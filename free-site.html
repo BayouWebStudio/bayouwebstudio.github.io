@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Get Your Free Website - Bayou Web Studios</title>
+    <meta name="description" content="Turn your Instagram into a stunning website in 60 seconds. Free demo site - no obligation.">
+    
+    <!-- Facebook Pixel Code -->
+    <!-- 
+    <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', 'YOUR_PIXEL_ID');
+      fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"
+    /></noscript>
+    -->
+    <!-- End Facebook Pixel Code -->
+    
+    <!-- Google Ads Global Site Tag -->
+    <!--
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+    -->
+    
+    <style>
+        /* CSS Variables for Brand Colors */
+        :root {
+            --brand-black: #0d0d1a;
+            --brand-gold: #c9a84c;
+            --brand-gold-hover: #b8954a;
+            --text-light: #ffffff;
+            --text-muted: #b0b0b0;
+            --input-bg: #1a1a2e;
+            --section-bg: #0f0f1c;
+        }
+        
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--brand-black);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes goldGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(201, 168, 76, 0.3); }
+            50% { box-shadow: 0 0 30px rgba(201, 168, 76, 0.6); }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        /* Container */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 0;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--text-light);
+        }
+        
+        .hero .subheadline {
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            line-height: 1.4;
+        }
+        
+        /* Form Styles */
+        .form-container {
+            background: var(--section-bg);
+            border-radius: 16px;
+            padding: 40px 30px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(201, 168, 76, 0.2);
+        }
+        
+        .form-group {
+            margin-bottom: 24px;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-light);
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+        
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 18px;
+            font-size: 1.1rem;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            background: var(--input-bg);
+            color: var(--text-light);
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--brand-gold);
+            box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.2);
+        }
+        
+        .form-group input::placeholder {
+            color: var(--text-muted);
+        }
+        
+        /* CTA Button */
+        .cta-button {
+            width: 100%;
+            padding: 20px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--brand-gold), #d4b95a);
+            color: var(--brand-black);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite, goldGlow 3s infinite;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(201, 168, 76, 0.4);
+        }
+        
+        .cta-button:active {
+            transform: translateY(0);
+        }
+        
+        /* Hidden honeypot field */
+        .honeypot {
+            position: absolute;
+            left: -9999px;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+        }
+        
+        /* Success Message */
+        .success-message {
+            display: none;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .success-message h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .success-message p {
+            font-size: 1.1rem;
+        }
+        
+        /* Section Styles */
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section h2 {
+            text-align: center;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: 50px;
+            color: var(--text-light);
+        }
+        
+        /* Social Proof */
+        .social-proof {
+            background: var(--section-bg);
+        }
+        
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .testimonial {
+            background: var(--brand-black);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid rgba(201, 168, 76, 0.3);
+            text-align: center;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 15px;
+            color: var(--text-muted);
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--brand-gold);
+        }
+        
+        /* How It Works */
+        .how-it-works .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+        
+        .step {
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .step-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--brand-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+            color: var(--brand-black);
+            font-weight: bold;
+        }
+        
+        .step h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--text-light);
+        }
+        
+        .step p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+        
+        /* FAQ */
+        .faq {
+            background: var(--section-bg);
+        }
+        
+        .faq-item {
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            background: var(--brand-black);
+            padding: 25px 30px;
+            font-weight: 600;
+            color: var(--text-light);
+            cursor: pointer;
+            border: none;
+            width: 100%;
+            text-align: left;
+            font-size: 1.1rem;
+            transition: background 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            background: rgba(201, 168, 76, 0.1);
+        }
+        
+        .faq-answer {
+            padding: 0 30px 25px;
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--brand-black);
+            padding: 50px 0 30px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--brand-gold);
+            margin-bottom: 10px;
+        }
+        
+        .footer-location {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+        
+        /* Mobile Optimizations */
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 30px 20px;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            .hero {
+                padding: 20px 0;
+            }
+            
+            .steps,
+            .testimonials {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Intersection Observer Animations */
+        .fade-in-element {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .fade-in-element.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="fade-in">Your Instagram is great. Your website should be too.</h1>
+            <p class="subheadline fade-in">Enter your handle. We'll build your site in 60 seconds. Free.</p>
+            
+            <div class="form-container fade-in">
+                <form action="https://formsubmit.co/bayouwebstudio@gmail.com" method="POST" id="freeWebsiteForm">
+                    <!-- Hidden FormSubmit Configuration -->
+                    <input type="hidden" name="_subject" value="🚀 New Free Site Request">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="hidden" name="_next" value="#success">
+                    
+                    <!-- Honeypot field for spam prevention -->
+                    <input type="text" name="_honey" class="honeypot" tabindex="-1" autocomplete="off">
+                    
+                    <!-- Hidden timestamp field -->
+                    <input type="hidden" name="timestamp" id="timestamp">
+                    
+                    <div class="form-group">
+                        <label for="instagram">Instagram Handle *</label>
+                        <input type="text" id="instagram" name="instagram" placeholder="@yourhandle" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="industry">Industry *</label>
+                        <select id="industry" name="industry" required>
+                            <option value="">Select your industry</option>
+                            <option value="Tattoo Artist">Tattoo Artist</option>
+                            <option value="Barber">Barber</option>
+                            <option value="Nail Salon">Nail Salon</option>
+                            <option value="Photographer">Photographer</option>
+                            <option value="Restaurant">Restaurant</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="cta-button">
+                        Build My Free Site →
+                    </button>
+                </form>
+                
+                <div class="success-message" id="successMessage">
+                    <h3>🎉 Request Submitted!</h3>
+                    <p>We're building your site! Check your email within 24 hours.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Social Proof Section -->
+    <section class="section social-proof">
+        <div class="container">
+            <h2 class="fade-in-element">Trusted by 20+ Houston Businesses</h2>
+            <div class="testimonials">
+                <div class="testimonial fade-in-element">
+                    <p class="testimonial-text">"My new site brought in 3 new clients in the first week!"</p>
+                    <p class="testimonial-author">— Sarah, Tattoo Artist</p>
+                </div>
+                <div class="testimonial fade-in-element">
+                    <p class="testimonial-text">"Finally have a professional online presence that matches my work."</p>
+                    <p class="testimonial-author">— Mike, Barber</p>
+                </div>
+                <div class="testimonial fade-in-element">
+                    <p class="testimonial-text">"The booking system alone paid for itself in the first month."</p>
+                    <p class="testimonial-author">— Lisa, Nail Salon</p>
+                </div>
+                <div class="testimonial fade-in-element">
+                    <p class="testimonial-text">"Best investment I've made for my photography business."</p>
+                    <p class="testimonial-author">— James, Photographer</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- How It Works Section -->
+    <section class="section how-it-works">
+        <div class="container">
+            <h2 class="fade-in-element">How It Works</h2>
+            <div class="steps">
+                <div class="step fade-in-element">
+                    <div class="step-icon">1</div>
+                    <h3>Enter Your Instagram</h3>
+                    <p>Just drop your handle above and we'll pull your best content to showcase your work.</p>
+                </div>
+                <div class="step fade-in-element">
+                    <div class="step-icon">2</div>
+                    <h3>We Build Your Site (Free)</h3>
+                    <p>Our team creates a custom website that perfectly represents your brand in under 24 hours.</p>
+                </div>
+                <div class="step fade-in-element">
+                    <div class="step-icon">3</div>
+                    <h3>Love It? Keep It for $25/mo</h3>
+                    <p>No obligation. If you love your new site, keep it hosted with unlimited changes for just $25/month.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FAQ Section -->
+    <section class="section faq">
+        <div class="container">
+            <h2 class="fade-in-element">Frequently Asked Questions</h2>
+            
+            <div class="faq-item fade-in-element">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    What's included in my website?
+                </button>
+                <div class="faq-answer" style="display: none;">
+                    Your website includes a custom domain, professional hosting, SSL certificate, mobile-responsive design, contact forms, and unlimited content changes. Everything you need to look professional online.
+                </div>
+            </div>
+            
+            <div class="faq-item fade-in-element">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    How long does it really take?
+                </button>
+                <div class="faq-answer" style="display: none;">
+                    Most sites are completed within 24 hours. We'll send you a preview link via email as soon as it's ready for your review.
+                </div>
+            </div>
+            
+            <div class="faq-item fade-in-element">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    Can I make changes after it's built?
+                </button>
+                <div class="faq-answer" style="display: none;">
+                    Absolutely! Unlimited changes are included in your monthly subscription. Just submit a form and we'll make any updates you need within 48 hours.
+                </div>
+            </div>
+            
+            <div class="faq-item fade-in-element">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    What if I don't like my free site?
+                </button>
+                <div class="faq-answer" style="display: none;">
+                    There's no obligation whatsoever. The free demo site is exactly that - free. If you don't love it, you don't pay anything. No contracts, no commitments.
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-brand">Bayou Web Studios</div>
+            <div class="footer-location">Houston, TX</div>
+        </div>
+    </footer>
+    
+    <script>
+        // Set timestamp when form loads
+        document.getElementById('timestamp').value = new Date().toISOString();
+        
+        // Handle form submission and show success message
+        document.getElementById('freeWebsiteForm').addEventListener('submit', function(e) {
+            // Show success message
+            setTimeout(function() {
+                document.getElementById('freeWebsiteForm').style.display = 'none';
+                document.getElementById('successMessage').style.display = 'block';
+                
+                // Scroll to success message
+                document.getElementById('successMessage').scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }, 1000);
+        });
+        
+        // Instagram handle formatting
+        document.getElementById('instagram').addEventListener('input', function(e) {
+            let value = e.target.value;
+            if (value && !value.startsWith('@')) {
+                e.target.value = '@' + value;
+            }
+        });
+        
+        // FAQ Toggle Function
+        function toggleFaq(button) {
+            const answer = button.nextElementSibling;
+            const isOpen = answer.style.display === 'block';
+            
+            // Close all other FAQs
+            document.querySelectorAll('.faq-answer').forEach(ans => {
+                ans.style.display = 'none';
+            });
+            
+            // Toggle current FAQ
+            answer.style.display = isOpen ? 'none' : 'block';
+        }
+        
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all fade-in elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add staggered delay to initial fade-ins
+            document.querySelectorAll('.hero .fade-in').forEach((el, index) => {
+                el.style.animationDelay = `${index * 0.2}s`;
+            });
+            
+            // Observe elements that should fade in on scroll
+            document.querySelectorAll('.fade-in-element').forEach(el => {
+                observer.observe(el);
+            });
+            
+            // Check for success hash in URL (from FormSubmit redirect)
+            if (window.location.hash === '#success') {
+                document.getElementById('freeWebsiteForm').style.display = 'none';
+                document.getElementById('successMessage').style.display = 'block';
+            }
+        });
+        
+        // Track scroll behavior for analytics (when pixel/gtag is enabled)
+        let scrollTracked = false;
+        window.addEventListener('scroll', function() {
+            if (!scrollTracked && window.scrollY > window.innerHeight * 0.5) {
+                scrollTracked = true;
+                // Uncomment when analytics are enabled:
+                // fbq('track', 'ViewContent');
+                // gtag('event', 'scroll', { 'event_category': 'engagement' });
+            }
+        });
+        
+        // Track form interactions (when analytics are enabled)
+        document.getElementById('instagram').addEventListener('focus', function() {
+            // fbq('track', 'InitiateCheckout');
+            // gtag('event', 'form_start', { 'event_category': 'form' });
+        });
+        
+        document.getElementById('email').addEventListener('blur', function() {
+            if (this.value) {
+                // fbq('track', 'AddToCart');
+                // gtag('event', 'form_progress', { 'event_category': 'form' });
+            }
+        });
+    </script>
+</body>
+</html>
