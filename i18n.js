@@ -400,14 +400,22 @@ let currentLanguage = 'en';
 
 // Get user's preferred language from browser or localStorage
 function initLanguage() {
-  const savedLang = localStorage.getItem('bws-language');
-  if (savedLang) {
-    currentLanguage = savedLang;
+  // URL parameter takes priority (e.g. ?lang=es)
+  const urlParams = new URLSearchParams(window.location.search);
+  const urlLang = urlParams.get('lang');
+  if (urlLang && translations[urlLang]) {
+    currentLanguage = urlLang;
+    localStorage.setItem('bws-language', urlLang);
   } else {
-    // Detect browser language
-    const browserLang = navigator.language || navigator.languages[0];
-    if (browserLang.startsWith('es')) {
-      currentLanguage = 'es';
+    const savedLang = localStorage.getItem('bws-language');
+    if (savedLang) {
+      currentLanguage = savedLang;
+    } else {
+      // Detect browser language
+      const browserLang = navigator.language || navigator.languages[0];
+      if (browserLang.startsWith('es')) {
+        currentLanguage = 'es';
+      }
     }
   }
   updateLanguage();
