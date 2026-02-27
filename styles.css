@@ -1085,6 +1085,43 @@ body {
   animation: fadeInUp 0.6s ease-out;
 }
 
+/* Language Toggle */
+.lang-toggle {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 6px 12px;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  margin-right: 12px;
+}
+
+.lang-toggle:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: var(--primary);
+}
+
+.lang-toggle strong {
+  color: var(--primary);
+}
+
+/* Mobile responsive for language toggle */
+@media (max-width: 768px) {
+  .lang-toggle {
+    margin-right: 16px;
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+  
+  .nav-container {
+    padding: 0 16px;
+  }
+}
+
 /* Utility Classes */
 .text-center { text-align: center; }
 .text-primary { color: var(--primary); }

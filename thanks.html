@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thank You - Bayou Web Studios</title>
+    <title data-i18n="thanks_page_title">Thank You - Bayou Web Studios</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,40 +27,40 @@
             <div class="hero-content" style="grid-template-columns: 1fr; text-align: center; max-width: 600px; margin: 0 auto;">
                 <div class="hero-text">
                     <div style="font-size: 64px; margin-bottom: 24px;">🎉</div>
-                    <h1 class="hero-title">Thank You!</h1>
-                    <p class="hero-subtitle">We received your request and we're excited to build your demo site! Here's what happens next:</p>
+                    <h1 class="hero-title" data-i18n="thanks_heading">Thank You!</h1>
+                    <p class="hero-subtitle" data-i18n="thanks_subheading">We received your request and we're excited to build your demo site! Here's what happens next:</p>
                     
                     <div class="steps" style="margin-top: 48px; text-align: left;">
                         <div class="step">
                             <div class="step-number">1</div>
-                            <h3>We'll Check Out Your Instagram</h3>
-                            <p>Our team will review your existing content and style to understand your brand.</p>
+                            <h3 data-i18n="thanks_step_1_title">We'll Check Out Your Instagram</h3>
+                            <p data-i18n="thanks_step_1_desc">Our team will review your existing content and style to understand your brand.</p>
                         </div>
                         <div class="step">
                             <div class="step-number">2</div>
-                            <h3>Build Your Demo Site</h3>
-                            <p>Within 2-3 business days, we'll have a custom demo site ready for you to review.</p>
+                            <h3 data-i18n="thanks_step_2_title">Build Your Demo Site</h3>
+                            <p data-i18n="thanks_step_2_desc">Within 2-3 business days, we'll have a custom demo site ready for you to review.</p>
                         </div>
                         <div class="step">
                             <div class="step-number">3</div>
-                            <h3>Send You the Link</h3>
-                            <p>We'll email you the demo link and schedule a quick call to walk through the features.</p>
+                            <h3 data-i18n="thanks_step_3_title">Send You the Link</h3>
+                            <p data-i18n="thanks_step_3_desc">We'll email you the demo link and schedule a quick call to walk through the features.</p>
                         </div>
                         <div class="step">
                             <div class="step-number">4</div>
-                            <h3>You Decide</h3>
-                            <p>Love it? Great! Just $25/month and it's yours. Don't love it? No problem, no charge.</p>
+                            <h3 data-i18n="thanks_step_4_title">You Decide</h3>
+                            <p data-i18n="thanks_step_4_desc">Love it? Great! Just $25/month and it's yours. Don't love it? No problem, no charge.</p>
                         </div>
                     </div>
 
                     <div style="margin-top: 48px; padding: 24px; background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border);">
-                        <h3 style="color: var(--primary); margin-bottom: 16px;">📧 Check Your Email</h3>
-                        <p style="color: var(--text-muted); margin: 0;">You should receive a confirmation email within the next few minutes. If you don't see it, check your spam folder!</p>
+                        <h3 style="color: var(--primary); margin-bottom: 16px;" data-i18n="thanks_email_heading">📧 Check Your Email</h3>
+                        <p style="color: var(--text-muted); margin: 0;" data-i18n="thanks_email_desc">You should receive a confirmation email within the next few minutes. If you don't see it, check your spam folder!</p>
                     </div>
 
                     <div class="hero-buttons" style="margin-top: 48px;">
-                        <a href="/" class="btn btn-primary">Back to Home</a>
-                        <a href="#portfolio" class="btn btn-secondary">View Examples</a>
+                        <a href="/" class="btn btn-primary" data-i18n="thanks_back_button">Back to Home</a>
+                        <a href="#portfolio" class="btn btn-secondary" data-i18n="thanks_examples_button">View Examples</a>
                     </div>
                 </div>
             </div>
@@ -73,22 +73,23 @@
             <div class="footer-content">
                 <div class="footer-brand">
                     <h3>Bayou Web Studios</h3>
-                    <p>Custom websites for tattoo artists and creatives</p>
+                    <p data-i18n="footer_brand_desc">Custom websites for tattoo artists and creatives</p>
                 </div>
                 <div class="footer-links">
                     <div class="footer-column">
-                        <h4>Contact</h4>
+                        <h4 data-i18n="thanks_footer_contact">Contact</h4>
                         <a href="mailto:hello@bayouwebstudio.com">hello@bayouwebstudio.com</a>
-                        <a href="/">Back to Website</a>
+                        <a href="/" data-i18n="thanks_footer_back_to_website">Back to Website</a>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 Bayou Web Studios. All rights reserved.</p>
+                <p data-i18n="footer_copyright">&copy; 2026 Bayou Web Studios. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
+    <script src="i18n.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
