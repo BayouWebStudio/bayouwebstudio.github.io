@@ -2,7 +2,7 @@ const translations = {
   en: {
     // Meta tags
     meta_title: 'Bayou Web Studios - Your Link-in-Bio Deserves Better',
-    meta_description: 'Custom websites that replace your Linktree — designed for tattoo artists and creatives. Real websites that convert visitors into clients.',
+    meta_description: 'Your brand deserves its own website. We handle the design, the tech, and the updates — you handle the art.',
     
     // Navigation
     nav_features: 'Features',
@@ -14,7 +14,7 @@ const translations = {
     // Hero Section
     hero_title: 'Your Link-in-Bio',
     hero_highlight: 'Deserves Better',
-    hero_subtitle: 'Custom websites that replace your Linktree — designed for tattoo artists and creatives who want to convert visitors into clients, not just clicks.',
+    hero_subtitle: 'Your brand deserves its own website. We handle the design, the tech, and the updates — you handle the art.',
     hero_start_button: 'Start at $25/mo',
     hero_examples_button: 'See Examples',
     proof_businesses: 'businesses hosting',
@@ -211,7 +211,7 @@ const translations = {
     // Hero Section
     hero_title: 'Tu Link-en-Bio',
     hero_highlight: 'Merece Algo Mejor',
-    hero_subtitle: 'Sitios web personalizados que reemplazan tu Linktree — diseñados para tatuadores y creativos que quieren convertir visitantes en clientes, no solo clicks.',
+    hero_subtitle: 'Tu marca merece su propio sitio web. Nosotros nos encargamos del diseño, la tecnología y las actualizaciones — tú solo enfócate en tu arte.',
     hero_start_button: 'Desde $25/mes',
     hero_examples_button: 'Ver Ejemplos',
     proof_businesses: 'negocios alojados',
