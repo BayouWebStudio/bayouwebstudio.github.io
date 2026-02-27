@@ -981,20 +981,33 @@ body {
     grid-template-columns: 1fr;
   }
 
+  .comparison-table {
+    padding: 16px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
   .comparison-grid {
-    grid-template-columns: 1fr;
-    gap: 0;
+    grid-template-columns: 1.5fr repeat(4, 1fr);
+    min-width: 500px;
+    gap: 1px;
+    font-size: 12px;
   }
 
   .comparison-cell {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 16px;
+    padding: 10px 6px;
+    text-align: center;
   }
 
   .comparison-cell.feature {
+    text-align: left;
     font-weight: 600;
+    font-size: 11px;
+  }
+
+  .comparison-header h3 {
+    font-size: 18px;
+    margin-bottom: 16px;
   }
 
   .contact-content {
