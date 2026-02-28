@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Seafoam Green | Tattoo Artist | Pasadena TX</title>
+  <meta name="description" content="Seafoam Green is a tattoo artist based in Pasadena, TX specializing in Traditional, Fine-line, Japanese, and Geometric tattoos. Private studio. Book via Instagram DM." />
+  <meta property="og:title" content="Seafoam Green | Tattoo Artist | Pasadena TX" />
+  <meta property="og:description" content="Traditional, Fine-line, Japanese & Geometric tattoos. Private studio in Pasadena, TX. Book via Instagram DM." />
+  <meta property="og:image" content="img/profile.jpg" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Seafoam Green Tattoos",
+    "description": "Traditional, Fine-line, Japanese, and Geometric tattoo artist in Pasadena, TX",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Pasadena",
+      "addressRegion": "TX",
+      "addressCountry": "US"
+    },
+    "url": "https://www.instagram.com/seafoam.green.art/",
+    "sameAs": ["https://www.instagram.com/seafoam.green.art/"]
+  }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f0f0f;
+      --surface: #1a1a1a;
+      --surface2: #222;
+      --text: #f5f5f5;
+      --muted: #aaa;
+      --accent: #2ecc71;
+      --accent-dark: #27ae60;
+      --radius: 12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(15,15,15,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(46,204,113,0.15);
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+    .nav-brand {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.03em;
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    @media (max-width: 600px) { .nav-links { display: none; } }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 1.5rem 4rem;
+      background: radial-gradient(ellipse at 60% 30%, rgba(46,204,113,0.08) 0%, transparent 70%),
+                  radial-gradient(ellipse at 20% 80%, rgba(46,204,113,0.05) 0%, transparent 60%),
+                  var(--bg);
+    }
+    .hero-avatar {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--accent);
+      box-shadow: 0 0 30px rgba(46,204,113,0.3);
+      margin-bottom: 1.5rem;
+    }
+    .verified-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: #0f0f0f;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 20px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+    }
+    .hero h1 span { color: var(--accent); }
+    .hero-location {
+      font-size: 1rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .hero-styles {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-bottom: 2.5rem;
+    }
+    .tag {
+      background: var(--surface2);
+      border: 1px solid rgba(46,204,113,0.3);
+      color: var(--accent);
+      padding: 0.3rem 0.9rem;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      letter-spacing: 0.05em;
+    }
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--accent);
+      color: #0f0f0f;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 0.85rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .hero-cta:hover { background: var(--accent-dark); transform: translateY(-2px); }
+    .hero-cta svg { width: 18px; height: 18px; }
+
+    /* ── SECTIONS ── */
+    section { padding: 5rem 1.5rem; }
+    .container { max-width: 1000px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    h2 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── ABOUT ── */
+    #about { background: var(--surface); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    @media (max-width: 700px) { .about-grid { grid-template-columns: 1fr; } }
+    .about-text p { color: var(--muted); font-size: 1.05rem; margin-bottom: 1rem; }
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .stat-card {
+      background: var(--bg);
+      border: 1px solid rgba(46,204,113,0.15);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      text-align: center;
+    }
+    .stat-number {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .stat-label { font-size: 0.78rem; color: var(--muted); margin-top: 0.25rem; letter-spacing: 0.06em; text-transform: uppercase; }
+
+    /* ── PRICING ── */
+    #pricing { background: var(--bg); }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.25rem;
+      margin-top: 2rem;
+    }
+    .price-card {
+      background: var(--surface);
+      border: 1px solid rgba(46,204,113,0.12);
+      border-radius: var(--radius);
+      padding: 1.75rem 1.5rem;
+      text-align: center;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+    .price-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .price-card.featured {
+      border-color: var(--accent);
+      background: linear-gradient(135deg, rgba(46,204,113,0.08), var(--surface));
+    }
+    .price-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+    .price-label { font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
+    .price-amount { font-size: 2.2rem; font-weight: 800; color: var(--text); }
+    .price-unit { font-size: 0.85rem; color: var(--muted); margin-top: 0.25rem; }
+    .price-note { font-size: 0.8rem; color: var(--accent); margin-top: 0.5rem; font-style: italic; }
+
+    /* ── GALLERY ── */
+    #gallery { background: var(--surface); }
+    .masonry {
+      columns: 3;
+      column-gap: 0.75rem;
+      margin-top: 2rem;
+    }
+    @media (max-width: 800px) { .masonry { columns: 2; } }
+    @media (max-width: 480px) { .masonry { columns: 1; } }
+    .masonry-item {
+      break-inside: avoid;
+      margin-bottom: 0.75rem;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+    }
+    .masonry-item img {
+      width: 100%;
+      display: block;
+      transition: transform 0.35s ease, filter 0.35s;
+      filter: brightness(0.92);
+    }
+    .masonry-item:hover img { transform: scale(1.04); filter: brightness(1); }
+    .masonry-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(46,204,113,0);
+      transition: background 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .masonry-overlay svg { opacity: 0; transition: opacity 0.3s; color: white; }
+    .masonry-item:hover .masonry-overlay { background: rgba(46,204,113,0.12); }
+    .masonry-item:hover .masonry-overlay svg { opacity: 1; }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: rgba(0,0,0,0.93);
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .lightbox.active { display: flex; }
+    .lightbox-img {
+      max-width: min(90vw, 900px);
+      max-height: 90vh;
+      border-radius: 8px;
+      box-shadow: 0 0 60px rgba(46,204,113,0.2);
+      object-fit: contain;
+    }
+    .lightbox-close {
+      position: fixed;
+      top: 1.5rem; right: 1.5rem;
+      background: var(--surface);
+      border: none;
+      color: var(--text);
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      font-size: 1.4rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .lightbox-close:hover { background: var(--accent); color: #0f0f0f; }
+    .lightbox-nav {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: white;
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      font-size: 1.4rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .lightbox-nav:hover { background: var(--accent); color: #0f0f0f; }
+    .lightbox-prev { left: 1rem; }
+    .lightbox-next { right: 1rem; }
+
+    /* ── BOOK CTA ── */
+    #book {
+      background: linear-gradient(135deg, #0f0f0f 0%, rgba(46,204,113,0.06) 50%, #0f0f0f 100%);
+      text-align: center;
+    }
+    #book h2 { margin-bottom: 1rem; }
+    #book p { color: var(--muted); font-size: 1.05rem; max-width: 500px; margin: 0 auto 2rem; }
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--accent);
+      color: #0f0f0f;
+      font-weight: 700;
+      font-size: 1.05rem;
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(46,204,113,0.25);
+    }
+    .cta-btn:hover { background: var(--accent-dark); transform: translateY(-2px); box-shadow: 0 6px 30px rgba(46,204,113,0.4); }
+    .booking-note { margin-top: 1.25rem; color: var(--muted); font-size: 0.88rem; }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--surface); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    @media (max-width: 600px) { .contact-grid { grid-template-columns: 1fr; } }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--bg);
+      border: 1px solid rgba(46,204,113,0.12);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color 0.2s;
+    }
+    .contact-item:hover { border-color: var(--accent); }
+    .contact-icon { font-size: 1.75rem; }
+    .contact-label { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+    .contact-value { font-weight: 600; font-size: 0.95rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── FLOATING BOOK BUTTON ── */
+    .float-book {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 90;
+      background: var(--accent);
+      color: #0f0f0f;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 0.8rem 1.4rem;
+      border-radius: 50px;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      box-shadow: 0 4px 20px rgba(46,204,113,0.4);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .float-book:hover { background: var(--accent-dark); transform: translateY(-2px); }
+    .float-book svg { width: 16px; height: 16px; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand">Seafoam Green</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <img src="img/profile.jpg" alt="Seafoam Green – Tattoo Artist" class="hero-avatar" />
+  <div class="verified-badge">✓ Verified Artist</div>
+  <h1><span>Seafoam</span> Green</h1>
+  <div class="hero-location">📍 Pasadena, TX · Private Studio</div>
+  <div class="hero-styles">
+    <span class="tag">Traditional</span>
+    <span class="tag">Fine-line</span>
+    <span class="tag">Japanese</span>
+    <span class="tag">Geometric</span>
+  </div>
+  <a href="https://www.instagram.com/seafoam.green.art/" target="_blank" rel="noopener" class="hero-cta">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+    Book a Session
+  </a>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text">
+        <p class="section-label">About the Artist</p>
+        <h2>Colorful Work,<br/>Private Studio</h2>
+        <p>Seafoam Green is a tattoo artist based out of a private studio in Pasadena, TX — bringing bold color, clean lines, and meticulous detail to every piece.</p>
+        <p>Specializing in Traditional, Fine-line, Japanese, and Geometric styles, he's built a reputation for work that pops with personality. Over 1,500 posts deep and still going strong.</p>
+        <p>All bookings are handled personally via Instagram DM. Limited availability — cancellation list always open.</p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-card">
+          <div class="stat-number">1,523</div>
+          <div class="stat-label">Posts of Work</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">2.4K+</div>
+          <div class="stat-label">Followers</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">4</div>
+          <div class="stat-label">Style Specialties</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">TX</div>
+          <div class="stat-label">Pasadena, TX</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="container">
+    <p class="section-label">Rates</p>
+    <h2>Simple, Transparent Pricing</h2>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-icon">⚡</div>
+        <div class="price-label">Minimum</div>
+        <div class="price-amount">$150</div>
+        <div class="price-unit">per session</div>
+        <div class="price-note">Any size, any placement</div>
+      </div>
+      <div class="price-card featured">
+        <div class="price-icon">⏱️</div>
+        <div class="price-label">Hourly Rate</div>
+        <div class="price-amount">$150</div>
+        <div class="price-unit">per hour</div>
+        <div class="price-note">Most common option</div>
+      </div>
+      <div class="price-card">
+        <div class="price-icon">🔥</div>
+        <div class="price-label">Flash Tattoos</div>
+        <div class="price-amount">$100</div>
+        <div class="price-unit">per hour</div>
+        <div class="price-note">Pre-drawn designs</div>
+      </div>
+      <div class="price-card">
+        <div class="price-icon">🌟</div>
+        <div class="price-label">Full Day</div>
+        <div class="price-amount">$500</div>
+        <div class="price-unit">9:30am – 5:30pm</div>
+        <div class="price-note">Best value for large pieces</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="container">
+    <p class="section-label">Gallery</p>
+    <h2>Finished Work</h2>
+    <div class="masonry" id="gallery-grid">
+      <div class="masonry-item" onclick="openLightbox(0)">
+        <img src="img/tattoo_01.jpg" alt="Tattoo by Seafoam Green" loading="lazy" />
+        <div class="masonry-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="32" height="32"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
+      <div class="masonry-item" onclick="openLightbox(1)">
+        <img src="img/tattoo_02.jpg" alt="Tattoo by Seafoam Green" loading="lazy" />
+        <div class="masonry-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="32" height="32"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
+      <div class="masonry-item" onclick="openLightbox(2)">
+        <img src="img/tattoo_03.jpg" alt="Tattoo by Seafoam Green" loading="lazy" />
+        <div class="masonry-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="32" height="32"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
+      <div class="masonry-item" onclick="openLightbox(3)">
+        <img src="img/tattoo_04.jpg" alt="Tattoo by Seafoam Green" loading="lazy" />
+        <div class="masonry-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="32" height="32"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
+      <div class="masonry-item" onclick="openLightbox(4)">
+        <img src="img/tattoo_05.jpg" alt="Tattoo by Seafoam Green" loading="lazy" />
+        <div class="masonry-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="32" height="32"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
+      <div class="masonry-item" onclick="openLightbox(5)">
+        <img src="img/tattoo_06.jpg" alt="Tattoo by Seafoam Green" loading="lazy" />
+        <div class="masonry-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="32" height="32"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
+      <div class="masonry-item" onclick="openLightbox(6)">
+        <img src="img/tattoo_07.jpg" alt="Tattoo by Seafoam Green" loading="lazy" />
+        <div class="masonry-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="32" height="32"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
+      <div class="masonry-item" onclick="openLightbox(7)">
+        <img src="img/tattoo_08.jpg" alt="Tattoo by Seafoam Green" loading="lazy" />
+        <div class="masonry-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="32" height="32"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
+      <div class="masonry-item" onclick="openLightbox(8)">
+        <img src="img/tattoo_09.jpg" alt="Tattoo by Seafoam Green" loading="lazy" />
+        <div class="masonry-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="32" height="32"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
+      <div class="masonry-item" onclick="openLightbox(9)">
+        <img src="img/tattoo_10.jpg" alt="Tattoo by Seafoam Green" loading="lazy" />
+        <div class="masonry-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="32" height="32"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
+      <div class="masonry-item" onclick="openLightbox(10)">
+        <img src="img/tattoo_11.jpg" alt="Tattoo by Seafoam Green" loading="lazy" />
+        <div class="masonry-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="32" height="32"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
+      <div class="masonry-item" onclick="openLightbox(11)">
+        <img src="img/tattoo_12.jpg" alt="Tattoo by Seafoam Green" loading="lazy" />
+        <div class="masonry-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="32" height="32"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOK CTA -->
+<section id="book">
+  <div class="container">
+    <p class="section-label">Bookings</p>
+    <h2>Ready to Get Tattooed?</h2>
+    <p>Seafoam Green is currently booking via Instagram DM. Cancellation list is always open — reach out to get on it.</p>
+    <a href="https://www.instagram.com/seafoam.green.art/" target="_blank" rel="noopener" class="cta-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="20" height="20"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      DM on Instagram
+    </a>
+    <p class="booking-note">@seafoam.green.art · Pasadena, TX</p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <p class="section-label">Get In Touch</p>
+    <h2>Contact</h2>
+    <div class="contact-grid">
+      <a href="https://www.instagram.com/seafoam.green.art/" target="_blank" rel="noopener" class="contact-item">
+        <span class="contact-icon">📷</span>
+        <div>
+          <div class="contact-label">Instagram</div>
+          <div class="contact-value">@seafoam.green.art</div>
+        </div>
+      </a>
+      <div class="contact-item">
+        <span class="contact-icon">📍</span>
+        <div>
+          <div class="contact-label">Location</div>
+          <div class="contact-value">Pasadena, TX (Private Studio)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Seafoam Green. All rights reserved.</p>
+  <p style="margin-top:0.5rem;">Website by <a href="https://bayouwebstudio.com" target="_blank" rel="noopener">Bayou Web Studio</a></p>
+</footer>
+
+<!-- FLOATING BOOK BUTTON -->
+<a href="https://www.instagram.com/seafoam.green.art/" target="_blank" rel="noopener" class="float-book">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+  Book Now
+</a>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <button class="lightbox-close" onclick="closeLightboxBtn()">&times;</button>
+  <button class="lightbox-nav lightbox-prev" onclick="prevImage(event)">&#8249;</button>
+  <img class="lightbox-img" id="lightbox-img" src="" alt="Tattoo by Seafoam Green" />
+  <button class="lightbox-nav lightbox-next" onclick="nextImage(event)">&#8250;</button>
+</div>
+
+<script>
+  const galleryImages = [
+    'img/tattoo_01.jpg','img/tattoo_02.jpg','img/tattoo_03.jpg','img/tattoo_04.jpg',
+    'img/tattoo_05.jpg','img/tattoo_06.jpg','img/tattoo_07.jpg','img/tattoo_08.jpg',
+    'img/tattoo_09.jpg','img/tattoo_10.jpg','img/tattoo_11.jpg','img/tattoo_12.jpg'
+  ];
+  let currentIndex = 0;
+
+  function openLightbox(idx) {
+    currentIndex = idx;
+    document.getElementById('lightbox-img').src = galleryImages[idx];
+    document.getElementById('lightbox').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightboxBtn() {
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  function closeLightbox(e) {
+    if (e.target === document.getElementById('lightbox')) closeLightboxBtn();
+  }
+  function prevImage(e) {
+    e.stopPropagation();
+    currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+    document.getElementById('lightbox-img').src = galleryImages[currentIndex];
+  }
+  function nextImage(e) {
+    e.stopPropagation();
+    currentIndex = (currentIndex + 1) % galleryImages.length;
+    document.getElementById('lightbox-img').src = galleryImages[currentIndex];
+  }
+  document.addEventListener('keydown', e => {
+    if (!document.getElementById('lightbox').classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightboxBtn();
+    if (e.key === 'ArrowLeft') prevImage(e);
+    if (e.key === 'ArrowRight') nextImage(e);
+  });
+</script>
+</body>
+</html>
