@@ -60,9 +60,27 @@
     footer { background: #000; padding: 32px 24px; text-align: center; font-size: 0.8rem; color: var(--gray); border-top: 1px solid rgba(255,255,255,0.06); }
     footer a { color: var(--gold); }
     footer a:hover { text-decoration: underline; }
+    .lang-toggle {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      z-index: 999;
+      transition: .2s;
+    }
+    .lang-toggle:hover { background: rgba(255,255,255,0.2); }
   </style>
 </head>
 <body>
+
+  <button class="lang-toggle" onclick="toggleLang()">🌐 ES</button>
 
   <div class="back-bar container">
     <a class="back-link" href="https://bayouwebstudio.com">← Back to bayouwebstudio.com</a>
@@ -71,52 +89,52 @@
   <div class="hero">
     <div class="tier-badge">Starter Plan</div>
     <h1>$<span class="price">25</span>/mo</h1>
-    <p class="tagline">Everything you need to get found on Google.</p>
-    <a class="btn-primary" href="https://buy.stripe.com/6oU00j8TIfbn6hW34L3Je06" target="_blank" rel="noopener">Start Free — No Setup Fee</a>
-    <p class="no-setup">No contracts. Cancel anytime.</p>
+    <p class="tagline" data-en="Everything you need to get found on Google." data-es="Todo lo que necesitas para aparecer en Google.">Everything you need to get found on Google.</p>
+    <a class="btn-primary" href="https://buy.stripe.com/6oU00j8TIfbn6hW34L3Je06" target="_blank" rel="noopener" data-en="Start Free — No Setup Fee" data-es="Empieza Gratis — Sin Costo de Configuración">Start Free — No Setup Fee</a>
+    <p class="no-setup" data-en="No contracts. Cancel anytime." data-es="Sin contratos. Cancela cuando quieras.">No contracts. Cancel anytime.</p>
   </div>
 
   <section>
     <div class="container">
-      <div class="section-label">What You Get</div>
-      <h2 class="section-title">Everything's Included</h2>
-      <p class="section-sub">One flat monthly price covers everything below. Nothing hidden.</p>
+      <div class="section-label" data-en="What You Get" data-es="Lo Que Incluye">What You Get</div>
+      <h2 class="section-title" data-en="Everything's Included" data-es="¿Qué Incluye?">Everything's Included</h2>
+      <p class="section-sub" data-en="One flat monthly price covers everything below. Nothing hidden." data-es="Un precio mensual fijo cubre todo lo de abajo. Sin costos ocultos.">One flat monthly price covers everything below. Nothing hidden.</p>
       <ul class="checklist">
-        <li><span class="icon">✅</span> Custom .com Domain (we buy it for you)</li>
-        <li><span class="icon">✅</span> Professional Website Design</li>
-        <li><span class="icon">✅</span> Google Ranking &amp; SEO Optimization</li>
-        <li><span class="icon">✅</span> Mobile-First, Fast-Loading Site</li>
-        <li><span class="icon">✅</span> Gallery with Lightbox</li>
-        <li><span class="icon">✅</span> Booking Link Integration</li>
-        <li><span class="icon">✅</span> Google Maps Integration</li>
-        <li><span class="icon">✅</span> Unlimited Change Requests</li>
-        <li><span class="icon">✅</span> SSL Certificate (HTTPS)</li>
-        <li><span class="icon">✅</span> Professional Hosting</li>
-        <li><span class="icon">✅</span> Email Support</li>
+        <li><span class="icon">✅</span> <span data-en="Custom .com Domain (we buy it for you)" data-es="Dominio .com personalizado (lo compramos nosotros)">Custom .com Domain (we buy it for you)</span></li>
+        <li><span class="icon">✅</span> <span data-en="Professional Website Design" data-es="Diseño de sitio web profesional">Professional Website Design</span></li>
+        <li><span class="icon">✅</span> <span data-en="Google Ranking &amp; SEO Optimization" data-es="Posicionamiento en Google y optimización SEO">Google Ranking &amp; SEO Optimization</span></li>
+        <li><span class="icon">✅</span> <span data-en="Mobile-First, Fast-Loading Site" data-es="Sitio móvil, de carga rápida">Mobile-First, Fast-Loading Site</span></li>
+        <li><span class="icon">✅</span> <span data-en="Gallery with Lightbox" data-es="Galería con Lightbox">Gallery with Lightbox</span></li>
+        <li><span class="icon">✅</span> <span data-en="Booking Link Integration" data-es="Integración de enlace de reservas">Booking Link Integration</span></li>
+        <li><span class="icon">✅</span> <span data-en="Google Maps Integration" data-es="Integración con Google Maps">Google Maps Integration</span></li>
+        <li><span class="icon">✅</span> <span data-en="Unlimited Change Requests" data-es="Solicitudes de cambios ilimitadas">Unlimited Change Requests</span></li>
+        <li><span class="icon">✅</span> <span data-en="SSL Certificate (HTTPS)" data-es="Certificado SSL (HTTPS)">SSL Certificate (HTTPS)</span></li>
+        <li><span class="icon">✅</span> <span data-en="Professional Hosting" data-es="Hosting profesional">Professional Hosting</span></li>
+        <li><span class="icon">✅</span> <span data-en="Email Support" data-es="Soporte por correo electrónico">Email Support</span></li>
       </ul>
     </div>
   </section>
 
   <section>
     <div class="container">
-      <div class="section-label">Real Client Sites</div>
-      <h2 class="section-title">See What We Build</h2>
-      <p class="section-sub">These are real sites — built for real artists, just like you.</p>
+      <div class="section-label" data-en="Real Client Sites" data-es="Sitios Reales de Clientes">Real Client Sites</div>
+      <h2 class="section-title" data-en="See What We Build" data-es="Sitios que Hemos Construido">See What We Build</h2>
+      <p class="section-sub" data-en="These are real sites — built for real artists, just like you." data-es="Estos son sitios reales — construidos para artistas reales, como tú.">These are real sites — built for real artists, just like you.</p>
       <div class="cards">
         <div class="card">
           <div class="card-name">Tatsu Ink</div>
           <div class="card-url">tatsuink.com</div>
-          <a class="card-link" href="https://tatsuink.com" target="_blank" rel="noopener">View Live →</a>
+          <a class="card-link" href="https://tatsuink.com" target="_blank" rel="noopener" data-en="View Live →" data-es="Ver en Vivo →">View Live →</a>
         </div>
         <div class="card">
           <div class="card-name">Alan Gutiérrez</div>
           <div class="card-url">guccierrezz.com</div>
-          <a class="card-link" href="https://guccierrezz.com" target="_blank" rel="noopener">View Live →</a>
+          <a class="card-link" href="https://guccierrezz.com" target="_blank" rel="noopener" data-en="View Live →" data-es="Ver en Vivo →">View Live →</a>
         </div>
         <div class="card">
           <div class="card-name">Julia Claire</div>
           <div class="card-url">jujubrilliart.com</div>
-          <a class="card-link" href="https://jujubrilliart.com" target="_blank" rel="noopener">View Live →</a>
+          <a class="card-link" href="https://jujubrilliart.com" target="_blank" rel="noopener" data-en="View Live →" data-es="Ver en Vivo →">View Live →</a>
         </div>
       </div>
     </div>
@@ -124,24 +142,24 @@
 
   <section>
     <div class="container">
-      <div class="section-label">The Process</div>
-      <h2 class="section-title">How It Works</h2>
-      <p class="section-sub">Three steps. Usually live within 24 hours.</p>
+      <div class="section-label" data-en="The Process" data-es="El Proceso">The Process</div>
+      <h2 class="section-title" data-en="How It Works" data-es="¿Cómo Funciona?">How It Works</h2>
+      <p class="section-sub" data-en="Three steps. Usually live within 24 hours." data-es="Tres pasos. Generalmente en línea en 24 horas.">Three steps. Usually live within 24 hours.</p>
       <div class="steps">
         <div class="step">
           <div class="step-num">1</div>
-          <div class="step-title">Send Your IG</div>
-          <div class="step-desc">Sign up and drop us your Instagram handle. That's literally it.</div>
+          <div class="step-title" data-en="Send Your IG" data-es="Envíanos tu Instagram">Send Your IG</div>
+          <div class="step-desc" data-en="Sign up and drop us your Instagram handle. That's literally it." data-es="Tomamos tus fotos y construimos tu sitio.">Sign up and drop us your Instagram handle. That's literally it.</div>
         </div>
         <div class="step">
           <div class="step-num">2</div>
-          <div class="step-title">We Build It</div>
-          <div class="step-desc">We pull your photos, write your copy, set up your domain, and build your site.</div>
+          <div class="step-title" data-en="We Build It" data-es="¿Te gusta? $25/mes">We Build It</div>
+          <div class="step-desc" data-en="We pull your photos, write your copy, set up your domain, and build your site." data-es="Sin contratos, cancela cuando quieras.">We pull your photos, write your copy, set up your domain, and build your site.</div>
         </div>
         <div class="step">
           <div class="step-num">3</div>
-          <div class="step-title">You're Live</div>
-          <div class="step-desc">You approve, we flip the switch. Your site is live and ranking on Google.</div>
+          <div class="step-title" data-en="You're Live" data-es="Nosotros manejamos todo">You're Live</div>
+          <div class="step-desc" data-en="You approve, we flip the switch. Your site is live and ranking on Google." data-es="Dominio, hosting, SEO, actualizaciones.">You approve, we flip the switch. Your site is live and ranking on Google.</div>
         </div>
       </div>
     </div>
@@ -150,42 +168,62 @@
   <section>
     <div class="container">
       <div class="section-label">FAQ</div>
-      <h2 class="section-title">Common Questions</h2>
-      <p class="section-sub">If you don't see your question, email us.</p>
+      <h2 class="section-title" data-en="Common Questions" data-es="Preguntas Frecuentes">Common Questions</h2>
+      <p class="section-sub" data-en="If you don't see your question, email us." data-es="Si no ves tu pregunta, escríbenos.">If you don't see your question, email us.</p>
       <div class="faq">
         <div class="faq-item">
-          <div class="faq-q">What's the difference between Starter and Pro?</div>
-          <div class="faq-a">Pro adds an analytics dashboard so you can see your traffic, store integration (Shopify, Etsy, etc.), and priority support with faster response times.</div>
+          <div class="faq-q" data-en="What's the difference between Starter and Pro?" data-es="¿Cuál es la diferencia entre Starter y Pro?">What's the difference between Starter and Pro?</div>
+          <div class="faq-a" data-en="Pro adds an analytics dashboard so you can see your traffic, store integration (Shopify, Etsy, etc.), and priority support with faster response times." data-es="Pro agrega un panel de análisis para ver tu tráfico, integración de tienda (Shopify, Etsy, etc.) y soporte prioritario con tiempos de respuesta más rápidos.">Pro adds an analytics dashboard so you can see your traffic, store integration (Shopify, Etsy, etc.), and priority support with faster response times.</div>
         </div>
         <div class="faq-item">
-          <div class="faq-q">Do you really buy the domain for me?</div>
-          <div class="faq-a">Yes — included in the $25/mo. We register it, point it to your site, handle everything. You don't touch a single DNS record.</div>
+          <div class="faq-q" data-en="Do you really buy the domain for me?" data-es="¿Realmente compran el dominio por mí?">Do you really buy the domain for me?</div>
+          <div class="faq-a" data-en="Yes — included in the $25/mo. We register it, point it to your site, handle everything. You don't touch a single DNS record." data-es="Sí — incluido en los $25/mes. Lo registramos, lo apuntamos a tu sitio, manejamos todo. No tienes que tocar ningún registro DNS.">Yes — included in the $25/mo. We register it, point it to your site, handle everything. You don't touch a single DNS record.</div>
         </div>
         <div class="faq-item">
-          <div class="faq-q">How fast will my site be live?</div>
-          <div class="faq-a">Usually within 24 hours of signing up. Send us your IG, we build, you approve, we go live.</div>
+          <div class="faq-q" data-en="How fast will my site be live?" data-es="¿Qué tan rápido estará mi sitio en línea?">How fast will my site be live?</div>
+          <div class="faq-a" data-en="Usually within 24 hours of signing up. Send us your IG, we build, you approve, we go live." data-es="Generalmente dentro de 24 horas de registrarte. Envíanos tu IG, construimos, tú apruebas, salimos en vivo.">Usually within 24 hours of signing up. Send us your IG, we build, you approve, we go live.</div>
         </div>
         <div class="faq-item">
-          <div class="faq-q">Can I cancel anytime?</div>
-          <div class="faq-a">Yes. No contracts, no cancellation fees. Cancel anytime — just email us.</div>
+          <div class="faq-q" data-en="Can I cancel anytime?" data-es="¿Puedo cancelar en cualquier momento?">Can I cancel anytime?</div>
+          <div class="faq-a" data-en="Yes. No contracts, no cancellation fees. Cancel anytime — just email us." data-es="Sí. Sin contratos, sin cargos por cancelación. Cancela cuando quieras — solo escríbenos.">Yes. No contracts, no cancellation fees. Cancel anytime — just email us.</div>
         </div>
         <div class="faq-item">
-          <div class="faq-q">What if I already have a domain?</div>
-          <div class="faq-a">No problem. We can use your existing domain. Just let us know when you sign up.</div>
+          <div class="faq-q" data-en="What if I already have a domain?" data-es="¿Qué pasa si ya tengo un dominio?">What if I already have a domain?</div>
+          <div class="faq-a" data-en="No problem. We can use your existing domain. Just let us know when you sign up." data-es="Sin problema. Podemos usar tu dominio existente. Solo avísanos cuando te registres.">No problem. We can use your existing domain. Just let us know when you sign up.</div>
         </div>
       </div>
     </div>
   </section>
 
   <div class="final-cta">
-    <h2>Ready to get found on Google?</h2>
-    <p>$25/mo. No setup fee. Cancel anytime.</p>
-    <a class="btn-final" href="https://buy.stripe.com/6oU00j8TIfbn6hW34L3Je06" target="_blank" rel="noopener">Start Free — No Setup Fee</a>
+    <h2 data-en="Ready to get found on Google?" data-es="¿Listo para que te encuentren en Google?">Ready to get found on Google?</h2>
+    <p data-en="$25/mo. No setup fee. Cancel anytime." data-es="$25/mes. Sin costo de configuración. Cancela cuando quieras.">$25/mo. No setup fee. Cancel anytime.</p>
+    <a class="btn-final" href="https://buy.stripe.com/6oU00j8TIfbn6hW34L3Je06" target="_blank" rel="noopener" data-en="Start Free — No Setup Fee" data-es="Empieza Gratis — Sin Costo de Configuración">Start Free — No Setup Fee</a>
   </div>
 
   <footer>
-    <p>Bayou Web Studios | <a href="mailto:support@bayouwebstudio.com">support@bayouwebstudio.com</a> | <a href="https://bayouwebstudio.com">bayouwebstudio.com</a></p>
+    <p><span data-en="Bayou Web Studios | " data-es="Bayou Web Studios | Houston, TX | ">Bayou Web Studios | </span><a href="mailto:support@bayouwebstudio.com">support@bayouwebstudio.com</a> | <a href="https://bayouwebstudio.com">bayouwebstudio.com</a></p>
   </footer>
+
+  <script>
+    let currentLang = localStorage.getItem('bws_lang') || 'en';
+    function toggleLang() {
+      currentLang = currentLang === 'en' ? 'es' : 'en';
+      localStorage.setItem('bws_lang', currentLang);
+      document.querySelectorAll('[data-en]').forEach(el => {
+        el.textContent = currentLang === 'es' ? el.dataset.es : el.dataset.en;
+      });
+      document.querySelector('.lang-toggle').textContent = currentLang === 'en' ? '🌐 ES' : '🌐 EN';
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      if (currentLang === 'es') {
+        document.querySelectorAll('[data-en]').forEach(el => {
+          el.textContent = el.dataset.es;
+        });
+        document.querySelector('.lang-toggle').textContent = '🌐 EN';
+      }
+    });
+  </script>
 
 </body>
 </html>
