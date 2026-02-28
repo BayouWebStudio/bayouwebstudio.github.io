@@ -8,9 +8,11 @@
   <meta name="keywords" content="Fozy, fozyink, blackwork tattoo, geometric tattoo, Hong Kong tattoo artist, body suit tattoo, tribal geometric, soulfree studio" />
   <meta property="og:title" content="Fozy | Blackwork &amp; Geometric Tattoo Artist — Hong Kong" />
   <meta property="og:description" content="Large-scale blackwork &amp; geometric body suits. Based in Hong Kong @ Soul Free Studio." />
-  <meta property="og:image" content="https://iili.io/qqfgPst.jpg" />
+  <meta property="og:image" content="https://bayouwebstudio.github.io/fozyink/img/photo_01.jpg" />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://bayouwebstudio.github.io/fozyink/" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://bayouwebstudio.github.io/fozyink/img/photo_01.jpg" />
 
   <script type="application/ld+json">
   {
@@ -19,7 +21,8 @@
     "name": "Fozy",
     "alternateName": "@fozyink",
     "description": "Blackwork and geometric tattoo artist based in Hong Kong, specializing in large-scale body suits and tribal-geometric fusion.",
-    "image": "https://iili.io/qqfgPst.jpg",
+    "image": "https://bayouwebstudio.github.io/fozyink/img/photo_01.jpg",
+    "url": "https://bayouwebstudio.github.io/fozyink/",
     "sameAs": [
       "https://www.instagram.com/fozyink/",
       "https://www.threads.net/@fozyink"
@@ -51,17 +54,11 @@
 
     :root {
       --black: #000000;
-      --off-black: #0a0a0a;
-      --deep: #111111;
-      --surface: #161616;
-      --border: #222222;
       --accent: #5b7fa6;
-      --accent-dim: #3a5a7a;
-      --white: #f5f5f5;
-      --gray: #888;
-      --font-display: 'Bebas Neue', sans-serif;
-      --font-body: 'Inter', sans-serif;
-      --font-serif: 'Cormorant Garamond', serif;
+      --accent-light: #8aadcf;
+      --white: #f0f0f0;
+      --gray: #666;
+      --card-bg: #0d0d0d;
     }
 
     html { scroll-behavior: smooth; }
@@ -69,38 +66,36 @@
     body {
       background: var(--black);
       color: var(--white);
-      font-family: var(--font-body);
-      font-size: 16px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
       line-height: 1.6;
       overflow-x: hidden;
     }
 
-    /* ── NAV ── */
+    /* NAV */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
+      padding: 1.25rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1.2rem 2rem;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+      background: linear-gradient(to bottom, rgba(0,0,0,0.95), transparent);
     }
-
     .nav-logo {
-      font-family: var(--font-display);
-      font-size: 1.8rem;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
       letter-spacing: 0.15em;
       color: var(--white);
       text-decoration: none;
     }
-
+    .nav-logo span { color: var(--accent); }
     .nav-links {
       display: flex;
       gap: 2rem;
       list-style: none;
     }
-
     .nav-links a {
       color: var(--gray);
       text-decoration: none;
@@ -109,11 +104,10 @@
       text-transform: uppercase;
       transition: color 0.3s;
     }
-
     .nav-links a:hover { color: var(--white); }
 
-    /* ── HERO ── */
-    #hero {
+    /* HERO */
+    .hero {
       position: relative;
       height: 100vh;
       min-height: 600px;
@@ -121,69 +115,51 @@
       align-items: flex-end;
       overflow: hidden;
     }
-
-    .hero-bg {
+    .hero-img {
       position: absolute;
       inset: 0;
-      background-image: url('https://iili.io/qqfrHL7.jpg');
-      background-size: cover;
-      background-position: center top;
-      transform: scale(1.05);
-      transition: transform 8s ease-out;
-      filter: brightness(0.45);
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      filter: brightness(0.55);
     }
-
-    #hero:hover .hero-bg { transform: scale(1.0); }
-
     .hero-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(
-        to top,
-        rgba(0,0,0,1) 0%,
-        rgba(0,0,0,0.5) 40%,
-        transparent 70%
-      );
+      background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
     }
-
     .hero-content {
       position: relative;
-      z-index: 2;
-      padding: 3rem 2rem 4rem;
-      max-width: 1200px;
-      width: 100%;
-      margin: 0 auto;
+      z-index: 10;
+      padding: 3rem 2.5rem;
+      max-width: 700px;
     }
-
-    .hero-tag {
-      display: inline-block;
+    .hero-eyebrow {
       font-size: 0.7rem;
-      letter-spacing: 0.3em;
+      letter-spacing: 0.35em;
       text-transform: uppercase;
       color: var(--accent);
-      border: 1px solid var(--accent-dim);
-      padding: 0.3rem 0.8rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
     }
-
-    .hero-name {
-      font-family: var(--font-display);
-      font-size: clamp(5rem, 15vw, 12rem);
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 12vw, 9rem);
       line-height: 0.9;
       letter-spacing: 0.02em;
       color: var(--white);
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
     }
-
     .hero-sub {
-      font-family: var(--font-serif);
+      font-family: 'Cormorant Garamond', serif;
       font-size: clamp(1rem, 2.5vw, 1.4rem);
       font-style: italic;
-      color: rgba(245,245,245,0.7);
-      margin-bottom: 2rem;
       font-weight: 300;
+      color: rgba(240,240,240,0.75);
+      margin-bottom: 2rem;
+      max-width: 480px;
+      line-height: 1.5;
     }
-
     .hero-cta {
       display: inline-flex;
       align-items: center;
@@ -191,491 +167,289 @@
       background: var(--accent);
       color: #fff;
       text-decoration: none;
-      padding: 0.9rem 2rem;
-      font-size: 0.8rem;
+      padding: 0.85rem 2rem;
+      font-size: 0.75rem;
+      font-weight: 500;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      font-weight: 500;
       transition: background 0.3s, transform 0.2s;
     }
+    .hero-cta:hover { background: var(--accent-light); transform: translateY(-2px); }
 
-    .hero-cta:hover {
-      background: #4a6e95;
-      transform: translateY(-2px);
+    /* STATS */
+    .stats {
+      background: var(--card-bg);
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      text-align: center;
+      gap: 1px;
+    }
+    .stat-item {
+      padding: 1.5rem 1rem;
+      border-right: 1px solid #1a1a1a;
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.5rem;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+    }
+    .stat-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-top: 0.25rem;
     }
 
-    /* ── SECTION SHARED ── */
-    section { padding: 6rem 2rem; }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
+    /* SECTION COMMON */
+    section { padding: 5rem 2rem; max-width: 1200px; margin: 0 auto; }
 
     .section-label {
       font-size: 0.65rem;
-      letter-spacing: 0.35em;
+      letter-spacing: 0.4em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 0.8rem;
+      margin-bottom: 0.75rem;
     }
-
     .section-title {
-      font-family: var(--font-display);
-      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
       line-height: 1;
-      letter-spacing: 0.05em;
-      margin-bottom: 1.5rem;
-    }
-
-    .divider {
-      width: 60px;
-      height: 2px;
-      background: var(--accent);
+      letter-spacing: 0.04em;
+      color: var(--white);
       margin-bottom: 2.5rem;
     }
 
-    /* ── ABOUT ── */
-    #about {
-      background: var(--off-black);
-    }
-
+    /* ABOUT */
     .about-grid {
       display: grid;
-      grid-template-columns: 1fr 1.6fr;
+      grid-template-columns: 1fr 1fr;
       gap: 4rem;
       align-items: center;
     }
-
-    .about-photo-wrap {
-      position: relative;
-    }
-
-    .about-photo {
-      width: 100%;
-      aspect-ratio: 1;
+    .about-img {
+      aspect-ratio: 3/4;
       object-fit: cover;
-      filter: grayscale(20%) contrast(1.1);
-      display: block;
-    }
-
-    .about-photo-frame {
-      position: absolute;
-      bottom: -12px;
-      right: -12px;
       width: 100%;
-      height: 100%;
-      border: 1px solid var(--accent-dim);
-      z-index: -1;
+      filter: grayscale(20%);
     }
-
-    .about-bio {
-      font-family: var(--font-serif);
-      font-size: 1.15rem;
+    .about-text p {
+      color: rgba(240,240,240,0.65);
+      font-size: 0.95rem;
+      margin-bottom: 1.25rem;
       line-height: 1.8;
-      color: rgba(245,245,245,0.8);
-      margin-bottom: 1.5rem;
-      font-weight: 300;
     }
-
-    .about-stats {
-      display: flex;
-      gap: 2.5rem;
-      margin-top: 2.5rem;
-      padding-top: 2.5rem;
-      border-top: 1px solid var(--border);
-    }
-
-    .stat-item {}
-
-    .stat-num {
-      font-family: var(--font-display);
-      font-size: 2.2rem;
-      color: var(--accent);
-      line-height: 1;
-    }
-
-    .stat-label {
-      font-size: 0.7rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--gray);
-      margin-top: 0.2rem;
-    }
-
     .about-tags {
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
       margin-top: 1.5rem;
     }
-
     .tag {
-      font-size: 0.7rem;
-      letter-spacing: 0.15em;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      padding: 0.3rem 0.8rem;
-      border: 1px solid var(--border);
-      color: var(--gray);
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 0.35rem 0.75rem;
     }
 
-    /* ── GALLERY ── */
-    #gallery {
-      background: var(--black);
-    }
-
-    .gallery-intro {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      margin-bottom: 3rem;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
+    /* PORTFOLIO GRID */
+    .gallery-full { padding: 5rem 0; background: #050505; }
+    .gallery-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
     .gallery-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 4px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
     }
-
     .gallery-item {
-      position: relative;
       overflow: hidden;
+      aspect-ratio: 1;
       cursor: pointer;
-      background: var(--surface);
+      position: relative;
     }
-
-    .gallery-item:nth-child(1),
-    .gallery-item:nth-child(6) {
+    .gallery-item:first-child {
       grid-column: span 2;
-      grid-row: span 2;
+      aspect-ratio: 2/1;
     }
-
     .gallery-item img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block;
-      filter: grayscale(15%) contrast(1.05);
       transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.4s;
-      min-height: 200px;
+      filter: grayscale(15%);
     }
-
     .gallery-item:hover img {
       transform: scale(1.06);
-      filter: grayscale(0%) contrast(1.1);
+      filter: grayscale(0%);
     }
-
-    .gallery-item::after {
-      content: '';
+    .gallery-item-overlay {
       position: absolute;
       inset: 0;
-      background: rgba(91, 127, 166, 0);
-      transition: background 0.4s;
-    }
-
-    .gallery-item:hover::after {
-      background: rgba(91, 127, 166, 0.08);
-    }
-
-    /* ── LIGHTBOX ── */
-    .lightbox {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 1000;
-      background: rgba(0,0,0,0.95);
-      align-items: center;
-      justify-content: center;
-    }
-
-    .lightbox.active { display: flex; }
-
-    .lightbox img {
-      max-width: 90vw;
-      max-height: 90vh;
-      object-fit: contain;
-    }
-
-    .lightbox-close {
-      position: absolute;
-      top: 1.5rem;
-      right: 1.5rem;
-      background: none;
-      border: none;
-      color: var(--white);
-      font-size: 2rem;
-      cursor: pointer;
-      line-height: 1;
-    }
-
-    /* ── STYLE SECTION ── */
-    #style {
-      background: var(--deep);
-      border-top: 1px solid var(--border);
-    }
-
-    .style-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-      margin-top: 3rem;
-    }
-
-    .style-card {
-      background: var(--surface);
-      padding: 2.5rem 2rem;
-      border-bottom: 2px solid transparent;
-      transition: border-color 0.3s, background 0.3s;
-    }
-
-    .style-card:hover {
-      border-color: var(--accent);
-      background: #1a1a1a;
-    }
-
-    .style-icon {
-      font-size: 1.8rem;
-      margin-bottom: 1rem;
-      display: block;
-    }
-
-    .style-card h3 {
-      font-family: var(--font-display);
-      font-size: 1.5rem;
-      letter-spacing: 0.1em;
-      margin-bottom: 0.8rem;
-    }
-
-    .style-card p {
-      font-size: 0.875rem;
-      color: var(--gray);
-      line-height: 1.7;
-    }
-
-    /* ── CONTACT ── */
-    #contact {
-      background: var(--off-black);
-    }
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6rem;
-      align-items: start;
-    }
-
-    .contact-info-text {
-      font-family: var(--font-serif);
-      font-size: 1.1rem;
-      color: rgba(245,245,245,0.7);
-      line-height: 1.8;
-      margin-bottom: 2.5rem;
-      font-weight: 300;
-    }
-
-    .contact-links {
+      background: rgba(0,0,0,0);
+      transition: background 0.3s;
       display: flex;
-      flex-direction: column;
-      gap: 1rem;
+      align-items: flex-end;
+      padding: 1.25rem;
     }
-
-    .contact-link {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 1.2rem 1.5rem;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      text-decoration: none;
-      color: var(--white);
-      transition: border-color 0.3s, background 0.3s;
-    }
-
-    .contact-link:hover {
-      border-color: var(--accent);
-      background: #1c1c1c;
-    }
-
-    .contact-link-icon {
-      font-size: 1.4rem;
-      flex-shrink: 0;
-    }
-
-    .contact-link-body {}
-
-    .contact-link-label {
+    .gallery-item:hover .gallery-item-overlay { background: rgba(0,0,0,0.35); }
+    .gallery-item-label {
       font-size: 0.65rem;
-      letter-spacing: 0.25em;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 0.1rem;
+      color: rgba(255,255,255,0);
+      transition: color 0.3s;
     }
+    .gallery-item:hover .gallery-item-label { color: rgba(255,255,255,0.8); }
 
-    .contact-link-value {
-      font-size: 0.95rem;
-      font-weight: 500;
+    /* BOOKING */
+    .booking-section {
+      background: var(--card-bg);
+      border: 1px solid #1a1a1a;
     }
-
-    .booking-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      padding: 3rem;
-    }
-
-    .booking-card h3 {
-      font-family: var(--font-display);
-      font-size: 2rem;
-      letter-spacing: 0.1em;
-      margin-bottom: 1rem;
-    }
-
-    .booking-card p {
-      font-size: 0.875rem;
-      color: var(--gray);
-      line-height: 1.7;
-      margin-bottom: 2rem;
-    }
-
-    .booking-points {
-      list-style: none;
-      margin-bottom: 2.5rem;
-    }
-
-    .booking-points li {
-      font-size: 0.85rem;
-      color: rgba(245,245,245,0.7);
-      padding: 0.5rem 0;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      gap: 0.7rem;
-    }
-
-    .booking-points li::before {
-      content: '▸';
-      color: var(--accent);
-      flex-shrink: 0;
-    }
-
-    .btn-book {
-      display: block;
+    .booking-section section {
+      max-width: 700px;
       text-align: center;
+    }
+    .booking-section .section-title { margin-bottom: 1rem; }
+    .booking-desc {
+      color: rgba(240,240,240,0.55);
+      font-size: 0.9rem;
+      margin-bottom: 2.5rem;
+      line-height: 1.8;
+    }
+    .booking-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
       background: var(--accent);
       color: #fff;
       text-decoration: none;
-      padding: 1.1rem 2rem;
-      font-size: 0.8rem;
+      padding: 0.9rem 2.25rem;
+      font-size: 0.75rem;
+      font-weight: 500;
       letter-spacing: 0.2em;
       text-transform: uppercase;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .btn-primary:hover { background: var(--accent-light); transform: translateY(-2px); }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      text-decoration: none;
+      padding: 0.9rem 2.25rem;
+      font-size: 0.75rem;
       font-weight: 500;
-      transition: background 0.3s;
-      width: 100%;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: background 0.3s, color 0.3s, transform 0.2s;
+    }
+    .btn-secondary:hover {
+      background: var(--accent);
+      color: #fff;
+      transform: translateY(-2px);
     }
 
-    .btn-book:hover { background: #4a6e95; }
-
-    /* ── FLOAT BUTTON ── */
-    .float-book {
+    /* FLOATING CTA */
+    .float-cta {
       position: fixed;
       bottom: 2rem;
       right: 2rem;
-      z-index: 99;
+      z-index: 200;
+    }
+    .float-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
       background: var(--accent);
       color: #fff;
       text-decoration: none;
-      padding: 0.9rem 1.6rem;
+      padding: 0.9rem 1.75rem;
       font-size: 0.75rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
       font-weight: 500;
-      box-shadow: 0 4px 20px rgba(91, 127, 166, 0.35);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      box-shadow: 0 8px 32px rgba(91,127,166,0.45);
       transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
     }
-
-    .float-book:hover {
-      background: #4a6e95;
+    .float-btn:hover {
+      background: var(--accent-light);
       transform: translateY(-3px);
-      box-shadow: 0 8px 30px rgba(91, 127, 166, 0.5);
+      box-shadow: 0 12px 40px rgba(91,127,166,0.6);
     }
 
-    /* ── FOOTER ── */
+    /* FOOTER */
     footer {
-      background: var(--black);
-      border-top: 1px solid var(--border);
+      background: #000;
+      border-top: 1px solid #111;
       padding: 3rem 2rem;
       text-align: center;
     }
-
     .footer-logo {
-      font-family: var(--font-display);
-      font-size: 2.5rem;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
       letter-spacing: 0.15em;
+      color: var(--white);
       margin-bottom: 1rem;
     }
-
-    .footer-tagline {
-      font-family: var(--font-serif);
-      font-style: italic;
-      color: var(--gray);
-      margin-bottom: 2rem;
-      font-weight: 300;
-    }
-
-    .footer-social {
+    .footer-links {
       display: flex;
+      gap: 2rem;
       justify-content: center;
-      gap: 1.5rem;
-      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
     }
-
-    .footer-social a {
+    .footer-links a {
       color: var(--gray);
       text-decoration: none;
       font-size: 0.75rem;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       transition: color 0.3s;
     }
-
-    .footer-social a:hover { color: var(--accent); }
-
-    .footer-credit {
+    .footer-links a:hover { color: var(--accent); }
+    .footer-copy {
       font-size: 0.7rem;
-      color: #444;
+      color: #333;
       letter-spacing: 0.1em;
     }
-
-    .footer-credit a {
-      color: var(--accent-dim);
-      text-decoration: none;
-      transition: color 0.3s;
+    .footer-credit {
+      font-size: 0.65rem;
+      color: #292929;
+      margin-top: 0.5rem;
+      letter-spacing: 0.1em;
     }
-
+    .footer-credit a { color: #3a5a7a; text-decoration: none; }
     .footer-credit a:hover { color: var(--accent); }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-      .about-photo-wrap { max-width: 320px; }
-      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .style-grid { grid-template-columns: 1fr; }
-      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-      .gallery-item:nth-child(1),
-      .gallery-item:nth-child(6) { grid-column: span 1; grid-row: span 1; }
-    }
-
-    @media (max-width: 600px) {
-      nav { padding: 1rem 1.2rem; }
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 1rem; }
       .nav-links { display: none; }
-      section { padding: 4rem 1.2rem; }
-      .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 3px; }
-      .about-stats { flex-wrap: wrap; gap: 1.5rem; }
-      .booking-card { padding: 2rem 1.5rem; }
+      .hero-content { padding: 2rem 1.5rem; }
+      .stats { grid-template-columns: repeat(3, 1fr); padding: 1rem; }
+      .stat-item { padding: 1rem 0.5rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-item:first-child { grid-column: span 2; }
+      section { padding: 3rem 1.25rem; }
+      .booking-section section { padding: 3rem 1.25rem; }
+      .float-cta { bottom: 1.25rem; right: 1.25rem; }
+      .float-btn { padding: 0.75rem 1.25rem; font-size: 0.7rem; }
     }
   </style>
 </head>
@@ -683,265 +457,142 @@
 
   <!-- NAV -->
   <nav>
-    <a href="#hero" class="nav-logo">FOZY</a>
+    <a href="#" class="nav-logo">F<span>.</span>OZY</a>
     <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
       <li><a href="#about">About</a></li>
-      <li><a href="#gallery">Gallery</a></li>
-      <li><a href="#style">Style</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="#booking">Book</a></li>
     </ul>
   </nav>
 
   <!-- HERO -->
-  <section id="hero">
-    <div class="hero-bg"></div>
+  <section class="hero" style="padding:0; max-width:none;">
+    <img class="hero-img" src="img/photo_01.jpg" alt="Fozy blackwork body suit tattoo — Hong Kong" />
     <div class="hero-overlay"></div>
     <div class="hero-content">
-      <span class="hero-tag">Hong Kong · Soul Free Studio</span>
-      <h1 class="hero-name">FOZY</h1>
-      <p class="hero-sub">Blackwork &amp; Geometric Body Suits</p>
+      <p class="hero-eyebrow">Blackwork · Geometric · Hong Kong</p>
+      <h1 class="hero-title">FOZY</h1>
+      <p class="hero-sub">Large-scale body suits &amp; geometric works. Based at Soul Free Studio, Hong Kong.</p>
       <a href="https://wa.me/85255777277" class="hero-cta" target="_blank" rel="noopener">
-        ✦ Book a Consultation
+        📲 Book via WhatsApp
       </a>
     </div>
   </section>
 
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="container">
-      <div class="about-grid">
-        <div class="about-photo-wrap">
-          <img src="https://iili.io/qqfgPst.jpg" alt="Fozy — Blackwork Tattoo Artist" class="about-photo" />
-          <div class="about-photo-frame"></div>
-        </div>
-        <div>
-          <p class="section-label">About the Artist</p>
-          <h2 class="section-title">FOZY</h2>
-          <div class="divider"></div>
-          <p class="about-bio">
-            Based in Hong Kong and working out of <strong>Soul Free Studio</strong>, Fozy is a blackwork and geometric tattoo artist who specializes in large-scale body suits that merge tribal geometry with flowing organic patterns. His work is bold, intentional, and deeply personal — each piece built to move with the body and last a lifetime.
-          </p>
-          <p class="about-bio">
-            With roots in sacred geometry and a command of negative space, Fozy creates immersive tattoo experiences that transform the human form into living art. From sleeves to full body compositions, his precision and vision are unmatched.
-          </p>
-          <div class="about-tags">
-            <span class="tag">Blackwork</span>
-            <span class="tag">Geometric</span>
-            <span class="tag">Body Suits</span>
-            <span class="tag">Tribal Fusion</span>
-            <span class="tag">Large Scale</span>
-            <span class="tag">Hong Kong</span>
-          </div>
-          <div class="about-stats">
-            <div class="stat-item">
-              <div class="stat-num">17.9K</div>
-              <div class="stat-label">Instagram</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-num">HKG</div>
-              <div class="stat-label">Based In</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-num">∞</div>
-              <div class="stat-label">Canvas</div>
-            </div>
-          </div>
-        </div>
-      </div>
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat-item">
+      <div class="stat-num">17.9K</div>
+      <div class="stat-label">Followers</div>
     </div>
-  </section>
-
-  <!-- GALLERY -->
-  <section id="gallery">
-    <div class="container">
-      <div class="gallery-intro">
-        <div>
-          <p class="section-label">Portfolio</p>
-          <h2 class="section-title">THE WORK</h2>
-          <div class="divider"></div>
-        </div>
-        <a href="https://www.instagram.com/fozyink/" target="_blank" rel="noopener" style="font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);text-decoration:none;">
-          View @fozyink →
-        </a>
-      </div>
+    <div class="stat-item">
+      <div class="stat-num">266+</div>
+      <div class="stat-label">Posts</div>
     </div>
-    <div class="gallery-grid">
-      <div class="gallery-item" onclick="openLightbox('https://iili.io/qqfgL1n.jpg')">
-        <img src="https://iili.io/qqfgL1n.jpg" alt="Fozy blackwork tattoo" loading="lazy" />
-      </div>
-      <div class="gallery-item" onclick="openLightbox('https://iili.io/qqfgD7f.jpg')">
-        <img src="https://iili.io/qqfgD7f.jpg" alt="Fozy geometric tattoo" loading="lazy" />
-      </div>
-      <div class="gallery-item" onclick="openLightbox('https://iili.io/qqfgmml.jpg')">
-        <img src="https://iili.io/qqfgmml.jpg" alt="Fozy body suit" loading="lazy" />
-      </div>
-      <div class="gallery-item" onclick="openLightbox('https://iili.io/qqfrHL7.jpg')">
-        <img src="https://iili.io/qqfrHL7.jpg" alt="Fozy tribal geometric" loading="lazy" />
-      </div>
-      <div class="gallery-item" onclick="openLightbox('https://iili.io/qqfr3ru.jpg')">
-        <img src="https://iili.io/qqfr3ru.jpg" alt="Fozy blackwork sleeve" loading="lazy" />
-      </div>
-      <div class="gallery-item" onclick="openLightbox('https://iili.io/qqfrBmQ.jpg')">
-        <img src="https://iili.io/qqfrBmQ.jpg" alt="Fozy geometric pattern" loading="lazy" />
-      </div>
-      <div class="gallery-item" onclick="openLightbox('https://iili.io/qqfrxLP.jpg')">
-        <img src="https://iili.io/qqfrxLP.jpg" alt="Fozy tattoo art" loading="lazy" />
-      </div>
-      <div class="gallery-item" onclick="openLightbox('https://iili.io/qqfrTEF.jpg')">
-        <img src="https://iili.io/qqfrTEF.jpg" alt="Fozy large scale tattoo" loading="lazy" />
-      </div>
-      <div class="gallery-item" onclick="openLightbox('https://iili.io/qqfrYpR.jpg')">
-        <img src="https://iili.io/qqfrYpR.jpg" alt="Fozy blackwork art" loading="lazy" />
-      </div>
-      <div class="gallery-item" onclick="openLightbox('https://iili.io/qqfr0QI.jpg')">
-        <img src="https://iili.io/qqfr0QI.jpg" alt="Fozy geometric body art" loading="lazy" />
-      </div>
-      <div class="gallery-item" onclick="openLightbox('https://iili.io/qqfreQS.jpg')">
-        <img src="https://iili.io/qqfreQS.jpg" alt="Fozy tribal tattoo" loading="lazy" />
-      </div>
-      <div class="gallery-item" onclick="openLightbox('https://iili.io/qqfrS4e.jpg')">
-        <img src="https://iili.io/qqfrS4e.jpg" alt="Fozy flowing blackwork" loading="lazy" />
-      </div>
+    <div class="stat-item">
+      <div class="stat-num">12+</div>
+      <div class="stat-label">Years</div>
     </div>
-  </section>
-
-  <!-- LIGHTBOX -->
-  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-    <button class="lightbox-close" onclick="closeLightbox()">×</button>
-    <img id="lightbox-img" src="" alt="Fozy tattoo" />
   </div>
 
-  <!-- STYLE -->
-  <section id="style">
-    <div class="container">
-      <p class="section-label">Specializations</p>
-      <h2 class="section-title">THE STYLE</h2>
-      <div class="divider"></div>
-      <div class="style-grid">
-        <div class="style-card">
-          <span class="style-icon">◈</span>
-          <h3>BLACKWORK</h3>
-          <p>Pure black ink, zero compromise. Fozy's blackwork commands attention with bold contrast, intricate linework, and deep saturation that stands the test of time.</p>
+  <!-- PORTFOLIO -->
+  <div class="gallery-full" id="work">
+    <div class="gallery-inner">
+      <p class="section-label" style="margin-bottom:0.5rem;">Portfolio</p>
+      <h2 class="section-title">THE WORK</h2>
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="img/photo_03.jpg" alt="Fozy blackwork geometric tattoo" loading="lazy" />
+          <div class="gallery-item-overlay"><span class="gallery-item-label">Geometric Blackwork</span></div>
         </div>
-        <div class="style-card">
-          <span class="style-icon">⬡</span>
-          <h3>GEOMETRIC</h3>
-          <p>Sacred geometry meets organic flow. Precise angular forms that breathe life, merge with curves, and create compositions that feel both mathematical and primal.</p>
+        <div class="gallery-item">
+          <img src="img/photo_04.jpg" alt="Fozy geometric tattoo soulfree studio" loading="lazy" />
+          <div class="gallery-item-overlay"><span class="gallery-item-label">Blackwork Detail</span></div>
         </div>
-        <div class="style-card">
-          <span class="style-icon">◎</span>
-          <h3>BODY SUITS</h3>
-          <p>Large-scale full-body compositions are where Fozy excels. A cohesive vision from concept to completion — your body becomes the canvas for a living masterpiece.</p>
+        <div class="gallery-item">
+          <img src="img/photo_05.jpg" alt="Fozy blackwork tattoo Hong Kong Dec 2025" loading="lazy" />
+          <div class="gallery-item-overlay"><span class="gallery-item-label">Soulfree Studio</span></div>
+        </div>
+        <div class="gallery-item">
+          <img src="img/photo_06.jpg" alt="Fozy tattoo December 2025" loading="lazy" />
+          <div class="gallery-item-overlay"><span class="gallery-item-label">Recent Work</span></div>
+        </div>
+        <div class="gallery-item">
+          <img src="img/photo_07.jpg" alt="Fozy soulfree studio November 2025" loading="lazy" />
+          <div class="gallery-item-overlay"><span class="gallery-item-label">Body Placement</span></div>
+        </div>
+        <div class="gallery-item">
+          <img src="img/photo_08.jpg" alt="Fozy tattoo artist Hong Kong" loading="lazy" />
+          <div class="gallery-item-overlay"><span class="gallery-item-label">Flow &amp; Pattern</span></div>
+        </div>
+        <div class="gallery-item" style="grid-column: span 2; aspect-ratio: 2/1;">
+          <img src="img/photo_09.jpg" alt="Fozy full sleeve bodysuit tattoo" loading="lazy" />
+          <div class="gallery-item-overlay"><span class="gallery-item-label">Full Sleeve — 5 Sessions</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-grid">
+      <img class="about-img" src="img/photo_01.jpg" alt="Fozy tattoo artist blackwork geometric" loading="lazy" />
+      <div class="about-text">
+        <p class="section-label">About the Artist</p>
+        <h2 class="section-title">B L A C K<br>W O R K</h2>
+        <p>Fozy is a Hong Kong-based tattoo artist renowned for precise blackwork and flowing geometric patterns. Working out of <strong>Soul Free Studio (@soulfree.studio)</strong>, Fozy has built an international reputation for large-scale body suits that push the boundary between art and skin.</p>
+        <p>With a meticulous approach to negative space and pattern flow, each piece is custom-designed to honor the body's natural movement and anatomy. Fozy regularly travels globally — joining world-class conventions in Italy, the Netherlands, Germany, the US, and Southeast Asia.</p>
+        <div class="about-tags">
+          <span class="tag">Blackwork</span>
+          <span class="tag">Geometric</span>
+          <span class="tag">Body Suits</span>
+          <span class="tag">Tribal Fusion</span>
+          <span class="tag">Large Scale</span>
+          <span class="tag">Hong Kong</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="container">
-      <div class="contact-grid">
-        <div>
-          <p class="section-label">Get In Touch</p>
-          <h2 class="section-title">BOOK NOW</h2>
-          <div class="divider"></div>
-          <p class="contact-info-text">
-            Ready to start your journey? Fozy takes on limited bookings to ensure every client receives his full focus and creative energy. Reach out via WhatsApp or email to begin the conversation.
-          </p>
-          <div class="contact-links">
-            <a href="https://wa.me/85255777277" class="contact-link" target="_blank" rel="noopener">
-              <span class="contact-link-icon">💬</span>
-              <div class="contact-link-body">
-                <div class="contact-link-label">WhatsApp</div>
-                <div class="contact-link-value">+852 5577 7277</div>
-              </div>
-            </a>
-            <a href="mailto:fozyink@hotmail.com" class="contact-link">
-              <span class="contact-link-icon">✉️</span>
-              <div class="contact-link-body">
-                <div class="contact-link-label">Email</div>
-                <div class="contact-link-value">fozyink@hotmail.com</div>
-              </div>
-            </a>
-            <a href="https://www.instagram.com/fozyink/" class="contact-link" target="_blank" rel="noopener">
-              <span class="contact-link-icon">📷</span>
-              <div class="contact-link-body">
-                <div class="contact-link-label">Instagram</div>
-                <div class="contact-link-value">@fozyink</div>
-              </div>
-            </a>
-            <a href="https://www.instagram.com/soulfree.studio/" class="contact-link" target="_blank" rel="noopener">
-              <span class="contact-link-icon">📍</span>
-              <div class="contact-link-body">
-                <div class="contact-link-label">Studio</div>
-                <div class="contact-link-value">@soulfree.studio · Hong Kong</div>
-              </div>
-            </a>
-          </div>
-        </div>
-        <div>
-          <div class="booking-card">
-            <h3>START YOUR PROJECT</h3>
-            <p>Whether you have a fully formed concept or just a feeling — Fozy collaborates closely with clients to bring their vision to life. No cookie-cutter work. Every piece is custom.</p>
-            <ul class="booking-points">
-              <li>Custom blackwork &amp; geometric designs</li>
-              <li>Large-scale sleeves &amp; body suits</li>
-              <li>Cover-ups &amp; reworks considered</li>
-              <li>International clients welcome</li>
-              <li>Consultation via WhatsApp or email</li>
-            </ul>
-            <a href="https://wa.me/85255777277" class="btn-book" target="_blank" rel="noopener">
-              ✦ &nbsp; Message on WhatsApp
-            </a>
-          </div>
-        </div>
+  <!-- BOOKING -->
+  <div class="booking-section" id="booking">
+    <section style="margin: 0 auto;">
+      <p class="section-label">Get Inked</p>
+      <h2 class="section-title">BOOK A SESSION</h2>
+      <p class="booking-desc">Ready to start your bodysuit journey? Fozy takes limited bookings each month for large-scale blackwork and geometric projects. Reach out via WhatsApp or email to discuss your concept.</p>
+      <div class="booking-buttons">
+        <a href="https://wa.me/85255777277" class="btn-primary" target="_blank" rel="noopener">
+          📲 WhatsApp +852 5577 7277
+        </a>
+        <a href="mailto:fozyink@hotmail.com" class="btn-secondary">
+          ✉️ fozyink@hotmail.com
+        </a>
       </div>
-    </div>
-  </section>
+      <p style="margin-top:2rem; font-size:0.75rem; color:#444; letter-spacing:0.1em;">
+        @fozyink · @soulfree.studio · Hong Kong
+      </p>
+    </section>
+  </div>
 
   <!-- FOOTER -->
   <footer>
     <div class="footer-logo">FOZY</div>
-    <p class="footer-tagline">Blackwork &amp; Geometric Tattoo · Hong Kong</p>
-    <div class="footer-social">
+    <div class="footer-links">
       <a href="https://www.instagram.com/fozyink/" target="_blank" rel="noopener">Instagram</a>
-      <a href="https://www.threads.net/@fozyink" target="_blank" rel="noopener">Threads</a>
-      <a href="https://www.instagram.com/soulfree.studio/" target="_blank" rel="noopener">Soul Free Studio</a>
       <a href="https://wa.me/85255777277" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="mailto:fozyink@hotmail.com">Email</a>
+      <a href="https://www.instagram.com/soulfree.studio/" target="_blank" rel="noopener">Soul Free Studio</a>
     </div>
-    <p class="footer-credit">
-      Demo site crafted by <a href="https://bayouwebstudio.com" target="_blank" rel="noopener">Bayou Web Studio</a>
-      &nbsp;·&nbsp; All artwork © Fozy / @fozyink
-    </p>
+    <p class="footer-copy">© 2026 Fozy · @fozyink · Hong Kong</p>
+    <p class="footer-credit">Site by <a href="https://bayouwebstudio.github.io" target="_blank" rel="noopener">Bayou Web Studio</a></p>
   </footer>
 
-  <!-- FLOAT BUTTON -->
-  <a href="https://wa.me/85255777277" class="float-book" target="_blank" rel="noopener">
-    ✦ Book Now
-  </a>
+  <!-- FLOATING BOOK NOW -->
+  <div class="float-cta">
+    <a href="https://wa.me/85255777277" class="float-btn" target="_blank" rel="noopener">
+      📲 Book Now
+    </a>
+  </div>
 
-  <script>
-    function openLightbox(src) {
-      document.getElementById('lightbox-img').src = src;
-      document.getElementById('lightbox').classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeLightbox() {
-      document.getElementById('lightbox').classList.remove('active');
-      document.body.style.overflow = '';
-    }
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') closeLightbox();
-    });
-
-    // Parallax hero
-    window.addEventListener('scroll', () => {
-      const hero = document.querySelector('.hero-bg');
-      if (hero) {
-        const scrolled = window.pageYOffset;
-        hero.style.transform = `scale(1.05) translateY(${scrolled * 0.3}px)`;
-      }
-    });
-  </script>
 </body>
 </html>
