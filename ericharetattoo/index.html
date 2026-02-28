@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eric Hare | Geometric Tattoo Artist — San Diego, CA</title>
+  <meta name="description" content="Eric Hare is a geometric tattoo artist based in San Diego, CA specializing in mandalas, dotwork, sacred geometry, and black geometric sleeves. Book at The Tattoo Temple." />
+  <meta name="keywords" content="Eric Hare, geometric tattoo, San Diego tattoo artist, mandala tattoo, dotwork, sacred geometry, ericharetattoo" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Eric Hare | Geometric Tattoo Artist — San Diego, CA" />
+  <meta property="og:description" content="Black geometric, mandalas, dotwork & sacred geometry. Based in San Diego at The Tattoo Temple." />
+  <meta property="og:image" content="https://iili.io/qqK1v2a.jpg" />
+  <meta property="og:url" content="https://bayouwebstudio.com/ericharetattoo/" />
+  <meta property="og:type" content="website" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Eric Hare | Geometric Tattoo Artist — San Diego, CA" />
+  <meta name="twitter:description" content="Black geometric, mandalas, dotwork & sacred geometry. Based in San Diego at The Tattoo Temple." />
+  <meta name="twitter:image" content="https://iili.io/qqK1v2a.jpg" />
+
+  <!-- JSON-LD LocalBusiness Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Eric Hare — Geometric Tattoo Artist",
+    "description": "Black geometric, mandalas, dotwork, sleeves, and sacred geometry tattoos.",
+    "url": "https://bayouwebstudio.com/ericharetattoo/",
+    "image": "https://iili.io/qqK1NB1.jpg",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "San Diego",
+      "addressRegion": "CA",
+      "addressCountry": "US"
+    },
+    "sameAs": [
+      "https://www.instagram.com/ericharetattoo/",
+      "https://www.cocreate.ink/artists/ericharetattoo"
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #C9A07A;
+      --gold-light: #e0bc97;
+      --black: #0a0a0a;
+      --dark: #111111;
+      --darker: #0d0d0d;
+      --text: #e8e8e8;
+      --muted: #888;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 2.5rem;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,160,122,0.12);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.05em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ── HERO ── */
+    #hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://iili.io/qqK1v2a.jpg');
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.35);
+      transform: scale(1.05);
+      transition: transform 8s ease;
+    }
+
+    #hero:hover .hero-bg { transform: scale(1.0); }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(10,10,10,0.3) 0%, rgba(10,10,10,0.7) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      padding: 0 1.5rem;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-weight: 900;
+      line-height: 1.0;
+      color: #fff;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(0.9rem, 2vw, 1.1rem);
+      color: rgba(255,255,255,0.65);
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      padding: 0.9rem 2.8rem;
+      background: var(--gold);
+      color: var(--black);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border: 2px solid var(--gold);
+      transition: all 0.3s;
+    }
+
+    .hero-cta:hover {
+      background: transparent;
+      color: var(--gold);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(255,255,255,0.4);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      animation: bounce 2s infinite;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ── SECTION BASE ── */
+    section { padding: 7rem 1.5rem; }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+    }
+
+    .divider {
+      width: 60px;
+      height: 2px;
+      background: var(--gold);
+      margin: 1.5rem 0 2.5rem;
+    }
+
+    /* ── ABOUT ── */
+    #about { background: var(--darker); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .about-img-wrap {
+      position: relative;
+    }
+
+    .about-img-wrap::before {
+      content: '';
+      position: absolute;
+      top: -12px;
+      left: -12px;
+      right: 12px;
+      bottom: 12px;
+      border: 2px solid var(--gold);
+      opacity: 0.35;
+      z-index: 0;
+    }
+
+    .about-img {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(20%);
+    }
+
+    .about-text p {
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 1.2rem;
+      font-size: 1.0rem;
+    }
+
+    .about-stats {
+      display: flex;
+      gap: 3rem;
+      margin-top: 2.5rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--gold);
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .ig-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--gold);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-top: 2rem;
+      border-bottom: 1px solid rgba(201,160,122,0.3);
+      padding-bottom: 0.2rem;
+      transition: border-color 0.3s;
+    }
+
+    .ig-link:hover { border-color: var(--gold); }
+
+    /* ── GALLERY ── */
+    #gallery { background: var(--black); }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+    }
+
+    .gallery-item {
+      aspect-ratio: 1;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease, filter 0.5s ease;
+      filter: grayscale(10%);
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.07);
+      filter: grayscale(0%);
+    }
+
+    .gallery-item-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(10,10,10,0.4);
+      opacity: 0;
+      transition: opacity 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gallery-item:hover .gallery-item-overlay { opacity: 1; }
+
+    .gallery-item-overlay span {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* ── SERVICES ── */
+    #services { background: var(--darker); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .service-card {
+      padding: 2.5rem 2rem;
+      border: 1px solid rgba(201,160,122,0.15);
+      position: relative;
+      transition: border-color 0.3s;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 40px;
+      height: 2px;
+      background: var(--gold);
+    }
+
+    .service-card:hover { border-color: rgba(201,160,122,0.4); }
+
+    .service-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+
+    .service-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+    }
+
+    .service-desc {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+
+    /* ── BOOKING CTA ── */
+    #book {
+      background: var(--black);
+      text-align: center;
+      padding: 8rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #book::before {
+      content: 'BOOK';
+      position: absolute;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(8rem, 20vw, 18rem);
+      font-weight: 900;
+      color: rgba(201,160,122,0.04);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    #book .section-title { margin-bottom: 1rem; }
+
+    #book p {
+      color: rgba(255,255,255,0.5);
+      max-width: 500px;
+      margin: 0 auto 3rem;
+      font-size: 1rem;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      padding: 1.1rem 3.5rem;
+      background: var(--gold);
+      color: var(--black);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      border: 2px solid var(--gold);
+      transition: all 0.3s;
+    }
+
+    .cta-btn:hover {
+      background: transparent;
+      color: var(--gold);
+    }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--darker); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .contact-info p {
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 0.8rem;
+    }
+
+    .contact-detail {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.2rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .contact-detail-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      min-width: 80px;
+      padding-top: 0.1rem;
+    }
+
+    .contact-detail-value {
+      color: rgba(255,255,255,0.7);
+      font-size: 0.95rem;
+    }
+
+    .contact-detail-value a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .contact-detail-value a:hover { color: var(--gold); }
+
+    .contact-cta-side {
+      padding: 3rem;
+      border: 1px solid rgba(201,160,122,0.15);
+      text-align: center;
+    }
+
+    .contact-cta-side .section-title {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .contact-cta-side p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black);
+      padding: 2.5rem 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .footer-copy {
+      color: rgba(255,255,255,0.3);
+      font-size: 0.75rem;
+    }
+
+    /* ── FLOATING BOOK BTN ── */
+    .float-book {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 200;
+      background: var(--gold);
+      color: var(--black);
+      text-decoration: none;
+      padding: 0.85rem 1.8rem;
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      box-shadow: 0 8px 30px rgba(201,160,122,0.4);
+      transition: all 0.3s;
+      border: 2px solid var(--gold);
+    }
+
+    .float-book:hover {
+      background: var(--black);
+      color: var(--gold);
+      box-shadow: 0 8px 30px rgba(201,160,122,0.2);
+    }
+
+    /* ── HAMBURGER (mobile) ── */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 24px;
+      height: 1.5px;
+      background: var(--gold);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-img-wrap { max-width: 380px; margin: 0 auto; }
+      .services-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .nav-toggle { display: flex; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .about-stats { gap: 2rem; }
+      .float-book { bottom: 1.2rem; right: 1.2rem; padding: 0.75rem 1.4rem; }
+      section { padding: 5rem 1.2rem; }
+    }
+
+    /* Fade-in animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-logo">Eric Hare</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#book">Book</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-toggle" onclick="document.querySelector('.nav-links').style.display = document.querySelector('.nav-links').style.display === 'flex' ? 'none' : 'flex'">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content fade-in visible">
+      <p class="hero-eyebrow">San Diego, CA &nbsp;·&nbsp; The Tattoo Temple</p>
+      <h1 class="hero-title">Eric<br>Hare</h1>
+      <p class="hero-subtitle">Geometric Tattoo Artist &nbsp;·&nbsp; Mandala &nbsp;·&nbsp; Sacred Geometry &nbsp;·&nbsp; Dotwork</p>
+      <a href="https://www.cocreate.ink/artists/ericharetattoo" target="_blank" class="hero-cta">Book a Session</a>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      Scroll
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-img-wrap fade-in">
+          <img src="https://iili.io/qqK1NB1.jpg" alt="Eric Hare — Geometric Tattoo Artist, San Diego" class="about-img" loading="lazy" />
+        </div>
+        <div class="about-text fade-in">
+          <p class="section-label">The Artist</p>
+          <h2 class="section-title">Geometry in Ink</h2>
+          <div class="divider"></div>
+          <p>Eric Hare is a geometric tattoo artist based at The Tattoo Temple in San Diego, CA. With a mastery of precision line work, mandala compositions, and sacred geometry, Eric creates tattoos that live on the boundary between mathematics and art.</p>
+          <p>His work spans full sleeves to intricate chest pieces — each design a custom exploration of symmetry, dotwork, and organic pattern. Whether you're drawn to strict geometric structures or flowing mandalas, Eric collaborates closely to bring your vision to life.</p>
+          <p>Every piece is designed for your body, your story, and built to last a lifetime.</p>
+
+          <div class="about-stats">
+            <div>
+              <span class="stat-num">16K+</span>
+              <span class="stat-label">Followers</span>
+            </div>
+            <div>
+              <span class="stat-num">12+</span>
+              <span class="stat-label">Years</span>
+            </div>
+            <div>
+              <span class="stat-num">∞</span>
+              <span class="stat-label">Designs</span>
+            </div>
+          </div>
+
+          <a href="https://www.instagram.com/ericharetattoo/" target="_blank" class="ig-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            @ericharetattoo
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery">
+    <div class="container">
+      <p class="section-label fade-in">Portfolio</p>
+      <h2 class="section-title fade-in">The Work</h2>
+      <div class="divider fade-in"></div>
+    </div>
+    <div style="max-width:1100px;margin:0 auto;padding:0 1.5rem;">
+      <div class="gallery-grid">
+        <div class="gallery-item fade-in">
+          <img src="https://iili.io/qqK1v2a.jpg" alt="Geometric tattoo by Eric Hare" loading="lazy" />
+          <div class="gallery-item-overlay"><span>Geometric</span></div>
+        </div>
+        <div class="gallery-item fade-in">
+          <img src="https://iili.io/qqK14hN.jpg" alt="Mandala tattoo by Eric Hare" loading="lazy" />
+          <div class="gallery-item-overlay"><span>Mandala</span></div>
+        </div>
+        <div class="gallery-item fade-in">
+          <img src="https://iili.io/qqK16QI.jpg" alt="Sacred geometry tattoo by Eric Hare" loading="lazy" />
+          <div class="gallery-item-overlay"><span>Sacred Geometry</span></div>
+        </div>
+        <div class="gallery-item fade-in">
+          <img src="https://iili.io/qqK1iBt.jpg" alt="Dotwork tattoo by Eric Hare" loading="lazy" />
+          <div class="gallery-item-overlay"><span>Dotwork</span></div>
+        </div>
+        <div class="gallery-item fade-in">
+          <img src="https://iili.io/qqK1sEX.jpg" alt="Sleeve tattoo by Eric Hare" loading="lazy" />
+          <div class="gallery-item-overlay"><span>Sleeve</span></div>
+        </div>
+        <div class="gallery-item fade-in">
+          <img src="https://iili.io/qqK1Z2s.jpg" alt="Geometric sleeve by Eric Hare" loading="lazy" />
+          <div class="gallery-item-overlay"><span>Geometric</span></div>
+        </div>
+        <div class="gallery-item fade-in">
+          <img src="https://iili.io/qqK1pTl.jpg" alt="Mandala sleeve by Eric Hare" loading="lazy" />
+          <div class="gallery-item-overlay"><span>Mandala</span></div>
+        </div>
+        <div class="gallery-item fade-in">
+          <img src="https://iili.io/qqKEF3u.jpg" alt="Dotwork mandala by Eric Hare" loading="lazy" />
+          <div class="gallery-item-overlay"><span>Dotwork</span></div>
+        </div>
+        <div class="gallery-item fade-in">
+          <img src="https://iili.io/qqKEfvj.jpg" alt="Geometric pattern by Eric Hare" loading="lazy" />
+          <div class="gallery-item-overlay"><span>Pattern</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="container">
+      <p class="section-label fade-in">What I Do</p>
+      <h2 class="section-title fade-in">Specialties</h2>
+      <div class="divider fade-in"></div>
+      <div class="services-grid">
+        <div class="service-card fade-in">
+          <span class="service-icon">◈</span>
+          <h3 class="service-title">Geometric & Mandala</h3>
+          <p class="service-desc">Precision geometric compositions and mandala designs built from sacred ratios and symmetry. From small wrist pieces to full back work.</p>
+        </div>
+        <div class="service-card fade-in">
+          <span class="service-icon">⬡</span>
+          <h3 class="service-title">Sacred Geometry</h3>
+          <p class="service-desc">Flower of Life, Metatron's Cube, Sri Yantra, and custom sacred geometry compositions with deep symbolic meaning and flawless execution.</p>
+        </div>
+        <div class="service-card fade-in">
+          <span class="service-icon">∷</span>
+          <h3 class="service-title">Dotwork & Sleeves</h3>
+          <p class="service-desc">Full and half sleeves combining dotwork shading with linework geometry. Cohesive, flowing designs built to wrap your body perfectly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING CTA -->
+  <section id="book">
+    <div class="container">
+      <p class="section-label fade-in">Ready?</p>
+      <h2 class="section-title fade-in">Let's Create<br>Something Permanent</h2>
+      <p class="fade-in">Booking is open for custom designs. Submit your inquiry through CoCreate and Eric will reach out to discuss your vision.</p>
+      <a href="https://www.cocreate.ink/artists/ericharetattoo" target="_blank" class="cta-btn fade-in">Request a Booking</a>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="contact-grid">
+        <div>
+          <p class="section-label fade-in">Find Me</p>
+          <h2 class="section-title fade-in">Contact</h2>
+          <div class="divider fade-in"></div>
+
+          <div class="contact-detail fade-in">
+            <span class="contact-detail-label">Studio</span>
+            <span class="contact-detail-value">
+              <a href="https://www.instagram.com/thetattoo_temple/" target="_blank">The Tattoo Temple</a>
+            </span>
+          </div>
+          <div class="contact-detail fade-in">
+            <span class="contact-detail-label">Location</span>
+            <span class="contact-detail-value">San Diego, CA</span>
+          </div>
+          <div class="contact-detail fade-in">
+            <span class="contact-detail-label">Instagram</span>
+            <span class="contact-detail-value">
+              <a href="https://www.instagram.com/ericharetattoo/" target="_blank">@ericharetattoo</a>
+            </span>
+          </div>
+          <div class="contact-detail fade-in">
+            <span class="contact-detail-label">Booking</span>
+            <span class="contact-detail-value">
+              <a href="https://www.cocreate.ink/artists/ericharetattoo" target="_blank">cocreate.ink</a>
+            </span>
+          </div>
+        </div>
+
+        <div class="contact-cta-side fade-in">
+          <h3 class="section-title">Start Your<br>Journey</h3>
+          <p>Custom geometric work takes time and intention. Reach out early to secure your spot.</p>
+          <a href="https://www.cocreate.ink/artists/ericharetattoo" target="_blank" class="cta-btn">Book Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-logo">Eric Hare</span>
+      <span class="footer-copy">© 2025 Eric Hare. San Diego, CA.</span>
+      <span>
+        <a href="https://bayouwebstudio.com" target="_blank" style="color:inherit;text-decoration:none;opacity:0.5;font-size:12px;">Powered by BWS</a>
+      </span>
+    </div>
+  </footer>
+
+  <!-- FLOATING BOOK BUTTON -->
+  <a href="https://www.cocreate.ink/artists/ericharetattoo" target="_blank" class="float-book">Book Now</a>
+
+  <script>
+    // Intersection Observer for fade-in
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-in:not(.visible)').forEach(el => observer.observe(el));
+
+    // Hide float button near footer
+    const floatBtn = document.querySelector('.float-book');
+    window.addEventListener('scroll', () => {
+      const footer = document.querySelector('footer');
+      const footerTop = footer.getBoundingClientRect().top;
+      floatBtn.style.opacity = footerTop < 120 ? '0' : '1';
+    });
+  </script>
+</body>
+</html>
