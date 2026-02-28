@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Danny Diablx | Tatuador Surrealista | Flash & Custom</title>
+  <meta name="description" content="Danny Diablx — tatuador surrealista de México. Especialista en diseños oscuros, criaturas oníricas, arañas y fine line. Flash original y tatuajes a medida. Príncipe de Barrio. 🇲🇽" />
+  <meta name="keywords" content="Danny Diablx, tatuajes surrealistas, flash tattoo México, fine line, dark tattoo, criaturas, arañas, SurrealDreams" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Danny Diablx | Tatuador Surrealista | Flash & Custom" />
+  <meta property="og:description" content="Tatuajes oscuros, oníricos y surrealistas. Flash original y diseños a medida. México 🇲🇽" />
+  <meta property="og:image" content="https://bayouwebstudio.com/dannydiablx/img/profile.jpg" />
+  <meta property="og:url" content="https://bayouwebstudio.com/dannydiablx/" />
+  <meta property="og:locale" content="es_MX" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Danny Diablx | Tatuador Surrealista" />
+  <meta name="twitter:description" content="Flash original y tatuajes a medida. México 🇲🇽 — @dannydiablx" />
+  <meta name="twitter:image" content="https://bayouwebstudio.com/dannydiablx/img/profile.jpg" />
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Danny Diablx",
+    "description": "Tatuador surrealista especializado en fine line, criaturas oscuras y flash original. México.",
+    "url": "https://bayouwebstudio.com/dannydiablx/",
+    "image": "https://bayouwebstudio.com/dannydiablx/img/profile.jpg",
+    "sameAs": ["https://www.instagram.com/dannydiablx/"],
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "MX"
+    },
+    "priceRange": "$$"
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #080808;
+      --bg2: #0f0f0f;
+      --bg3: #141414;
+      --text: #e8e8e8;
+      --muted: #888;
+      --accent: #9b59b6;
+      --accent2: #7d3c98;
+      --accent-glow: rgba(155, 89, 182, 0.35);
+      --border: rgba(155, 89, 182, 0.2);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Georgia', 'Times New Roman', serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    /* ── TYPOGRAPHY ── */
+    h1, h2, h3 { font-family: 'Georgia', serif; letter-spacing: 0.05em; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(8,8,8,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 1.5rem;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-brand {
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 1.5rem 4rem;
+      overflow: hidden;
+    }
+
+    /* Radial purple aura behind hero */
+    #hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(155,89,182,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-avatar-wrap {
+      position: relative;
+      width: 140px;
+      height: 140px;
+      margin-bottom: 2rem;
+    }
+
+    .hero-avatar-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      background: conic-gradient(var(--accent), var(--accent2), #2c0040, var(--accent));
+      animation: spin 8s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .hero-avatar-wrap::after {
+      content: '';
+      position: absolute;
+      inset: -12px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--accent-glow), transparent 70%);
+      animation: pulse-glow 4s ease-in-out infinite;
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 0.5; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.08); }
+    }
+
+    .hero-avatar {
+      position: relative;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--bg);
+      z-index: 1;
+    }
+
+    .hero-title {
+      font-size: clamp(2.8rem, 8vw, 6rem);
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 0.6rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-title span {
+      color: var(--accent);
+      text-shadow: 0 0 40px var(--accent-glow);
+    }
+
+    .hero-tagline {
+      font-size: clamp(1rem, 3vw, 1.4rem);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+      font-style: italic;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-sub {
+      font-size: 0.95rem;
+      color: var(--muted);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 2.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      padding: 0.85rem 2.5rem;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: all 0.3s;
+      position: relative;
+      z-index: 1;
+      background: transparent;
+    }
+
+    .hero-cta:hover {
+      background: var(--accent);
+      color: var(--bg);
+      box-shadow: 0 0 30px var(--accent-glow);
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--muted);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-8px); }
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+    }
+
+    /* ── SECTION BASE ── */
+    section {
+      position: relative;
+      padding: 5rem 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+      display: block;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      color: var(--text);
+      margin-bottom: 1.5rem;
+      line-height: 1.1;
+    }
+
+    .divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(to right, var(--accent), transparent);
+      margin: 1.5rem 0;
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      border-top: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .about-text p {
+      font-size: 1.05rem;
+      line-height: 1.9;
+      color: #b8b8b8;
+      margin-bottom: 1.2rem;
+    }
+
+    .about-text p em {
+      color: var(--accent);
+      font-style: normal;
+    }
+
+    .about-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .tag {
+      padding: 0.3rem 0.9rem;
+      border: 1px solid var(--border);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(155,89,182,0.05);
+    }
+
+    .about-visual {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .about-stat {
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      background: var(--bg3);
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      color: var(--accent);
+      font-weight: 700;
+      line-height: 1;
+      text-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 0.4rem;
+    }
+
+    .about-stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    /* ── GALLERY ── */
+    #gallery {
+      border-top: 1px solid var(--border);
+      max-width: 1400px;
+    }
+
+    .gallery-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .masonry-grid {
+      columns: 3;
+      column-gap: 12px;
+    }
+
+    @media (max-width: 900px) { .masonry-grid { columns: 2; } }
+    @media (max-width: 500px) { .masonry-grid { columns: 1; } }
+
+    .masonry-item {
+      break-inside: avoid;
+      margin-bottom: 12px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      background: var(--bg3);
+    }
+
+    .masonry-item img {
+      width: 100%;
+      display: block;
+      transition: transform 0.5s cubic-bezier(0.4,0,0.2,1), opacity 0.3s;
+      opacity: 0.9;
+    }
+
+    .masonry-item:hover img {
+      transform: scale(1.04);
+      opacity: 1;
+    }
+
+    .masonry-item::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 50%, rgba(155,89,182,0.3) 100%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: 1;
+    }
+
+    .masonry-item:hover::before { opacity: 1; }
+
+    .masonry-item .zoom-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.8);
+      opacity: 0;
+      transition: all 0.3s;
+      z-index: 2;
+      color: white;
+      font-size: 1.5rem;
+      background: rgba(155,89,182,0.8);
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+
+    .masonry-item:hover .zoom-icon {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    /* ── LIGHTBOX ── */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(4,4,4,0.97);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    #lightbox.active { display: flex; }
+
+    #lightbox img {
+      max-height: 92vh;
+      max-width: 90vw;
+      object-fit: contain;
+      border: 1px solid var(--border);
+      box-shadow: 0 0 80px rgba(155,89,182,0.2);
+    }
+
+    .lb-close {
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 2rem;
+      cursor: pointer;
+      opacity: 0.6;
+      transition: opacity 0.2s;
+    }
+    .lb-close:hover { opacity: 1; }
+
+    .lb-prev, .lb-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(155,89,182,0.2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 1.5rem;
+      padding: 0.75rem 1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      user-select: none;
+    }
+
+    .lb-prev { left: 1rem; }
+    .lb-next { right: 1rem; }
+    .lb-prev:hover, .lb-next:hover { background: var(--accent); color: var(--bg); }
+
+    /* ── FLASH CTA ── */
+    #flash {
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .flash-box {
+      border: 1px solid var(--border);
+      background: linear-gradient(135deg, var(--bg3) 0%, rgba(155,89,182,0.08) 100%);
+      padding: 4rem 2rem;
+      position: relative;
+      overflow: hidden;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .flash-box::before {
+      content: '✦';
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 3rem;
+      color: var(--accent);
+      opacity: 0.3;
+    }
+
+    .flash-spider {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      display: block;
+      filter: drop-shadow(0 0 12px var(--accent-glow));
+      animation: sway 4s ease-in-out infinite;
+    }
+
+    @keyframes sway {
+      0%, 100% { transform: rotate(-5deg); }
+      50% { transform: rotate(5deg); }
+    }
+
+    .flash-box h2 {
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .flash-sub {
+      color: var(--muted);
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+      letter-spacing: 0.05em;
+    }
+
+    .flash-btn {
+      display: inline-block;
+      padding: 1rem 3rem;
+      background: var(--accent);
+      color: var(--bg);
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+      box-shadow: 0 0 30px var(--accent-glow);
+    }
+
+    .flash-btn:hover {
+      background: #b07cc6;
+      box-shadow: 0 0 50px rgba(155,89,182,0.6);
+      transform: translateY(-2px);
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .contact-ig {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 1.2rem 2.5rem;
+      border: 1px solid var(--border);
+      color: var(--text);
+      text-decoration: none;
+      font-size: 1.1rem;
+      letter-spacing: 0.1em;
+      transition: all 0.3s;
+      background: var(--bg3);
+      margin: 1.5rem 0;
+    }
+
+    .contact-ig:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    .contact-ig svg { width: 24px; height: 24px; fill: currentColor; }
+
+    .contact-location {
+      color: var(--muted);
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      margin-top: 0.5rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 2rem 1.5rem;
+      color: var(--muted);
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+    }
+
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── FLOATING BOOK NOW ── */
+    .float-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 1.5rem;
+      z-index: 200;
+      background: var(--accent);
+      color: var(--bg);
+      padding: 0.85rem 1.8rem;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      box-shadow: 0 4px 30px rgba(155,89,182,0.5);
+      transition: all 0.3s;
+      border: none;
+      cursor: pointer;
+      animation: float-pulse 3s ease-in-out infinite;
+    }
+
+    @keyframes float-pulse {
+      0%, 100% { box-shadow: 0 4px 30px rgba(155,89,182,0.5); }
+      50% { box-shadow: 0 4px 50px rgba(155,89,182,0.8); }
+    }
+
+    .float-btn:hover {
+      background: #b07cc6;
+      transform: translateY(-3px) scale(1.03);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      #about {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      nav .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="#hero">Danny Diablx</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#gallery">Galería</a></li>
+    <li><a href="#flash">Flash</a></li>
+    <li><a href="#contact">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-avatar-wrap">
+    <img src="img/profile.jpg" alt="Danny Diablx" class="hero-avatar" />
+  </div>
+  <h1 class="hero-title">Danny <span>Diablx</span></h1>
+  <p class="hero-tagline">SurrealDreams</p>
+  <p class="hero-sub">Original Flash &amp; Custom Tattoos &nbsp;·&nbsp; México 🇲🇽</p>
+  <a href="#gallery" class="hero-cta">Ver galería</a>
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    <span>scroll</span>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-text">
+    <span class="section-label">Sobre el artista</span>
+    <h2 class="section-title">Príncipe de Barrio</h2>
+    <div class="divider"></div>
+    <p>
+      Danny Diablx es un tatuador originario de <em>México</em>, especializado en el arte surreal y oscuro.
+      Sus diseños habitan el espacio entre sueño y pesadilla — arañas, criaturas oníricas,
+      ojos que lo ven todo, y personajes de un universo propio.
+    </p>
+    <p>
+      Cada pieza es un portal. <em>Fine line, illustrative y dark whimsical</em> — técnicas que domina
+      con precisión quirúrgica y un alma que no encaja en lo convencional.
+    </p>
+    <p>
+      Flash original, diseños a medida, y una visión que no se imita.
+      Surreal. Oscuro. Bello. <em>100% Diablx.</em>
+    </p>
+    <div class="about-tags">
+      <span class="tag">Fine Line</span>
+      <span class="tag">Surreal</span>
+      <span class="tag">Dark Illustrative</span>
+      <span class="tag">Flash Original</span>
+      <span class="tag">Custom Tattoos</span>
+      <span class="tag">México 🇲🇽</span>
+    </div>
+  </div>
+  <div class="about-visual">
+    <div class="about-stats-grid">
+      <div class="about-stat">
+        <div class="stat-number">10K+</div>
+        <div class="stat-label">Seguidores</div>
+      </div>
+      <div class="about-stat">
+        <div class="stat-number">480+</div>
+        <div class="stat-label">Obras</div>
+      </div>
+      <div class="about-stat">
+        <div class="stat-number">∞</div>
+        <div class="stat-label">Sueños oscuros</div>
+      </div>
+      <div class="about-stat">
+        <div class="stat-number">1</div>
+        <div class="stat-label">Príncipe de Barrio</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="gallery-header">
+    <span class="section-label">Portfolio</span>
+    <h2 class="section-title">Galería</h2>
+    <div class="divider" style="margin: 1rem auto;"></div>
+    <p style="color: var(--muted); font-size:0.9rem; letter-spacing:0.05em;">Haz clic en cualquier imagen para ampliar</p>
+  </div>
+  <div class="masonry-grid" id="gallery-grid">
+    <!-- Images injected by JS -->
+  </div>
+</section>
+
+<!-- FLASH CTA -->
+<section id="flash">
+  <div class="flash-box">
+    <span class="flash-spider">🕷️</span>
+    <h2>Flash disponible</h2>
+    <p class="flash-sub">DM para reservar · Diseños originales listos para llevarte</p>
+    <a href="https://www.instagram.com/dannydiablx/" target="_blank" rel="noopener" class="flash-btn">
+      DM para reservar
+    </a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <span class="section-label">Contacto</span>
+  <h2 class="section-title">Encuéntrame</h2>
+  <div class="divider"></div>
+  <p style="color:var(--muted); margin-bottom:1rem;">
+    Para citas, flash disponible y diseños a medida — escríbeme directamente al Instagram.
+  </p>
+  <a href="https://www.instagram.com/dannydiablx/" target="_blank" rel="noopener" class="contact-ig">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+    </svg>
+    @dannydiablx
+  </a>
+  <p class="contact-location">México 🇲🇽 &nbsp;·&nbsp; También en Threads: @dannydiablx</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2025 Danny Diablx · Todos los derechos reservados</p>
+  <p style="margin-top:0.5rem;">
+    Demo site by <a href="https://bayouwebstudio.com" target="_blank">Bayou Web Studio</a>
+  </p>
+</footer>
+
+<!-- FLOATING BUTTON -->
+<a href="https://www.instagram.com/dannydiablx/" target="_blank" rel="noopener" class="float-btn">
+  Book Now
+</a>
+
+<!-- LIGHTBOX -->
+<div id="lightbox">
+  <button class="lb-close" onclick="closeLightbox()">✕</button>
+  <button class="lb-prev" onclick="lbNav(-1)">‹</button>
+  <img id="lb-img" src="" alt="Tattoo" />
+  <button class="lb-next" onclick="lbNav(1)">›</button>
+</div>
+
+<script>
+  // Gallery images
+  const galleryImages = [
+    'img/gallery_01.jpg',
+    'img/gallery_02.jpg',
+    'img/gallery_03.jpg',
+    'img/gallery_04.jpg',
+    'img/gallery_05.jpg',
+    'img/gallery_06.jpg',
+    'img/gallery_07.jpg',
+    'img/gallery_08.jpg',
+    'img/gallery_09.jpg',
+    'img/gallery_10.jpg',
+    'img/gallery_11.jpg',
+    'img/gallery_12.jpg',
+  ];
+
+  let currentIdx = 0;
+
+  // Build gallery
+  const grid = document.getElementById('gallery-grid');
+  galleryImages.forEach((src, i) => {
+    const item = document.createElement('div');
+    item.className = 'masonry-item';
+    item.innerHTML = `
+      <img src="${src}" alt="Tattoo by Danny Diablx" loading="lazy" />
+      <div class="zoom-icon">⊕</div>
+    `;
+    item.addEventListener('click', () => openLightbox(i));
+    grid.appendChild(item);
+  });
+
+  function openLightbox(idx) {
+    currentIdx = idx;
+    document.getElementById('lb-img').src = galleryImages[idx];
+    document.getElementById('lightbox').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function lbNav(dir) {
+    currentIdx = (currentIdx + dir + galleryImages.length) % galleryImages.length;
+    document.getElementById('lb-img').src = galleryImages[currentIdx];
+  }
+
+  document.getElementById('lightbox').addEventListener('click', function(e) {
+    if (e.target === this) closeLightbox();
+  });
+
+  document.addEventListener('keydown', e => {
+    if (!document.getElementById('lightbox').classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') lbNav(-1);
+    if (e.key === 'ArrowRight') lbNav(1);
+  });
+</script>
+</body>
+</html>
