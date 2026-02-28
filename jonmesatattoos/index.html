@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jon Mesa | Japanese Tattoo Artist | No Idols NYC | Ink Master</title>
+  <meta name="description" content="Jon Mesa — Japanese and black & grey tattoo specialist. Owner of No Idols NYC. Ink Master Season 15 Finalist. Host of The Honest Tattooer podcast. Book your consultation today." />
+  <meta property="og:title" content="Jon Mesa | Japanese Tattoo Artist | No Idols NYC" />
+  <meta property="og:description" content="NYC-based Japanese and black & grey tattoo master. Full back pieces, sleeves, large-scale traditional Japanese work. Ink Master S15 Finalist." />
+  <meta property="og:image" content="img/profile.jpg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://bayouwebstudio.com/jonmesatattoos/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Jon Mesa | Japanese Tattoo Artist | No Idols NYC" />
+  <meta name="twitter:description" content="NYC-based Japanese and black & grey tattoo master. Ink Master Season 15 Finalist." />
+  <meta name="twitter:image" content="img/profile.jpg" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Jon Mesa",
+    "jobTitle": "Tattoo Artist",
+    "description": "Japanese and black & grey tattoo specialist. Owner of No Idols NYC. Ink Master Season 15 Finalist.",
+    "url": "https://bayouwebstudio.com/jonmesatattoos/",
+    "image": "img/profile.jpg",
+    "sameAs": [
+      "https://www.instagram.com/jonmesatattoos/",
+      "https://www.instagram.com/noidolsnyc/"
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "New York",
+      "addressRegion": "NY",
+      "addressCountry": "US"
+    },
+    "worksFor": {
+      "@type": "LocalBusiness",
+      "name": "No Idols NYC",
+      "url": "https://www.instagram.com/noidolsnyc/"
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #080808;
+      --surface: #0f0f0f;
+      --surface2: #161616;
+      --text:    #f0ede8;
+      --muted:   #8a8480;
+      --accent:  #c0392b;
+      --accent2: #96281b;
+      --border:  #1e1e1e;
+      --gold:    #c9a84c;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ─────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 2.5rem;
+      background: linear-gradient(180deg, rgba(8,8,8,0.98) 0%, rgba(8,8,8,0) 100%);
+      backdrop-filter: blur(2px);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── HERO ─────────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 0;
+      padding-top: 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 70% 50%, rgba(192,57,43,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-text {
+      padding: 5rem 4rem 5rem 6rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 2rem;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.5rem, 6vw, 7rem);
+      font-weight: 300;
+      line-height: 0.95;
+      letter-spacing: -0.01em;
+      margin-bottom: 1rem;
+    }
+
+    .hero-name span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.42em;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      margin-top: 0.5rem;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .ink-master-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, var(--accent2), var(--accent));
+      color: #fff;
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.45rem 1rem;
+      border-radius: 2px;
+      margin-top: 1.5rem;
+      font-weight: 500;
+    }
+
+    .ink-master-badge svg {
+      width: 14px; height: 14px;
+      fill: #fff;
+    }
+
+    .hero-subtitle {
+      margin-top: 2rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+      max-width: 360px;
+      line-height: 1.8;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      margin-top: 2.5rem;
+      padding: 0.9rem 2.2rem;
+      background: transparent;
+      border: 1px solid var(--accent);
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+    }
+
+    .hero-cta:hover {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .hero-image {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      filter: grayscale(15%) contrast(1.05);
+    }
+
+    .hero-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, var(--bg) 0%, transparent 30%, transparent 70%, rgba(8,8,8,0.4) 100%),
+                  linear-gradient(0deg, var(--bg) 0%, transparent 15%);
+    }
+
+    /* ── CREDENTIALS BAR ───────────────────────────────────── */
+    .credentials {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+    }
+
+    .credentials-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0;
+      flex-wrap: wrap;
+    }
+
+    .cred-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.5rem 2.5rem;
+      border-right: 1px solid var(--border);
+    }
+
+    .cred-item:last-child { border-right: none; }
+
+    .cred-icon {
+      font-size: 1rem;
+    }
+
+    .cred-text {
+      font-size: 0.67rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .cred-text strong {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--text);
+      letter-spacing: 0.1em;
+    }
+
+    /* ── ABOUT ─────────────────────────────────────────────── */
+    #about {
+      padding: 8rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    .about-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .about-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      font-weight: 300;
+      line-height: 1.15;
+      position: sticky;
+      top: 120px;
+    }
+
+    .about-body p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+      line-height: 1.9;
+    }
+
+    .about-body p strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 3rem;
+      border-top: 1px solid var(--border);
+      padding-top: 2.5rem;
+    }
+
+    .stat {
+      border-left: 2px solid var(--accent);
+      padding-left: 1rem;
+    }
+
+    .stat-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 300;
+      line-height: 1;
+      color: var(--text);
+    }
+
+    .stat-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 0.3rem;
+    }
+
+    /* ── GALLERY ───────────────────────────────────────────── */
+    #gallery {
+      padding: 4rem 1.5rem 8rem;
+      background: var(--surface);
+    }
+
+    .gallery-header {
+      text-align: center;
+      padding-bottom: 4rem;
+    }
+
+    .gallery-header .section-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .gallery-header h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 300;
+    }
+
+    .masonry-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      columns: 3;
+      column-gap: 1rem;
+    }
+
+    .masonry-item {
+      break-inside: avoid;
+      margin-bottom: 1rem;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .masonry-item img {
+      width: 100%;
+      display: block;
+      transition: transform 0.5s ease, filter 0.4s ease;
+      filter: grayscale(10%) contrast(1.05);
+    }
+
+    .masonry-item:hover img {
+      transform: scale(1.04);
+      filter: grayscale(0%) contrast(1.08);
+    }
+
+    .masonry-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(192,57,43,0);
+      transition: background 0.4s ease;
+    }
+
+    .masonry-item:hover::after {
+      background: rgba(192,57,43,0.08);
+    }
+
+    /* ── LIGHTBOX ──────────────────────────────────────────── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0,0,0,0.96);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox.active { display: flex; }
+
+    .lightbox-img {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+      border: 1px solid var(--border);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 1.5rem; right: 2rem;
+      font-size: 2rem;
+      color: var(--muted);
+      cursor: pointer;
+      background: none;
+      border: none;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+
+    .lightbox-close:hover { color: var(--text); }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 3rem; height: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 1.2rem;
+    }
+
+    .lightbox-nav:hover { border-color: var(--accent); color: var(--accent); }
+    .lightbox-prev { left: 1.5rem; }
+    .lightbox-next { right: 1.5rem; }
+
+    /* ── BOOK / CTA ────────────────────────────────────────── */
+    #book {
+      padding: 8rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #book::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(192,57,43,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    #book .section-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    #book h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #book p {
+      color: var(--muted);
+      font-size: 0.88rem;
+      max-width: 480px;
+      margin: 0 auto 3rem;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      padding: 1.1rem 3rem;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      border: 1px solid var(--accent);
+    }
+
+    .cta-btn:hover {
+      background: transparent;
+      color: var(--text);
+    }
+
+    /* ── CONTACT ───────────────────────────────────────────── */
+    #contact {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 5rem 2rem;
+    }
+
+    .contact-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 3rem;
+    }
+
+    .contact-block .label {
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+    }
+
+    .contact-block a {
+      display: block;
+      color: var(--text);
+      text-decoration: none;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 300;
+      transition: color 0.2s;
+    }
+
+    .contact-block a:hover { color: var(--accent); }
+
+    .contact-block p {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* ── FOOTER ────────────────────────────────────────────── */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+    }
+
+    footer p {
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    footer a:hover { color: var(--text); }
+
+    /* ── FLOATING BOOK BTN ─────────────────────────────────── */
+    .float-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      padding: 0.85rem 1.6rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: all 0.3s;
+      box-shadow: 0 4px 20px rgba(192,57,43,0.4);
+    }
+
+    .float-btn:hover {
+      background: var(--accent2);
+      box-shadow: 0 6px 28px rgba(192,57,43,0.6);
+      transform: translateY(-2px);
+    }
+
+    /* ── RESPONSIVE ────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 55vw;
+      }
+
+      .hero-text {
+        padding: 6rem 2rem 3rem;
+      }
+
+      .hero-image {
+        height: 55vw;
+      }
+
+      #about {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        padding: 5rem 1.5rem;
+      }
+
+      .about-heading { position: static; }
+
+      .masonry-grid { columns: 2; }
+
+      .contact-inner {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      nav { padding: 1rem 1.5rem; }
+
+      .nav-links { display: none; }
+
+      .cred-item { padding: 0.5rem 1.2rem; }
+    }
+
+    @media (max-width: 560px) {
+      .masonry-grid { columns: 1; }
+      .about-stats { grid-template-columns: 1fr 1fr; }
+      .credentials-inner { gap: 0.5rem; }
+      .cred-item { border-right: none; border-bottom: 1px solid var(--border); width: 100%; justify-content: center; }
+      .cred-item:last-child { border-bottom: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Jon Mesa</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#book">Book</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-text">
+      <p class="hero-eyebrow">New York City, NY</p>
+      <h1 class="hero-name">
+        Jon<br>Mesa
+        <span>Owner, No Idols NYC</span>
+      </h1>
+      <div class="ink-master-badge">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
+        Ink Master Season 15 Finalist
+      </div>
+      <p class="hero-subtitle">
+        Japanese &amp; black/grey tattoo specialist. Full back pieces, sleeves, and large-scale traditional Japanese work — each piece a lifetime of craft.
+      </p>
+      <a href="https://www.instagram.com/jonmesatattoos/" target="_blank" rel="noopener" class="hero-cta">Book a Consultation</a>
+    </div>
+    <div class="hero-image">
+      <img src="img/profile.jpg" alt="Jon Mesa — Japanese Tattoo Artist, No Idols NYC" loading="eager" />
+    </div>
+  </section>
+
+  <!-- CREDENTIALS BAR -->
+  <div class="credentials">
+    <div class="credentials-inner">
+      <div class="cred-item">
+        <span class="cred-icon">📍</span>
+        <div class="cred-text"><strong>New York City</strong>No Idols NYC</div>
+      </div>
+      <div class="cred-item">
+        <span class="cred-icon">👥</span>
+        <div class="cred-text"><strong>99.8K Followers</strong>Instagram</div>
+      </div>
+      <div class="cred-item">
+        <span class="cred-icon">⭐</span>
+        <div class="cred-text"><strong>Ink Master S15</strong>Season 15 Finalist</div>
+      </div>
+      <div class="cred-item">
+        <span class="cred-icon">🎙️</span>
+        <div class="cred-text"><strong>The Honest Tattooer</strong>Podcast Host</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-heading">
+      <p class="about-label">About</p>
+      <h2>Mastery<br>in Every<br>Line.</h2>
+    </div>
+    <div class="about-body">
+      <p>
+        <strong>Jon Mesa</strong> is a New York City-based tattoo artist widely regarded as one of the finest practitioners of <strong>Japanese and black &amp; grey tattooing</strong> in the country. With nearly 100,000 followers and a body of work that spans full back pieces, full sleeves, and monumental large-scale compositions, Jon brings both technical mastery and deep artistic vision to every commission.
+      </p>
+      <p>
+        As the owner of <strong>No Idols NYC</strong>, Jon has built one of the most respected tattoo studios in the country — a space dedicated to craft, intention, and the long game. Every client who walks through the door is invested in a piece of art that will last a lifetime.
+      </p>
+      <p>
+        Jon's national profile grew significantly as an <strong>Ink Master Season 15 Finalist</strong>, where his technical precision and artistic depth were on full display to millions of viewers. Off the tattoo machine, Jon hosts <strong>The Honest Tattooer</strong> podcast — a candid conversation about the realities, artistry, and culture of professional tattooing.
+      </p>
+      <p>
+        Large-scale Japanese work. Precise black &amp; grey. Decades of dedication to a craft that demands nothing less than everything.
+      </p>
+      <div class="about-stats">
+        <div class="stat">
+          <div class="stat-number">99.8K</div>
+          <div class="stat-label">Instagram Followers</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">S15</div>
+          <div class="stat-label">Ink Master Finalist</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">NYC</div>
+          <div class="stat-label">No Idols Studio</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">1,500+</div>
+          <div class="stat-label">Posts of Work</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery">
+    <div class="gallery-header">
+      <p class="section-label">Selected Work</p>
+      <h2>The Portfolio</h2>
+    </div>
+    <div class="masonry-grid" id="galleryGrid">
+      <div class="masonry-item" data-index="0">
+        <img src="img/tattoo_01.jpg" alt="Jon Mesa Japanese tattoo work" loading="lazy" />
+      </div>
+      <div class="masonry-item" data-index="1">
+        <img src="img/tattoo_02.jpg" alt="Jon Mesa black and grey tattoo" loading="lazy" />
+      </div>
+      <div class="masonry-item" data-index="2">
+        <img src="img/tattoo_03.jpg" alt="Jon Mesa large scale tattoo" loading="lazy" />
+      </div>
+      <div class="masonry-item" data-index="3">
+        <img src="img/tattoo_04.jpg" alt="Jon Mesa traditional Japanese sleeve" loading="lazy" />
+      </div>
+      <div class="masonry-item" data-index="4">
+        <img src="img/tattoo_05.jpg" alt="Jon Mesa full back piece" loading="lazy" />
+      </div>
+      <div class="masonry-item" data-index="5">
+        <img src="img/tattoo_06.jpg" alt="Jon Mesa black and grey tattoo art" loading="lazy" />
+      </div>
+      <div class="masonry-item" data-index="6">
+        <img src="img/tattoo_07.jpg" alt="Jon Mesa Japanese tattoo sleeve" loading="lazy" />
+      </div>
+      <div class="masonry-item" data-index="7">
+        <img src="img/tattoo_08.jpg" alt="Jon Mesa No Idols NYC tattoo" loading="lazy" />
+      </div>
+      <div class="masonry-item" data-index="8">
+        <img src="img/tattoo_09.jpg" alt="Jon Mesa traditional Japanese tattoo" loading="lazy" />
+      </div>
+      <div class="masonry-item" data-index="9">
+        <img src="img/tattoo_10.jpg" alt="Jon Mesa large scale black and grey" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lbClose" aria-label="Close">×</button>
+    <button class="lightbox-nav lightbox-prev" id="lbPrev" aria-label="Previous">‹</button>
+    <img class="lightbox-img" id="lbImg" src="" alt="Jon Mesa tattoo" />
+    <button class="lightbox-nav lightbox-next" id="lbNext" aria-label="Next">›</button>
+  </div>
+
+  <!-- BOOK / CTA -->
+  <section id="book">
+    <p class="section-label">Consultations</p>
+    <h2>Ready to Start Your Piece?</h2>
+    <p>
+      Jon takes on select clients for large-scale Japanese and black &amp; grey projects. Full back pieces, sleeves, and statement work only. Begin your consultation through Instagram.
+    </p>
+    <a href="https://www.instagram.com/jonmesatattoos/" target="_blank" rel="noopener" class="cta-btn">Request a Consultation</a>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-inner">
+      <div class="contact-block">
+        <p class="label">Instagram</p>
+        <a href="https://www.instagram.com/jonmesatattoos/" target="_blank" rel="noopener">@jonmesatattoos</a>
+      </div>
+      <div class="contact-block">
+        <p class="label">Studio</p>
+        <a href="https://www.instagram.com/noidolsnyc/" target="_blank" rel="noopener">@noidolsnyc</a>
+        <p>No Idols NYC</p>
+      </div>
+      <div class="contact-block">
+        <p class="label">Location</p>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;color:var(--text);">New York City, NY</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 Jon Mesa. All rights reserved. &nbsp;|&nbsp; Site by <a href="https://bayouwebstudio.com" target="_blank" rel="noopener">Bayou Web Studio</a></p>
+  </footer>
+
+  <!-- FLOATING BUTTON -->
+  <a href="https://www.instagram.com/jonmesatattoos/" target="_blank" rel="noopener" class="float-btn">
+    📅 Book Consultation
+  </a>
+
+  <script>
+    // ── LIGHTBOX ──────────────────────────────────────────────────────────────
+    const galleryImgs = Array.from(document.querySelectorAll('.masonry-item img'));
+    const lightbox = document.getElementById('lightbox');
+    const lbImg    = document.getElementById('lbImg');
+    let current = 0;
+
+    function openLightbox(index) {
+      current = index;
+      lbImg.src = galleryImgs[current].src;
+      lbImg.alt = galleryImgs[current].alt;
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function showNext() {
+      current = (current + 1) % galleryImgs.length;
+      lbImg.src = galleryImgs[current].src;
+    }
+
+    function showPrev() {
+      current = (current - 1 + galleryImgs.length) % galleryImgs.length;
+      lbImg.src = galleryImgs[current].src;
+    }
+
+    document.querySelectorAll('.masonry-item').forEach((item, i) => {
+      item.addEventListener('click', () => openLightbox(i));
+    });
+
+    document.getElementById('lbClose').addEventListener('click', closeLightbox);
+    document.getElementById('lbNext').addEventListener('click', showNext);
+    document.getElementById('lbPrev').addEventListener('click', showPrev);
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') showNext();
+      if (e.key === 'ArrowLeft') showPrev();
+    });
+
+    // ── NAV SCROLL EFFECT ─────────────────────────────────────────────────────
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      nav.style.background = window.scrollY > 80
+        ? 'rgba(8,8,8,0.98)'
+        : 'linear-gradient(180deg, rgba(8,8,8,0.98) 0%, rgba(8,8,8,0) 100%)';
+    });
+  </script>
+</body>
+</html>
