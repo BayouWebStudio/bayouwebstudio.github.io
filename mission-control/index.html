@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="refresh" content="30">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>⬡ HEX MISSION CONTROL</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #050510;
+      --bg2: #080820;
+      --bg3: #0d0d2b;
+      --green: #00ff88;
+      --cyan: #00d4ff;
+      --dim: #4a4a7a;
+      --text: #c8c8e8;
+      --border: #1a1a3a;
+      --red: #ff4466;
+      --yellow: #ffcc00;
+    }
+
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 0;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--bg2);
+      border-bottom: 1px solid var(--green);
+      padding: 16px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--green);
+      letter-spacing: 0.1em;
+      text-shadow: 0 0 20px rgba(0,255,136,0.5);
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .timestamp {
+      color: var(--dim);
+      font-size: 0.75rem;
+    }
+
+    .live-badge {
+      background: var(--red);
+      color: white;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 3px;
+      letter-spacing: 0.15em;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    /* ── LAYOUT ── */
+    main {
+      padding: 24px 32px;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    .section {
+      margin-bottom: 32px;
+    }
+
+    .section-title {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--cyan);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── STAT BOXES ── */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .stat-box {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-top: 2px solid var(--green);
+      padding: 20px;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--green);
+      text-shadow: 0 0 15px rgba(0,255,136,0.4);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.65rem;
+      color: var(--dim);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-top: 8px;
+    }
+
+    /* ── TABLES ── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+    }
+
+    th {
+      text-align: left;
+      color: var(--dim);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    tr:hover td { background: rgba(255,255,255,0.02); }
+
+    /* ── CARDS ── */
+    .panel {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      padding: 20px;
+    }
+
+    .client-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 14px;
+    }
+
+    .client-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--cyan);
+      padding: 14px;
+    }
+
+    .client-name {
+      font-weight: 600;
+      color: var(--cyan);
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+
+    .client-url a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.75rem;
+    }
+
+    .client-url a:hover { color: var(--green); }
+
+    .client-meta {
+      margin-top: 8px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+      font-size: 0.7rem;
+    }
+
+    .client-handle {
+      margin-top: 6px;
+      font-size: 0.7rem;
+    }
+
+    .mrr {
+      color: var(--green);
+      font-weight: 600;
+    }
+
+    /* ── DEMO GRID ── */
+    .demo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 10px;
+    }
+
+    .demo-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      font-size: 0.75rem;
+    }
+
+    .demo-handle {
+      color: var(--green);
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .demo-url {
+      color: var(--dim);
+      text-decoration: none;
+      font-size: 0.65rem;
+    }
+
+    .demo-url:hover { color: var(--cyan); }
+
+    /* ── BADGES ── */
+    .badge-active  { color: var(--green); font-size: 0.75rem; }
+    .badge-warn    { color: var(--yellow); font-size: 0.75rem; }
+    .badge-running { color: var(--cyan); font-size: 0.75rem; }
+    .badge-fail    { color: var(--red); font-size: 0.75rem; }
+    .badge-paying  { background: rgba(0,255,136,0.15); color: var(--green); padding: 2px 6px; border-radius: 2px; font-size: 0.65rem; }
+    .badge-free    { background: rgba(74,74,122,0.3); color: var(--dim); padding: 2px 6px; border-radius: 2px; font-size: 0.65rem; }
+
+    /* ── MISC ── */
+    .mono  { font-family: 'JetBrains Mono', monospace; }
+    .dim   { color: var(--dim); }
+    .accent { color: var(--cyan); }
+
+    /* ── QUEUE ── */
+    .queue-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .queue-list li {
+      font-size: 0.8rem;
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      padding: 10px 12px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+    }
+
+    .checkbox { color: var(--dim); flex-shrink: 0; }
+
+    /* ── IDLE NOTE ── */
+    .idle-note {
+      font-size: 0.75rem;
+      color: var(--dim);
+      padding: 10px 0;
+      letter-spacing: 0.1em;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 24px;
+      color: var(--dim);
+      font-size: 0.65rem;
+      border-top: 1px solid var(--border);
+      letter-spacing: 0.1em;
+    }
+
+    @media (max-width: 900px) {
+      .stat-grid { grid-template-columns: repeat(2, 1fr); }
+      header { flex-direction: column; gap: 10px; text-align: center; }
+      main { padding: 16px; }
+    }
+
+    @media (max-width: 500px) {
+      .stat-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-title">⬡ HEX MISSION CONTROL</div>
+  <div class="header-right">
+    <span class="timestamp">Last generated: 2026-02-28 17:51:02 CT</span>
+    <span class="live-badge">● LIVE</span>
+  </div>
+</header>
+
+<main>
+
+  <!-- Panel 1: BWS Metrics -->
+  <div class="section">
+    <div class="section-title">▸ BWS Metrics</div>
+    <div class="stat-grid">
+      <div class="stat-box">
+        <div class="stat-value">3</div>
+        <div class="stat-label">Paying Clients</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-value">$45</div>
+        <div class="stat-label">MRR / Month</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-value">24</div>
+        <div class="stat-label">Demo Sites Built</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-value" style="color: var(--cyan); text-shadow: 0 0 15px rgba(0,212,255,0.4);">ACTIVE</div>
+        <div class="stat-label">Pipeline Status</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Panel 2: Cron Jobs -->
+  <div class="section">
+    <div class="section-title">▸ Cron Jobs — 9 Active</div>
+    <div class="panel">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th><th>Name</th><th>Schedule</th><th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td class="mono dim">20d49006</td>
+          <td>OMF Preview</td>
+          <td class="dim">Daily 8AM CT</td>
+          <td><span class="badge-active">✅ Active</span></td>
+        </tr>
+        <tr>
+          <td class="mono dim">2ae92a42</td>
+          <td>OMF Stories</td>
+          <td class="dim">Daily 8:30AM CT</td>
+          <td><span class="badge-active">✅ Active</span></td>
+        </tr>
+        <tr>
+          <td class="mono dim">dbfe5ceb</td>
+          <td>Nightly Summary</td>
+          <td class="dim">Daily 10PM CT</td>
+          <td><span class="badge-active">✅ Active</span></td>
+        </tr>
+        <tr>
+          <td class="mono dim">a06021af</td>
+          <td>IH Info Preview</td>
+          <td class="dim">Mon/Wed/Fri 9AM CT</td>
+          <td><span class="badge-active">✅ Active</span></td>
+        </tr>
+        <tr>
+          <td class="mono dim">09e4339d</td>
+          <td>IH Info Auto-Skip</td>
+          <td class="dim">Mon/Wed/Fri 9:30AM CT</td>
+          <td><span class="badge-active">✅ Active</span></td>
+        </tr>
+        <tr>
+          <td class="mono dim">97cc13ad</td>
+          <td>IH Daily Repost</td>
+          <td class="dim">Daily 10AM CT</td>
+          <td><span class="badge-active">✅ Active</span></td>
+        </tr>
+        <tr>
+          <td class="mono dim">9557cd21</td>
+          <td>BWS Change Requests</td>
+          <td class="dim">Every 30min</td>
+          <td><span class="badge-active">✅ Active</span></td>
+        </tr>
+        <tr>
+          <td class="mono dim">64d91d16</td>
+          <td>BWS Lead Processor</td>
+          <td class="dim">Every 5min</td>
+          <td><span class="badge-active">✅ Active</span></td>
+        </tr>
+        <tr>
+          <td class="mono dim">ce2ffea6</td>
+          <td>BWS Stripe Payment</td>
+          <td class="dim">Every 15min</td>
+          <td><span class="badge-active">✅ Active</span></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Panel 3: Clients -->
+  <div class="section">
+    <div class="section-title">▸ Clients — 6 Total</div>
+    <div class="client-grid">
+        <div class="client-card">
+          <div class="client-name">Tatsu Ink</div>
+          <div class="client-url"><a href="https://tatsuink.com" target="_blank">tatsuink.com</a></div>
+          <div class="client-meta">
+            <span class="mrr">$15/mo</span>
+            <span class="badge-paying">PAYING</span>
+            <span class="badge-active">✅ Live</span>
+          </div>
+          <div class="client-handle dim">@tatsu.tattoos</div>
+        </div>
+        <div class="client-card">
+          <div class="client-name">Alan Gutiérrez</div>
+          <div class="client-url"><a href="https://guccierrezz.com" target="_blank">guccierrezz.com</a></div>
+          <div class="client-meta">
+            <span class="mrr">$15/mo</span>
+            <span class="badge-paying">PAYING</span>
+            <span class="badge-active">✅ Live</span>
+          </div>
+          <div class="client-handle dim">@guccierrezz</div>
+        </div>
+        <div class="client-card">
+          <div class="client-name">Julia Claire</div>
+          <div class="client-url"><a href="https://jujubrilliart.com" target="_blank">jujubrilliart.com</a></div>
+          <div class="client-meta">
+            <span class="mrr">$15/mo</span>
+            <span class="badge-paying">PAYING</span>
+            <span class="badge-active">✅ Live</span>
+          </div>
+          <div class="client-handle dim">@juju.brilliart</div>
+        </div>
+        <div class="client-card">
+          <div class="client-name">Karla Heusner</div>
+          <div class="client-url"><a href="https://karlamheusner.com" target="_blank">karlamheusner.com</a></div>
+          <div class="client-meta">
+            <span class="mrr">$0/mo</span>
+            <span class="badge-free">FREE</span>
+            <span class="badge-active">✅ Live</span>
+          </div>
+          <div class="client-handle dim">family</div>
+        </div>
+        <div class="client-card">
+          <div class="client-name">Oskar Sekeres</div>
+          <div class="client-url"><a href="https://guccierrezz.com/sekerestattoo" target="_blank">guccierrezz.com/sekerestattoo</a></div>
+          <div class="client-meta">
+            <span class="mrr">$0/mo</span>
+            <span class="badge-free">FREE</span>
+            <span class="badge-active">✅ Live</span>
+          </div>
+          <div class="client-handle dim">demo</div>
+        </div>
+        <div class="client-card">
+          <div class="client-name">Tattoo Temple Hou.</div>
+          <div class="client-url"><a href="https://houstontattootemple.com" target="_blank">houstontattootemple.com</a></div>
+          <div class="client-meta">
+            <span class="mrr">$0/mo</span>
+            <span class="badge-free">FREE</span>
+            <span class="badge-warn">🔧 Rebuilding</span>
+          </div>
+          <div class="client-handle dim">own</div>
+        </div>
+    </div>
+  </div>
+
+  <!-- Panel 4: Demo Sites -->
+  <div class="section">
+    <div class="section-title">▸ Demo Sites Inventory — 24 Demo Sites</div>
+    <div class="demo-grid">
+        <div class="demo-card">
+          <div class="demo-handle">@ivanblxck</div>
+          <a href="https://bayouwebstudio.com/ivanblxck/" target="_blank" class="demo-url">/ivanblxck/</a>
+        </div>
+        <div class="demo-card">
+          <div class="demo-handle">@aaronriddletattoos</div>
+          <a href="https://bayouwebstudio.com/aaronriddletattoos/" target="_blank" class="demo-url">/aaronriddletattoos/</a>
+        </div>
+        <div class="demo-card">
+          <div class="demo-handle">@chasestattoos</div>
+          <a href="https://bayouwebstudio.com/chasestattoos/" target="_blank" class="demo-url">/chasestattoos/</a>
+        </div>
+        <div class="demo-card">
+          <div class="demo-handle">@fozyink</div>
+          <a href="https://bayouwebstudio.com/fozyink/" target="_blank" class="demo-url">/fozyink/</a>
+        </div>
+        <div class="demo-card">
+          <div class="demo-handle">@eliasjeis</div>
+          <a href="https://bayouwebstudio.com/eliasjeis/" target="_blank" class="demo-url">/eliasjeis/</a>
+        </div>
+        <div class="demo-card">
+          <div class="demo-handle">@bobbykarate</div>
+          <a href="https://bayouwebstudio.com/bobbykarate/" target="_blank" class="demo-url">/bobbykarate/</a>
+        </div>
+        <div class="demo-card">
+          <div class="demo-handle">@johnpaulroldan</div>
+          <a href="https://bayouwebstudio.com/johnpaulroldan/" target="_blank" class="demo-url">/johnpaulroldan/</a>
+        </div>
+        <div class="demo-card">
+          <div class="demo-handle">@jaimesartes</div>
+          <a href="https://bayouwebstudio.com/jaimesartes/" target="_blank" class="demo-url">/jaimesartes/</a>
+        </div>
+        <div class="demo-card">
+          <div class="demo-handle">@flushdelay</div>
+          <a href="https://bayouwebstudio.com/flushdelay/" target="_blank" class="demo-url">/flushdelay/</a>
+        </div>
+        <div class="demo-card">
+          <div class="demo-handle">@cosmotattoomx</div>
+          <a href="https://bayouwebstudio.com/cosmotattoomx/" target="_blank" class="demo-url">/cosmotattoomx/</a>
+        </div>
+        <div class="demo-card">
+          <div class="demo-handle">@seafoamgreenart</div>
+          <a href="https://bayouwebstudio.com/seafoamgreenart/" target="_blank" class="demo-url">/seafoamgreenart/</a>
+        </div>
+        <div class="demo-card">
+          <div class="demo-handle">@rubencharre</div>
+          <a href="https://bayouwebstudio.com/rubencharre/" target="_blank" class="demo-url">/rubencharre/</a>
+        </div>
+        <div class="demo-card">
+          <div class="demo-handle">@pauultattoo</div>
+          <a href="https://bayouwebstudio.com/pauultattoo/" target="_blank" class="demo-url">/pauultattoo/</a>
+        </div>
+        <div class="demo-card">
+          <div class="demo-handle">@johntuckermusttattoo</div>
+          <a href="https://bayouwebstudio.com/johntuckermusttattoo/" target="_blank" class="demo-url">/johntuckermusttattoo/</a>
+        </div>
+        <div class="demo-card">
+          <div class="demo-handle">@jonmesatattoos</div>
+          <a href="https://bayouwebstudio.com/jonmesatattoos/" target="_blank" class="demo-url">/jonmesatattoos/</a>
+        </div>
+        <div class="demo-card">
+          <div class="demo-handle">@sekerestattoo</div>
+          <a href="https://bayouwebstudio.com/sekerestattoo/" target="_blank" class="demo-url">/sekerestattoo/</a>
+        </div>
+        <div class="demo-card">
+          <div class="demo-handle">@laynelv</div>
+          <a href="https://bayouwebstudio.com/laynelv/" target="_blank" class="demo-url">/laynelv/</a>
+        </div>
+        <div class="demo-card">
+          <div class="demo-handle">@dannydiablx</div>
+          <a href="https://bayouwebstudio.com/dannydiablx/" target="_blank" class="demo-url">/dannydiablx/</a>
+        </div>
+        <div class="demo-card">
+          <div class="demo-handle">@sebashua</div>
+          <a href="https://bayouwebstudio.com/sebashua/" target="_blank" class="demo-url">/sebashua/</a>
+        </div>
+        <div class="demo-card">
+          <div class="demo-handle">@ponylawson</div>
+          <a href="https://bayouwebstudio.com/ponylawson/" target="_blank" class="demo-url">/ponylawson/</a>
+        </div>
+        <div class="demo-card">
+          <div class="demo-handle">@jaguarcrea</div>
+          <a href="https://bayouwebstudio.com/jaguarcrea/" target="_blank" class="demo-url">/jaguarcrea/</a>
+        </div>
+        <div class="demo-card">
+          <div class="demo-handle">@kodiellistattoos</div>
+          <a href="https://bayouwebstudio.com/kodiellistattoos/" target="_blank" class="demo-url">/kodiellistattoos/</a>
+        </div>
+        <div class="demo-card">
+          <div class="demo-handle">@cholosupreme</div>
+          <a href="https://bayouwebstudio.com/cholosupreme/" target="_blank" class="demo-url">/cholosupreme/</a>
+        </div>
+        <div class="demo-card">
+          <div class="demo-handle">@tattootemplehouston</div>
+          <a href="https://bayouwebstudio.com/tattootemplehouston/" target="_blank" class="demo-url">/tattootemplehouston/</a>
+        </div>
+    </div>
+  </div>
+
+  <!-- Panel 5: Subagents -->
+  <div class="section">
+    <div class="section-title">▸ Subagents — Today's Sessions</div>
+    <div class="panel">
+      <div class="idle-note">⬡ No agents running — idle</div>
+      <table style="margin-top: 12px;">
+        <thead>
+          <tr><th>Agent</th><th>Task</th><th>Status</th><th>Runtime</th></tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td class="mono">ponylawson</td>
+          <td class="dim">Build demo site</td>
+          <td><span class="badge-active">✅ DONE</span></td>
+          <td class="mono dim">3m49s</td>
+        </tr>
+        <tr>
+          <td class="mono">jaguarcrea</td>
+          <td class="dim">Build demo site</td>
+          <td><span class="badge-active">✅ DONE</span></td>
+          <td class="mono dim">4m22s</td>
+        </tr>
+        <tr>
+          <td class="mono">sekerestattoo</td>
+          <td class="dim">Rebuild demo site</td>
+          <td><span class="badge-active">✅ DONE</span></td>
+          <td class="mono dim">3m51s</td>
+        </tr>
+        <tr>
+          <td class="mono">dannydiablx</td>
+          <td class="dim">Build demo site</td>
+          <td><span class="badge-active">✅ DONE</span></td>
+          <td class="mono dim">3m45s</td>
+        </tr>
+        <tr>
+          <td class="mono">sebashua</td>
+          <td class="dim">Build demo site (DJ)</td>
+          <td><span class="badge-active">✅ DONE</span></td>
+          <td class="mono dim">4m52s</td>
+        </tr>
+        <tr>
+          <td class="mono">kodiellistattoos</td>
+          <td class="dim">Build demo site</td>
+          <td><span class="badge-active">✅ DONE</span></td>
+          <td class="mono dim">3m42s</td>
+        </tr>
+        <tr>
+          <td class="mono">cholosupreme</td>
+          <td class="dim">Build demo site</td>
+          <td><span class="badge-active">✅ DONE</span></td>
+          <td class="mono dim">4m27s</td>
+        </tr>
+        <tr>
+          <td class="mono">tattootemplehouston</td>
+          <td class="dim">Full pipeline rebuild</td>
+          <td><span class="badge-active">✅ DONE</span></td>
+          <td class="mono dim">11m17s</td>
+        </tr>
+        <tr>
+          <td class="mono">plans/starter+pro+premium</td>
+          <td class="dim">Tier landing pages</td>
+          <td><span class="badge-active">✅ DONE</span></td>
+          <td class="mono dim">—</td>
+        </tr>
+        <tr>
+          <td class="mono">lang-toggle</td>
+          <td class="dim">Spanish toggle on tier pages</td>
+          <td><span class="badge-active">✅ DONE</span></td>
+          <td class="mono dim">—</td>
+        </tr>
+        <tr>
+          <td class="mono">integrations section</td>
+          <td class="dim">bayouwebstudio.com update</td>
+          <td><span class="badge-active">✅ DONE</span></td>
+          <td class="mono dim">—</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Panel 6: Queue -->
+  <div class="section">
+    <div class="section-title">▸ Pipeline Queue / Next Steps</div>
+    <div class="panel">
+      <ul class="queue-list"><li><span class="checkbox">☐</span> Connect Google Search Console <span class="dim">— waiting DNS propagation — TXT record added</span></li><li><span class="checkbox">☐</span> Tattoo Temple Houston DNS <span class="dim">— domain on Wix — Raul needs to update manually</span></li><li><span class="checkbox">☐</span> Run end-to-end pipeline test with real lead</li><li><span class="checkbox">☐</span> Post remaining 8 BWS Instagram posts</li><li><span class="checkbox">☐</span> Get Ad Account ID for Meta Ads</li><li><span class="checkbox">☐</span> Scale @bayouwebstudio to 10-15 posts before ads</li><li><span class="checkbox">☐</span> Upgrade Umami ($9/mo for 10 sites)</li><li><span class="checkbox">☐</span> Aaron Riddle — close <span class="dim">— Stripe link sent</span></li><li><span class="checkbox">☐</span> Danny Diablx — close <span class="dim">— on phone with Raul</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Panel 7: Instagram -->
+  <div class="section">
+    <div class="section-title">▸ Instagram Accounts Managed</div>
+    <div class="panel">
+      <table>
+        <thead>
+          <tr><th>Account</th><th>Type</th><th>Followers</th><th>Automation</th></tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td class="accent">@weschetattoo</td>
+          <td class="dim">Personal</td>
+          <td class="mono">297K</td>
+          <td><span class="dim">Manual</span></td>
+        </tr>
+        <tr>
+          <td class="accent">@omfgeometry</td>
+          <td class="dim">Repost page</td>
+          <td class="mono">~41K</td>
+          <td><span class="badge-active">Fully automated</span></td>
+        </tr>
+        <tr>
+          <td class="accent">@inkedhaus</td>
+          <td class="dim">Brand</td>
+          <td class="mono">~5K</td>
+          <td><span class="badge-active">Fully automated</span></td>
+        </tr>
+        <tr>
+          <td class="accent">@tattootemple_houston</td>
+          <td class="dim">Shop</td>
+          <td class="mono">—</td>
+          <td><span class="dim">Connected</span></td>
+        </tr>
+        <tr>
+          <td class="accent">@bayouwebstudio</td>
+          <td class="dim">BWS brand</td>
+          <td class="mono">—</td>
+          <td><span class="dim">10 posts generated</span></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  ⬡ HEX MISSION CONTROL · bayouwebstudio.com · Auto-refreshes every 30s · Generated 2026-02-28 17:51:02 CT
+</footer>
+
+</body>
+</html>
