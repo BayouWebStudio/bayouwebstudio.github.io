@@ -3,40 +3,50 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Chase Nolan | Tattoo Artist — Traveling | @chases_tattoos</title>
-  <meta name="description" content="Chase Nolan — verified color realism & portrait tattoo artist. 29.9K followers. Traveling the US. Book your tattoo today." />
-  <meta property="og:title" content="Chase Nolan | Tattoo Artist — Traveling" />
-  <meta property="og:description" content="Color realism, portraits, large-scale work. Traveling artist. @chases_tattoos" />
-  <meta property="og:image" content="https://iili.io/qqf8Hlf.jpg" />
+  <title>Chase Nolan | Geometric Tattoo Artist — @chases_tattoos</title>
+  <meta name="description" content="Chase Nolan (@chases_tattoos) — verified geometric &amp; blackwork tattoo artist. 29.9K followers. Traveling the US. Book via Instagram DM." />
+  <meta name="keywords" content="Chase Nolan, chases_tattoos, geometric tattoo, blackwork tattoo, traveling tattoo artist, Sacred Mind Tattoo, geometric leg sleeve, body suit tattoo" />
+  <meta property="og:title" content="Chase Nolan | Geometric Tattoo Artist — Traveling the US" />
+  <meta property="og:description" content="Precise geometric blackwork &amp; body suits. Traveling artist. 29.9K followers. @chases_tattoos" />
+  <meta property="og:image" content="https://bayouwebstudio.github.io/chasestattoos/img/photo_04.jpg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://bayouwebstudio.github.io/chasestattoos/" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://bayouwebstudio.github.io/chasestattoos/img/photo_04.jpg" />
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Chase Nolan",
+    "alternateName": "@chases_tattoos",
     "jobTitle": "Tattoo Artist",
     "url": "https://bayouwebstudio.github.io/chasestattoos/",
-    "image": "https://iili.io/qqf8Hlf.jpg",
+    "image": "https://bayouwebstudio.github.io/chasestattoos/img/photo_04.jpg",
     "sameAs": [
       "https://www.instagram.com/chases_tattoos/",
-      "https://www.youtube.com/@chasenolanta"
+      "https://www.youtube.com/@chasenolantattoos"
     ],
-    "description": "Color realism and portrait tattoo artist. Traveling the United States. Verified on Instagram with 29.9K followers.",
-    "sponsor": ["Hustle Butter Deluxe", "Raw Pigments"]
+    "description": "Precise geometric and blackwork tattoo artist. Traveling the United States. Verified on Instagram with 29.9K followers.",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Sacred Mind Tattoo",
+      "sameAs": "https://www.instagram.com/sacredmindstattoo/"
+    }
   }
   </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600&family=Space+Grotesk:wght@300;400;600&display=swap" rel="stylesheet" />
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
       --black: #0a0a0a;
-      --accent: #00c8ff;
-      --accent2: #0077ff;
+      --accent: #00b4d8;
+      --accent2: #0077b6;
+      --accent-glow: rgba(0, 180, 216, 0.35);
       --white: #f5f5f5;
       --gray: #888;
       --card-bg: #111;
@@ -47,402 +57,415 @@
     body {
       background: var(--black);
       color: var(--white);
-      font-family: 'Inter', sans-serif;
+      font-family: 'Space Grotesk', 'Inter', sans-serif;
+      font-weight: 300;
       line-height: 1.6;
       overflow-x: hidden;
     }
 
-    /* ── NAV ── */
+    /* NAV */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
+      padding: 1.25rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem 2rem;
-      background: linear-gradient(to bottom, rgba(10,10,10,0.95), transparent);
+      background: linear-gradient(to bottom, rgba(10,10,10,0.98), transparent);
     }
     .nav-logo {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.6rem;
-      letter-spacing: 0.08em;
+      font-size: 1.5rem;
+      letter-spacing: 0.15em;
       color: var(--white);
       text-decoration: none;
     }
     .nav-logo span { color: var(--accent); }
-    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-verified {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1rem;
+      height: 1rem;
+      background: var(--accent);
+      border-radius: 50%;
+      font-size: 0.6rem;
+      margin-left: 0.3rem;
+      color: #000;
+      font-weight: 700;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
     .nav-links a {
-      color: rgba(245,245,245,0.7);
+      color: var(--gray);
       text-decoration: none;
-      font-size: 0.8rem;
-      letter-spacing: 0.1em;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      transition: color 0.2s;
+      transition: color 0.3s;
     }
     .nav-links a:hover { color: var(--accent); }
 
-    /* ── HERO ── */
-    #hero {
+    /* HERO */
+    .hero {
       position: relative;
-      min-height: 100vh;
+      height: 100vh;
+      min-height: 600px;
       display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 4rem 2rem;
+      align-items: flex-end;
       overflow: hidden;
     }
-    .hero-bg {
+    .hero-img {
       position: absolute;
       inset: 0;
-      background-image: url('https://iili.io/qqf8GJR.jpg');
-      background-size: cover;
-      background-position: center top;
-      filter: brightness(0.45);
-      transform: scale(1.04);
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      filter: brightness(0.5);
     }
     .hero-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, #0a0a0a 12%, rgba(10,10,10,0.2) 60%, transparent 100%);
+      background: linear-gradient(to top, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.25) 55%, transparent 100%);
+    }
+    .hero-glow {
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 60%;
+      height: 50%;
+      background: radial-gradient(ellipse at bottom left, var(--accent-glow) 0%, transparent 60%);
+      pointer-events: none;
     }
     .hero-content {
       position: relative;
-      max-width: 900px;
+      z-index: 10;
+      padding: 3rem 2.5rem;
+      max-width: 750px;
     }
-    .hero-badge {
-      display: inline-block;
-      background: var(--accent);
-      color: #000;
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
       text-transform: uppercase;
-      padding: 0.3rem 0.8rem;
-      border-radius: 2px;
+      color: var(--accent);
       margin-bottom: 1rem;
+      border-left: 2px solid var(--accent);
+      padding-left: 0.75rem;
     }
     .hero-title {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(3.5rem, 10vw, 8rem);
+      font-size: clamp(3.5rem, 11vw, 8.5rem);
       line-height: 0.92;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.03em;
+      color: var(--white);
+      margin-bottom: 0.5rem;
     }
-    .hero-title .accent { color: var(--accent); }
+    .hero-title-accent { color: var(--accent); }
     .hero-sub {
-      margin-top: 1.2rem;
-      font-size: clamp(0.9rem, 2vw, 1.15rem);
-      color: rgba(245,245,245,0.6);
-      max-width: 520px;
-      letter-spacing: 0.02em;
+      font-size: clamp(0.9rem, 2vw, 1.1rem);
+      color: rgba(245,245,245,0.65);
+      margin-bottom: 2rem;
+      max-width: 460px;
+      line-height: 1.7;
+      font-weight: 300;
     }
     .hero-cta {
-      margin-top: 2rem;
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-    .btn {
-      display: inline-block;
-      padding: 0.85rem 2rem;
-      border-radius: 3px;
-      font-weight: 600;
-      font-size: 0.85rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: all 0.2s;
-      cursor: pointer;
-      border: none;
-    }
-    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
       background: var(--accent);
       color: #000;
+      text-decoration: none;
+      padding: 0.9rem 2rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
     }
-    .btn-primary:hover {
-      background: #fff;
+    .hero-cta:hover {
+      background: #48cae4;
       transform: translateY(-2px);
-    }
-    .btn-ghost {
-      background: transparent;
-      color: var(--white);
-      border: 1px solid rgba(245,245,245,0.3);
-    }
-    .btn-ghost:hover {
-      border-color: var(--accent);
-      color: var(--accent);
+      box-shadow: 0 8px 32px var(--accent-glow);
     }
 
-    /* ── SECTIONS ── */
-    section { padding: 5rem 2rem; }
-    .section-inner { max-width: 1100px; margin: 0 auto; }
-    .section-label {
-      font-size: 0.7rem;
+    /* STATS BAR */
+    .stats-bar {
+      background: var(--card-bg);
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      text-align: center;
+    }
+    .stat-item {
+      padding: 1.5rem 1rem;
+      border-right: 1px solid #1a1a1a;
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+    }
+    .stat-label {
+      font-size: 0.6rem;
       letter-spacing: 0.25em;
       text-transform: uppercase;
+      color: var(--gray);
+      margin-top: 0.2rem;
+    }
+
+    /* SECTIONS */
+    .section-wrap { padding: 5rem 2rem; max-width: 1200px; margin: 0 auto; }
+
+    .section-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.75rem;
     }
     .section-title {
       font-family: 'Bebas Neue', sans-serif;
       font-size: clamp(2.5rem, 6vw, 4.5rem);
       line-height: 1;
-      margin-bottom: 2rem;
+      letter-spacing: 0.04em;
+      color: var(--white);
+      margin-bottom: 2.5rem;
     }
 
-    /* ── ABOUT ── */
-    #about { background: #0d0d0d; }
+    /* GALLERY */
+    .gallery-bg { background: #070707; padding: 5rem 0; }
+    .gallery-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+    }
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 1;
+      cursor: pointer;
+    }
+    .gallery-item.wide {
+      grid-column: span 2;
+      aspect-ratio: 2/1;
+    }
+    .gallery-item.tall {
+      grid-row: span 2;
+      aspect-ratio: auto;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.4s;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.06);
+      filter: brightness(1.1);
+    }
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      display: flex;
+      align-items: flex-end;
+      padding: 1rem;
+    }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-caption {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+    }
+    /* Accent border on hover */
+    .gallery-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 0px solid var(--accent);
+      transition: border-width 0.3s;
+      pointer-events: none;
+    }
+    .gallery-item:hover::after { border-width: 2px; }
+
+    /* ABOUT */
     .about-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 4rem;
       align-items: center;
     }
-    .about-img-wrap {
-      position: relative;
-    }
-    .about-img-wrap img {
+    .about-img {
       width: 100%;
-      border-radius: 4px;
-      display: block;
-      filter: brightness(0.92);
-    }
-    .about-img-wrap::before {
-      content: '';
-      position: absolute;
-      top: -12px; left: -12px;
-      right: 12px; bottom: 12px;
-      border: 2px solid var(--accent);
-      border-radius: 4px;
-      z-index: -1;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      border: 1px solid #1a1a1a;
     }
     .about-text p {
-      color: rgba(245,245,245,0.7);
-      margin-bottom: 1.2rem;
-      font-size: 1rem;
+      color: rgba(245,245,245,0.6);
+      font-size: 0.9rem;
+      margin-bottom: 1.25rem;
+      line-height: 1.8;
+      font-weight: 300;
     }
-    .about-stats {
+    .about-tags {
       display: flex;
-      gap: 2rem;
-      margin-top: 2rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
     }
-    .stat { text-align: center; }
-    .stat-num {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 2.5rem;
-      color: var(--accent);
-      line-height: 1;
-    }
-    .stat-label {
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--gray);
-    }
-    .sponsors {
-      margin-top: 2rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid rgba(255,255,255,0.08);
-    }
-    .sponsors-label {
-      font-size: 0.65rem;
+    .tag {
+      font-size: 0.6rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--gray);
-      margin-bottom: 0.8rem;
-    }
-    .sponsor-tags { display: flex; gap: 0.8rem; flex-wrap: wrap; }
-    .sponsor-tag {
-      background: rgba(0,200,255,0.08);
-      border: 1px solid rgba(0,200,255,0.25);
       color: var(--accent);
-      font-size: 0.75rem;
-      padding: 0.3rem 0.8rem;
-      border-radius: 2px;
-      letter-spacing: 0.05em;
+      border: 1px solid var(--accent2);
+      padding: 0.3rem 0.7rem;
     }
 
-    /* ── GALLERY ── */
-    #gallery { background: var(--black); }
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0.5rem;
-    }
-    .gallery-item {
+    /* BOOKING */
+    .booking-wrap {
+      background: linear-gradient(135deg, #0d1117 0%, #111827 50%, #0a0a0a 100%);
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
       position: relative;
       overflow: hidden;
-      aspect-ratio: 1;
-      border-radius: 3px;
-      cursor: pointer;
     }
-    .gallery-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.4s ease;
-    }
-    .gallery-item:hover img { transform: scale(1.07); }
-    .gallery-item::after {
+    .booking-wrap::before {
       content: '';
       position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0,200,255,0.15), transparent 60%);
-      opacity: 0;
-      transition: opacity 0.3s;
+      top: -50%;
+      left: -20%;
+      width: 60%;
+      height: 200%;
+      background: radial-gradient(ellipse, rgba(0,180,216,0.06) 0%, transparent 60%);
+      pointer-events: none;
     }
-    .gallery-item:hover::after { opacity: 1; }
-    .gallery-item.tall { grid-row: span 2; aspect-ratio: auto; }
-
-    /* ── TOUR ── */
-    #tour { background: #0d0d0d; }
-    .tour-intro {
-      color: rgba(245,245,245,0.65);
-      max-width: 520px;
+    .booking-inner {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+      text-align: center;
+      position: relative;
+    }
+    .booking-desc {
+      color: rgba(245,245,245,0.55);
+      font-size: 0.9rem;
       margin-bottom: 2.5rem;
+      line-height: 1.8;
     }
-    .tour-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 1rem;
-    }
-    .tour-card {
-      background: var(--card-bg);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 4px;
-      padding: 1.2rem 1.4rem;
-      transition: border-color 0.2s, transform 0.2s;
-    }
-    .tour-card:hover {
-      border-color: var(--accent);
-      transform: translateY(-3px);
-    }
-    .tour-city {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.5rem;
-      letter-spacing: 0.05em;
-      color: var(--white);
-    }
-    .tour-status {
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-top: 0.3rem;
-    }
-    .tour-note {
-      font-size: 0.75rem;
-      color: var(--gray);
-      margin-top: 0.5rem;
-    }
-    .tour-cta {
-      margin-top: 3rem;
-      padding: 2rem;
-      background: linear-gradient(135deg, rgba(0,200,255,0.07), rgba(0,119,255,0.07));
-      border: 1px solid rgba(0,200,255,0.18);
-      border-radius: 6px;
-      display: flex;
+    .book-btn {
+      display: inline-flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
-    .tour-cta-text h3 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.8rem;
-      letter-spacing: 0.04em;
-    }
-    .tour-cta-text p {
-      color: var(--gray);
-      font-size: 0.85rem;
-      margin-top: 0.3rem;
-    }
-
-    /* ── BOOK ── */
-    #book {
-      background: linear-gradient(135deg, #060d18, #0a0a0a);
-      text-align: center;
-    }
-    .book-inner { max-width: 680px; margin: 0 auto; }
-    .book-inner .section-title { margin-bottom: 1rem; }
-    .book-inner p {
-      color: rgba(245,245,245,0.6);
-      margin-bottom: 2.5rem;
-      font-size: 1rem;
-    }
-    .book-socials {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      margin-top: 2rem;
-      flex-wrap: wrap;
-    }
-    .social-link {
-      color: rgba(245,245,245,0.4);
-      text-decoration: none;
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
-    .social-link:hover { color: var(--accent); }
-
-    /* ── FOOTER ── */
-    footer {
-      padding: 2rem;
-      border-top: 1px solid rgba(255,255,255,0.05);
-      text-align: center;
-      color: var(--gray);
-      font-size: 0.8rem;
-    }
-    footer a { color: var(--gray); text-decoration: none; }
-
-    /* ── FLOATING BUTTON ── */
-    .float-book {
-      position: fixed;
-      bottom: 1.5rem;
-      right: 1.5rem;
-      z-index: 200;
+      gap: 0.6rem;
       background: var(--accent);
       color: #000;
-      font-weight: 700;
-      font-size: 0.8rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 0.9rem 1.6rem;
-      border-radius: 50px;
       text-decoration: none;
-      box-shadow: 0 4px 24px rgba(0,200,255,0.4);
-      transition: all 0.2s;
+      padding: 1rem 2.5rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+      box-shadow: 0 4px 24px var(--accent-glow);
     }
-    .float-book:hover {
-      background: #fff;
+    .book-btn:hover {
+      background: #48cae4;
       transform: translateY(-3px);
-      box-shadow: 0 8px 32px rgba(0,200,255,0.5);
+      box-shadow: 0 10px 40px rgba(0,180,216,0.5);
     }
 
-    /* ── DIVIDER ── */
-    .divider {
-      height: 1px;
-      background: linear-gradient(to right, transparent, rgba(0,200,255,0.3), transparent);
-      margin: 0 2rem;
+    /* FLOATING CTA */
+    .float-cta {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 200;
+    }
+    .float-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--accent);
+      color: #000;
+      text-decoration: none;
+      padding: 0.85rem 1.75rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      box-shadow: 0 8px 32px var(--accent-glow);
+      transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+    }
+    .float-btn:hover {
+      background: #48cae4;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(0,180,216,0.6);
     }
 
-    /* ── MOBILE ── */
+    /* FOOTER */
+    footer {
+      background: #060606;
+      border-top: 1px solid #111;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      letter-spacing: 0.2em;
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+    .footer-links a {
+      color: var(--gray);
+      text-decoration: none;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-copy { font-size: 0.65rem; color: #333; letter-spacing: 0.1em; }
+    .footer-credit { font-size: 0.6rem; color: #252525; margin-top: 0.5rem; }
+    .footer-credit a { color: #1a4a6a; text-decoration: none; }
+    .footer-credit a:hover { color: var(--accent); }
+
+    /* RESPONSIVE */
     @media (max-width: 768px) {
       nav { padding: 1rem; }
       .nav-links { display: none; }
+      .hero-content { padding: 2rem 1.5rem; }
+      .stats-bar { grid-template-columns: repeat(2, 1fr); }
       .about-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .about-img-wrap::before { display: none; }
       .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-item.wide { grid-column: span 2; }
       .gallery-item.tall { grid-row: span 1; aspect-ratio: 1; }
-      .about-stats { gap: 1.2rem; }
-      .tour-cta { flex-direction: column; text-align: center; }
-    }
-    @media (max-width: 480px) {
-      .gallery-grid { grid-template-columns: 1fr; }
-      section { padding: 3.5rem 1.2rem; }
+      .section-wrap { padding: 3rem 1.25rem; }
+      .float-cta { bottom: 1.25rem; right: 1.25rem; }
+      .float-btn { padding: 0.75rem 1.25rem; font-size: 0.7rem; }
     }
   </style>
 </head>
@@ -450,213 +473,145 @@
 
   <!-- NAV -->
   <nav>
-    <a class="nav-logo" href="#">Chase<span>.</span>Nolan</a>
+    <a href="#" class="nav-logo">CHASE<span>.</span><span style="color:var(--accent)">N</span>
+      <span class="nav-verified">✓</span>
+    </a>
     <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
       <li><a href="#about">About</a></li>
-      <li><a href="#gallery">Gallery</a></li>
-      <li><a href="#tour">Tour</a></li>
-      <li><a href="#book">Book</a></li>
+      <li><a href="#booking">Book</a></li>
     </ul>
   </nav>
 
-  <!-- FLOATING BOOK -->
-  <a class="float-book" href="https://www.instagram.com/chases_tattoos/" target="_blank">Book Now</a>
-
   <!-- HERO -->
-  <section id="hero">
-    <div class="hero-bg"></div>
+  <section class="hero" style="padding:0; max-width:none;">
+    <img class="hero-img" src="img/photo_04.jpg" alt="Chase Nolan geometric full body tattoo takeover" />
     <div class="hero-overlay"></div>
+    <div class="hero-glow"></div>
     <div class="hero-content">
-      <span class="hero-badge">✓ Verified Artist · Color Realism · Portraits</span>
-      <h1 class="hero-title">
-        Chase<br><span class="accent">Nolan</span>
-      </h1>
-      <p class="hero-sub">Large-scale color realism &amp; portrait tattoos. Traveling the US — bringing vibrant, life-like work to cities across the country.</p>
-      <div class="hero-cta">
-        <a class="btn btn-primary" href="https://www.instagram.com/chases_tattoos/" target="_blank">Book via Instagram</a>
-        <a class="btn btn-ghost" href="#gallery">View Portfolio</a>
-      </div>
+      <p class="hero-eyebrow">✓ Verified · 29.9K Followers · Traveling Artist</p>
+      <h1 class="hero-title">CHASE<br><span class="hero-title-accent">NOLAN</span></h1>
+      <p class="hero-sub">Precise geometric blackwork &amp; full body takeovers. Traveling the United States. Based at Sacred Mind Tattoo.</p>
+      <a href="https://www.instagram.com/chases_tattoos/" class="hero-cta" target="_blank" rel="noopener">
+        ✦ Book via Instagram DM
+      </a>
     </div>
   </section>
 
-  <div class="divider"></div>
+  <!-- STATS -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-num">29.9K</div>
+      <div class="stat-label">Followers</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">770+</div>
+      <div class="stat-label">Posts</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">✓</div>
+      <div class="stat-label">Verified</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">50+</div>
+      <div class="stat-label">US Cities</div>
+    </div>
+  </div>
+
+  <!-- PORTFOLIO -->
+  <div class="gallery-bg" id="work">
+    <div class="gallery-inner">
+      <p class="section-label" style="margin-bottom:0.5rem;">Portfolio</p>
+      <h2 class="section-title">THE WORK</h2>
+      <div class="gallery-grid">
+        <div class="gallery-item wide">
+          <img src="img/photo_03.jpg" alt="Chase Nolan black and red geometric leg sleeve tattoo" loading="lazy" />
+          <div class="gallery-overlay"><span class="gallery-caption">Black &amp; Red Geometric Leg Sleeve</span></div>
+        </div>
+        <div class="gallery-item">
+          <img src="img/photo_07.jpg" alt="Chase Nolan Sacred Mind Tattoo geometric work" loading="lazy" />
+          <div class="gallery-overlay"><span class="gallery-caption">Sacred Mind Tattoo</span></div>
+        </div>
+        <div class="gallery-item">
+          <img src="img/photo_01.jpg" alt="Chase Nolan tattoo work Dec 2025" loading="lazy" />
+          <div class="gallery-overlay"><span class="gallery-caption">Recent Commission</span></div>
+        </div>
+        <div class="gallery-item">
+          <img src="img/photo_02.jpg" alt="Chase Nolan Deerfield Beach tattoo" loading="lazy" />
+          <div class="gallery-overlay"><span class="gallery-caption">Deerfield Beach, FL</span></div>
+        </div>
+        <div class="gallery-item wide">
+          <img src="img/photo_04.jpg" alt="Chase Nolan massive geometric full body takeover" loading="lazy" />
+          <div class="gallery-overlay"><span class="gallery-caption">Full Body Geometric Takeover</span></div>
+        </div>
+        <div class="gallery-item">
+          <img src="img/photo_05.jpg" alt="Chase Nolan geometric chest cover-up tattoo" loading="lazy" />
+          <div class="gallery-overlay"><span class="gallery-caption">Geometric Chest Cover-Up</span></div>
+        </div>
+        <div class="gallery-item">
+          <img src="img/photo_06.jpg" alt="Chase Nolan last tattoo of 2025" loading="lazy" />
+          <div class="gallery-overlay"><span class="gallery-caption">Detailed Blackwork</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- ABOUT -->
-  <section id="about">
-    <div class="section-inner about-grid">
-      <div class="about-img-wrap">
-        <img src="https://iili.io/qqf8Hlf.jpg" alt="Chase Nolan — Tattoo Artist" loading="lazy" />
-      </div>
-      <div class="about-text">
-        <p class="section-label">About the Artist</p>
-        <h2 class="section-title">Chase Nolan</h2>
-        <p>
-          Chase Nolan is a verified color realism and portrait tattoo artist known for creating bold, hyper-detailed, and emotionally charged large-scale tattoos. Based out of <strong>Sacred Mind Tattoo</strong> (@sacredmindstattoo), Chase takes his artistry on the road — traveling city to city, bringing world-class work directly to clients across the US.
-        </p>
-        <p>
-          With nearly <strong>30K followers</strong> on Instagram and a YouTube presence, Chase's work speaks for itself: vivid color, flawless transitions, and portraits that feel alive on skin.
-        </p>
-        <div class="about-stats">
-          <div class="stat">
-            <div class="stat-num">29.9K</div>
-            <div class="stat-label">IG Followers</div>
-          </div>
-          <div class="stat">
-            <div class="stat-num">✓</div>
-            <div class="stat-label">Verified</div>
-          </div>
-          <div class="stat">
-            <div class="stat-num">10+</div>
-            <div class="stat-label">Tour Cities</div>
+  <div id="about">
+    <div class="section-wrap">
+      <div class="about-grid">
+        <div class="about-text">
+          <p class="section-label">About Chase Nolan</p>
+          <h2 class="section-title">PRECISE.<br>INTENTIONAL.</h2>
+          <p>Chase Nolan is a verified traveling tattoo artist with 29.9K followers, known for intricate geometric blackwork, dotwork patterns, and large-scale body suit projects. Based out of <strong>Sacred Mind Tattoo (@sacredmindstattoo)</strong>, Chase tours the United States year-round.</p>
+          <p>Whether it's a geometric leg sleeve, a full body takeover, or a precise chest piece — every tattoo is built with intentional line work and architectural precision. Chase's work speaks for itself on the skin.</p>
+          <div class="about-tags">
+            <span class="tag">Geometric</span>
+            <span class="tag">Blackwork</span>
+            <span class="tag">Dotwork</span>
+            <span class="tag">Body Suits</span>
+            <span class="tag">Leg Sleeves</span>
+            <span class="tag">Traveling Artist</span>
           </div>
         </div>
-        <div class="sponsors">
-          <p class="sponsors-label">Sponsored by</p>
-          <div class="sponsor-tags">
-            <span class="sponsor-tag">Hustle Butter Deluxe</span>
-            <span class="sponsor-tag">Raw Pigments</span>
-          </div>
-        </div>
+        <img class="about-img" src="img/photo_05.jpg" alt="Chase Nolan tattoo artist geometric blackwork" loading="lazy" />
       </div>
     </div>
-  </section>
+  </div>
 
-  <div class="divider"></div>
-
-  <!-- GALLERY -->
-  <section id="gallery">
-    <div class="section-inner">
-      <p class="section-label">Portfolio</p>
-      <h2 class="section-title">The Work</h2>
-      <div class="gallery-grid">
-        <div class="gallery-item tall">
-          <img src="https://iili.io/qqf8GJR.jpg" alt="Chase Nolan tattoo — color realism" loading="lazy" />
-        </div>
-        <div class="gallery-item">
-          <img src="https://iili.io/qqf82Hl.jpg" alt="Chase Nolan tattoo" loading="lazy" />
-        </div>
-        <div class="gallery-item">
-          <img src="https://iili.io/qqf8Ciu.jpg" alt="Chase Nolan tattoo — portrait" loading="lazy" />
-        </div>
-        <div class="gallery-item">
-          <img src="https://iili.io/qqf8zUx.jpg" alt="Chase Nolan tattoo — large scale" loading="lazy" />
-        </div>
-        <div class="gallery-item tall">
-          <img src="https://iili.io/qqf8RDP.jpg" alt="Chase Nolan tattoo" loading="lazy" />
-        </div>
-        <div class="gallery-item">
-          <img src="https://iili.io/qqf8lfa.jpg" alt="Chase Nolan tattoo — color" loading="lazy" />
-        </div>
-        <div class="gallery-item">
-          <img src="https://iili.io/qqf800J.jpg" alt="Chase Nolan tattoo" loading="lazy" />
-        </div>
-        <div class="gallery-item">
-          <img src="https://iili.io/qqf81Uv.jpg" alt="Chase Nolan tattoo — realism" loading="lazy" />
-        </div>
-        <div class="gallery-item">
-          <img src="https://iili.io/qqf8GJR.jpg" alt="Chase Nolan tattoo" loading="lazy" />
-        </div>
-        <div class="gallery-item">
-          <img src="https://iili.io/qqf8MRp.jpg" alt="Chase Nolan tattoo — portrait" loading="lazy" />
-        </div>
-      </div>
+  <!-- BOOKING -->
+  <div class="booking-wrap" id="booking">
+    <div class="booking-inner">
+      <p class="section-label">Get Tattooed</p>
+      <h2 class="section-title">BOOK A SESSION</h2>
+      <p class="booking-desc">Chase is available for bookings nationwide. Send a DM on Instagram with your concept, placement, and size to get started. Traveling dates announced regularly — follow @chases_tattoos to stay updated.</p>
+      <a href="https://www.instagram.com/chases_tattoos/" class="book-btn" target="_blank" rel="noopener">
+        ✦ DM on Instagram
+      </a>
+      <p style="margin-top:2rem; font-size:0.75rem; color:#333; letter-spacing:0.1em;">
+        @chases_tattoos · @sacredmindstattoo · Traveling the US
+      </p>
     </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- TOUR -->
-  <section id="tour">
-    <div class="section-inner">
-      <p class="section-label">Tour Dates</p>
-      <h2 class="section-title">Where I'm Headed</h2>
-      <p class="tour-intro">Chase travels constantly — if your city is on the list, now's your chance. DM on Instagram to lock in your spot before he moves on.</p>
-      <div class="tour-grid">
-        <div class="tour-card">
-          <div class="tour-city">Atlanta</div>
-          <div class="tour-status">Coming Up</div>
-          <div class="tour-note">DM for exact dates</div>
-        </div>
-        <div class="tour-card">
-          <div class="tour-city">Chicago</div>
-          <div class="tour-status">Coming Up</div>
-          <div class="tour-note">DM for exact dates</div>
-        </div>
-        <div class="tour-card">
-          <div class="tour-city">Kansas</div>
-          <div class="tour-status">Coming Up</div>
-          <div class="tour-note">DM for exact dates</div>
-        </div>
-        <div class="tour-card">
-          <div class="tour-city">Denver</div>
-          <div class="tour-status">Coming Up</div>
-          <div class="tour-note">DM for exact dates</div>
-        </div>
-        <div class="tour-card">
-          <div class="tour-city">Raleigh</div>
-          <div class="tour-status">Coming Up</div>
-          <div class="tour-note">DM for exact dates</div>
-        </div>
-        <div class="tour-card">
-          <div class="tour-city">Long Beach</div>
-          <div class="tour-status">Coming Up</div>
-          <div class="tour-note">DM for exact dates</div>
-        </div>
-        <div class="tour-card">
-          <div class="tour-city">Wildwood</div>
-          <div class="tour-status">Coming Up</div>
-          <div class="tour-note">DM for exact dates</div>
-        </div>
-        <div class="tour-card">
-          <div class="tour-city">Syracuse</div>
-          <div class="tour-status">Coming Up</div>
-          <div class="tour-note">DM for exact dates</div>
-        </div>
-        <div class="tour-card">
-          <div class="tour-city">San Antonio</div>
-          <div class="tour-status">Coming Up</div>
-          <div class="tour-note">DM for exact dates</div>
-        </div>
-        <div class="tour-card">
-          <div class="tour-city">Meadow Lakes</div>
-          <div class="tour-status">Coming Up</div>
-          <div class="tour-note">DM for exact dates</div>
-        </div>
-      </div>
-      <div class="tour-cta">
-        <div class="tour-cta-text">
-          <h3>Your city not listed?</h3>
-          <p>Reach out anyway — Chase's schedule grows constantly.</p>
-        </div>
-        <a class="btn btn-primary" href="https://www.instagram.com/chases_tattoos/" target="_blank">DM @chases_tattoos</a>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- BOOK -->
-  <section id="book">
-    <div class="section-inner book-inner">
-      <p class="section-label">Ready to Commit?</p>
-      <h2 class="section-title">Let's Build<br>Something Permanent</h2>
-      <p>Chase books through Instagram DM. Send a reference photo, your city, and a brief description of your vision. Serious inquiries only — spots fill fast on tour.</p>
-      <a class="btn btn-primary" style="font-size:1rem; padding: 1rem 2.5rem;" href="https://www.instagram.com/chases_tattoos/" target="_blank">Book Now → @chases_tattoos</a>
-      <div class="book-socials">
-        <a class="social-link" href="https://www.instagram.com/chases_tattoos/" target="_blank">Instagram</a>
-        <a class="social-link" href="https://www.instagram.com/sacredmindstattoo/" target="_blank">Sacred Mind Tattoo</a>
-        <a class="social-link" href="https://www.youtube.com/@chasenolanta" target="_blank">YouTube</a>
-      </div>
-    </div>
-  </section>
+  </div>
 
   <!-- FOOTER -->
   <footer>
-    <p style="margin-bottom:0.4rem;">© 2025 Chase Nolan · @chases_tattoos · All Rights Reserved</p>
-    <p>
-      <a href="https://bayouwebstudio.com" target="_blank" style="color:inherit;text-decoration:none;opacity:0.5;font-size:12px;">Powered by BWS</a>
-    </p>
+    <div class="footer-logo">CHASE NOLAN</div>
+    <div class="footer-links">
+      <a href="https://www.instagram.com/chases_tattoos/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.youtube.com/@chasenolantattoos" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://www.instagram.com/sacredmindstattoo/" target="_blank" rel="noopener">Sacred Mind Tattoo</a>
+    </div>
+    <p class="footer-copy">© 2026 Chase Nolan · @chases_tattoos</p>
+    <p class="footer-credit">Site by <a href="https://bayouwebstudio.github.io" target="_blank" rel="noopener">Bayou Web Studio</a></p>
   </footer>
+
+  <!-- FLOATING BOOK NOW -->
+  <div class="float-cta">
+    <a href="https://www.instagram.com/chases_tattoos/" class="float-btn" target="_blank" rel="noopener">
+      ✦ Book Now
+    </a>
+  </div>
 
 </body>
 </html>
