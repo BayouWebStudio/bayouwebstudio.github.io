@@ -1,234 +1,428 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Elias Jeis | Geometric & Sacred Geometry Tattoo Artist | Santiago, Chile</title>
-<meta name="description" content="Elias Jeis (@eliasjeis) — Geometric, mandala, dotwork, and sacred geometry tattoo artist. 80K+ followers. Based in Santiago, Chile. Traveling Europe from July. Book via WhatsApp.">
-<meta name="keywords" content="Elias Jeis, eliasjeis, geometric tattoo, mandala tattoo, sacred geometry, dotwork tattoo, Santiago Chile tattoo artist, European tattoo tour">
-<meta property="og:title" content="Elias Jeis | Geometric & Sacred Geometry Tattoo Artist">
-<meta property="og:description" content="Geometric, mandala, dotwork, and sacred geometry tattoo artist. Santiago, Chile. Europe from July.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://bayouwebstudio.github.io/eliasjeis/">
-<meta property="og:image" content="img/photo_01.jpg">
-<link rel="canonical" href="https://bayouwebstudio.github.io/eliasjeis/">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Elias Jeis",
-  "alternateName": "eliasjeis",
-  "jobTitle": "Tattoo Artist",
-  "description": "Geometric, mandala, dotwork, and sacred geometry tattoo artist",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Santiago",
-    "addressCountry": "CL"
-  },
-  "sameAs": ["https://www.instagram.com/eliasjeis/"],
-  "url": "https://bayouwebstudio.github.io/eliasjeis/"
-}
-</script>
-<style>
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  :root{
-    --bg:#050505;
-    --surface:#0a0a0f;
-    --blue:#4A9EFF;
-    --blue-dark:#2a7dd4;
-    --blue-glow:rgba(74,158,255,0.3);
-    --white:#ffffff;
-    --gray:#777;
-    --font-display:'Georgia',serif;
-    --font-body:'Arial',sans-serif;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Elias Jeis — Geometric & Sacred Geometry tattoo artist based in Santiago, Chile → Europe (July). 80.9K Instagram followers. Book your custom tattoo today.">
+  <meta property="og:title" content="Elias Jeis | Tattoo Artist">
+  <meta property="og:description" content="Geometric & Sacred Geometry · Santiago, Chile → Europe (July) · 80.9K followers">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#4A9EFF">
+  <title>Elias Jeis | Tattoo Artist</title>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Elias Jeis",
+    "jobTitle": "Tattoo Artist",
+    "description": "Geometric & Sacred Geometry tattoo artist",
+    "address": { "@type": "PostalAddress", "addressLocality": "Santiago, Chile → Europe (July)" },
+    "sameAs": ["https://www.instagram.com/eliasjeis/"]
   }
-  html{scroll-behavior:smooth}
-  body{background:var(--bg);color:var(--white);font-family:var(--font-body);overflow-x:hidden}
-  
-  /* NAV */
-  nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(5,5,5,0.95);border-bottom:1px solid rgba(74,158,255,0.15);padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(10px)}
-  .nav-logo{font-family:var(--font-display);font-size:1.3rem;letter-spacing:0.15em;color:var(--blue);text-decoration:none;text-transform:uppercase}
-  .nav-links{display:flex;gap:2rem;list-style:none}
-  .nav-links a{color:var(--gray);text-decoration:none;letter-spacing:0.1em;font-size:0.85rem;text-transform:uppercase;transition:color 0.3s}
-  .nav-links a:hover{color:var(--blue)}
-  
-  /* HERO */
-  .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;padding:2rem;background:radial-gradient(ellipse at center,rgba(74,158,255,0.06) 0%,transparent 60%),var(--bg)}
-  .hero::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(74,158,255,0.03) 60px),repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(74,158,255,0.03) 60px)}
-  .hero-content{position:relative;z-index:1}
-  .hero-eyebrow{font-size:0.75rem;letter-spacing:0.4em;color:var(--blue);text-transform:uppercase;margin-bottom:1.5rem;opacity:0.8}
-  .hero-name{font-family:var(--font-display);font-size:clamp(3.5rem,12vw,9rem);font-weight:700;line-height:0.9;letter-spacing:-0.03em;text-transform:uppercase;margin-bottom:1rem;text-shadow:0 0 80px var(--blue-glow)}
-  .hero-name .last{display:block;color:var(--blue)}
-  .hero-sub{font-size:clamp(0.8rem,2vw,1rem);letter-spacing:0.35em;color:var(--gray);text-transform:uppercase;margin-bottom:3rem}
-  .hero-line{display:flex;align-items:center;justify-content:center;gap:1rem;margin-bottom:3rem}
-  .hero-line-bar{width:40px;height:1px;background:var(--blue);opacity:0.6}
-  .hero-line-text{font-size:0.7rem;letter-spacing:0.3em;color:var(--blue);text-transform:uppercase;opacity:0.7}
-  .avail-badge{display:inline-block;border:1px solid rgba(74,158,255,0.4);padding:0.6rem 1.5rem;font-size:0.75rem;letter-spacing:0.2em;color:var(--blue);text-transform:uppercase;margin-bottom:2rem}
-  
-  /* ABOUT */
-  .about{padding:6rem 2rem;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
-  .about-img{position:relative}
-  .about-img img{width:100%;aspect-ratio:3/4;object-fit:cover;filter:saturate(0.8)}
-  .about-img::before{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 60%,rgba(74,158,255,0.1) 100%);pointer-events:none;z-index:1}
-  .about-img::after{content:'';position:absolute;inset:-6px;border:1px solid rgba(74,158,255,0.25);pointer-events:none}
-  .about-text h2{font-family:var(--font-display);font-size:clamp(2rem,5vw,3rem);margin-bottom:1.5rem;line-height:1.1}
-  .about-text h2 em{color:var(--blue);font-style:normal}
-  .about-text p{color:var(--gray);line-height:1.8;margin-bottom:1.5rem;font-size:0.95rem}
-  .avail-info{background:rgba(74,158,255,0.05);border:1px solid rgba(74,158,255,0.2);padding:1.5rem;margin-top:1.5rem}
-  .avail-info h3{color:var(--blue);font-size:0.8rem;letter-spacing:0.25em;text-transform:uppercase;margin-bottom:1rem}
-  .avail-item{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;font-size:0.9rem}
-  .avail-dot{width:8px;height:8px;background:var(--blue);border-radius:50%;flex-shrink:0}
-  .about-tags{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1.5rem}
-  .tag{border:1px solid rgba(74,158,255,0.3);color:var(--blue);padding:0.4rem 1rem;font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase}
-  
-  /* GALLERY */
-  .gallery-section{padding:6rem 2rem;background:var(--surface)}
-  .section-header{text-align:center;margin-bottom:4rem}
-  .section-header h2{font-family:var(--font-display);font-size:clamp(2rem,5vw,3rem);text-transform:uppercase;letter-spacing:0.05em}
-  .section-header p{color:var(--gray);margin-top:1rem;letter-spacing:0.15em;font-size:0.85rem;text-transform:uppercase}
-  .gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:3px;max-width:1200px;margin:0 auto}
-  .gallery-item{overflow:hidden;aspect-ratio:1;position:relative}
-  .gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform 0.8s ease,filter 0.8s ease;filter:saturate(0.7)}
-  .gallery-item:hover img{transform:scale(1.06);filter:saturate(1) brightness(1.1)}
-  .gallery-item::after{content:'';position:absolute;inset:0;border:1px solid rgba(74,158,255,0);transition:border-color 0.4s}
-  .gallery-item:hover::after{border-color:rgba(74,158,255,0.3)}
-  
-  /* BOOKING */
-  .booking{padding:6rem 2rem;text-align:center;background:radial-gradient(ellipse at center,rgba(74,158,255,0.04) 0%,transparent 70%),var(--bg)}
-  .booking h2{font-family:var(--font-display);font-size:clamp(2rem,5vw,3rem);margin-bottom:1rem}
-  .booking p{color:var(--gray);margin-bottom:3rem;max-width:500px;margin-left:auto;margin-right:auto;line-height:1.8}
-  .btn-book{display:inline-flex;align-items:center;gap:0.75rem;border:1px solid var(--blue);color:var(--blue);padding:1.2rem 3rem;letter-spacing:0.25em;text-transform:uppercase;text-decoration:none;font-size:0.85rem;transition:all 0.3s;position:relative;overflow:hidden}
-  .btn-book::before{content:'';position:absolute;inset:0;background:var(--blue);transform:scaleX(0);transform-origin:left;transition:transform 0.3s}
-  .btn-book:hover{color:var(--bg)}
-  .btn-book:hover::before{transform:scaleX(1)}
-  .btn-book span{position:relative;z-index:1}
-  .avail-tags{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-bottom:2rem}
-  .avail-tag{font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;padding:0.4rem 1rem;border:1px solid rgba(74,158,255,0.25);color:rgba(74,158,255,0.7)}
-  
-  /* FLOAT BTN */
-  .float-btn{position:fixed;bottom:2rem;right:2rem;z-index:999;background:var(--blue);color:#000;padding:1rem 1.8rem;text-decoration:none;font-size:0.8rem;letter-spacing:0.2em;text-transform:uppercase;font-weight:700;transition:all 0.3s;box-shadow:0 4px 25px var(--blue-glow)}
-  .float-btn:hover{background:#fff;transform:translateY(-2px);box-shadow:0 8px 35px rgba(74,158,255,0.5)}
-  
-  /* FOOTER */
-  footer{background:#000;border-top:1px solid #0a0a1a;padding:3rem 2rem;text-align:center}
-  .footer-logo{font-family:var(--font-display);font-size:1.5rem;color:var(--blue);margin-bottom:0.5rem}
-  .footer-sub{color:var(--gray);font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:1rem}
-  .footer-bws{color:#333;font-size:0.7rem;margin-top:2rem}
-  .footer-bws a{color:#555;text-decoration:none}
-  .footer-bws a:hover{color:var(--blue)}
-  
-  @media(max-width:768px){
-    .nav-links{display:none}
-    .about{grid-template-columns:1fr;gap:2rem}
-    .about-img::after{display:none}
-  }
-</style>
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --accent: #4A9EFF;
+      --accent2: #2A7EDF;
+      --bg: #030508;
+      --bg2: #050810;
+      --card: #0a0f1a;
+      --text: #e8f0ff;
+      --text-muted: #888;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 16px 24px;
+      display: flex; justify-content: space-between; align-items: center;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+      backdrop-filter: blur(2px);
+    }
+    .nav-name { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent); }
+    .nav-ig { color: var(--text-muted); font-size: 0.85rem; text-decoration: none; }
+    .nav-ig:hover { color: var(--accent); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero-no-img {
+      background: linear-gradient(135deg, var(--bg) 0%, var(--bg2) 100%);
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.75) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 1;
+      text-align: center; padding: 2rem;
+      max-width: 700px;
+    }
+    .hero-content h1 {
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.8);
+    }
+    .hero-style {
+      font-size: 1.1rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .hero-location {
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 2rem;
+    }
+    .hero-cta {
+      display: inline-block;
+      padding: 14px 36px;
+      background: var(--accent);
+      color: #000;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      border-radius: 4px;
+      letter-spacing: 0.05em;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .hero-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    }
+
+    /* ABOUT */
+    section { padding: 80px 24px; max-width: 1100px; margin: 0 auto; }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    @media (max-width: 640px) {
+      .about-grid { grid-template-columns: 1fr; }
+    }
+    .artist-portrait {
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--accent);
+      display: block;
+    }
+    .artist-portrait-placeholder {
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: var(--card);
+      border: 3px solid var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 4rem; font-weight: 900;
+      color: var(--accent);
+    }
+    .about-text h2 {
+      font-size: 2rem; font-weight: 800;
+      margin-bottom: 8px;
+      color: var(--accent);
+    }
+    .about-text .followers-badge {
+      display: inline-block;
+      background: var(--card);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      margin-bottom: 16px;
+    }
+    .about-text p {
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 16px;
+      font-size: 1.05rem;
+    }
+    .detail-item {
+      display: flex; align-items: center; gap: 8px;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 8px;
+    }
+    .detail-icon { font-size: 1rem; }
+    .availability-note {
+      margin-top: 16px;
+      padding: 12px 16px;
+      background: var(--card);
+      border-left: 3px solid var(--accent);
+      border-radius: 4px;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.8);
+    }
+    .rates-box {
+      margin-top: 16px;
+      padding: 16px 20px;
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+    }
+    .rates-box h3 {
+      color: var(--accent);
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .rates-box p { color: rgba(255,255,255,0.7); font-size: 0.95rem; }
+
+    /* GALLERY */
+    .gallery-section {
+      max-width: 1200px;
+      padding: 80px 24px;
+      margin: 0 auto;
+    }
+    .section-title {
+      font-size: 1.8rem; font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .section-subtitle {
+      color: var(--text-muted);
+      margin-bottom: 40px;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 12px;
+    }
+    .gallery-item {
+      aspect-ratio: 1;
+      overflow: hidden;
+      border-radius: 6px;
+      cursor: pointer;
+      background: var(--card);
+    }
+    .gallery-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+
+    /* LIGHTBOX */
+    .lightbox {
+      display: none;
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(0,0,0,0.95);
+      align-items: center; justify-content: center;
+    }
+    .lightbox.active { display: flex; }
+    .lightbox img {
+      max-width: 90vw; max-height: 90vh;
+      object-fit: contain; border-radius: 4px;
+    }
+    .lightbox-close {
+      position: absolute; top: 20px; right: 24px;
+      color: white; font-size: 2rem; cursor: pointer;
+      background: none; border: none; line-height: 1;
+    }
+
+    /* BOOKING */
+    .booking-section {
+      background: var(--bg2);
+      padding: 80px 24px;
+      text-align: center;
+    }
+    .booking-inner { max-width: 600px; margin: 0 auto; }
+    .booking-inner h2 {
+      font-size: 2.2rem; font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .booking-inner p { color: rgba(255,255,255,0.6); margin-bottom: 32px; }
+    .book-btn {
+      display: inline-block;
+      padding: 18px 48px;
+      background: var(--accent);
+      color: #000;
+      font-weight: 800;
+      font-size: 1.1rem;
+      text-decoration: none;
+      border-radius: 4px;
+      letter-spacing: 0.05em;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .book-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    }
+    .also-email {
+      margin-top: 16px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    .also-email a { color: var(--accent); }
+
+    /* FLOATING BUTTON */
+    .float-book {
+      position: fixed; bottom: 24px; right: 24px; z-index: 99;
+      display: flex; align-items: center; gap: 8px;
+      padding: 14px 24px;
+      background: var(--accent);
+      color: #000;
+      font-weight: 700; font-size: 0.95rem;
+      text-decoration: none; border-radius: 50px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .float-book:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+    }
+
+    /* FOOTER */
+    footer {
+      background: #000;
+      padding: 32px 24px;
+      text-align: center;
+      color: rgba(255,255,255,0.3);
+      font-size: 0.85rem;
+    }
+    footer a { color: rgba(255,255,255,0.5); text-decoration: none; }
+    footer a:hover { color: var(--accent); }
+
+    /* DIVIDER */
+    .divider {
+      width: 60px; height: 3px;
+      background: var(--accent);
+      margin: 0 auto 48px;
+    }
+  </style>
 </head>
 <body>
 
 <nav>
-  <a class="nav-logo" href="#">Elias Jeis</a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#work">Work</a></li>
-    <li><a href="#booking">Booking</a></li>
-  </ul>
+  <span class="nav-name">Elias Jeis</span>
+  <a href="https://instagram.com/eliasjeis" target="_blank" class="nav-ig">@eliasjeis</a>
 </nav>
 
-<section class="hero">
-  <div class="hero-content">
-    <p class="hero-eyebrow">Santiago, Chile · Available Worldwide</p>
-    <h1 class="hero-name">Elias<span class="last">Jeis</span></h1>
-    <p class="hero-sub">Geometric · Mandala · Sacred Geometry · Dotwork</p>
-    <div class="hero-line">
-      <span class="hero-line-bar"></span>
-      <span class="hero-line-text">80K+ followers worldwide</span>
-      <span class="hero-line-bar"></span>
-    </div>
-    <div class="avail-badge">📍 Santiago → ✈️ Europe from July</div>
-  </div>
-</section>
 
-<section class="about" id="about">
-  <div class="about-img">
-    <img src="img/photo_01.jpg" alt="Elias Jeis geometric tattoo artist Santiago Chile">
-  </div>
-  <div class="about-text">
-    <h2>Where Math Becomes <em>Art</em></h2>
-    <p>Elias Jeis is a Santiago-based tattoo artist with over 80,000 followers worldwide, renowned for his precise geometric compositions, intricate mandalas, and sacred geometry work. Every line is intentional. Every pattern carries meaning.</p>
-    <p>Rooted in the mathematical beauty of sacred geometry, Elias creates tattoos that transcend decoration — they become personal symbols of symmetry, balance, and transformation.</p>
-    <div class="avail-info">
-      <h3>📅 Availability</h3>
-      <div class="avail-item"><span class="avail-dot"></span><span>Santiago, Chile — Until May 2026</span></div>
-      <div class="avail-item"><span class="avail-dot"></span><span>Europe Tour — From July 2026</span></div>
-      <div class="avail-item"><span class="avail-dot"></span><span>Booking via WhatsApp only</span></div>
+  <section class="hero" style="background-image: url('img/photo_01.jpg')">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>Elias Jeis</h1>
+      <p class="hero-style">Geometric & Sacred Geometry</p>
+      <p class="hero-location">📍 Santiago, Chile → Europe (July)</p>
+      <a href="https://wa.link/ho34vv" class="hero-cta" target="_blank" rel="noopener">Book via WhatsApp</a>
     </div>
-    <div class="about-tags">
-      <span class="tag">Geometric</span>
-      <span class="tag">Mandala</span>
-      <span class="tag">Dotwork</span>
-      <span class="tag">Sacred Geometry</span>
-      <span class="tag">Fine Line</span>
+  </section>
+
+<section class="about-section" style="background: var(--bg2);">
+  <div style="max-width:1100px; margin:0 auto; padding:80px 24px;">
+    <div class="about-grid">
+      <div><img src="img/profile.jpg" alt="Elias Jeis profile" class="artist-portrait"></div>
+      <div class="about-text">
+        <h2>Elias Jeis</h2>
+        <span class="followers-badge">📸 80.9K followers</span>
+        <p>Geometric & Sacred Geometry tattoo artist based in Santiago, Chile → Europe (July).</p>
+        
+        
+        <div class="detail-item">
+          <span class="detail-icon">📸</span>
+          <span><a href="https://instagram.com/eliasjeis" target="_blank" style="color:var(--accent)">@eliasjeis</a></span>
+        </div>
+        <div class="availability-note"><span>✈️</span> Available Santiago until May · Europe from July</div>
+        
+      </div>
     </div>
   </div>
 </section>
 
-<section class="gallery-section" id="work">
-  <div class="section-header">
-    <h2>Selected Works</h2>
-    <p>Geometric · Mandala · Sacred Geometry</p>
-  </div>
+<div class="gallery-section">
+  <h2 class="section-title">Portfolio</h2>
+  <p class="section-subtitle">Latest work from @eliasjeis</p>
   <div class="gallery-grid">
     
-        <div class="gallery-item">
-            <img src="img/photo_02.jpg" alt="Elias Jeis tattoo - geometric mandala sacred geometry dotwork" loading="lazy">
+        <div class="gallery-item" onclick="openLightbox('photo_02.jpg')">
+          <img src="img/photo_02.jpg" alt="Elias Jeis tattoo 2" loading="lazy">
         </div>
-        <div class="gallery-item">
-            <img src="img/photo_03.jpg" alt="Elias Jeis tattoo - geometric mandala sacred geometry dotwork" loading="lazy">
+        <div class="gallery-item" onclick="openLightbox('photo_03.jpg')">
+          <img src="img/photo_03.jpg" alt="Elias Jeis tattoo 3" loading="lazy">
         </div>
-        <div class="gallery-item">
-            <img src="img/photo_04.jpg" alt="Elias Jeis tattoo - geometric mandala sacred geometry dotwork" loading="lazy">
+        <div class="gallery-item" onclick="openLightbox('photo_04.jpg')">
+          <img src="img/photo_04.jpg" alt="Elias Jeis tattoo 4" loading="lazy">
         </div>
-        <div class="gallery-item">
-            <img src="img/photo_05.jpg" alt="Elias Jeis tattoo - geometric mandala sacred geometry dotwork" loading="lazy">
+        <div class="gallery-item" onclick="openLightbox('photo_05.jpg')">
+          <img src="img/photo_05.jpg" alt="Elias Jeis tattoo 5" loading="lazy">
         </div>
-        <div class="gallery-item">
-            <img src="img/photo_06.jpg" alt="Elias Jeis tattoo - geometric mandala sacred geometry dotwork" loading="lazy">
+        <div class="gallery-item" onclick="openLightbox('photo_06.jpg')">
+          <img src="img/photo_06.jpg" alt="Elias Jeis tattoo 6" loading="lazy">
         </div>
-        <div class="gallery-item">
-            <img src="img/photo_07.jpg" alt="Elias Jeis tattoo - geometric mandala sacred geometry dotwork" loading="lazy">
+        <div class="gallery-item" onclick="openLightbox('photo_07.jpg')">
+          <img src="img/photo_07.jpg" alt="Elias Jeis tattoo 7" loading="lazy">
         </div>
-        <div class="gallery-item">
-            <img src="img/photo_08.jpg" alt="Elias Jeis tattoo - geometric mandala sacred geometry dotwork" loading="lazy">
+        <div class="gallery-item" onclick="openLightbox('photo_08.jpg')">
+          <img src="img/photo_08.jpg" alt="Elias Jeis tattoo 8" loading="lazy">
         </div>
-        <div class="gallery-item">
-            <img src="img/photo_09.jpg" alt="Elias Jeis tattoo - geometric mandala sacred geometry dotwork" loading="lazy">
+        <div class="gallery-item" onclick="openLightbox('photo_09.jpg')">
+          <img src="img/photo_09.jpg" alt="Elias Jeis tattoo 9" loading="lazy">
+        </div>
+        <div class="gallery-item" onclick="openLightbox('photo_10.jpg')">
+          <img src="img/photo_10.jpg" alt="Elias Jeis tattoo 10" loading="lazy">
+        </div>
+        <div class="gallery-item" onclick="openLightbox('photo_11.jpg')">
+          <img src="img/photo_11.jpg" alt="Elias Jeis tattoo 11" loading="lazy">
+        </div>
+        <div class="gallery-item" onclick="openLightbox('photo_12.jpg')">
+          <img src="img/photo_12.jpg" alt="Elias Jeis tattoo 12" loading="lazy">
         </div>
   </div>
-</section>
+</div>
 
-<section class="booking" id="booking">
-  <h2>Begin Your Design</h2>
-  <div class="avail-tags">
-    <span class="avail-tag">Santiago until May</span>
-    <span class="avail-tag">Europe from July</span>
+<div class="booking-section">
+  <div class="booking-inner">
+    <h2>Book Your Session</h2>
+    <p>Ready to get inked? Reach out to Elias Jeis directly to discuss your vision and schedule your appointment.</p>
+    <a href="https://wa.link/ho34vv" class="book-btn" target="_blank" rel="noopener">Book via WhatsApp</a>
+    
   </div>
-  <p>Reach out via WhatsApp to discuss your vision. Elias works with each client to create a unique geometric piece that resonates with their personal journey.</p>
-  <a class="btn-book" href="https://wa.link/ho34vv" target="_blank" rel="noopener"><span>Book via WhatsApp</span></a>
-</section>
+</div>
+
+<a href="https://wa.link/ho34vv" class="float-book" target="_blank" rel="noopener">
+  ✏️ Book via WhatsApp
+</a>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt="Tattoo">
+</div>
 
 <footer>
-  <div class="footer-logo">Elias Jeis</div>
-  <div class="footer-sub">@eliasjeis · Santiago, Chile</div>
-  <div style="color:#333;font-size:0.75rem;letter-spacing:0.2em">
-    <a href="https://www.instagram.com/eliasjeis/" target="_blank" rel="noopener" style="color:#555;text-decoration:none">Instagram</a>
-    &nbsp;·&nbsp;
-    <a href="https://wa.link/ho34vv" target="_blank" rel="noopener" style="color:#555;text-decoration:none">WhatsApp</a>
-  </div>
-  <div class="footer-bws">Site crafted by <a href="https://bayouwebstudio.github.io" target="_blank">Bayou Web Studio</a></div>
+  <p>Demo site built by <a href="https://bayouwebstudios.com" target="_blank">Bayou Web Studios</a> · All images © @eliasjeis</p>
 </footer>
 
-<a class="float-btn" href="https://wa.link/ho34vv" target="_blank" rel="noopener">✦ Book Now</a>
-
+<script>
+  function openLightbox(fname) {
+    document.getElementById('lightbox-img').src = 'img/' + fname;
+    document.getElementById('lightbox').classList.add('active');
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+  }
+  document.addEventListener('keydown', (e) => { if(e.key==='Escape') closeLightbox(); });
+</script>
 </body>
 </html>
