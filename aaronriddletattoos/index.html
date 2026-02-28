@@ -1,236 +1,428 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aaron Riddle | Color Realism & Japanese Tattoo Artist | Phoenix, AZ</title>
-<meta name="description" content="Aaron Riddle (@aaronriddletattoos) — Color realism, Japanese, and psychedelic tattoo artist at Desert Psychedelic in Phoenix, AZ. $200/hr. Email to book: aaronriddle138@gmail.com">
-<meta name="keywords" content="Aaron Riddle, aaronriddletattoos, color realism tattoo, Japanese tattoo, psychedelic tattoo, Phoenix tattoo artist, Desert Psychedelic tattoo">
-<meta property="og:title" content="Aaron Riddle | Color Realism & Japanese Tattoo Artist">
-<meta property="og:description" content="Color realism, Japanese, and psychedelic tattoo artist at Desert Psychedelic, Phoenix AZ.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://bayouwebstudio.github.io/aaronriddletattoos/">
-<meta property="og:image" content="img/photo_01.jpg">
-<link rel="canonical" href="https://bayouwebstudio.github.io/aaronriddletattoos/">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Aaron Riddle",
-  "alternateName": "aaronriddletattoos",
-  "jobTitle": "Tattoo Artist",
-  "description": "Color realism, Japanese, and psychedelic tattoo artist",
-  "email": "aaronriddle138@gmail.com",
-  "worksFor": {
-    "@type": "LocalBusiness",
-    "name": "Desert Psychedelic",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "1619 E McDowell Rd Unit E",
-      "addressLocality": "Phoenix",
-      "addressRegion": "AZ",
-      "addressCountry": "US"
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aaron Riddle — Color Realism tattoo artist based in Phoenix, AZ. 44K Instagram followers. Book your custom tattoo today.">
+  <meta property="og:title" content="Aaron Riddle | Tattoo Artist">
+  <meta property="og:description" content="Color Realism · Phoenix, AZ · 44K followers">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#8B1A4A">
+  <title>Aaron Riddle | Tattoo Artist</title>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Aaron Riddle",
+    "jobTitle": "Tattoo Artist",
+    "description": "Color Realism tattoo artist",
+    "address": { "@type": "PostalAddress", "addressLocality": "Phoenix, AZ" },
+    "sameAs": ["https://www.instagram.com/aaronriddletattoos/"]
+  }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --accent: #8B1A4A;
+      --accent2: #6B0A3A;
+      --bg: #0a0508;
+      --bg2: #120810;
+      --card: #1a0d15;
+      --text: #f0e0e8;
+      --text-muted: #888;
     }
-  },
-  "sameAs": ["https://www.instagram.com/aaronriddletattoos/"],
-  "url": "https://bayouwebstudio.github.io/aaronriddletattoos/"
-}
-</script>
-<style>
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  :root{
-    --bg:#0a0a0a;
-    --surface:#111;
-    --accent:#8b0000;
-    --accent2:#6a0dad;
-    --accent-light:#c0392b;
-    --white:#ffffff;
-    --gray:#888;
-    --font-display:'Georgia',serif;
-    --font-body:'Arial',sans-serif;
-  }
-  html{scroll-behavior:smooth}
-  body{background:var(--bg);color:var(--white);font-family:var(--font-body);overflow-x:hidden}
-  
-  /* NAV */
-  nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(10,10,10,0.95);border-bottom:1px solid rgba(139,0,0,0.3);padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(10px)}
-  .nav-logo{font-family:var(--font-display);font-size:1.3rem;letter-spacing:0.1em;color:var(--accent-light);text-decoration:none;text-transform:uppercase}
-  .nav-links{display:flex;gap:2rem;list-style:none}
-  .nav-links a{color:var(--gray);text-decoration:none;letter-spacing:0.1em;font-size:0.85rem;text-transform:uppercase;transition:color 0.3s}
-  .nav-links a:hover{color:var(--accent-light)}
-  
-  /* HERO */
-  .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;padding:2rem;background:radial-gradient(ellipse at 30% 50%,rgba(106,13,173,0.15) 0%,transparent 50%),radial-gradient(ellipse at 70% 50%,rgba(139,0,0,0.15) 0%,transparent 50%),var(--bg)}
-  .hero-content{position:relative;z-index:1}
-  .hero-eyebrow{font-size:0.75rem;letter-spacing:0.4em;color:var(--accent-light);text-transform:uppercase;margin-bottom:1.5rem}
-  .hero-name{font-family:var(--font-display);font-size:clamp(3rem,10vw,7rem);font-weight:700;line-height:0.95;letter-spacing:-0.02em;text-transform:uppercase;margin-bottom:1rem;text-shadow:0 0 60px rgba(139,0,0,0.5)}
-  .hero-name .last{color:var(--accent-light)}
-  .hero-sub{font-size:clamp(0.85rem,2vw,1rem);letter-spacing:0.3em;color:var(--gray);text-transform:uppercase;margin-bottom:3rem}
-  .hero-divider{width:80px;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));margin:0 auto 3rem}
-  .hero-cta{display:inline-block;background:linear-gradient(135deg,var(--accent),var(--accent2));color:var(--white);padding:1.2rem 3rem;letter-spacing:0.2em;text-transform:uppercase;text-decoration:none;font-size:0.85rem;font-weight:700;transition:all 0.3s;box-shadow:0 4px 20px rgba(139,0,0,0.4)}
-  .hero-cta:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(139,0,0,0.6)}
-  
-  /* RATES STRIP */
-  .rates-strip{background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 100%);padding:1.5rem 2rem;display:flex;justify-content:center;gap:3rem;flex-wrap:wrap}
-  .rate-item{text-align:center}
-  .rate-price{font-family:var(--font-display);font-size:1.5rem;font-weight:700;color:var(--white)}
-  .rate-label{font-size:0.7rem;letter-spacing:0.2em;color:rgba(255,255,255,0.7);text-transform:uppercase}
-  
-  /* ABOUT */
-  .about{padding:6rem 2rem;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
-  .about-img img{width:100%;aspect-ratio:3/4;object-fit:cover}
-  .about-img{position:relative}
-  .about-img::after{content:'';position:absolute;inset:-6px 6px 6px -6px;border:2px solid var(--accent);opacity:0.4;pointer-events:none}
-  .about-text h2{font-family:var(--font-display);font-size:clamp(2rem,5vw,3rem);margin-bottom:1.5rem;line-height:1.1}
-  .about-text h2 em{background:linear-gradient(135deg,var(--accent-light),#9b59b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-style:normal}
-  .about-text p{color:var(--gray);line-height:1.8;margin-bottom:1.5rem;font-size:0.95rem}
-  .studio-info{border-left:3px solid var(--accent);padding-left:1rem;margin-top:1.5rem}
-  .studio-info p{color:rgba(255,255,255,0.7);font-size:0.9rem;margin-bottom:0.3rem}
-  .about-tags{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1.5rem}
-  .tag{background:rgba(139,0,0,0.2);border:1px solid rgba(139,0,0,0.4);color:var(--accent-light);padding:0.4rem 1rem;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;border-radius:2px}
-  
-  /* GALLERY */
-  .gallery-section{padding:6rem 2rem;background:var(--surface)}
-  .section-header{text-align:center;margin-bottom:4rem}
-  .section-header h2{font-family:var(--font-display);font-size:clamp(2rem,5vw,3rem);text-transform:uppercase}
-  .section-header p{color:var(--gray);margin-top:1rem;letter-spacing:0.15em;font-size:0.85rem;text-transform:uppercase}
-  .gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:4px;max-width:1200px;margin:0 auto}
-  .gallery-item{overflow:hidden;aspect-ratio:1;position:relative}
-  .gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease}
-  .gallery-item:hover img{transform:scale(1.08)}
-  
-  /* BOOKING */
-  .booking{padding:6rem 2rem;text-align:center;background:radial-gradient(ellipse at center,rgba(106,13,173,0.08) 0%,transparent 70%),var(--bg)}
-  .booking h2{font-family:var(--font-display);font-size:clamp(2rem,5vw,3rem);margin-bottom:1rem}
-  .booking p{color:var(--gray);margin-bottom:2rem;max-width:550px;margin-left:auto;margin-right:auto;line-height:1.8}
-  .booking-note{font-size:0.8rem;color:var(--accent-light);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:2rem;display:block}
-  .btn-book{display:inline-block;background:linear-gradient(135deg,var(--accent),var(--accent2));color:var(--white);padding:1.2rem 3rem;letter-spacing:0.2em;text-transform:uppercase;text-decoration:none;font-size:0.85rem;font-weight:700;transition:all 0.3s;box-shadow:0 4px 20px rgba(139,0,0,0.4)}
-  .btn-book:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(139,0,0,0.6)}
-  .deposit-note{margin-top:1.5rem;color:#555;font-size:0.8rem}
-  
-  /* FLOAT BTN */
-  .float-btn{position:fixed;bottom:2rem;right:2rem;z-index:999;background:linear-gradient(135deg,var(--accent),var(--accent2));color:var(--white);padding:1rem 1.8rem;text-decoration:none;font-size:0.8rem;letter-spacing:0.15em;text-transform:uppercase;font-weight:700;transition:all 0.3s;box-shadow:0 4px 20px rgba(139,0,0,0.5);border-radius:2px}
-  .float-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(139,0,0,0.7)}
-  
-  /* FOOTER */
-  footer{background:#050505;border-top:1px solid #1a0a0a;padding:3rem 2rem;text-align:center}
-  .footer-logo{font-family:var(--font-display);font-size:1.3rem;color:var(--accent-light);margin-bottom:0.5rem}
-  .footer-sub{color:var(--gray);font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:1rem}
-  .footer-bws{color:#333;font-size:0.7rem;margin-top:2rem}
-  .footer-bws a{color:#555;text-decoration:none}
-  .footer-bws a:hover{color:var(--accent-light)}
-  
-  @media(max-width:768px){
-    .nav-links{display:none}
-    .about{grid-template-columns:1fr;gap:2rem}
-    .rates-strip{gap:1.5rem}
-  }
-</style>
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 16px 24px;
+      display: flex; justify-content: space-between; align-items: center;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+      backdrop-filter: blur(2px);
+    }
+    .nav-name { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent); }
+    .nav-ig { color: var(--text-muted); font-size: 0.85rem; text-decoration: none; }
+    .nav-ig:hover { color: var(--accent); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero-no-img {
+      background: linear-gradient(135deg, var(--bg) 0%, var(--bg2) 100%);
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.75) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 1;
+      text-align: center; padding: 2rem;
+      max-width: 700px;
+    }
+    .hero-content h1 {
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.8);
+    }
+    .hero-style {
+      font-size: 1.1rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .hero-location {
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 2rem;
+    }
+    .hero-cta {
+      display: inline-block;
+      padding: 14px 36px;
+      background: var(--accent);
+      color: #000;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      border-radius: 4px;
+      letter-spacing: 0.05em;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .hero-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    }
+
+    /* ABOUT */
+    section { padding: 80px 24px; max-width: 1100px; margin: 0 auto; }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    @media (max-width: 640px) {
+      .about-grid { grid-template-columns: 1fr; }
+    }
+    .artist-portrait {
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--accent);
+      display: block;
+    }
+    .artist-portrait-placeholder {
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: var(--card);
+      border: 3px solid var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 4rem; font-weight: 900;
+      color: var(--accent);
+    }
+    .about-text h2 {
+      font-size: 2rem; font-weight: 800;
+      margin-bottom: 8px;
+      color: var(--accent);
+    }
+    .about-text .followers-badge {
+      display: inline-block;
+      background: var(--card);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      margin-bottom: 16px;
+    }
+    .about-text p {
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 16px;
+      font-size: 1.05rem;
+    }
+    .detail-item {
+      display: flex; align-items: center; gap: 8px;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 8px;
+    }
+    .detail-icon { font-size: 1rem; }
+    .availability-note {
+      margin-top: 16px;
+      padding: 12px 16px;
+      background: var(--card);
+      border-left: 3px solid var(--accent);
+      border-radius: 4px;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.8);
+    }
+    .rates-box {
+      margin-top: 16px;
+      padding: 16px 20px;
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+    }
+    .rates-box h3 {
+      color: var(--accent);
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .rates-box p { color: rgba(255,255,255,0.7); font-size: 0.95rem; }
+
+    /* GALLERY */
+    .gallery-section {
+      max-width: 1200px;
+      padding: 80px 24px;
+      margin: 0 auto;
+    }
+    .section-title {
+      font-size: 1.8rem; font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .section-subtitle {
+      color: var(--text-muted);
+      margin-bottom: 40px;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 12px;
+    }
+    .gallery-item {
+      aspect-ratio: 1;
+      overflow: hidden;
+      border-radius: 6px;
+      cursor: pointer;
+      background: var(--card);
+    }
+    .gallery-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+
+    /* LIGHTBOX */
+    .lightbox {
+      display: none;
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(0,0,0,0.95);
+      align-items: center; justify-content: center;
+    }
+    .lightbox.active { display: flex; }
+    .lightbox img {
+      max-width: 90vw; max-height: 90vh;
+      object-fit: contain; border-radius: 4px;
+    }
+    .lightbox-close {
+      position: absolute; top: 20px; right: 24px;
+      color: white; font-size: 2rem; cursor: pointer;
+      background: none; border: none; line-height: 1;
+    }
+
+    /* BOOKING */
+    .booking-section {
+      background: var(--bg2);
+      padding: 80px 24px;
+      text-align: center;
+    }
+    .booking-inner { max-width: 600px; margin: 0 auto; }
+    .booking-inner h2 {
+      font-size: 2.2rem; font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .booking-inner p { color: rgba(255,255,255,0.6); margin-bottom: 32px; }
+    .book-btn {
+      display: inline-block;
+      padding: 18px 48px;
+      background: var(--accent);
+      color: #000;
+      font-weight: 800;
+      font-size: 1.1rem;
+      text-decoration: none;
+      border-radius: 4px;
+      letter-spacing: 0.05em;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .book-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    }
+    .also-email {
+      margin-top: 16px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    .also-email a { color: var(--accent); }
+
+    /* FLOATING BUTTON */
+    .float-book {
+      position: fixed; bottom: 24px; right: 24px; z-index: 99;
+      display: flex; align-items: center; gap: 8px;
+      padding: 14px 24px;
+      background: var(--accent);
+      color: #000;
+      font-weight: 700; font-size: 0.95rem;
+      text-decoration: none; border-radius: 50px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .float-book:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+    }
+
+    /* FOOTER */
+    footer {
+      background: #000;
+      padding: 32px 24px;
+      text-align: center;
+      color: rgba(255,255,255,0.3);
+      font-size: 0.85rem;
+    }
+    footer a { color: rgba(255,255,255,0.5); text-decoration: none; }
+    footer a:hover { color: var(--accent); }
+
+    /* DIVIDER */
+    .divider {
+      width: 60px; height: 3px;
+      background: var(--accent);
+      margin: 0 auto 48px;
+    }
+  </style>
 </head>
 <body>
 
 <nav>
-  <a class="nav-logo" href="#">Aaron Riddle</a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#work">Work</a></li>
-    <li><a href="#booking">Booking</a></li>
-  </ul>
+  <span class="nav-name">Aaron Riddle</span>
+  <a href="https://instagram.com/aaronriddletattoos" target="_blank" class="nav-ig">@aaronriddletattoos</a>
 </nav>
 
-<section class="hero">
-  <div class="hero-content">
-    <p class="hero-eyebrow">Desert Psychedelic · Phoenix, Arizona</p>
-    <h1 class="hero-name">Aaron <span class="last">Riddle</span></h1>
-    <p class="hero-sub">Color Realism · Japanese · Psychedelic</p>
-    <div class="hero-divider"></div>
-    <a class="hero-cta" href="mailto:aaronriddle138@gmail.com">Email to Book</a>
-  </div>
-</section>
 
-<div class="rates-strip">
-  <div class="rate-item"><span class="rate-price">$200</span><span class="rate-label">Per Hour</span></div>
-  <div class="rate-item"><span class="rate-price">$800</span><span class="rate-label">Half Day</span></div>
-  <div class="rate-item"><span class="rate-price">$1,200</span><span class="rate-label">Full Day</span></div>
-  <div class="rate-item"><span class="rate-price">$200</span><span class="rate-label">Deposit</span></div>
-</div>
-
-<section class="about" id="about">
-  <div class="about-img">
-    <img src="img/photo_01.jpg" alt="Aaron Riddle tattoo artist Phoenix AZ">
-  </div>
-  <div class="about-text">
-    <h2>Bold Color. <em>Fearless Vision.</em></h2>
-    <p>Aaron Riddle is a Phoenix-based tattoo artist at Desert Psychedelic, specializing in vibrant color realism, traditional Japanese imagery, and mind-bending psychedelic compositions. With 44K+ Instagram followers, his work speaks for itself.</p>
-    <p>Whether you're looking for hyper-realistic portraiture, intricate Japanese sleeves, or surreal psychedelic pieces, Aaron brings technical mastery and creative passion to every project.</p>
-    <div class="studio-info">
-      <p><strong>Desert Psychedelic</strong></p>
-      <p>1619 E McDowell Rd, Unit E</p>
-      <p>Phoenix, AZ</p>
+  <section class="hero" style="background-image: url('img/photo_01.jpg')">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>Aaron Riddle</h1>
+      <p class="hero-style">Color Realism</p>
+      <p class="hero-location">📍 Phoenix, AZ</p>
+      <a href="mailto:aaronriddle138@gmail.com" class="hero-cta" target="_blank" rel="noopener">Email to Book</a>
     </div>
-    <div class="about-tags">
-      <span class="tag">Color Realism</span>
-      <span class="tag">Japanese</span>
-      <span class="tag">Psychedelic</span>
-      <span class="tag">Neo-Traditional</span>
+  </section>
+
+<section class="about-section" style="background: var(--bg2);">
+  <div style="max-width:1100px; margin:0 auto; padding:80px 24px;">
+    <div class="about-grid">
+      <div><img src="img/profile.jpg" alt="Aaron Riddle profile" class="artist-portrait"></div>
+      <div class="about-text">
+        <h2>Aaron Riddle</h2>
+        <span class="followers-badge">📸 44K followers</span>
+        <p>Color Realism tattoo artist based in Phoenix, AZ.</p>
+        <div class="detail-item"><span class="detail-icon">🏠</span><span>Desert Psychedelic</span></div>
+        <div class="detail-item"><span class="detail-icon">📍</span><span>1619 E McDowell Rd Unit E, Phoenix AZ</span></div>
+        <div class="detail-item">
+          <span class="detail-icon">📸</span>
+          <span><a href="https://instagram.com/aaronriddletattoos" target="_blank" style="color:var(--accent)">@aaronriddletattoos</a></span>
+        </div>
+        
+        <div class="rates-box"><h3>Rates</h3><p>$200/hr · $800 half day · $1,200 full day · $200 deposit</p></div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="gallery-section" id="work">
-  <div class="section-header">
-    <h2>Portfolio</h2>
-    <p>Color Realism · Japanese · Psychedelic</p>
-  </div>
+<div class="gallery-section">
+  <h2 class="section-title">Portfolio</h2>
+  <p class="section-subtitle">Latest work from @aaronriddletattoos</p>
   <div class="gallery-grid">
     
-        <div class="gallery-item">
-            <img src="img/photo_02.jpg" alt="Aaron Riddle tattoo - color realism Japanese psychedelic" loading="lazy">
+        <div class="gallery-item" onclick="openLightbox('photo_02.jpg')">
+          <img src="img/photo_02.jpg" alt="Aaron Riddle tattoo 2" loading="lazy">
         </div>
-        <div class="gallery-item">
-            <img src="img/photo_03.jpg" alt="Aaron Riddle tattoo - color realism Japanese psychedelic" loading="lazy">
+        <div class="gallery-item" onclick="openLightbox('photo_03.jpg')">
+          <img src="img/photo_03.jpg" alt="Aaron Riddle tattoo 3" loading="lazy">
         </div>
-        <div class="gallery-item">
-            <img src="img/photo_04.jpg" alt="Aaron Riddle tattoo - color realism Japanese psychedelic" loading="lazy">
+        <div class="gallery-item" onclick="openLightbox('photo_04.jpg')">
+          <img src="img/photo_04.jpg" alt="Aaron Riddle tattoo 4" loading="lazy">
         </div>
-        <div class="gallery-item">
-            <img src="img/photo_05.jpg" alt="Aaron Riddle tattoo - color realism Japanese psychedelic" loading="lazy">
+        <div class="gallery-item" onclick="openLightbox('photo_05.jpg')">
+          <img src="img/photo_05.jpg" alt="Aaron Riddle tattoo 5" loading="lazy">
         </div>
-        <div class="gallery-item">
-            <img src="img/photo_06.jpg" alt="Aaron Riddle tattoo - color realism Japanese psychedelic" loading="lazy">
+        <div class="gallery-item" onclick="openLightbox('photo_06.jpg')">
+          <img src="img/photo_06.jpg" alt="Aaron Riddle tattoo 6" loading="lazy">
         </div>
-        <div class="gallery-item">
-            <img src="img/photo_07.jpg" alt="Aaron Riddle tattoo - color realism Japanese psychedelic" loading="lazy">
+        <div class="gallery-item" onclick="openLightbox('photo_07.jpg')">
+          <img src="img/photo_07.jpg" alt="Aaron Riddle tattoo 7" loading="lazy">
         </div>
-        <div class="gallery-item">
-            <img src="img/photo_08.jpg" alt="Aaron Riddle tattoo - color realism Japanese psychedelic" loading="lazy">
+        <div class="gallery-item" onclick="openLightbox('photo_08.jpg')">
+          <img src="img/photo_08.jpg" alt="Aaron Riddle tattoo 8" loading="lazy">
         </div>
-        <div class="gallery-item">
-            <img src="img/photo_09.jpg" alt="Aaron Riddle tattoo - color realism Japanese psychedelic" loading="lazy">
+        <div class="gallery-item" onclick="openLightbox('photo_09.jpg')">
+          <img src="img/photo_09.jpg" alt="Aaron Riddle tattoo 9" loading="lazy">
+        </div>
+        <div class="gallery-item" onclick="openLightbox('photo_10.jpg')">
+          <img src="img/photo_10.jpg" alt="Aaron Riddle tattoo 10" loading="lazy">
+        </div>
+        <div class="gallery-item" onclick="openLightbox('photo_11.jpg')">
+          <img src="img/photo_11.jpg" alt="Aaron Riddle tattoo 11" loading="lazy">
+        </div>
+        <div class="gallery-item" onclick="openLightbox('photo_12.jpg')">
+          <img src="img/photo_12.jpg" alt="Aaron Riddle tattoo 12" loading="lazy">
         </div>
   </div>
-</section>
+</div>
 
-<section class="booking" id="booking">
-  <h2>Book Your Session</h2>
-  <span class="booking-note">✉ Email Only — No DMs</span>
-  <p>Aaron takes bookings exclusively via email. Please include your idea, size, placement, and any reference images. A $200 deposit is required to secure your appointment.</p>
-  <a class="btn-book" href="mailto:aaronriddle138@gmail.com">aaronriddle138@gmail.com</a>
-  <p class="deposit-note">$200 non-refundable deposit required · $200/hr · Half day $800 · Full day $1,200</p>
-</section>
+<div class="booking-section">
+  <div class="booking-inner">
+    <h2>Book Your Session</h2>
+    <p>Ready to get inked? Reach out to Aaron Riddle directly to discuss your vision and schedule your appointment.</p>
+    <a href="mailto:aaronriddle138@gmail.com" class="book-btn" target="_blank" rel="noopener">Email to Book</a>
+    
+  </div>
+</div>
+
+<a href="mailto:aaronriddle138@gmail.com" class="float-book" target="_blank" rel="noopener">
+  ✏️ Email to Book
+</a>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt="Tattoo">
+</div>
 
 <footer>
-  <div class="footer-logo">Aaron Riddle</div>
-  <div class="footer-sub">@aaronriddletattoos · Phoenix, AZ</div>
-  <div style="color:#333;font-size:0.75rem;letter-spacing:0.2em">
-    <a href="https://www.instagram.com/aaronriddletattoos/" target="_blank" rel="noopener" style="color:#555;text-decoration:none">Instagram</a>
-    &nbsp;·&nbsp;
-    <a href="mailto:aaronriddle138@gmail.com" style="color:#555;text-decoration:none">Email</a>
-  </div>
-  <div class="footer-bws">Site crafted by <a href="https://bayouwebstudio.github.io" target="_blank">Bayou Web Studio</a></div>
+  <p>Demo site built by <a href="https://bayouwebstudios.com" target="_blank">Bayou Web Studios</a> · All images © @aaronriddletattoos</p>
 </footer>
 
-<a class="float-btn" href="mailto:aaronriddle138@gmail.com">✦ Book Now</a>
-
+<script>
+  function openLightbox(fname) {
+    document.getElementById('lightbox-img').src = 'img/' + fname;
+    document.getElementById('lightbox').classList.add('active');
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+  }
+  document.addEventListener('keydown', (e) => { if(e.key==='Escape') closeLightbox(); });
+</script>
 </body>
 </html>
