@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premium Plan — $99/mo | Bayou Web Studios</title>
+  <meta name="description" content="Full-service for serious artists and studios. Dedicated account manager, multi-page site, custom features, same-day changes — $99/mo. No setup fee.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='16' fill='%230a0a0a'/><text y='.9em' font-size='72' x='10' fill='%23c9a84c'>B</text></svg>">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0a0a; --bg2: #111111; --bg3: #1a1a1a;
+      --gold: #c9a84c; --accent: #e74c3c; --white: #ffffff; --gray: #a0a0a0;
+      --radius: 12px;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--white); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+    .back-bar { padding: 20px 24px; }
+    .back-link { color: var(--gray); font-size: 0.875rem; transition: color 0.2s; }
+    .back-link:hover { color: var(--white); }
+    .hero { padding: 60px 24px 80px; text-align: center; }
+    .tier-badge { display: inline-block; background: var(--accent); color: #fff; font-size: 0.75rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; padding: 6px 18px; border-radius: 100px; margin-bottom: 24px; }
+    .hero h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 900; letter-spacing: -0.03em; line-height: 1.05; }
+    .hero h1 .price { color: var(--accent); }
+    .hero .tagline { font-size: 1.15rem; color: var(--gray); margin: 16px auto 36px; max-width: 520px; }
+    .btn-primary { display: inline-block; background: var(--accent); color: #fff; font-weight: 800; font-size: 1.05rem; padding: 18px 40px; border-radius: 10px; transition: transform 0.2s, opacity 0.2s; }
+    .btn-primary:hover { transform: translateY(-2px); opacity: 0.9; }
+    .no-setup { font-size: 0.8rem; color: var(--gray); margin-top: 12px; }
+    section { padding: 64px 0; }
+    section:nth-child(even) { background: var(--bg2); }
+    .section-label { font-size: 0.75rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    .section-title { font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 900; letter-spacing: -0.02em; margin-bottom: 8px; }
+    .section-sub { color: var(--gray); margin-bottom: 40px; }
+    .checklist { list-style: none; display: grid; gap: 4px; }
+    .checklist li { display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; background: var(--bg3); border-radius: 8px; font-size: 0.95rem; }
+    .checklist li.divider { background: transparent; padding: 6px 0 2px; font-size: 0.8rem; font-weight: 800; letter-spacing: 0.08em; color: var(--accent); text-transform: uppercase; border-top: 1px solid rgba(255,255,255,0.08); margin-top: 8px; }
+    .checklist li .icon { flex-shrink: 0; }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+    .card { background: var(--bg3); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); padding: 28px 24px; transition: transform 0.2s, border-color 0.2s; }
+    .card:hover { transform: translateY(-4px); border-color: var(--accent); }
+    .card-name { font-weight: 800; font-size: 1.05rem; margin-bottom: 6px; }
+    .card-url { font-size: 0.8rem; color: var(--gray); margin-bottom: 16px; }
+    .card-link { font-size: 0.85rem; font-weight: 700; color: var(--accent); }
+    .card-link:hover { text-decoration: underline; }
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px; }
+    .step { text-align: center; }
+    .step-num { width: 52px; height: 52px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 900; font-size: 1.3rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+    .step-title { font-weight: 800; font-size: 1.05rem; margin-bottom: 8px; }
+    .step-desc { font-size: 0.875rem; color: var(--gray); }
+    .faq { display: grid; gap: 16px; }
+    .faq-item { background: var(--bg3); border-radius: var(--radius); padding: 24px; border-left: 3px solid var(--accent); }
+    .faq-q { font-weight: 700; font-size: 0.95rem; margin-bottom: 10px; }
+    .faq-a { font-size: 0.875rem; color: var(--gray); line-height: 1.7; }
+    .final-cta { text-align: center; padding: 80px 24px; }
+    .final-cta h2 { font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 900; letter-spacing: -0.02em; margin-bottom: 16px; }
+    .final-cta p { color: var(--gray); margin-bottom: 36px; }
+    .btn-final { display: inline-block; background: var(--accent); color: #fff; font-weight: 800; font-size: 1.1rem; padding: 20px 48px; border-radius: 10px; transition: transform 0.2s, opacity 0.2s; }
+    .btn-final:hover { transform: translateY(-2px); opacity: 0.9; }
+    footer { background: #000; padding: 32px 24px; text-align: center; font-size: 0.8rem; color: var(--gray); border-top: 1px solid rgba(255,255,255,0.06); }
+    footer a { color: var(--gold); }
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <div class="back-bar container">
+    <a class="back-link" href="https://bayouwebstudio.com">← Back to bayouwebstudio.com</a>
+  </div>
+
+  <div class="hero">
+    <div class="tier-badge">Premium Plan</div>
+    <h1>$<span class="price">99</span>/mo</h1>
+    <p class="tagline">Full-service for serious artists and studios.</p>
+    <a class="btn-primary" href="https://buy.stripe.com/00w3cv2vk6ER9u8cFl3Je08" target="_blank" rel="noopener">Start Free — No Setup Fee</a>
+    <p class="no-setup">No contracts. Cancel anytime.</p>
+  </div>
+
+  <section>
+    <div class="container">
+      <div class="section-label">What You Get</div>
+      <h2 class="section-title">The Full Package</h2>
+      <p class="section-sub">Everything in Pro, plus white-glove service and custom everything.</p>
+      <ul class="checklist">
+        <li><span class="icon">✅</span> Custom .com Domain (we buy it for you)</li>
+        <li><span class="icon">✅</span> Professional Website Design</li>
+        <li><span class="icon">✅</span> Google Ranking &amp; SEO Optimization</li>
+        <li><span class="icon">✅</span> Mobile-First, Fast-Loading Site</li>
+        <li><span class="icon">✅</span> Gallery with Lightbox</li>
+        <li><span class="icon">✅</span> Booking Link Integration</li>
+        <li><span class="icon">✅</span> Google Maps Integration</li>
+        <li><span class="icon">✅</span> Unlimited Change Requests</li>
+        <li><span class="icon">✅</span> SSL Certificate (HTTPS)</li>
+        <li><span class="icon">✅</span> Professional Hosting</li>
+        <li><span class="icon">✅</span> Umami Analytics Dashboard</li>
+        <li><span class="icon">✅</span> Store Integration (Shopify, Big Cartel, Printify, Etsy)</li>
+        <li><span class="icon">✅</span> Monthly SEO Report</li>
+        <li><span class="icon">✅</span> Social Links Integration</li>
+        <li class="divider">Premium Extras</li>
+        <li><span class="icon">✅</span> Custom Features &amp; Design</li>
+        <li><span class="icon">✅</span> Dedicated Account Manager (AI-powered — Hex)</li>
+        <li><span class="icon">✅</span> Multi-Page Site (Home + Gallery + Shop + About + Contact)</li>
+        <li><span class="icon">✅</span> Blog/News Section</li>
+        <li><span class="icon">✅</span> Advanced Store Setup</li>
+        <li><span class="icon">✅</span> Custom Booking System Integration</li>
+        <li><span class="icon">✅</span> Artist Roster Page (for shops/studios)</li>
+        <li><span class="icon">✅</span> Weekly SEO &amp; Traffic Reports</li>
+        <li><span class="icon">✅</span> Same-Day Change Requests</li>
+        <li><span class="icon">✅</span> Direct Phone/Text Support</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-label">Real Client Sites</div>
+      <h2 class="section-title">See What We Build</h2>
+      <p class="section-sub">These are real sites — built for real artists, just like you.</p>
+      <div class="cards">
+        <div class="card">
+          <div class="card-name">Tatsu Ink</div>
+          <div class="card-url">tatsuink.com</div>
+          <a class="card-link" href="https://tatsuink.com" target="_blank" rel="noopener">View Live →</a>
+        </div>
+        <div class="card">
+          <div class="card-name">Alan Gutiérrez</div>
+          <div class="card-url">guccierrezz.com</div>
+          <a class="card-link" href="https://guccierrezz.com" target="_blank" rel="noopener">View Live →</a>
+        </div>
+        <div class="card">
+          <div class="card-name">Julia Claire</div>
+          <div class="card-url">jujubrilliart.com</div>
+          <a class="card-link" href="https://jujubrilliart.com" target="_blank" rel="noopener">View Live →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-label">The Process</div>
+      <h2 class="section-title">How It Works</h2>
+      <p class="section-sub">Same easy process — with more horsepower behind it.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-title">Send Your IG</div>
+          <div class="step-desc">Sign up and drop us your Instagram handle. We take it from there.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-title">We Build It</div>
+          <div class="step-desc">Full custom build — multi-page, all features, all integrations. We scope it together.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-title">You're Live</div>
+          <div class="step-desc">You approve every detail. We go live. Hex monitors it 24/7 from day one.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">Common Questions</h2>
+      <p class="section-sub">If you don't see your question, text or email us.</p>
+      <div class="faq">
+        <div class="faq-item">
+          <div class="faq-q">Who is the "dedicated account manager"?</div>
+          <div class="faq-a">An AI-powered system called Hex that monitors your site 24/7, catches issues before you do, and handles changes fast. Think of it as having a tech team on call at all times.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">What counts as "custom features"?</div>
+          <div class="faq-a">Anything not in Pro — custom animations, multi-language, booking calendars, advanced e-commerce, membership areas, and more. We scope it out together before we start.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Is this good for a tattoo shop (not just solo artists)?</div>
+          <div class="faq-a">Yes — the Artist Roster page shows all your resident artists with their own gallery sections, bios, and booking links. Perfect for studios with multiple artists.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Can I get a Starter or Pro site first and upgrade?</div>
+          <div class="faq-a">Absolutely. Many clients start at Starter and upgrade as they grow. We'll migrate your existing site and add all Premium features — no rebuild needed.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">What's the setup process?</div>
+          <div class="faq-a">Same as other tiers — send us your IG handle, we build a free demo, you approve it, we go live. The difference is what we build is a lot more powerful.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="final-cta">
+    <h2>Ready for the full treatment?</h2>
+    <p>$99/mo. No setup fee. Cancel anytime.</p>
+    <a class="btn-final" href="https://buy.stripe.com/00w3cv2vk6ER9u8cFl3Je08" target="_blank" rel="noopener">Start Free — No Setup Fee</a>
+  </div>
+
+  <footer>
+    <p>Bayou Web Studios | <a href="mailto:support@bayouwebstudio.com">support@bayouwebstudio.com</a> | <a href="https://bayouwebstudio.com">bayouwebstudio.com</a></p>
+  </footer>
+
+</body>
+</html>
