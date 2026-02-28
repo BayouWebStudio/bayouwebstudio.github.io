@@ -1,98 +1,791 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Professional tattoo artist. Book your session today.">
-<meta property="og:title" content="inkedhaus | Tattoo Artist">
-<meta property="og:description" content="Professional tattoo artist. Book your session today.">
-<meta property="og:image" content="">
-<title>inkedhaus | Tattoo Artist</title>
-<link rel="canonical" href="https://bayouwebstudio.com/inkedhaus/">
-<script type="application/ld+json">{
-  "@context":"https://schema.org","@type":"LocalBusiness",
-  "name":"inkedhaus","image":"",
-  "url":"https://bayouwebstudio.com/inkedhaus/",
-  "sameAs":["https://www.instagram.com/inkedhaus/"]
-}</script>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0a0a0a;color:#fff}
-nav{position:fixed;top:0;width:100%;background:rgba(10,10,10,.95);padding:16px 24px;z-index:100;display:flex;justify-content:space-between;align-items:center}
-nav .logo{color:#C9A07A;font-weight:bold;font-size:18px;letter-spacing:1px}
-nav a{color:#fff;text-decoration:none;font-size:14px;margin-left:24px;opacity:.8}
-.hero{height:100vh;background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.8)),url('') center/cover;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 24px}
-.hero h1{font-size:clamp(36px,6vw,72px);font-weight:900;letter-spacing:-1px;line-height:1.1;margin-bottom:16px}
-.hero h1 span{color:#C9A07A}
-.hero p{font-size:18px;opacity:.8;margin-bottom:32px}
-.btn{background:#C9A07A;color:#0a0a0a;padding:16px 40px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:16px;display:inline-block;transition:.2s}
-.btn:hover{opacity:.85;transform:translateY(-2px)}
-section{padding:80px 24px;max-width:1100px;margin:0 auto}
-.section-title{font-size:32px;font-weight:900;color:#C9A07A;margin-bottom:48px;text-align:center;letter-spacing:-0.5px}
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
-.about-img{width:100%;border-radius:16px;aspect-ratio:1;object-fit:cover;border:3px solid #C9A07A}
-.about-text h2{font-size:28px;margin-bottom:16px}
-.about-text p{color:#aaa;line-height:1.8;font-size:15px}
-.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
-.gallery-item img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px;transition:.3s}
-.gallery-item img:hover{transform:scale(1.03);opacity:.9}
-.cta-section{text-align:center;padding:80px 24px;background:linear-gradient(135deg,#111,#1a1a2e)}
-.cta-section h2{font-size:36px;margin-bottom:16px}
-.cta-section p{color:#aaa;font-size:17px;margin-bottom:32px}
-.float-btn{position:fixed;bottom:24px;right:24px;background:#C9A07A;color:#0a0a0a;padding:14px 24px;border-radius:50px;text-decoration:none;font-weight:bold;font-size:15px;box-shadow:0 4px 24px rgba(0,0,0,.4);z-index:999;transition:.2s}
-.float-btn:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,0,0,.5)}
-footer{padding:32px 24px;text-align:center;border-top:1px solid #222;color:#555;font-size:13px}
-@media(max-width:700px){.about-grid{grid-template-columns:1fr}nav a{display:none}}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>InkedHaus — Premium Tattoo Aftercare</title>
+  <meta name="description" content="InkedHaus is a premium, fragrance-free, botanical tattoo aftercare brand. Our stage-based healing system — Wash, Soothe, Restore, Maintain — protects and preserves your ink." />
+  <meta name="theme-color" content="#8CA583" />
+  <link rel="canonical" href="https://bayouwebstudio.com/inkedhaus/" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="InkedHaus — Premium Tattoo Aftercare" />
+  <meta property="og:description" content="Fragrance-free, botanical aftercare for serious ink. Shop the InkedHaus healing system." />
+  <meta property="og:image" content="img/photo_01.jpg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://bayouwebstudio.com/inkedhaus/" />
+
+  <!-- JSON-LD Organization Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "InkedHaus",
+    "url": "https://inkedhaus.com",
+    "logo": "https://bayouwebstudio.com/inkedhaus/img/photo_01.jpg",
+    "description": "Premium fragrance-free botanical tattoo aftercare. Stage-based healing system: Wash, Soothe, Restore, Maintain.",
+    "sameAs": [
+      "https://www.instagram.com/inkedhaus/",
+      "https://inkedhaus.com"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer support",
+      "url": "https://inkedhaus.com/pages/contact"
+    }
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sage: #8CA583;
+      --sage-light: #b3c9aa;
+      --sage-dark: #6b8c63;
+      --black: #111111;
+      --white: #fafafa;
+      --gray: #666666;
+      --light-gray: #e8e8e8;
+      --font-sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      --font-serif: Georgia, 'Times New Roman', serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--white);
+      color: var(--black);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── FLOATING CTA ── */
+    .floating-cta {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 1000;
+      background: var(--black);
+      color: var(--white);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 14px 22px;
+      border-radius: 2px;
+      transition: background 0.2s, transform 0.2s;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+    }
+    .floating-cta:hover {
+      background: var(--sage-dark);
+      transform: translateY(-2px);
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 900;
+      background: var(--white);
+      border-bottom: 1px solid var(--light-gray);
+      padding: 0 5vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .nav-logo {
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--black);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--sage); }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--gray);
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--black); }
+    .nav-cta {
+      background: var(--sage);
+      color: var(--white) !important;
+      padding: 8px 18px;
+      border-radius: 2px;
+    }
+    .nav-cta:hover { background: var(--sage-dark); color: var(--white) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 92vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+    }
+    .hero-content {
+      padding: 80px 5vw 80px 8vw;
+    }
+    .hero-eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--sage);
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    .hero-title {
+      font-size: clamp(2.4rem, 5vw, 4.2rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+      color: var(--black);
+    }
+    .hero-title em {
+      font-style: normal;
+      color: var(--sage);
+    }
+    .hero-subtitle {
+      font-size: 1.05rem;
+      color: var(--gray);
+      max-width: 420px;
+      margin-bottom: 40px;
+      line-height: 1.7;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: var(--black);
+      color: var(--white);
+      text-decoration: none;
+      padding: 16px 32px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--sage-dark); transform: translateY(-1px); }
+    .btn-outline {
+      display: inline-block;
+      border: 2px solid var(--black);
+      color: var(--black);
+      text-decoration: none;
+      padding: 14px 28px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+    .btn-outline:hover { background: var(--black); color: var(--white); }
+    .hero-image {
+      height: 92vh;
+      overflow: hidden;
+      position: relative;
+    }
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    .hero-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, var(--white) 0%, transparent 100%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      margin-top: 48px;
+      display: flex;
+      gap: 32px;
+    }
+    .hero-badge-item {
+      text-align: left;
+    }
+    .hero-badge-item strong {
+      display: block;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--sage);
+    }
+    .hero-badge-item span {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    /* ── SECTION COMMON ── */
+    section { padding: 100px 5vw; }
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--sage);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .section-body {
+      color: var(--gray);
+      font-size: 1rem;
+      line-height: 1.8;
+      max-width: 560px;
+    }
+
+    /* ── SYSTEM (ABOUT) ── */
+    .system-section {
+      background: var(--black);
+      color: var(--white);
+    }
+    .system-section .section-title { color: var(--white); }
+    .system-section .section-body { color: #aaa; }
+    .system-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      margin-top: 64px;
+    }
+    .system-step {
+      background: #1a1a1a;
+      padding: 40px 32px;
+      position: relative;
+    }
+    .step-num {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--sage);
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    .step-name {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+    .step-desc {
+      font-size: 0.88rem;
+      color: #888;
+      line-height: 1.7;
+    }
+    .step-bar {
+      width: 32px;
+      height: 3px;
+      background: var(--sage);
+      margin-bottom: 24px;
+    }
+
+    /* ── GALLERY ── */
+    .gallery-section { background: var(--white); padding-bottom: 60px; }
+    .gallery-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: repeat(3, 240px);
+      gap: 4px;
+    }
+    .gallery-item {
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      background: var(--light-gray);
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+      display: block;
+    }
+    .gallery-item:hover img { transform: scale(1.04); }
+    .gallery-item.large {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+    .gallery-item.tall {
+      grid-row: span 2;
+    }
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0);
+      transition: background 0.3s;
+      display: flex;
+      align-items: flex-end;
+      padding: 16px;
+    }
+    .gallery-item:hover .gallery-overlay { background: rgba(0,0,0,0.3); }
+    .gallery-ig-link {
+      color: white;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 700;
+      opacity: 0;
+      transition: opacity 0.3s;
+      text-decoration: none;
+    }
+    .gallery-item:hover .gallery-ig-link { opacity: 1; }
+    .gallery-footer {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    /* ── PRODUCTS ── */
+    .products-section { background: #f0f4ef; }
+    .products-intro {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      margin-bottom: 80px;
+    }
+    .products-images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+      height: 480px;
+    }
+    .products-images img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .products-images .main-img {
+      grid-row: span 2;
+    }
+    .cta-box {
+      background: var(--black);
+      color: var(--white);
+      padding: 48px;
+      border-radius: 2px;
+      text-align: center;
+      margin-top: 64px;
+    }
+    .cta-box h3 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .cta-box p {
+      color: #aaa;
+      margin-bottom: 32px;
+    }
+    .btn-sage {
+      display: inline-block;
+      background: var(--sage);
+      color: var(--white);
+      text-decoration: none;
+      padding: 16px 40px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      transition: background 0.2s;
+    }
+    .btn-sage:hover { background: var(--sage-dark); }
+
+    /* ── VALUES STRIP ── */
+    .values-strip {
+      background: var(--sage);
+      padding: 40px 5vw;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .value-item {
+      text-align: center;
+      color: var(--white);
+    }
+    .value-item strong {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .value-item span {
+      font-size: 0.75rem;
+      opacity: 0.85;
+    }
+
+    /* ── CONTACT ── */
+    .contact-section {
+      background: var(--white);
+      text-align: center;
+    }
+    .contact-section .section-body { margin: 0 auto 40px; text-align: center; }
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-top: 32px;
+    }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--gray);
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--light-gray);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .contact-link:hover { color: var(--sage-dark); border-color: var(--sage); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black);
+      color: #666;
+      padding: 40px 5vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    footer .logo { color: var(--white); font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; font-size: 0.9rem; }
+    footer .logo span { color: var(--sage); }
+    footer p { font-size: 0.75rem; }
+    footer a { color: var(--sage); text-decoration: none; }
+    footer a:hover { color: var(--sage-light); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+      .hero-content { padding: 60px 5vw; order: 2; }
+      .hero-image { height: 55vw; order: 1; }
+      .hero-image::after { background: linear-gradient(to bottom, transparent 60%, var(--white) 100%); }
+      .system-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(5, 200px);
+      }
+      .gallery-item.large { grid-column: span 2; }
+      .products-intro { grid-template-columns: 1fr; gap: 40px; }
+      .nav-links { display: none; }
+      footer { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 600px) {
+      section { padding: 64px 5vw; }
+      .system-grid { grid-template-columns: 1fr; }
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+      }
+      .gallery-item { height: 180px; }
+      .gallery-item.large, .gallery-item.tall { grid-column: span 1; grid-row: span 1; height: 180px; }
+      .hero-badge { gap: 20px; }
+      .floating-cta { bottom: 16px; right: 16px; padding: 12px 18px; }
+    }
+  </style>
 </head>
 <body>
-<nav>
-  <div class="logo">@inkedhaus</div>
-  <div>
-    <a href="#gallery">Gallery</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
-  </div>
-</nav>
 
-<div class="hero">
-  <div>
-    <h1>inkedhaus<br><span>Portfolio</span></h1>
-    <p>Custom work. Real craft. Book your session today.</p>
-    <a href="#gallery" class="btn">Book Now</a>
-  </div>
-</div>
+  <!-- Floating CTA -->
+  <a href="https://inkedhaus.com" target="_blank" rel="noopener" class="floating-cta">Shop Now →</a>
 
-<section id="about">
-  <h2 class="section-title">About</h2>
-  <div class="about-grid">
-    
-    <div class="about-text">
-      <h2>inkedhaus</h2>
-      <p>Follow on Instagram for the latest work: <a href="https://instagram.com/inkedhaus" style="color:#C9A07A">@inkedhaus</a></p>
+  <!-- Nav -->
+  <nav>
+    <a href="#" class="nav-logo">Inked<span>Haus</span></a>
+    <ul class="nav-links">
+      <li><a href="#system">The System</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#shop">Products</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="https://inkedhaus.com" target="_blank" class="nav-cta">Shop Now</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" style="padding:0;">
+    <div class="hero-content">
+      <p class="hero-eyebrow">Premium Tattoo Aftercare</p>
+      <h1 class="hero-title">Your ink<br>deserves<br><em>better.</em></h1>
+      <p class="hero-subtitle">InkedHaus is a fragrance-free, botanical healing system designed to protect, soothe, and preserve your tattoo — from fresh to forever.</p>
+      <div class="hero-actions">
+        <a href="https://inkedhaus.com" target="_blank" rel="noopener" class="btn-primary">Shop the System</a>
+        <a href="#system" class="btn-outline">How It Works</a>
+      </div>
+      <div class="hero-badge">
+        <div class="hero-badge-item">
+          <strong>119K</strong>
+          <span>Followers</span>
+        </div>
+        <div class="hero-badge-item">
+          <strong>4</strong>
+          <span>Stage System</span>
+        </div>
+        <div class="hero-badge-item">
+          <strong>0</strong>
+          <span>Fragrances</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="img/photo_08.jpg" alt="InkedHaus — premium tattoo aftercare on tattooed skin" loading="eager" />
+    </div>
+  </section>
+
+  <!-- Values Strip -->
+  <div class="values-strip">
+    <div class="value-item">
+      <strong>Fragrance-Free</strong>
+      <span>No irritants, ever</span>
+    </div>
+    <div class="value-item">
+      <strong>Botanical</strong>
+      <span>Plant-powered healing</span>
+    </div>
+    <div class="value-item">
+      <strong>Stage-Based</strong>
+      <span>Right product, right time</span>
+    </div>
+    <div class="value-item">
+      <strong>Artist Trusted</strong>
+      <span>Recommended by professionals</span>
+    </div>
+    <div class="value-item">
+      <strong>All Skin Types</strong>
+      <span>Inclusive formulations</span>
     </div>
   </div>
-</section>
 
-<section id="gallery">
-  <h2 class="section-title">Portfolio</h2>
-  <div class="gallery-grid">
-<!-- GALLERY_IMAGES -->
+  <!-- System / About -->
+  <section class="system-section" id="system">
+    <div style="max-width: 1200px; margin: 0 auto;">
+      <p class="section-label">The Healing System</p>
+      <h2 class="section-title">Four stages.<br>One complete protocol.</h2>
+      <p class="section-body">Most aftercare is an afterthought. InkedHaus engineered a complete healing protocol — each product formulated for a specific stage of your tattoo's recovery.</p>
+      <div class="system-grid">
+        <div class="system-step">
+          <p class="step-num">Stage 01</p>
+          <div class="step-bar"></div>
+          <h3 class="step-name">Wash</h3>
+          <p class="step-desc">Gentle, antimicrobial cleanse. Removes plasma and bacteria without stripping the skin barrier. Start here, every time.</p>
+        </div>
+        <div class="system-step">
+          <p class="step-num">Stage 02</p>
+          <div class="step-bar"></div>
+          <h3 class="step-name">Soothe</h3>
+          <p class="step-desc">Botanical-infused balm that calms inflammation and locks in moisture during the most critical healing window — days 1–5.</p>
+        </div>
+        <div class="system-step">
+          <p class="step-num">Stage 03</p>
+          <div class="step-bar"></div>
+          <h3 class="step-name">Restore</h3>
+          <p class="step-desc">Lightweight lotion accelerates skin regeneration and minimizes peeling. Keeps color vivid as the skin re-seals.</p>
+        </div>
+        <div class="system-step">
+          <p class="step-num">Stage 04</p>
+          <div class="step-bar"></div>
+          <h3 class="step-name">Maintain</h3>
+          <p class="step-desc">Daily moisturizer with UV defense. Because healed ink still needs protection. Use it forever.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  </div>
-</section>
+  <!-- Gallery -->
+  <section class="gallery-section" id="gallery">
+    <div style="max-width: 1400px; margin: 0 auto;">
+      <div class="gallery-header">
+        <div>
+          <p class="section-label">@inkedhaus on Instagram</p>
+          <h2 class="section-title">Real results.<br>Real skin.</h2>
+        </div>
+        <a href="https://www.instagram.com/inkedhaus/" target="_blank" rel="noopener" class="btn-outline" style="white-space:nowrap;">Follow @inkedhaus</a>
+      </div>
+      <div class="gallery-grid">
+        <div class="gallery-item large">
+          <img src="img/photo_01.jpg" alt="InkedHaus aftercare" loading="lazy" />
+          <div class="gallery-overlay"><a href="https://www.instagram.com/inkedhaus/" target="_blank" class="gallery-ig-link">View on Instagram ↗</a></div>
+        </div>
+        <div class="gallery-item">
+          <img src="img/photo_02.jpg" alt="InkedHaus product" loading="lazy" />
+          <div class="gallery-overlay"><a href="https://www.instagram.com/inkedhaus/" target="_blank" class="gallery-ig-link">View on Instagram ↗</a></div>
+        </div>
+        <div class="gallery-item">
+          <img src="img/photo_03.jpg" alt="Tattoo aftercare" loading="lazy" />
+          <div class="gallery-overlay"><a href="https://www.instagram.com/inkedhaus/" target="_blank" class="gallery-ig-link">View on Instagram ↗</a></div>
+        </div>
+        <div class="gallery-item tall">
+          <img src="img/photo_04.jpg" alt="InkedHaus healed tattoo" loading="lazy" />
+          <div class="gallery-overlay"><a href="https://www.instagram.com/inkedhaus/" target="_blank" class="gallery-ig-link">View on Instagram ↗</a></div>
+        </div>
+        <div class="gallery-item">
+          <img src="img/photo_05.jpg" alt="InkedHaus" loading="lazy" />
+          <div class="gallery-overlay"><a href="https://www.instagram.com/inkedhaus/" target="_blank" class="gallery-ig-link">View on Instagram ↗</a></div>
+        </div>
+        <div class="gallery-item">
+          <img src="img/photo_06.jpg" alt="Tattoo healing" loading="lazy" />
+          <div class="gallery-overlay"><a href="https://www.instagram.com/inkedhaus/" target="_blank" class="gallery-ig-link">View on Instagram ↗</a></div>
+        </div>
+        <div class="gallery-item">
+          <img src="img/photo_07.jpg" alt="InkedHaus botanical" loading="lazy" />
+          <div class="gallery-overlay"><a href="https://www.instagram.com/inkedhaus/" target="_blank" class="gallery-ig-link">View on Instagram ↗</a></div>
+        </div>
+        <div class="gallery-item tall">
+          <img src="img/photo_09.jpg" alt="InkedHaus aftercare system" loading="lazy" />
+          <div class="gallery-overlay"><a href="https://www.instagram.com/inkedhaus/" target="_blank" class="gallery-ig-link">View on Instagram ↗</a></div>
+        </div>
+        <div class="gallery-item">
+          <img src="img/photo_10.jpg" alt="Healed tattoo" loading="lazy" />
+          <div class="gallery-overlay"><a href="https://www.instagram.com/inkedhaus/" target="_blank" class="gallery-ig-link">View on Instagram ↗</a></div>
+        </div>
+        <div class="gallery-item">
+          <img src="img/photo_11.jpg" alt="InkedHaus" loading="lazy" />
+          <div class="gallery-overlay"><a href="https://www.instagram.com/inkedhaus/" target="_blank" class="gallery-ig-link">View on Instagram ↗</a></div>
+        </div>
+        <div class="gallery-item">
+          <img src="img/photo_12.jpg" alt="InkedHaus product line" loading="lazy" />
+          <div class="gallery-overlay"><a href="https://www.instagram.com/inkedhaus/" target="_blank" class="gallery-ig-link">View on Instagram ↗</a></div>
+        </div>
+        <div class="gallery-item">
+          <img src="img/photo_13.jpg" alt="Tattoo aftercare" loading="lazy" />
+          <div class="gallery-overlay"><a href="https://www.instagram.com/inkedhaus/" target="_blank" class="gallery-ig-link">View on Instagram ↗</a></div>
+        </div>
+        <div class="gallery-item large">
+          <img src="img/photo_14.jpg" alt="InkedHaus" loading="lazy" />
+          <div class="gallery-overlay"><a href="https://www.instagram.com/inkedhaus/" target="_blank" class="gallery-ig-link">View on Instagram ↗</a></div>
+        </div>
+        <div class="gallery-item">
+          <img src="img/photo_15.jpg" alt="InkedHaus aftercare" loading="lazy" />
+          <div class="gallery-overlay"><a href="https://www.instagram.com/inkedhaus/" target="_blank" class="gallery-ig-link">View on Instagram ↗</a></div>
+        </div>
+      </div>
+      <div class="gallery-footer">
+        <a href="https://www.instagram.com/inkedhaus/" target="_blank" rel="noopener" class="contact-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          119K followers on @inkedhaus
+        </a>
+      </div>
+    </div>
+  </section>
 
-<div class="cta-section" id="contact">
-  <h2>Book Now Today</h2>
-  <p>Ready to work together? Get in touch to book your session.</p>
-  <a href="https://www.instagram.com/inkedhaus/" class="btn">DM on Instagram</a>
-</div>
+  <!-- Products / Shop -->
+  <section class="products-section" id="shop">
+    <div style="max-width: 1200px; margin: 0 auto;">
+      <div class="products-intro">
+        <div>
+          <p class="section-label">The Collection</p>
+          <h2 class="section-title">Formulated for<br>serious ink.</h2>
+          <p class="section-body" style="margin-bottom:32px;">Every InkedHaus formula is fragrance-free, dermatologist-informed, and built specifically for tattooed skin. No fillers. No guesswork. Just science that works.</p>
+          <ul style="list-style:none; display:flex; flex-direction:column; gap:12px;">
+            <li style="display:flex; align-items:center; gap:12px; font-size:0.88rem; color:var(--gray);">
+              <span style="width:8px; height:8px; border-radius:50%; background:var(--sage); flex-shrink:0;"></span>
+              <span><strong style="color:var(--black);">Wash</strong> — Antimicrobial cleansing foam, pH-balanced</span>
+            </li>
+            <li style="display:flex; align-items:center; gap:12px; font-size:0.88rem; color:var(--gray);">
+              <span style="width:8px; height:8px; border-radius:50%; background:var(--sage); flex-shrink:0;"></span>
+              <span><strong style="color:var(--black);">Soothe</strong> — Aloe + calendula healing balm</span>
+            </li>
+            <li style="display:flex; align-items:center; gap:12px; font-size:0.88rem; color:var(--gray);">
+              <span style="width:8px; height:8px; border-radius:50%; background:var(--sage); flex-shrink:0;"></span>
+              <span><strong style="color:var(--black);">Restore</strong> — Vitamin-enriched repair lotion</span>
+            </li>
+            <li style="display:flex; align-items:center; gap:12px; font-size:0.88rem; color:var(--gray);">
+              <span style="width:8px; height:8px; border-radius:50%; background:var(--sage); flex-shrink:0;"></span>
+              <span><strong style="color:var(--black);">Maintain</strong> — Daily SPF moisturizer for healed ink</span>
+            </li>
+          </ul>
+          <div style="margin-top:40px;">
+            <a href="https://inkedhaus.com" target="_blank" rel="noopener" class="btn-primary">Shop All Products →</a>
+          </div>
+        </div>
+        <div class="products-images">
+          <img src="img/photo_05.jpg" alt="InkedHaus product" class="main-img" loading="lazy" />
+          <img src="img/photo_09.jpg" alt="InkedHaus on skin" loading="lazy" />
+          <img src="img/photo_13.jpg" alt="InkedHaus botanical" loading="lazy" />
+        </div>
+      </div>
+      <div class="cta-box">
+        <h3>The complete healing system</h3>
+        <p>Everything your tattoo needs, from day one to done. Shop bundles and save on inkedhaus.com.</p>
+        <a href="https://inkedhaus.com" target="_blank" rel="noopener" class="btn-sage">Shop Now at inkedhaus.com →</a>
+      </div>
+    </div>
+  </section>
 
-<a href="https://www.instagram.com/inkedhaus/" class="float-btn">Book Now</a>
+  <!-- Contact -->
+  <section class="contact-section" id="contact">
+    <div style="max-width: 600px; margin: 0 auto;">
+      <p class="section-label">Get In Touch</p>
+      <h2 class="section-title">We're here for<br>every stage.</h2>
+      <p class="section-body">Questions about our products, healing protocols, or wholesale opportunities? Reach us through any of the channels below.</p>
+      <div class="contact-links">
+        <a href="https://inkedhaus.com/pages/contact" target="_blank" class="contact-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          inkedhaus.com/contact
+        </a>
+        <a href="https://www.instagram.com/inkedhaus/" target="_blank" class="contact-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          @inkedhaus
+        </a>
+        <a href="https://inkedhaus.com" target="_blank" class="contact-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          inkedhaus.com
+        </a>
+      </div>
+    </div>
+  </section>
 
-<footer>
-  <p style="margin-bottom:8px">@inkedhaus · <a href="https://instagram.com/inkedhaus" style="color:#C9A07A">inkedhaus</a></p>
-  <a href="https://bayouwebstudio.com" target="_blank" style="color:inherit;text-decoration:none;opacity:0.5;font-size:12px;">Powered by BWS</a>
-</footer>
+  <!-- Footer -->
+  <footer>
+    <div class="logo">Inked<span>Haus</span></div>
+    <p>© 2025 InkedHaus. All rights reserved.</p>
+    <p>Demo by <a href="https://bayouwebstudio.com" target="_blank">Bayou Web Studio</a></p>
+  </footer>
+
 </body>
 </html>
