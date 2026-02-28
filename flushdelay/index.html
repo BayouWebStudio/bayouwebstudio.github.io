@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fernando Aponte | Tatuador | CDMX México</title>
+  <meta name="description" content="Fernando Aponte (@flushdelay) — Tatuador de estilo japonés tradicional, neo-tradicional e ilustrativo en CDMX. Disponible para citas en Cosmo Tattoo, México.">
+  <meta name="keywords" content="tatuador CDMX, tatuajes japoneses México, neo-tradicional, Fernando Aponte, flushdelay, Cosmo Tattoo">
+  <meta property="og:title" content="Fernando Aponte | Tatuador | CDMX México">
+  <meta property="og:description" content="Tatuajes japonés tradicional, neo-tradicional e ilustrativo en Ciudad de México. Flash disponible.">
+  <meta property="og:image" content="img/tattoo_01.jpg">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_MX">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Fernando Aponte | Tatuador | CDMX México">
+  <meta name="twitter:description" content="Tatuajes japonés tradicional, neo-tradicional e ilustrativo en CDMX.">
+  <meta name="twitter:image" content="img/tattoo_01.jpg">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Fernando Aponte",
+    "alternateName": "flushdelay",
+    "description": "Tatuador especializado en estilo japonés tradicional, neo-tradicional e ilustrativo en Ciudad de México",
+    "url": "https://bayouwebstudio.com/flushdelay/",
+    "image": "https://bayouwebstudio.com/flushdelay/img/profile.jpg",
+    "email": "flushdelay@gmail.com",
+    "sameAs": ["https://www.instagram.com/flushdelay/"],
+    "worksFor": {
+      "@type": "LocalBusiness",
+      "name": "Cosmo Tattoo",
+      "sameAs": "https://www.instagram.com/cosmotattoomx/"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Ciudad de México",
+      "addressCountry": "MX"
+    }
+  }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0a;
+      --bg2: #111111;
+      --bg3: #1a1a1a;
+      --text: #f0f0f0;
+      --muted: #888;
+      --accent: #c23b22;
+      --accent-hover: #e04826;
+      --border: #2a2a2a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Georgia', 'Times New Roman', serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-brand {
+      font-size: 1.1rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(194,59,34,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-border {
+      position: absolute;
+      inset: 20px;
+      border: 1px solid rgba(194,59,34,0.15);
+      pointer-events: none;
+    }
+
+    .profile-wrapper {
+      position: relative;
+      width: 160px;
+      height: 160px;
+      margin: 0 auto 2rem;
+    }
+    .profile-ring {
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      animation: spin-slow 20s linear infinite;
+    }
+    .profile-ring::before {
+      content: '';
+      position: absolute;
+      top: -4px; left: 50%;
+      transform: translateX(-50%);
+      width: 8px; height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+    @keyframes spin-slow { to { transform: rotate(360deg); } }
+    .profile-img {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--bg);
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-tag {
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    .hero-name {
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: bold;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+    .hero-handle {
+      font-size: 1rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+    .hero-location {
+      font-size: 0.9rem;
+      color: var(--accent);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+    .hero-styles {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-bottom: 2.5rem;
+    }
+    .hero-style-tag {
+      padding: 0.35rem 1rem;
+      border: 1px solid var(--border);
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .btn-primary {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      padding: 0.9rem 2.5rem;
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: bold;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+    }
+    .btn-outline {
+      display: inline-block;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      padding: 0.9rem 2.5rem;
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-outline:hover {
+      background: var(--accent);
+      color: #fff;
+    }
+    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+
+    /* DIVIDER */
+    .divider {
+      width: 60px;
+      height: 2px;
+      background: var(--accent);
+      margin: 0 auto 2rem;
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 6rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: bold;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+    .section-body {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 680px;
+      line-height: 1.8;
+    }
+
+    /* ABOUT */
+    #about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      padding: 6rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      border-top: 1px solid var(--border);
+    }
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    .stat-box {
+      border: 1px solid var(--border);
+      padding: 1.25rem;
+    }
+    .stat-num {
+      font-size: 2rem;
+      font-weight: bold;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 0.25rem;
+    }
+    .about-visual {
+      position: relative;
+    }
+    .about-img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      display: block;
+    }
+    .about-img-border {
+      position: absolute;
+      inset: 12px -12px -12px 12px;
+      border: 1px solid var(--accent);
+      z-index: -1;
+    }
+
+    /* GALLERY */
+    #gallery {
+      border-top: 1px solid var(--border);
+      padding: 6rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .gallery-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .gallery-grid {
+      columns: 3;
+      column-gap: 1rem;
+      gap: 1rem;
+    }
+    .gallery-item {
+      break-inside: avoid;
+      margin-bottom: 1rem;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+    }
+    .gallery-item img {
+      width: 100%;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .gallery-item::after {
+      content: '↗';
+      position: absolute;
+      inset: 0;
+      background: rgba(194,59,34,0.7);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .gallery-item:hover img { transform: scale(1.04); }
+    .gallery-item:hover::after { opacity: 1; }
+
+    /* LIGHTBOX */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0,0,0,0.95);
+      align-items: center;
+      justify-content: center;
+    }
+    #lightbox.active { display: flex; }
+    #lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+    }
+    #lightbox-close {
+      position: absolute;
+      top: 1.5rem; right: 2rem;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 2rem;
+      cursor: pointer;
+      line-height: 1;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    #lightbox-close:hover { opacity: 1; }
+    #lightbox-prev, #lightbox-next {
+      position: absolute;
+      top: 50%; transform: translateY(-50%);
+      background: var(--accent);
+      border: none;
+      color: #fff;
+      padding: 1rem 1.25rem;
+      cursor: pointer;
+      font-size: 1.25rem;
+      transition: background 0.2s;
+    }
+    #lightbox-prev { left: 1rem; }
+    #lightbox-next { right: 1rem; }
+    #lightbox-prev:hover, #lightbox-next:hover { background: var(--accent-hover); }
+
+    /* FLASH */
+    #flash {
+      border-top: 1px solid var(--border);
+      background: var(--bg2);
+      padding: 0;
+      max-width: none;
+    }
+    .flash-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 6rem 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .flash-tag {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      padding: 0.3rem 0.9rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .flash-features {
+      list-style: none;
+      margin-top: 2rem;
+    }
+    .flash-features li {
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--border);
+      color: var(--muted);
+      padding-left: 1.5rem;
+      position: relative;
+      font-size: 0.95rem;
+    }
+    .flash-features li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+    .flash-years {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .flash-year {
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      text-align: center;
+      transition: border-color 0.2s;
+    }
+    .flash-year:hover { border-color: var(--accent); }
+    .flash-year-num {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .flash-year-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 0.5rem;
+    }
+
+    /* BOOK */
+    #book {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 8rem 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .book-quote {
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      line-height: 1.3;
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+    .book-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2.5rem; }
+
+    /* CONTACT */
+    #contact {
+      border-top: 1px solid var(--border);
+      background: var(--bg2);
+      padding: 0;
+      max-width: none;
+    }
+    .contact-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 6rem 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+    }
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .contact-icon {
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .contact-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .contact-value {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.2s;
+    }
+    .contact-value:hover { color: var(--accent); }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      max-width: none;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    footer a:hover { color: var(--accent-hover); }
+
+    /* FLOATING BTN */
+    .fab {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 200;
+      background: var(--accent);
+      color: #fff;
+      padding: 1rem 1.75rem;
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: bold;
+      box-shadow: 0 4px 24px rgba(194,59,34,0.4);
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .fab:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(194,59,34,0.5);
+    }
+
+    /* SCROLL indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--muted);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+      animation: scroll-anim 2s ease-in-out infinite;
+    }
+    @keyframes scroll-anim {
+      0%, 100% { transform: scaleY(1); opacity: 1; }
+      50% { transform: scaleY(0.5); opacity: 0.4; }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      #about, .flash-inner, .contact-inner {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .gallery-grid { columns: 2; }
+      .flash-years { grid-template-columns: 1fr 1fr; }
+      .about-img { aspect-ratio: 4/3; }
+    }
+    @media (max-width: 600px) {
+      .gallery-grid { columns: 1; }
+      .nav-links { display: none; }
+      nav { padding: 1rem; }
+      .flash-years { grid-template-columns: 1fr 1fr; }
+      .about-stats { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="#hero">@flushdelay</a>
+  <ul class="nav-links">
+    <li><a href="#about">Sobre Mí</a></li>
+    <li><a href="#gallery">Galería</a></li>
+    <li><a href="#flash">Flash</a></li>
+    <li><a href="#contact">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+  <div class="hero-border"></div>
+  <div class="profile-wrapper">
+    <div class="profile-ring"></div>
+    <img class="profile-img" src="img/profile.jpg" alt="Fernando Aponte - Tatuador CDMX">
+  </div>
+  <p class="hero-tag">Tatuador · CDMX México</p>
+  <h1 class="hero-name">Fernando<br>Aponte</h1>
+  <p class="hero-handle">@flushdelay</p>
+  <p class="hero-location">📍 Ciudad de México · Cosmo Tattoo</p>
+  <div class="hero-styles">
+    <span class="hero-style-tag">Japonés Tradicional</span>
+    <span class="hero-style-tag">Neo-Tradicional</span>
+    <span class="hero-style-tag">Ilustrativo</span>
+    <span class="hero-style-tag">Flash</span>
+  </div>
+  <div class="hero-ctas">
+    <a href="mailto:flushdelay@gmail.com" class="btn-primary">Reservar Cita</a>
+    <a href="#gallery" class="btn-outline">Ver Trabajos</a>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    <span>Desplazar</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-text">
+    <p class="section-label">Sobre Mí</p>
+    <h2 class="section-title">Arte que<br>Permanece</h2>
+    <div class="divider" style="margin: 0 0 1.5rem;"></div>
+    <p class="section-body">
+      Soy Fernando Aponte, tatuador con base en <strong>Ciudad de México</strong>. 
+      Trabajo en <strong>Cosmo Tattoo (@cosmotattoomx)</strong> y me especializo en tatuajes 
+      de estilo <strong>japonés tradicional</strong>, <strong>neo-tradicional</strong> e <strong>ilustrativo</strong> 
+      con colores intensos y líneas limpias.
+    </p>
+    <p class="section-body" style="margin-top: 1rem;">
+      Cada pieza es diseñada con intención y respeto a la tradición, adaptada a la historia 
+      única de cada cliente. Disfruto del trabajo con flash diseñado a mano y proyectos 
+      personalizados de mediano y gran formato.
+    </p>
+    <div class="about-stats">
+      <div class="stat-box">
+        <div class="stat-num">12.5K</div>
+        <div class="stat-label">Seguidores</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">1,657</div>
+        <div class="stat-label">Publicaciones</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">4</div>
+        <div class="stat-label">Años de Flash</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">CDMX</div>
+        <div class="stat-label">Base</div>
+      </div>
+    </div>
+  </div>
+  <div class="about-visual">
+    <img class="about-img" src="img/tattoo_05.jpg" alt="Tatuaje por Fernando Aponte - flushdelay">
+    <div class="about-img-border"></div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" style="max-width: 1400px; border-top: 1px solid var(--border);">
+  <div class="gallery-header">
+    <p class="section-label">Portafolio</p>
+    <h2 class="section-title">Trabajos Recientes</h2>
+    <div class="divider"></div>
+    <p style="color: var(--muted); font-size: 0.9rem;">Haz clic en cualquier imagen para ampliar</p>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item" onclick="openLightbox(0)">
+      <img src="img/tattoo_01.jpg" alt="Tatuaje Pantera Japonesa - Fernando Aponte" loading="lazy">
+    </div>
+    <div class="gallery-item" onclick="openLightbox(1)">
+      <img src="img/tattoo_02.jpg" alt="Tatuaje Niña y Caracol - Fernando Aponte" loading="lazy">
+    </div>
+    <div class="gallery-item" onclick="openLightbox(2)">
+      <img src="img/tattoo_03.jpg" alt="Tatuaje Flash - Fernando Aponte" loading="lazy">
+    </div>
+    <div class="gallery-item" onclick="openLightbox(3)">
+      <img src="img/tattoo_04.jpg" alt="Tatuaje Mano con Máscara - Fernando Aponte" loading="lazy">
+    </div>
+    <div class="gallery-item" onclick="openLightbox(4)">
+      <img src="img/tattoo_05.jpg" alt="Tatuaje Mujer Perfil - Fernando Aponte" loading="lazy">
+    </div>
+    <div class="gallery-item" onclick="openLightbox(5)">
+      <img src="img/tattoo_06.jpg" alt="Tatuaje Luchador - Fernando Aponte" loading="lazy">
+    </div>
+    <div class="gallery-item" onclick="openLightbox(6)">
+      <img src="img/tattoo_07.jpg" alt="Tatuaje Escorpión Calavera - Fernando Aponte" loading="lazy">
+    </div>
+    <div class="gallery-item" onclick="openLightbox(7)">
+      <img src="img/tattoo_08.jpg" alt="Tatuaje Oso y Tortuga - Fernando Aponte" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- FLASH SECTION -->
+<div id="flash" style="border-top: 1px solid var(--border); background: var(--bg2);">
+  <div class="flash-inner">
+    <div>
+      <div class="flash-tag">Flash Disponible</div>
+      <h2 class="section-title">Flash<br>Diseñado a Mano</h2>
+      <div class="divider" style="margin: 0 0 1.5rem;"></div>
+      <p class="section-body">
+        El flash es una de mis pasiones. Diseño colecciones exclusivas cada año, 
+        inspiradas en el arte japonés tradicional con mi toque personal neo-tradicional 
+        e ilustrativo.
+      </p>
+      <ul class="flash-features">
+        <li>Flash japonés tradicional y neo-tradicional</li>
+        <li>Diseños ilustrativos únicos</li>
+        <li>Flash de colección anual (2023–2026)</li>
+        <li>Piezas originales disponibles por orden de llegada</li>
+        <li>Instructor en Domestika</li>
+      </ul>
+      <div style="margin-top: 2rem;">
+        <a href="mailto:flushdelay@gmail.com" class="btn-primary">Preguntar por Flash</a>
+      </div>
+    </div>
+    <div>
+      <div class="flash-years">
+        <div class="flash-year">
+          <div class="flash-year-num">2026</div>
+          <div class="flash-year-label">Colección</div>
+        </div>
+        <div class="flash-year">
+          <div class="flash-year-num">2025</div>
+          <div class="flash-year-label">Colección</div>
+        </div>
+        <div class="flash-year">
+          <div class="flash-year-num">2024</div>
+          <div class="flash-year-label">Colección</div>
+        </div>
+        <div class="flash-year">
+          <div class="flash-year-num">2023</div>
+          <div class="flash-year-label">Colección</div>
+        </div>
+      </div>
+      <div style="margin-top: 1.5rem; border: 1px solid var(--border); padding: 1.5rem; text-align: center;">
+        <p style="font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem;">También en</p>
+        <p style="font-size: 1.2rem; color: var(--text);">Domestika</p>
+        <p style="font-size: 0.85rem; color: var(--muted); margin-top: 0.25rem;">Cursos de ilustración y tatuaje</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BOOK CTA -->
+<section id="book">
+  <p class="section-label">Agenda tu Cita</p>
+  <p class="book-quote">"El tatuaje es una historia permanente que llevas contigo."</p>
+  <div class="divider"></div>
+  <p style="color: var(--muted); font-size: 1rem; max-width: 500px; margin: 0 auto;">
+    ¿Listo para tu próximo tatuaje? Escríbeme para consultas, precios y disponibilidad. 
+    Trabajo en <strong style="color: var(--text);">Cosmo Tattoo</strong> en Ciudad de México.
+  </p>
+  <div class="book-ctas">
+    <a href="mailto:flushdelay@gmail.com" class="btn-primary">✉ Enviar Correo</a>
+    <a href="https://www.instagram.com/flushdelay/" target="_blank" rel="noopener" class="btn-outline">📷 Instagram</a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div id="contact" style="border-top: 1px solid var(--border); background: var(--bg2);">
+  <div class="contact-inner">
+    <div>
+      <p class="section-label">Contacto</p>
+      <h2 class="section-title">Hablemos</h2>
+      <div class="divider" style="margin: 0 0 1.5rem;"></div>
+      <p class="section-body">
+        Para reservaciones, consultas de flash o proyectos personalizados, 
+        contáctame directamente por correo o Instagram.
+      </p>
+    </div>
+    <div>
+      <div class="contact-item">
+        <div class="contact-icon">✉</div>
+        <div>
+          <div class="contact-label">Correo Electrónico</div>
+          <a class="contact-value" href="mailto:flushdelay@gmail.com">flushdelay@gmail.com</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📷</div>
+        <div>
+          <div class="contact-label">Instagram</div>
+          <a class="contact-value" href="https://www.instagram.com/flushdelay/" target="_blank" rel="noopener">@flushdelay</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">🏠</div>
+        <div>
+          <div class="contact-label">Estudio</div>
+          <a class="contact-value" href="https://www.instagram.com/cosmotattoomx/" target="_blank" rel="noopener">Cosmo Tattoo · @cosmotattoomx</a>
+        </div>
+      </div>
+      <div class="contact-item" style="border-bottom: none;">
+        <div class="contact-icon">📍</div>
+        <div>
+          <div class="contact-label">Ubicación</div>
+          <span class="contact-value">Ciudad de México, México</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2026 Fernando Aponte · @flushdelay · CDMX</span>
+  <span>Diseño web por <a href="https://bayouwebstudio.com" target="_blank" rel="noopener">Bayou Web Studio</a></span>
+</footer>
+
+<!-- FLOATING BUTTON -->
+<a class="fab" href="mailto:flushdelay@gmail.com">Reservar →</a>
+
+<!-- LIGHTBOX -->
+<div id="lightbox">
+  <button id="lightbox-close" onclick="closeLightbox()">✕</button>
+  <button id="lightbox-prev" onclick="prevImage()">‹</button>
+  <img id="lightbox-img" src="" alt="">
+  <button id="lightbox-next" onclick="nextImage()">›</button>
+</div>
+
+<script>
+  const galleryImages = [
+    'img/tattoo_01.jpg',
+    'img/tattoo_02.jpg',
+    'img/tattoo_03.jpg',
+    'img/tattoo_04.jpg',
+    'img/tattoo_05.jpg',
+    'img/tattoo_06.jpg',
+    'img/tattoo_07.jpg',
+    'img/tattoo_08.jpg',
+  ];
+  let currentIdx = 0;
+
+  function openLightbox(idx) {
+    currentIdx = idx;
+    document.getElementById('lightbox-img').src = galleryImages[idx];
+    document.getElementById('lightbox').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  function prevImage() {
+    currentIdx = (currentIdx - 1 + galleryImages.length) % galleryImages.length;
+    document.getElementById('lightbox-img').src = galleryImages[currentIdx];
+  }
+  function nextImage() {
+    currentIdx = (currentIdx + 1) % galleryImages.length;
+    document.getElementById('lightbox-img').src = galleryImages[currentIdx];
+  }
+  document.getElementById('lightbox').addEventListener('click', function(e) {
+    if (e.target === this) closeLightbox();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (!document.getElementById('lightbox').classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') prevImage();
+    if (e.key === 'ArrowRight') nextImage();
+  });
+</script>
+</body>
+</html>
