@@ -1,594 +1,1460 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="meta_title">Bayou Web Studios - Your Link-in-Bio Deserves Better</title>
-    <meta name="description" data-i18n="meta_description" content="Your brand deserves its own website. We handle the design, the tech, and the updates — you handle the art.">
-    
-    <!-- Canonical -->
-    <link rel="canonical" href="https://bayouwebstudio.com/">
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="Bayou Web Studios - Your Link-in-Bio Deserves Better">
-    <meta property="og:description" content="Your brand deserves its own website. We handle the design, the tech, and the updates — you handle the art.">
-    <meta property="og:image" content="https://bayouwebstudio.com/og-image.png">
-    <meta property="og:url" content="https://bayouwebstudio.com/">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Bayou Web Studios">
-    
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Bayou Web Studios - Your Link-in-Bio Deserves Better">
-    <meta name="twitter:description" content="Your brand deserves its own website. We handle the design, the tech, and the updates — you handle the art.">
-    <meta name="twitter:image" content="https://bayouwebstudio.com/og-image.png">
-    
-    <!-- Schema.org JSON-LD -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "ProfessionalService",
-      "name": "Bayou Web Studios",
-      "description": "Your brand deserves its own website. We handle the design, the tech, and the updates — you handle the art.",
-      "url": "https://bayouwebstudio.com",
-      "logo": "https://bayouwebstudio.com/logo.png",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Houston",
-        "addressRegion": "TX",
-        "addressCountry": "US"
-      },
-      "areaServed": "Worldwide",
-      "priceRange": "$25-$99/mo",
-      "sameAs": [
-        "https://www.instagram.com/bayouwebstudio/",
-        "https://www.facebook.com/profile.php?id=61587038401415"
-      ],
-      "serviceType": ["Web Design", "Website Development", "SEO"],
-      "offers": {
-        "@type": "AggregateOffer",
-        "lowPrice": "25",
-        "highPrice": "99",
-        "priceCurrency": "USD",
-        "offerCount": "3"
-      }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bayou Web Studios — Websites That Get You Found on Google</title>
+  <meta name="description" content="Bayou Web Studios builds custom websites for tattoo artists, barbers, nail techs, and creatives. Starting at $25/mo. SEO included free. No setup fee, no contracts.">
+  <link rel="canonical" href="https://bayouwebstudio.com/">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Bayou Web Studios — Websites That Get You Found on Google">
+  <meta property="og:description" content="We turn your Instagram into a professional website that ranks on Google. Starting at $25/mo. Free demo — no commitment.">
+  <meta property="og:image" content="https://bayouwebstudio.com/og-image.png">
+  <meta property="og:url" content="https://bayouwebstudio.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Bayou Web Studios">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Bayou Web Studios — Websites That Get You Found on Google">
+  <meta name="twitter:description" content="We turn your Instagram into a professional website that ranks on Google. Starting at $25/mo. Free demo — no commitment.">
+  <meta name="twitter:image" content="https://bayouwebstudio.com/og-image.png">
+
+  <!-- JSON-LD Organization Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Bayou Web Studios",
+    "description": "Custom websites for tattoo artists, barbers, nail techs, photographers, and creatives. SEO included free.",
+    "url": "https://bayouwebstudio.com",
+    "logo": "https://bayouwebstudio.com/logo.png",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Houston",
+      "addressRegion": "TX",
+      "addressCountry": "US"
+    },
+    "areaServed": "Worldwide",
+    "priceRange": "$25–$99/mo",
+    "email": "support@bayouwebstudio.com",
+    "sameAs": [
+      "https://www.instagram.com/bayouwebstudio/",
+      "https://www.facebook.com/profile.php?id=61587038401415"
+    ],
+    "serviceType": ["Web Design", "Website Development", "SEO", "Local SEO"]
+  }
+  </script>
+
+  <!-- Inline SVG favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='16' fill='%230a0a0a'/><text y='.9em' font-size='72' x='10' fill='%23c9a84c'>B</text></svg>">
+
+  <style>
+    /* ─── RESET & BASE ─────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0a0a;
+      --bg2: #111111;
+      --bg3: #1a1a1a;
+      --gold: #c9a84c;
+      --gold-light: #e5c97a;
+      --white: #ffffff;
+      --gray: #a0a0a0;
+      --green: #22c55e;
+      --red: #ef4444;
+      --radius: 12px;
+      --transition: 0.3s ease;
     }
-    </script>
-    
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    button { cursor: pointer; border: none; background: none; font: inherit; }
+
+    /* ─── SCROLL ANIMATIONS ─────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+
+    /* ─── NAV ───────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,168,76,0.12);
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .nav-logo {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--white);
+      white-space: nowrap;
+      letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--gray);
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color var(--transition);
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .btn-nav {
+      background: var(--gold);
+      color: #000;
+      font-weight: 700;
+      font-size: 0.825rem;
+      padding: 8px 18px;
+      border-radius: 8px;
+      white-space: nowrap;
+      transition: background var(--transition), transform var(--transition);
+    }
+    .btn-nav:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .lang-toggle {
+      background: var(--bg3);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--gray);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 8px;
+      transition: all var(--transition);
+    }
+    .lang-toggle:hover { border-color: var(--gold); color: var(--gold); }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: all var(--transition);
+    }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 64px; left: 0; right: 0;
+      background: rgba(10,10,10,0.98);
+      backdrop-filter: blur(12px);
+      z-index: 99;
+      padding: 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .mobile-menu.open { display: block; }
+    .mobile-menu a {
+      display: block;
+      padding: 12px 0;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--gray);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      transition: color var(--transition);
+    }
+    .mobile-menu a:hover { color: var(--white); }
+    .mobile-menu .btn-cta-full {
+      display: block;
+      margin-top: 16px;
+      text-align: center;
+      background: var(--gold);
+      color: #000;
+      font-weight: 700;
+      padding: 14px;
+      border-radius: 10px;
+    }
+
+    /* ─── HERO ──────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-glow {
+      position: absolute;
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 400px;
+      background: radial-gradient(ellipse, rgba(201,168,76,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(34,197,94,0.12);
+      border: 1px solid rgba(34,197,94,0.3);
+      color: var(--green);
+      font-size: 0.825rem;
+      font-weight: 600;
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+    }
+    h1 {
+      font-size: clamp(2.2rem, 6vw, 4.5rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      max-width: 900px;
+      margin-bottom: 24px;
+    }
+    h1 .highlight { color: var(--gold); }
+    .hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      color: var(--gray);
+      max-width: 580px;
+      margin-bottom: 40px;
+    }
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold);
+      color: #000;
+      font-weight: 800;
+      font-size: 1rem;
+      padding: 16px 32px;
+      border-radius: 10px;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+      box-shadow: 0 4px 24px rgba(201,168,76,0.25);
+    }
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(201,168,76,0.35);
+    }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--white);
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 15px 32px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.2);
+      transition: border-color var(--transition), transform var(--transition);
+    }
+    .btn-secondary:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+    /* ─── STATS BAR ─────────────────────────────────── */
+    #stats {
+      background: var(--bg2);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 40px 24px;
+    }
+    .stats-grid {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      text-align: center;
+    }
+    .stat-value {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 900;
+      color: var(--gold);
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.875rem;
+      color: var(--gray);
+      margin-top: 6px;
+    }
+
+    /* ─── SECTION COMMONS ───────────────────────────── */
+    section { padding: 96px 24px; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    h2 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 900;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .section-sub {
+      color: var(--gray);
+      font-size: 1.05rem;
+      max-width: 560px;
+      margin-bottom: 56px;
+    }
+
+    /* ─── PORTFOLIO ─────────────────────────────────── */
+    #portfolio { background: var(--bg); }
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .portfolio-card {
+      background: var(--bg3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+    }
+    .portfolio-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(201,168,76,0.3);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    }
+    .portfolio-thumb {
+      height: 200px;
+      background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .portfolio-thumb::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(201,168,76,0.06) 0%, transparent 60%);
+    }
+    .portfolio-thumb-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--white);
+      text-align: center;
+      z-index: 1;
+    }
+    .portfolio-thumb-handle {
+      font-size: 0.8rem;
+      color: var(--gold);
+      font-weight: 600;
+      z-index: 1;
+    }
+    .portfolio-thumb-icon {
+      font-size: 2.5rem;
+      z-index: 1;
+      opacity: 0.4;
+    }
+    .portfolio-info {
+      padding: 16px;
+    }
+    .portfolio-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+    .portfolio-city {
+      font-size: 0.8rem;
+      color: var(--gray);
+      margin-top: 2px;
+    }
+    .portfolio-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 10px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--gold);
+      transition: gap var(--transition);
+    }
+    .portfolio-link:hover { gap: 8px; }
+
+    /* ─── SEO COMPARISON ────────────────────────────── */
+    #seo { background: var(--bg2); }
+    .seo-compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+    .seo-card {
+      border-radius: var(--radius);
+      padding: 32px;
+    }
+    .seo-card.yes {
+      background: rgba(34,197,94,0.06);
+      border: 1px solid rgba(34,197,94,0.2);
+    }
+    .seo-card.no {
+      background: rgba(239,68,68,0.06);
+      border: 1px solid rgba(239,68,68,0.15);
+    }
+    .seo-card-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .seo-card.yes .seo-card-title { color: var(--green); }
+    .seo-card.no .seo-card-title { color: var(--red); }
+    .seo-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      font-size: 0.9rem;
+    }
+    .seo-item:last-child { border-bottom: none; }
+    .seo-icon { font-size: 1rem; flex-shrink: 0; margin-top: 2px; }
+    .seo-audit-badge {
+      background: linear-gradient(135deg, rgba(201,168,76,0.15), rgba(201,168,76,0.05));
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: var(--radius);
+      padding: 24px 32px;
+      text-align: center;
+    }
+    .seo-audit-score {
+      font-size: 4rem;
+      font-weight: 900;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .seo-audit-label { color: var(--gray); font-size: 0.9rem; margin-top: 6px; }
+
+    /* ─── HOW IT WORKS ──────────────────────────────── */
+    #how { background: var(--bg); }
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      position: relative;
+    }
+    .steps-grid::before {
+      content: '';
+      position: absolute;
+      top: 40px;
+      left: calc(16.66% + 16px);
+      right: calc(16.66% + 16px);
+      height: 1px;
+      background: linear-gradient(90deg, var(--gold), transparent 50%, var(--gold));
+      opacity: 0.3;
+    }
+    .step-card {
+      background: var(--bg3);
+      border-radius: var(--radius);
+      padding: 32px;
+      border: 1px solid rgba(255,255,255,0.06);
+      position: relative;
+    }
+    .step-num {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--gold);
+      color: #000;
+      font-weight: 900;
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .step-icon { font-size: 1.8rem; margin-bottom: 12px; }
+    .step-title { font-size: 1.1rem; font-weight: 800; margin-bottom: 8px; }
+    .step-desc { font-size: 0.9rem; color: var(--gray); line-height: 1.6; }
+
+    /* ─── FEATURES ──────────────────────────────────── */
+    #features { background: var(--bg2); }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .feature-card {
+      background: var(--bg3);
+      border-radius: var(--radius);
+      padding: 28px;
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: border-color var(--transition), transform var(--transition);
+    }
+    .feature-card:hover {
+      border-color: rgba(201,168,76,0.25);
+      transform: translateY(-3px);
+    }
+    .feature-icon { font-size: 2rem; margin-bottom: 14px; }
+    .feature-title { font-size: 1rem; font-weight: 800; margin-bottom: 6px; }
+    .feature-desc { font-size: 0.875rem; color: var(--gray); }
+
+    /* ─── PRICING ───────────────────────────────────── */
+    #pricing { background: var(--bg); }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+    .pricing-card {
+      background: var(--bg3);
+      border-radius: var(--radius);
+      padding: 32px;
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: transform var(--transition);
+    }
+    .pricing-card:hover { transform: translateY(-4px); }
+    .pricing-card.featured {
+      background: linear-gradient(160deg, #1e1a0e, #1a1a1a);
+      border-color: var(--gold);
+      position: relative;
+    }
+    .pricing-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gold);
+      color: #000;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 4px 16px;
+      border-radius: 100px;
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+    }
+    .pricing-tier { font-size: 0.85rem; font-weight: 700; color: var(--gold); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; }
+    .pricing-price { font-size: 3rem; font-weight: 900; line-height: 1; letter-spacing: -0.03em; }
+    .pricing-price span { font-size: 1rem; font-weight: 400; color: var(--gray); }
+    .pricing-desc { font-size: 0.875rem; color: var(--gray); margin: 12px 0 24px; }
+    .pricing-features { list-style: none; margin-bottom: 28px; }
+    .pricing-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 0;
+      font-size: 0.875rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .pricing-features li:last-child { border-bottom: none; }
+    .pricing-features .check { color: var(--green); font-size: 0.9rem; flex-shrink: 0; }
+    .btn-pricing {
+      display: block;
+      text-align: center;
+      padding: 14px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: all var(--transition);
+    }
+    .btn-pricing.gold {
+      background: var(--gold);
+      color: #000;
+    }
+    .btn-pricing.gold:hover { background: var(--gold-light); }
+    .btn-pricing.outline {
+      border: 1px solid rgba(255,255,255,0.2);
+      color: var(--white);
+    }
+    .btn-pricing.outline:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ─── FAQ ───────────────────────────────────────── */
+    #faq { background: var(--bg2); }
+    .faq-list { max-width: 720px; margin: 0 auto; }
+    .faq-item {
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .faq-q {
+      width: 100%;
+      text-align: left;
+      padding: 20px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      cursor: pointer;
+      transition: color var(--transition);
+    }
+    .faq-q:hover { color: var(--gold); }
+    .faq-arrow {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--bg3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1rem;
+      transition: transform var(--transition), background var(--transition);
+    }
+    .faq-item.open .faq-arrow { transform: rotate(45deg); background: var(--gold); color: #000; }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+    }
+    .faq-item.open .faq-a { max-height: 300px; padding-bottom: 20px; }
+    .faq-a p { color: var(--gray); font-size: 0.9rem; line-height: 1.7; }
+
+    /* ─── CTA SECTION ───────────────────────────────── */
+    #cta {
+      background: linear-gradient(160deg, #111006 0%, var(--bg) 100%);
+      padding: 100px 24px;
+      text-align: center;
+      border-top: 1px solid rgba(201,168,76,0.12);
+    }
+    #cta h2 { margin-bottom: 16px; }
+    #cta p { color: var(--gray); margin-bottom: 40px; }
+
+    /* ─── FOOTER ────────────────────────────────────── */
+    footer {
+      background: var(--bg2);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 40px 24px;
+      text-align: center;
+    }
+    .footer-logo { font-size: 1.2rem; font-weight: 800; margin-bottom: 8px; }
+    .footer-logo span { color: var(--gold); }
+    .footer-info { color: var(--gray); font-size: 0.875rem; line-height: 1.8; }
+    .footer-info a { color: var(--gold); }
+    .footer-copy { color: rgba(255,255,255,0.3); font-size: 0.8rem; margin-top: 16px; }
+
+    /* ─── RESPONSIVE ────────────────────────────────── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .btn-nav { display: none; }
+      .hamburger { display: flex; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+      .seo-compare { grid-template-columns: 1fr; }
+      .steps-grid { grid-template-columns: 1fr; }
+      .steps-grid::before { display: none; }
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+      .pricing-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .portfolio-grid { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="nav">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <span class="logo-text">Bayou Web Studios</span>
-            </div>
-            <div class="nav-menu" id="navMenu">
-                <a href="#features" class="nav-link" data-i18n="nav_features">Features</a>
-                <a href="#pricing" class="nav-link" data-i18n="nav_pricing">Pricing</a>
-                <a href="#portfolio" class="nav-link" data-i18n="nav_portfolio">Portfolio</a>
-                <a href="#faq" class="nav-link" data-i18n="nav_faq">FAQ</a>
-                <a href="#contact" class="nav-link cta-nav" data-i18n="nav_get_started">Get Started</a>
-            </div>
-            <button class="lang-toggle" id="langToggle" title="Cambiar a Español">EN | ES</button>
-            <div class="nav-toggle" id="navToggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+
+<!-- ─── NAV ──────────────────────────────────────────── -->
+<nav>
+  <a href="/" class="nav-logo">Bayou <span>Web Studios</span></a>
+  <ul class="nav-links">
+    <li><a href="#features" data-i18n="nav_features">Features</a></li>
+    <li><a href="#portfolio" data-i18n="nav_portfolio">Portfolio</a></li>
+    <li><a href="#pricing" data-i18n="nav_pricing">Pricing</a></li>
+    <li><a href="#faq" data-i18n="nav_faq">FAQ</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="/free-site.html" class="btn-nav" data-i18n="nav_cta">Get Your Free Site</a>
+    <button class="lang-toggle" id="langBtn" onclick="toggleLang()">ES</button>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#features" onclick="toggleMenu()" data-i18n="nav_features">Features</a>
+  <a href="#portfolio" onclick="toggleMenu()" data-i18n="nav_portfolio">Portfolio</a>
+  <a href="#pricing" onclick="toggleMenu()" data-i18n="nav_pricing">Pricing</a>
+  <a href="#faq" onclick="toggleMenu()" data-i18n="nav_faq">FAQ</a>
+  <a href="/free-site.html" class="btn-cta-full" data-i18n="nav_cta">Get Your Free Site</a>
+</div>
+
+<!-- ─── HERO ──────────────────────────────────────────── -->
+<section id="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-badge reveal">
+    <span>✅</span>
+    <span data-i18n="hero_badge">Google Ranking &amp; SEO Included Free</span>
+  </div>
+  <h1 class="reveal reveal-delay-1">
+    <span data-i18n="hero_h1a">We Build Websites That</span><br>
+    <span class="highlight" data-i18n="hero_h1b">Get You Found on Google</span>
+  </h1>
+  <p class="hero-sub reveal reveal-delay-2" data-i18n="hero_sub">
+    Turn your Instagram into a real website. We handle everything — design, hosting, SEO, and updates. You just share your link.
+  </p>
+  <div class="hero-ctas reveal reveal-delay-3">
+    <a href="/free-site.html" class="btn-primary">
+      <span data-i18n="hero_cta1">Get Your Free Site</span>
+      <span>→</span>
+    </a>
+    <a href="#portfolio" class="btn-secondary">
+      <span data-i18n="hero_cta2">See Our Work</span>
+    </a>
+  </div>
+</section>
+
+<!-- ─── STATS BAR ─────────────────────────────────────── -->
+<div id="stats">
+  <div class="stats-grid">
+    <div class="reveal">
+      <div class="stat-value" data-target="25" data-suffix="+">0</div>
+      <div class="stat-label" data-i18n="stat1">Sites Built</div>
+    </div>
+    <div class="reveal reveal-delay-1">
+      <div class="stat-value">$0</div>
+      <div class="stat-label" data-i18n="stat2">Setup Fee</div>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <div class="stat-value" data-target="85" data-suffix="+">0</div>
+      <div class="stat-label" data-i18n="stat3">SEO Score</div>
+    </div>
+    <div class="reveal reveal-delay-3">
+      <div class="stat-value">&lt;2s</div>
+      <div class="stat-label" data-i18n="stat4">Load Time</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── PORTFOLIO ─────────────────────────────────────── -->
+<section id="portfolio">
+  <div class="section-inner">
+    <div class="section-tag" data-i18n="port_tag">Our Work</div>
+    <h2 data-i18n="port_h2">Real Sites. Real Artists.<br>Real Results.</h2>
+    <p class="section-sub" data-i18n="port_sub">Every site is custom-built, SEO-optimized, and mobile-first. This is what your site could look like.</p>
+    <div class="portfolio-grid">
+
+      <div class="portfolio-card reveal">
+        <div class="portfolio-thumb" style="background: linear-gradient(135deg, #0d1117 0%, #1a0a2e 100%);">
+          <div class="portfolio-thumb-icon">🎨</div>
+          <div class="portfolio-thumb-title">Tatsu Ink</div>
+          <div class="portfolio-thumb-handle">@tatsu.tattoos</div>
         </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1 class="hero-title" data-i18n="hero_title">Your Link-in-Bio <span class="highlight" data-i18n="hero_highlight">Deserves Better</span></h1>
-                    <p class="hero-subtitle" data-i18n="hero_subtitle">Your brand deserves its own website. We handle the design, the tech, and the updates — you handle the art.</p>
-                    <div class="hero-buttons">
-                        <a href="#pricing" class="btn btn-primary" data-i18n="hero_start_button">Start at $25/mo</a>
-                        <a href="#portfolio" class="btn btn-secondary" data-i18n="hero_examples_button">See Examples</a>
-                    </div>
-                    <div class="hero-proof">
-                        <div class="proof-item">
-                            <span class="proof-number">3</span>
-                            <span class="proof-text" data-i18n="proof_businesses">businesses hosting</span>
-                        </div>
-                        <div class="proof-item">
-                            <span class="proof-number">$0</span>
-                            <span class="proof-text" data-i18n="proof_setup_fee">setup fee — ever</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="hero-visual">
-                    <div class="comparison">
-                        <div class="comparison-side">
-                            <h4 data-i18n="comparison_generic_linktree">Generic Linktree</h4>
-                            <div class="phone-mockup linktree">
-                                <div class="phone-content">
-                                    <div class="profile-circle"></div>
-                                    <h5>@yourhandle</h5>
-                                    <div class="link-button" data-i18n="comparison_book_appointment">Book Appointment</div>
-                                    <div class="link-button">Instagram</div>
-                                    <div class="link-button" data-i18n="comparison_shop">Shop</div>
-                                    <div class="link-button" data-i18n="comparison_contact">Contact</div>
-                                    <div class="linktree-footer">Powered by Linktree</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="vs">VS</div>
-                        <div class="comparison-side">
-                            <h4 data-i18n="comparison_bws_site">Your BWS Site</h4>
-                            <div class="phone-mockup bws">
-                                <div class="phone-content">
-                                    <div class="custom-hero" data-i18n="comparison_your_brand">Your Brand</div>
-                                    <div class="gallery-preview"></div>
-                                    <div class="booking-status">📖 <span data-i18n="comparison_books_open">Books Open</span></div>
-                                    <div class="social-proof">⭐⭐⭐⭐⭐ <span data-i18n="comparison_reviews">47 Reviews</span></div>
-                                    <div class="cta-button" data-i18n="comparison_book_now">Book Now - $200 Deposit</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="portfolio-info">
+          <div class="portfolio-name">Tatsu Ink</div>
+          <div class="portfolio-city">Anime Tattoos · Houston, TX</div>
+          <a href="https://tatsuink.com" target="_blank" rel="noopener" class="portfolio-link">View Live →</a>
         </div>
-    </section>
+      </div>
 
-    <!-- Features Section -->
-    <section id="features" class="features">
-        <div class="container">
-            <div class="section-header">
-                <h2 data-i18n="features_heading">Everything Your Linktree Can't Do</h2>
-                <p data-i18n="features_subheading">A real website that works as hard as you do</p>
-            </div>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🎨</div>
-                    <h3 data-i18n="feature_custom_design_title">Custom Design</h3>
-                    <p data-i18n="feature_custom_design_desc">Not a template — YOUR brand, YOUR style. Every site is designed specifically for you and your art.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📊</div>
-                    <h3 data-i18n="feature_analytics_title">Analytics Dashboard</h3>
-                    <p data-i18n="feature_analytics_desc">See who visits, what they click, where they come from. Real data to grow your business.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📧</div>
-                    <h3 data-i18n="feature_email_title">Email & Waitlist Capture</h3>
-                    <p data-i18n="feature_email_desc">Collect leads when books are closed. Build your waitlist automatically.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">💳</div>
-                    <h3 data-i18n="feature_payments_title">Deposit Payments</h3>
-                    <p data-i18n="feature_payments_desc">Stripe-powered payments. Reduce no-shows with required deposits.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🛍️</div>
-                    <h3 data-i18n="feature_shop_title">Simple Shop</h3>
-                    <p data-i18n="feature_shop_desc">Sell prints, merch, gift cards — no Shopify needed. Direct payments to your account.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📖</div>
-                    <h3 data-i18n="feature_books_title">Books Open/Closed Toggle</h3>
-                    <p data-i18n="feature_books_desc">One click to update your booking status. Visitors know immediately if you're available.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📸</div>
-                    <h3 data-i18n="feature_gallery_title">Client Gallery</h3>
-                    <p data-i18n="feature_gallery_desc">Healed photos uploaded by your clients. Social proof that converts.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔍</div>
-                    <h3 data-i18n="feature_seo_title">Google Ranking & SEO Included</h3>
-                    <p data-i18n="feature_seo_desc">Every site comes with full SEO optimization — meta tags, schema markup, fast loading, and Google-ready structure. Your clients are searching for you. Make sure they find you, not your competitor.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📍</div>
-                    <h3 data-i18n="feature_maps_title">Google Maps & Reviews</h3>
-                    <p data-i18n="feature_maps_desc">Embedded maps and reviews, always current. Help clients find you easily.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔄</div>
-                    <h3 data-i18n="feature_changes_title">Easy Changes</h3>
-                    <p data-i18n="feature_changes_desc">Request updates through your client portal. Most changes live within 24 hours.</p>
-                </div>
-            </div>
+      <div class="portfolio-card reveal reveal-delay-1">
+        <div class="portfolio-thumb" style="background: linear-gradient(135deg, #0d150d 0%, #0a1a12 100%);">
+          <div class="portfolio-thumb-icon">⚡</div>
+          <div class="portfolio-thumb-title">Bobby Karate</div>
+          <div class="portfolio-thumb-handle">@bobbykarate</div>
         </div>
-    </section>
-
-    <!-- SEO Section -->
-    <section class="seo-section" style="background: #111; padding: 80px 0; border-top: 1px solid #222;">
-        <div class="container">
-            <div class="section-header">
-                <h2 style="color: #fff;">🔍 Google Ranking & SEO — Included Free</h2>
-                <p style="color: #aaa; max-width: 700px; margin: 0 auto;">Most artists rely on Instagram alone. But what happens when someone Googles "tattoo artist near me"? If you don't have a real website, you're invisible. We fix that.</p>
-            </div>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 40px; max-width: 1000px; margin-left: auto; margin-right: auto;">
-                <div style="background: #1a1a1a; padding: 30px; border-radius: 12px; border-left: 3px solid #4CAF50;">
-                    <h3 style="color: #4CAF50; margin-bottom: 10px;">✅ What You Get</h3>
-                    <ul style="color: #ccc; line-height: 2; list-style: none; padding: 0;">
-                        <li>• Full SEO audit & optimization</li>
-                        <li>• Google-ready meta tags & schema markup</li>
-                        <li>• Fast page speed (under 2 seconds)</li>
-                        <li>• Mobile-first design (Google ranks mobile first)</li>
-                        <li>• Local SEO for your city & neighborhood</li>
-                        <li>• Google Maps integration</li>
-                    </ul>
-                </div>
-                <div style="background: #1a1a1a; padding: 30px; border-radius: 12px; border-left: 3px solid #f44336;">
-                    <h3 style="color: #f44336; margin-bottom: 10px;">❌ Without a Website</h3>
-                    <ul style="color: #ccc; line-height: 2; list-style: none; padding: 0;">
-                        <li>• Invisible on Google searches</li>
-                        <li>• Linktree pages don't rank</li>
-                        <li>• Instagram bios aren't indexed</li>
-                        <li>• Competitors with websites get YOUR clients</li>
-                        <li>• No credibility with walk-in searchers</li>
-                        <li>• Zero organic traffic growth</li>
-                    </ul>
-                </div>
-            </div>
-            <p style="text-align: center; color: #888; margin-top: 30px; font-size: 14px;">Every BWS site scores 85+ on Google's SEO audit. Most artist sites score under 30.</p>
+        <div class="portfolio-info">
+          <div class="portfolio-name">Bobby Karate</div>
+          <div class="portfolio-city">Traditional Tattoos · Sarasota, FL</div>
+          <a href="https://bayouwebstudio.com/bobbykarate/" target="_blank" rel="noopener" class="portfolio-link">View Live →</a>
         </div>
-    </section>
+      </div>
 
-    <!-- How It Works Section -->
-    <section class="how-it-works">
-        <div class="container">
-            <div class="section-header">
-                <h2 data-i18n="how_it_works_heading">How It Works</h2>
-                <p data-i18n="how_it_works_subheading">From Linktree to real website in 4 simple steps</p>
-            </div>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3 data-i18n="step_1_title">We Build Your Site for Free</h3>
-                    <p data-i18n="step_1_desc">Send us your Instagram handle and we'll build you a demo site. No payment required.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3 data-i18n="step_2_title">You Love It? $25/mo</h3>
-                    <p data-i18n="step_2_desc">If you want to keep it, just $25/month. That's it. No setup fee. No contracts.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3 data-i18n="step_3_title">Need Changes? Use Your Portal</h3>
-                    <p data-i18n="step_3_desc">Every client gets a change request portal. Most updates are live within 24 hours.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <h3 data-i18n="step_4_title">Want More Features? Upgrade Anytime</h3>
-                    <p data-i18n="step_4_desc">Start basic, upgrade when you need analytics, payments, or SEO optimization.</p>
-                </div>
-            </div>
+      <div class="portfolio-card reveal reveal-delay-2">
+        <div class="portfolio-thumb" style="background: linear-gradient(135deg, #150d0d 0%, #1a0a0a 100%);">
+          <div class="portfolio-thumb-icon">🖤</div>
+          <div class="portfolio-thumb-title">John Paul Roldan</div>
+          <div class="portfolio-thumb-handle">@johnpaulroldan</div>
         </div>
-    </section>
-
-    <!-- Pricing Section -->
-    <section id="pricing" class="pricing">
-        <div class="container">
-            <div class="section-header">
-                <h2 data-i18n="pricing_heading">Simple, Honest Pricing</h2>
-                <p data-i18n="pricing_subheading">No contracts. Cancel anytime. See how we compare.</p>
-            </div>
-            
-            <!-- Comparison Table -->
-            <div class="comparison-table">
-                <h3 data-i18n="comparison_table_heading">See How We Stack Up</h3>
-                <div class="table-scroll">
-                    <table class="compare-tbl">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th class="highlight">BWS Basic</th>
-                                <th>Linktree Pro</th>
-                                <th>Beacons Pro</th>
-                                <th>Squarespace</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="feature" data-i18n="comparison_price_month">Price/Month</td>
-                                <td class="highlight">$25</td>
-                                <td>$24</td>
-                                <td>$30</td>
-                                <td>$33</td>
-                            </tr>
-                            <tr>
-                                <td class="feature" data-i18n="comparison_custom_design">Custom Design</td>
-                                <td class="highlight">✅</td>
-                                <td>❌</td>
-                                <td>❌</td>
-                                <td>⚠️ <span data-i18n="comparison_diy">DIY</span></td>
-                            </tr>
-                            <tr>
-                                <td class="feature" data-i18n="comparison_seo_optimized">SEO Optimized</td>
-                                <td class="highlight">✅</td>
-                                <td>❌</td>
-                                <td>❌</td>
-                                <td>⚠️ <span data-i18n="comparison_diy">DIY</span></td>
-                            </tr>
-                            <tr>
-                                <td class="feature" data-i18n="comparison_their_branding">Their Branding</td>
-                                <td class="highlight">❌</td>
-                                <td>✅</td>
-                                <td>✅</td>
-                                <td>❌</td>
-                            </tr>
-                            <tr>
-                                <td class="feature" data-i18n="comparison_support">Support</td>
-                                <td class="highlight" data-i18n="comparison_personal">Personal</td>
-                                <td>Email</td>
-                                <td>Email</td>
-                                <td data-i18n="comparison_none">None</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Pricing Tiers -->
-            <div class="pricing-tiers">
-                <div class="pricing-tier basic">
-                    <div class="tier-header">
-                        <h3 data-i18n="pricing_basic_name">Basic</h3>
-                        <div class="price">$25<span data-i18n="pricing_per_month">/mo</span></div>
-                        <p data-i18n="pricing_basic_desc">Perfect for getting started</p>
-                    </div>
-                    <ul class="tier-features">
-                        <li data-i18n="pricing_basic_feature_1">Custom website design</li>
-                        <li data-i18n="pricing_basic_feature_2">Portfolio gallery</li>
-                        <li data-i18n="pricing_basic_feature_3">Booking link integration</li>
-                        <li data-i18n="pricing_basic_feature_4">Social media links</li>
-                        <li data-i18n="pricing_basic_feature_5">Google Maps integration</li>
-                        <li data-i18n="pricing_basic_feature_6">Mobile responsive</li>
-                        <li data-i18n="pricing_basic_feature_7">Change request portal</li>
-                    </ul>
-                    <a href="https://buy.stripe.com/6oU00j8TIfbn6hW34L3Je06" class="btn btn-outline" data-i18n="pricing_get_started">Get Started</a>
-                </div>
-                
-                <div class="pricing-tier pro featured">
-                    <div class="tier-badge" data-i18n="pricing_most_popular">Most Popular</div>
-                    <div class="tier-header">
-                        <h3 data-i18n="pricing_pro_name">Pro</h3>
-                        <div class="price">$49<span data-i18n="pricing_per_month">/mo</span></div>
-                        <p data-i18n="pricing_pro_desc">For serious artists</p>
-                    </div>
-                    <ul class="tier-features">
-                        <li><strong data-i18n="pricing_pro_everything_plus">Everything in Basic, plus:</strong></li>
-                        <li data-i18n="pricing_pro_feature_1">Analytics dashboard</li>
-                        <li data-i18n="pricing_pro_feature_2">Email & waitlist capture</li>
-                        <li data-i18n="pricing_pro_feature_3">Stripe deposit payments</li>
-                        <li data-i18n="pricing_pro_feature_4">Simple shop page (10 products)</li>
-                        <li data-i18n="pricing_pro_feature_5">Books open/closed toggle</li>
-                        <li data-i18n="pricing_pro_feature_6">Priority support</li>
-                    </ul>
-                    <a href="https://buy.stripe.com/dRm5kD6LA7IVgWAeNt3Je07" class="btn btn-primary" data-i18n="pricing_get_started">Get Started</a>
-                </div>
-                
-                <div class="pricing-tier premium">
-                    <div class="tier-header">
-                        <h3 data-i18n="pricing_premium_name">Premium</h3>
-                        <div class="price">$99<span data-i18n="pricing_per_month">/mo</span></div>
-                        <p data-i18n="pricing_premium_desc">Maximum growth</p>
-                    </div>
-                    <ul class="tier-features">
-                        <li><strong data-i18n="pricing_premium_everything_plus">Everything in Pro, plus:</strong></li>
-                        <li data-i18n="pricing_premium_feature_1">SEO optimization</li>
-                        <li data-i18n="pricing_premium_feature_2">Google Ads management</li>
-                        <li data-i18n="pricing_premium_feature_3">Client healed photo gallery</li>
-                        <li data-i18n="pricing_premium_feature_4">Advanced analytics</li>
-                        <li data-i18n="pricing_premium_feature_5">Priority support</li>
-                        <li data-i18n="pricing_premium_feature_6">Monthly strategy calls</li>
-                    </ul>
-                    <a href="https://buy.stripe.com/00w3cv2vk6ER9u8cFl3Je08" class="btn btn-outline" data-i18n="pricing_get_started">Get Started</a>
-                </div>
-            </div>
-            
-            <div class="pricing-note">
-                <p><strong data-i18n="pricing_no_contracts_label">No Contracts:</strong> <span data-i18n="pricing_no_contracts_text">Cancel anytime. Your site stays live through your billing period.</span></p>
-            </div>
+        <div class="portfolio-info">
+          <div class="portfolio-name">John Paul Roldan</div>
+          <div class="portfolio-city">Realism Tattoos · Houston, TX</div>
+          <a href="https://bayouwebstudio.com/johnpaulroldan/" target="_blank" rel="noopener" class="portfolio-link">View Live →</a>
         </div>
-    </section>
+      </div>
 
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="portfolio">
-        <div class="container">
-            <div class="section-header">
-                <h2 data-i18n="portfolio_heading">Sites We've Built</h2>
-                <p data-i18n="portfolio_subheading">Real websites for real artists</p>
-            </div>
-            <div class="portfolio-grid">
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <img src="https://via.placeholder.com/300x200/1a1a1a/c9a84c?text=Tatsu+Ink" alt="Tatsu Ink Website">
-                    </div>
-                    <div class="portfolio-info">
-                        <h3>Tatsu Ink</h3>
-                        <p data-i18n="portfolio_tatsu_desc">Tattoo artist in Houston, TX</p>
-                        <a href="https://tatsuink.com" target="_blank" class="portfolio-link" data-i18n="portfolio_view_site">View Site →</a>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <img src="https://via.placeholder.com/300x200/1a1a1a/c9a84c?text=Tattoo+Temple" alt="Tattoo Temple Houston Website">
-                    </div>
-                    <div class="portfolio-info">
-                        <h3>Tattoo Temple Houston</h3>
-                        <p data-i18n="portfolio_temple_desc">Premium tattoo & piercing studio in Houston, TX</p>
-                        <a href="https://houstontattootemple.com" target="_blank" class="portfolio-link" data-i18n="portfolio_view_site">View Site →</a>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <img src="https://via.placeholder.com/300x200/1a1a1a/c9a84c?text=Wesche+Tattoo" alt="Wesche Tattoo Website">
-                    </div>
-                    <div class="portfolio-info">
-                        <h3>Wesche Tattoo</h3>
-                        <p data-i18n="portfolio_wesche_desc">Sacred geometry tattoo artist — 297K followers</p>
-                        <a href="https://weschetattoo.com" target="_blank" class="portfolio-link" data-i18n="portfolio_view_site">View Site →</a>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <img src="https://via.placeholder.com/300x200/1a1a1a/c9a84c?text=Karla+Heusner" alt="Karla M. Heusner Website">
-                    </div>
-                    <div class="portfolio-info">
-                        <h3>Karla M. Heusner</h3>
-                        <p>Writer, journalist & educator — Belize to Houston</p>
-                        <a href="https://karlamheusner.com" target="_blank" class="portfolio-link">View Site →</a>
-                    </div>
-                </div>
-            </div>
+      <div class="portfolio-card reveal">
+        <div class="portfolio-thumb" style="background: linear-gradient(135deg, #0f0f1a 0%, #1a1a0f 100%);">
+          <div class="portfolio-thumb-icon">✒️</div>
+          <div class="portfolio-thumb-title">Alan Gutiérrez</div>
+          <div class="portfolio-thumb-handle">@guccierrezz</div>
         </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section id="faq" class="faq">
-        <div class="container">
-            <div class="section-header">
-                <h2 data-i18n="faq_heading">Frequently Asked Questions</h2>
-            </div>
-            <div class="faq-list">
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h3 data-i18n="faq_q1">What about my existing Linktree?</h3>
-                        <span class="faq-toggle">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p data-i18n="faq_a1">Your BWS site completely replaces your Linktree. Just update the link in your Instagram bio to your new custom URL. You'll get better conversions and look more professional.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h3 data-i18n="faq_q2">Do I need to know code?</h3>
-                        <span class="faq-toggle">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p data-i18n="faq_a2">Not at all. We handle everything — design, development, hosting, updates. You focus on tattooing, we handle the tech.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h3 data-i18n="faq_q3">Can I sell products on my site?</h3>
-                        <span class="faq-toggle">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p data-i18n="faq_a3">Yes! The Pro plan includes a simple shop page with Stripe integration. Sell prints, merch, gift cards — up to 10 products. No Shopify fees, money goes directly to your account.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h3 data-i18n="faq_q4">What if I want to cancel?</h3>
-                        <span class="faq-toggle">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p data-i18n="faq_a4">No contracts, no commitments. Cancel anytime. Your site stays live through your current billing period so you don't lose traffic.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h3 data-i18n="faq_q5">How fast are changes and updates?</h3>
-                        <span class="faq-toggle">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p data-i18n="faq_a5">Most changes are live within 24 hours. Simple updates (hours, prices, photos) can often be done same-day. Use your client portal to request any changes.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h3 data-i18n="faq_q6">What makes this better than DIY website builders?</h3>
-                        <span class="faq-toggle">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p data-i18n="faq_a6">You don't have to learn anything or spend time building. We know what converts visitors into clients for tattoo artists specifically. Plus you get ongoing support — no fighting with templates alone.</p>
-                    </div>
-                </div>
-            </div>
+        <div class="portfolio-info">
+          <div class="portfolio-name">Alan Gutiérrez</div>
+          <div class="portfolio-city">Tattoo Artist</div>
+          <a href="https://guccierrezz.com" target="_blank" rel="noopener" class="portfolio-link">View Live →</a>
         </div>
-    </section>
+      </div>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h2 data-i18n="contact_heading">Ready to Ditch Your Linktree?</h2>
-                    <p data-i18n="contact_subheading">Send us your Instagram handle and we'll build you a demo site for free. No payment required until you love it.</p>
-                    <div class="contact-methods">
-                        <div class="contact-method">
-                            <div class="contact-icon">📧</div>
-                            <div>
-                                <strong data-i18n="contact_email_label">Email Us</strong>
-                                <p>hello@bayouwebstudio.com</p>
-                            </div>
-                        </div>
-                        <div class="contact-method">
-                            <div class="contact-icon">📍</div>
-                            <div>
-                                <strong data-i18n="contact_location_label">Based in Houston</strong>
-                                <p data-i18n="contact_location_desc">Serving tattoo artists everywhere</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="contact-form">
-                    <form action="https://formsubmit.co/hello@bayouwebstudio.com" method="POST">
-                        <input type="hidden" name="_subject" value="New BWS Demo Request">
-                        <input type="hidden" name="_next" value="https://bayouwebstudio.com/thanks.html">
-                        <input type="text" name="name" data-i18n="form_name_placeholder" placeholder="Your Name" required>
-                        <input type="text" name="instagram" data-i18n="form_instagram_placeholder" placeholder="Your Instagram Handle" required>
-                        <input type="email" name="email" data-i18n="form_email_placeholder" placeholder="Your Email" required>
-                        <select name="plan" required>
-                            <option value="" data-i18n="form_plan_placeholder">Which plan interests you?</option>
-                            <option value="basic" data-i18n="form_plan_basic">Basic - $25/mo</option>
-                            <option value="pro" data-i18n="form_plan_pro">Pro - $49/mo</option>
-                            <option value="premium" data-i18n="form_plan_premium">Premium - $99/mo</option>
-                            <option value="unsure" data-i18n="form_plan_unsure">Not sure yet</option>
-                        </select>
-                        <textarea name="message" data-i18n="form_message_placeholder" placeholder="Tell us about your style and what you need" rows="4"></textarea>
-                        <button type="submit" class="btn btn-primary" data-i18n="form_submit_button">Get My Free Demo Site</button>
-                    </form>
-                </div>
-            </div>
+      <div class="portfolio-card reveal reveal-delay-1">
+        <div class="portfolio-thumb" style="background: linear-gradient(135deg, #0a120f 0%, #0f1a15 100%);">
+          <div class="portfolio-thumb-icon">🐉</div>
+          <div class="portfolio-thumb-title">Fozy</div>
+          <div class="portfolio-thumb-handle">@fozyink</div>
         </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <h3>Bayou Web Studios</h3>
-                    <p data-i18n="footer_brand_desc">Custom websites for tattoo artists and creatives</p>
-                </div>
-                <div class="footer-links">
-                    <div class="footer-column">
-                        <h4 data-i18n="footer_services_heading">Services</h4>
-                        <a href="#features" data-i18n="footer_custom_websites">Custom Websites</a>
-                        <a href="#pricing" data-i18n="footer_pricing">Pricing</a>
-                        <a href="#portfolio" data-i18n="footer_portfolio">Portfolio</a>
-                    </div>
-                    <div class="footer-column">
-                        <h4 data-i18n="footer_support_heading">Support</h4>
-                        <a href="#faq" data-i18n="footer_faq">FAQ</a>
-                        <a href="mailto:hello@bayouwebstudio.com" data-i18n="footer_contact">Contact</a>
-                        <a href="/changes" data-i18n="footer_request_changes">Request Changes</a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p data-i18n="footer_copyright">&copy; 2026 Bayou Web Studios. All rights reserved.</p>
-            </div>
+        <div class="portfolio-info">
+          <div class="portfolio-name">Fozy</div>
+          <div class="portfolio-city">Tattoo Artist · Hong Kong</div>
+          <a href="https://bayouwebstudio.com/fozyink/" target="_blank" rel="noopener" class="portfolio-link">View Live →</a>
         </div>
-    </footer>
+      </div>
 
-    <script src="i18n.js"></script>
-    <script src="script.js"></script>
+      <div class="portfolio-card reveal reveal-delay-2">
+        <div class="portfolio-thumb" style="background: linear-gradient(135deg, #12100a 0%, #1a150a 100%);">
+          <div class="portfolio-thumb-icon">🌙</div>
+          <div class="portfolio-thumb-title">Oskar Sekeres</div>
+          <div class="portfolio-thumb-handle">@sekerestattoo</div>
+        </div>
+        <div class="portfolio-info">
+          <div class="portfolio-name">Oskar Sekeres</div>
+          <div class="portfolio-city">Tattoo Artist</div>
+          <a href="https://bayouwebstudio.com/sekerestattoo/" target="_blank" rel="noopener" class="portfolio-link">View Live →</a>
+        </div>
+      </div>
+
+      <div class="portfolio-card reveal">
+        <div class="portfolio-thumb" style="background: linear-gradient(135deg, #0a0f1a 0%, #0a1525 100%);">
+          <div class="portfolio-thumb-icon">☀️</div>
+          <div class="portfolio-thumb-title">Sunny</div>
+          <div class="portfolio-thumb-handle">@sunnyaink</div>
+        </div>
+        <div class="portfolio-info">
+          <div class="portfolio-name">Sunny</div>
+          <div class="portfolio-city">Tattoo Artist</div>
+          <a href="https://bayouwebstudio.com/sunnyaink/" target="_blank" rel="noopener" class="portfolio-link">View Live →</a>
+        </div>
+      </div>
+
+      <div class="portfolio-card reveal reveal-delay-1">
+        <div class="portfolio-thumb" style="background: linear-gradient(135deg, #0a1210 0%, #1a0a15 100%);">
+          <div class="portfolio-thumb-icon">🎭</div>
+          <div class="portfolio-thumb-title">Layne</div>
+          <div class="portfolio-thumb-handle">@laynelv</div>
+        </div>
+        <div class="portfolio-info">
+          <div class="portfolio-name">Layne</div>
+          <div class="portfolio-city">Creative Portfolio</div>
+          <a href="https://bayouwebstudio.com/laynelv/" target="_blank" rel="noopener" class="portfolio-link">View Live →</a>
+        </div>
+      </div>
+
+      <div class="portfolio-card reveal reveal-delay-2">
+        <div class="portfolio-thumb" style="background: linear-gradient(135deg, #0f0a1a 0%, #150a12 100%);">
+          <div class="portfolio-thumb-icon">📖</div>
+          <div class="portfolio-thumb-title">Karla Heusner</div>
+          <div class="portfolio-thumb-handle">Literary Portfolio</div>
+        </div>
+        <div class="portfolio-info">
+          <div class="portfolio-name">Karla Heusner</div>
+          <div class="portfolio-city">Author · Literary Portfolio</div>
+          <a href="https://karlamheusner.com" target="_blank" rel="noopener" class="portfolio-link">View Live →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── SEO SECTION ───────────────────────────────────── -->
+<section id="seo">
+  <div class="section-inner">
+    <div class="section-tag" data-i18n="seo_tag">SEO &amp; Google Ranking</div>
+    <h2 data-i18n="seo_h2">Your Website Should Work<br>While You Sleep</h2>
+    <p class="section-sub" data-i18n="seo_sub">Every BWS site is built to rank. We do the Google work so you don't have to.</p>
+
+    <div class="seo-compare">
+      <div class="seo-card yes reveal">
+        <div class="seo-card-title">✅ <span data-i18n="seo_with">With a BWS Website</span></div>
+        <div class="seo-item"><span class="seo-icon">✅</span><span data-i18n="seo_y1">Meta tags &amp; schema markup — Google reads your site perfectly</span></div>
+        <div class="seo-item"><span class="seo-icon">✅</span><span data-i18n="seo_y2">Local SEO — show up when people search "[your city] tattoo artist"</span></div>
+        <div class="seo-item"><span class="seo-icon">✅</span><span data-i18n="seo_y3">Google Maps integration — clients find your studio instantly</span></div>
+        <div class="seo-item"><span class="seo-icon">✅</span><span data-i18n="seo_y4">Mobile-first design — 85+ Google PageSpeed score</span></div>
+        <div class="seo-item"><span class="seo-icon">✅</span><span data-i18n="seo_y5">Fast page speeds — under 2 seconds load time</span></div>
+        <div class="seo-item"><span class="seo-icon">✅</span><span data-i18n="seo_y6">Your brand. Your domain. You own it.</span></div>
+      </div>
+      <div class="seo-card no reveal reveal-delay-1">
+        <div class="seo-card-title">❌ <span data-i18n="seo_without">Instagram / Link-in-Bio Only</span></div>
+        <div class="seo-item"><span class="seo-icon">❌</span><span data-i18n="seo_n1">No Google indexing — invisible to search engines</span></div>
+        <div class="seo-item"><span class="seo-icon">❌</span><span data-i18n="seo_n2">No local SEO — you don't show up in city searches</span></div>
+        <div class="seo-item"><span class="seo-icon">❌</span><span data-i18n="seo_n3">No Google Maps listing tied to a real site</span></div>
+        <div class="seo-item"><span class="seo-icon">❌</span><span data-i18n="seo_n4">Slow load — IG profiles aren't optimized for conversions</span></div>
+        <div class="seo-item"><span class="seo-icon">❌</span><span data-i18n="seo_n5">Algorithm dependent — one shadowban and you disappear</span></div>
+        <div class="seo-item"><span class="seo-icon">❌</span><span data-i18n="seo_n6">You're building Instagram's brand, not yours</span></div>
+      </div>
+    </div>
+
+    <div class="seo-audit-badge reveal">
+      <div class="seo-audit-score">85+</div>
+      <div class="seo-audit-label" data-i18n="seo_audit">Every BWS site scores 85+ on Google's official SEO audit</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── HOW IT WORKS ──────────────────────────────────── -->
+<section id="how">
+  <div class="section-inner">
+    <div class="section-tag" data-i18n="how_tag">The Process</div>
+    <h2 data-i18n="how_h2">Up and Running<br>in 24 Hours</h2>
+    <p class="section-sub" data-i18n="how_sub">Three steps. No tech skills needed. No commitment until you love it.</p>
+    <div class="steps-grid">
+      <div class="step-card reveal">
+        <div class="step-num">1</div>
+        <div class="step-icon">📱</div>
+        <div class="step-title" data-i18n="step1_title">Send Us Your Instagram</div>
+        <div class="step-desc" data-i18n="step1_desc">Just share your Instagram handle. We pull your photos, bio, and booking links to build your custom site — no form-filling required.</div>
+      </div>
+      <div class="step-card reveal reveal-delay-1">
+        <div class="step-num">2</div>
+        <div class="step-icon">💛</div>
+        <div class="step-title" data-i18n="step2_title">Love It? $25/mo</div>
+        <div class="step-desc" data-i18n="step2_desc">We send you the preview. If you love it, subscribe at $25/mo. No contracts, cancel anytime. If you're not into it — no charge, no hard feelings.</div>
+      </div>
+      <div class="step-card reveal reveal-delay-2">
+        <div class="step-num">3</div>
+        <div class="step-icon">🚀</div>
+        <div class="step-title" data-i18n="step3_title">We Handle Everything</div>
+        <div class="step-desc" data-i18n="step3_desc">Domain, hosting, SEO, updates, support — it's all included. Need a change? Just message us. We do it for you.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FEATURES ──────────────────────────────────────── -->
+<section id="features">
+  <div class="section-inner">
+    <div class="section-tag" data-i18n="feat_tag">What's Included</div>
+    <h2 data-i18n="feat_h2">Everything You Need.<br>Nothing You Don't.</h2>
+    <p class="section-sub" data-i18n="feat_sub">Every plan includes the full stack — no add-ons, no surprises.</p>
+    <div class="features-grid">
+
+      <div class="feature-card reveal">
+        <div class="feature-icon">🌐</div>
+        <div class="feature-title" data-i18n="feat1_title">Custom .com Domain</div>
+        <div class="feature-desc" data-i18n="feat1_desc">YourName.com — included in every plan. No domain shopping required. We handle registration and DNS.</div>
+      </div>
+
+      <div class="feature-card reveal reveal-delay-1">
+        <div class="feature-icon">📈</div>
+        <div class="feature-title" data-i18n="feat2_title">Google Ranking &amp; SEO</div>
+        <div class="feature-desc" data-i18n="feat2_desc">Full on-page SEO, meta tags, schema markup, and local optimization. Included free with every site.</div>
+      </div>
+
+      <div class="feature-card reveal reveal-delay-2">
+        <div class="feature-icon">📱</div>
+        <div class="feature-title" data-i18n="feat3_title">Mobile-First Design</div>
+        <div class="feature-desc" data-i18n="feat3_desc">Your site looks stunning on every screen size. Built mobile-first because that's where your clients are.</div>
+      </div>
+
+      <div class="feature-card reveal reveal-delay-3">
+        <div class="feature-icon">♾️</div>
+        <div class="feature-title" data-i18n="feat4_title">Unlimited Changes</div>
+        <div class="feature-desc" data-i18n="feat4_desc">New photos, updated prices, new booking link? Just message us. Unlimited updates included.</div>
+      </div>
+
+      <div class="feature-card reveal reveal-delay-4">
+        <div class="feature-icon">📍</div>
+        <div class="feature-title" data-i18n="feat5_title">Google Maps Integration</div>
+        <div class="feature-desc" data-i18n="feat5_desc">Embedded map so clients can find your studio in one tap. Boosts local SEO too.</div>
+      </div>
+
+      <div class="feature-card reveal reveal-delay-5">
+        <div class="feature-icon">🔒</div>
+        <div class="feature-title" data-i18n="feat6_title">Professional Hosting &amp; SSL</div>
+        <div class="feature-desc" data-i18n="feat6_desc">Fast, secure hosting with SSL certificate. Your site is always online, always protected.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── PRICING ───────────────────────────────────────── -->
+<section id="pricing">
+  <div class="section-inner">
+    <div class="section-tag" data-i18n="price_tag">Pricing</div>
+    <h2 data-i18n="price_h2">Simple Pricing.<br>No Setup Fees. No Contracts.</h2>
+    <p class="section-sub" data-i18n="price_sub">Start with a free demo — we build your site first. You only pay if you love it.</p>
+    <div class="pricing-grid">
+
+      <!-- Starter -->
+      <div class="pricing-card reveal">
+        <div class="pricing-tier" data-i18n="p1_tier">Starter</div>
+        <div class="pricing-price">$25<span data-i18n="per_mo">/mo</span></div>
+        <div class="pricing-desc" data-i18n="p1_desc">Everything you need to get online and get found.</div>
+        <ul class="pricing-features">
+          <li><span class="check">✓</span><span data-i18n="p1_f1">Custom .com domain</span></li>
+          <li><span class="check">✓</span><span data-i18n="p1_f2">Professional hosting &amp; SSL</span></li>
+          <li><span class="check">✓</span><span data-i18n="p1_f3">Full SEO optimization</span></li>
+          <li><span class="check">✓</span><span data-i18n="p1_f4">Photo gallery</span></li>
+          <li><span class="check">✓</span><span data-i18n="p1_f5">Booking link integration</span></li>
+          <li><span class="check">✓</span><span data-i18n="p1_f6">Google Maps</span></li>
+          <li><span class="check">✓</span><span data-i18n="p1_f7">Unlimited changes</span></li>
+        </ul>
+        <a href="/free-site.html" class="btn-pricing outline" data-i18n="price_cta">Start With Free Demo</a>
+      </div>
+
+      <!-- Pro -->
+      <div class="pricing-card featured reveal reveal-delay-1">
+        <div class="pricing-badge" data-i18n="p2_badge">Most Popular</div>
+        <div class="pricing-tier" data-i18n="p2_tier">Pro</div>
+        <div class="pricing-price">$49<span data-i18n="per_mo">/mo</span></div>
+        <div class="pricing-desc" data-i18n="p2_desc">For artists ready to grow and track their results.</div>
+        <ul class="pricing-features">
+          <li><span class="check">✓</span><span data-i18n="p2_f1">Everything in Starter</span></li>
+          <li><span class="check">✓</span><span data-i18n="p2_f2">Analytics dashboard</span></li>
+          <li><span class="check">✓</span><span data-i18n="p2_f3">Priority support</span></li>
+          <li><span class="check">✓</span><span data-i18n="p2_f4">Shop / merch page</span></li>
+          <li><span class="check">✓</span><span data-i18n="p2_f5">Advanced gallery features</span></li>
+        </ul>
+        <a href="/free-site.html" class="btn-pricing gold" data-i18n="price_cta">Start With Free Demo</a>
+      </div>
+
+      <!-- Premium -->
+      <div class="pricing-card reveal reveal-delay-2">
+        <div class="pricing-tier" data-i18n="p3_tier">Premium</div>
+        <div class="pricing-price">$99<span data-i18n="per_mo">/mo</span></div>
+        <div class="pricing-desc" data-i18n="p3_desc">Full-service. For artists who want white-glove treatment.</div>
+        <ul class="pricing-features">
+          <li><span class="check">✓</span><span data-i18n="p3_f1">Everything in Pro</span></li>
+          <li><span class="check">✓</span><span data-i18n="p3_f2">Custom features &amp; integrations</span></li>
+          <li><span class="check">✓</span><span data-i18n="p3_f3">Dedicated account manager</span></li>
+          <li><span class="check">✓</span><span data-i18n="p3_f4">Same-day changes</span></li>
+          <li><span class="check">✓</span><span data-i18n="p3_f5">Monthly SEO reports</span></li>
+        </ul>
+        <a href="/free-site.html" class="btn-pricing outline" data-i18n="price_cta">Start With Free Demo</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── FAQ ───────────────────────────────────────────── -->
+<section id="faq">
+  <div class="section-inner">
+    <div class="section-tag" data-i18n="faq_tag">FAQ</div>
+    <h2 style="text-align:center; margin-bottom: 48px;" data-i18n="faq_h2">Common Questions</h2>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span data-i18n="faq1_q">What's included in my website?</span>
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a"><p data-i18n="faq1_a">Every site includes a custom .com domain, professional hosting, SSL certificate, Google SEO optimization, photo gallery, booking link, Google Maps, and unlimited changes. All plans include the full stack — no hidden add-ons.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span data-i18n="faq2_q">Do you really include SEO?</span>
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a"><p data-i18n="faq2_a">Yes — full Google ranking optimization is included free with every site. That means meta tags, schema markup, local SEO, fast page speeds, and mobile-first design. Every BWS site targets an 85+ score on Google's SEO audit.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span data-i18n="faq3_q">How fast do you build?</span>
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a"><p data-i18n="faq3_a">Usually 24 hours. Just send us your Instagram handle and we get to work. You'll get a preview link to review before anything goes live.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span data-i18n="faq4_q">Can I make changes after launch?</span>
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a"><p data-i18n="faq4_a">Unlimited changes — always. New photos, updated rates, new booking link? Just fill out a quick form or message us. We make the change for you, usually same day.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span data-i18n="faq5_q">What if I don't like my site?</span>
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a"><p data-i18n="faq5_a">No obligation, ever. The demo is completely free — we build it, you review it, and if you're not into it, you owe us nothing. No credit card required to see your site.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span data-i18n="faq6_q">Do you work with non-tattoo businesses?</span>
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a"><p data-i18n="faq6_a">Absolutely — we build for barbers, nail techs, photographers, makeup artists, and any creative professional. If you have an Instagram and need a real website, we've got you.</p></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA ───────────────────────────────────────────── -->
+<section id="cta">
+  <div class="section-inner" style="max-width: 640px; text-align: center;">
+    <div class="section-tag" style="text-align:center;" data-i18n="cta_tag">Get Started Free</div>
+    <h2 class="reveal" data-i18n="cta_h2">Ready to Get Found<br>on Google?</h2>
+    <p class="reveal reveal-delay-1" style="color: var(--gray); margin-bottom: 40px;" data-i18n="cta_sub">We build your site for free. You only pay if you love it. Starting at $25/mo with no setup fees and no contracts.</p>
+    <a href="/free-site.html" class="btn-primary reveal reveal-delay-2" style="display:inline-flex; font-size: 1.1rem; padding: 18px 40px;">
+      <span data-i18n="cta_btn">Get Your Free Site</span>
+      <span>→</span>
+    </a>
+    <p style="margin-top: 16px; font-size: 0.8rem; color: var(--gray);" data-i18n="cta_note">No credit card. No commitment. Built in 24 hours.</p>
+  </div>
+</section>
+
+<!-- ─── FOOTER ────────────────────────────────────────── -->
+<footer>
+  <div class="footer-logo">Bayou <span>Web Studios</span></div>
+  <div class="footer-info">
+    Houston, TX · <a href="mailto:support@bayouwebstudio.com">support@bayouwebstudio.com</a>
+  </div>
+  <div class="footer-copy">© 2026 Bayou Web Studios. All rights reserved.</div>
+</footer>
+
+<script>
+// ─── TRANSLATIONS ──────────────────────────────────────
+const i18n = {
+  en: {
+    meta_title: "Bayou Web Studios — Websites That Get You Found on Google",
+    nav_features: "Features",
+    nav_portfolio: "Portfolio",
+    nav_pricing: "Pricing",
+    nav_faq: "FAQ",
+    nav_cta: "Get Your Free Site",
+    hero_badge: "Google Ranking & SEO Included Free",
+    hero_h1a: "We Build Websites That",
+    hero_h1b: "Get You Found on Google",
+    hero_sub: "Turn your Instagram into a real website. We handle everything — design, hosting, SEO, and updates. You just share your link.",
+    hero_cta1: "Get Your Free Site",
+    hero_cta2: "See Our Work",
+    stat1: "Sites Built",
+    stat2: "Setup Fee",
+    stat3: "SEO Score",
+    stat4: "Load Time",
+    port_tag: "Our Work",
+    port_h2: "Real Sites. Real Artists.\nReal Results.",
+    port_sub: "Every site is custom-built, SEO-optimized, and mobile-first. This is what your site could look like.",
+    seo_tag: "SEO & Google Ranking",
+    seo_h2: "Your Website Should Work\nWhile You Sleep",
+    seo_sub: "Every BWS site is built to rank. We do the Google work so you don't have to.",
+    seo_with: "With a BWS Website",
+    seo_without: "Instagram / Link-in-Bio Only",
+    seo_y1: "Meta tags & schema markup — Google reads your site perfectly",
+    seo_y2: "Local SEO — show up when people search \"[your city] tattoo artist\"",
+    seo_y3: "Google Maps integration — clients find your studio instantly",
+    seo_y4: "Mobile-first design — 85+ Google PageSpeed score",
+    seo_y5: "Fast page speeds — under 2 seconds load time",
+    seo_y6: "Your brand. Your domain. You own it.",
+    seo_n1: "No Google indexing — invisible to search engines",
+    seo_n2: "No local SEO — you don't show up in city searches",
+    seo_n3: "No Google Maps listing tied to a real site",
+    seo_n4: "Slow load — IG profiles aren't optimized for conversions",
+    seo_n5: "Algorithm dependent — one shadowban and you disappear",
+    seo_n6: "You're building Instagram's brand, not yours",
+    seo_audit: "Every BWS site scores 85+ on Google's official SEO audit",
+    how_tag: "The Process",
+    how_h2: "Up and Running\nin 24 Hours",
+    how_sub: "Three steps. No tech skills needed. No commitment until you love it.",
+    step1_title: "Send Us Your Instagram",
+    step1_desc: "Just share your Instagram handle. We pull your photos, bio, and booking links to build your custom site — no form-filling required.",
+    step2_title: "Love It? $25/mo",
+    step2_desc: "We send you the preview. If you love it, subscribe at $25/mo. No contracts, cancel anytime. If you're not into it — no charge, no hard feelings.",
+    step3_title: "We Handle Everything",
+    step3_desc: "Domain, hosting, SEO, updates, support — it's all included. Need a change? Just message us. We do it for you.",
+    feat_tag: "What's Included",
+    feat_h2: "Everything You Need.\nNothing You Don't.",
+    feat_sub: "Every plan includes the full stack — no add-ons, no surprises.",
+    feat1_title: "Custom .com Domain",
+    feat1_desc: "YourName.com — included in every plan. No domain shopping required. We handle registration and DNS.",
+    feat2_title: "Google Ranking & SEO",
+    feat2_desc: "Full on-page SEO, meta tags, schema markup, and local optimization. Included free with every site.",
+    feat3_title: "Mobile-First Design",
+    feat3_desc: "Your site looks stunning on every screen size. Built mobile-first because that's where your clients are.",
+    feat4_title: "Unlimited Changes",
+    feat4_desc: "New photos, updated prices, new booking link? Just message us. Unlimited updates included.",
+    feat5_title: "Google Maps Integration",
+    feat5_desc: "Embedded map so clients can find your studio in one tap. Boosts local SEO too.",
+    feat6_title: "Professional Hosting & SSL",
+    feat6_desc: "Fast, secure hosting with SSL certificate. Your site is always online, always protected.",
+    price_tag: "Pricing",
+    price_h2: "Simple Pricing.\nNo Setup Fees. No Contracts.",
+    price_sub: "Start with a free demo — we build your site first. You only pay if you love it.",
+    p1_tier: "Starter",
+    p1_desc: "Everything you need to get online and get found.",
+    p1_f1: "Custom .com domain",
+    p1_f2: "Professional hosting & SSL",
+    p1_f3: "Full SEO optimization",
+    p1_f4: "Photo gallery",
+    p1_f5: "Booking link integration",
+    p1_f6: "Google Maps",
+    p1_f7: "Unlimited changes",
+    p2_badge: "Most Popular",
+    p2_tier: "Pro",
+    p2_desc: "For artists ready to grow and track their results.",
+    p2_f1: "Everything in Starter",
+    p2_f2: "Analytics dashboard",
+    p2_f3: "Priority support",
+    p2_f4: "Shop / merch page",
+    p2_f5: "Advanced gallery features",
+    p3_tier: "Premium",
+    p3_desc: "Full-service. For artists who want white-glove treatment.",
+    p3_f1: "Everything in Pro",
+    p3_f2: "Custom features & integrations",
+    p3_f3: "Dedicated account manager",
+    p3_f4: "Same-day changes",
+    p3_f5: "Monthly SEO reports",
+    per_mo: "/mo",
+    price_cta: "Start With Free Demo",
+    faq_tag: "FAQ",
+    faq_h2: "Common Questions",
+    faq1_q: "What's included in my website?",
+    faq1_a: "Every site includes a custom .com domain, professional hosting, SSL certificate, Google SEO optimization, photo gallery, booking link, Google Maps, and unlimited changes. All plans include the full stack — no hidden add-ons.",
+    faq2_q: "Do you really include SEO?",
+    faq2_a: "Yes — full Google ranking optimization is included free with every site. That means meta tags, schema markup, local SEO, fast page speeds, and mobile-first design. Every BWS site targets an 85+ score on Google's SEO audit.",
+    faq3_q: "How fast do you build?",
+    faq3_a: "Usually 24 hours. Just send us your Instagram handle and we get to work. You'll get a preview link to review before anything goes live.",
+    faq4_q: "Can I make changes after launch?",
+    faq4_a: "Unlimited changes — always. New photos, updated rates, new booking link? Just fill out a quick form or message us. We make the change for you, usually same day.",
+    faq5_q: "What if I don't like my site?",
+    faq5_a: "No obligation, ever. The demo is completely free — we build it, you review it, and if you're not into it, you owe us nothing. No credit card required to see your site.",
+    faq6_q: "Do you work with non-tattoo businesses?",
+    faq6_a: "Absolutely — we build for barbers, nail techs, photographers, makeup artists, and any creative professional. If you have an Instagram and need a real website, we've got you.",
+    cta_tag: "Get Started Free",
+    cta_h2: "Ready to Get Found\non Google?",
+    cta_sub: "We build your site for free. You only pay if you love it. Starting at $25/mo with no setup fees and no contracts.",
+    cta_btn: "Get Your Free Site",
+    cta_note: "No credit card. No commitment. Built in 24 hours.",
+  },
+  es: {
+    meta_title: "Bayou Web Studios — Sitios Web Que Te Hacen Visible en Google",
+    nav_features: "Funciones",
+    nav_portfolio: "Portafolio",
+    nav_pricing: "Precios",
+    nav_faq: "FAQ",
+    nav_cta: "Obtén Tu Sitio Gratis",
+    hero_badge: "Posicionamiento en Google Incluido Gratis",
+    hero_h1a: "Creamos Sitios Web Que",
+    hero_h1b: "Te Hacen Visible en Google",
+    hero_sub: "Convertimos tu Instagram en un sitio web profesional. Nosotros manejamos todo — diseño, hosting, SEO y actualizaciones.",
+    hero_cta1: "Obtén Tu Sitio Gratis",
+    hero_cta2: "Ver Nuestro Trabajo",
+    stat1: "Sitios Creados",
+    stat2: "Cuota de Inicio",
+    stat3: "Puntaje SEO",
+    stat4: "Tiempo de Carga",
+    port_tag: "Nuestro Trabajo",
+    port_h2: "Sitios Reales. Artistas Reales.\nResultados Reales.",
+    port_sub: "Cada sitio es personalizado, optimizado para SEO y diseñado primero para móvil.",
+    seo_tag: "SEO y Posicionamiento",
+    seo_h2: "Tu Sitio Debe Trabajar\nMientras Duermes",
+    seo_sub: "Cada sitio BWS está construido para posicionarse en Google.",
+    seo_with: "Con un Sitio BWS",
+    seo_without: "Solo Instagram / Link-en-Bio",
+    seo_y1: "Meta tags y schema markup — Google lee tu sitio perfectamente",
+    seo_y2: "SEO local — apareces cuando buscan \"tatuador en [tu ciudad]\"",
+    seo_y3: "Integración con Google Maps — los clientes encuentran tu estudio al instante",
+    seo_y4: "Diseño mobile-first — puntaje 85+ en Google PageSpeed",
+    seo_y5: "Páginas rápidas — menos de 2 segundos de carga",
+    seo_y6: "Tu marca. Tu dominio. Tú lo posees.",
+    seo_n1: "Sin indexación en Google — invisible para los buscadores",
+    seo_n2: "Sin SEO local — no apareces en búsquedas de tu ciudad",
+    seo_n3: "Sin Google Maps vinculado a un sitio real",
+    seo_n4: "Carga lenta — los perfiles de IG no están optimizados para conversiones",
+    seo_n5: "Dependiente del algoritmo — un shadowban y desapareces",
+    seo_n6: "Estás construyendo la marca de Instagram, no la tuya",
+    seo_audit: "Cada sitio BWS obtiene 85+ en la auditoría oficial de SEO de Google",
+    how_tag: "El Proceso",
+    how_h2: "En Línea en\n24 Horas",
+    how_sub: "Tres pasos. Sin habilidades técnicas. Sin compromiso hasta que lo ames.",
+    step1_title: "Envíanos Tu Instagram",
+    step1_desc: "Solo comparte tu usuario de Instagram. Tomamos tus fotos, bio y links de reserva para crear tu sitio personalizado.",
+    step2_title: "¿Te Encanta? $25/mes",
+    step2_desc: "Te enviamos la vista previa. Si te encanta, suscríbete a $25/mes. Sin contratos, cancela cuando quieras.",
+    step3_title: "Nosotros Manejamos Todo",
+    step3_desc: "Dominio, hosting, SEO, actualizaciones, soporte — todo incluido. ¿Necesitas un cambio? Solo escríbenos.",
+    feat_tag: "Qué Incluye",
+    feat_h2: "Todo Lo Que Necesitas.\nNada Que No.",
+    feat_sub: "Cada plan incluye todo el paquete — sin extras, sin sorpresas.",
+    feat1_title: "Dominio .com Personalizado",
+    feat1_desc: "TuNombre.com — incluido en cada plan. Nos encargamos del registro y DNS.",
+    feat2_title: "Posicionamiento en Google",
+    feat2_desc: "SEO completo, meta tags, schema markup y optimización local. Incluido gratis.",
+    feat3_title: "Diseño Mobile-First",
+    feat3_desc: "Tu sitio se ve perfecto en cualquier pantalla. Diseñado primero para móvil.",
+    feat4_title: "Cambios Ilimitados",
+    feat4_desc: "¿Nuevas fotos, precios actualizados? Solo escríbenos. Actualizaciones ilimitadas.",
+    feat5_title: "Integración con Google Maps",
+    feat5_desc: "Mapa integrado para que los clientes encuentren tu estudio de un toque.",
+    feat6_title: "Hosting Profesional y SSL",
+    feat6_desc: "Hosting rápido y seguro con certificado SSL. Tu sitio siempre en línea.",
+    price_tag: "Precios",
+    price_h2: "Precios Simples.\nSin Cuotas de Inicio. Sin Contratos.",
+    price_sub: "Comienza con una demostración gratuita — creamos tu sitio primero. Solo pagas si te encanta.",
+    p1_tier: "Inicial",
+    p1_desc: "Todo lo que necesitas para estar en línea y ser encontrado.",
+    p1_f1: "Dominio .com personalizado",
+    p1_f2: "Hosting profesional y SSL",
+    p1_f3: "Optimización SEO completa",
+    p1_f4: "Galería de fotos",
+    p1_f5: "Link de reserva integrado",
+    p1_f6: "Google Maps",
+    p1_f7: "Cambios ilimitados",
+    p2_badge: "Más Popular",
+    p2_tier: "Pro",
+    p2_desc: "Para artistas listos para crecer y medir sus resultados.",
+    p2_f1: "Todo del plan Inicial",
+    p2_f2: "Panel de analíticas",
+    p2_f3: "Soporte prioritario",
+    p2_f4: "Página de tienda / merch",
+    p2_f5: "Funciones avanzadas de galería",
+    p3_tier: "Premium",
+    p3_desc: "Servicio completo. Para artistas que quieren atención VIP.",
+    p3_f1: "Todo del plan Pro",
+    p3_f2: "Funciones e integraciones personalizadas",
+    p3_f3: "Gestor de cuenta dedicado",
+    p3_f4: "Cambios el mismo día",
+    p3_f5: "Informes mensuales de SEO",
+    per_mo: "/mes",
+    price_cta: "Comenzar con Demo Gratis",
+    faq_tag: "Preguntas Frecuentes",
+    faq_h2: "Preguntas Comunes",
+    faq1_q: "¿Qué incluye mi sitio web?",
+    faq1_a: "Cada sitio incluye dominio .com personalizado, hosting profesional, SSL, SEO de Google, galería de fotos, link de reserva, Google Maps y cambios ilimitados.",
+    faq2_q: "¿Realmente incluyen SEO?",
+    faq2_a: "Sí — optimización completa de posicionamiento en Google incluida gratis con cada sitio. Meta tags, schema markup, SEO local y diseño mobile-first.",
+    faq3_q: "¿Qué tan rápido construyen?",
+    faq3_a: "Generalmente en 24 horas. Solo envíanos tu usuario de Instagram y nos ponemos a trabajar.",
+    faq4_q: "¿Puedo hacer cambios después del lanzamiento?",
+    faq4_a: "Cambios ilimitados — siempre. Nuevas fotos, tarifas actualizadas, nuevo link de reserva. Solo escríbenos.",
+    faq5_q: "¿Qué pasa si no me gusta mi sitio?",
+    faq5_a: "Sin compromiso, nunca. La demo es completamente gratis — lo construimos, lo revisas, y si no te convence, no debes nada.",
+    faq6_q: "¿Trabajan con negocios que no son de tatuajes?",
+    faq6_a: "Absolutamente — creamos sitios para barberos, técnicas de uñas, fotógrafos, maquillistas y cualquier profesional creativo.",
+    cta_tag: "Comienza Gratis",
+    cta_h2: "¿Listo para Aparecer\nen Google?",
+    cta_sub: "Creamos tu sitio gratis. Solo pagas si te encanta. Desde $25/mes sin cuotas de inicio ni contratos.",
+    cta_btn: "Obtén Tu Sitio Gratis",
+    cta_note: "Sin tarjeta de crédito. Sin compromiso. Listo en 24 horas.",
+  }
+};
+
+let currentLang = 'en';
+
+function applyLang(lang) {
+  const t = i18n[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.textContent = t[key];
+  });
+  document.getElementById('langBtn').textContent = lang === 'en' ? 'ES' : 'EN';
+  document.documentElement.lang = lang;
+}
+
+function toggleLang() {
+  currentLang = currentLang === 'en' ? 'es' : 'en';
+  applyLang(currentLang);
+}
+
+// ─── MOBILE MENU ──────────────────────────────────────
+function toggleMenu() {
+  const menu = document.getElementById('mobileMenu');
+  menu.classList.toggle('open');
+}
+
+// ─── FAQ ACCORDION ────────────────────────────────────
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+// ─── SCROLL REVEAL ────────────────────────────────────
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ─── COUNTER ANIMATION ────────────────────────────────
+function animateCounter(el) {
+  const target = parseInt(el.getAttribute('data-target'));
+  const suffix = el.getAttribute('data-suffix') || '';
+  const duration = 1500;
+  const start = performance.now();
+  const update = (now) => {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.floor(eased * target) + suffix;
+    if (progress < 1) requestAnimationFrame(update);
+  };
+  requestAnimationFrame(update);
+}
+
+const statsObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.querySelectorAll('[data-target]').forEach(animateCounter);
+      statsObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+
+const statsEl = document.getElementById('stats');
+if (statsEl) statsObserver.observe(statsEl);
+</script>
 </body>
 </html>
