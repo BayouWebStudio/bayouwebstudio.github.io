@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Domain Confirmed — Bayou Web Studios</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0d0d1a;
+      color: #e0e0e0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .card {
+      background: #111128;
+      border: 1px solid #2a2a44;
+      border-radius: 20px;
+      padding: 48px 40px;
+      max-width: 520px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+
+    .logo {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #C9A07A;
+      margin-bottom: 36px;
+      opacity: 0.85;
+    }
+
+    .emoji { font-size: 52px; margin-bottom: 20px; display: block; }
+
+    h1 {
+      color: #ffffff;
+      font-size: 26px;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 12px;
+    }
+
+    h1 span { color: #C9A07A; }
+
+    .subtitle {
+      color: #888;
+      font-size: 15px;
+      line-height: 1.6;
+      margin-bottom: 32px;
+    }
+
+    .domain-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #1a1a30, #222238);
+      border: 1px solid #C9A07A;
+      border-radius: 12px;
+      padding: 14px 28px;
+      font-size: 22px;
+      font-weight: 700;
+      color: #C9A07A;
+      margin-bottom: 36px;
+      letter-spacing: 0.01em;
+    }
+
+    /* Spinner */
+    .spinner-wrap {
+      margin: 28px auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid #2a2a44;
+      border-top-color: #C9A07A;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .spinner-label {
+      color: #888;
+      font-size: 14px;
+    }
+
+    /* Success state */
+    .success-state { display: none; }
+
+    .success-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .success-title {
+      color: #C9A07A;
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .success-body {
+      color: #aaa;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid #2a2a44;
+      margin: 32px 0;
+    }
+
+    .footer {
+      color: #444;
+      font-size: 12px;
+    }
+
+    .footer a { color: #666; text-decoration: none; }
+    .footer a:hover { color: #C9A07A; }
+
+    /* Error state */
+    .error-notice {
+      display: none;
+      background: #1a0000;
+      border: 1px solid #5a1a1a;
+      border-radius: 8px;
+      padding: 12px 16px;
+      color: #ff8888;
+      font-size: 13px;
+      margin-top: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">Bayou Web Studios</div>
+
+    <div id="confirmState">
+      <span class="emoji">🎉</span>
+      <h1>Great choice! <span id="domainDisplay">your domain</span> is yours.</h1>
+      <p class="subtitle">We're processing your selection now.</p>
+      <div class="domain-badge" id="domainBadge">…</div>
+
+      <div class="spinner-wrap" id="spinnerWrap">
+        <div class="spinner"></div>
+        <span class="spinner-label">Registering your domain…</span>
+      </div>
+
+      <div class="error-notice" id="errorNotice">
+        Something went wrong submitting automatically. Please email
+        <a href="mailto:support@bayouwebstudio.com">support@bayouwebstudio.com</a>
+        with your domain choice.
+      </div>
+    </div>
+
+    <div class="success-state" id="successState">
+      <span class="success-icon">✅</span>
+      <div class="success-title">We're on it!</div>
+      <p class="success-body">
+        We're registering your domain now.<br>
+        <strong style="color:#fff;">Expect your site live within 24 hours.</strong>
+      </p>
+      <p class="success-body" style="margin-top:12px; font-size:13px; color:#666;">
+        You'll receive a confirmation email at your address on file.
+      </p>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="footer">
+      <a href="https://bayouwebstudio.com">bayouwebstudio.com</a>
+      &nbsp;·&nbsp; Houston, TX
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const domain = params.get('domain') || 'your domain';
+      const client = params.get('client') || '';
+      const email  = params.get('email')  || '';
+
+      // Update display
+      document.getElementById('domainDisplay').textContent = domain;
+      document.getElementById('domainBadge').textContent   = domain;
+      document.title = domain + ' — Bayou Web Studios';
+
+      // Auto-submit to Formspree
+      async function submit() {
+        try {
+          const res = await fetch('https://formspree.io/f/mgolqdey', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({ domain, client, email, type: 'domain-pick' })
+          });
+
+          if (res.ok) {
+            showSuccess();
+          } else {
+            const data = await res.json().catch(() => ({}));
+            console.error('Formspree error', res.status, data);
+            showError();
+          }
+        } catch (err) {
+          console.error('Network error', err);
+          showError();
+        }
+      }
+
+      function showSuccess() {
+        document.getElementById('confirmState').style.display = 'none';
+        document.getElementById('successState').style.display = 'block';
+      }
+
+      function showError() {
+        document.getElementById('spinnerWrap').style.display = 'none';
+        document.getElementById('errorNotice').style.display = 'block';
+      }
+
+      // Brief intentional delay so the user sees the confirmation + spinner
+      setTimeout(submit, 1800);
+    })();
+  </script>
+</body>
+</html>
