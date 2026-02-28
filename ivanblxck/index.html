@@ -1,214 +1,428 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ivan Escobar | Blackwork & Geometric Tattoo Artist | Denver, CO</title>
-<meta name="description" content="Ivan Escobar (@ivanblxck) — Blackwork, geometric, ornamental, dotwork and mandala tattoo artist based in Denver, CO. 145K+ followers. Book your consultation today.">
-<meta name="keywords" content="Ivan Escobar, ivanblxck, blackwork tattoo, geometric tattoo, mandala tattoo, dotwork, Denver tattoo artist, ornamental tattoo">
-<meta property="og:title" content="Ivan Escobar | Blackwork & Geometric Tattoo Artist">
-<meta property="og:description" content="Blackwork, geometric, ornamental, dotwork and mandala tattoo artist based in Denver, CO.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://bayouwebstudio.github.io/ivanblxck/">
-<meta property="og:image" content="img/photo_01.jpg">
-<link rel="canonical" href="https://bayouwebstudio.github.io/ivanblxck/">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Ivan Escobar",
-  "alternateName": "ivanblxck",
-  "jobTitle": "Tattoo Artist",
-  "description": "Blackwork, geometric, ornamental, dotwork and mandala tattoo artist",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Denver",
-    "addressRegion": "CO",
-    "addressCountry": "US"
-  },
-  "sameAs": ["https://www.instagram.com/ivanblxck/"],
-  "url": "https://bayouwebstudio.github.io/ivanblxck/"
-}
-</script>
-<style>
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  :root{
-    --bg:#050505;
-    --surface:#0d0d0d;
-    --gold:#b8960c;
-    --gold-light:#d4a820;
-    --white:#ffffff;
-    --gray:#888;
-    --font-display:'Georgia',serif;
-    --font-body:'Arial',sans-serif;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ivan — Blackwork & Geometric tattoo artist based in Denver, CO. 145K Instagram followers. Book your custom tattoo today.">
+  <meta property="og:title" content="Ivan | Tattoo Artist">
+  <meta property="og:description" content="Blackwork & Geometric · Denver, CO · 145K followers">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#C9A84C">
+  <title>Ivan | Tattoo Artist</title>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Ivan",
+    "jobTitle": "Tattoo Artist",
+    "description": "Blackwork & Geometric tattoo artist",
+    "address": { "@type": "PostalAddress", "addressLocality": "Denver, CO" },
+    "sameAs": ["https://www.instagram.com/ivanblxck/"]
   }
-  html{scroll-behavior:smooth}
-  body{background:var(--bg);color:var(--white);font-family:var(--font-body);overflow-x:hidden}
-  
-  /* NAV */
-  nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(5,5,5,0.95);border-bottom:1px solid rgba(184,150,12,0.2);padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(10px)}
-  .nav-logo{font-family:var(--font-display);font-size:1.4rem;letter-spacing:0.15em;color:var(--gold);text-decoration:none;text-transform:uppercase}
-  .nav-links{display:flex;gap:2rem;list-style:none}
-  .nav-links a{color:var(--gray);text-decoration:none;letter-spacing:0.1em;font-size:0.85rem;text-transform:uppercase;transition:color 0.3s}
-  .nav-links a:hover{color:var(--gold)}
-  
-  /* HERO */
-  .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;padding:2rem;background:radial-gradient(ellipse at center, #0d0d0d 0%, #050505 70%)}
-  .hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23b8960c' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
-  .hero-content{position:relative;z-index:1}
-  .hero-eyebrow{font-size:0.75rem;letter-spacing:0.4em;color:var(--gold);text-transform:uppercase;margin-bottom:1.5rem}
-  .hero-name{font-family:var(--font-display);font-size:clamp(3rem,10vw,8rem);font-weight:700;line-height:0.9;letter-spacing:-0.02em;text-transform:uppercase;margin-bottom:1rem}
-  .hero-name span{display:block;color:var(--gold)}
-  .hero-sub{font-size:clamp(0.9rem,2vw,1.1rem);letter-spacing:0.3em;color:var(--gray);text-transform:uppercase;margin-bottom:3rem}
-  .hero-divider{width:60px;height:2px;background:var(--gold);margin:0 auto 3rem}
-  .hero-stats{display:flex;gap:3rem;justify-content:center;flex-wrap:wrap}
-  .stat{text-align:center}
-  .stat-num{font-family:var(--font-display);font-size:2rem;color:var(--gold);display:block}
-  .stat-label{font-size:0.7rem;letter-spacing:0.2em;color:var(--gray);text-transform:uppercase}
-  
-  /* ABOUT */
-  .about{padding:6rem 2rem;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
-  .about-img{position:relative}
-  .about-img img{width:100%;aspect-ratio:3/4;object-fit:cover;filter:grayscale(20%)}
-  .about-img::after{content:'';position:absolute;inset:-8px -8px 8px 8px;border:1px solid var(--gold);opacity:0.3;pointer-events:none}
-  .about-text h2{font-family:var(--font-display);font-size:clamp(2rem,5vw,3.5rem);margin-bottom:1.5rem;line-height:1.1}
-  .about-text h2 em{color:var(--gold);font-style:normal}
-  .about-text p{color:var(--gray);line-height:1.8;margin-bottom:1.5rem;font-size:0.95rem}
-  .about-tags{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:2rem}
-  .tag{border:1px solid rgba(184,150,12,0.4);color:var(--gold);padding:0.4rem 1rem;font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase}
-  
-  /* GALLERY */
-  .gallery-section{padding:6rem 2rem;background:var(--surface)}
-  .section-header{text-align:center;margin-bottom:4rem}
-  .section-header h2{font-family:var(--font-display);font-size:clamp(2rem,5vw,3rem);text-transform:uppercase;letter-spacing:0.05em}
-  .section-header p{color:var(--gray);margin-top:1rem;letter-spacing:0.15em;font-size:0.85rem;text-transform:uppercase}
-  .gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:4px;max-width:1200px;margin:0 auto}
-  .gallery-item{overflow:hidden;aspect-ratio:1;position:relative;cursor:pointer}
-  .gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease,filter 0.6s ease;filter:grayscale(20%)}
-  .gallery-item:hover img{transform:scale(1.05);filter:grayscale(0%)}
-  
-  /* BOOKING */
-  .booking{padding:6rem 2rem;text-align:center;position:relative;overflow:hidden}
-  .booking::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(184,150,12,0.05) 0%,transparent 60%)}
-  .booking h2{font-family:var(--font-display);font-size:clamp(2rem,5vw,3.5rem);margin-bottom:1rem;position:relative}
-  .booking p{color:var(--gray);margin-bottom:3rem;max-width:500px;margin-left:auto;margin-right:auto;line-height:1.8;position:relative}
-  .btn-book{display:inline-block;border:1px solid var(--gold);color:var(--gold);padding:1.2rem 3rem;letter-spacing:0.3em;text-transform:uppercase;text-decoration:none;font-size:0.85rem;transition:all 0.3s;position:relative;background:transparent}
-  .btn-book:hover{background:var(--gold);color:var(--bg)}
-  
-  /* FLOATING BUTTON */
-  .float-btn{position:fixed;bottom:2rem;right:2rem;z-index:999;background:var(--gold);color:var(--bg);padding:1rem 1.8rem;text-decoration:none;font-size:0.8rem;letter-spacing:0.2em;text-transform:uppercase;font-weight:700;transition:all 0.3s;box-shadow:0 4px 20px rgba(184,150,12,0.4)}
-  .float-btn:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 8px 30px rgba(184,150,12,0.6)}
-  
-  /* FOOTER */
-  footer{background:#000;border-top:1px solid #111;padding:3rem 2rem;text-align:center}
-  .footer-logo{font-family:var(--font-display);font-size:1.5rem;color:var(--gold);margin-bottom:0.5rem}
-  .footer-sub{color:var(--gray);font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:2rem}
-  .footer-bws{color:#333;font-size:0.7rem;margin-top:2rem}
-  .footer-bws a{color:#555;text-decoration:none}
-  .footer-bws a:hover{color:var(--gold)}
-  
-  @media(max-width:768px){
-    .nav-links{display:none}
-    .about{grid-template-columns:1fr;gap:2rem}
-    .about-img::after{display:none}
-    .hero-stats{gap:1.5rem}
-  }
-</style>
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --accent: #C9A84C;
+      --accent2: #a08030;
+      --bg: #050505;
+      --bg2: #0a0a0a;
+      --card: #111111;
+      --text: #ffffff;
+      --text-muted: #888;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 16px 24px;
+      display: flex; justify-content: space-between; align-items: center;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+      backdrop-filter: blur(2px);
+    }
+    .nav-name { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent); }
+    .nav-ig { color: var(--text-muted); font-size: 0.85rem; text-decoration: none; }
+    .nav-ig:hover { color: var(--accent); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero-no-img {
+      background: linear-gradient(135deg, var(--bg) 0%, var(--bg2) 100%);
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.75) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 1;
+      text-align: center; padding: 2rem;
+      max-width: 700px;
+    }
+    .hero-content h1 {
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.8);
+    }
+    .hero-style {
+      font-size: 1.1rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .hero-location {
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 2rem;
+    }
+    .hero-cta {
+      display: inline-block;
+      padding: 14px 36px;
+      background: var(--accent);
+      color: #000;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      border-radius: 4px;
+      letter-spacing: 0.05em;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .hero-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    }
+
+    /* ABOUT */
+    section { padding: 80px 24px; max-width: 1100px; margin: 0 auto; }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    @media (max-width: 640px) {
+      .about-grid { grid-template-columns: 1fr; }
+    }
+    .artist-portrait {
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--accent);
+      display: block;
+    }
+    .artist-portrait-placeholder {
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: var(--card);
+      border: 3px solid var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 4rem; font-weight: 900;
+      color: var(--accent);
+    }
+    .about-text h2 {
+      font-size: 2rem; font-weight: 800;
+      margin-bottom: 8px;
+      color: var(--accent);
+    }
+    .about-text .followers-badge {
+      display: inline-block;
+      background: var(--card);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      margin-bottom: 16px;
+    }
+    .about-text p {
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 16px;
+      font-size: 1.05rem;
+    }
+    .detail-item {
+      display: flex; align-items: center; gap: 8px;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 8px;
+    }
+    .detail-icon { font-size: 1rem; }
+    .availability-note {
+      margin-top: 16px;
+      padding: 12px 16px;
+      background: var(--card);
+      border-left: 3px solid var(--accent);
+      border-radius: 4px;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.8);
+    }
+    .rates-box {
+      margin-top: 16px;
+      padding: 16px 20px;
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+    }
+    .rates-box h3 {
+      color: var(--accent);
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .rates-box p { color: rgba(255,255,255,0.7); font-size: 0.95rem; }
+
+    /* GALLERY */
+    .gallery-section {
+      max-width: 1200px;
+      padding: 80px 24px;
+      margin: 0 auto;
+    }
+    .section-title {
+      font-size: 1.8rem; font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .section-subtitle {
+      color: var(--text-muted);
+      margin-bottom: 40px;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 12px;
+    }
+    .gallery-item {
+      aspect-ratio: 1;
+      overflow: hidden;
+      border-radius: 6px;
+      cursor: pointer;
+      background: var(--card);
+    }
+    .gallery-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+
+    /* LIGHTBOX */
+    .lightbox {
+      display: none;
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(0,0,0,0.95);
+      align-items: center; justify-content: center;
+    }
+    .lightbox.active { display: flex; }
+    .lightbox img {
+      max-width: 90vw; max-height: 90vh;
+      object-fit: contain; border-radius: 4px;
+    }
+    .lightbox-close {
+      position: absolute; top: 20px; right: 24px;
+      color: white; font-size: 2rem; cursor: pointer;
+      background: none; border: none; line-height: 1;
+    }
+
+    /* BOOKING */
+    .booking-section {
+      background: var(--bg2);
+      padding: 80px 24px;
+      text-align: center;
+    }
+    .booking-inner { max-width: 600px; margin: 0 auto; }
+    .booking-inner h2 {
+      font-size: 2.2rem; font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .booking-inner p { color: rgba(255,255,255,0.6); margin-bottom: 32px; }
+    .book-btn {
+      display: inline-block;
+      padding: 18px 48px;
+      background: var(--accent);
+      color: #000;
+      font-weight: 800;
+      font-size: 1.1rem;
+      text-decoration: none;
+      border-radius: 4px;
+      letter-spacing: 0.05em;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .book-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    }
+    .also-email {
+      margin-top: 16px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    .also-email a { color: var(--accent); }
+
+    /* FLOATING BUTTON */
+    .float-book {
+      position: fixed; bottom: 24px; right: 24px; z-index: 99;
+      display: flex; align-items: center; gap: 8px;
+      padding: 14px 24px;
+      background: var(--accent);
+      color: #000;
+      font-weight: 700; font-size: 0.95rem;
+      text-decoration: none; border-radius: 50px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .float-book:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+    }
+
+    /* FOOTER */
+    footer {
+      background: #000;
+      padding: 32px 24px;
+      text-align: center;
+      color: rgba(255,255,255,0.3);
+      font-size: 0.85rem;
+    }
+    footer a { color: rgba(255,255,255,0.5); text-decoration: none; }
+    footer a:hover { color: var(--accent); }
+
+    /* DIVIDER */
+    .divider {
+      width: 60px; height: 3px;
+      background: var(--accent);
+      margin: 0 auto 48px;
+    }
+  </style>
 </head>
 <body>
 
 <nav>
-  <a class="nav-logo" href="#">Ivan Escobar</a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#work">Work</a></li>
-    <li><a href="#booking">Booking</a></li>
-  </ul>
+  <span class="nav-name">Ivan</span>
+  <a href="https://instagram.com/ivanblxck" target="_blank" class="nav-ig">@ivanblxck</a>
 </nav>
 
-<section class="hero">
-  <div class="hero-content">
-    <p class="hero-eyebrow">Denver, Colorado · Est. 2014</p>
-    <h1 class="hero-name">Ivan<span>Escobar</span></h1>
-    <p class="hero-sub">Blackwork · Geometric · Mandala · Dotwork</p>
-    <div class="hero-divider"></div>
-    <div class="hero-stats">
-      <div class="stat"><span class="stat-num">145K</span><span class="stat-label">Followers</span></div>
-      <div class="stat"><span class="stat-num">10+</span><span class="stat-label">Years</span></div>
-      <div class="stat"><span class="stat-num">∞</span><span class="stat-label">Precision</span></div>
+
+  <section class="hero" style="background-image: url('img/photo_01.jpg')">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>Ivan</h1>
+      <p class="hero-style">Blackwork & Geometric</p>
+      <p class="hero-location">📍 Denver, CO</p>
+      <a href="https://linktr.ee/ivanblxck" class="hero-cta" target="_blank" rel="noopener">Book Now</a>
+    </div>
+  </section>
+
+<section class="about-section" style="background: var(--bg2);">
+  <div style="max-width:1100px; margin:0 auto; padding:80px 24px;">
+    <div class="about-grid">
+      <div><img src="img/profile.jpg" alt="Ivan profile" class="artist-portrait"></div>
+      <div class="about-text">
+        <h2>Ivan</h2>
+        <span class="followers-badge">📸 145K followers</span>
+        <p>Blackwork & Geometric tattoo artist based in Denver, CO.</p>
+        
+        
+        <div class="detail-item">
+          <span class="detail-icon">📸</span>
+          <span><a href="https://instagram.com/ivanblxck" target="_blank" style="color:var(--accent)">@ivanblxck</a></span>
+        </div>
+        
+        
+      </div>
     </div>
   </div>
 </section>
 
-<section class="about" id="about">
-  <div class="about-img">
-    <img src="img/photo_01.jpg" alt="Ivan Escobar tattoo artist Denver">
-  </div>
-  <div class="about-text">
-    <h2>The Art of <em>Darkness</em></h2>
-    <p>Ivan Escobar is a Denver-based tattoo artist known for his mastery of blackwork, geometric patterns, and ornamental mandala designs. With over a decade of dedication to his craft, Ivan has cultivated a signature style that merges mathematical precision with organic beauty.</p>
-    <p>Each piece is a meditation — intricate dotwork and sacred geometry woven into permanent marks that carry meaning beyond aesthetics. Based in Denver, CO, with a global clientele drawn by his 145K+ Instagram following.</p>
-    <div class="about-tags">
-      <span class="tag">Blackwork</span>
-      <span class="tag">Geometric</span>
-      <span class="tag">Mandala</span>
-      <span class="tag">Dotwork</span>
-      <span class="tag">Ornamental</span>
-      <span class="tag">Sacred Geometry</span>
-    </div>
-  </div>
-</section>
-
-<section class="gallery-section" id="work">
-  <div class="section-header">
-    <h2>Selected Work</h2>
-    <p>Blackwork · Geometric · Ornamental</p>
-  </div>
+<div class="gallery-section">
+  <h2 class="section-title">Portfolio</h2>
+  <p class="section-subtitle">Latest work from @ivanblxck</p>
   <div class="gallery-grid">
     
-        <div class="gallery-item">
-            <img src="img/photo_02.jpg" alt="Ivan Escobar tattoo work - blackwork geometric mandala" loading="lazy">
+        <div class="gallery-item" onclick="openLightbox('photo_02.jpg')">
+          <img src="img/photo_02.jpg" alt="Ivan tattoo 2" loading="lazy">
         </div>
-        <div class="gallery-item">
-            <img src="img/photo_03.jpg" alt="Ivan Escobar tattoo work - blackwork geometric mandala" loading="lazy">
+        <div class="gallery-item" onclick="openLightbox('photo_03.jpg')">
+          <img src="img/photo_03.jpg" alt="Ivan tattoo 3" loading="lazy">
         </div>
-        <div class="gallery-item">
-            <img src="img/photo_04.jpg" alt="Ivan Escobar tattoo work - blackwork geometric mandala" loading="lazy">
+        <div class="gallery-item" onclick="openLightbox('photo_04.jpg')">
+          <img src="img/photo_04.jpg" alt="Ivan tattoo 4" loading="lazy">
         </div>
-        <div class="gallery-item">
-            <img src="img/photo_05.jpg" alt="Ivan Escobar tattoo work - blackwork geometric mandala" loading="lazy">
+        <div class="gallery-item" onclick="openLightbox('photo_05.jpg')">
+          <img src="img/photo_05.jpg" alt="Ivan tattoo 5" loading="lazy">
         </div>
-        <div class="gallery-item">
-            <img src="img/photo_06.jpg" alt="Ivan Escobar tattoo work - blackwork geometric mandala" loading="lazy">
+        <div class="gallery-item" onclick="openLightbox('photo_06.jpg')">
+          <img src="img/photo_06.jpg" alt="Ivan tattoo 6" loading="lazy">
         </div>
-        <div class="gallery-item">
-            <img src="img/photo_07.jpg" alt="Ivan Escobar tattoo work - blackwork geometric mandala" loading="lazy">
+        <div class="gallery-item" onclick="openLightbox('photo_07.jpg')">
+          <img src="img/photo_07.jpg" alt="Ivan tattoo 7" loading="lazy">
         </div>
-        <div class="gallery-item">
-            <img src="img/photo_08.jpg" alt="Ivan Escobar tattoo work - blackwork geometric mandala" loading="lazy">
+        <div class="gallery-item" onclick="openLightbox('photo_08.jpg')">
+          <img src="img/photo_08.jpg" alt="Ivan tattoo 8" loading="lazy">
         </div>
-        <div class="gallery-item">
-            <img src="img/photo_09.jpg" alt="Ivan Escobar tattoo work - blackwork geometric mandala" loading="lazy">
+        <div class="gallery-item" onclick="openLightbox('photo_09.jpg')">
+          <img src="img/photo_09.jpg" alt="Ivan tattoo 9" loading="lazy">
+        </div>
+        <div class="gallery-item" onclick="openLightbox('photo_10.jpg')">
+          <img src="img/photo_10.jpg" alt="Ivan tattoo 10" loading="lazy">
+        </div>
+        <div class="gallery-item" onclick="openLightbox('photo_11.jpg')">
+          <img src="img/photo_11.jpg" alt="Ivan tattoo 11" loading="lazy">
+        </div>
+        <div class="gallery-item" onclick="openLightbox('photo_12.jpg')">
+          <img src="img/photo_12.jpg" alt="Ivan tattoo 12" loading="lazy">
         </div>
   </div>
-</section>
+</div>
 
-<section class="booking" id="booking">
-  <h2>Start Your Journey</h2>
-  <p>Every tattoo begins with a conversation. Reach out via Instagram to discuss your vision, placement, and availability. Denver studio — worldwide travel available.</p>
-  <a class="btn-book" href="https://www.instagram.com/ivanblxck/" target="_blank" rel="noopener">Book via Instagram</a>
-</section>
+<div class="booking-section">
+  <div class="booking-inner">
+    <h2>Book Your Session</h2>
+    <p>Ready to get inked? Reach out to Ivan directly to discuss your vision and schedule your appointment.</p>
+    <a href="https://linktr.ee/ivanblxck" class="book-btn" target="_blank" rel="noopener">Book Now</a>
+    
+  </div>
+</div>
+
+<a href="https://linktr.ee/ivanblxck" class="float-book" target="_blank" rel="noopener">
+  ✏️ Book Now
+</a>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt="Tattoo">
+</div>
 
 <footer>
-  <div class="footer-logo">Ivan Escobar</div>
-  <div class="footer-sub">@ivanblxck · Denver, CO</div>
-  <div style="color:#333;font-size:0.75rem;letter-spacing:0.2em">
-    <a href="https://www.instagram.com/ivanblxck/" target="_blank" rel="noopener" style="color:#555;text-decoration:none">Instagram</a>
-  </div>
-  <div class="footer-bws">Site crafted by <a href="https://bayouwebstudio.github.io" target="_blank">Bayou Web Studio</a></div>
+  <p>Demo site built by <a href="https://bayouwebstudios.com" target="_blank">Bayou Web Studios</a> · All images © @ivanblxck</p>
 </footer>
 
-<a class="float-btn" href="https://www.instagram.com/ivanblxck/" target="_blank" rel="noopener">✦ Book Now</a>
-
+<script>
+  function openLightbox(fname) {
+    document.getElementById('lightbox-img').src = 'img/' + fname;
+    document.getElementById('lightbox').classList.add('active');
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+  }
+  document.addEventListener('keydown', (e) => { if(e.key==='Escape') closeLightbox(); });
+</script>
 </body>
 </html>
