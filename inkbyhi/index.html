@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hot Hands Henry | Tattoo Artist | Kuro Tattoo Hawaii</title>
+  <meta name="description" content="Hot Hands Henry (@ink_by_hi) — versatile tattoo artist at Kuro Tattoo, Hawaii. Japanese traditional, neo-trad floral, geometric, blackwork, and color work. DM to book." />
+  <meta name="keywords" content="tattoo artist Hawaii, Japanese traditional tattoo, Kuro Tattoo, Hot Hands Henry, ink by hi, geometric tattoo Hawaii, floral tattoo, blackwork" />
+  <meta name="author" content="Hot Hands Henry" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Hot Hands Henry | Tattoo Artist | Kuro Tattoo Hawaii" />
+  <meta property="og:description" content="Versatile tattoo artist based in Hawaii. Japanese traditional, neo-trad floral, geometric, blackwork, color. DM @ink_by_hi to book." />
+  <meta property="og:image" content="img/profile.jpg" />
+  <meta property="og:url" content="https://bayouwebstudio.com/inkbyhi/" />
+  <meta property="og:type" content="website" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Hot Hands Henry | Tattoo Artist | Kuro Tattoo Hawaii" />
+  <meta name="twitter:description" content="Japanese traditional, neo-trad floral, geometric, blackwork & color — Hawaii 🌺" />
+  <meta name="twitter:image" content="img/profile.jpg" />
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Hot Hands Henry",
+    "alternateName": "ink_by_hi",
+    "jobTitle": "Tattoo Artist",
+    "worksFor": {
+      "@type": "LocalBusiness",
+      "name": "Kuro Tattoo",
+      "address": {
+        "@type": "PostalAddress",
+        "addressRegion": "Hawaii",
+        "addressCountry": "US"
+      }
+    },
+    "sameAs": [
+      "https://www.instagram.com/ink_by_hi/",
+      "https://www.instagram.com/kurotattoo_hi/"
+    ],
+    "image": "img/profile.jpg",
+    "description": "Versatile tattoo artist at Kuro Tattoo, Hawaii. Specializing in Japanese traditional, neo-trad floral, geometric, blackwork, and color tattoos."
+  }
+  </script>
+
+  <style>
+    /* ── Reset & Variables ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0a;
+      --text: #f0f0f0;
+      --text-muted: #aaa;
+      --accent: #c0392b;
+      --accent-dark: #96281b;
+      --wood: #2c1810;
+      --wood-light: #3d2418;
+      --border: rgba(192,57,43,0.25);
+      --font-display: 'Georgia', 'Times New Roman', serif;
+      --font-body: system-ui, -apple-system, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── Navigation ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(10,10,10,0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── Hero ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 1.5rem 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(ellipse at 50% 40%, rgba(192,57,43,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 20% 80%, rgba(44,24,16,0.4) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    /* Japanese wave pattern overlay */
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 200px;
+      background: linear-gradient(to top, var(--bg), transparent);
+      pointer-events: none;
+    }
+
+    .hero-kamon {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      opacity: 0.6;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .profile-pic-wrap {
+      position: relative;
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 2rem;
+    }
+
+    .profile-pic-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      background: conic-gradient(var(--accent), var(--wood), var(--accent));
+      animation: spin 8s linear infinite;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .profile-pic {
+      position: relative;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--bg);
+      z-index: 1;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.3em 0.9em;
+      border-radius: 2px;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 8vw, 5.5rem);
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, #f0f0f0 0%, #c0392b 50%, #f0f0f0 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-handle {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+
+    .hero-handle span { color: var(--accent); }
+
+    .hero-location {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      margin-bottom: 2rem;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      padding: 0.9em 2em;
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      transition: background 0.2s, transform 0.2s;
+      font-weight: 600;
+    }
+
+    .hero-cta:hover {
+      background: var(--accent-dark);
+      transform: translateY(-2px);
+    }
+
+    /* Japanese decorative divider */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 3rem auto;
+      max-width: 400px;
+      padding: 0 1.5rem;
+    }
+
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--accent), transparent);
+    }
+
+    .divider-icon {
+      color: var(--accent);
+      font-size: 1.2rem;
+      opacity: 0.8;
+    }
+
+    /* ── Sections ── */
+    section {
+      padding: 5rem 1.5rem;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.03em;
+    }
+
+    /* ── About ── */
+    .about {
+      background: linear-gradient(to bottom, var(--bg), var(--wood) 50%, var(--bg));
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .about-text p {
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+
+    .about-text p strong {
+      color: var(--text);
+    }
+
+    .style-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .style-tag {
+      background: rgba(192,57,43,0.15);
+      border: 1px solid var(--border);
+      color: var(--accent);
+      padding: 0.3em 0.8em;
+      font-size: 0.8rem;
+      border-radius: 2px;
+      letter-spacing: 0.05em;
+    }
+
+    .about-kanji {
+      text-align: center;
+      font-size: 8rem;
+      line-height: 1;
+      opacity: 0.08;
+      font-family: serif;
+      user-select: none;
+      position: relative;
+    }
+
+    .about-kanji::after {
+      content: '黒';
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 8rem;
+      opacity: 1;
+    }
+
+    /* ── Gallery ── */
+    .gallery-section {
+      background: var(--bg);
+    }
+
+    .gallery-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    /* Masonry grid */
+    .masonry {
+      columns: 3;
+      column-gap: 12px;
+    }
+
+    .masonry-item {
+      break-inside: avoid;
+      margin-bottom: 12px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .masonry-item img {
+      width: 100%;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .masonry-item:hover img {
+      transform: scale(1.04);
+    }
+
+    .masonry-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(192,57,43,0.0);
+      transition: background 0.3s;
+    }
+
+    .masonry-item:hover::after {
+      background: rgba(192,57,43,0.12);
+    }
+
+    /* ── Shop ── */
+    .shop-section {
+      background: var(--wood);
+      text-align: center;
+    }
+
+    .shop-card {
+      display: inline-block;
+      background: rgba(10,10,10,0.6);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 3rem 4rem;
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .shop-kanji {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .shop-name {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+
+    .shop-subtitle {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+    }
+
+    .shop-link {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 1rem;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--accent);
+      transition: opacity 0.2s;
+    }
+
+    .shop-link:hover { opacity: 0.7; }
+
+    /* ── Book CTA ── */
+    .book-section {
+      background: linear-gradient(135deg, var(--bg) 0%, #1a0a08 50%, var(--bg) 100%);
+      text-align: center;
+    }
+
+    .book-section .section-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+    }
+
+    .book-section p {
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+    }
+
+    .book-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      padding: 1em 2.5em;
+      font-size: 1rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 3px;
+      font-weight: 700;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(192,57,43,0.3);
+    }
+
+    .book-btn:hover {
+      background: var(--accent-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(192,57,43,0.4);
+    }
+
+    /* ── Contact ── */
+    .contact-section {
+      background: var(--bg);
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      max-width: 700px;
+      margin: 2rem auto 0;
+    }
+
+    .contact-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .contact-item-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .contact-item-value {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: opacity 0.2s;
+    }
+
+    .contact-item-value:hover { opacity: 0.7; }
+
+    /* ── Footer ── */
+    footer {
+      background: #050505;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding: 2rem 1.5rem;
+      text-align: center;
+    }
+
+    footer p {
+      color: rgba(255,255,255,0.25);
+      font-size: 0.8rem;
+    }
+
+    footer a {
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    footer a:hover { color: var(--accent); }
+
+    /* ── Floating Book Button ── */
+    .float-book {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      padding: 0.75em 1.4em;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      box-shadow: 0 4px 20px rgba(192,57,43,0.5);
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      animation: pulse-glow 3s ease-in-out infinite;
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 4px 20px rgba(192,57,43,0.5); }
+      50% { box-shadow: 0 4px 35px rgba(192,57,43,0.8); }
+    }
+
+    .float-book:hover {
+      background: var(--accent-dark);
+      transform: translateY(-3px);
+    }
+
+    /* ── Lightbox ── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: rgba(0,0,0,0.95);
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .lightbox.active { display: flex; }
+
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 4px;
+      box-shadow: 0 20px 80px rgba(0,0,0,0.8);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      color: rgba(255,255,255,0.6);
+      font-size: 2rem;
+      cursor: pointer;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+
+    .lightbox-close:hover { color: var(--accent); }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(192,57,43,0.6);
+      color: #fff;
+      border: none;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .lightbox-nav:hover { background: var(--accent); }
+    .lightbox-nav.prev { left: 1rem; }
+    .lightbox-nav.next { right: 1rem; }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-kanji { display: none; }
+
+      .masonry { columns: 2; }
+
+      .shop-card { padding: 2rem 1.5rem; }
+
+      .contact-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    }
+
+    @media (max-width: 480px) {
+      .masonry { columns: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <a class="nav-logo" href="#">黒 · ink_by_hi</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#shop">Shop</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-kamon">🌸</div>
+
+    <div class="profile-pic-wrap">
+      <img src="img/profile.jpg" alt="Hot Hands Henry — @ink_by_hi" class="profile-pic" />
+    </div>
+
+    <div class="hero-badge">Artist</div>
+    <h1>HOT HANDS HENRY</h1>
+    <p class="hero-handle"><span>@ink_by_hi</span></p>
+    <p class="hero-location">Kuro Tattoo · Hawaii 🌺</p>
+
+    <a class="hero-cta" href="https://www.instagram.com/ink_by_hi/" target="_blank" rel="noopener">
+      📲 DM to Book
+    </a>
+  </section>
+
+  <!-- Divider -->
+  <div class="divider">
+    <div class="divider-line"></div>
+    <div class="divider-icon">⛩</div>
+    <div class="divider-line"></div>
+  </div>
+
+  <!-- About -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-text">
+          <p class="section-label">About the Artist</p>
+          <h2 class="section-title">Hot Hands Henry</h2>
+          <p>
+            Based out of <strong>Kuro Tattoo</strong> in Hawaii, Henry brings a rare versatility to the tattoo world.
+            Whether he's layering color into a blooming chrysanthemum, carving out a geometric mandala, or pulling
+            clean fine lines through a neo-trad floral — every piece carries the same intention and precision.
+          </p>
+          <p>
+            <strong>"Hot Hands"</strong> isn't just a nickname. It's a reputation earned piece by piece, session by session.
+            From bold Japanese traditional to intricate blackwork, Henry's range is as wide as the Pacific he works beside.
+          </p>
+          <div class="style-tags">
+            <span class="style-tag">Japanese Traditional</span>
+            <span class="style-tag">Neo-Trad Floral</span>
+            <span class="style-tag">Geometric</span>
+            <span class="style-tag">Mandala</span>
+            <span class="style-tag">Fine Line</span>
+            <span class="style-tag">Blackwork</span>
+            <span class="style-tag">Full Color</span>
+          </div>
+        </div>
+        <div class="about-kanji" aria-hidden="true">黒</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="divider">
+    <div class="divider-line"></div>
+    <div class="divider-icon">🀄</div>
+    <div class="divider-line"></div>
+  </div>
+
+  <!-- Gallery -->
+  <section class="gallery-section" id="gallery">
+    <div class="container">
+      <div class="gallery-header">
+        <p class="section-label">Portfolio</p>
+        <h2 class="section-title">The Work</h2>
+        <p style="color:var(--text-muted); max-width:500px; margin:0 auto; font-size:0.95rem;">
+          Japanese floral next to geometric mandala. Color next to blackwork. The range is the point.
+        </p>
+      </div>
+
+      <div class="masonry" id="gallery-grid">
+        <div class="masonry-item" onclick="openLightbox(0)">
+          <img src="img/tattoo_01.jpg" alt="Tattoo by Hot Hands Henry" loading="lazy" />
+        </div>
+        <div class="masonry-item" onclick="openLightbox(1)">
+          <img src="img/tattoo_02.jpg" alt="Tattoo by Hot Hands Henry" loading="lazy" />
+        </div>
+        <div class="masonry-item" onclick="openLightbox(2)">
+          <img src="img/tattoo_03.jpg" alt="Tattoo by Hot Hands Henry" loading="lazy" />
+        </div>
+        <div class="masonry-item" onclick="openLightbox(3)">
+          <img src="img/tattoo_04.jpg" alt="Tattoo by Hot Hands Henry" loading="lazy" />
+        </div>
+        <div class="masonry-item" onclick="openLightbox(4)">
+          <img src="img/tattoo_05.jpg" alt="Tattoo by Hot Hands Henry" loading="lazy" />
+        </div>
+        <div class="masonry-item" onclick="openLightbox(5)">
+          <img src="img/tattoo_06.jpg" alt="Tattoo by Hot Hands Henry" loading="lazy" />
+        </div>
+        <div class="masonry-item" onclick="openLightbox(6)">
+          <img src="img/tattoo_07.jpg" alt="Tattoo by Hot Hands Henry" loading="lazy" />
+        </div>
+        <div class="masonry-item" onclick="openLightbox(7)">
+          <img src="img/tattoo_08.jpg" alt="Tattoo by Hot Hands Henry" loading="lazy" />
+        </div>
+        <div class="masonry-item" onclick="openLightbox(8)">
+          <img src="img/tattoo_09.jpg" alt="Tattoo by Hot Hands Henry" loading="lazy" />
+        </div>
+        <div class="masonry-item" onclick="openLightbox(9)">
+          <img src="img/tattoo_10.jpg" alt="Tattoo by Hot Hands Henry" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="divider">
+    <div class="divider-line"></div>
+    <div class="divider-icon">🌺</div>
+    <div class="divider-line"></div>
+  </div>
+
+  <!-- Shop -->
+  <section class="shop-section" id="shop">
+    <div class="container">
+      <p class="section-label">Find Me At</p>
+      <div class="shop-card">
+        <span class="shop-kanji">黒</span>
+        <h2 class="shop-name">Kuro Tattoo</h2>
+        <p class="shop-subtitle">Hawaii 🌺</p>
+        <a class="shop-link" href="https://www.instagram.com/kurotattoo_hi/" target="_blank" rel="noopener">
+          @kurotattoo_hi
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Book CTA -->
+  <section class="book-section" id="book">
+    <div class="container">
+      <p class="section-label">Ready?</p>
+      <h2 class="section-title">Let's Build Something</h2>
+      <p>DM on Instagram to discuss your tattoo. Consultations by appointment.</p>
+      <a class="book-btn" href="https://www.instagram.com/ink_by_hi/" target="_blank" rel="noopener">
+        📲 DM to Book
+      </a>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact-section" id="contact">
+    <div class="container">
+      <p class="section-label">Connect</p>
+      <h2 class="section-title">Get in Touch</h2>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <span class="contact-item-label">Instagram</span>
+          <a class="contact-item-value" href="https://www.instagram.com/ink_by_hi/" target="_blank" rel="noopener">
+            @ink_by_hi
+          </a>
+        </div>
+        <div class="contact-item">
+          <span class="contact-item-label">Shop</span>
+          <a class="contact-item-value" href="https://www.instagram.com/kurotattoo_hi/" target="_blank" rel="noopener">
+            @kurotattoo_hi
+          </a>
+        </div>
+        <div class="contact-item">
+          <span class="contact-item-label">Location</span>
+          <span class="contact-item-value">Hawaii 🌺</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      © 2025 Hot Hands Henry · <a href="https://www.instagram.com/ink_by_hi/" target="_blank" rel="noopener">@ink_by_hi</a>
+      &nbsp;·&nbsp;
+      Demo site by <a href="https://bayouwebstudio.com" target="_blank" rel="noopener">Bayou Web Studio</a>
+    </p>
+  </footer>
+
+  <!-- Floating Book Button -->
+  <a class="float-book" href="https://www.instagram.com/ink_by_hi/" target="_blank" rel="noopener">
+    📲 Book Now
+  </a>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" onclick="closeLightboxOnOverlay(event)">
+    <span class="lightbox-close" onclick="closeLightbox()">✕</span>
+    <button class="lightbox-nav prev" onclick="event.stopPropagation(); navLightbox(-1)">‹</button>
+    <img id="lightbox-img" src="" alt="Tattoo by Hot Hands Henry" />
+    <button class="lightbox-nav next" onclick="event.stopPropagation(); navLightbox(1)">›</button>
+  </div>
+
+  <script>
+    const images = [
+      'img/tattoo_01.jpg','img/tattoo_02.jpg','img/tattoo_03.jpg',
+      'img/tattoo_04.jpg','img/tattoo_05.jpg','img/tattoo_06.jpg',
+      'img/tattoo_07.jpg','img/tattoo_08.jpg','img/tattoo_09.jpg',
+      'img/tattoo_10.jpg'
+    ];
+    let currentIndex = 0;
+
+    function openLightbox(idx) {
+      currentIndex = idx;
+      document.getElementById('lightbox-img').src = images[idx];
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function closeLightboxOnOverlay(e) {
+      if (e.target === document.getElementById('lightbox')) closeLightbox();
+    }
+
+    function navLightbox(dir) {
+      currentIndex = (currentIndex + dir + images.length) % images.length;
+      document.getElementById('lightbox-img').src = images[currentIndex];
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') navLightbox(-1);
+      if (e.key === 'ArrowRight') navLightbox(1);
+    });
+
+    // Navbar scroll effect
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      nav.style.boxShadow = window.scrollY > 50 
+        ? '0 2px 20px rgba(192,57,43,0.15)' 
+        : 'none';
+    });
+  </script>
+</body>
+</html>
