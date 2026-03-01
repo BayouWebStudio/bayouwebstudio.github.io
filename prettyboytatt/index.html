@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prettyboytatt | Black &amp; Gray Realism Tattoo Artist | Houston TX</title>
+  <meta name="description" content="PRETTYBOYTATT — Black &amp; gray realism specialist. Hyper-realistic portraits, mythology, Greek gods, full sleeves and back pieces. Based in Houston, TX at Blessed Tattoo HTX. DM to book." />
+  <meta name="keywords" content="prettyboytatt, black gray realism tattoo, Houston tattoo artist, portrait tattoo, mythology tattoo, Greek gods tattoo, sleeve tattoo, back piece tattoo, blessed tattoo htx" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Prettyboytatt | Black &amp; Gray Realism | Houston TX" />
+  <meta property="og:description" content="Hyper-realistic black &amp; gray realism. Portraits, mythology, sleeves, back pieces. Houston, TX — @blessedtattoohtx. DM to book." />
+  <meta property="og:image" content="https://bayouwebstudio.com/prettyboytatt/img/profile_pic.jpg" />
+  <meta property="og:url" content="https://bayouwebstudio.com/prettyboytatt/" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Prettyboytatt | Black &amp; Gray Realism | Houston TX" />
+  <meta name="twitter:description" content="Hyper-realistic portraits, mythology, Greek gods. Houston TX. DM @prettyboytatt to book." />
+  <meta name="twitter:image" content="https://bayouwebstudio.com/prettyboytatt/img/profile_pic.jpg" />
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "PRETTYBOYTATT",
+    "description": "Black and gray realism tattoo artist specializing in hyper-realistic portraits, mythology, Greek gods, sleeves and back pieces.",
+    "url": "https://bayouwebstudio.com/prettyboytatt/",
+    "image": "https://bayouwebstudio.com/prettyboytatt/img/profile_pic.jpg",
+    "sameAs": [
+      "https://www.instagram.com/prettyboytatt/",
+      "https://www.instagram.com/blessedtattoohtx/"
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Houston",
+      "addressRegion": "TX",
+      "addressCountry": "US"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 29.7604,
+      "longitude": -95.3698
+    }
+  }
+  </script>
+
+  <style>
+    /* ─── RESET & BASE ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #060606;
+      --surface: #0d0d0d;
+      --surface2: #111111;
+      --text: #f0f0f0;
+      --text-muted: #888;
+      --gold: #b8860b;
+      --gold-light: #d4a017;
+      --gold-glow: rgba(184,134,11,0.4);
+      --gold-subtle: rgba(184,134,11,0.12);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Georgia', 'Times New Roman', serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ─── FLOATING BOOK BUTTON ─── */
+    .float-book {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 1000;
+      background: var(--gold);
+      color: #000;
+      font-family: 'Arial', sans-serif;
+      font-weight: 900;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.85rem 1.5rem;
+      border-radius: 2px;
+      box-shadow: 0 0 20px var(--gold-glow), 0 4px 20px rgba(0,0,0,0.6);
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+    .float-book:hover {
+      background: var(--gold-light);
+      box-shadow: 0 0 30px rgba(184,134,11,0.7), 0 4px 30px rgba(0,0,0,0.8);
+      transform: translateY(-2px);
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      padding: 6rem 2rem 4rem;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 50% 60%, rgba(184,134,11,0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 120% 80% at 50% 100%, rgba(184,134,11,0.04) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 2.5rem;
+      opacity: 0.9;
+    }
+    .hero-profile {
+      position: relative;
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 2.5rem;
+    }
+    .hero-profile img {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      position: relative;
+      z-index: 1;
+      filter: grayscale(30%) contrast(1.1);
+    }
+    .hero-profile::before {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      background: conic-gradient(var(--gold), var(--gold-light), #8b6914, var(--gold), var(--gold-light), var(--gold));
+      z-index: 0;
+      animation: ringRotate 8s linear infinite;
+    }
+    .hero-profile::after {
+      content: '';
+      position: absolute;
+      inset: -12px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%);
+      z-index: 0;
+      animation: ringPulse 3s ease-in-out infinite;
+    }
+    @keyframes ringRotate { to { transform: rotate(360deg); } }
+    @keyframes ringPulse { 0%,100% { opacity: 0.6; } 50% { opacity: 1; } }
+
+    .hero-title {
+      font-family: 'Arial Black', 'Arial', sans-serif;
+      font-size: clamp(3rem, 12vw, 9rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      line-height: 0.9;
+      margin-bottom: 1.2rem;
+      background: linear-gradient(180deg, #ffffff 0%, #c8c8c8 60%, #888 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 40px rgba(255,255,255,0.08));
+    }
+    .hero-subtitle {
+      font-family: 'Arial', sans-serif;
+      font-size: clamp(0.75rem, 2vw, 1rem);
+      font-weight: 400;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+    .hero-location {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.25em;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      text-transform: uppercase;
+    }
+    .hero-booking {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-family: 'Arial', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0.9rem 2rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 15px rgba(184,134,11,0.2), inset 0 0 15px rgba(184,134,11,0.03);
+    }
+    .hero-booking:hover {
+      background: var(--gold);
+      color: #000;
+      box-shadow: 0 0 30px rgba(184,134,11,0.5);
+    }
+    .hero-divider {
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 2.5rem auto 0;
+    }
+
+    /* ─── CREDENTIALS BAR ─── */
+    .creds {
+      background: var(--surface);
+      border-top: 1px solid rgba(184,134,11,0.15);
+      border-bottom: 1px solid rgba(184,134,11,0.15);
+      padding: 1.5rem 2rem;
+    }
+    .creds-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0;
+    }
+    .cred-item {
+      text-align: center;
+      padding: 0.75rem 2rem;
+      position: relative;
+      flex: 1;
+      min-width: 140px;
+    }
+    .cred-item + .cred-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 20%;
+      height: 60%;
+      width: 1px;
+      background: rgba(184,134,11,0.25);
+    }
+    .cred-value {
+      font-family: 'Arial Black', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: var(--gold);
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+    .cred-label {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 0.3rem;
+    }
+
+    /* ─── SECTIONS ─── */
+    section { padding: 5rem 2rem; }
+    .section-inner { max-width: 900px; margin: 0 auto; }
+    .section-tag {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+    }
+    .section-title {
+      font-family: 'Arial Black', sans-serif;
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ─── ABOUT ─── */
+    .about { background: var(--surface); }
+    .about-body {
+      font-size: 1.1rem;
+      color: #ccc;
+      line-height: 1.9;
+      max-width: 620px;
+    }
+    .about-body strong { color: var(--text); }
+    .about-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 2rem;
+    }
+    .about-tag {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(184,134,11,0.3);
+      padding: 0.4rem 1rem;
+      background: var(--gold-subtle);
+    }
+
+    /* ─── GALLERY ─── */
+    .gallery-section { background: var(--bg); }
+    .gallery-grid {
+      columns: 3;
+      column-gap: 8px;
+      margin-top: 2.5rem;
+    }
+    .gallery-item {
+      break-inside: avoid;
+      margin-bottom: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+    }
+    .gallery-item img {
+      width: 100%;
+      display: block;
+      transition: transform 0.5s ease, filter 0.5s ease;
+      filter: grayscale(15%) contrast(1.05);
+    }
+    .gallery-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(184,134,11,0.15);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .gallery-item:hover img { transform: scale(1.03); filter: grayscale(0%) contrast(1.1); }
+    .gallery-item:hover::after { opacity: 1; }
+
+    /* ─── LIGHTBOX ─── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(0,0,0,0.97);
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .lightbox.active { display: flex; }
+    .lightbox-img {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+      box-shadow: 0 0 80px rgba(184,134,11,0.2);
+    }
+    .lightbox-close {
+      position: fixed;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: none;
+      border: 1px solid rgba(255,255,255,0.3);
+      color: #fff;
+      width: 44px;
+      height: 44px;
+      font-size: 1.4rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .lightbox-close:hover { border-color: var(--gold); color: var(--gold); }
+    .lightbox-prev, .lightbox-next {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      width: 48px;
+      height: 48px;
+      font-size: 1.4rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .lightbox-prev { left: 1rem; }
+    .lightbox-next { right: 1rem; }
+    .lightbox-prev:hover, .lightbox-next:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ─── BOOK CTA ─── */
+    .book-cta {
+      background: var(--surface);
+      text-align: center;
+      border-top: 1px solid rgba(184,134,11,0.1);
+      border-bottom: 1px solid rgba(184,134,11,0.1);
+    }
+    .book-cta .section-inner { max-width: 600px; }
+    .book-cta-tagline {
+      font-size: clamp(1.6rem, 5vw, 2.8rem);
+      font-family: 'Georgia', serif;
+      font-style: italic;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+    .book-cta-sub {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+    }
+    .book-btn {
+      display: inline-block;
+      background: var(--gold);
+      color: #000;
+      font-family: 'Arial', sans-serif;
+      font-weight: 900;
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 1.1rem 3rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 30px rgba(184,134,11,0.3);
+    }
+    .book-btn:hover {
+      background: var(--gold-light);
+      box-shadow: 0 0 50px rgba(184,134,11,0.5);
+      transform: translateY(-2px);
+    }
+
+    /* ─── CONTACT ─── */
+    .contact { background: var(--bg); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-top: 2.5rem;
+    }
+    .contact-item {}
+    .contact-label {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+    .contact-value {
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+    .contact-value a:hover { color: var(--gold); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid rgba(184,134,11,0.1);
+      padding: 2rem;
+      text-align: center;
+    }
+    .footer-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-copy {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+    .footer-bws {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+    }
+    .footer-bws a { color: var(--gold); }
+    .footer-bws a:hover { text-decoration: underline; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      .gallery-grid { columns: 2; }
+      .cred-item { min-width: 120px; padding: 0.6rem 1rem; }
+      .cred-value { font-size: 1.1rem; }
+      .float-book { bottom: 1rem; right: 1rem; padding: 0.75rem 1.2rem; font-size: 0.75rem; }
+    }
+    @media (max-width: 480px) {
+      .gallery-grid { columns: 1; }
+      .creds-inner { flex-direction: column; }
+      .cred-item + .cred-item::before { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Floating Book Button -->
+<a href="https://www.instagram.com/prettyboytatt/" target="_blank" rel="noopener" class="float-book">
+  📱 Book Now
+</a>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-eyebrow">Houston, TX &nbsp;·&nbsp; Black &amp; Gray Realism</div>
+
+  <div class="hero-profile">
+    <img src="img/profile_pic.jpg" alt="PRETTYBOYTATT — Black &amp; Gray Realism Tattoo Artist" />
+  </div>
+
+  <h1 class="hero-title">Prettyboytatt</h1>
+  <p class="hero-subtitle">Black &amp; Gray Realism</p>
+  <p class="hero-location">📍 Houston, TX &nbsp;·&nbsp; @blessedtattoohtx</p>
+
+  <a href="https://www.instagram.com/prettyboytatt/" target="_blank" rel="noopener" class="hero-booking">
+    <span>📱</span> DM for Booking
+  </a>
+  <div class="hero-divider"></div>
+</section>
+
+<!-- ═══ CREDENTIALS BAR ═══ -->
+<div class="creds">
+  <div class="creds-inner">
+    <div class="cred-item">
+      <div class="cred-value">68.6K</div>
+      <div class="cred-label">Followers</div>
+    </div>
+    <div class="cred-item">
+      <div class="cred-value">215</div>
+      <div class="cred-label">Posts</div>
+    </div>
+    <div class="cred-item">
+      <div class="cred-value">B&amp;G</div>
+      <div class="cred-label">Realism Specialist</div>
+    </div>
+    <div class="cred-item">
+      <div class="cred-value" style="font-size:1rem; letter-spacing:0">@blessedtattoohtx</div>
+      <div class="cred-label">Houston TX</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ABOUT ═══ -->
+<section class="about">
+  <div class="section-inner">
+    <div class="section-tag">About the Artist</div>
+    <h2 class="section-title">Where Mythology<br />Meets Skin</h2>
+    <p class="about-body">
+      <strong>PRETTYBOYTATT</strong> is a black &amp; gray realism specialist based in Houston, TX, 
+      working out of <strong>Blessed Tattoo HTX</strong>. Known for insane hyper-realistic portraits, 
+      Greek gods, mythology figures, and cinematic full sleeves and back pieces — every tattoo is 
+      executed with the precision and drama of a movie poster.
+      <br /><br />
+      From Zeus to Wolverine, from warrior portraits to full back murals, the work speaks for itself. 
+      If you're ready to commit to a masterpiece, <strong>DM @prettyboytatt on Instagram to book.</strong>
+    </p>
+    <div class="about-tags">
+      <span class="about-tag">Portrait Realism</span>
+      <span class="about-tag">Greek Mythology</span>
+      <span class="about-tag">Full Sleeves</span>
+      <span class="about-tag">Back Pieces</span>
+      <span class="about-tag">Black &amp; Gray</span>
+      <span class="about-tag">Houston TX</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ GALLERY ═══ -->
+<section class="gallery-section">
+  <div class="section-inner">
+    <div class="section-tag">Portfolio</div>
+    <h2 class="section-title">The Work</h2>
+  </div>
+  <div style="max-width:1200px; margin:0 auto; padding:0 1rem;">
+    <div class="gallery-grid" id="galleryGrid">
+      <div class="gallery-item" data-index="0"><img src="img/post_1_img0.jpg" alt="Black and gray realism tattoo by Prettyboytatt" loading="lazy" /></div>
+      <div class="gallery-item" data-index="1"><img src="img/post_1_img1.jpg" alt="Black and gray realism tattoo by Prettyboytatt" loading="lazy" /></div>
+      <div class="gallery-item" data-index="2"><img src="img/post_1_img2.jpg" alt="Black and gray realism tattoo by Prettyboytatt" loading="lazy" /></div>
+      <div class="gallery-item" data-index="3"><img src="img/post_2_main.jpg" alt="Black and gray realism tattoo by Prettyboytatt" loading="lazy" /></div>
+      <div class="gallery-item" data-index="4"><img src="img/post_3_img0.jpg" alt="Black and gray realism tattoo by Prettyboytatt" loading="lazy" /></div>
+      <div class="gallery-item" data-index="5"><img src="img/post_3_img1.jpg" alt="Back piece tattoo by Prettyboytatt" loading="lazy" /></div>
+      <div class="gallery-item" data-index="6"><img src="img/post_3_img2.jpg" alt="Black and gray realism tattoo by Prettyboytatt" loading="lazy" /></div>
+      <div class="gallery-item" data-index="7"><img src="img/post_3_img3.jpg" alt="Black and gray realism tattoo by Prettyboytatt" loading="lazy" /></div>
+      <div class="gallery-item" data-index="8"><img src="img/post_4_img0.jpg" alt="Black and gray realism tattoo by Prettyboytatt" loading="lazy" /></div>
+      <div class="gallery-item" data-index="9"><img src="img/post_4_img1.jpg" alt="Black and gray realism tattoo by Prettyboytatt" loading="lazy" /></div>
+      <div class="gallery-item" data-index="10"><img src="img/post_4_img2.jpg" alt="Black and gray realism tattoo by Prettyboytatt" loading="lazy" /></div>
+      <div class="gallery-item" data-index="11"><img src="img/post_6_img0.jpg" alt="Black and gray realism tattoo by Prettyboytatt" loading="lazy" /></div>
+      <div class="gallery-item" data-index="12"><img src="img/post_6_img1.jpg" alt="Black and gray realism tattoo by Prettyboytatt" loading="lazy" /></div>
+      <div class="gallery-item" data-index="13"><img src="img/post_6_img2.jpg" alt="Black and gray realism tattoo by Prettyboytatt" loading="lazy" /></div>
+      <div class="gallery-item" data-index="14"><img src="img/post_7_main.jpg" alt="Black and gray realism tattoo by Prettyboytatt" loading="lazy" /></div>
+      <div class="gallery-item" data-index="15"><img src="img/post_10_img0.jpg" alt="Black and gray realism tattoo by Prettyboytatt" loading="lazy" /></div>
+      <div class="gallery-item" data-index="16"><img src="img/post_10_img1.jpg" alt="Black and gray realism tattoo by Prettyboytatt" loading="lazy" /></div>
+      <div class="gallery-item" data-index="17"><img src="img/post_10_img2.jpg" alt="Black and gray realism tattoo by Prettyboytatt" loading="lazy" /></div>
+      <div class="gallery-item" data-index="18"><img src="img/post_11_img0.jpg" alt="Black and gray realism tattoo by Prettyboytatt" loading="lazy" /></div>
+      <div class="gallery-item" data-index="19"><img src="img/post_11_img1.jpg" alt="Black and gray realism tattoo by Prettyboytatt" loading="lazy" /></div>
+      <div class="gallery-item" data-index="20"><img src="img/post_0_main.jpg" alt="Black and gray realism tattoo by Prettyboytatt" loading="lazy" /></div>
+      <div class="gallery-item" data-index="21"><img src="img/post_5_main.jpg" alt="Black and gray realism tattoo by Prettyboytatt" loading="lazy" /></div>
+      <div class="gallery-item" data-index="22"><img src="img/post_8_main.jpg" alt="Black and gray realism tattoo by Prettyboytatt" loading="lazy" /></div>
+      <div class="gallery-item" data-index="23"><img src="img/post_9_main.jpg" alt="Black and gray realism tattoo by Prettyboytatt" loading="lazy" /></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BOOK CTA ═══ -->
+<section class="book-cta">
+  <div class="section-inner">
+    <p class="book-cta-tagline">"Ready for your masterpiece?"</p>
+    <p class="book-cta-sub">Black &amp; Gray Realism · Houston, TX</p>
+    <a href="https://www.instagram.com/prettyboytatt/" target="_blank" rel="noopener" class="book-btn">
+      📱 DM @prettyboytatt to Book
+    </a>
+  </div>
+</section>
+
+<!-- ═══ CONTACT ═══ -->
+<section class="contact">
+  <div class="section-inner">
+    <div class="section-tag">Contact &amp; Location</div>
+    <h2 class="section-title">Find the Artist</h2>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <div class="contact-label">Instagram</div>
+        <div class="contact-value">
+          <a href="https://www.instagram.com/prettyboytatt/" target="_blank" rel="noopener">@prettyboytatt</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">Studio</div>
+        <div class="contact-value">
+          <a href="https://www.instagram.com/blessedtattoohtx/" target="_blank" rel="noopener">@blessedtattoohtx</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">Location</div>
+        <div class="contact-value">Houston, TX</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">Bookings</div>
+        <div class="contact-value">
+          <a href="https://www.instagram.com/prettyboytatt/" target="_blank" rel="noopener">DM on Instagram</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-inner">
+    <p class="footer-copy">© 2025 PRETTYBOYTATT · All Rights Reserved</p>
+    <p class="footer-bws">Website by <a href="https://bayouwebstudio.com" target="_blank" rel="noopener">Bayou Web Studio</a></p>
+  </div>
+</footer>
+
+<!-- ═══ LIGHTBOX ═══ -->
+<div class="lightbox" id="lightbox" role="dialog" aria-label="Image viewer">
+  <button class="lightbox-close" id="lbClose" aria-label="Close">&times;</button>
+  <button class="lightbox-prev" id="lbPrev" aria-label="Previous">&#8249;</button>
+  <img class="lightbox-img" id="lbImg" src="" alt="Tattoo detail" />
+  <button class="lightbox-next" id="lbNext" aria-label="Next">&#8250;</button>
+</div>
+
+<script>
+  const items = Array.from(document.querySelectorAll('.gallery-item'));
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lbImg');
+  let current = 0;
+
+  function openLb(idx) {
+    current = idx;
+    lbImg.src = items[idx].querySelector('img').src;
+    lb.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLb() {
+    lb.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  function prev() { current = (current - 1 + items.length) % items.length; lbImg.src = items[current].querySelector('img').src; }
+  function next() { current = (current + 1) % items.length; lbImg.src = items[current].querySelector('img').src; }
+
+  items.forEach((el, i) => el.addEventListener('click', () => openLb(i)));
+  document.getElementById('lbClose').addEventListener('click', closeLb);
+  document.getElementById('lbPrev').addEventListener('click', prev);
+  document.getElementById('lbNext').addEventListener('click', next);
+  lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('active')) return;
+    if (e.key === 'Escape') closeLb();
+    if (e.key === 'ArrowLeft') prev();
+    if (e.key === 'ArrowRight') next();
+  });
+</script>
+</body>
+</html>
