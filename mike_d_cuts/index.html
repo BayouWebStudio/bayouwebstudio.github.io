@@ -4,272 +4,53 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mike D Cuts | Houston Barbershop</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600|Source+Sans+Pro:wght@400;600&display=swap">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600|Source+Sans+Pro:wght@400;600&display=swap">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --bg: #0d0d0d;
-    --surface: #141414;
-    --accent: #c9a84c;
-    --accent2: #8a6f2e;
-    --btn-bg: #c9a84c;
-    --btn-text: #0d0d0d;
-  }
-  body {
-    background: var(--bg);
-    color: #f0f0f0;
-    font-family: 'Source Sans Pro', 'Helvetica', sans-serif;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 80px 24px 60px;
-    position: relative;
-    background: linear-gradient(180deg, #0d0d0d 0%, #141414 100%);
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-  }
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at 50% 0%, #c9a84c18 0%, transparent 65%);
-    pointer-events: none;
-  }
-  .badge {
-    display: inline-block;
-    font-family: 'Source Sans Pro', 'Helvetica', sans-serif;
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--accent);
-    border: 1px solid var(--accent);
-    padding: 6px 16px;
-    border-radius: 2px;
-    margin-bottom: 28px;
-  }
-  .hero h1 {
-    font-family: 'Oswald', 'Arial Narrow', sans-serif;
-    font-size: clamp(3rem, 10vw, 7rem);
-    font-weight: 700;
-    line-height: 0.95;
-    letter-spacing: 0.02em;
-    color: #ffffff;
-    margin-bottom: 20px;
-    text-transform: uppercase;
-  }
-  .hero-sub {
-    font-size: 1.1rem;
-    color: rgba(255,255,255,0.55);
-    max-width: 520px;
-    line-height: 1.6;
-    margin-bottom: 16px;
-  }
-  .follower-count {
-    font-size: 0.85rem;
-    color: var(--accent);
-    letter-spacing: 0.1em;
-    margin-bottom: 36px;
-  }
-  .hero-cta {
-    display: inline-block;
-    background: var(--btn-bg);
-    color: var(--btn-text);
-    font-family: 'Source Sans Pro', 'Helvetica', sans-serif;
-    font-size: 1rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 16px 44px;
-    text-decoration: none;
-    border-radius: 3px;
-    transition: opacity 0.2s, transform 0.2s;
-  }
-  .hero-cta:hover { opacity: 0.85; transform: translateY(-2px); }
-  /* NAV */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 18px 32px;
-    background: linear-gradient(180deg, #0d0d0dee 0%, transparent 100%);
-  }
-  .nav-brand {
-    font-family: 'Oswald', 'Arial Narrow', sans-serif;
-    font-size: 1.3rem;
-    color: #fff;
-    text-decoration: none;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
-  .nav-ig {
-    font-size: 0.8rem;
-    color: var(--accent);
-    text-decoration: none;
-    letter-spacing: 0.08em;
-  }
-  /* GALLERY */
-  .gallery-section {
-    padding: 80px 24px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  .section-label {
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 12px;
-  }
-  .section-title {
-    font-family: 'Oswald', 'Arial Narrow', sans-serif;
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 700;
-    text-transform: uppercase;
-    color: #ffffff;
-    margin-bottom: 40px;
-  }
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 12px;
-  }
-  .gallery-item {
-    aspect-ratio: 1;
-    overflow: hidden;
-    border-radius: 4px;
-    background: var(--surface);
-  }
-  .gallery-item img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.4s ease;
-  }
-  .gallery-item:hover img { transform: scale(1.04); }
-  /* NO PHOTOS PLACEHOLDER */
-  .no-photos {
-    grid-column: 1 / -1;
-    padding: 60px;
-    text-align: center;
-    background: var(--surface);
-    border-radius: 4px;
-    border: 1px dashed rgba(255,255,255,0.1);
-    color: rgba(255,255,255,0.3);
-    font-size: 0.9rem;
-    letter-spacing: 0.1em;
-  }
-  /* ABOUT */
-  .about-section {
-    padding: 80px 24px;
-    background: var(--surface);
-    border-top: 1px solid rgba(255,255,255,0.05);
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-  }
-  .about-inner {
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  .about-inner p {
-    font-size: 1.15rem;
-    line-height: 1.8;
-    color: rgba(255,255,255,0.65);
-    margin-top: 12px;
-  }
-  /* CONTACT */
-  .contact-section {
-    padding: 80px 24px;
-    text-align: center;
-    max-width: 600px;
-    margin: 0 auto;
-  }
-  .contact-section .section-title { margin-bottom: 16px; }
-  .contact-section p {
-    color: rgba(255,255,255,0.5);
-    margin-bottom: 32px;
-    line-height: 1.6;
-  }
-  .contact-links {
-    display: flex;
-    gap: 16px;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  .contact-link {
-    display: inline-block;
-    padding: 14px 36px;
-    font-size: 0.9rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    text-decoration: none;
-    border-radius: 3px;
-    transition: opacity 0.2s;
-  }
-  .contact-link.primary {
-    background: var(--btn-bg);
-    color: var(--btn-text);
-  }
-  .contact-link.secondary {
-    border: 1px solid var(--accent);
-    color: var(--accent);
-  }
-  .contact-link:hover { opacity: 0.8; }
-  /* FLOATING BOOK NOW */
-  .float-book {
-    position: fixed;
-    bottom: 28px;
-    right: 28px;
-    z-index: 999;
-    background: var(--btn-bg);
-    color: var(--btn-text);
-    font-family: 'Source Sans Pro', 'Helvetica', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 800;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    padding: 14px 24px;
-    border-radius: 50px;
-    text-decoration: none;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.5);
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  .float-book:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,0,0,0.7); }
-  /* FOOTER */
-  footer {
-    padding: 24px;
-    text-align: center;
-    opacity: 0.5;
-    font-size: 0.75rem;
-    letter-spacing: 0.08em;
-    color: rgba(255,255,255,0.4);
-    border-top: 1px solid rgba(255,255,255,0.04);
-  }
-  footer a { color: inherit; text-decoration: none; }
-  @media (max-width: 600px) {
-    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-    .float-book { bottom: 16px; right: 16px; padding: 12px 20px; }
-  }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0d0d0d;--surface:#141414;--accent:#c9a84c;--btn-bg:#c9a84c;--btn-text:#0d0d0d}
+body{background:var(--bg);color:#f0f0f0;font-family:'Source+Sans+Pro','Helvetica',sans-serif;min-height:100vh;overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:18px 32px;background:linear-gradient(180deg,#0d0d0dee 0%,transparent 100%)}
+.nav-brand{font-family:'Oswald','Arial Narrow',sans-serif;font-size:1.3rem;color:#fff;text-decoration:none;letter-spacing:.06em;text-transform:uppercase}
+.nav-ig{font-size:.8rem;color:var(--accent);text-decoration:none;letter-spacing:.08em}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:80px 24px 60px;background:linear-gradient(180deg,#0d0d0d 0%,#141414 100%);border-bottom:1px solid rgba(255,255,255,.05);position:relative}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,#c9a84c18 0%,transparent 65%);pointer-events:none}
+.badge{display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);padding:6px 16px;border-radius:2px;margin-bottom:28px}
+.hero h1{font-family:'Oswald','Arial Narrow',sans-serif;font-size:clamp(3rem,10vw,7rem);font-weight:700;line-height:.95;color:#fff;margin-bottom:20px;text-transform:uppercase}
+.hero-sub{font-size:1.1rem;color:rgba(255,255,255,.55);max-width:520px;line-height:1.6;margin-bottom:16px}
+.follower-count{font-size:.85rem;color:var(--accent);letter-spacing:.1em;margin-bottom:36px}
+.hero-cta{display:inline-block;background:var(--btn-bg);color:var(--btn-text);font-size:1rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:16px 44px;text-decoration:none;border-radius:3px;transition:opacity .2s,transform .2s}
+.hero-cta:hover{opacity:.85;transform:translateY(-2px)}
+.gallery-section{padding:80px 24px;max-width:1200px;margin:0 auto}
+.section-label{font-size:.7rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.section-title{font-family:'Oswald','Arial Narrow',sans-serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:700;text-transform:uppercase;color:#fff;margin-bottom:40px}
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.gallery-item{aspect-ratio:1;overflow:hidden;border-radius:4px;background:var(--surface)}
+.gallery-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease}
+.gallery-item:hover img{transform:scale(1.04)}
+.no-photos{grid-column:1/-1;padding:60px;text-align:center;background:var(--surface);border-radius:4px;border:1px dashed rgba(255,255,255,.1);color:rgba(255,255,255,.3);font-size:.9rem;letter-spacing:.1em}
+.about-section{padding:80px 24px;background:var(--surface);border-top:1px solid rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.05)}
+.about-inner{max-width:800px;margin:0 auto}
+.about-inner p{font-size:1.15rem;line-height:1.8;color:rgba(255,255,255,.65);margin-top:12px}
+.contact-section{padding:80px 24px;text-align:center;max-width:600px;margin:0 auto}
+.contact-section p{color:rgba(255,255,255,.5);margin-bottom:32px;line-height:1.6}
+.contact-links{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.contact-link{display:inline-block;padding:14px 36px;font-size:.9rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border-radius:3px;transition:opacity .2s}
+.contact-link.primary{background:var(--btn-bg);color:var(--btn-text)}
+.contact-link.secondary{border:1px solid var(--accent);color:var(--accent)}
+.contact-link:hover{opacity:.8}
+.float-book{position:fixed;bottom:28px;right:28px;z-index:999;background:var(--btn-bg);color:var(--btn-text);font-size:.85rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;padding:14px 24px;border-radius:50px;text-decoration:none;box-shadow:0 4px 24px rgba(0,0,0,.5);transition:transform .2s,box-shadow .2s}
+.float-book:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,0,0,.7)}
+footer{padding:24px;text-align:center;opacity:.5;font-size:.75rem;letter-spacing:.08em;color:rgba(255,255,255,.4);border-top:1px solid rgba(255,255,255,.04)}
+footer a{color:inherit;text-decoration:none}
+@media(max-width:600px){.gallery-grid{grid-template-columns:repeat(2,1fr)}.float-book{bottom:16px;right:16px;padding:12px 20px}}
 </style>
 </head>
 <body>
-
 <nav>
   <a class="nav-brand" href="#">Mike D Cuts</a>
   <a class="nav-ig" href="https://instagram.com/mike_d_cuts" target="_blank">@mike_d_cuts</a>
 </nav>
-
 <section class="hero">
   <div class="badge">Barbershop · Houston, TX</div>
   <h1>Mike D Cuts</h1>
@@ -280,15 +61,20 @@ Click the link.</p>
   <div class="follower-count">✦ 1,317 Instagram Followers</div>
   <a class="hero-cta" href="https://instagram.com/mike_d_cuts">Book via Instagram</a>
 </section>
-
 <section class="gallery-section">
   <div class="section-label">Portfolio</div>
   <h2 class="section-title">Our Work</h2>
   <div class="gallery-grid">
-    <div class="no-photos">📷 &nbsp; Portfolio images coming soon</div>
+    <div class="gallery-item"><img src="imgs/img_00.jpg" alt="Mike D Cuts work" loading="lazy"></div>
+<div class="gallery-item"><img src="imgs/img_01.jpg" alt="Mike D Cuts work" loading="lazy"></div>
+<div class="gallery-item"><img src="imgs/img_02.jpg" alt="Mike D Cuts work" loading="lazy"></div>
+<div class="gallery-item"><img src="imgs/img_03.jpg" alt="Mike D Cuts work" loading="lazy"></div>
+<div class="gallery-item"><img src="imgs/img_06.jpg" alt="Mike D Cuts work" loading="lazy"></div>
+<div class="gallery-item"><img src="imgs/img_07.jpg" alt="Mike D Cuts work" loading="lazy"></div>
+<div class="gallery-item"><img src="imgs/img_11.jpg" alt="Mike D Cuts work" loading="lazy"></div>
+
   </div>
 </section>
-
 <section class="about-section">
   <div class="about-inner">
     <div class="section-label">About</div>
@@ -299,7 +85,6 @@ Appointments ⬇️
 Click the link.</p>
   </div>
 </section>
-
 <section class="contact-section">
   <div class="section-label">Get In Touch</div>
   <h2 class="section-title">Book Now</h2>
@@ -309,12 +94,9 @@ Click the link.</p>
     <a class="contact-link secondary" href="https://instagram.com/mike_d_cuts" target="_blank">@mike_d_cuts</a>
   </div>
 </section>
-
 <a class="float-book" href="https://instagram.com/mike_d_cuts">✦ Book Now</a>
-
 <footer>
-  <p>Site created by <a href="https://bayouwebstudio.com" target="_blank">Bayou Web Studio</a> · Houston, TX · <a href="https://bayouwebstudio.com" target="_blank">Get Your Site</a></p>
+  <p>Site created by <a href="https://bayouwebstudio.com" target="_blank">Bayou Web Studio</a> · Houston, TX</p>
 </footer>
-
 </body>
 </html>
