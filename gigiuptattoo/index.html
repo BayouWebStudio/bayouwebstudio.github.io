@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gigi Up Tattoo | Tatuadora | Empoderamiento Femenino | Barcelona y Mendoza</title>
+  <meta name="description" content="Gigi Lopez Sabatini — tatuadora desde 2012. Blackwork orgánico, tribal y gran escala. Fundadora de Proyecto EmpoderArte: tatuajes para mujeres sobrevivientes de cáncer. Barcelona 🇪🇸 · Mendoza 🇦🇷">
+  <meta name="keywords" content="tatuadora, blackwork, empoderamiento femenino, proyecto empoderarte, cancer survivors tattoo, barcelona, mendoza, gigi lopez sabatini, gigiuptattoo">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Gigi Up Tattoo | Tatuadora | Empoderamiento Femenino">
+  <meta property="og:description" content="Tatuadora y activista. Fundadora de @proyecto.empoderarte — resignificando cicatrices, devolviendo el cuerpo a quienes lo perdieron. Barcelona 🇪🇸 · Mendoza 🇦🇷">
+  <meta property="og:image" content="https://bayouwebstudio.com/gigiuptattoo/img/profile_linktree.jpg">
+  <meta property="og:url" content="https://bayouwebstudio.com/gigiuptattoo/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Gigi Up Tattoo | Tatuadora | Empoderamiento Femenino">
+  <meta name="twitter:description" content="Tatuadora y activista. Fundadora de @proyecto.empoderarte — resignificando cicatrices, devolviendo el cuerpo a quienes lo perdieron.">
+  <meta name="twitter:image" content="https://bayouwebstudio.com/gigiuptattoo/img/profile_linktree.jpg">
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Gigi Lopez Sabatini",
+    "alternateName": "gigiuptattoo",
+    "description": "Tatuadora desde 2012. Blackwork orgánico y tribal de gran escala. Fundadora de Proyecto EmpoderArte — empoderamiento femenino a través del tatuaje.",
+    "url": "https://bayouwebstudio.com/gigiuptattoo/",
+    "image": "https://bayouwebstudio.com/gigiuptattoo/img/profile_linktree.jpg",
+    "sameAs": [
+      "https://www.instagram.com/gigiuptattoo/",
+      "https://www.instagram.com/proyecto.empoderarte/",
+      "https://linktr.ee/gigiuptattoo"
+    ],
+    "jobTitle": "Tattoo Artist",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Proyecto EmpoderArte",
+      "url": "https://www.instagram.com/proyecto.empoderarte/"
+    },
+    "workLocation": [
+      {"@type": "Place", "name": "Barcelona, España"},
+      {"@type": "Place", "name": "Mendoza, Argentina"}
+    ]
+  }
+  </script>
+
+  <style>
+    /* ── Reset & Base ───────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d0a0e;
+      --bg2: #2d1f3d;
+      --bg3: #1a1125;
+      --text: #f0e8f0;
+      --text-muted: #b8a8c8;
+      --accent: #c4488a;
+      --accent-light: #e05aa0;
+      --accent-dark: #8c2f65;
+      --accent-glow: rgba(196, 72, 138, 0.3);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── Typography ────────────────────────────────────────── */
+    h1, h2, h3 {
+      font-family: 'Georgia', serif;
+      letter-spacing: 0.05em;
+    }
+
+    a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--accent-light); }
+
+    /* ── Navigation ────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 1rem 2rem;
+      background: linear-gradient(to bottom, rgba(13,10,14,0.95), transparent);
+      backdrop-filter: blur(8px);
+    }
+
+    nav a {
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-family: sans-serif;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--accent); }
+
+    /* ── Hero ──────────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 60% at 50% 40%, rgba(196,72,138,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-profile {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--accent);
+      box-shadow: 0 0 40px var(--accent-glow), 0 0 80px rgba(196,72,138,0.1);
+      margin-bottom: 2rem;
+    }
+
+    .hero-name {
+      font-size: clamp(2rem, 6vw, 4.5rem);
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, #f0e8f0 0%, #e8c0d8 50%, #c4488a 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-tagline {
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-location {
+      font-size: 1rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-since {
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-family: sans-serif;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 2rem;
+      border: 1px solid var(--accent);
+      border-radius: 50px;
+      font-family: sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      transition: all 0.3s;
+    }
+    .hero-cta:hover {
+      background: var(--accent);
+      color: white;
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    /* ── Divider ────────────────────────────────────────────── */
+    .divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      margin: 0 auto 3rem;
+    }
+
+    /* ── Sections ───────────────────────────────────────────── */
+    section {
+      padding: 5rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .section-title {
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      margin-bottom: 1.5rem;
+      color: var(--text);
+    }
+
+    /* ── Mission ────────────────────────────────────────────── */
+    #mission {
+      max-width: 100%;
+      padding: 5rem 2rem;
+      background: linear-gradient(135deg, var(--bg3), var(--bg2));
+      border-top: 1px solid rgba(196,72,138,0.2);
+      border-bottom: 1px solid rgba(196,72,138,0.2);
+    }
+
+    .mission-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .mission-quote {
+      font-size: clamp(1.3rem, 3.5vw, 2rem);
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.5;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .mission-quote::before {
+      content: '"';
+      font-size: 4rem;
+      color: var(--accent);
+      position: absolute;
+      top: -1rem;
+      left: -1rem;
+      line-height: 1;
+      opacity: 0.6;
+    }
+
+    .mission-body {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      line-height: 1.9;
+      margin-bottom: 2rem;
+    }
+
+    .mission-highlight {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      background: rgba(196,72,138,0.15);
+      border-left: 3px solid var(--accent);
+      color: var(--text);
+      font-style: italic;
+      margin: 0.5rem 0;
+    }
+
+    .btn-accent {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.75rem;
+      background: var(--accent);
+      color: white;
+      border-radius: 50px;
+      font-family: sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: all 0.3s;
+    }
+    .btn-accent:hover {
+      background: var(--accent-light);
+      color: white;
+      box-shadow: 0 4px 20px var(--accent-glow);
+      transform: translateY(-2px);
+    }
+
+    /* ── Press ──────────────────────────────────────────────── */
+    .press-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .press-card {
+      background: var(--bg2);
+      border: 1px solid rgba(196,72,138,0.2);
+      border-radius: 12px;
+      padding: 2rem;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .press-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-dark), var(--accent), var(--accent-light));
+    }
+
+    .press-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+
+    .press-outlet {
+      font-family: sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .press-headline {
+      font-size: 1rem;
+      line-height: 1.5;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+
+    .press-link {
+      font-family: sans-serif;
+      font-size: 0.8rem;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .press-link:hover { color: var(--accent-light); }
+
+    /* ── Gallery ─────────────────────────────────────────────── */
+    #galeria { max-width: 100%; padding: 5rem 2rem; }
+
+    .gallery-inner { max-width: 1200px; margin: 0 auto; }
+
+    .masonry {
+      column-count: 3;
+      column-gap: 12px;
+    }
+
+    @media (max-width: 768px) { .masonry { column-count: 2; } }
+    @media (max-width: 480px) { .masonry { column-count: 1; } }
+
+    .masonry-item {
+      break-inside: avoid;
+      margin-bottom: 12px;
+      cursor: pointer;
+      overflow: hidden;
+      border-radius: 6px;
+      position: relative;
+    }
+
+    .masonry-item img {
+      width: 100%;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .masonry-item:hover img { transform: scale(1.04); }
+
+    .masonry-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(196,72,138,0.2), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .masonry-item:hover::after { opacity: 1; }
+
+    /* ── Lightbox ────────────────────────────────────────────── */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0,0,0,0.92);
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+    }
+
+    #lightbox.active { display: flex; }
+
+    #lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 4px;
+      box-shadow: 0 0 60px rgba(0,0,0,0.8);
+      cursor: default;
+    }
+
+    #lightbox-close {
+      position: absolute;
+      top: 1.5rem; right: 1.5rem;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    #lightbox-close:hover { opacity: 1; }
+
+    #lightbox-prev, #lightbox-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(196,72,138,0.3);
+      border: 1px solid rgba(196,72,138,0.5);
+      color: white;
+      font-size: 1.5rem;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    #lightbox-prev { left: 1rem; }
+    #lightbox-next { right: 1rem; }
+    #lightbox-prev:hover, #lightbox-next:hover {
+      background: var(--accent);
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    /* ── Tour ────────────────────────────────────────────────── */
+    #tour {
+      max-width: 100%;
+      padding: 5rem 2rem;
+      background: linear-gradient(135deg, var(--bg2), var(--bg3));
+      border-top: 1px solid rgba(196,72,138,0.15);
+      border-bottom: 1px solid rgba(196,72,138,0.15);
+    }
+
+    .tour-inner {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .tour-emoji {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .tour-desc {
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      font-size: 1.05rem;
+    }
+
+    /* ── Contact ─────────────────────────────────────────────── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .contact-card {
+      background: var(--bg2);
+      border: 1px solid rgba(196,72,138,0.2);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: all 0.3s;
+    }
+    .contact-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    .contact-icon { font-size: 1.8rem; margin-bottom: 0.75rem; display: block; }
+
+    .contact-label {
+      font-family: sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-value {
+      font-size: 0.95rem;
+      color: var(--accent);
+    }
+
+    /* ── Footer ──────────────────────────────────────────────── */
+    footer {
+      text-align: center;
+      padding: 2.5rem 2rem;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      color: var(--text-muted);
+      font-family: sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+    }
+
+    footer a { color: var(--accent); }
+    footer a:hover { color: var(--accent-light); }
+
+    /* ── Floating CTA ────────────────────────────────────────── */
+    #float-cta {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 99;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 1.5rem;
+      background: var(--accent);
+      color: white;
+      border-radius: 50px;
+      font-family: sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      box-shadow: 0 4px 24px rgba(196,72,138,0.5);
+      transition: all 0.3s;
+    }
+    #float-cta:hover {
+      background: var(--accent-light);
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(196,72,138,0.6);
+    }
+
+    /* ── Responsive nav ──────────────────────────────────────── */
+    @media (max-width: 600px) {
+      nav { gap: 1rem; flex-wrap: wrap; font-size: 0.7rem; }
+      #float-cta { bottom: 1rem; right: 1rem; padding: 0.7rem 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <a href="#hero">Inicio</a>
+    <a href="#mission">Misión</a>
+    <a href="#prensa">Prensa</a>
+    <a href="#galeria">Galería</a>
+    <a href="#tour">Tour</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+
+  <!-- Hero -->
+  <section id="hero">
+    <img
+      src="img/profile_linktree.jpg"
+      alt="Gigi Lopez Sabatini — Tatuadora"
+      class="hero-profile"
+    >
+    <h1 class="hero-name">Gigi Lopez Sabatini</h1>
+    <p class="hero-tagline">Empowerment Through Body Art 🖤✂️</p>
+    <p class="hero-location">Barcelona 🇪🇸 · Mendoza 🇦🇷</p>
+    <p class="hero-since">Tatuadora desde 2012</p>
+    <a href="https://www.instagram.com/gigiuptattoo/" target="_blank" rel="noopener" class="hero-cta">
+      ✦ Ver en Instagram
+    </a>
+  </section>
+
+  <!-- Mission -->
+  <div id="mission">
+    <div class="mission-inner">
+      <span class="section-label">Misión</span>
+      <h2 class="section-title" style="text-align:center;">El tatuaje como herramienta de sanación</h2>
+      <div class="divider"></div>
+
+      <p class="mission-quote">
+        El cuerpo que vivió algo extraordinario merece ser honrado de manera extraordinaria.
+      </p>
+
+      <p class="mission-body">
+        Gigi Lopez Sabatini no es simplemente una tatuadora — es una artista del cuerpo, activista y fundadora de
+        <strong style="color:var(--text);">@proyecto.empoderarte</strong>, un proyecto único que tatúa a mujeres sobrevivientes
+        de cáncer de mama para <em>resignificar sus cicatrices</em> y devolverles la soberanía sobre sus propios cuerpos.
+      </p>
+
+      <p class="mission-body">
+        Desde 2012, con más de 14 años de experiencia, Gigi trabaja con blackwork orgánico, diseños tribales de gran
+        escala en muslos, torsos y cuerpo entero. Cada trazo es un acto de resistencia, cada sesión un ritual de sanación.
+        No se trata solo de arte — se trata de
+        <span class="mission-highlight">autonomía corporal, empoderamiento femenino y reconexión con una misma</span>.
+      </p>
+
+      <p class="mission-body">
+        El Proyecto EmpoderArte reúne a mujeres que han enfrentado la enfermedad, la pérdida y la transformación — y
+        que deciden, con tinta, reclamar su historia.
+      </p>
+
+      <br>
+      <a href="https://www.instagram.com/proyecto.empoderarte/" target="_blank" rel="noopener" class="btn-accent">
+        🌸 Conocé Proyecto EmpoderArte
+      </a>
+    </div>
+  </div>
+
+  <!-- Press -->
+  <section id="prensa">
+    <span class="section-label">Prensa & Medios</span>
+    <h2 class="section-title">Una historia que trasciende el tatuaje</h2>
+    <div class="divider"></div>
+
+    <div class="press-grid">
+      <a
+        href="https://www.elsol.com.ar/mendoza/el-arte-del-tatuaje-como-herramienta-de-sanacion-y-empoderamiento-femenino/"
+        target="_blank"
+        rel="noopener"
+        class="press-card"
+      >
+        <p class="press-outlet">📰 Diario El Sol</p>
+        <h3 class="press-headline">
+          "El arte del tatuaje como herramienta de sanación y empoderamiento femenino"
+        </h3>
+        <span class="press-link">Leer nota →</span>
+      </a>
+
+      <a
+        href="https://www.diariouno.com.ar/sociedad/artista-mendocina-tatua-mujeres-que-han-padecido-cancer-mama-resignificar-sus-cicatrices-n1038135"
+        target="_blank"
+        rel="noopener"
+        class="press-card"
+      >
+        <p class="press-outlet">📰 Diario UNO</p>
+        <h3 class="press-headline">
+          "Artista mendocina tatúa mujeres que han padecido cáncer de mama para resignificar sus cicatrices"
+        </h3>
+        <span class="press-link">Leer nota →</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <div id="galeria">
+    <div class="gallery-inner">
+      <span class="section-label" style="text-align:center; display:block;">Galería</span>
+      <h2 class="section-title" style="text-align:center;">Blackwork. Tribal. Gran Escala.</h2>
+      <div class="divider"></div>
+
+      <div class="masonry" id="masonry-grid">
+        <div class="masonry-item" onclick="openLightbox(0)">
+          <img src="img/post_00_491453862_18458809495073176_3288149899559239757_n.jpg" alt="Tatuaje blackwork por Gigi Lopez Sabatini" loading="lazy">
+        </div>
+        <div class="masonry-item" onclick="openLightbox(1)">
+          <img src="img/post_01_521201206_1171425868364755_2880159826203119704_n.jpg" alt="Tatuaje blackwork orgánico" loading="lazy">
+        </div>
+        <div class="masonry-item" onclick="openLightbox(2)">
+          <img src="img/post_02_309148145_1457240694772502_4720047372888771863_n.jpg" alt="Arte corporal por Gigi" loading="lazy">
+        </div>
+        <div class="masonry-item" onclick="openLightbox(3)">
+          <img src="img/post_04_640391812_938583652185134_7701563935930795037_n.jpg" alt="Tatuaje tribal gran escala" loading="lazy">
+        </div>
+        <div class="masonry-item" onclick="openLightbox(4)">
+          <img src="img/post_05_628030478_18511252780073176_6646827131253581468_n.jpg" alt="Empoderamiento corporal" loading="lazy">
+        </div>
+        <div class="masonry-item" onclick="openLightbox(5)">
+          <img src="img/post_06_617988909_18558132028051903_6920892655047321665_n.jpg" alt="Blackwork orgánico" loading="lazy">
+        </div>
+        <div class="masonry-item" onclick="openLightbox(6)">
+          <img src="img/post_07_604971585_18501148378073176_2462535392888215123_n.jpg" alt="Proyecto EmpoderArte tattoo" loading="lazy">
+        </div>
+        <div class="masonry-item" onclick="openLightbox(7)">
+          <img src="img/post_08_600638482_18500685514073176_5310566522243659733_n.jpg" alt="Tatuaje sanación" loading="lazy">
+        </div>
+        <div class="masonry-item" onclick="openLightbox(8)">
+          <img src="img/post_09_587304809_18499030009073176_3632590243663403810_n.jpg" alt="Tribal blackwork" loading="lazy">
+        </div>
+        <div class="masonry-item" onclick="openLightbox(9)">
+          <img src="img/post_10_587283876_18497601451073176_5957225086622541586_n.jpg" alt="Arte corporal femenino" loading="lazy">
+        </div>
+        <div class="masonry-item" onclick="openLightbox(10)">
+          <img src="img/post_11_587692610_18496677403073176_7564681225690462464_n.jpg" alt="Gigi Up Tattoo blackwork" loading="lazy">
+        </div>
+        <div class="masonry-item" onclick="openLightbox(11)">
+          <img src="img/post_12_587818226_18111158056610275_6634633060794219433_n.jpg" alt="Tatuaje empoderamiento" loading="lazy">
+        </div>
+        <div class="masonry-item" onclick="openLightbox(12)">
+          <img src="img/post_13_583624831_18103885750708260_635017996345835521_n.jpg" alt="Arte por Gigi Lopez Sabatini" loading="lazy">
+        </div>
+        <div class="masonry-item" onclick="openLightbox(13)">
+          <img src="img/post_14_581519339_18495270076073176_1382373351984961367_n.jpg" alt="Blackwork tribal" loading="lazy">
+        </div>
+        <div class="masonry-item" onclick="openLightbox(14)">
+          <img src="img/post_15_581214234_18495006985073176_4571846192189268668_n.jpg" alt="Gran escala tattoo" loading="lazy">
+        </div>
+        <div class="masonry-item" onclick="openLightbox(15)">
+          <img src="img/post_17_568043958_17877078810424170_1145498627920262212_n.webp" alt="Tatuaje sanación empoderarte" loading="lazy">
+        </div>
+        <div class="masonry-item" onclick="openLightbox(16)">
+          <img src="img/post_19_562551221_18486910516073176_1415006704186682712_n.jpg" alt="Tatuaje blackwork femenino" loading="lazy">
+        </div>
+        <div class="masonry-item" onclick="openLightbox(17)">
+          <img src="img/post_20_542282220_18101465287610275_4134084596028175995_n.jpg" alt="Arte corporal por Gigi" loading="lazy">
+        </div>
+        <div class="masonry-item" onclick="openLightbox(18)">
+          <img src="img/post_21_561557644_18533261488002639_1660202054045551823_n.jpg" alt="Blackwork orgánico gran escala" loading="lazy">
+        </div>
+        <div class="masonry-item" onclick="openLightbox(19)">
+          <img src="img/post_22_505727561_18467048455073176_4983301772557505534_n.jpg" alt="Tatuaje tribal" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div id="lightbox" onclick="closeLightbox(event)">
+    <button id="lightbox-close" onclick="closeLightbox()">✕</button>
+    <button id="lightbox-prev" onclick="prevImage(event)">‹</button>
+    <img id="lightbox-img" src="" alt="Galería Gigi Lopez Sabatini">
+    <button id="lightbox-next" onclick="nextImage(event)">›</button>
+  </div>
+
+  <!-- Tour -->
+  <div id="tour">
+    <div class="tour-inner">
+      <span class="tour-emoji">✈️</span>
+      <span class="section-label" style="text-align:center; display:block;">UP Tattoo Tour</span>
+      <h2 class="section-title" style="text-align:center;">Gigi viaja. Gigi tatúa.</h2>
+      <div class="divider"></div>
+      <p class="tour-desc">
+        Gigi recorre ciudades llevando su arte y su misión. Seguí la agenda del
+        <strong style="color:var(--text);">UP TATTOO TOUR</strong> — las fechas, las ciudades y cómo reservar tu lugar.
+      </p>
+      <a
+        href="https://ig.me/j/AbZz85SFnjiX14-1/"
+        target="_blank"
+        rel="noopener"
+        class="btn-accent"
+      >
+        📍 Conocé la agenda del UP TATTOO TOUR
+      </a>
+    </div>
+  </div>
+
+  <!-- Contact -->
+  <section id="contacto">
+    <span class="section-label">Contacto</span>
+    <h2 class="section-title">Hablemos</h2>
+    <div class="divider"></div>
+
+    <div class="contact-grid">
+      <a href="https://www.instagram.com/gigiuptattoo/" target="_blank" rel="noopener" class="contact-card">
+        <span class="contact-icon">📸</span>
+        <p class="contact-label">Instagram principal</p>
+        <p class="contact-value">@gigiuptattoo</p>
+      </a>
+
+      <a href="https://www.instagram.com/proyecto.empoderarte/" target="_blank" rel="noopener" class="contact-card">
+        <span class="contact-icon">🌸</span>
+        <p class="contact-label">Proyecto EmpoderArte</p>
+        <p class="contact-value">@proyecto.empoderarte</p>
+      </a>
+
+      <div class="contact-card">
+        <span class="contact-icon">🇪🇸</span>
+        <p class="contact-label">Sede Europa</p>
+        <p class="contact-value" style="color:var(--text);">Barcelona, España</p>
+      </div>
+
+      <div class="contact-card">
+        <span class="contact-icon">🇦🇷</span>
+        <p class="contact-label">Sede América</p>
+        <p class="contact-value" style="color:var(--text);">Mendoza, Argentina</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p style="margin-bottom:0.5rem;">
+      © 2025 Gigi Lopez Sabatini · <a href="https://www.instagram.com/gigiuptattoo/" target="_blank">@gigiuptattoo</a>
+    </p>
+    <p style="opacity:0.5;">
+      Sitio demo creado por <a href="https://bayouwebstudio.com" target="_blank">Bayou Web Studio</a>
+    </p>
+  </footer>
+
+  <!-- Floating CTA -->
+  <a id="float-cta" href="https://www.instagram.com/gigiuptattoo/" target="_blank" rel="noopener">
+    📩 Contactar
+  </a>
+
+  <!-- Lightbox JS -->
+  <script>
+    const images = [
+      'img/post_00_491453862_18458809495073176_3288149899559239757_n.jpg',
+      'img/post_01_521201206_1171425868364755_2880159826203119704_n.jpg',
+      'img/post_02_309148145_1457240694772502_4720047372888771863_n.jpg',
+      'img/post_04_640391812_938583652185134_7701563935930795037_n.jpg',
+      'img/post_05_628030478_18511252780073176_6646827131253581468_n.jpg',
+      'img/post_06_617988909_18558132028051903_6920892655047321665_n.jpg',
+      'img/post_07_604971585_18501148378073176_2462535392888215123_n.jpg',
+      'img/post_08_600638482_18500685514073176_5310566522243659733_n.jpg',
+      'img/post_09_587304809_18499030009073176_3632590243663403810_n.jpg',
+      'img/post_10_587283876_18497601451073176_5957225086622541586_n.jpg',
+      'img/post_11_587692610_18496677403073176_7564681225690462464_n.jpg',
+      'img/post_12_587818226_18111158056610275_6634633060794219433_n.jpg',
+      'img/post_13_583624831_18103885750708260_635017996345835521_n.jpg',
+      'img/post_14_581519339_18495270076073176_1382373351984961367_n.jpg',
+      'img/post_15_581214234_18495006985073176_4571846192189268668_n.jpg',
+      'img/post_17_568043958_17877078810424170_1145498627920262212_n.webp',
+      'img/post_19_562551221_18486910516073176_1415006704186682712_n.jpg',
+      'img/post_20_542282220_18101465287610275_4134084596028175995_n.jpg',
+      'img/post_21_561557644_18533261488002639_1660202054045551823_n.jpg',
+      'img/post_22_505727561_18467048455073176_4983301772557505534_n.jpg'
+    ];
+
+    let currentIndex = 0;
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+
+    function openLightbox(index) {
+      currentIndex = index;
+      lightboxImg.src = images[index];
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox(e) {
+      if (!e || e.target === lightbox || e.target.id === 'lightbox-close') {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+
+    function prevImage(e) {
+      e.stopPropagation();
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      lightboxImg.src = images[currentIndex];
+    }
+
+    function nextImage(e) {
+      e.stopPropagation();
+      currentIndex = (currentIndex + 1) % images.length;
+      lightboxImg.src = images[currentIndex];
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox({target: lightbox});
+      if (e.key === 'ArrowLeft') prevImage(e);
+      if (e.key === 'ArrowRight') nextImage(e);
+    });
+  </script>
+
+</body>
+</html>
