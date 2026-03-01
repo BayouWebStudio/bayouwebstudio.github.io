@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tattoos by Sunny | Sacred Geometry & Dotwork | Coachella Valley</title>
+  <meta name="description" content="Sacred geometry, dotwork, and blackwork tattoos by Sunny. Owner of Sacred Black Ink in the Coachella Valley. 18+ years of experience." />
+  <style>
+    :root {
+      --gold: #c9a84c;
+      --gold-light: #e4c97e;
+      --gold-dim: rgba(201, 168, 76, 0.15);
+      --bg: #0a0a0a;
+      --bg2: #111111;
+      --text: #e8e0d0;
+      --muted: #888;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Georgia', serif;
+      line-height: 1.6;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: relative;
+      text-align: center;
+      padding: 80px 20px 60px;
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at center top, rgba(201,168,76,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .logo-symbol {
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+      opacity: 0.7;
+      color: var(--gold);
+      letter-spacing: 8px;
+    }
+
+    header h1 {
+      font-size: clamp(2rem, 6vw, 3.8rem);
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      color: #fff;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    header h1 span {
+      color: var(--gold);
+    }
+
+    .tagline {
+      font-size: clamp(0.85rem, 2.5vw, 1rem);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+      font-family: 'Arial', sans-serif;
+      font-weight: 300;
+    }
+
+    .location {
+      font-size: 0.85rem;
+      color: var(--muted);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .divider {
+      width: 60px;
+      height: 1px;
+      background: var(--gold);
+      margin: 24px auto;
+      opacity: 0.5;
+    }
+
+    .bio {
+      max-width: 540px;
+      margin: 0 auto;
+      font-size: 0.95rem;
+      color: #bbb;
+      line-height: 1.8;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 28px;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-num {
+      display: block;
+      font-size: 1.5rem;
+      color: var(--gold);
+      font-weight: 400;
+    }
+
+    .stat-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-family: 'Arial', sans-serif;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      padding: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      font-family: 'Arial', sans-serif;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--gold); }
+
+    /* ── SECTION TITLES ── */
+    .section-title {
+      text-align: center;
+      padding: 60px 20px 8px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(1.2rem, 4vw, 1.8rem);
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #fff;
+    }
+
+    .section-title p {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      font-family: 'Arial', sans-serif;
+    }
+
+    /* ── GALLERY ── */
+    .gallery {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 16px 60px;
+      columns: 1;
+      column-gap: 12px;
+    }
+
+    @media (min-width: 480px) { .gallery { columns: 2; } }
+    @media (min-width: 768px) { .gallery { columns: 3; } }
+    @media (min-width: 1100px) { .gallery { columns: 4; } }
+
+    .gallery-item {
+      break-inside: avoid;
+      margin-bottom: 12px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 2px;
+      cursor: pointer;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      display: block;
+      transition: transform 0.4s ease;
+      filter: brightness(0.92);
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.03);
+      filter: brightness(1);
+    }
+
+    .gallery-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 1px solid transparent;
+      transition: border-color 0.3s;
+    }
+
+    .gallery-item:hover::after {
+      border-color: rgba(201,168,76,0.4);
+    }
+
+    /* ── LIGHTBOX ── */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.95);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    #lightbox.active { display: flex; }
+
+    #lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+      border: 1px solid rgba(201,168,76,0.2);
+    }
+
+    #lightbox-close {
+      position: fixed;
+      top: 20px;
+      right: 24px;
+      font-size: 2rem;
+      color: var(--gold);
+      cursor: pointer;
+      line-height: 1;
+      z-index: 1001;
+    }
+
+    /* ── STYLES SECTION ── */
+    .styles-section {
+      background: var(--bg2);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .styles-grid {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+      margin-top: 36px;
+    }
+
+    .style-card {
+      max-width: 200px;
+    }
+
+    .style-icon {
+      font-size: 2rem;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .style-card h3 {
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 8px;
+      font-family: 'Arial', sans-serif;
+      font-weight: 400;
+    }
+
+    .style-card p {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.6;
+      font-family: 'Arial', sans-serif;
+    }
+
+    /* ── CONTACT STRIP ── */
+    .contact-strip {
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .contact-strip h2 {
+      font-size: clamp(1.2rem, 3vw, 1.6rem);
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .contact-strip p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-family: 'Arial', sans-serif;
+      margin-bottom: 28px;
+    }
+
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 32px;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-family: 'Arial', sans-serif;
+      border-radius: 1px;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: #0a0a0a;
+      font-weight: 700;
+    }
+
+    .btn-primary:hover {
+      background: var(--gold-light);
+    }
+
+    .btn-outline {
+      border: 1px solid rgba(201,168,76,0.5);
+      color: var(--gold);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--gold);
+      background: var(--gold-dim);
+    }
+
+    /* ── BOOK NOW FLOAT ── */
+    #book-float {
+      position: fixed;
+      bottom: 28px;
+      right: 24px;
+      background: var(--gold);
+      color: #0a0a0a;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 14px 22px;
+      border-radius: 2px;
+      box-shadow: 0 4px 24px rgba(201,168,76,0.35);
+      z-index: 900;
+      transition: all 0.2s;
+    }
+
+    #book-float:hover {
+      background: var(--gold-light);
+      box-shadow: 0 6px 32px rgba(201,168,76,0.5);
+      transform: translateY(-2px);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 20px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    footer p {
+      font-size: 0.7rem;
+      color: var(--muted);
+      font-family: 'Arial', sans-serif;
+      opacity: 0.5;
+      letter-spacing: 0.1em;
+    }
+
+    footer a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    footer a:hover { opacity: 1; }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo-symbol">✦ ◈ ✦</div>
+    <h1>Tattoos by <span>Sunny</span></h1>
+    <p class="tagline">Sacred Geometry &nbsp;·&nbsp; Dotwork &nbsp;·&nbsp; Blackwork</p>
+    <p class="location">🌴 Coachella Valley, California &nbsp;·&nbsp; @sacredblack.ink</p>
+    <div class="divider"></div>
+    <p class="bio">
+      18 years of mastery in sacred geometry, dotwork, and intricate blackwork. 
+      Every piece is a meditation in precision — mandalas, geometric sleeves, 
+      spiritual iconography, and blackwork portraiture that lives on your skin forever.
+    </p>
+    <div class="stats">
+      <div class="stat">
+        <span class="stat-num">18+</span>
+        <span class="stat-label">Years Experience</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">44K</span>
+        <span class="stat-label">Instagram Followers</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">∞</span>
+        <span class="stat-label">Sacred Geometry</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#gallery">Gallery</a>
+    <a href="#styles">Styles</a>
+    <a href="#contact">Book</a>
+    <a href="https://www.instagram.com/sunnyaink/" target="_blank" rel="noopener">Instagram</a>
+  </nav>
+
+  <!-- GALLERY -->
+  <div class="section-title" id="gallery">
+    <h2>Portfolio</h2>
+    <p>Recent work — sacred geometry, dotwork & blackwork</p>
+  </div>
+
+  <div class="gallery">
+    <div class="gallery-item" onclick="openLightbox('img/photo_01.jpg')">
+      <img src="img/photo_01.jpg" alt="Black and grey portrait tattoo with floral elements" loading="lazy" />
+    </div>
+    <div class="gallery-item" onclick="openLightbox('img/photo_02.jpg')">
+      <img src="img/photo_02.jpg" alt="Archangel Saint Michael detailed blackwork tattoo" loading="lazy" />
+    </div>
+    <div class="gallery-item" onclick="openLightbox('img/photo_03.jpg')">
+      <img src="img/photo_03.jpg" alt="Medusa tattoo with detailed linework" loading="lazy" />
+    </div>
+    <div class="gallery-item" onclick="openLightbox('img/photo_04.jpg')">
+      <img src="img/photo_04.jpg" alt="Saint Michael blackwork forearm tattoo" loading="lazy" />
+    </div>
+    <div class="gallery-item" onclick="openLightbox('img/photo_05.jpg')">
+      <img src="img/photo_05.jpg" alt="Geometric blackwork sleeve tattoo" loading="lazy" />
+    </div>
+    <div class="gallery-item" onclick="openLightbox('img/photo_06.jpg')">
+      <img src="img/photo_06.jpg" alt="Geometric blackwork sleeve in progress" loading="lazy" />
+    </div>
+    <div class="gallery-item" onclick="openLightbox('img/photo_07.jpg')">
+      <img src="img/photo_07.jpg" alt="Geometric blackwork arm tattoo" loading="lazy" />
+    </div>
+    <div class="gallery-item" onclick="openLightbox('img/photo_08.jpg')">
+      <img src="img/photo_08.jpg" alt="Geometric dotwork arm tattoo" loading="lazy" />
+    </div>
+    <div class="gallery-item" onclick="openLightbox('img/photo_09.jpg')">
+      <img src="img/photo_09.jpg" alt="Blackwork geometric arm tattoo" loading="lazy" />
+    </div>
+    <div class="gallery-item" onclick="openLightbox('img/photo_10.jpg')">
+      <img src="img/photo_10.jpg" alt="Dotwork geometric sleeve with detailed shading" loading="lazy" />
+    </div>
+    <div class="gallery-item" onclick="openLightbox('img/photo_11.jpg')">
+      <img src="img/photo_11.jpg" alt="Healed skull tattoo with geometric elements" loading="lazy" />
+    </div>
+    <div class="gallery-item" onclick="openLightbox('img/photo_12.jpg')">
+      <img src="img/photo_12.jpg" alt="Greek mythology sleeve tattoo" loading="lazy" />
+    </div>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" onclick="closeLightbox()">
+    <span id="lightbox-close" onclick="closeLightbox()">✕</span>
+    <img id="lightbox-img" src="" alt="Tattoo detail" />
+  </div>
+
+  <!-- STYLES -->
+  <div class="styles-section" id="styles">
+    <div class="section-title" style="padding-top:0">
+      <h2>Specialties</h2>
+      <p>Precision-driven styles for those who want art that lasts</p>
+    </div>
+    <div class="styles-grid">
+      <div class="style-card">
+        <div class="style-icon">◈</div>
+        <h3>Sacred Geometry</h3>
+        <p>Metatron's Cube, Flower of Life, Platonic solids — the mathematics of the universe rendered in ink.</p>
+      </div>
+      <div class="style-card">
+        <div class="style-icon">⬡</div>
+        <h3>Dotwork</h3>
+        <p>Thousands of precise dots creating gradient, texture, and shadow. Meditative in process, stunning in result.</p>
+      </div>
+      <div class="style-card">
+        <div class="style-icon">◼</div>
+        <h3>Blackwork</h3>
+        <p>Bold, graphic, and timeless. Heavy black ink with geometric precision for pieces that age beautifully.</p>
+      </div>
+      <div class="style-card">
+        <div class="style-icon">☽</div>
+        <h3>Spiritual Iconography</h3>
+        <p>Angels, mythological figures, and sacred symbols rendered with reverence and exceptional detail.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="contact-strip" id="contact">
+    <h2>Ready to Get Inked?</h2>
+    <p>Based in the Coachella Valley · Owner of @sacredblack.ink · 18 years of experience</p>
+    <div class="btn-group">
+      <a href="https://www.instagram.com/sunnyaink/" target="_blank" rel="noopener" class="btn btn-primary">
+        Book via Instagram
+      </a>
+      <a href="https://www.instagram.com/sacredblack.ink/" target="_blank" rel="noopener" class="btn btn-outline">
+        Sacred Black Ink Studio
+      </a>
+    </div>
+  </div>
+
+  <!-- FLOATING BOOK NOW -->
+  <a href="https://www.instagram.com/sunnyaink/" target="_blank" rel="noopener" id="book-float">
+    Book Now
+  </a>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>
+      © 2025 Tattoos by Sunny &nbsp;·&nbsp; 
+      <a href="https://www.instagram.com/sunnyaink/" target="_blank" rel="noopener">@sunnyaink</a>
+      &nbsp;·&nbsp;
+      Site by <a href="https://bayouwebstudio.com" target="_blank" rel="noopener">Bayou Web Studio</a>
+    </p>
+  </footer>
+
+  <script>
+    function openLightbox(src) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  </script>
+
+</body>
+</html>
