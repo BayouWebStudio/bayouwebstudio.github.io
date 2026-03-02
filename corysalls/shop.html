@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop - {{ARTIST_NAME}}</title>
+    <meta name="description" content="Shop {{ARTIST_NAME}} prints, merch, and gift cards. Support your favorite tattoo artist.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Stripe -->
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+    <!-- Books Status Banner -->
+    <div id="booksStatusBanner" class="books-banner books-open">
+        <div class="container">
+            <div class="books-status">
+                <span class="books-icon">📖</span>
+                <span class="books-text">Books are currently OPEN</span>
+                <span class="books-action">Book now!</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html" style="text-decoration: none;">
+                    <span class="logo-text">{{ARTIST_NAME}}</span>
+                </a>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html#about" class="nav-link">About</a>
+                <a href="index.html#gallery" class="nav-link">Work</a>
+                <a href="index.html#services" class="nav-link">Services</a>
+                <a href="index.html#contact" class="nav-link">Contact</a>
+                <a href="{{BOOKING_LINK}}" class="nav-link cta-nav" target="_blank">{{BOOKING_TEXT}}</a>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Shop Hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content" style="grid-template-columns: 1fr; text-align: center;">
+                <div class="hero-text">
+                    <h1 class="hero-title">Shop</h1>
+                    <p class="hero-subtitle">Prints, merch, and gift cards from {{ARTIST_NAME}}</p>
+                    <p class="hero-bio">Support your favorite artist and take home some amazing pieces.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shop Section -->
+    <section class="shop">
+        <div class="container">
+            <div class="shop-categories">
+                <div class="category-filters">
+                    <button class="filter-btn active" data-filter="all">All Items</button>
+                    <button class="filter-btn" data-filter="prints">Prints</button>
+                    <button class="filter-btn" data-filter="merch">Merch</button>
+                    <button class="filter-btn" data-filter="gift">Gift Cards</button>
+                </div>
+            </div>
+            
+            <div class="shop-grid">
+                <!-- Example products - replace with actual items -->
+                <div class="shop-item" data-category="prints">
+                    <div class="item-image">
+                        <img src="{{PRODUCT_IMAGE_1}}" alt="{{PRODUCT_NAME_1}}" loading="lazy">
+                    </div>
+                    <div class="item-info">
+                        <h3>{{PRODUCT_NAME_1}}</h3>
+                        <p class="item-description">{{PRODUCT_DESCRIPTION_1}}</p>
+                        <div class="item-price">${{PRODUCT_PRICE_1}}</div>
+                        <button class="btn btn-primary buy-btn" data-price-id="{{STRIPE_PRICE_ID_1}}">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+
+                <div class="shop-item" data-category="prints">
+                    <div class="item-image">
+                        <img src="{{PRODUCT_IMAGE_2}}" alt="{{PRODUCT_NAME_2}}" loading="lazy">
+                    </div>
+                    <div class="item-info">
+                        <h3>{{PRODUCT_NAME_2}}</h3>
+                        <p class="item-description">{{PRODUCT_DESCRIPTION_2}}</p>
+                        <div class="item-price">${{PRODUCT_PRICE_2}}</div>
+                        <button class="btn btn-primary buy-btn" data-price-id="{{STRIPE_PRICE_ID_2}}">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+
+                <div class="shop-item" data-category="merch">
+                    <div class="item-image">
+                        <img src="{{PRODUCT_IMAGE_3}}" alt="{{PRODUCT_NAME_3}}" loading="lazy">
+                    </div>
+                    <div class="item-info">
+                        <h3>{{PRODUCT_NAME_3}}</h3>
+                        <p class="item-description">{{PRODUCT_DESCRIPTION_3}}</p>
+                        <div class="item-price">${{PRODUCT_PRICE_3}}</div>
+                        <button class="btn btn-primary buy-btn" data-price-id="{{STRIPE_PRICE_ID_3}}">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+
+                <div class="shop-item" data-category="gift">
+                    <div class="item-image">
+                        <div class="gift-card-design">
+                            <div class="gift-card-content">
+                                <h4>Gift Card</h4>
+                                <p>{{ARTIST_NAME}}</p>
+                                <div class="gift-amount">$50</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-info">
+                        <h3>$50 Gift Card</h3>
+                        <p class="item-description">Perfect for someone who wants to get tattooed</p>
+                        <div class="item-price">$50</div>
+                        <button class="btn btn-primary buy-btn" data-price-id="{{GIFT_CARD_50_PRICE_ID}}">
+                            Purchase
+                        </button>
+                    </div>
+                </div>
+
+                <div class="shop-item" data-category="gift">
+                    <div class="item-image">
+                        <div class="gift-card-design">
+                            <div class="gift-card-content">
+                                <h4>Gift Card</h4>
+                                <p>{{ARTIST_NAME}}</p>
+                                <div class="gift-amount">$100</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-info">
+                        <h3>$100 Gift Card</h3>
+                        <p class="item-description">Give the gift of amazing ink</p>
+                        <div class="item-price">$100</div>
+                        <button class="btn btn-primary buy-btn" data-price-id="{{GIFT_CARD_100_PRICE_ID}}">
+                            Purchase
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Add more products as needed -->
+            </div>
+            
+            <!-- Shopping Cart -->
+            <div id="cart" class="cart" style="display: none;">
+                <div class="cart-content">
+                    <div class="cart-header">
+                        <h3>Shopping Cart</h3>
+                        <button id="closeCart" class="cart-close">&times;</button>
+                    </div>
+                    <div id="cartItems" class="cart-items">
+                        <!-- Cart items will be populated by JavaScript -->
+                    </div>
+                    <div class="cart-footer">
+                        <div class="cart-total">
+                            Total: $<span id="cartTotal">0</span>
+                        </div>
+                        <button id="checkoutBtn" class="btn btn-primary" style="width: 100%;">
+                            Checkout
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Cart overlay -->
+            <div id="cartOverlay" class="cart-overlay" style="display: none;"></div>
+        </div>
+    </section>
+
+    <!-- Shipping Info -->
+    <section class="shipping-info">
+        <div class="container">
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-icon">📦</div>
+                    <h3>Free Shipping</h3>
+                    <p>Free shipping on orders over $50</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">🔄</div>
+                    <h3>Easy Returns</h3>
+                    <p>30-day return policy on all items</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">⭐</div>
+                    <h3>Quality Guaranteed</h3>
+                    <p>High-quality prints and materials</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">💳</div>
+                    <h3>Secure Checkout</h3>
+                    <p>Powered by Stripe for secure payments</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>{{ARTIST_NAME}}</h3>
+                    <p>{{ARTIST_TAGLINE}}</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Shop</h4>
+                        <a href="#prints">Prints</a>
+                        <a href="#merch">Merchandise</a>
+                        <a href="#gift">Gift Cards</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Support</h4>
+                        <a href="mailto:{{ARTIST_EMAIL}}">Contact</a>
+                        <a href="#shipping">Shipping Info</a>
+                        <a href="#returns">Returns</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Artist</h4>
+                        <a href="index.html">Main Site</a>
+                        <a href="index.html#gallery">Gallery</a>
+                        <a href="{{BOOKING_LINK}}" target="_blank">Book Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; {{CURRENT_YEAR}} {{ARTIST_NAME}}. All rights reserved.</p>
+                <p class="footer-credit">Website by <a href="https://bayouwebstudio.com" target="_blank" style="opacity: 0.5;">Bayou Web Studios</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Initialize Stripe
+        const stripe = Stripe('{{STRIPE_PUBLISHABLE_KEY}}');
+        
+        // Simple shopping cart functionality
+        let cart = [];
+        
+        // Cart management
+        function addToCart(productName, price, priceId) {
+            const existingItem = cart.find(item => item.priceId === priceId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    name: productName,
+                    price: price,
+                    priceId: priceId,
+                    quantity: 1
+                });
+            }
+            
+            updateCartDisplay();
+            showCart();
+        }
+        
+        function removeFromCart(priceId) {
+            cart = cart.filter(item => item.priceId !== priceId);
+            updateCartDisplay();
+        }
+        
+        function updateCartDisplay() {
+            const cartItems = document.getElementById('cartItems');
+            const cartTotal = document.getElementById('cartTotal');
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p>Your cart is empty</p>';
+                cartTotal.textContent = '0';
+                return;
+            }
+            
+            let total = 0;
+            cartItems.innerHTML = cart.map(item => {
+                total += item.price * item.quantity;
+                return `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <h4>${item.name}</h4>
+                            <p>$${item.price} x ${item.quantity}</p>
+                        </div>
+                        <div class="cart-item-actions">
+                            <button onclick="removeFromCart('${item.priceId}')" class="remove-btn">Remove</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            cartTotal.textContent = total.toFixed(2);
+        }
+        
+        function showCart() {
+            document.getElementById('cart').style.display = 'block';
+            document.getElementById('cartOverlay').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function hideCart() {
+            document.getElementById('cart').style.display = 'none';
+            document.getElementById('cartOverlay').style.display = 'none';
+            document.body.style.overflow = '';
+        }
+        
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add to cart buttons
+            document.querySelectorAll('.buy-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const shopItem = this.closest('.shop-item');
+                    const productName = shopItem.querySelector('h3').textContent;
+                    const priceText = shopItem.querySelector('.item-price').textContent;
+                    const price = parseFloat(priceText.replace('$', ''));
+                    const priceId = this.getAttribute('data-price-id');
+                    
+                    addToCart(productName, price, priceId);
+                });
+            });
+            
+            // Cart controls
+            document.getElementById('closeCart').addEventListener('click', hideCart);
+            document.getElementById('cartOverlay').addEventListener('click', hideCart);
+            
+            // Checkout
+            document.getElementById('checkoutBtn').addEventListener('click', function() {
+                if (cart.length === 0) {
+                    alert('Your cart is empty!');
+                    return;
+                }
+                
+                // Create Stripe checkout session
+                const lineItems = cart.map(item => ({
+                    price: item.priceId,
+                    quantity: item.quantity
+                }));
+                
+                stripe.redirectToCheckout({
+                    lineItems: lineItems,
+                    mode: 'payment',
+                    successUrl: window.location.origin + '/shop-success.html',
+                    cancelUrl: window.location.origin + '/shop.html'
+                }).then(function(result) {
+                    if (result.error) {
+                        alert(result.error.message);
+                    }
+                });
+            });
+            
+            // Shop filters
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const shopItems = document.querySelectorAll('.shop-item');
+            
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const filter = this.getAttribute('data-filter');
+                    
+                    // Update active button
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Filter shop items
+                    shopItems.forEach(item => {
+                        const categories = item.getAttribute('data-category') || '';
+                        
+                        if (filter === 'all' || categories.includes(filter)) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+    
+    <style>
+        /* Shop-specific styles */
+        .shop {
+            padding: 60px 0;
+            background: var(--bg-secondary);
+        }
+        
+        .shop-categories {
+            margin-bottom: 48px;
+        }
+        
+        .category-filters {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+        }
+        
+        .shop-item {
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        
+        .shop-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow);
+        }
+        
+        .item-image {
+            aspect-ratio: 1;
+            overflow: hidden;
+        }
+        
+        .item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .gift-card-design {
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+        
+        .gift-card-content h4 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+        
+        .gift-amount {
+            font-size: 32px;
+            font-weight: 700;
+            margin-top: 16px;
+        }
+        
+        .item-info {
+            padding: 24px;
+        }
+        
+        .item-info h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .item-description {
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            font-size: 14px;
+        }
+        
+        .item-price {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+        
+        .buy-btn {
+            width: 100%;
+        }
+        
+        /* Cart styles */
+        .cart {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            max-width: 500px;
+            width: 90%;
+            max-height: 70vh;
+            z-index: 10000;
+        }
+        
+        .cart-content {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .cart-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            padding: 24px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .cart-close {
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 24px;
+            cursor: pointer;
+            margin-left: auto;
+        }
+        
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px;
+        }
+        
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+        
+        .cart-item-info h4 {
+            margin-bottom: 4px;
+        }
+        
+        .cart-item-info p {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+        
+        .remove-btn {
+            background: var(--error);
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        
+        .cart-footer {
+            padding: 24px;
+            border-top: 1px solid var(--border);
+        }
+        
+        .cart-total {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+        
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+        }
+        
+        /* Shipping info */
+        .shipping-info {
+            padding: 60px 0;
+            background: var(--bg);
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 32px;
+        }
+        
+        .info-card {
+            text-align: center;
+            padding: 32px 24px;
+        }
+        
+        .info-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+        
+        .info-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .info-card p {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            .category-filters {
+                justify-content: center;
+                gap: 12px;
+            }
+            
+            .shop-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cart {
+                width: 95%;
+                max-height: 80vh;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</body>
+</html>
