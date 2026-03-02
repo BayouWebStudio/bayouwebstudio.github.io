@@ -19,6 +19,10 @@ style.textContent=`
 @keyframes mintBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 .mint-bubble{position:fixed;bottom:80px;right:20px;width:56px;height:56px;border-radius:50%;background:#111;border:2px solid ${ACCENT};cursor:pointer;z-index:99999;display:flex;align-items:center;justify-content:center;box-shadow:0 0 15px rgba(152,232,193,0.3);animation:mintBounce 2s ease-in-out infinite;transition:transform .2s}
 .mint-bubble:hover{animation-play-state:paused;transform:scale(1.1)}
+.mint-cta{position:fixed;bottom:92px;right:82px;background:#111;border:1px solid #98E8C133;border-radius:12px;padding:8px 14px;color:#98E8C1;font-size:13px;font-weight:500;font-family:'Inter',sans-serif;z-index:99998;white-space:nowrap;box-shadow:0 4px 16px rgba(0,0,0,.4);animation:mintCtaFade 0.4s ease-out;cursor:pointer}
+.mint-cta:after{content:'';position:absolute;right:-6px;top:50%;transform:translateY(-50%);border:6px solid transparent;border-left-color:#111}
+@keyframes mintCtaFade{from{opacity:0;transform:translateX(8px)}to{opacity:1;transform:translateX(0)}}
+@media(max-width:480px){.mint-cta{bottom:92px;right:78px;font-size:12px}}
 .mint-bubble.no-bounce{animation:none}
 .mint-bubble svg{width:40px;height:40px}
 .mint-window{position:fixed;bottom:80px;right:20px;width:380px;max-height:500px;background:#0a0a0a;border:1px solid #333;border-radius:16px;z-index:99999;display:none;flex-direction:column;font-family:'Inter',sans-serif;box-shadow:0 8px 32px rgba(0,0,0,.6);overflow:hidden;animation:mint-slideup .25s ease-out}
@@ -68,7 +72,13 @@ win.innerHTML=`
   <button class="mint-send" disabled>${sendIcon}</button>
 </div>`;
 
+// CTA tooltip
+const cta=document.createElement('div');cta.className='mint-cta';cta.textContent='✨ Try me! Ask anything';
+cta.onclick=function(){toggle()};
 document.body.appendChild(bubble);
+document.body.appendChild(cta);
+// Auto-hide CTA after 8s or on click
+setTimeout(()=>{if(cta.parentNode&&!isOpen)cta.style.opacity='0';setTimeout(()=>{if(cta.parentNode)cta.remove()},500)},8000);
 document.body.appendChild(win);
 
 const msgs=win.querySelector('.mint-messages');
@@ -92,7 +102,7 @@ function toggle(){
   if(isOpen){
     win.classList.add('open');
     bubble.classList.add('no-bounce');
-    bubble.style.display='none';
+    bubble.style.display='none';if(cta.parentNode)cta.remove();
     if(!msgs.children.length)addMsg("Hey! I'm Mint 🌿 Ask me anything about this site!","bot");
     input.focus();
   }else{
