@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Professional tattoo artist. Book your session today.">
-<meta property="og:title" content="Edgar Licona | Tattoo Artist">
-<meta property="og:description" content="Professional tattoo artist. Book your session today.">
+<meta name="description" content="Tatuador profesional en CDMX. Mandala, Blackwork, Ornamental y Piercing. Agenda tu sesión hoy.">
+<meta property="og:title" content="Edgar Licona | Tatuador CDMX">
+<meta property="og:description" content="Tatuador profesional en CDMX. Mandala, Blackwork, Ornamental y Piercing.">
 <meta property="og:image" content="img/photo_00.jpg">
-<title>Edgar Licona | Tattoo Artist</title>
+<title>Edgar Licona | Tatuador CDMX</title>
 <link rel="canonical" href="https://bayouwebstudio.com/edgarliconatattoo/">
 <script type="application/ld+json">{
   "@context":"https://schema.org","@type":"LocalBusiness",
   "name":"Edgar Licona","image":"img/photo_00.jpg",
   "url":"https://bayouwebstudio.com/edgarliconatattoo/",
+  "address":{"@type":"PostalAddress","addressLocality":"Ciudad de México","addressCountry":"MX"},
   "sameAs":["https://www.instagram.com/edgarliconatattoo/"]
 }</script>
 <style>
@@ -33,15 +34,23 @@ section{padding:80px 24px;max-width:1100px;margin:0 auto}
 .about-img{width:100%;border-radius:16px;aspect-ratio:1;object-fit:cover;border:3px solid #C9A07A}
 .about-text h2{font-size:28px;margin-bottom:16px}
 .about-text p{color:#aaa;line-height:1.8;font-size:15px}
-.gallery-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}@media(min-width:900px){.gallery-grid{grid-template-columns:repeat(3,1fr)}}@media(min-width:1200px){.gallery-grid{grid-template-columns:repeat(4,1fr)
-.gallery-item img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px;transition:.3s}
-.gallery-item img:hover{transform:scale(1.03);opacity:.9}
+.gallery-grid{columns:2;column-gap:10px}
+.gallery-item{break-inside:avoid;margin-bottom:10px}
+.gallery-item img{width:100%;border-radius:12px;transition:.3s;display:block}
+.gallery-item img:hover{transform:scale(1.02);opacity:.9}
+@media(min-width:700px){.gallery-grid{columns:3}}
+@media(min-width:1100px){.gallery-grid{columns:4}}
 .cta-section{text-align:center;padding:80px 24px;background:linear-gradient(135deg,#111,#1a1a2e)}
 .cta-section h2{font-size:36px;margin-bottom:16px}
 .cta-section p{color:#aaa;font-size:17px;margin-bottom:32px}
-.float-btn{position:fixed;bottom:24px;right:24px;background:#C9A07A;color:#0a0a0a;padding:14px 24px;border-radius:50px;text-decoration:none;font-weight:bold;font-size:15px;box-shadow:0 4px 24px rgba(0,0,0,.4);z-index:999;transition:.2s}
+.float-btn{position:fixed;bottom:24px;right:24px;background:#25D366;color:#fff;padding:14px 24px;border-radius:50px;text-decoration:none;font-weight:bold;font-size:15px;box-shadow:0 4px 24px rgba(0,0,0,.4);z-index:999;transition:.2s;display:flex;align-items:center;gap:8px}
 .float-btn:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,0,0,.5)}
+.float-btn svg{width:20px;height:20px;fill:#fff}
 footer{padding:32px 24px;text-align:center;border-top:1px solid #222;color:#555;font-size:13px}
+footer a{color:#555;text-decoration:none}
+footer a:hover{color:#C9A07A}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.tag{background:#1a1a1a;border:1px solid #333;color:#aaa;padding:6px 14px;border-radius:20px;font-size:13px}
 @media(max-width:700px){.about-grid{grid-template-columns:1fr}nav a{display:none}}
 </style>
 </head>
@@ -49,59 +58,69 @@ footer{padding:32px 24px;text-align:center;border-top:1px solid #222;color:#555;
 <nav>
   <div class="logo">@edgarliconatattoo</div>
   <div>
-    <a href="#gallery">Gallery</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
+    <a href="#galeria">Galería</a>
+    <a href="#sobre-mi">Sobre Mí</a>
+    <a href="#contacto">Contacto</a>
   </div>
 </nav>
 
 <div class="hero">
   <div>
-    <h1>Edgar Licona<br><span>Portfolio</span></h1>
-    <p>Custom work. Real craft. Book your session today.</p>
-    <a href="#gallery" class="btn">Book Now</a>
+    <h1>Edgar Licona<br><span>Tatuador CDMX</span></h1>
+    <p>Mandala · Blackwork · Ornamental · Piercing</p>
+    <a href="https://wa.me/5215535241053" class="btn">Reservar Cita</a>
   </div>
 </div>
 
-<section id="about">
-  <h2 class="section-title">About</h2>
+<section id="sobre-mi">
+  <h2 class="section-title">Sobre Mí</h2>
   <div class="about-grid">
-    <img src='img/photo_00.jpg' alt='Edgar Licona' class='about-img'>
+    <img src="img/photo_00.jpg" alt="Edgar Licona" class="about-img">
     <div class="about-text">
       <h2>Edgar Licona</h2>
-      <p style="color:#aaa;line-height:1.8">Follow on Instagram for the latest work.</p>
-      <p style="margin-top:12px"><a href="https://instagram.com/edgarliconatattoo" style="color:#C9A07A">@edgarliconatattoo</a></p>
+      <p>Tatuador y artista con base en Ciudad de México. Especialista en mandala, blackwork y diseños ornamentales con precisión y detalle únicos.</p>
+      <p style="margin-top:16px">Estudio: <a href="https://www.instagram.com/tenebriumtattoo/" style="color:#C9A07A">@tenebriumtattoo</a> · CDMX 🇲🇽</p>
+      <div class="tags">
+        <span class="tag">#Mandala</span>
+        <span class="tag">#Blackwork</span>
+        <span class="tag">#Ornamental</span>
+        <span class="tag">#Piercing</span>
+        <span class="tag">#CDMX</span>
+      </div>
+      <p style="margin-top:20px"><a href="https://instagram.com/edgarliconatattoo" style="color:#C9A07A">@edgarliconatattoo</a> · 50K seguidores</p>
     </div>
   </div>
 </section>
 
-<section id="gallery">
-  <h2 class="section-title">Portfolio</h2>
+<section id="galeria">
+  <h2 class="section-title">Galería</h2>
   <div class="gallery-grid">
-<!-- GALLERY_IMAGES -->
-<div class="gallery-item"><img src="img/photo_01.jpg" alt="Edgar Licona work" loading="lazy"></div>
-<div class="gallery-item"><img src="img/photo_02.jpg" alt="Edgar Licona work" loading="lazy"></div>
-<div class="gallery-item"><img src="img/photo_03.jpg" alt="Edgar Licona work" loading="lazy"></div>
-<div class="gallery-item"><img src="img/photo_04.jpg" alt="Edgar Licona work" loading="lazy"></div>
-<div class="gallery-item"><img src="img/photo_05.jpg" alt="Edgar Licona work" loading="lazy"></div>
-<div class="gallery-item"><img src="img/photo_06.jpg" alt="Edgar Licona work" loading="lazy"></div>
-<div class="gallery-item"><img src="img/photo_07.jpg" alt="Edgar Licona work" loading="lazy"></div>
-<div class="gallery-item"><img src="img/photo_08.jpg" alt="Edgar Licona work" loading="lazy"></div>
-<div class="gallery-item"><img src="img/photo_09.jpg" alt="Edgar Licona work" loading="lazy"></div>
+<div class="gallery-item"><img src="img/photo_01.jpg" alt="Tatuaje por Edgar Licona" loading="lazy"></div>
+<div class="gallery-item"><img src="img/photo_02.jpg" alt="Tatuaje por Edgar Licona" loading="lazy"></div>
+<div class="gallery-item"><img src="img/photo_03.jpg" alt="Tatuaje por Edgar Licona" loading="lazy"></div>
+<div class="gallery-item"><img src="img/photo_04.jpg" alt="Tatuaje por Edgar Licona" loading="lazy"></div>
+<div class="gallery-item"><img src="img/photo_05.jpg" alt="Tatuaje por Edgar Licona" loading="lazy"></div>
+<div class="gallery-item"><img src="img/photo_06.jpg" alt="Tatuaje por Edgar Licona" loading="lazy"></div>
+<div class="gallery-item"><img src="img/photo_07.jpg" alt="Tatuaje por Edgar Licona" loading="lazy"></div>
+<div class="gallery-item"><img src="img/photo_08.jpg" alt="Tatuaje por Edgar Licona" loading="lazy"></div>
+<div class="gallery-item"><img src="img/photo_09.jpg" alt="Tatuaje por Edgar Licona" loading="lazy"></div>
   </div>
 </section>
 
-<div class="cta-section" id="contact">
-  <h2>Book Now Today</h2>
-  <p>Ready to work together? Get in touch to book your session.</p>
-  <a href="https://www.instagram.com/edgarliconatattoo/" class="btn">DM on Instagram</a>
+<div class="cta-section" id="contacto">
+  <h2>¿Listo para tu tatuaje?</h2>
+  <p>Escríbenos por WhatsApp para agendar tu sesión o resolver tus dudas.</p>
+  <a href="https://wa.me/5215535241053" class="btn">Agendar por WhatsApp</a>
 </div>
 
-<a href="https://www.instagram.com/edgarliconatattoo/" class="float-btn">Book Now</a>
+<a href="https://wa.me/5215535241053" class="float-btn" title="Reservar por WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  Reservar
+</a>
 
 <footer>
-  <p style="margin-bottom:8px">@edgarliconatattoo · <a href="https://instagram.com/edgarliconatattoo" style="color:#C9A07A">Edgar Licona</a></p>
-  <a href="https://bayouwebstudio.com" target="_blank" style="color:inherit;text-decoration:none;opacity:0.5;font-size:12px;">Powered by BWS</a>
+  <p style="opacity:.5">Sitio web creado por <a href="https://bayouwebstudio.com" target="_blank">Bayou Web Studio</a> · Diseño web para artistas del tatuaje</p>
 </footer>
+
 </body>
 </html>
