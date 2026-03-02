@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Horihan | Traditional Japanese Tattoo Artist — Houston, TX</title>
+  <meta name="description" content="Horihan — Traditional Japanese tattoo artist (Irezumi) based in Houston, TX at @santattoohtx. Bold color, full sleeves, back pieces. Booking inquiries: Horihanart@gmail.com" />
+  <meta name="keywords" content="Horihan, horihan666, Japanese tattoo Houston, Irezumi Houston, traditional Japanese tattoo artist, koi tattoo, dragon tattoo Houston, sleeve tattoo, santattoohtx" />
+
+  <meta property="og:title" content="Horihan | Traditional Japanese Tattoo — Houston, TX" />
+  <meta property="og:description" content="Irezumi master working in the classical Japanese tradition. Full sleeves, back pieces, bold color. Houston, TX at @santattoohtx." />
+  <meta property="og:image" content="https://bayouwebstudio.github.io/horihan666/img/tattoo_01.jpg" />
+  <meta property="og:url" content="https://bayouwebstudio.github.io/horihan666/" />
+  <meta property="og:type" content="website" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Horihan | Traditional Japanese Tattoo — Houston, TX" />
+  <meta name="twitter:image" content="https://bayouwebstudio.github.io/horihan666/img/tattoo_01.jpg" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Horihan — Traditional Japanese Tattoo Artist",
+    "description": "Irezumi master specializing in traditional Japanese tattoo. Bold color, full sleeves, back pieces. Based in Houston, TX.",
+    "url": "https://bayouwebstudio.github.io/horihan666/",
+    "image": "https://bayouwebstudio.github.io/horihan666/img/tattoo_01.jpg",
+    "email": "Horihanart@gmail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Houston",
+      "addressRegion": "TX",
+      "addressCountry": "US"
+    },
+    "sameAs": [
+      "https://www.instagram.com/horihan666/",
+      "https://www.instagram.com/santattoohtx/"
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --gold:   #C9A84C;
+      --gold-dim: rgba(201,168,76,0.18);
+      --black:  #0a0a0a;
+      --dark:   #111111;
+      --darker: #0d0d0d;
+      --text:   #e8e8e8;
+      --muted:  #888;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--black); color: var(--text); font-family: 'Inter', sans-serif; font-weight: 300; line-height: 1.6; overflow-x: hidden; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 2.5rem;
+      background: rgba(10,10,10,0.9); backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--gold-dim);
+    }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--gold); letter-spacing: 0.06em; text-decoration: none; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.3s; }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* HERO */
+    #hero { position: relative; height: 100vh; min-height: 620px; display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; background-image: url('img/tattoo_01.jpg'); background-size: cover; background-position: center top; filter: brightness(0.26); transform: scale(1.06); transition: transform 10s ease; }
+    #hero:hover .hero-bg { transform: scale(1.0); }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(10,10,10,0.15) 0%, rgba(10,10,10,0.72) 100%); }
+    .hero-deco { position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(to right, transparent, var(--gold), transparent); opacity: 0.6; }
+    .hero-deco-b { position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(to right, transparent, var(--gold), transparent); opacity: 0.6; }
+    .hero-content { position: relative; z-index: 2; max-width: 820px; padding: 0 1.5rem; }
+    .hero-eyebrow { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.38em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.4rem; }
+    .hero-kanji { font-size: clamp(1.4rem, 3vw, 2rem); color: rgba(201,168,76,0.45); letter-spacing: 0.5em; margin-bottom: 0.8rem; font-weight: 300; }
+    .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(3.5rem, 9vw, 7rem); font-weight: 900; line-height: 0.95; color: #fff; margin-bottom: 1.3rem; letter-spacing: -0.01em; }
+    .hero-subtitle { font-size: clamp(0.85rem, 1.8vw, 1.05rem); color: rgba(255,255,255,0.55); font-weight: 300; letter-spacing: 0.1em; margin-bottom: 0.6rem; }
+    .hero-location { font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(201,168,76,0.7); margin-bottom: 2.8rem; }
+    .hero-cta { display: inline-block; padding: 1rem 3rem; background: var(--gold); color: var(--black); text-decoration: none; font-weight: 600; font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase; border: 2px solid var(--gold); transition: all 0.35s; }
+    .hero-cta:hover { background: transparent; color: var(--gold); }
+    .hero-scroll { position: absolute; bottom: 2.2rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; color: rgba(255,255,255,0.3); font-size: 0.6rem; letter-spacing: 0.24em; text-transform: uppercase; animation: bounce 2.5s infinite; }
+    .scroll-line { width: 1px; height: 44px; background: linear-gradient(to bottom, var(--gold), transparent); }
+    @keyframes bounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(8px); } }
+
+    /* SHARED */
+    section { padding: 7rem 1.5rem; }
+    .container { max-width: 1120px; margin: 0 auto; }
+    .section-label { font-size: 0.64rem; font-weight: 600; letter-spacing: 0.38em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.7rem; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 700; line-height: 1.12; margin-bottom: 1.4rem; }
+    .divider { width: 48px; height: 2px; background: var(--gold); margin: 1.4rem 0 2rem; }
+
+    /* ABOUT */
+    #about { background: var(--dark); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .about-img-wrap { position: relative; }
+    .about-img-wrap::before { content: ''; position: absolute; top: 16px; left: 16px; right: -16px; bottom: -16px; border: 1px solid rgba(201,168,76,0.28); pointer-events: none; }
+    .about-img-wrap::after { content: '彫'; position: absolute; bottom: -32px; right: -10px; font-size: 4rem; color: rgba(201,168,76,0.1); font-weight: 700; line-height: 1; pointer-events: none; }
+    .about-img { width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block; filter: grayscale(5%); }
+    .about-text p { color: rgba(232,232,232,0.72); font-size: 0.98rem; line-height: 1.9; margin-bottom: 1.4rem; }
+    .about-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2.5rem; padding-top: 2.5rem; border-top: 1px solid rgba(201,168,76,0.15); }
+    .stat-number { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; color: var(--gold); display: block; }
+    .stat-label { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+
+    /* GALLERY */
+    #gallery { background: var(--black); }
+    .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .gallery-item { position: relative; overflow: hidden; cursor: pointer; }
+    .gallery-item img { width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block; transition: transform 0.65s ease, filter 0.4s ease; filter: saturate(85%); }
+    .gallery-item:hover img { transform: scale(1.07); filter: saturate(110%); }
+    .gallery-item-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,10,10,0.8) 0%, transparent 55%); opacity: 0; transition: opacity 0.4s; display: flex; align-items: flex-end; padding: 1.2rem; }
+    .gallery-item:hover .gallery-item-overlay { opacity: 1; }
+    .gallery-item-overlay span { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+
+    /* Lightbox */
+    .lightbox { display: none; position: fixed; inset: 0; z-index: 500; background: rgba(0,0,0,0.95); align-items: center; justify-content: center; cursor: zoom-out; }
+    .lightbox.active { display: flex; }
+    .lightbox img { max-width: 90vw; max-height: 90vh; object-fit: contain; box-shadow: 0 0 80px rgba(0,0,0,0.8); }
+    .lightbox-close { position: absolute; top: 1.5rem; right: 2rem; color: rgba(255,255,255,0.6); font-size: 2rem; cursor: pointer; line-height: 1; transition: color 0.3s; }
+    .lightbox-close:hover { color: var(--gold); }
+
+    /* STYLES SECTION */
+    #styles { background: var(--darker); }
+    .styles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+    .style-card { border: 1px solid rgba(201,168,76,0.16); padding: 2.2rem 1.6rem; transition: border-color 0.3s, background 0.3s; }
+    .style-card:hover { border-color: var(--gold); background: rgba(201,168,76,0.04); }
+    .style-icon { font-size: 1.6rem; margin-bottom: 1rem; }
+    .style-card h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; margin-bottom: 0.6rem; }
+    .style-card p { font-size: 0.87rem; color: var(--muted); line-height: 1.75; }
+
+    /* PULL QUOTE */
+    #quote { background: var(--dark); padding: 6rem 1.5rem; text-align: center; position: relative; overflow: hidden; }
+    #quote::before { content: '龍'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 22rem; color: rgba(201,168,76,0.03); font-weight: 700; pointer-events: none; user-select: none; line-height: 1; }
+    .quote-text { font-family: 'Playfair Display', serif; font-size: clamp(1.3rem, 3.5vw, 2.2rem); font-style: italic; font-weight: 700; color: var(--text); max-width: 820px; margin: 0 auto; line-height: 1.55; position: relative; z-index: 1; }
+    .quote-text::before { content: '\201C'; color: var(--gold); }
+    .quote-text::after  { content: '\201D'; color: var(--gold); }
+    .quote-author { margin-top: 1.8rem; font-size: 0.72rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); position: relative; z-index: 1; }
+
+    /* BOOKING */
+    #booking { background: var(--dark); }
+    .booking-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .booking-info p { color: rgba(232,232,232,0.7); font-size: 0.95rem; line-height: 1.9; margin-bottom: 1.2rem; }
+    .booking-contact-list { list-style: none; margin-top: 2rem; }
+    .booking-contact-list li { padding: 1rem 0; border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; gap: 1rem; }
+    .booking-contact-list li:first-child { border-top: 1px solid rgba(255,255,255,0.06); }
+    .contact-icon { width: 40px; height: 40px; border-radius: 50%; background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.25); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+    .contact-detail { display: flex; flex-direction: column; }
+    .contact-label { font-size: 0.64rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+    .contact-value { font-size: 0.92rem; color: var(--text); }
+    .contact-value a { color: var(--gold); text-decoration: none; }
+    .contact-value a:hover { text-decoration: underline; }
+    .booking-form-box { background: rgba(255,255,255,0.02); border: 1px solid rgba(201,168,76,0.15); padding: 2.8rem; }
+    .booking-form-box h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 0.5rem; }
+    .booking-form-box > p { font-size: 0.87rem; color: var(--muted); margin-bottom: 2rem; }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label { display: block; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
+    .form-group input, .form-group textarea, .form-group select { width: 100%; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); color: var(--text); padding: 0.8rem 1rem; font-family: 'Inter', sans-serif; font-size: 0.9rem; outline: none; transition: border-color 0.3s; -webkit-appearance: none; }
+    .form-group select option { background: #111; }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--gold); }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .form-submit { width: 100%; background: var(--gold); color: var(--black); border: 2px solid var(--gold); padding: 0.95rem 2rem; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; transition: all 0.3s; }
+    .form-submit:hover { background: transparent; color: var(--gold); }
+
+    /* FLOAT BOOK */
+    .float-book { position: fixed; bottom: 2rem; right: 2rem; z-index: 200; background: var(--gold); color: var(--black); padding: 0.9rem 1.8rem; text-decoration: none; font-weight: 700; font-size: 0.74rem; letter-spacing: 0.18em; text-transform: uppercase; box-shadow: 0 8px 36px rgba(201,168,76,0.38); transition: all 0.3s; border: 2px solid var(--gold); }
+    .float-book:hover { background: transparent; color: var(--gold); box-shadow: 0 8px 36px rgba(201,168,76,0.15); }
+
+    /* FOOTER */
+    footer { background: var(--darker); border-top: 1px solid rgba(255,255,255,0.05); padding: 3.5rem 1.5rem; text-align: center; }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 700; color: var(--gold); margin-bottom: 0.6rem; display: block; }
+    .footer-tagline { font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.8rem; }
+    .footer-links { display: flex; justify-content: center; gap: 2.5rem; margin: 1.5rem 0; list-style: none; flex-wrap: wrap; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.78rem; transition: color 0.3s; }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-copy { font-size: 0.74rem; color: rgba(136,136,136,0.45); margin-top: 1.8rem; }
+    .bws-credit { font-size: 0.68rem; color: rgba(136,136,136,0.5); margin-top: 0.6rem; }
+    .bws-credit a { color: rgba(201,168,76,0.5); text-decoration: none; transition: color 0.3s; }
+    .bws-credit a:hover { color: var(--gold); }
+
+    /* SCROLL REVEAL */
+    .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.75s ease, transform 0.75s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+    .fade-in-left { opacity: 0; transform: translateX(-30px); transition: opacity 0.75s ease, transform 0.75s ease; }
+    .fade-in-left.visible { opacity: 1; transform: none; }
+    .fade-in-right { opacity: 0; transform: translateX(30px); transition: opacity 0.75s ease, transform 0.75s ease; }
+    .fade-in-right.visible { opacity: 1; transform: none; }
+
+    /* RESPONSIVE */
+    @media (min-width: 901px) { .gallery-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .booking-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .styles-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+      .styles-grid { grid-template-columns: 1fr; }
+      .float-book { bottom: 1.2rem; right: 1.2rem; padding: 0.75rem 1.4rem; font-size: 0.7rem; }
+      .about-img-wrap::after { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#hero" class="nav-logo">Horihan</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#styles">Styles</a></li>
+      <li><a href="#booking">Book</a></li>
+    </ul>
+  </nav>
+
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-deco"></div>
+    <div class="hero-deco-b"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Traditional Japanese Tattoo · Irezumi</p>
+      <p class="hero-kanji">彫 · 刺青 · 龍</p>
+      <h1 class="hero-title">Horihan</h1>
+      <p class="hero-subtitle">Traditional Japanese Tattoo</p>
+      <p class="hero-location">📍 Houston, TX — @santattoohtx</p>
+      <a href="#booking" class="hero-cta">Book a Consultation</a>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-img-wrap fade-in-left">
+          <img src="img/tattoo_05.jpg" alt="Horihan — Traditional Japanese Tattoo Artist, Houston TX" class="about-img" loading="lazy" />
+        </div>
+        <div class="about-text fade-in-right">
+          <p class="section-label">About the Artist</p>
+          <h2 class="section-title">The Way<br>of Irezumi</h2>
+          <div class="divider"></div>
+          <p>Horihan is a traditional Japanese tattoo artist (Irezumi) based in Houston, Texas, working out of @santattoohtx studio. With a deep reverence for the classical Japanese tattooing tradition, Horihan creates bold, vibrant pieces rooted in centuries of iconography — koi fish, dragons, tigers, waves, cherry blossoms, peonies, and more.</p>
+          <p>Every piece is designed to flow with the body. Horihan specializes in large-scale work — full sleeves, body suits, and sweeping back pieces — executed with the powerful color saturation and dynamic composition that define the Irezumi tradition.</p>
+          <p>Each tattoo is a one-of-a-kind collaboration: a conversation between artist, client, and the living canvas of the body.</p>
+          <div class="about-stats">
+            <div>
+              <span class="stat-number">17.9K</span>
+              <span class="stat-label">Followers</span>
+            </div>
+            <div>
+              <span class="stat-number">HTX</span>
+              <span class="stat-label">Houston, TX</span>
+            </div>
+            <div>
+              <span class="stat-number">2026</span>
+              <span class="stat-label">Booking Open</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery">
+    <div class="container">
+      <p class="section-label fade-in">Portfolio</p>
+      <h2 class="section-title fade-in">Recent Work</h2>
+      <div class="divider fade-in"></div>
+      <div class="gallery-grid">
+        <div class="gallery-item fade-in" onclick="openLightbox('img/tattoo_01.jpg')"><img src="img/tattoo_01.jpg" alt="Traditional Japanese tattoo by Horihan" loading="lazy" /><div class="gallery-item-overlay"><span>Irezumi</span></div></div>
+        <div class="gallery-item fade-in" onclick="openLightbox('img/tattoo_02.jpg')"><img src="img/tattoo_02.jpg" alt="Japanese sleeve tattoo Horihan Houston" loading="lazy" /><div class="gallery-item-overlay"><span>Sleeve</span></div></div>
+        <div class="gallery-item fade-in" onclick="openLightbox('img/tattoo_03.jpg')"><img src="img/tattoo_03.jpg" alt="Koi fish tattoo by Horihan" loading="lazy" /><div class="gallery-item-overlay"><span>Koi · 鯉</span></div></div>
+        <div class="gallery-item fade-in" onclick="openLightbox('img/tattoo_04.jpg')"><img src="img/tattoo_04.jpg" alt="Dragon tattoo Houston by Horihan" loading="lazy" /><div class="gallery-item-overlay"><span>Dragon · 龍</span></div></div>
+        <div class="gallery-item fade-in" onclick="openLightbox('img/tattoo_05.jpg')"><img src="img/tattoo_05.jpg" alt="Traditional Japanese back piece by Horihan" loading="lazy" /><div class="gallery-item-overlay"><span>Back Piece</span></div></div>
+        <div class="gallery-item fade-in" onclick="openLightbox('img/tattoo_06.jpg')"><img src="img/tattoo_06.jpg" alt="Japanese full sleeve tattoo Horihan" loading="lazy" /><div class="gallery-item-overlay"><span>Full Sleeve</span></div></div>
+        <div class="gallery-item fade-in" onclick="openLightbox('img/tattoo_07.jpg')"><img src="img/tattoo_07.jpg" alt="Tiger tattoo Japanese style Houston" loading="lazy" /><div class="gallery-item-overlay"><span>Tiger · 虎</span></div></div>
+        <div class="gallery-item fade-in" onclick="openLightbox('img/tattoo_08.jpg')"><img src="img/tattoo_08.jpg" alt="Japanese traditional tattoo by Horihan" loading="lazy" /><div class="gallery-item-overlay"><span>Irezumi</span></div></div>
+        <div class="gallery-item fade-in" onclick="openLightbox('img/tattoo_09.jpg')"><img src="img/tattoo_09.jpg" alt="Horihan traditional Japanese tattoo work" loading="lazy" /><div class="gallery-item-overlay"><span>Irezumi</span></div></div>
+        <div class="gallery-item fade-in" onclick="openLightbox('img/tattoo_10.jpg')"><img src="img/tattoo_10.jpg" alt="Japanese traditional tattoo piece Houston TX" loading="lazy" /><div class="gallery-item-overlay"><span>Sleeve</span></div></div>
+        <div class="gallery-item fade-in" onclick="openLightbox('img/tattoo_11.jpg')"><img src="img/tattoo_11.jpg" alt="Irezumi full color by Horihan" loading="lazy" /><div class="gallery-item-overlay"><span>Bold Color</span></div></div>
+        <div class="gallery-item fade-in" onclick="openLightbox('img/tattoo_12.jpg')"><img src="img/tattoo_12.jpg" alt="Traditional Japanese body suit Horihan" loading="lazy" /><div class="gallery-item-overlay"><span>Irezumi</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="quote">
+    <div class="container">
+      <p class="quote-text fade-in">Every tattoo tells a story that cannot be erased. I work in the tradition of masters who came before — to give permanence to what matters most.</p>
+      <p class="quote-author fade-in">— Horihan &nbsp;·&nbsp; @horihan666</p>
+    </div>
+  </section>
+
+  <section id="styles">
+    <div class="container">
+      <p class="section-label fade-in">Specialties</p>
+      <h2 class="section-title fade-in">Rooted in Tradition</h2>
+      <div class="divider fade-in"></div>
+      <div class="styles-grid">
+        <div class="style-card fade-in">
+          <div class="style-icon">🐉</div>
+          <h3>Dragons &amp; Mythical Beasts</h3>
+          <p>Ryū, phoenixes, and oni — fearsome creatures rendered in bold linework and dramatic color saturation of the Edo-period tradition.</p>
+        </div>
+        <div class="style-card fade-in">
+          <div class="style-icon">🌸</div>
+          <h3>Botanicals &amp; Waves</h3>
+          <p>Cherry blossoms, peonies, chrysanthemums, and crashing waves — the classic motifs that breathe life into every composition.</p>
+        </div>
+        <div class="style-card fade-in">
+          <div class="style-icon">🐟</div>
+          <h3>Koi &amp; Wildlife</h3>
+          <p>Koi fish, tigers, snakes, and hawks — animals charged with cultural meaning, executed with dynamic movement and bold color.</p>
+        </div>
+        <div class="style-card fade-in">
+          <div class="style-icon">⛩️</div>
+          <h3>Full Sleeves</h3>
+          <p>Cohesive compositions that wrap the arm from shoulder to wrist — a signature specialty with carefully planned flow and balance.</p>
+        </div>
+        <div class="style-card fade-in">
+          <div class="style-icon">🗾</div>
+          <h3>Back Pieces</h3>
+          <p>Large-scale canvases bring the most epic compositions to life — a full back becomes a masterwork of Japanese tradition.</p>
+        </div>
+        <div class="style-card fade-in">
+          <div class="style-icon">⚔️</div>
+          <h3>Samurai &amp; Geisha</h3>
+          <p>Figures from feudal Japan depicted with theatrical drama and meticulous detail — samurai warriors, geisha, and kabuki masks.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="booking">
+    <div class="container">
+      <p class="section-label fade-in">Get in Touch</p>
+      <h2 class="section-title fade-in">Book a Consultation</h2>
+      <div class="divider fade-in"></div>
+      <div class="booking-grid">
+        <div class="booking-info fade-in">
+          <p>Horihan takes on a carefully curated number of clients to ensure each piece receives the full attention and craft it deserves. Large-scale work — full sleeves and back pieces — is a specialty.</p>
+          <p>To begin, send an email or DM on Instagram with your concept, reference images, and placement. Consultations are available at @santattoohtx studio in Houston, TX.</p>
+          <ul class="booking-contact-list">
+            <li>
+              <div class="contact-icon">✉</div>
+              <div class="contact-detail">
+                <span class="contact-label">Email</span>
+                <span class="contact-value"><a href="mailto:Horihanart@gmail.com">Horihanart@gmail.com</a></span>
+              </div>
+            </li>
+            <li>
+              <div class="contact-icon">📷</div>
+              <div class="contact-detail">
+                <span class="contact-label">Instagram</span>
+                <span class="contact-value"><a href="https://www.instagram.com/horihan666/" target="_blank" rel="noopener">@horihan666</a></span>
+              </div>
+            </li>
+            <li>
+              <div class="contact-icon">📍</div>
+              <div class="contact-detail">
+                <span class="contact-label">Studio</span>
+                <span class="contact-value"><a href="https://www.instagram.com/santattoohtx/" target="_blank" rel="noopener">@santattoohtx — Houston, TX</a></span>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="booking-form-box fade-in">
+          <h3>Start Your Inquiry</h3>
+          <p>Fill out the form and Horihan will reply via email within a few days.</p>
+          <form action="mailto:Horihanart@gmail.com" method="POST" enctype="text/plain">
+            <div class="form-group">
+              <label for="name">Your Name</label>
+              <input type="text" id="name" name="name" placeholder="Full name" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="your@email.com" required />
+            </div>
+            <div class="form-group">
+              <label for="piece">Piece Type</label>
+              <select id="piece" name="piece">
+                <option value="">Select type...</option>
+                <option>Full Sleeve</option>
+                <option>Half Sleeve</option>
+                <option>Back Piece</option>
+                <option>Chest / Torso</option>
+                <option>Single Piece</option>
+                <option>Body Suit / Large Project</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject / Motif</label>
+              <input type="text" id="subject" name="subject" placeholder="e.g. Koi fish, dragon, tiger + waves..." />
+            </div>
+            <div class="form-group">
+              <label for="message">Tell Horihan about your vision</label>
+              <textarea id="message" name="message" placeholder="Describe your concept, color preferences, size, placement, and any reference images..."></textarea>
+            </div>
+            <button type="submit" class="form-submit">Send Inquiry</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-logo">Horihan</span>
+    <p class="footer-tagline">Traditional Japanese Tattoo · Houston, TX</p>
+    <ul class="footer-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#styles">Styles</a></li>
+      <li><a href="#booking">Book</a></li>
+      <li><a href="https://www.instagram.com/horihan666/" target="_blank" rel="noopener">Instagram</a></li>
+    </ul>
+    <p class="footer-copy">&copy; 2026 Horihan. All rights reserved.</p>
+    <p class="bws-credit">Built by <a href="https://bayouwebstudio.com" target="_blank" rel="noopener">Bayou Web Studio</a></p>
+  </footer>
+
+  <a href="#booking" class="float-book">Book Now</a>
+
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close" onclick="closeLightbox()">✕</span>
+    <img id="lightbox-img" src="" alt="Horihan tattoo" />
+  </div>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right').forEach(el => observer.observe(el));
+
+    function openLightbox(src) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+  </script>
+</body>
+</html>
