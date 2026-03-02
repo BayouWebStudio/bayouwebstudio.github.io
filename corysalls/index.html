@@ -1,560 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cory Salls - Houston Tattoo Artist | Gold Rush Collective</title>
-    <meta name="description" content="Cory Salls - Custom tattoo artist at Gold Rush Collective in Houston, TX. Appointment only. 24K+ followers. Bold, precise, unforgettable work. Call (832) 208-9528.">
-    
-    <!-- SEO Keywords -->
-    <meta name="keywords" content="Houston tattoo artist, Gold Rush Collective tattoo, Cory Salls tattoo, custom tattoos Houston, Houston TX tattoo, appointment only tattoo Houston">
-    <meta name="author" content="Cory Salls">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://bayouwebstudio.com/corysalls/">
-
-    <!-- Open Graph / Social -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://bayouwebstudio.com/corysalls/">
-    <meta property="og:title" content="Cory Salls - Houston Tattoo Artist | Gold Rush Collective">
-    <meta property="og:description" content="Custom tattoo artist at Gold Rush Collective in Houston, TX. Appointment only. Bold, precise, unforgettable work.">
-    <meta property="og:image" content="https://bayouwebstudio.com/corysalls/img/og-image.jpg">
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:title" content="Cory Salls - Houston Tattoo Artist">
-    <meta property="twitter:description" content="Custom tattoo artist at Gold Rush Collective, Houston TX. Appointment only.">
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="styles.css">
-
-    <!-- Schema Markup for Local SEO -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "Cory Salls Tattoos",
-      "description": "Custom tattoo artist at Gold Rush Collective in Houston, TX.",
-      "telephone": "(832) 208-9528",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Houston",
-        "addressRegion": "TX",
-        "addressCountry": "US"
-      },
-      "sameAs": ["https://www.instagram.com/cory_salls/"],
-      "priceRange": "$$$",
-      "image": "https://bayouwebstudio.com/corysalls/img/og-image.jpg"
-    }
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cory Salls | Portfolio</title>
+  <meta name="description" content="Artist✍🏻💥Appointment only💥 all deposits and transactions are non-refundable (832) 208-9528">
+  <meta property="og:title" content="Cory Salls | Portfolio">
+  <meta property="og:description" content="Artist✍🏻💥Appointment only💥 all deposits and transactions are non-refundable (832) 208-9528">
+  <meta property="og:url" content="https://getminted.ai/corysalls/">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://getminted.ai/corysalls/img/photo_01.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{background:#0a0a0a;color:#fff;font-family:'Inter',sans-serif;overflow-x:hidden}
+    .hero{min-height:60vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem}
+    .hero h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:700;margin-bottom:0.5rem}
+    .hero .accent{color:#C9A84C}
+    .hero p{max-width:600px;color:#aaa;font-size:1.1rem;line-height:1.6;margin-top:1rem}
+    .gallery{columns:2;column-gap:8px;padding:0 8px;max-width:1200px;margin:0 auto 4rem}
+    @media(min-width:768px){.gallery{columns:3}}
+    .gallery-item{break-inside:avoid;margin-bottom:8px;border-radius:8px;overflow:hidden;opacity:0;transform:translateY(20px);transition:opacity 0.6s,transform 0.6s}
+    .gallery-item.visible{opacity:1;transform:translateY(0)}
+    .gallery-item img{width:100%;display:block;cursor:pointer;transition:transform 0.3s}
+    .gallery-item img:hover{transform:scale(1.02)}
+    .book-btn{position:fixed;bottom:24px;right:24px;background:#C9A84C;color:#0a0a0a;border:none;padding:14px 28px;border-radius:50px;font-size:1rem;font-weight:600;cursor:pointer;text-decoration:none;z-index:100;box-shadow:0 4px 20px #C9A84C44;transition:transform 0.2s}
+    .book-btn:hover{transform:scale(1.05)}
+    .lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:200;align-items:center;justify-content:center;cursor:pointer}
+    .lightbox.open{display:flex}
+    .lightbox img{max-width:90vw;max-height:90vh;border-radius:8px}
+    footer{text-align:center;padding:2rem;color:#555;font-size:12px}
+    footer a{color:inherit;text-decoration:none;opacity:0.5}
+  </style>
 </head>
 <body>
+  <section class="hero">
+    <h1><span class="accent">Cory Salls</span></h1>
+    <p>Artist✍🏻💥Appointment only💥 all deposits and transactions are non-refundable (832) 208-9528</p>
+  </section>
 
-    <!-- Books Status Banner -->
-    <div id="booksStatusBanner" class="books-banner books-open">
-        <div class="container">
-            <div class="books-status">
-                <span class="books-icon">📖</span>
-                <span class="books-text">Currently accepting appointment inquiries</span>
-                <span class="books-action">— DM or call to book!</span>
-            </div>
-        </div>
-    </div>
+  <section class="gallery">
+    <div class="gallery-item" style="animation-delay:0s"><img src="img/photo_01.jpg" alt="Cory Salls work 1" loading="lazy" onclick="openLightbox(this.src)"></div>
+          <div class="gallery-item" style="animation-delay:0.1s"><img src="img/photo_02.jpg" alt="Cory Salls work 2" loading="lazy" onclick="openLightbox(this.src)"></div>
+          <div class="gallery-item" style="animation-delay:0.2s"><img src="img/photo_03.jpg" alt="Cory Salls work 3" loading="lazy" onclick="openLightbox(this.src)"></div>
+          <div class="gallery-item" style="animation-delay:0.30000000000000004s"><img src="img/photo_04.jpg" alt="Cory Salls work 4" loading="lazy" onclick="openLightbox(this.src)"></div>
+          <div class="gallery-item" style="animation-delay:0.4s"><img src="img/photo_05.jpg" alt="Cory Salls work 5" loading="lazy" onclick="openLightbox(this.src)"></div>
+          <div class="gallery-item" style="animation-delay:0.5s"><img src="img/photo_06.jpg" alt="Cory Salls work 6" loading="lazy" onclick="openLightbox(this.src)"></div>
+          <div class="gallery-item" style="animation-delay:0.6000000000000001s"><img src="img/photo_07.jpg" alt="Cory Salls work 7" loading="lazy" onclick="openLightbox(this.src)"></div>
+          <div class="gallery-item" style="animation-delay:0.7000000000000001s"><img src="img/photo_08.jpg" alt="Cory Salls work 8" loading="lazy" onclick="openLightbox(this.src)"></div>
+  </section>
 
-    <!-- Navigation -->
-    <nav class="nav">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <span class="logo-text">CORY SALLS</span>
-            </div>
-            <div class="nav-menu" id="navMenu">
-                <a href="#about" class="nav-link">About</a>
-                <a href="#gallery" class="nav-link">Work</a>
-                <a href="#services" class="nav-link">Services</a>
-                <a href="#reviews" class="nav-link">Reviews</a>
-                <a href="#contact" class="nav-link">Contact</a>
-                <a href="https://www.instagram.com/cory_salls/" class="nav-link cta-nav" target="_blank">Book Now</a>
-            </div>
-            <div class="nav-toggle" id="navToggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </nav>
+  <a href="https://instagram.com/cory_salls" target="_blank" class="book-btn">Book Now</a>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <div class="hero-badge">Gold Rush Collective · Houston, TX</div>
-                    <h1 class="hero-title">Cory Salls</h1>
-                    <p class="hero-subtitle">Houston Tattoo Artist</p>
-                    <div class="hero-bio">
-                        Custom tattoo work that lasts a lifetime. Bold lines, rich detail, and a design built around <em>you</em>. Based at Gold Rush Collective in Houston — appointment only.
-                    </div>
-                    
-                    <div class="hero-buttons">
-                        <a href="https://www.instagram.com/cory_salls/" class="btn btn-primary" target="_blank">📱 DM to Book</a>
-                        <a href="tel:8322089528" class="btn btn-secondary">📞 (832) 208-9528</a>
-                    </div>
-                    
-                    <!-- Social Proof -->
-                    <div class="hero-proof">
-                        <div class="proof-item">
-                            <span class="proof-number">24K+</span>
-                            <span class="proof-text">followers</span>
-                        </div>
-                        <div class="proof-item">
-                            <span class="proof-number">466+</span>
-                            <span class="proof-text">posts</span>
-                        </div>
-                        <div class="proof-item">
-                            <span class="proof-number">5★</span>
-                            <span class="proof-text">rated</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="hero-visual">
-                    <div class="hero-image">
-                        <img src="img/photo_01.jpg" alt="Cory Salls - Houston Tattoo Artist" loading="eager">
-                    </div>
-                    <div class="hero-badge-float">
-                        <span class="badge-icon">⚡</span>
-                        <div>
-                            <strong>Appointment Only</strong>
-                            <span>Book via DM or call</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <div class="lightbox" id="lightbox" onclick="this.classList.remove('open')">
+    <img id="lightbox-img" src="" alt="Full size">
+  </div>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-text">
-                    <div class="section-header" style="text-align:left; margin-bottom: var(--spacing-lg);">
-                        <h2>About Cory</h2>
-                    </div>
-                    <div class="about-bio">
-                        <p>Cory Salls is a Houston-based tattoo artist operating out of <strong>Gold Rush Collective</strong> — one of Houston's premier tattoo shops. With a dedicated following of 24,000+ across Instagram and a portfolio spanning hundreds of pieces, Cory's work speaks for itself.</p>
-                        <p>Every piece is custom-designed from scratch — no flash, no shortcuts. Whether it's a bold statement sleeve or an intricate fine-line piece, Cory brings the same level of care and precision to every client.</p>
-                        <p>Deposits and transactions are non-refundable. Cory's time is valuable — and so is yours. Come prepared, come committed, and leave with art you'll carry for life.</p>
-                    </div>
-                    <div class="about-specialties">
-                        <h3>Specialties</h3>
-                        <ul class="specialty-list">
-                            <li>Custom Designs</li>
-                            <li>Black &amp; Grey Realism</li>
-                            <li>Bold Traditional</li>
-                            <li>Fine Line Work</li>
-                            <li>Cover-ups</li>
-                            <li>Large Scale Pieces</li>
-                            <li>Portraits</li>
-                            <li>Illustrative</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="about-image">
-                    <img src="img/photo_01.jpg" alt="Cory Salls tattooing at Gold Rush Collective Houston" loading="lazy">
-                </div>
-            </div>
-        </div>
-    </section>
+  <footer>
+    <a href="https://getminted.ai" target="_blank" style="color:inherit;text-decoration:none;opacity:0.5;font-size:12px;">Minted by Mint 🌿</a>
+  </footer>
 
-    <!-- Services Section -->
-    <section id="services" class="services">
-        <div class="container">
-            <div class="section-header">
-                <h2>Services & Pricing</h2>
-                <p>Custom work, appointment only — built around your vision</p>
-            </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">✏️</div>
-                    <h3>Custom Designs</h3>
-                    <div class="price">Starting at $200</div>
-                    <p>Fully original artwork designed specifically for you. No templates, no recycled concepts. Your idea, brought to life in ink.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🖤</div>
-                    <h3>Black &amp; Grey Realism</h3>
-                    <div class="price">Starting at $300</div>
-                    <p>Photorealistic work with depth, shadow, and detail that makes people do a double-take. Portraits, nature, and beyond.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">💪</div>
-                    <h3>Large Scale &amp; Sleeves</h3>
-                    <div class="price">Custom Quote</div>
-                    <p>Multi-session projects built to flow with your body. Full sleeves, back pieces, and large compositions done right.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🔄</div>
-                    <h3>Cover-ups</h3>
-                    <div class="price">Consultation Required</div>
-                    <p>Got old ink you regret? Let's turn it into something you're proud of. Cover-up specialists require a consultation first.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">✨</div>
-                    <h3>Fine Line Work</h3>
-                    <div class="price">Starting at $150</div>
-                    <p>Delicate, precise linework that ages beautifully. Minimalist or intricate — fine line is a specialty done with care.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">💬</div>
-                    <h3>Consultation</h3>
-                    <div class="price">Free</div>
-                    <p>Not sure what you want? Let's talk it through. Reach out via DM or call to set up a quick consult before booking.</p>
-                </div>
-            </div>
-            <div class="pricing-note">
-                <p><strong>Deposits:</strong> Required to hold your appointment. All deposits and transactions are non-refundable.</p>
-                <p><strong>Touch-ups:</strong> Free within 90 days on all healed pieces.</p>
-                <p><strong>Booking:</strong> DM on Instagram or call (832) 208-9528 — appointment only, no walk-ins.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Gallery Section -->
-    <section id="gallery" class="gallery">
-        <div class="container">
-            <div class="section-header">
-                <h2>Recent Work</h2>
-                <p>466+ posts and counting — follow <a href="https://www.instagram.com/cory_salls/" target="_blank" style="color: var(--primary);">@cory_salls</a> for daily drops</p>
-            </div>
-            
-            <div class="gallery-filters">
-                <button class="filter-btn active" data-filter="all">All Work</button>
-                <button class="filter-btn" data-filter="black-grey">Black &amp; Grey</button>
-                <button class="filter-btn" data-filter="color">Color</button>
-                <button class="filter-btn" data-filter="fine-line">Fine Line</button>
-                <button class="filter-btn" data-filter="large-scale">Large Scale</button>
-            </div>
-            
-            <div class="gallery-grid" id="galleryGrid">
-                <div class="gallery-item" data-category="custom">
-                    <div class="gallery-image">
-                        <img src="img/photo_01.jpg" alt="Tattoo artwork 1" loading="eager" onerror="this.parentElement.parentElement.style.display='none'">
-                    </div>
-                </div>
-                <div class="gallery-item" data-category="custom">
-                    <div class="gallery-image">
-                        <img src="img/photo_02.jpg" alt="Tattoo artwork 2" loading="eager" onerror="this.parentElement.parentElement.style.display='none'">
-                    </div>
-                </div>
-                <div class="gallery-item" data-category="custom">
-                    <div class="gallery-image">
-                        <img src="img/photo_03.jpg" alt="Tattoo artwork 3" loading="eager" onerror="this.parentElement.parentElement.style.display='none'">
-                    </div>
-                </div>
-                <div class="gallery-item" data-category="custom">
-                    <div class="gallery-image">
-                        <img src="img/photo_04.jpg" alt="Tattoo artwork 4" loading="eager" onerror="this.parentElement.parentElement.style.display='none'">
-                    </div>
-                </div>
-                <div class="gallery-item" data-category="custom">
-                    <div class="gallery-image">
-                        <img src="img/photo_05.jpg" alt="Tattoo artwork 5" loading="lazy" onerror="this.parentElement.parentElement.style.display='none'">
-                    </div>
-                </div>
-                <div class="gallery-item" data-category="custom">
-                    <div class="gallery-image">
-                        <img src="img/photo_06.jpg" alt="Tattoo artwork 6" loading="lazy" onerror="this.parentElement.parentElement.style.display='none'">
-                    </div>
-                </div>
-                <div class="gallery-item" data-category="custom">
-                    <div class="gallery-image">
-                        <img src="img/photo_07.jpg" alt="Tattoo artwork 7" loading="lazy" onerror="this.parentElement.parentElement.style.display='none'">
-                    </div>
-                </div>
-                <div class="gallery-item" data-category="custom">
-                    <div class="gallery-image">
-                        <img src="img/photo_08.jpg" alt="Tattoo artwork 8" loading="lazy" onerror="this.parentElement.parentElement.style.display='none'">
-                    </div>
-                </div>
-                <div class="gallery-item" data-category="custom">
-                    <div class="gallery-image">
-                        <img src="img/photo_09.jpg" alt="Tattoo artwork 9" loading="lazy" onerror="this.parentElement.parentElement.style.display='none'">
-                    </div>
-                </div>
-                <div class="gallery-item" data-category="custom">
-                    <div class="gallery-image">
-                        <img src="img/photo_10.jpg" alt="Tattoo artwork 10" loading="lazy" onerror="this.parentElement.parentElement.style.display='none'">
-                    </div>
-                </div>
-                <div class="gallery-item" data-category="custom">
-                    <div class="gallery-image">
-                        <img src="img/photo_11.jpg" alt="Tattoo artwork 11" loading="lazy" onerror="this.parentElement.parentElement.style.display='none'">
-                    </div>
-                </div>
-                <div class="gallery-item" data-category="custom">
-                    <div class="gallery-image">
-                        <img src="img/photo_12.jpg" alt="Tattoo artwork 12" loading="lazy" onerror="this.parentElement.parentElement.style.display='none'">
-                    </div>
-                </div>
-            </div>
-            
-            <div class="gallery-more">
-                <a href="https://www.instagram.com/cory_salls/" class="btn btn-outline" target="_blank">See All 466+ Posts on Instagram →</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Reviews Section -->
-    <section id="reviews" class="reviews">
-        <div class="container">
-            <div class="section-header">
-                <h2>Client Reviews</h2>
-                <p>What Houston clients are saying</p>
-            </div>
-            <div class="reviews-grid">
-                <div class="review-card">
-                    <div class="review-rating">⭐⭐⭐⭐⭐</div>
-                    <p class="review-text">"Cory did my half sleeve and I couldn't be happier. The detail and shading are insane — everyone stops to ask about it. Appointment process was smooth, totally worth it."</p>
-                    <div class="review-author">
-                        <div class="review-avatar">MR</div>
-                        <div>
-                            <div class="review-name">Marcus R.</div>
-                            <div style="color: var(--text-muted); font-size: 13px;">Houston, TX · Sleeve client</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="review-card">
-                    <div class="review-rating">⭐⭐⭐⭐⭐</div>
-                    <p class="review-text">"I drove from Austin just to get tattooed by Cory. The custom design process was collaborative and he totally got my vision. Absolutely professional, top-tier shop."</p>
-                    <div class="review-author">
-                        <div class="review-avatar">JL</div>
-                        <div>
-                            <div class="review-name">Jessica L.</div>
-                            <div style="color: var(--text-muted); font-size: 13px;">Austin, TX · Custom portrait</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="review-card">
-                    <div class="review-rating">⭐⭐⭐⭐⭐</div>
-                    <p class="review-text">"Gold Rush Collective is the real deal and Cory is why I keep coming back. 4 tattoos in and every single one has exceeded my expectations. Book him before he's booked out for months."</p>
-                    <div class="review-author">
-                        <div class="review-avatar">DK</div>
-                        <div>
-                            <div class="review-name">Derek K.</div>
-                            <div style="color: var(--text-muted); font-size: 13px;">Houston, TX · Repeat client</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="reviews-more">
-                <a href="https://www.instagram.com/cory_salls/" class="btn btn-outline" target="_blank">See More on Instagram</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Location Section -->
-    <section id="location" class="location">
-        <div class="container">
-            <div class="location-content">
-                <div class="location-info">
-                    <h2>Visit the Studio</h2>
-                    <div class="address">
-                        <div class="address-line" style="font-weight: 700; color: var(--primary); font-size: 20px;">Gold Rush Collective</div>
-                        <div class="address-line">Houston, Texas</div>
-                        <div class="address-line" style="color: var(--text-muted); font-size: 14px;">Exact address provided upon booking confirmation</div>
-                    </div>
-                    <div class="contact-info">
-                        <div class="contact-item">
-                            <strong>📞 Phone:</strong> <a href="tel:8322089528" style="color: var(--primary);">(832) 208-9528</a>
-                        </div>
-                        <div class="contact-item">
-                            <strong>📱 Instagram:</strong> <a href="https://www.instagram.com/cory_salls/" target="_blank" style="color: var(--primary);">@cory_salls</a>
-                        </div>
-                        <div class="contact-item">
-                            <strong>🕒 Booking:</strong> Appointment only — no walk-ins
-                        </div>
-                        <div class="contact-item">
-                            <strong>📍 Location:</strong> Houston, TX
-                        </div>
-                    </div>
-                    <div style="margin-top: var(--spacing-lg);">
-                        <a href="tel:8322089528" class="btn btn-primary" style="margin-right: 12px;">Call to Book</a>
-                        <a href="https://www.instagram.com/cory_salls/" class="btn btn-outline" target="_blank">DM on Instagram</a>
-                    </div>
-                </div>
-                <div class="location-map">
-                    <div class="map-container">
-                        <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d221964.2985729266!2d-95.66796895!3d29.81659375!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8640b8b4488d8501%3A0xca0d02def365053b!2sHouston%2C%20TX!5e0!3m2!1sen!2sus!4v1710000000000!5m2!1sen!2sus"
-                            width="100%" 
-                            height="320" 
-                            style="border:0;" 
-                            allowfullscreen="" 
-                            loading="lazy" 
-                            referrerpolicy="no-referrer-when-downgrade">
-                        </iframe>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Email Capture Section -->
-    <section class="email-capture">
-        <div class="container">
-            <div class="capture-content">
-                <div class="capture-text">
-                    <h2>Stay in the Loop</h2>
-                    <p>Get notified when spots open up, see new work first, and get booking updates.</p>
-                </div>
-                <form class="capture-form" action="https://formsubmit.co/hello@bayouwebstudio.com" method="POST">
-                    <input type="hidden" name="_subject" value="New Email Signup - Cory Salls Site">
-                    <input type="hidden" name="_next" value="https://bayouwebstudio.com/corysalls/thanks.html">
-                    <input type="email" name="email" placeholder="Enter your email" required>
-                    <button type="submit" class="btn btn-primary">Notify Me</button>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h2>Get in Touch</h2>
-                    <p>Ready to get tattooed? Have a concept in mind? Let's make it happen — reach out and let's talk.</p>
-                    
-                    <div class="contact-methods">
-                        <div class="contact-method">
-                            <div class="contact-icon">📞</div>
-                            <div>
-                                <strong>Phone / Text</strong>
-                                <p><a href="tel:8322089528" style="color: var(--primary);">(832) 208-9528</a></p>
-                            </div>
-                        </div>
-                        <div class="contact-method">
-                            <div class="contact-icon">📱</div>
-                            <div>
-                                <strong>Instagram DM</strong>
-                                <p><a href="https://www.instagram.com/cory_salls/" target="_blank" style="color: var(--primary);">@cory_salls</a></p>
-                            </div>
-                        </div>
-                        <div class="contact-method">
-                            <div class="contact-icon">📍</div>
-                            <div>
-                                <strong>Studio</strong>
-                                <p>Gold Rush Collective, Houston TX</p>
-                            </div>
-                        </div>
-                        <div class="contact-method">
-                            <div class="contact-icon">⚡</div>
-                            <div>
-                                <strong>Policy</strong>
-                                <p>Appointment only. Deposits non-refundable.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="social-links">
-                        <a href="https://www.instagram.com/cory_salls/" class="social-link" target="_blank">
-                            <span class="social-icon">📸</span>
-                            <span>@cory_salls</span>
-                        </a>
-                        <a href="tel:8322089528" class="social-link">
-                            <span class="social-icon">📞</span>
-                            <span>(832) 208-9528</span>
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="contact-form">
-                    <h3 style="margin-bottom: var(--spacing-md); color: var(--primary);">Send a Booking Inquiry</h3>
-                    <form action="https://formsubmit.co/hello@bayouwebstudio.com" method="POST">
-                        <input type="hidden" name="_subject" value="Booking Inquiry - Cory Salls Website">
-                        <input type="hidden" name="_next" value="https://bayouwebstudio.com/corysalls/thanks.html">
-                        <input type="text" name="name" placeholder="Your Name" required>
-                        <input type="email" name="email" placeholder="Your Email" required>
-                        <input type="tel" name="phone" placeholder="Your Phone (optional)">
-                        <select name="tattoo_type">
-                            <option value="">What type of tattoo?</option>
-                            <option value="custom-design">Custom Design</option>
-                            <option value="black-grey">Black &amp; Grey Realism</option>
-                            <option value="color">Color Work</option>
-                            <option value="fine-line">Fine Line</option>
-                            <option value="large-scale">Large Scale / Sleeve</option>
-                            <option value="cover-up">Cover-up</option>
-                            <option value="portrait">Portrait</option>
-                            <option value="other">Other / Not Sure</option>
-                        </select>
-                        <textarea name="message" placeholder="Tell me about your tattoo idea — size, placement, style, references..." rows="5" required></textarea>
-                        <button type="submit" class="btn btn-primary">Send Inquiry</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Floating Book Now Button -->
-    <div class="floating-cta" id="floatingCTA">
-        <a href="https://www.instagram.com/cory_salls/" target="_blank" class="floating-btn">
-            <span class="floating-icon">📅</span>
-            <span class="floating-text">Book Appointment</span>
-        </a>
-    </div>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <h3>Cory Salls</h3>
-                    <p>Houston Tattoo Artist · Gold Rush Collective</p>
-                    <p style="margin-top: 8px; font-size: 14px;">(832) 208-9528</p>
-                </div>
-                <div class="footer-links">
-                    <div class="footer-column">
-                        <h4>Quick Links</h4>
-                        <a href="#about">About</a>
-                        <a href="#gallery">Gallery</a>
-                        <a href="#services">Services</a>
-                        <a href="#contact">Contact</a>
-                    </div>
-                    <div class="footer-column">
-                        <h4>Connect</h4>
-                        <a href="https://www.instagram.com/cory_salls/" target="_blank">Instagram</a>
-                        <a href="tel:8322089528">Call / Text</a>
-                    </div>
-                    <div class="footer-column">
-                        <h4>Client Area</h4>
-                        <a href="changes.html">Request Changes</a>
-                        <a href="stats.html">Analytics</a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Cory Salls. All rights reserved. · Houston, Texas</p>
-                <p class="footer-credit"><a href="https://bayouwebstudio.com" target="_blank" style="color: inherit; text-decoration: none; opacity: 0.5; font-size: 12px;">Powered by Bayou Web Studio</a></p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Lightbox Modal -->
-    <div id="lightbox" class="lightbox">
-        <div class="lightbox-content">
-            <span class="lightbox-close">&times;</span>
-            <img id="lightbox-image" src="" alt="">
-            <div class="lightbox-info">
-                <h3 id="lightbox-title"></h3>
-                <p id="lightbox-description"></p>
-            </div>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
-    <script src="https://bayouwebstudio.com/mint-widget.js"></script>
+  <script>
+    function openLightbox(src){document.getElementById('lightbox-img').src=src;document.getElementById('lightbox').classList.add('open')}
+    const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:0.1});
+    document.querySelectorAll('.gallery-item').forEach(el=>observer.observe(el));
+  </script>
+  <script src="https://getminted.ai/mint-widget.js"></script>
 </body>
 </html>
