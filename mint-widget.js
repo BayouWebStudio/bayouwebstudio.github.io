@@ -1,5 +1,8 @@
 (function(){
-const API='https://api.bayouwebstudio.com/api/mint/chat';
+const CONVEX_API='https://impartial-bear-607.convex.site/api/mint/chat';
+const FLASK_API='https://api.bayouwebstudio.com/api/mint/chat';
+const USE_CONVEX=window.location.hostname.includes('weschetattoo-test')||window.location.pathname.includes('weschetattoo-test')||window.location.hostname.includes('getminted');
+const API=USE_CONVEX?CONVEX_API:FLASK_API;
 const ACCENT='#98E8C1';
 const BG='#111';
 const BUBBLE_BG='#1a1a1a';
@@ -127,12 +130,24 @@ async function send(){
 
   const typing=document.createElement('div');typing.className='mint-typing';typing.textContent='Mint is typing...';msgs.appendChild(typing);msgs.scrollTop=msgs.scrollHeight;
 
+  const ctx=(window.location.hostname.replace('www.','').replace('.com','').replace('.ai','').replace('.io','').replace('bayouwebstudio.github.io','').split('/').pop()||window.location.pathname.split('/').filter(Boolean)[0]||'general');
+
   try{
-    const r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:text,context:(window.location.hostname.replace('www.','').replace('.com','').replace('.ai','').replace('.io','').replace('bayouwebstudio.github.io','').split('/').pop()||window.location.pathname.split('/').filter(Boolean)[0]||'general'),history:history.slice(-10)})});
-    const d=await r.json();
-    typing.remove();
-    if(d.reply){addMsg(d.reply,'bot');history.push({role:'assistant',content:d.reply})}
-    else{addMsg("Sorry, I couldn't get a response. Try again!","bot")}
+    if(USE_CONVEX){
+      const r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:text,context:ctx,threadId:window._mintThreadId||undefined})});
+      const threadId=r.headers.get('X-Thread-Id');
+      if(threadId)window._mintThreadId=threadId;
+      const reply=await r.text();
+      typing.remove();
+      if(reply&&!reply.includes('"code":')){addMsg(reply,'bot');history.push({role:'assistant',content:reply})}
+      else{addMsg("Sorry, I couldn't get a response. Try again!","bot")}
+    }else{
+      const r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:text,context:ctx,history:history.slice(-10)})});
+      const d=await r.json();
+      typing.remove();
+      if(d.reply){addMsg(d.reply,'bot');history.push({role:'assistant',content:d.reply})}
+      else{addMsg("Sorry, I couldn't get a response. Try again!","bot")}
+    }
   }catch(e){typing.remove();addMsg("Connection error. Please try again.","bot")}
   sending=false;sendBtn.disabled=!input.value.trim();
 }
