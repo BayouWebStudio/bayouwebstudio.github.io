@@ -86,11 +86,15 @@ html,body{height:100%;background:var(--bg);color:#e0e0e0;font-family:'Inter',san
 </div>
 
 <script>
-const API = 'https://api.bayouwebstudio.com/api/mint/edit';
+const API = 'https://api.bayouwebstudio.com/api/mint/chat';
 const UPLOAD_API = 'https://api.bayouwebstudio.com/api/mint/upload';
 const params = new URLSearchParams(location.search);
 const TOKEN = params.get('token');
 if (!TOKEN) document.body.innerHTML = '<div style="display:flex;height:100vh;align-items:center;justify-content:center;color:#666;font-family:Inter,sans-serif;font-size:16px">Missing token. Check your link.</div>';
+
+// Detect site slug from URL path: e.g. /weschetattoo-test/editor.html -> weschetattoo-test
+const pathParts = location.pathname.split('/').filter(Boolean);
+const SLUG = pathParts.length >= 2 ? pathParts[pathParts.length - 2] : 'general';
 
 const chatArea = document.getElementById('chatArea');
 const chatInner = document.getElementById('chatInner');
@@ -99,7 +103,7 @@ const sendBtn = document.getElementById('sendBtn');
 const typing = document.getElementById('typing');
 const dropOverlay = document.getElementById('dropOverlay');
 const fileInput = document.getElementById('fileInput');
-let history = [];
+let threadId = null;
 let sending = false;
 
 function scrollBottom() {
@@ -119,7 +123,6 @@ async function send(text) {
   if (!text.trim() || sending) return;
   sending = true;
   addMsg('user', text);
-  history.push({role:'user', content: text});
   input.value = '';
   autoResize();
   sendBtn.disabled = true;
@@ -127,19 +130,48 @@ async function send(text) {
   scrollBottom();
 
   try {
+    const body = { message: text, authToken: TOKEN, context: SLUG };
+    if (threadId) body.threadId = threadId;
+
     const r = await fetch(API, {
       method: 'POST',
       headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({message: text, token: TOKEN, history: history.slice(-20)})
+      body: JSON.stringify(body)
     });
-    const data = await r.json();
+
+    // Capture thread ID for continuity
+    const newThreadId = r.headers.get('X-Thread-Id');
+    if (newThreadId) threadId = newThreadId;
+
     typing.classList.remove('active');
-    if (data.reply) {
-      addMsg('bot', data.reply);
-      history.push({role:'assistant', content: data.reply});
+
+    // Create streaming bot message
+    const msgEl = document.createElement('div');
+    msgEl.className = 'msg bot';
+    msgEl.innerHTML = '<div class="label">Mint</div><span class="msg-text"></span>';
+    chatInner.insertBefore(msgEl, typing);
+    const textSpan = msgEl.querySelector('.msg-text');
+
+    const contentType = r.headers.get('Content-Type') || '';
+    if (contentType.includes('application/json')) {
+      // Fallback: JSON response
+      const data = await r.json();
+      textSpan.innerHTML = (data.reply || data.error || 'Something went wrong.').replace(/\n/g,'<br>');
     } else {
-      addMsg('bot', data.error || 'Something went wrong. Try again.');
+      // Stream plain text
+      const reader = r.body.getReader();
+      const decoder = new TextDecoder();
+      let fullText = '';
+      while (true) {
+        const {done, value} = await reader.read();
+        if (done) break;
+        fullText += decoder.decode(value, {stream: true});
+        textSpan.innerHTML = fullText.replace(/\n/g,'<br>');
+        scrollBottom();
+      }
+      if (!fullText) textSpan.textContent = 'Something went wrong. Try again.';
     }
+    scrollBottom();
   } catch(e) {
     typing.classList.remove('active');
     addMsg('bot', 'Connection error. Please try again.');
@@ -154,6 +186,7 @@ async function uploadFiles(files) {
   addMsg('user', `Uploading ${files.length} photo${files.length>1?'s':''}...`);
   const fd = new FormData();
   fd.append('token', TOKEN);
+  fd.append('slug', SLUG);
   for (const f of files) fd.append('files', f);
   try {
     const r = await fetch(UPLOAD_API, {method:'POST', body: fd});
@@ -199,7 +232,7 @@ document.addEventListener('drop', e => {
 });
 
 if (TOKEN) {
-  fetch(`https://api.bayouwebstudio.com/api/mint/site-info?token=${TOKEN}`)
+  fetch(`https://api.bayouwebstudio.com/api/mint/site-info?token=${TOKEN}&slug=${SLUG}`)
     .then(r=>r.json()).then(d=>{if(d.site_name)document.title=`Mint — ${d.site_name}`;}).catch(()=>{});
 }
 </script>
