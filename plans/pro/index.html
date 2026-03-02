@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pro Plan — $49/mo | Bayou Web Studios</title>
+  <meta name="description" content="For artists ready to sell, track, and grow. Analytics dashboard, store integration, priority support — $49/mo. No setup fee.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='16' fill='%230a0a0a'/><text y='.9em' font-size='72' x='10' fill='%23c9a84c'>B</text></svg>">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0a0a; --bg2: #111111; --bg3: #1a1a1a;
+      --gold: #c9a84c; --accent: #c9a84c; --white: #ffffff; --gray: #a0a0a0;
+      --radius: 12px;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--white); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+    .back-bar { padding: 20px 24px; }
+    .back-link { color: var(--gray); font-size: 0.875rem; transition: color 0.2s; }
+    .back-link:hover { color: var(--white); }
+    .hero { padding: 60px 24px 80px; text-align: center; }
+    .tier-badge { display: inline-block; background: var(--accent); color: #000; font-size: 0.75rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; padding: 6px 18px; border-radius: 100px; margin-bottom: 24px; }
+    .hero h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 900; letter-spacing: -0.03em; line-height: 1.05; }
+    .hero h1 .price { color: var(--accent); }
+    .hero .tagline { font-size: 1.15rem; color: var(--gray); margin: 16px auto 36px; max-width: 520px; }
+    .btn-primary { display: inline-block; background: var(--accent); color: #000; font-weight: 800; font-size: 1.05rem; padding: 18px 40px; border-radius: 10px; transition: transform 0.2s, opacity 0.2s; }
+    .btn-primary:hover { transform: translateY(-2px); opacity: 0.9; }
+    .no-setup { font-size: 0.8rem; color: var(--gray); margin-top: 12px; }
+    section { padding: 64px 0; }
+    section:nth-child(even) { background: var(--bg2); }
+    .section-label { font-size: 0.75rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    .section-title { font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 900; letter-spacing: -0.02em; margin-bottom: 8px; }
+    .section-sub { color: var(--gray); margin-bottom: 40px; }
+    .checklist { list-style: none; display: grid; gap: 4px; }
+    .checklist li { display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; background: var(--bg3); border-radius: 8px; font-size: 0.95rem; }
+    .checklist li.divider { background: transparent; padding: 6px 0 2px; font-size: 0.8rem; font-weight: 800; letter-spacing: 0.08em; color: var(--accent); text-transform: uppercase; border-top: 1px solid rgba(255,255,255,0.08); margin-top: 8px; }
+    .checklist li .icon { flex-shrink: 0; }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+    .card { background: var(--bg3); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); padding: 28px 24px; transition: transform 0.2s, border-color 0.2s; }
+    .card:hover { transform: translateY(-4px); border-color: var(--accent); }
+    .card-name { font-weight: 800; font-size: 1.05rem; margin-bottom: 6px; }
+    .card-url { font-size: 0.8rem; color: var(--gray); margin-bottom: 16px; }
+    .card-link { font-size: 0.85rem; font-weight: 700; color: var(--accent); }
+    .card-link:hover { text-decoration: underline; }
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px; }
+    .step { text-align: center; }
+    .step-num { width: 52px; height: 52px; border-radius: 50%; background: var(--accent); color: #000; font-weight: 900; font-size: 1.3rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+    .step-title { font-weight: 800; font-size: 1.05rem; margin-bottom: 8px; }
+    .step-desc { font-size: 0.875rem; color: var(--gray); }
+    .faq { display: grid; gap: 16px; }
+    .faq-item { background: var(--bg3); border-radius: var(--radius); padding: 24px; border-left: 3px solid var(--accent); }
+    .faq-q { font-weight: 700; font-size: 0.95rem; margin-bottom: 10px; }
+    .faq-a { font-size: 0.875rem; color: var(--gray); line-height: 1.7; }
+    .final-cta { text-align: center; padding: 80px 24px; }
+    .final-cta h2 { font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 900; letter-spacing: -0.02em; margin-bottom: 16px; }
+    .final-cta p { color: var(--gray); margin-bottom: 36px; }
+    .btn-final { display: inline-block; background: var(--accent); color: #000; font-weight: 800; font-size: 1.1rem; padding: 20px 48px; border-radius: 10px; transition: transform 0.2s, opacity 0.2s; }
+    .btn-final:hover { transform: translateY(-2px); opacity: 0.9; }
+    footer { background: #000; padding: 32px 24px; text-align: center; font-size: 0.8rem; color: var(--gray); border-top: 1px solid rgba(255,255,255,0.06); }
+    footer a { color: var(--gold); }
+    footer a:hover { text-decoration: underline; }
+    .lang-toggle {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      z-index: 999;
+      transition: .2s;
+    }
+    .lang-toggle:hover { background: rgba(255,255,255,0.2); }
+  </style>
+</head>
+<body>
+
+  <button class="lang-toggle" onclick="toggleLang()">🌐 ES</button>
+
+  <div class="back-bar container">
+    <a class="back-link" href="https://bayouwebstudio.com">← Back to bayouwebstudio.com</a>
+  </div>
+
+  <div class="hero">
+    <div class="tier-badge" data-en="Pro Plan — Most Popular" data-es="Plan Pro — Más Popular">Pro Plan — Most Popular</div>
+    <h1>$<span class="price">49</span>/mo</h1>
+    <p class="tagline" data-en="For artists ready to sell, track, and grow." data-es="Para artistas listos para vender, medir y crecer.">For artists ready to sell, track, and grow.</p>
+    <a class="btn-primary" href="https://buy.stripe.com/dRm5kD6LA7IVgWAeNt3Je07" target="_blank" rel="noopener" data-en="Start Free — No Setup Fee" data-es="Comenzar con Pro — Sin Costo de Configuración">Start Free — No Setup Fee</a>
+    <p class="no-setup" data-en="No contracts. Cancel anytime." data-es="Sin contratos. Cancela cuando quieras.">No contracts. Cancel anytime.</p>
+  </div>
+
+  <section>
+    <div class="container">
+      <div class="section-label" data-en="What You Get" data-es="Lo Que Incluye">What You Get</div>
+      <h2 class="section-title" data-en="Everything's Included" data-es="¿Qué Incluye el Plan Pro?">Everything's Included</h2>
+      <p class="section-sub" data-en="Everything in Starter, plus the tools to grow your business." data-es="Todo del plan Starter, más las herramientas para hacer crecer tu negocio.">Everything in Starter, plus the tools to grow your business.</p>
+      <ul class="checklist">
+        <li><span class="icon">✅</span> <span data-en="Custom .com Domain (we buy it for you)" data-es="Dominio .com personalizado (lo compramos nosotros)">Custom .com Domain (we buy it for you)</span></li>
+        <li><span class="icon">✅</span> <span data-en="Professional Website Design" data-es="Diseño de sitio web profesional">Professional Website Design</span></li>
+        <li><span class="icon">✅</span> <span data-en="Google Ranking &amp; SEO Optimization" data-es="Posicionamiento en Google y optimización SEO">Google Ranking &amp; SEO Optimization</span></li>
+        <li><span class="icon">✅</span> <span data-en="Mobile-First, Fast-Loading Site" data-es="Sitio móvil, de carga rápida">Mobile-First, Fast-Loading Site</span></li>
+        <li><span class="icon">✅</span> <span data-en="Gallery with Lightbox" data-es="Galería con Lightbox">Gallery with Lightbox</span></li>
+        <li><span class="icon">✅</span> <span data-en="Booking Link Integration" data-es="Integración de enlace de reservas">Booking Link Integration</span></li>
+        <li><span class="icon">✅</span> <span data-en="Google Maps Integration" data-es="Integración con Google Maps">Google Maps Integration</span></li>
+        <li><span class="icon">✅</span> <span data-en="Unlimited Change Requests" data-es="Solicitudes de cambios ilimitadas">Unlimited Change Requests</span></li>
+        <li><span class="icon">✅</span> <span data-en="SSL Certificate (HTTPS)" data-es="Certificado SSL (HTTPS)">SSL Certificate (HTTPS)</span></li>
+        <li><span class="icon">✅</span> <span data-en="Professional Hosting" data-es="Hosting profesional">Professional Hosting</span></li>
+        <li class="divider" data-en="Pro Extras" data-es="Extras Pro">Pro Extras</li>
+        <li><span class="icon">✅</span> <span data-en="Umami Analytics Dashboard (see your traffic)" data-es="Panel de análisis Umami (ve tu tráfico)">Umami Analytics Dashboard (see your traffic)</span></li>
+        <li><span class="icon">✅</span> <span data-en="Store Integration (Shopify, Big Cartel, Printify, Etsy)" data-es="Integración de tienda (Shopify, Big Cartel, Printify, Etsy)">Store Integration (Shopify, Big Cartel, Printify, Etsy)</span></li>
+        <li><span class="icon">✅</span> <span data-en="Priority Support (faster response)" data-es="Soporte prioritario (respuesta más rápida)">Priority Support (faster response)</span></li>
+        <li><span class="icon">✅</span> <span data-en="Monthly SEO Report" data-es="Reporte mensual de SEO">Monthly SEO Report</span></li>
+        <li><span class="icon">✅</span> <span data-en="Social Links Integration" data-es="Integración de redes sociales">Social Links Integration</span></li>
+        <li><span class="icon">✅</span> <span data-en="Flash/Availability Section" data-es="Sección de disponibilidad / flash">Flash/Availability Section</span></li>
+        <li><span class="icon">✅</span> <span data-en="Pricing Section on Your Site" data-es="Sección de precios en tu sitio">Pricing Section on Your Site</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-label" data-en="Real Client Sites" data-es="Sitios Reales de Clientes">Real Client Sites</div>
+      <h2 class="section-title" data-en="See What We Build" data-es="Sitios que Hemos Construido">See What We Build</h2>
+      <p class="section-sub" data-en="These are real sites — built for real artists, just like you." data-es="Estos son sitios reales — construidos para artistas reales, como tú.">These are real sites — built for real artists, just like you.</p>
+      <div class="cards">
+        <div class="card">
+          <div class="card-name">Tatsu Ink</div>
+          <div class="card-url">tatsuink.com</div>
+          <a class="card-link" href="https://tatsuink.com" target="_blank" rel="noopener" data-en="View Live →" data-es="Ver en Vivo →">View Live →</a>
+        </div>
+        <div class="card">
+          <div class="card-name">Alan Gutiérrez</div>
+          <div class="card-url">guccierrezz.com</div>
+          <a class="card-link" href="https://guccierrezz.com" target="_blank" rel="noopener" data-en="View Live →" data-es="Ver en Vivo →">View Live →</a>
+        </div>
+        <div class="card">
+          <div class="card-name">Julia Claire</div>
+          <div class="card-url">jujubrilliart.com</div>
+          <a class="card-link" href="https://jujubrilliart.com" target="_blank" rel="noopener" data-en="View Live →" data-es="Ver en Vivo →">View Live →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-label" data-en="The Process" data-es="El Proceso">The Process</div>
+      <h2 class="section-title" data-en="How It Works" data-es="¿Cómo Funciona?">How It Works</h2>
+      <p class="section-sub" data-en="Three steps. Usually live within 24 hours." data-es="Tres pasos. Generalmente en línea en 24 horas.">Three steps. Usually live within 24 hours.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-title" data-en="Send Your IG" data-es="Envíanos tu Instagram">Send Your IG</div>
+          <div class="step-desc" data-en="Sign up and drop us your Instagram handle. That's literally it." data-es="Regístrate y comparte tu usuario de Instagram. Eso es todo.">Sign up and drop us your Instagram handle. That's literally it.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-title" data-en="We Build It" data-es="Nosotros lo Construimos">We Build It</div>
+          <div class="step-desc" data-en="We pull your photos, write your copy, set up your domain, and build your site." data-es="Tomamos tus fotos, escribimos tu contenido, configuramos tu dominio y construimos tu sitio.">We pull your photos, write your copy, set up your domain, and build your site.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-title" data-en="You're Live" data-es="Ya Estás en Línea">You're Live</div>
+          <div class="step-desc" data-en="You approve, we flip the switch. Your site is live and ranking on Google." data-es="Tú apruebas, nosotros activamos. Tu sitio está en vivo y posicionándose en Google.">You approve, we flip the switch. Your site is live and ranking on Google.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title" data-en="Common Questions" data-es="Preguntas Frecuentes">Common Questions</h2>
+      <p class="section-sub" data-en="If you don't see your question, email us." data-es="Si no ves tu pregunta, escríbenos.">If you don't see your question, email us.</p>
+      <div class="faq">
+        <div class="faq-item">
+          <div class="faq-q" data-en="What store platforms do you connect?" data-es="¿Qué plataformas de tienda conectan?">What store platforms do you connect?</div>
+          <div class="faq-a" data-en="Shopify, Big Cartel, Printify, Etsy, Gumroad — if you sell there, we embed it into your site so customers never have to leave." data-es="Shopify, Big Cartel, Printify, Etsy, Gumroad — si vendes ahí, lo integramos en tu sitio para que tus clientes nunca tengan que salir.">Shopify, Big Cartel, Printify, Etsy, Gumroad — if you sell there, we embed it into your site so customers never have to leave.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" data-en="What does the analytics dashboard show?" data-es="¿Qué muestra el panel de análisis?">What does the analytics dashboard show?</div>
+          <div class="faq-a" data-en="Visitors, page views, where they come from, which pages they view — all privacy-friendly, no cookie banners required." data-es="Visitantes, vistas de página, de dónde vienen, qué páginas ven — todo respetuoso de la privacidad, sin banners de cookies.">Visitors, page views, where they come from, which pages they view — all privacy-friendly, no cookie banners required.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" data-en="What's priority support?" data-es="¿Qué es el soporte prioritario?">What's priority support?</div>
+          <div class="faq-a" data-en="We respond within a few hours instead of 24hrs. Changes, questions, updates — faster turnaround for Pro clients." data-es="Respondemos en pocas horas en lugar de 24 hrs. Cambios, preguntas, actualizaciones — respuesta más rápida para clientes Pro.">We respond within a few hours instead of 24hrs. Changes, questions, updates — faster turnaround for Pro clients.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" data-en="Can I upgrade from Starter to Pro?" data-es="¿Puedo mejorar de Starter a Pro?">Can I upgrade from Starter to Pro?</div>
+          <div class="faq-a" data-en="Yes, anytime. We'll just update your billing and add the Pro features to your existing site. No rebuild needed." data-es="Sí, en cualquier momento. Solo actualizamos tu facturación y agregamos las funciones Pro a tu sitio existente. Sin reconstrucción.">Yes, anytime. We'll just update your billing and add the Pro features to your existing site. No rebuild needed.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" data-en="Do I need a store already or can you set one up?" data-es="¿Necesito tener una tienda ya o pueden configurarla?">Do I need a store already or can you set one up?</div>
+          <div class="faq-a" data-en="You need an existing store account (Shopify, Big Cartel, etc.) — we handle the integration into your site. We don't set up the store account itself." data-es="Necesitas una cuenta de tienda existente (Shopify, Big Cartel, etc.) — nosotros manejamos la integración en tu sitio. No creamos la cuenta de la tienda.">You need an existing store account (Shopify, Big Cartel, etc.) — we handle the integration into your site. We don't set up the store account itself.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="final-cta">
+    <h2 data-en="Ready to sell, track, and grow?" data-es="¿Listo para vender, medir y crecer?">Ready to sell, track, and grow?</h2>
+    <p data-en="$49/mo. No setup fee. Cancel anytime." data-es="$49/mes. Sin costo de configuración. Cancela cuando quieras.">$49/mo. No setup fee. Cancel anytime.</p>
+    <a class="btn-final" href="https://buy.stripe.com/dRm5kD6LA7IVgWAeNt3Je07" target="_blank" rel="noopener" data-en="Start Free — No Setup Fee" data-es="Comenzar con Pro — Sin Costo de Configuración">Start Free — No Setup Fee</a>
+  </div>
+
+  <footer>
+    <p><span data-en="Bayou Web Studios | " data-es="Bayou Web Studios | Houston, TX | ">Bayou Web Studios | </span><a href="mailto:support@bayouwebstudio.com">support@bayouwebstudio.com</a> | <a href="https://bayouwebstudio.com">bayouwebstudio.com</a></p>
+  </footer>
+
+  <script>
+    let currentLang = localStorage.getItem('bws_lang') || 'en';
+    function toggleLang() {
+      currentLang = currentLang === 'en' ? 'es' : 'en';
+      localStorage.setItem('bws_lang', currentLang);
+      document.querySelectorAll('[data-en]').forEach(el => {
+        el.textContent = currentLang === 'es' ? el.dataset.es : el.dataset.en;
+      });
+      document.querySelector('.lang-toggle').textContent = currentLang === 'en' ? '🌐 ES' : '🌐 EN';
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      if (currentLang === 'es') {
+        document.querySelectorAll('[data-en]').forEach(el => {
+          el.textContent = el.dataset.es;
+        });
+        document.querySelector('.lang-toggle').textContent = '🌐 EN';
+      }
+    });
+  </script>
+
+</body>
+</html>

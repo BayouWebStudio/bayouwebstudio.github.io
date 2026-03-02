@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Joey Kintz — Geometric, Blackwork & Ornamental tattoo artist based in Sydney, Australia. Book at Whistler Street Tattoo.">
+    <meta name="keywords" content="geometric tattoo, blackwork tattoo, ornamental tattoo, Sydney tattoo artist, Joey Kintz, Whistler Street Tattoo">
+    <meta name="author" content="Joey Kintz">
+    <meta property="og:title" content="JOEY KINTZ — Geometric & Blackwork Tattooing">
+    <meta property="og:description" content="Geometric, Blackwork & Ornamental tattoo artist based in Sydney, Australia.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bayouwebstudio.com/joekintztattooing/">
+    <title>JOEY KINTZ — Geometric &amp; Blackwork Tattooing | Sydney</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Joey Kintz",
+        "alternateName": "joekintztattooing",
+        "jobTitle": "Tattoo Artist",
+        "description": "Geometric, Blackwork & Ornamental tattoo artist based in Sydney, Australia",
+        "url": "https://bayouwebstudio.com/joekintztattooing/",
+        "sameAs": ["https://www.instagram.com/joekintztattooing/"],
+        "knowsAbout": ["Geometric Tattoos", "Blackwork Tattoos", "Ornamental Tattoos", "Symmetry", "SMP"],
+        "workLocation": {
+            "@type": "Place",
+            "name": "Whistler Street Tattoo",
+            "address": {"@type": "PostalAddress", "addressLocality": "Sydney", "addressCountry": "AU"}
+        }
+    }
+    </script>
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg: #0a0a0a;
+            --bg2: #111;
+            --bg3: #161616;
+            --accent: #c9a84c;
+            --accent2: #e8c96e;
+            --text: #e8e8e8;
+            --muted: #888;
+            --border: #222;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            background: rgba(10,10,10,0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 2rem;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-brand {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--text); }
+
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 64px;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 50% 60%, rgba(201,168,76,0.07) 0%, transparent 70%);
+        }
+
+        .hero-mandala {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.04;
+            pointer-events: none;
+        }
+
+        .hero-mandala svg {
+            width: min(80vw, 80vh);
+            height: min(80vw, 80vh);
+            animation: spin 120s linear infinite;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .hero-eyebrow {
+            font-size: 0.7rem;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2.5rem, 8vw, 5.5rem);
+            font-weight: 900;
+            letter-spacing: 0.05em;
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .hero-title span {
+            display: block;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 50%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-sub {
+            font-size: clamp(0.85rem, 2vw, 1rem);
+            color: var(--muted);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 3rem;
+        }
+
+        .hero-tags {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .hero-tag {
+            border: 1px solid rgba(201,168,76,0.3);
+            color: var(--accent);
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 0.4rem 1rem;
+            border-radius: 100px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            color: #000;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 0.9rem 2.5rem;
+            border-radius: 4px;
+            transition: opacity 0.2s, transform 0.2s;
+        }
+
+        .btn-primary:hover { opacity: 0.9; transform: translateY(-2px); }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 0.9rem 2.5rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+
+        .btn-secondary:hover { border-color: var(--accent); transform: translateY(-2px); }
+
+        section { padding: 6rem 2rem; }
+
+        .section-label {
+            font-size: 0.65rem;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        #about {
+            background: var(--bg2);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .about-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .about-inner { grid-template-columns: 1fr; gap: 3rem; }
+            .nav-links { display: none; }
+        }
+
+        .about-text p {
+            color: var(--muted);
+            margin-bottom: 1.25rem;
+            font-size: 0.95rem;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .stat-box {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .stat-num {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-top: 0.25rem;
+        }
+
+        .portfolio-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .gallery-masonry {
+            columns: 2;
+            column-gap: 12px;
+        }
+
+        @media (min-width: 768px) { .gallery-masonry { columns: 3; column-gap: 14px; } }
+        @media (min-width: 1100px) { .gallery-masonry { columns: 4; column-gap: 16px; } }
+
+        .gallery-item {
+            break-inside: avoid;
+            margin-bottom: 12px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover img { transform: scale(1.04); }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .gallery-item:hover::after { opacity: 1; }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 200;
+            background: rgba(0,0,0,0.95);
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .lightbox.active { display: flex; }
+
+        .lightbox img {
+            max-width: 90vw;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 2rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        #booking {
+            background: var(--bg2);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .booking-inner {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .booking-inner p { color: var(--muted); margin-bottom: 1.5rem; }
+
+        .booking-details {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2.5rem;
+        }
+
+        .booking-detail {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        .booking-detail strong { color: var(--text); display: block; margin-bottom: 0.15rem; }
+
+        .float-book {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 150;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            color: #000;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 1rem 1.75rem;
+            border-radius: 50px;
+            box-shadow: 0 4px 30px rgba(201,168,76,0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 4px 30px rgba(201,168,76,0.4); }
+            50% { box-shadow: 0 4px 50px rgba(201,168,76,0.7); }
+        }
+
+        .float-book:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 8px 40px rgba(201,168,76,0.6);
+        }
+
+        footer {
+            background: var(--bg);
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-brand {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-social { margin: 1.5rem 0; }
+
+        .footer-social a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            border: 1px solid var(--border);
+            padding: 0.5rem 1.25rem;
+            border-radius: 4px;
+            transition: color 0.2s, border-color 0.2s;
+        }
+
+        .footer-social a:hover { color: var(--accent); border-color: var(--accent); }
+
+        .footer-credit {
+            font-size: 0.7rem;
+            color: var(--muted);
+            opacity: 0.5;
+            margin-top: 2rem;
+        }
+
+        .footer-credit a { color: inherit; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-brand">JOEY KINTZ</div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#booking">Booking</a></li>
+        </ul>
+    </nav>
+
+    <section id="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-mandala">
+            <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="200" cy="200" r="190" stroke="#c9a84c" stroke-width="0.5"/>
+                <circle cx="200" cy="200" r="150" stroke="#c9a84c" stroke-width="0.5"/>
+                <circle cx="200" cy="200" r="110" stroke="#c9a84c" stroke-width="0.5"/>
+                <circle cx="200" cy="200" r="70" stroke="#c9a84c" stroke-width="0.5"/>
+                <circle cx="200" cy="200" r="30" stroke="#c9a84c" stroke-width="0.5"/>
+                <line x1="200" y1="10" x2="200" y2="390" stroke="#c9a84c" stroke-width="0.3"/>
+                <line x1="10" y1="200" x2="390" y2="200" stroke="#c9a84c" stroke-width="0.3"/>
+                <line x1="41" y1="41" x2="359" y2="359" stroke="#c9a84c" stroke-width="0.3"/>
+                <line x1="359" y1="41" x2="41" y2="359" stroke="#c9a84c" stroke-width="0.3"/>
+                <line x1="103" y1="10" x2="297" y2="390" stroke="#c9a84c" stroke-width="0.2"/>
+                <line x1="297" y1="10" x2="103" y2="390" stroke="#c9a84c" stroke-width="0.2"/>
+                <line x1="10" y1="103" x2="390" y2="297" stroke="#c9a84c" stroke-width="0.2"/>
+                <line x1="10" y1="297" x2="390" y2="103" stroke="#c9a84c" stroke-width="0.2"/>
+                <polygon points="200,50 332,125 332,275 200,350 68,275 68,125" stroke="#c9a84c" stroke-width="0.5" fill="none"/>
+                <polygon points="200,80 312,140 312,260 200,320 88,260 88,140" stroke="#c9a84c" stroke-width="0.3" fill="none"/>
+                <polygon points="200,110 230,185 310,185 248,230 270,310 200,263 130,310 152,230 90,185 170,185" stroke="#c9a84c" stroke-width="0.4" fill="none"/>
+            </svg>
+        </div>
+        <div class="hero-content">
+            <p class="hero-eyebrow">Sydney, Australia &middot; Whistler Street Tattoo</p>
+            <h1 class="hero-title"><span>JOEY KINTZ</span></h1>
+            <p class="hero-sub">Geometric &middot; Blackwork &middot; Ornamental</p>
+            <div class="hero-tags">
+                <span class="hero-tag">Geometric</span>
+                <span class="hero-tag">Blackwork</span>
+                <span class="hero-tag">Symmetry</span>
+                <span class="hero-tag">Ornamental</span>
+                <span class="hero-tag">SMP</span>
+            </div>
+            <div class="hero-actions">
+                <a href="#portfolio" class="btn-primary">View Portfolio</a>
+                <a href="#booking" class="btn-secondary">Book a Session</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="about-inner">
+            <div class="about-text">
+                <p class="section-label">About the Artist</p>
+                <h2 class="section-title">Precision. Pattern. Purpose.</h2>
+                <p>Joey Kintz is a Sydney-based tattoo artist specialising in geometric, blackwork, symmetry, and ornamental tattooing. Based at Whistler Street Tattoo, Joey brings mathematical precision and artistic intuition to every piece.</p>
+                <p>With a philosophy rooted in balance and structure, Joey's work draws on sacred geometry, intricate dotwork, and bold blackwork &mdash; creating tattoos that are as precise as they are striking.</p>
+                <p>Currently taking bookings through Instagram and the studio website. Custom designs and flash available.</p>
+                <div style="margin-top:2rem;">
+                    <a href="https://www.instagram.com/joekintztattooing/" target="_blank" rel="noopener" class="btn-secondary">@joekintztattooing</a>
+                </div>
+            </div>
+            <div class="about-stats">
+                <div class="stat-box">
+                    <span class="stat-num">125K</span>
+                    <span class="stat-label">Instagram Followers</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-num">SYD</span>
+                    <span class="stat-label">Based in Sydney, AU</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-num">GEO</span>
+                    <span class="stat-label">Geometric Specialist</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-num">BW</span>
+                    <span class="stat-label">Blackwork &amp; Ornamental</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" style="max-width:1400px;margin:0 auto;padding:6rem 2rem;">
+        <div class="portfolio-header">
+            <p class="section-label">Portfolio</p>
+            <h2 class="section-title">Recent Work</h2>
+            <p style="color:var(--muted);max-width:500px;margin:0 auto;font-size:0.9rem;">A selection of geometric and blackwork pieces &mdash; all photos from <a href="https://www.instagram.com/joekintztattooing/" target="_blank" style="color:var(--accent)">@joekintztattooing</a>.</p>
+        </div>
+        <div class="gallery-masonry">
+            <div class="gallery-item" onclick="openLightbox('img/joey_01.jpg')"><img src="img/joey_01.jpg" alt="Joey Kintz geometric tattoo" loading="lazy"></div>
+            <div class="gallery-item" onclick="openLightbox('img/joey_02.jpg')"><img src="img/joey_02.jpg" alt="Joey Kintz blackwork tattoo" loading="lazy"></div>
+            <div class="gallery-item" onclick="openLightbox('img/joey_03.jpg')"><img src="img/joey_03.jpg" alt="Joey Kintz ornamental tattoo" loading="lazy"></div>
+            <div class="gallery-item" onclick="openLightbox('img/joey_04.jpg')"><img src="img/joey_04.jpg" alt="Joey Kintz geometric tattoo" loading="lazy"></div>
+            <div class="gallery-item" onclick="openLightbox('img/joey_05.jpg')"><img src="img/joey_05.jpg" alt="Joey Kintz blackwork tattoo" loading="lazy"></div>
+            <div class="gallery-item" onclick="openLightbox('img/joey_06.jpg')"><img src="img/joey_06.jpg" alt="Joey Kintz ornamental tattoo" loading="lazy"></div>
+            <div class="gallery-item" onclick="openLightbox('img/joey_07.jpg')"><img src="img/joey_07.jpg" alt="Joey Kintz geometric tattoo" loading="lazy"></div>
+            <div class="gallery-item" onclick="openLightbox('img/joey_08.jpg')"><img src="img/joey_08.jpg" alt="Joey Kintz blackwork tattoo" loading="lazy"></div>
+            <div class="gallery-item" onclick="openLightbox('img/joey_09.jpg')"><img src="img/joey_09.jpg" alt="Joey Kintz ornamental tattoo" loading="lazy"></div>
+            <div class="gallery-item" onclick="openLightbox('img/joey_10.jpg')"><img src="img/joey_10.jpg" alt="Joey Kintz geometric tattoo" loading="lazy"></div>
+            <div class="gallery-item" onclick="openLightbox('img/joey_11.jpg')"><img src="img/joey_11.jpg" alt="Joey Kintz blackwork tattoo" loading="lazy"></div>
+            <div class="gallery-item" onclick="openLightbox('img/joey_12.jpg')"><img src="img/joey_12.jpg" alt="Joey Kintz ornamental tattoo" loading="lazy"></div>
+        </div>
+    </section>
+
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <button class="lightbox-close" onclick="closeLightbox()">&#215;</button>
+        <img id="lightbox-img" src="" alt="">
+    </div>
+
+    <section id="booking">
+        <div class="booking-inner">
+            <p class="section-label">Book a Session</p>
+            <h2 class="section-title">Work With Joey</h2>
+            <p>Interested in a custom piece or one of the available flash designs? Reach out through Instagram DM or the contact page at Whistler Street Tattoo's website.</p>
+            <div class="booking-details">
+                <div class="booking-detail"><strong>Studio</strong>Whistler Street Tattoo</div>
+                <div class="booking-detail"><strong>Location</strong>Sydney, Australia</div>
+                <div class="booking-detail"><strong>Availability</strong>Bookings Open</div>
+            </div>
+            <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+                <a href="https://www.instagram.com/joekintztattooing/" target="_blank" rel="noopener" class="btn-primary">DM on Instagram</a>
+                <a href="https://whistlerstreettattoo.com.au/" target="_blank" rel="noopener" class="btn-secondary">Studio Website</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-brand">JOEY KINTZ</div>
+        <p style="color:var(--muted);font-size:0.8rem;margin-top:0.25rem;">Geometric &middot; Blackwork &middot; Ornamental &middot; Sydney</p>
+        <div class="footer-social">
+            <a href="https://www.instagram.com/joekintztattooing/" target="_blank" rel="noopener">Instagram @joekintztattooing</a>
+        </div>
+        <p class="footer-credit">Site by <a href="https://bayouwebstudio.com" target="_blank" rel="noopener">Bayou Web Studio</a></p>
+    </footer>
+
+    <a href="#booking" class="float-book">Book Now</a>
+
+    <script>
+        function openLightbox(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeLightbox(); });
+        window.addEventListener('scroll', function() {
+            var nav = document.querySelector('nav');
+            nav.style.background = window.scrollY > 50 ? 'rgba(10,10,10,0.98)' : 'rgba(10,10,10,0.92)';
+        });
+    </script>
+</body>
+</html>

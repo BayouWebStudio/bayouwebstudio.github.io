@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Victor Hugo Pinzon | The Good Jaguar | Tatuador | México &amp; USA</title>
+  <meta name="description" content="Victor Hugo Pinzon 'The Good Jaguar' — Tatuador especialista en blackwork geométrico, realismo en negro y gris, y ornamental. Arte sin fronteras. México 🇲🇽 &amp; USA 🇺🇸. Latinoamérica Tour." />
+  <meta name="keywords" content="tatuador, blackwork, geometric tattoo, black grey realism, ornamental, Victor Hugo Pinzon, jaguar.crea, The Good Jaguar, Mexico, USA, tattoo artist" />
+  <meta property="og:title" content="Victor Hugo Pinzon | The Good Jaguar | Tatuador" />
+  <meta property="og:description" content="Arte sin fronteras. Blackwork geométrico &amp; realismo en negro y gris. México 🇲🇽 / USA 🇺🇸 — Latinoamérica Tour." />
+  <meta property="og:image" content="img/profile.jpg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://bayouwebstudio.com/jaguarcrea/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Victor Hugo Pinzon",
+    "alternateName": "The Good Jaguar",
+    "description": "Tatuador especialista en blackwork geométrico y realismo en negro y gris. Arte sin fronteras.",
+    "url": "https://bayouwebstudio.com/jaguarcrea/",
+    "sameAs": ["https://www.instagram.com/jaguar.crea/"],
+    "jobTitle": "Tattoo Artist",
+    "image": "img/profile.jpg",
+    "address": [
+      {"@type": "PostalAddress", "addressCountry": "MX"},
+      {"@type": "PostalAddress", "addressCountry": "US"}
+    ]
+  }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #060606;
+      --bg2: #0d0d0d;
+      --bg3: #111111;
+      --text: #e8e8e8;
+      --text-muted: #888;
+      --gold: #d4a017;
+      --gold-dim: #a87d10;
+      --gold-glow: rgba(212,160,23,0.25);
+      --white: #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      background: rgba(6,6,6,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(212,160,23,0.15);
+    }
+
+    .nav-logo {
+      font-size: 0.85rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg-pattern {
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 20% 20%, rgba(212,160,23,0.04) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(212,160,23,0.04) 0%, transparent 50%),
+        repeating-linear-gradient(
+          60deg,
+          transparent,
+          transparent 30px,
+          rgba(212,160,23,0.015) 30px,
+          rgba(212,160,23,0.015) 31px
+        ),
+        repeating-linear-gradient(
+          -60deg,
+          transparent,
+          transparent 30px,
+          rgba(212,160,23,0.015) 30px,
+          rgba(212,160,23,0.015) 31px
+        );
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+    }
+
+    .hero-profile-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+
+    .hero-profile-img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--gold);
+      box-shadow: 0 0 40px var(--gold-glow), 0 0 80px rgba(212,160,23,0.1);
+    }
+
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      opacity: 0.9;
+    }
+
+    .hero-name {
+      font-size: clamp(2.5rem, 8vw, 5.5rem);
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+      color: var(--white);
+    }
+
+    .hero-tagline {
+      font-size: clamp(1rem, 3vw, 1.6rem);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+      font-weight: 300;
+    }
+
+    .hero-bio {
+      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-flags {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      letter-spacing: 0.3em;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      padding: 0.9rem 2.5rem;
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      font-size: 0.85rem;
+      transition: all 0.3s;
+    }
+
+    .hero-cta:hover {
+      background: var(--gold);
+      color: var(--bg);
+      box-shadow: 0 0 30px var(--gold-glow);
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-muted);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      animation: pulse 2s infinite;
+    }
+
+    .scroll-indicator::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+
+    /* ─── SECTIONS ─── */
+    section {
+      padding: 5rem 2rem;
+    }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 2rem;
+    }
+
+    /* ─── ABOUT ─── */
+    #about {
+      background: var(--bg2);
+      border-top: 1px solid rgba(212,160,23,0.1);
+      border-bottom: 1px solid rgba(212,160,23,0.1);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .about-text p {
+      color: var(--text-muted);
+      margin-bottom: 1.2rem;
+      line-height: 1.8;
+      font-size: 1rem;
+    }
+
+    .about-text strong {
+      color: var(--text);
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .stat-box {
+      border: 1px solid rgba(212,160,23,0.2);
+      padding: 1.5rem;
+      text-align: center;
+      background: rgba(212,160,23,0.03);
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: var(--gold);
+      line-height: 1;
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 0.4rem;
+      display: block;
+    }
+
+    .specialties {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .specialty-tag {
+      border: 1px solid rgba(212,160,23,0.3);
+      padding: 0.3rem 0.8rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    /* ─── GALLERY ─── */
+    #galeria {
+      background: var(--bg);
+    }
+
+    .gallery-grid {
+      columns: 3;
+      column-gap: 0.75rem;
+    }
+
+    .gallery-item {
+      break-inside: avoid;
+      margin-bottom: 0.75rem;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      display: block;
+      transition: transform 0.5s ease, filter 0.5s ease;
+      filter: brightness(0.85);
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.04);
+      filter: brightness(1);
+    }
+
+    .gallery-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(212,160,23,0.15), transparent 50%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+
+    .gallery-item:hover::after { opacity: 1; }
+
+    /* ─── LIGHTBOX ─── */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.96);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    #lightbox.active { display: flex; }
+
+    #lightbox-img {
+      max-width: 90vw;
+      max-height: 85vh;
+      object-fit: contain;
+      box-shadow: 0 0 60px rgba(212,160,23,0.2);
+    }
+
+    #lightbox-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 2rem;
+      font-size: 2rem;
+      color: var(--gold);
+      cursor: pointer;
+      background: none;
+      border: none;
+      line-height: 1;
+      z-index: 10;
+    }
+
+    #lightbox-prev, #lightbox-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(212,160,23,0.15);
+      border: 1px solid rgba(212,160,23,0.3);
+      color: var(--gold);
+      font-size: 1.5rem;
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s;
+    }
+
+    #lightbox-prev { left: 1rem; }
+    #lightbox-next { right: 1rem; }
+    #lightbox-prev:hover, #lightbox-next:hover { background: rgba(212,160,23,0.3); }
+
+    /* ─── TOUR / CTA ─── */
+    #tour {
+      background: var(--bg2);
+      text-align: center;
+      border-top: 1px solid rgba(212,160,23,0.1);
+      border-bottom: 1px solid rgba(212,160,23,0.1);
+    }
+
+    .tour-badge {
+      display: inline-block;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      padding: 0.4rem 1.2rem;
+      margin-bottom: 1.5rem;
+      animation: border-pulse 2s infinite;
+    }
+
+    @keyframes border-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 transparent; }
+      50% { box-shadow: 0 0 20px var(--gold-glow); }
+    }
+
+    .tour-title {
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.75rem;
+    }
+
+    .tour-sub {
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+      font-size: 1rem;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--bg);
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 1rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 1rem 3rem;
+      transition: all 0.3s;
+      box-shadow: 0 0 30px var(--gold-glow);
+    }
+
+    .cta-btn:hover {
+      background: #e8b520;
+      box-shadow: 0 0 50px rgba(212,160,23,0.5);
+      transform: translateY(-2px);
+    }
+
+    .tour-note {
+      margin-top: 1.5rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+    }
+
+    /* ─── CONTACT ─── */
+    #contacto {
+      background: var(--bg);
+      text-align: center;
+    }
+
+    .contact-ig {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      margin: 1.5rem 0;
+      transition: color 0.3s;
+    }
+
+    .contact-ig:hover { color: var(--gold); }
+
+    .ig-icon {
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    .contact-location {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+      letter-spacing: 0.2em;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--bg2);
+      border-top: 1px solid rgba(212,160,23,0.1);
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 0.15em;
+    }
+
+    footer a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    footer a:hover { text-decoration: underline; }
+
+    /* ─── FLOAT BUTTON ─── */
+    .float-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 200;
+      background: var(--gold);
+      color: var(--bg);
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0.85rem 1.6rem;
+      box-shadow: 0 4px 30px rgba(212,160,23,0.5);
+      transition: all 0.3s;
+    }
+
+    .float-btn:hover {
+      background: #e8b520;
+      box-shadow: 0 4px 50px rgba(212,160,23,0.7);
+      transform: translateY(-3px);
+    }
+
+    /* ─── DIVIDER ─── */
+    .gold-divider {
+      width: 60px;
+      height: 2px;
+      background: var(--gold);
+      margin: 0 auto 1.5rem;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      nav { padding: 0.8rem 1.2rem; }
+      .nav-links { gap: 1.2rem; }
+      .nav-links a { font-size: 0.7rem; }
+
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .gallery-grid { columns: 2; }
+      .float-btn { bottom: 1.2rem; right: 1.2rem; padding: 0.7rem 1.2rem; font-size: 0.78rem; }
+    }
+
+    @media (max-width: 480px) {
+      .gallery-grid { columns: 1; }
+      .about-stats { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* ─── FADE IN ─── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-logo">Jaguar.Crea</a>
+    <ul class="nav-links">
+      <li><a href="#about">Sobre Mí</a></li>
+      <li><a href="#galeria">Galería</a></li>
+      <li><a href="#tour">Tour</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg-pattern"></div>
+    <div class="hero-content">
+      <div class="hero-profile-wrap">
+        <img src="img/profile.jpg" alt="Victor Hugo Pinzon - The Good Jaguar" class="hero-profile-img" />
+      </div>
+      <p class="hero-eyebrow">Tatuador Verificado ✓</p>
+      <h1 class="hero-name">Victor Hugo<br>Pinzon</h1>
+      <p class="hero-tagline">✨ The Good Jaguar 🐆</p>
+      <p class="hero-bio">Arte Sin Fronteras</p>
+      <div class="hero-flags">🇲🇽 &nbsp; 🇺🇸</div>
+      <a href="https://www.instagram.com/jaguar.crea/" target="_blank" rel="noopener" class="hero-cta">Ver Galería en IG →</a>
+    </div>
+    <div class="scroll-indicator">Scroll</div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div class="about-text fade-in">
+          <p class="section-label">Sobre el Artista</p>
+          <h2 class="section-title">Blackwork &<br>Realismo</h2>
+          <p>
+            <strong>Victor Hugo Pinzon</strong> es un tatuador especializado en <strong>blackwork geométrico</strong>, 
+            <strong>realismo en negro y gris</strong> y <strong>ornamental intrincado</strong> — piezas de gran escala 
+            que desafían la percepción y crean ilusiones ópticas hipnóticas en la piel.
+          </p>
+          <p>
+            Mangas completas, espaldas, cuellos. Cada trazo es una declaración. Arte que no conoce fronteras, 
+            igual que el artista que lo crea.
+          </p>
+          <p>
+            Actualmente en <strong>Latinoamérica Tour</strong> — recorriendo México y USA llevando su 
+            visión única a nuevos territorios. Si quieres una pieza que te represente de verdad, este es tu momento.
+          </p>
+          <div class="specialties">
+            <span class="specialty-tag">Blackwork Geométrico</span>
+            <span class="specialty-tag">Negro &amp; Gris</span>
+            <span class="specialty-tag">Ornamental</span>
+            <span class="specialty-tag">Ilusión Óptica</span>
+            <span class="specialty-tag">Mangas</span>
+            <span class="specialty-tag">Piezas de Espalda</span>
+          </div>
+        </div>
+        <div class="about-stats fade-in">
+          <div class="stat-box">
+            <span class="stat-number">27.9K</span>
+            <span class="stat-label">Seguidores IG</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-number">710+</span>
+            <span class="stat-label">Publicaciones</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-number">2</span>
+            <span class="stat-label">Países 🇲🇽🇺🇸</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-number">∞</span>
+            <span class="stat-label">Arte Sin Fronteras</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="galeria">
+    <div class="section-inner">
+      <p class="section-label" style="text-align:center;">Portfolio</p>
+      <h2 class="section-title" style="text-align:center;">Galería de Obra</h2>
+      <div class="gold-divider"></div>
+      <div class="gallery-grid" id="galleryGrid">
+        <!-- Images injected by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" role="dialog" aria-modal="true">
+    <button id="lightbox-close" aria-label="Cerrar">✕</button>
+    <button id="lightbox-prev" aria-label="Anterior">‹</button>
+    <img id="lightbox-img" src="" alt="Tattoo artwork" />
+    <button id="lightbox-next" aria-label="Siguiente">›</button>
+  </div>
+
+  <!-- TOUR / BOOK -->
+  <section id="tour">
+    <div class="section-inner fade-in">
+      <div class="tour-badge">🔥 Tour Activo</div>
+      <h2 class="tour-title">Latinoamérica Tour</h2>
+      <p class="tour-sub">
+        Pocas fechas disponibles. Si quieres una pieza de arte que te represente, 
+        envía un DM ahora y reserva tu espacio antes de que se agoten.
+      </p>
+      <a href="https://www.instagram.com/jaguar.crea/" target="_blank" rel="noopener" class="cta-btn">
+        Cotizar y Reservar en IG
+      </a>
+      <p class="tour-note">México 🇲🇽 · USA 🇺🇸 · Latinoamérica</p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contacto">
+    <div class="section-inner fade-in">
+      <p class="section-label">Contacto</p>
+      <h2 class="section-title">Hablemos</h2>
+      <div class="gold-divider"></div>
+      <a href="https://www.instagram.com/jaguar.crea/" target="_blank" rel="noopener" class="contact-ig">
+        <div class="ig-icon">📷</div>
+        @jaguar.crea
+      </a>
+      <p class="contact-location">México 🇲🇽 &nbsp;/&nbsp; USA 🇺🇸</p>
+      <p style="margin-top:1rem; color:var(--text-muted); font-size:0.85rem;">
+        Para cotizaciones y reservas, envía un mensaje directo en Instagram.
+      </p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>
+      © 2025 Victor Hugo Pinzon — The Good Jaguar &nbsp;|&nbsp; 
+      <a href="https://www.instagram.com/jaguar.crea/" target="_blank" rel="noopener">@jaguar.crea</a>
+    </p>
+    <p style="margin-top:0.4rem;">
+      Diseño web por <a href="https://bayouwebstudio.com" target="_blank" rel="noopener">Bayou Web Studio</a>
+    </p>
+  </footer>
+
+  <!-- FLOATING CTA -->
+  <a href="https://www.instagram.com/jaguar.crea/" target="_blank" rel="noopener" class="float-btn">Cotizar →</a>
+
+  <script>
+    // ─── Gallery images
+    const tattooImages = Array.from({length: 27}, (_, i) => `img/tattoo_${String(i+1).padStart(2,'0')}.jpg`);
+    const grid = document.getElementById('galleryGrid');
+
+    tattooImages.forEach((src, i) => {
+      const div = document.createElement('div');
+      div.className = 'gallery-item';
+      div.dataset.index = i;
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = `Victor Hugo Pinzon tattoo artwork ${i+1}`;
+      img.loading = 'lazy';
+      div.appendChild(img);
+      grid.appendChild(div);
+      div.addEventListener('click', () => openLightbox(i));
+    });
+
+    // ─── Lightbox
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-img');
+    let currentIndex = 0;
+
+    function openLightbox(i) {
+      currentIndex = i;
+      lbImg.src = tattooImages[i];
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function showPrev() {
+      currentIndex = (currentIndex - 1 + tattooImages.length) % tattooImages.length;
+      lbImg.src = tattooImages[currentIndex];
+    }
+
+    function showNext() {
+      currentIndex = (currentIndex + 1) % tattooImages.length;
+      lbImg.src = tattooImages[currentIndex];
+    }
+
+    document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+    document.getElementById('lightbox-prev').addEventListener('click', showPrev);
+    document.getElementById('lightbox-next').addEventListener('click', showNext);
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+
+    document.addEventListener('keydown', e => {
+      if (!lightbox.classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') showPrev();
+      if (e.key === 'ArrowRight') showNext();
+    });
+
+    // ─── Fade in on scroll
+    const faders = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.15 });
+    faders.forEach(f => observer.observe(f));
+  </script>
+</body>
+</html>

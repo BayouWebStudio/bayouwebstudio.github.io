@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sebashua | DJ &amp; Producer | Madrid España</title>
+  <meta name="description" content="Sebashua — DJ y productor musical de Madrid. Fundador de @vibra_arte. Ha actuado en el Arcadia Festival (Portugal), Barcelona, Milán y Venecia. Disponible para eventos y festivales." />
+  <meta name="keywords" content="Sebashua, DJ Madrid, productor musical, vibra_arte, Arcadia Festival, DJ España, electronic music, booking DJ" />
+  <meta name="author" content="Sebashua" />
+  <meta property="og:title" content="Sebashua | DJ &amp; Producer | Madrid España" />
+  <meta property="og:description" content="DJ y productor musical de Madrid. Fundador de @vibra_arte. Actuaciones en festivales de toda Europa." />
+  <meta property="og:image" content="https://bayouwebstudio.github.io/sebashua/img/photo_00.jpg" />
+  <meta property="og:url" content="https://bayouwebstudio.com/sebashua/" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Sebashua | DJ &amp; Producer | Madrid España" />
+  <meta name="twitter:description" content="DJ y productor musical de Madrid. Fundador de @vibra_arte." />
+  <meta name="twitter:image" content="https://bayouwebstudio.github.io/sebashua/img/photo_00.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;700;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MusicGroup",
+    "name": "Sebashua",
+    "description": "DJ y productor musical de Madrid, España. Fundador de Vibra Arte.",
+    "url": "https://bayouwebstudio.com/sebashua/",
+    "image": "https://bayouwebstudio.github.io/sebashua/img/photo_00.jpg",
+    "sameAs": [
+      "https://www.instagram.com/sebashua_/",
+      "https://open.spotify.com/artist/6"
+    ],
+    "foundingLocation": {
+      "@type": "Place",
+      "name": "Madrid, España"
+    },
+    "genre": "Electronic Music"
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #06060f;
+      --bg2: #0b0b1a;
+      --bg3: #0f0f22;
+      --text: #f0f0f0;
+      --muted: #888;
+      --accent: #00d4ff;
+      --accent2: #0099cc;
+      --accent-glow: rgba(0, 212, 255, 0.25);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Barlow', sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ========== NAV ========== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 2rem;
+      background: rgba(6,6,15,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,212,255,0.1);
+    }
+
+    .nav-logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 1.4rem;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    .nav-cta {
+      background: var(--accent);
+      color: var(--bg) !important;
+      padding: 0.4rem 1.2rem;
+      border-radius: 2px;
+      font-weight: 500 !important;
+    }
+
+    .nav-cta:hover { background: var(--accent2); }
+
+    /* ========== HERO ========== */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 6rem 2rem 4rem;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(ellipse 80% 60% at 50% 30%, rgba(0,212,255,0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 40% at 20% 80%, rgba(0,100,150,0.08) 0%, transparent 60%),
+        var(--bg);
+    }
+
+    /* Scan lines effect */
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,212,255,0.015) 2px,
+        rgba(0,212,255,0.015) 4px
+      );
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 900px;
+      width: 100%;
+    }
+
+    .hero-profile {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--accent);
+      box-shadow: 0 0 30px var(--accent-glow), 0 0 60px rgba(0,212,255,0.1);
+      margin-bottom: 2rem;
+    }
+
+    .hero-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: clamp(4rem, 15vw, 11rem);
+      line-height: 0.9;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-name span {
+      display: block;
+      background: linear-gradient(135deg, #fff 30%, var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 300;
+      font-size: clamp(1rem, 3vw, 1.6rem);
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-location {
+      font-size: 0.9rem;
+      color: var(--muted);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 2rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all 0.25s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    .btn-primary:hover {
+      background: #fff;
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+    }
+
+    .btn-outline:hover {
+      background: var(--accent-glow);
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--muted);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--muted), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+
+    /* ========== SECTIONS ========== */
+    section {
+      padding: 6rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 30px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .section-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      text-transform: uppercase;
+      line-height: 1;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ========== ABOUT ========== */
+    #about {
+      background: var(--bg2);
+      max-width: 100%;
+      padding: 6rem 2rem;
+    }
+
+    .about-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .about-text p {
+      font-size: 1.05rem;
+      color: #ccc;
+      margin-bottom: 1.2rem;
+      line-height: 1.8;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .stat-box {
+      border: 1px solid rgba(0,212,255,0.2);
+      padding: 1.2rem 1.5rem;
+      background: rgba(0,212,255,0.03);
+    }
+
+    .stat-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 2rem;
+      color: var(--accent);
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .about-visual {
+      position: relative;
+    }
+
+    .about-img-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+    }
+
+    .about-img-grid img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      filter: grayscale(20%) contrast(1.05);
+      transition: filter 0.3s;
+    }
+
+    .about-img-grid img:hover { filter: grayscale(0) contrast(1.1); }
+
+    .about-img-grid img:first-child {
+      grid-column: 1 / -1;
+      aspect-ratio: 16/9;
+    }
+
+    /* ========== GALLERY ========== */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.5rem;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 1;
+      cursor: pointer;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease, filter 0.4s ease;
+      filter: grayscale(15%);
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.06);
+      filter: grayscale(0);
+    }
+
+    .gallery-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,212,255,0.15) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .gallery-item:hover::after { opacity: 1; }
+
+    /* ========== MUSIC ========== */
+    #musica {
+      background: var(--bg3);
+      max-width: 100%;
+      padding: 6rem 2rem;
+    }
+
+    .music-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .music-inner .section-label { justify-content: center; }
+    .music-inner .section-label::before { display: none; }
+
+    .spotify-card {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      background: rgba(0,212,255,0.04);
+      border: 1px solid rgba(0,212,255,0.15);
+      padding: 3rem 4rem;
+      margin-top: 1rem;
+      max-width: 500px;
+      width: 100%;
+    }
+
+    .spotify-icon {
+      width: 70px;
+      height: 70px;
+    }
+
+    .spotify-card p {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    /* ========== EVENTS / BOOKING ========== */
+    #eventos {
+      text-align: center;
+    }
+
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1px;
+      background: rgba(0,212,255,0.1);
+      border: 1px solid rgba(0,212,255,0.1);
+      margin: 2rem 0 3rem;
+    }
+
+    .event-item {
+      background: var(--bg);
+      padding: 2rem;
+      text-align: left;
+    }
+
+    .event-flag { font-size: 1.5rem; margin-bottom: 0.5rem; }
+
+    .event-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    .event-loc { font-size: 0.85rem; color: var(--muted); margin-top: 0.2rem; }
+
+    .booking-cta {
+      background: var(--bg2);
+      border: 1px solid rgba(0,212,255,0.2);
+      padding: 3rem 2rem;
+      margin-top: 2rem;
+    }
+
+    .booking-cta h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 2rem;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .booking-cta p { color: var(--muted); margin-bottom: 1.5rem; }
+
+    /* ========== CONTACT ========== */
+    #contacto {
+      background: var(--bg2);
+      max-width: 100%;
+      padding: 5rem 2rem;
+      text-align: center;
+    }
+
+    .contact-inner {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .contact-link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .contact-link:hover { color: var(--accent); }
+
+    .contact-link-icon {
+      width: 48px;
+      height: 48px;
+      border: 1px solid rgba(0,212,255,0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .contact-link:hover .contact-link-icon {
+      border-color: var(--accent);
+      box-shadow: 0 0 15px var(--accent-glow);
+    }
+
+    .contact-link-label { font-size: 0.8rem; letter-spacing: 0.1em; }
+
+    /* ========== FOOTER ========== */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid rgba(0,212,255,0.08);
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    footer a { color: var(--accent); text-decoration: none; }
+
+    /* ========== FLOATING BOOK BTN ========== */
+    .float-book {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 200;
+      background: var(--accent);
+      color: var(--bg);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 2px;
+      box-shadow: 0 4px 20px rgba(0,212,255,0.35);
+      transition: all 0.25s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .float-book:hover {
+      background: #fff;
+      box-shadow: 0 4px 30px rgba(0,212,255,0.5);
+      transform: translateY(-2px);
+    }
+
+    /* ========== LIGHTBOX ========== */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      background: rgba(0,0,0,0.95);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox.active { display: flex; }
+
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 2rem;
+      color: #fff;
+      font-size: 2rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 768px) {
+      nav { padding: 1rem; }
+      .nav-links { display: none; }
+
+      .about-inner {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .about-img-grid { display: none; }
+
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .spotify-card { padding: 2rem; }
+
+      .float-book {
+        bottom: 1rem;
+        right: 1rem;
+        font-size: 0.8rem;
+        padding: 0.7rem 1.2rem;
+      }
+
+      section { padding: 4rem 1.2rem; }
+      #about, #musica, #contacto { padding: 4rem 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-logo">SEBASHUA</a>
+    <ul class="nav-links">
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#galeria">Galería</a></li>
+      <li><a href="#musica">Música</a></li>
+      <li><a href="#eventos">Eventos</a></li>
+      <li><a href="https://www.instagram.com/sebashua_/" target="_blank" rel="noopener" class="nav-cta">Booking</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-inner">
+      <img src="img/photo_00.jpg" alt="Sebashua" class="hero-profile" />
+      <div class="hero-name"><span>Sebashua</span></div>
+      <div class="hero-subtitle">DJ &amp; Producer</div>
+      <div class="hero-location">📍 Madrid, España</div>
+      <div class="hero-actions">
+        <a href="https://open.spotify.com/artist/6" target="_blank" rel="noopener" class="btn btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+          Escuchar en Spotify
+        </a>
+        <a href="https://www.instagram.com/sebashua_/" target="_blank" rel="noopener" class="btn btn-outline">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          @sebashua_
+        </a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      Scroll
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <div id="sobre">
+    <div id="about">
+      <div class="about-inner">
+        <div class="about-text">
+          <div class="section-label">Sobre mí</div>
+          <h2 class="section-title">DJ.<br/>Productor.<br/>Creador.</h2>
+          <p>
+            Sebashua es DJ y productor musical con base en Madrid, España. Con una propuesta sonora que fusiona lo electrónico con lo artístico, lleva años construyendo su nombre en la escena underground europea.
+          </p>
+          <p>
+            Fundador de <strong style="color:var(--accent)">@vibra_arte</strong>, un colectivo cultural dedicado a la música y las artes en sus múltiples formas. Una plataforma donde el sonido, la imagen y la energía se encuentran.
+          </p>
+          <p>
+            Ha actuado en escenarios de toda Europa, incluyendo el <strong>Arcadia Festival</strong> en Portugal, Barcelona, Milán y Venecia — llevando su música más allá de las fronteras.
+          </p>
+          <div class="about-stats">
+            <div class="stat-box">
+              <div class="stat-num">14.6K</div>
+              <div class="stat-label">Seguidores</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-num">277+</div>
+              <div class="stat-label">Publicaciones</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-num">4+</div>
+              <div class="stat-label">Países</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-num">MDR</div>
+              <div class="stat-label">Madrid, España 🇪🇸</div>
+            </div>
+          </div>
+        </div>
+        <div class="about-visual">
+          <div class="about-img-grid">
+            <img src="img/photo_07.jpg" alt="Sebashua actuando" loading="lazy" />
+            <img src="img/photo_03.jpg" alt="Sebashua DJ set" loading="lazy" />
+            <img src="img/photo_04.jpg" alt="Sebashua festival" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GALLERY -->
+  <section id="galeria">
+    <div class="section-label">Prensa &amp; Galería</div>
+    <h2 class="section-title">En Escena</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item" onclick="openLightbox('img/photo_01.jpg')">
+        <img src="img/photo_01.jpg" alt="Sebashua performance" loading="lazy" />
+      </div>
+      <div class="gallery-item" onclick="openLightbox('img/photo_02.jpg')">
+        <img src="img/photo_02.jpg" alt="Sebashua DJ set" loading="lazy" />
+      </div>
+      <div class="gallery-item" onclick="openLightbox('img/photo_03.jpg')">
+        <img src="img/photo_03.jpg" alt="Sebashua festival" loading="lazy" />
+      </div>
+      <div class="gallery-item" onclick="openLightbox('img/photo_04.jpg')">
+        <img src="img/photo_04.jpg" alt="Sebashua en directo" loading="lazy" />
+      </div>
+      <div class="gallery-item" onclick="openLightbox('img/photo_05.jpg')">
+        <img src="img/photo_05.jpg" alt="Sebashua cabina" loading="lazy" />
+      </div>
+      <div class="gallery-item" onclick="openLightbox('img/photo_06.jpg')">
+        <img src="img/photo_06.jpg" alt="Sebashua press" loading="lazy" />
+      </div>
+      <div class="gallery-item" onclick="openLightbox('img/photo_08.jpg')">
+        <img src="img/photo_08.jpg" alt="Sebashua show" loading="lazy" />
+      </div>
+      <div class="gallery-item" onclick="openLightbox('img/photo_09.jpg')">
+        <img src="img/photo_09.jpg" alt="Sebashua actuación" loading="lazy" />
+      </div>
+      <div class="gallery-item" onclick="openLightbox('img/photo_10.jpg')">
+        <img src="img/photo_10.jpg" alt="Sebashua vibra arte" loading="lazy" />
+      </div>
+      <div class="gallery-item" onclick="openLightbox('img/photo_11.jpg')">
+        <img src="img/photo_11.jpg" alt="Sebashua stage" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- MUSIC -->
+  <div id="musica">
+    <div id="musica-sec">
+      <div class="music-inner" style="max-width:1200px;margin:0 auto;padding:6rem 2rem;">
+        <div class="section-label" style="justify-content:center;">
+          Música
+        </div>
+        <h2 class="section-title" style="text-align:center;">Escúchame</h2>
+        <div style="display:flex;justify-content:center;margin-top:1.5rem;">
+          <div class="spotify-card">
+            <svg class="spotify-icon" viewBox="0 0 24 24" fill="#1DB954"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+            <p>Encuentra toda la música de Sebashua en Spotify — tracks, sets y producciones originales.</p>
+            <a href="https://open.spotify.com/artist/6" target="_blank" rel="noopener" class="btn btn-primary">
+              Abrir en Spotify
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EVENTS / BOOKING -->
+  <section id="eventos">
+    <div class="section-label">Eventos</div>
+    <h2 class="section-title">Por Toda Europa</h2>
+
+    <div class="events-grid">
+      <div class="event-item">
+        <div class="event-flag">🇵🇹</div>
+        <div class="event-name">Arcadia Festival</div>
+        <div class="event-loc">Portugal</div>
+      </div>
+      <div class="event-item">
+        <div class="event-flag">🇪🇸</div>
+        <div class="event-name">Barcelona</div>
+        <div class="event-loc">España</div>
+      </div>
+      <div class="event-item">
+        <div class="event-flag">🇮🇹</div>
+        <div class="event-name">Milán</div>
+        <div class="event-loc">Italia</div>
+      </div>
+      <div class="event-item">
+        <div class="event-flag">🇮🇹</div>
+        <div class="event-name">Venecia</div>
+        <div class="event-loc">Italia</div>
+      </div>
+      <div class="event-item">
+        <div class="event-flag">🇪🇸</div>
+        <div class="event-name">Madrid</div>
+        <div class="event-loc">Base &amp; Residencia</div>
+      </div>
+    </div>
+
+    <div class="booking-cta">
+      <h3>¿Quieres que Sebashua actúe en tu evento?</h3>
+      <p>Festivales, clubes, eventos privados, pop-ups culturales — estamos disponibles para toda Europa y más allá.</p>
+      <a href="https://www.instagram.com/sebashua_/" target="_blank" rel="noopener" class="btn btn-primary">
+        Contactar para Booking
+      </a>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <div id="contacto">
+    <div class="contact-inner">
+      <div class="section-label" style="justify-content:center;">Contacto</div>
+      <h2 class="section-title">Conéctate</h2>
+      <p style="color:var(--muted);margin-bottom:1rem;">Para bookings, colaboraciones y más — escríbenos por Instagram.</p>
+      <div class="contact-links">
+        <a href="https://www.instagram.com/sebashua_/" target="_blank" rel="noopener" class="contact-link">
+          <div class="contact-link-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </div>
+          <span class="contact-link-label">@sebashua_</span>
+        </a>
+        <a href="https://www.instagram.com/vibra_arte/" target="_blank" rel="noopener" class="contact-link">
+          <div class="contact-link-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </div>
+          <span class="contact-link-label">@vibra_arte</span>
+        </a>
+        <a href="https://open.spotify.com/artist/6" target="_blank" rel="noopener" class="contact-link">
+          <div class="contact-link-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+          </div>
+          <span class="contact-link-label">Spotify</span>
+        </a>
+      </div>
+      <div style="margin-top:2rem;font-size:0.85rem;color:var(--muted)">📍 Madrid, España 🇪🇸</div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Sebashua — DJ &amp; Producer | Madrid, España &nbsp;·&nbsp;
+      Sitio web por <a href="https://bayouwebstudio.com" target="_blank" rel="noopener">Bayou Web Studio</a>
+    </p>
+  </footer>
+
+  <!-- FLOATING BOOK -->
+  <a href="https://www.instagram.com/sebashua_/" target="_blank" rel="noopener" class="float-book">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+    Booking
+  </a>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+    <img id="lightbox-img" src="" alt="Gallery" onclick="event.stopPropagation()" />
+  </div>
+
+  <script>
+    function openLightbox(src) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+
+    // Intersection observer for fade-in
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.gallery-item, .stat-box, .event-item').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>

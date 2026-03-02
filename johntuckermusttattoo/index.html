@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>John Tucker | Neo-Traditional Tattoo Artist | Cool Cat Tattoos</title>
+  <meta name="description" content="John Tucker is a neo-traditional tattoo artist at Cool Cat Tattoos, specializing in bold color, anime-influenced, Japanese, and illustrative tattoo art. Book your tattoo today." />
+  <meta property="og:title" content="John Tucker | Neo-Traditional Tattoo Artist | Cool Cat Tattoos" />
+  <meta property="og:description" content="Bold color neo-traditional tattoos — tigers, dragons, jesters, florals, and character pieces. Book with John Tucker at Cool Cat Tattoos." />
+  <meta property="og:image" content="img/profile.jpg" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="John Tucker | Neo-Traditional Tattoo Artist" />
+  <meta name="twitter:description" content="Bold color neo-traditional tattoos at Cool Cat Tattoos." />
+  <meta name="twitter:image" content="img/profile.jpg" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "John Tucker",
+    "jobTitle": "Tattoo Artist",
+    "description": "Neo-traditional tattoo artist specializing in bold color, anime-influenced, Japanese, and illustrative tattoo art.",
+    "url": "https://bayouwebstudio.com/johntuckermusttattoo/",
+    "image": "https://bayouwebstudio.com/johntuckermusttattoo/img/profile.jpg",
+    "sameAs": ["https://www.instagram.com/johntuckermusttattoo/"],
+    "worksFor": {
+      "@type": "LocalBusiness",
+      "name": "Cool Cat Tattoos",
+      "sameAs": "https://www.instagram.com/cool.cat.tattoos/"
+    }
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d0d0d;
+      --text: #f0f0f0;
+      --accent: #f4a62a;
+      --accent-dark: #c8851f;
+      --muted: #888;
+      --card-bg: #1a1a1a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem 1.5rem;
+      position: relative;
+      background: radial-gradient(ellipse at 50% 0%, rgba(244,166,42,0.12) 0%, transparent 70%);
+    }
+
+    .hero-avatar {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      border: 4px solid var(--accent);
+      object-fit: cover;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 0 40px rgba(244,166,42,0.4);
+    }
+
+    #hero h1 {
+      font-size: clamp(2.4rem, 7vw, 4.5rem);
+      font-weight: 900;
+      letter-spacing: -1px;
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+    }
+
+    #hero h1 span {
+      color: var(--accent);
+    }
+
+    .hero-shop {
+      font-size: 1.1rem;
+      color: var(--muted);
+      margin-bottom: 0.3rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .hero-shop a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .hero-shop a:hover { opacity: 0.75; }
+
+    .hero-tagline {
+      font-size: clamp(1rem, 3vw, 1.25rem);
+      color: var(--muted);
+      max-width: 500px;
+      margin: 1rem auto 2rem;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--accent);
+      color: #0d0d0d;
+      font-weight: 800;
+      font-size: 1rem;
+      padding: 0.85rem 2.2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(244,166,42,0.35);
+    }
+    .btn-primary:hover {
+      background: var(--accent-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(244,166,42,0.5);
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--muted);
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 5rem 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+      font-weight: 700;
+    }
+
+    section h2 {
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-weight: 900;
+      margin-bottom: 1.5rem;
+      line-height: 1.1;
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+
+    @media (min-width: 768px) {
+      #about { grid-template-columns: 1fr 1fr; }
+    }
+
+    .about-text p {
+      color: #ccc;
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+    }
+
+    .style-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .tag {
+      background: rgba(244,166,42,0.12);
+      border: 1px solid rgba(244,166,42,0.3);
+      color: var(--accent);
+      padding: 0.3rem 0.85rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid #2a2a2a;
+      border-radius: 12px;
+      padding: 1.25rem;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 0.25rem;
+    }
+
+    /* ── GALLERY ── */
+    #gallery { max-width: 1200px; }
+
+    .gallery-grid {
+      columns: 2;
+      column-gap: 0.75rem;
+      margin-top: 2rem;
+    }
+
+    @media (min-width: 600px) { .gallery-grid { columns: 3; } }
+    @media (min-width: 900px) { .gallery-grid { columns: 4; } }
+
+    .gallery-item {
+      break-inside: avoid;
+      margin-bottom: 0.75rem;
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      display: block;
+      transition: transform 0.35s ease, filter 0.35s ease;
+      border-radius: 10px;
+    }
+
+    .gallery-item::after {
+      content: '⬡';
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: var(--accent);
+      background: rgba(13,13,13,0.55);
+      opacity: 0;
+      transition: opacity 0.3s;
+      border-radius: 10px;
+    }
+
+    .gallery-item:hover img { transform: scale(1.04); filter: brightness(0.75); }
+    .gallery-item:hover::after { opacity: 1; }
+
+    /* ── LIGHTBOX ── */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    #lightbox.active { display: flex; }
+
+    #lightbox img {
+      max-width: 90vw;
+      max-height: 88vh;
+      border-radius: 10px;
+      box-shadow: 0 0 60px rgba(244,166,42,0.2);
+    }
+
+    #lb-close {
+      position: absolute;
+      top: 1rem;
+      right: 1.25rem;
+      font-size: 2rem;
+      color: var(--text);
+      background: none;
+      border: none;
+      cursor: pointer;
+      line-height: 1;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    #lb-close:hover { opacity: 1; }
+
+    #lb-prev, #lb-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(244,166,42,0.15);
+      border: 1px solid rgba(244,166,42,0.3);
+      color: var(--accent);
+      font-size: 1.5rem;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+    #lb-prev:hover, #lb-next:hover { background: rgba(244,166,42,0.3); }
+    #lb-prev { left: 1rem; }
+    #lb-next { right: 1rem; }
+
+    /* ── BOOK CTA ── */
+    #book {
+      text-align: center;
+      background: radial-gradient(ellipse at 50% 50%, rgba(244,166,42,0.08) 0%, transparent 70%);
+      border: 1px solid #2a2a2a;
+      border-radius: 24px;
+      padding: 4rem 2rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    #book h2 { margin-bottom: 1rem; }
+
+    #book p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 480px;
+      margin: 0 auto 2rem;
+    }
+
+    /* ── CONTACT ── */
+    #contact { max-width: 600px; }
+
+    .contact-links {
+      margin-top: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--card-bg);
+      border: 1px solid #2a2a2a;
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .contact-link:hover {
+      border-color: var(--accent);
+      background: rgba(244,166,42,0.06);
+    }
+
+    .contact-icon {
+      font-size: 1.5rem;
+      width: 2.5rem;
+      text-align: center;
+    }
+
+    .contact-info-label {
+      font-size: 0.7rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .contact-info-val {
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    /* ── FLOATING BOOK BTN ── */
+    #float-book {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 500;
+      background: var(--accent);
+      color: #0d0d0d;
+      font-weight: 800;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 6px 25px rgba(244,166,42,0.5);
+      transition: background 0.2s, transform 0.2s;
+    }
+    #float-book:hover {
+      background: var(--accent-dark);
+      transform: scale(1.05);
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      width: 60px;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 2px;
+      margin-bottom: 2rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2.5rem 1rem;
+      border-top: 1px solid #1e1e1e;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(13,13,13,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #1e1e1e;
+    }
+
+    .nav-name {
+      font-weight: 900;
+      font-size: 1rem;
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-name">John Tucker</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#book">Book</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero" style="padding-top:5rem;">
+  <img src="img/profile.jpg" alt="John Tucker - Neo-Traditional Tattoo Artist" class="hero-avatar" />
+  <h1>John <span>Tucker</span></h1>
+  <p class="hero-shop">@ <a href="https://www.instagram.com/cool.cat.tattoos/" target="_blank" rel="noopener">cool.cat.tattoos</a> &mdash; St. Pete, FL</p>
+  <p class="hero-tagline">Neo-traditional tattoo art. Bold color. Vivid characters. Unforgettable work.</p>
+  <a href="https://forms.gle/RaDWYAgGUwZe222aA" target="_blank" rel="noopener" class="btn-primary">Book Your Tattoo</a>
+  <span class="scroll-hint">↓ scroll</span>
+</section>
+
+<!-- ABOUT -->
+<section style="max-width:1100px;">
+  <div id="about">
+    <div class="about-text">
+      <p class="section-label">About the Artist</p>
+      <h2>Bold. Vivid. Unapologetically Colorful.</h2>
+      <div class="divider"></div>
+      <p>John Tucker is a neo-traditional tattoo artist based at <strong>@cool.cat.tattoos</strong> in St. Pete, FL, bringing a distinct energy to every piece — vivid tigers, dramatic dragons, whimsical jesters, lush florals, and anime-influenced character work.</p>
+      <p>His style blends classic neo-traditional structure with bold, saturated color and expressive illustration — art that lives on your skin and demands to be seen. He works alongside fellow artist <a href="https://www.instagram.com/coriiiander/" target="_blank" rel="noopener" style="color:var(--accent)">@coriiiander</a> 🧡</p>
+      <p>When he's not tattooing, John is probably being a proud Cat Dad 🐱</p>
+      <div class="style-tags">
+        <span class="tag">Neo-Traditional</span>
+        <span class="tag">Bold Color</span>
+        <span class="tag">Anime-Influenced</span>
+        <span class="tag">Japanese</span>
+        <span class="tag">Illustrative</span>
+        <span class="tag">Tigers & Dragons</span>
+        <span class="tag">Florals</span>
+        <span class="tag">Character Pieces</span>
+      </div>
+    </div>
+    <div class="about-stats">
+      <div class="stat-card">
+        <div class="stat-num">14K+</div>
+        <div class="stat-label">Followers</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">435+</div>
+        <div class="stat-label">Posts</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">St. Pete</div>
+        <div class="stat-label">Location</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">🐱</div>
+        <div class="stat-label">Cat Dad</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" style="max-width:1200px;">
+  <p class="section-label">Portfolio</p>
+  <h2>Recent Work</h2>
+  <div class="divider"></div>
+
+  <div class="gallery-grid">
+    <div class="gallery-item" onclick="openLightbox(0)"><img src="img/tattoo_00.jpg" alt="Neo-traditional tattoo by John Tucker" loading="lazy" /></div>
+    <div class="gallery-item" onclick="openLightbox(1)"><img src="img/tattoo_01.jpg" alt="Bold color tattoo by John Tucker" loading="lazy" /></div>
+    <div class="gallery-item" onclick="openLightbox(2)"><img src="img/tattoo_02.jpg" alt="Illustrative tattoo by John Tucker" loading="lazy" /></div>
+    <div class="gallery-item" onclick="openLightbox(3)"><img src="img/tattoo_03.jpg" alt="Neo-traditional tattoo by John Tucker" loading="lazy" /></div>
+    <div class="gallery-item" onclick="openLightbox(4)"><img src="img/tattoo_04.jpg" alt="Vivid color tattoo by John Tucker" loading="lazy" /></div>
+    <div class="gallery-item" onclick="openLightbox(5)"><img src="img/tattoo_05.jpg" alt="Anime-influenced tattoo by John Tucker" loading="lazy" /></div>
+    <div class="gallery-item" onclick="openLightbox(6)"><img src="img/tattoo_06.jpg" alt="Bold tattoo by John Tucker" loading="lazy" /></div>
+    <div class="gallery-item" onclick="openLightbox(7)"><img src="img/tattoo_07.jpg" alt="Character tattoo by John Tucker" loading="lazy" /></div>
+    <div class="gallery-item" onclick="openLightbox(8)"><img src="img/tattoo_08.jpg" alt="Neo-traditional tattoo by John Tucker" loading="lazy" /></div>
+    <div class="gallery-item" onclick="openLightbox(9)"><img src="img/tattoo_09.jpg" alt="Illustrative tattoo by John Tucker" loading="lazy" /></div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" onclick="closeLightboxOnBg(event)">
+  <button id="lb-close" onclick="closeLightbox()" aria-label="Close">&times;</button>
+  <button id="lb-prev" onclick="lbPrev()" aria-label="Previous">&#8249;</button>
+  <img id="lb-img" src="" alt="Tattoo by John Tucker" />
+  <button id="lb-next" onclick="lbNext()" aria-label="Next">&#8250;</button>
+</div>
+
+<!-- BOOK -->
+<section style="padding: 5rem 1.5rem;">
+  <div id="book">
+    <p class="section-label">Ready?</p>
+    <h2>Book Your Session</h2>
+    <div class="divider" style="margin: 1rem auto;"></div>
+    <p>Fill out John's booking form to get started. Tell him about your idea, placement, and size — and let's make something bold.</p>
+    <a href="https://forms.gle/RaDWYAgGUwZe222aA" target="_blank" rel="noopener" class="btn-primary">Open Booking Form</a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label">Get in Touch</p>
+  <h2>Contact</h2>
+  <div class="divider"></div>
+  <div class="contact-links">
+    <a href="https://www.instagram.com/johntuckermusttattoo/" target="_blank" rel="noopener" class="contact-link">
+      <span class="contact-icon">📸</span>
+      <div>
+        <div class="contact-info-label">Instagram</div>
+        <div class="contact-info-val">@johntuckermusttattoo</div>
+      </div>
+    </a>
+    <a href="https://forms.gle/RaDWYAgGUwZe222aA" target="_blank" rel="noopener" class="contact-link">
+      <span class="contact-icon">📋</span>
+      <div>
+        <div class="contact-info-label">Booking Form</div>
+        <div class="contact-info-val">Submit a Request</div>
+      </div>
+    </a>
+    <a href="https://www.instagram.com/cool.cat.tattoos/" target="_blank" rel="noopener" class="contact-link">
+      <span class="contact-icon">🐱</span>
+      <div>
+        <div class="contact-info-label">Shop</div>
+        <div class="contact-info-val">@cool.cat.tattoos — St. Pete, FL</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 John Tucker &mdash; All tattoo artwork belongs to the artist.</p>
+  <p style="margin-top:0.5rem;">Website by <a href="https://bayouwebstudio.com" target="_blank" rel="noopener">Bayou Web Studio</a></p>
+</footer>
+
+<!-- FLOATING BOOK BUTTON -->
+<a id="float-book" href="https://forms.gle/RaDWYAgGUwZe222aA" target="_blank" rel="noopener">✏️ Book Now</a>
+
+<script>
+  const images = [
+    'img/tattoo_00.jpg','img/tattoo_01.jpg','img/tattoo_02.jpg','img/tattoo_03.jpg',
+    'img/tattoo_04.jpg','img/tattoo_05.jpg','img/tattoo_06.jpg','img/tattoo_07.jpg',
+    'img/tattoo_08.jpg','img/tattoo_09.jpg'
+  ];
+  let lbIndex = 0;
+
+  function openLightbox(i) {
+    lbIndex = i;
+    document.getElementById('lb-img').src = images[i];
+    document.getElementById('lightbox').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function closeLightboxOnBg(e) {
+    if (e.target === document.getElementById('lightbox')) closeLightbox();
+  }
+
+  function lbPrev() {
+    lbIndex = (lbIndex - 1 + images.length) % images.length;
+    document.getElementById('lb-img').src = images[lbIndex];
+  }
+
+  function lbNext() {
+    lbIndex = (lbIndex + 1) % images.length;
+    document.getElementById('lb-img').src = images[lbIndex];
+  }
+
+  document.addEventListener('keydown', e => {
+    if (!document.getElementById('lightbox').classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') lbPrev();
+    if (e.key === 'ArrowRight') lbNext();
+  });
+
+  // Hide float button near book section
+  const floatBtn = document.getElementById('float-book');
+  const bookSec = document.getElementById('book');
+  const observer = new IntersectionObserver(entries => {
+    floatBtn.style.opacity = entries[0].isIntersecting ? '0' : '1';
+    floatBtn.style.pointerEvents = entries[0].isIntersecting ? 'none' : 'auto';
+  }, { threshold: 0.3 });
+  observer.observe(bookSec);
+</script>
+
+</body>
+</html>

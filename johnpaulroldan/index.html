@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>John Paul Roldan | Realism Tattoo Artist | Houston TX</title>
+  <meta name="description" content="John Paul Roldan — realism tattoo artist and co-owner of Demon Ink Tattoo in Houston, TX. Specializing in black & grey realism, portraits, color realism, wildlife, surrealism, and sleeves. Book via jpdemonink@gmail.com.">
+  <meta name="keywords" content="John Paul Roldan, tattoo artist, Houston TX, realism tattoo, black grey realism, portrait tattoo, color realism, Demon Ink Tattoo">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="John Paul Roldan | Realism Tattoo Artist | Houston TX">
+  <meta property="og:description" content="Co-owner of Demon Ink Tattoo. Specializing in black & grey realism, portraits, color realism, wildlife, surrealism, and sleeves.">
+  <meta property="og:image" content="https://bayouwebstudio.com/johnpaulroldan/img/profile.jpg">
+  <meta property="og:url" content="https://bayouwebstudio.com/johnpaulroldan/">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "John Paul Roldan",
+    "jobTitle": "Tattoo Artist",
+    "description": "Realism tattoo artist specializing in black & grey, portraits, color realism, wildlife, and surrealism.",
+    "url": "https://bayouwebstudio.com/johnpaulroldan/",
+    "image": "https://bayouwebstudio.com/johnpaulroldan/img/profile.jpg",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Houston",
+      "addressRegion": "TX",
+      "addressCountry": "US"
+    },
+    "worksFor": {
+      "@type": "LocalBusiness",
+      "name": "Demon Ink Tattoo"
+    },
+    "sameAs": [
+      "https://www.instagram.com/johnpaulroldan",
+      "https://www.threads.net/@johnpaulroldan"
+    ],
+    "telephone": "361-945-4554",
+    "email": "jpdemonink@gmail.com"
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #111111;
+      --bg2: #181818;
+      --bg3: #1e1e1e;
+      --text: #f0ede8;
+      --text-muted: #a09890;
+      --gold: #c9a84c;
+      --gold-dark: #a8893a;
+      --gold-light: #e8c96c;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Georgia', serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      background: rgba(17,17,17,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+
+    .nav-logo {
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 1.5rem 4rem;
+      position: relative;
+      background: radial-gradient(ellipse at 50% 60%, rgba(201,168,76,0.06) 0%, transparent 70%);
+    }
+
+    .hero-inner {
+      max-width: 700px;
+      width: 100%;
+    }
+
+    .hero-avatar {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--gold);
+      margin-bottom: 1.8rem;
+      box-shadow: 0 0 40px rgba(201,168,76,0.25);
+    }
+
+    .hero-verified {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(201,168,76,0.12);
+      border: 1px solid rgba(201,168,76,0.3);
+      color: var(--gold);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.9rem;
+      border-radius: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero-verified svg { width: 14px; height: 14px; fill: var(--gold); }
+
+    h1 {
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--text-muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    .hero-location {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    .hero-location span { color: var(--gold); }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--gold);
+      color: #111;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.9rem 2.4rem;
+      border-radius: 2px;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-1px);
+    }
+
+    /* DIVIDER */
+    .divider {
+      width: 60px;
+      height: 1px;
+      background: var(--gold);
+      margin: 0 auto 2rem;
+      opacity: 0.5;
+    }
+
+    /* ABOUT */
+    #about {
+      background: var(--bg2);
+      padding: 6rem 1.5rem;
+      text-align: center;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+    }
+
+    h2 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-text {
+      max-width: 640px;
+      margin: 0 auto 2rem;
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+
+    .specialties {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      justify-content: center;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .specialty-tag {
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.25);
+      color: var(--gold);
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.45rem 1rem;
+      border-radius: 2px;
+    }
+
+    /* GALLERY */
+    #gallery {
+      padding: 6rem 1.5rem;
+      background: var(--bg);
+    }
+
+    #gallery .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .masonry {
+      columns: 3 280px;
+      column-gap: 12px;
+    }
+
+    .masonry-item {
+      break-inside: avoid;
+      margin-bottom: 12px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      border-radius: 2px;
+    }
+
+    .masonry-item img {
+      display: block;
+      width: 100%;
+      transition: transform 0.4s ease;
+    }
+
+    .masonry-item:hover img {
+      transform: scale(1.03);
+    }
+
+    .masonry-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(201,168,76,0.0);
+      transition: background 0.3s;
+    }
+
+    .masonry-item:hover::after {
+      background: rgba(201,168,76,0.08);
+    }
+
+    /* BOOK CTA */
+    #book {
+      background: var(--bg2);
+      padding: 6rem 1.5rem;
+      text-align: center;
+    }
+
+    .book-inner {
+      max-width: 580px;
+      margin: 0 auto;
+    }
+
+    .book-inner p {
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+
+    /* CONTACT */
+    #contact {
+      padding: 6rem 1.5rem;
+      background: var(--bg3);
+      text-align: center;
+    }
+
+    .contact-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      max-width: 700px;
+      margin: 2rem auto 0;
+    }
+
+    .contact-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .contact-item .label {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .contact-item a, .contact-item span {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .contact-item a:hover { color: var(--gold); }
+
+    /* SPONSORS */
+    .sponsors {
+      margin-top: 3rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .sponsors p {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .sponsor-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+
+    .sponsor-tags span {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding: 2rem 1.5rem;
+      text-align: center;
+    }
+
+    footer p {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    footer a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    /* FLOATING BOOK BUTTON */
+    .float-book {
+      position: fixed;
+      bottom: 1.8rem;
+      right: 1.8rem;
+      z-index: 200;
+      background: var(--gold);
+      color: #111;
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 0.85rem 1.6rem;
+      border-radius: 2px;
+      box-shadow: 0 4px 24px rgba(201,168,76,0.4);
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    }
+
+    .float-book:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 32px rgba(201,168,76,0.5);
+    }
+
+    /* LIGHTBOX */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0,0,0,0.94);
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+    }
+
+    .lightbox.active { display: flex; }
+
+    .lightbox img {
+      max-width: 92vw;
+      max-height: 92vh;
+      object-fit: contain;
+      border-radius: 2px;
+      box-shadow: 0 0 60px rgba(0,0,0,0.8);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 1.2rem;
+      right: 1.5rem;
+      color: var(--text-muted);
+      font-size: 2rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+
+    .lightbox-close:hover { color: var(--gold); }
+
+    .lightbox-prev, .lightbox-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(201,168,76,0.15);
+      border: 1px solid rgba(201,168,76,0.3);
+      color: var(--gold);
+      font-size: 1.4rem;
+      cursor: pointer;
+      padding: 0.8rem 1rem;
+      border-radius: 2px;
+      transition: background 0.2s;
+      line-height: 1;
+    }
+
+    .lightbox-prev { left: 1rem; }
+    .lightbox-next { right: 1rem; }
+    .lightbox-prev:hover, .lightbox-next:hover { background: rgba(201,168,76,0.3); }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .masonry { columns: 2 140px; }
+      .float-book { bottom: 1rem; right: 1rem; font-size: 0.72rem; padding: 0.75rem 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">John Paul Roldan</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="mailto:jpdemonink@gmail.com" class="btn-primary" style="padding:0.5rem 1.2rem;font-size:0.75rem;">Book Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <img src="img/profile.jpg" alt="John Paul Roldan — Realism Tattoo Artist" class="hero-avatar">
+    <div class="hero-verified">
+      <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+      Verified Artist
+    </div>
+    <h1>John Paul Roldan</h1>
+    <p class="hero-sub">Co-owner · Demon Ink Tattoo</p>
+    <p class="hero-location">Houston, TX &nbsp;·&nbsp; <span>@johnpaulroldan</span></p>
+    <a href="mailto:jpdemonink@gmail.com" class="btn-primary">Book a Consultation</a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <p class="section-label">About</p>
+  <div class="divider"></div>
+  <h2>Crafting Realism in Every Detail</h2>
+  <p class="about-text">
+    Based in Houston, Texas, John Paul Roldan is a verified realism specialist and co-owner of 
+    <strong>Demon Ink Tattoo</strong>. With a refined eye for detail and texture, John Paul brings 
+    portraits, animals, and surreal imagery to life on skin — in both black & grey and vivid color. 
+    Every piece is built to last and built to impress.
+  </p>
+  <div class="specialties">
+    <span class="specialty-tag">Black & Grey Realism</span>
+    <span class="specialty-tag">Portraits</span>
+    <span class="specialty-tag">Color Realism</span>
+    <span class="specialty-tag">Wildlife</span>
+    <span class="specialty-tag">Surrealism</span>
+    <span class="specialty-tag">Full Sleeves</span>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="section-header">
+    <p class="section-label">Portfolio</p>
+    <div class="divider"></div>
+    <h2>Selected Work</h2>
+  </div>
+  <div class="masonry" id="gallery-grid">
+    <div class="masonry-item" onclick="openLightbox(0)"><img src="img/photo_01.jpg" alt="Tattoo by John Paul Roldan" loading="lazy"></div>
+    <div class="masonry-item" onclick="openLightbox(1)"><img src="img/photo_02.jpg" alt="Tattoo by John Paul Roldan" loading="lazy"></div>
+    <div class="masonry-item" onclick="openLightbox(2)"><img src="img/photo_03.jpg" alt="Tattoo by John Paul Roldan" loading="lazy"></div>
+    <div class="masonry-item" onclick="openLightbox(3)"><img src="img/photo_04.jpg" alt="Tattoo by John Paul Roldan" loading="lazy"></div>
+    <div class="masonry-item" onclick="openLightbox(4)"><img src="img/photo_05.jpg" alt="Tattoo by John Paul Roldan" loading="lazy"></div>
+    <div class="masonry-item" onclick="openLightbox(5)"><img src="img/photo_06.jpg" alt="Tattoo by John Paul Roldan" loading="lazy"></div>
+    <div class="masonry-item" onclick="openLightbox(6)"><img src="img/photo_07.jpg" alt="Tattoo by John Paul Roldan" loading="lazy"></div>
+    <div class="masonry-item" onclick="openLightbox(7)"><img src="img/photo_08.jpg" alt="Tattoo by John Paul Roldan" loading="lazy"></div>
+    <div class="masonry-item" onclick="openLightbox(8)"><img src="img/photo_09.jpg" alt="Tattoo by John Paul Roldan" loading="lazy"></div>
+    <div class="masonry-item" onclick="openLightbox(9)"><img src="img/photo_10.jpg" alt="Tattoo by John Paul Roldan" loading="lazy"></div>
+    <div class="masonry-item" onclick="openLightbox(10)"><img src="img/photo_11.jpg" alt="Tattoo by John Paul Roldan" loading="lazy"></div>
+    <div class="masonry-item" onclick="openLightbox(11)"><img src="img/photo_12.jpg" alt="Tattoo by John Paul Roldan" loading="lazy"></div>
+  </div>
+</section>
+
+<!-- BOOK CTA -->
+<section id="book">
+  <div class="book-inner">
+    <p class="section-label">Bookings</p>
+    <div class="divider"></div>
+    <h2>Ready to Get Tattooed?</h2>
+    <p>
+      John Paul takes on a limited number of projects each month to ensure every piece gets 
+      the time and attention it deserves. Reach out to start the conversation about your next tattoo.
+    </p>
+    <a href="mailto:jpdemonink@gmail.com" class="btn-primary">Email to Book</a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label">Contact</p>
+  <div class="divider"></div>
+  <h2>Get in Touch</h2>
+
+  <div class="contact-grid">
+    <div class="contact-item">
+      <span class="label">Email</span>
+      <a href="mailto:jpdemonink@gmail.com">jpdemonink@gmail.com</a>
+    </div>
+    <div class="contact-item">
+      <span class="label">Phone</span>
+      <a href="tel:3619454554">361-945-4554</a>
+    </div>
+    <div class="contact-item">
+      <span class="label">Instagram</span>
+      <a href="https://www.instagram.com/johnpaulroldan" target="_blank" rel="noopener">@johnpaulroldan</a>
+    </div>
+    <div class="contact-item">
+      <span class="label">Threads</span>
+      <a href="https://www.threads.net/@johnpaulroldan" target="_blank" rel="noopener">@johnpaulroldan</a>
+    </div>
+    <div class="contact-item">
+      <span class="label">Shop</span>
+      <span>Demon Ink Tattoo · Houston, TX</span>
+    </div>
+  </div>
+
+  <div class="sponsors">
+    <p>Sponsored by</p>
+    <div class="sponsor-tags">
+      <span>@rawpigments</span>
+      <span>·</span>
+      <span>@fkirons</span>
+      <span>·</span>
+      <span>@kwadron</span>
+      <span>·</span>
+      <span>@vitalitreetattoo</span>
+      <span>·</span>
+      <span>@sullenclothing</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 John Paul Roldan · Houston, TX · Site by <a href="https://bayouwebstudio.com" target="_blank" rel="noopener">Bayou Web Studio</a></p>
+</footer>
+
+<!-- FLOATING BOOK BUTTON -->
+<a href="mailto:jpdemonink@gmail.com" class="float-book">Book Now</a>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <button class="lightbox-close" onclick="closeLightboxDirect()">&times;</button>
+  <button class="lightbox-prev" onclick="prevPhoto(event)">&#8249;</button>
+  <img id="lightbox-img" src="" alt="Tattoo by John Paul Roldan">
+  <button class="lightbox-next" onclick="nextPhoto(event)">&#8250;</button>
+</div>
+
+<script>
+  const photos = [
+    'img/photo_01.jpg','img/photo_02.jpg','img/photo_03.jpg','img/photo_04.jpg',
+    'img/photo_05.jpg','img/photo_06.jpg','img/photo_07.jpg','img/photo_08.jpg',
+    'img/photo_09.jpg','img/photo_10.jpg','img/photo_11.jpg','img/photo_12.jpg'
+  ];
+  let currentIdx = 0;
+
+  function openLightbox(idx) {
+    currentIdx = idx;
+    document.getElementById('lightbox-img').src = photos[idx];
+    document.getElementById('lightbox').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightboxDirect() {
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function closeLightbox(e) {
+    if (e.target === document.getElementById('lightbox')) closeLightboxDirect();
+  }
+
+  function prevPhoto(e) {
+    e.stopPropagation();
+    currentIdx = (currentIdx - 1 + photos.length) % photos.length;
+    document.getElementById('lightbox-img').src = photos[currentIdx];
+  }
+
+  function nextPhoto(e) {
+    e.stopPropagation();
+    currentIdx = (currentIdx + 1) % photos.length;
+    document.getElementById('lightbox-img').src = photos[currentIdx];
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (!document.getElementById('lightbox').classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightboxDirect();
+    if (e.key === 'ArrowLeft') { currentIdx = (currentIdx - 1 + photos.length) % photos.length; document.getElementById('lightbox-img').src = photos[currentIdx]; }
+    if (e.key === 'ArrowRight') { currentIdx = (currentIdx + 1) % photos.length; document.getElementById('lightbox-img').src = photos[currentIdx]; }
+  });
+</script>
+</body>
+</html>

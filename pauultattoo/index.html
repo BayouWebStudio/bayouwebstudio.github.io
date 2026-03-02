@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paul Urquiza | Tatuador Black Ornamental | Chile</title>
+  <meta name="description" content="Paul Urquiza — especialista en tatuajes black ornamental y blackwork en Chile. Mangas completas, piezas grandes y diseños geométricos. Agenda abierta.">
+  <meta name="keywords" content="tatuajes black ornamental Chile, blackwork Chile, tatuajes geométricos, Paul Urquiza tatuador, pauultattoo, mangas tatuaje Chile">
+  <meta name="author" content="Paul Urquiza">
+  <meta name="robots" content="index, follow">
+
+  <!-- OG Tags -->
+  <meta property="og:title" content="Paul Urquiza | Tatuador Black Ornamental | Chile">
+  <meta property="og:description" content="Especialista en black ornamental y blackwork. Mangas, piezas grandes y geometría audaz. Agenda abierta — DM en Instagram.">
+  <meta property="og:image" content="https://bayouwebstudio.com/pauultattoo/img/profile_pic.jpg">
+  <meta property="og:url" content="https://bayouwebstudio.com/pauultattoo/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_CL">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Paul Urquiza | Tatuador Black Ornamental | Chile">
+  <meta name="twitter:description" content="Black ornamental specialist. Agenda abierta — DM @pauultattoo">
+  <meta name="twitter:image" content="https://bayouwebstudio.com/pauultattoo/img/profile_pic.jpg">
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Paul Urquiza",
+    "alternateName": "@pauultattoo",
+    "description": "Tatuador especialista en black ornamental y blackwork en Chile",
+    "url": "https://bayouwebstudio.com/pauultattoo/",
+    "image": "https://bayouwebstudio.com/pauultattoo/img/profile_pic.jpg",
+    "sameAs": [
+      "https://www.instagram.com/pauultattoo/",
+      "https://www.threads.net/@pauultattoo"
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "CL"
+    },
+    "jobTitle": "Tatuador Black Ornamental"
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #050505;
+      --bg2: #0d0d0d;
+      --bg3: #111111;
+      --text: #e8e8e8;
+      --muted: #888888;
+      --accent: #888888;
+      --border: #1a1a1a;
+      --white: #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Georgia', serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ---- NAV ---- */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(5,5,5,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 1.5rem;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    nav .nav-logo {
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav ul a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    nav ul a:hover { color: var(--text); }
+
+    /* ---- HERO ---- */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 8rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 30%, rgba(136,136,136,0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-ornament {
+      width: 1px;
+      height: 60px;
+      background: linear-gradient(to bottom, transparent, var(--muted));
+      margin: 0 auto 3rem;
+    }
+
+    .hero-avatar {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      object-fit: cover;
+      margin-bottom: 2rem;
+      filter: grayscale(20%);
+    }
+
+    .hero-location {
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-name {
+      font-size: clamp(2.8rem, 8vw, 5.5rem);
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .hero-tagline {
+      font-size: clamp(0.8rem, 2vw, 1rem);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-divider {
+      width: 40px;
+      height: 1px;
+      background: var(--muted);
+      margin: 0 auto 2.5rem;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      padding: 0.9rem 2.5rem;
+      border: 1px solid var(--muted);
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      transition: all 0.3s;
+      position: relative;
+    }
+
+    .hero-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--muted);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+      z-index: -1;
+    }
+
+    .hero-cta:hover {
+      color: var(--bg);
+    }
+
+    .hero-cta:hover::before {
+      transform: scaleX(1);
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--muted);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0.5;
+    }
+
+    .scroll-hint::after {
+      content: '';
+      width: 1px;
+      height: 30px;
+      background: var(--muted);
+      animation: scrollPulse 2s infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(0.6); }
+    }
+
+    /* ---- SECTIONS ---- */
+    section {
+      padding: 6rem 1.5rem;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .section-label::before {
+      content: '';
+      width: 30px;
+      height: 1px;
+      background: var(--muted);
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 2rem;
+      line-height: 1.2;
+    }
+
+    /* ---- ABOUT ---- */
+    #about {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .about-text p {
+      color: var(--muted);
+      margin-bottom: 1.2rem;
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+
+    .about-text p strong {
+      color: var(--text);
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .stat {
+      padding: 1.5rem;
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      color: var(--white);
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .sponsors {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .sponsors-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .sponsor-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .sponsor-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      transition: color 0.2s;
+      border: 1px solid var(--border);
+      padding: 0.3rem 0.75rem;
+    }
+
+    .sponsor-links a:hover { color: var(--text); border-color: var(--muted); }
+
+    /* ---- GALLERY ---- */
+    #galeria {
+      background: var(--bg);
+    }
+
+    .gallery-intro {
+      max-width: 550px;
+      margin-bottom: 3rem;
+    }
+
+    .gallery-intro p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    /* Masonry */
+    .masonry {
+      columns: 3;
+      column-gap: 8px;
+    }
+
+    @media (max-width: 900px) {
+      .masonry { columns: 2; }
+    }
+
+    @media (max-width: 500px) {
+      .masonry { columns: 2; column-gap: 4px; }
+    }
+
+    .masonry-item {
+      break-inside: avoid;
+      margin-bottom: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      background: var(--bg3);
+    }
+
+    @media (max-width: 500px) {
+      .masonry-item { margin-bottom: 4px; }
+    }
+
+    .masonry-item img {
+      width: 100%;
+      display: block;
+      transition: transform 0.5s ease, filter 0.3s ease;
+      filter: brightness(0.9);
+    }
+
+    .masonry-item:hover img {
+      transform: scale(1.03);
+      filter: brightness(1);
+    }
+
+    .masonry-item .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(5,5,5,0);
+      transition: background 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .masonry-item:hover .overlay {
+      background: rgba(5,5,5,0.25);
+    }
+
+    .overlay-icon {
+      color: white;
+      font-size: 1.5rem;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .masonry-item:hover .overlay-icon {
+      opacity: 0.7;
+    }
+
+    /* ---- LIGHTBOX ---- */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0,0,0,0.95);
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    #lightbox.active {
+      display: flex;
+    }
+
+    #lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+      box-shadow: 0 0 60px rgba(0,0,0,0.8);
+    }
+
+    .lb-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: none;
+      border: 1px solid var(--muted);
+      color: var(--muted);
+      font-size: 1.2rem;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .lb-close:hover { color: white; border-color: white; }
+
+    .lb-prev, .lb-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: 1px solid rgba(136,136,136,0.3);
+      color: var(--muted);
+      font-size: 1.5rem;
+      width: 48px;
+      height: 48px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .lb-prev { left: 1rem; }
+    .lb-next { right: 1rem; }
+    .lb-prev:hover, .lb-next:hover { color: white; border-color: var(--muted); }
+
+    /* ---- BOOKING ---- */
+    #reservar {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+      padding: 7rem 1.5rem;
+    }
+
+    .booking-inner {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .booking-inner .section-label {
+      justify-content: center;
+    }
+
+    .booking-inner .section-label::before {
+      display: none;
+    }
+
+    .booking-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+      line-height: 1.1;
+    }
+
+    .booking-desc {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-bottom: 2.5rem;
+      line-height: 1.8;
+    }
+
+    .booking-btn {
+      display: inline-block;
+      padding: 1.1rem 3rem;
+      background: var(--text);
+      color: var(--bg);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      transition: all 0.3s;
+      font-family: inherit;
+    }
+
+    .booking-btn:hover {
+      background: var(--white);
+    }
+
+    .booking-note {
+      margin-top: 1.5rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    /* ---- CONTACT ---- */
+    #contacto {
+      background: var(--bg);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 1rem 1.25rem;
+      border: 1px solid var(--border);
+      transition: all 0.2s;
+      font-size: 0.9rem;
+    }
+
+    .contact-link:hover {
+      border-color: var(--muted);
+      color: var(--text);
+    }
+
+    .contact-link-icon {
+      font-size: 1.1rem;
+      width: 20px;
+      text-align: center;
+    }
+
+    .contact-info p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    /* ---- FOOTER ---- */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 2rem 1.5rem;
+      text-align: center;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .footer-name {
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .footer-credit {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: rgba(136,136,136,0.4);
+    }
+
+    .footer-credit a {
+      color: rgba(136,136,136,0.6);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-credit a:hover { color: var(--muted); }
+
+    /* ---- FLOATING BUTTON ---- */
+    .float-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 90;
+      background: var(--text);
+      color: var(--bg);
+      text-decoration: none;
+      padding: 0.85rem 1.75rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-family: inherit;
+      transition: all 0.3s;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+
+    .float-btn:hover {
+      background: var(--white);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 25px rgba(0,0,0,0.6);
+    }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 768px) {
+      nav ul { display: none; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .float-btn { bottom: 1.5rem; right: 1rem; padding: 0.75rem 1.25rem; font-size: 0.7rem; }
+    }
+
+    @media (max-width: 480px) {
+      .about-stats { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#hero">Paul Urquiza</a>
+    <ul>
+      <li><a href="#about">Sobre Mí</a></li>
+      <li><a href="#galeria">Galería</a></li>
+      <li><a href="#reservar">Reservar</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-ornament"></div>
+    <img class="hero-avatar" src="img/profile_pic.jpg" alt="Paul Urquiza — Tatuador Black Ornamental Chile">
+    <p class="hero-location">🇨🇱 Chile</p>
+    <h1 class="hero-name">Paul Urquiza</h1>
+    <p class="hero-tagline">Black Ornamental &nbsp;·&nbsp; Blackwork &nbsp;·&nbsp; Geometric</p>
+    <div class="hero-divider"></div>
+    <a class="hero-cta" href="#reservar">Agenda Abierta</a>
+    <div class="scroll-hint">Ver trabajo</div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-text">
+          <p class="section-label">Sobre Mí</p>
+          <h2 class="section-title">Especialista en<br>Black Ornamental</h2>
+          <p>
+            <strong>Paul Urquiza</strong> es un tatuador chileno especializado en <strong>black ornamental</strong>, blackwork y geometría audaz. Su trabajo se distingue por líneas precisas, patrones intrincados y composiciones que abrazan el cuerpo con intensidad.
+          </p>
+          <p>
+            Desde <strong>mangas completas</strong> hasta piezas de gran escala, cada tatuaje es diseñado a medida — pensado para durar, para impactar, para contar una historia en la piel.
+          </p>
+          <p>
+            Actualmente con <strong>agenda abierta</strong>. No esperes — los cupos son limitados.
+          </p>
+          <div class="sponsors">
+            <p class="sponsors-label">Patrocinado por</p>
+            <div class="sponsor-links">
+              <a href="https://www.instagram.com/hustlebutterdeluxe/" target="_blank" rel="noopener">@hustlebutterdeluxe</a>
+              <a href="https://www.instagram.com/electrum_ink/" target="_blank" rel="noopener">@electrum_ink</a>
+            </div>
+          </div>
+        </div>
+        <div class="about-stats">
+          <div class="stat">
+            <span class="stat-number">17K+</span>
+            <span class="stat-label">Seguidores</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">1,110</span>
+            <span class="stat-label">Publicaciones</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Blackwork</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">🇨🇱</span>
+            <span class="stat-label">Chile</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="galeria">
+    <div class="container">
+      <p class="section-label">Trabajo</p>
+      <h2 class="section-title">Galería</h2>
+      <div class="gallery-intro">
+        <p>Black ornamental en su máxima expresión. Cada pieza refleja años de precisión técnica y una visión estética que transforma la piel en arte duradero.</p>
+      </div>
+      <div class="masonry" id="gallery-grid">
+        <!-- images injected by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" role="dialog" aria-modal="true" aria-label="Galería de tatuajes">
+    <button class="lb-close" aria-label="Cerrar">&times;</button>
+    <button class="lb-prev" aria-label="Anterior">&#8249;</button>
+    <img id="lb-img" src="" alt="Tatuaje de Paul Urquiza">
+    <button class="lb-next" aria-label="Siguiente">&#8250;</button>
+  </div>
+
+  <!-- BOOKING -->
+  <section id="reservar">
+    <div class="booking-inner">
+      <p class="section-label">Citas</p>
+      <h2 class="booking-title">Agenda<br>Abierta</h2>
+      <p class="booking-desc">
+        ¿Listo para llevar tu tatuaje al siguiente nivel? Paul está tomando citas para piezas black ornamental, mangas completas y proyectos personalizados. Escríbele directamente en Instagram.
+      </p>
+      <a class="booking-btn" href="https://www.instagram.com/pauultattoo/" target="_blank" rel="noopener">
+        DM para Reservar
+      </a>
+      <p class="booking-note">Responde en Instagram · @pauultattoo ✓</p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contacto">
+    <div class="container">
+      <div class="contact-grid">
+        <div>
+          <p class="section-label">Contacto</p>
+          <h2 class="section-title">Hablemos</h2>
+          <div class="contact-links">
+            <a class="contact-link" href="https://www.instagram.com/pauultattoo/" target="_blank" rel="noopener">
+              <span class="contact-link-icon">📸</span>
+              <span>@pauultattoo en Instagram</span>
+            </a>
+            <a class="contact-link" href="https://www.threads.net/@pauultattoo" target="_blank" rel="noopener">
+              <span class="contact-link-icon">🧵</span>
+              <span>@pauultattoo en Threads</span>
+            </a>
+            <a class="contact-link" href="https://www.instagram.com/hustlebutterdeluxe/" target="_blank" rel="noopener">
+              <span class="contact-link-icon">🤝</span>
+              <span>@hustlebutterdeluxe</span>
+            </a>
+            <a class="contact-link" href="https://www.instagram.com/electrum_ink/" target="_blank" rel="noopener">
+              <span class="contact-link-icon">⚡</span>
+              <span>@electrum_ink</span>
+            </a>
+          </div>
+        </div>
+        <div class="contact-info">
+          <p>Para consultas sobre citas, presupuestos o colaboraciones, la mejor manera de contactar a Paul es a través de su Instagram.</p>
+          <p>Ubicado en <strong>Chile 🇨🇱</strong> — disponible para proyectos nacionales e internacionales.</p>
+          <p>Las consultas sobre tatuajes personalizados, diseños de manga, piezas grandes y colaboraciones son bienvenidas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <p class="footer-name">Paul Urquiza &nbsp;·&nbsp; @pauultattoo &nbsp;·&nbsp; Chile 🇨🇱</p>
+      <p class="footer-credit">
+        Sitio web por <a href="https://bayouwebstudio.com" target="_blank" rel="noopener">Bayou Web Studio</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- FLOATING BUTTON -->
+  <a class="float-btn" href="https://www.instagram.com/pauultattoo/" target="_blank" rel="noopener">Reservar</a>
+
+  <script>
+    // Gallery images
+    const tattooImages = [
+      'post_00_a.jpg','post_01_a.jpg','post_01_c.jpg','post_01_c2.jpg',
+      'post_02_a.jpg','post_03_a.jpg','post_04_a.jpg','post_05_a.jpg',
+      'post_06_a.jpg','post_07_a.jpg','post_08_a.jpg','post_09_a.jpg',
+      'post_10_a.jpg','post_11_a.jpg'
+    ];
+
+    const grid = document.getElementById('gallery-grid');
+    tattooImages.forEach((img, i) => {
+      const item = document.createElement('div');
+      item.className = 'masonry-item';
+      item.innerHTML = `
+        <img src="img/${img}" alt="Tatuaje black ornamental de Paul Urquiza" loading="lazy">
+        <div class="overlay"><span class="overlay-icon">+</span></div>
+      `;
+      item.addEventListener('click', () => openLightbox(i));
+      grid.appendChild(item);
+    });
+
+    // Lightbox
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lb-img');
+    let currentIdx = 0;
+
+    function openLightbox(idx) {
+      currentIdx = idx;
+      lbImg.src = `img/${tattooImages[idx]}`;
+      lb.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lb.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function showNext() {
+      currentIdx = (currentIdx + 1) % tattooImages.length;
+      lbImg.src = `img/${tattooImages[currentIdx]}`;
+    }
+
+    function showPrev() {
+      currentIdx = (currentIdx - 1 + tattooImages.length) % tattooImages.length;
+      lbImg.src = `img/${tattooImages[currentIdx]}`;
+    }
+
+    document.querySelector('.lb-close').addEventListener('click', closeLightbox);
+    document.querySelector('.lb-next').addEventListener('click', showNext);
+    document.querySelector('.lb-prev').addEventListener('click', showPrev);
+
+    lb.addEventListener('click', (e) => {
+      if (e.target === lb) closeLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!lb.classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') showNext();
+      if (e.key === 'ArrowLeft') showPrev();
+    });
+
+    // Smooth nav scroll + active state
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

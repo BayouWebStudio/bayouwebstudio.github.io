@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oskar Sekeres | Tatuador | Geometría Dotwork | CDMX México</title>
+  <meta name="description" content="Oskar Sekeres — tatuador especialista en geometría sagrada, dotwork y neo-tradicional. Con sede en CDMX y Puebla, México. Agenda tu cita vía Instagram o Linktree.">
+  <meta name="keywords" content="tatuador CDMX, tatuajes geometría, dotwork México, mandala tattoo, neo tradicional, Puebla tatuajes, Oskar Sekeres">
+  <meta name="author" content="Oskar Sekeres">
+  <meta property="og:title" content="Oskar Sekeres | Tatuador | Geometría Dotwork | CDMX México">
+  <meta property="og:description" content="Tatuador especialista en geometría, dotwork y neo-tradicional. CDMX · Puebla, México.">
+  <meta property="og:image" content="https://bayouwebstudio.com/sekerestattoo/img/profile.jpg">
+  <meta property="og:url" content="https://bayouwebstudio.com/sekerestattoo/">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Oskar Sekeres | Tatuador CDMX">
+  <meta name="twitter:description" content="Geometría · Dotwork · Neo-Tradicional — CDMX y Puebla, México">
+  <meta name="twitter:image" content="https://bayouwebstudio.com/sekerestattoo/img/profile.jpg">
+  <link rel="canonical" href="https://bayouwebstudio.com/sekerestattoo/">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Oskar Sekeres",
+    "jobTitle": "Tatuador",
+    "description": "Especialista en tatuajes de geometría sagrada, dotwork y neo-tradicional en CDMX y Puebla, México.",
+    "url": "https://bayouwebstudio.com/sekerestattoo/",
+    "image": "https://bayouwebstudio.com/sekerestattoo/img/profile.jpg",
+    "sameAs": [
+      "https://www.instagram.com/sekerestattoo/",
+      "https://linktr.ee/Oskarsekeres"
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Ciudad de México",
+      "addressRegion": "CDMX",
+      "addressCountry": "MX"
+    }
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0a;
+      --surface: #111111;
+      --surface2: #1a1a1a;
+      --text: #f0f0f0;
+      --text-muted: #888;
+      --gold: #c9a84c;
+      --gold-light: #e8c76a;
+      --gold-dim: rgba(201,168,76,0.15);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Georgia', serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: rgba(10,10,10,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+    }
+
+    .nav-logo {
+      font-size: 1rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+      font-family: 'Helvetica Neue', sans-serif;
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+      background: radial-gradient(ellipse at center, rgba(201,168,76,0.05) 0%, transparent 70%);
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: 
+        repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(201,168,76,0.03) 60px, rgba(201,168,76,0.03) 61px),
+        repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(201,168,76,0.03) 60px, rgba(201,168,76,0.03) 61px);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      max-width: 700px;
+    }
+
+    .hero-profile {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      border: 3px solid var(--gold);
+      object-fit: cover;
+      margin-bottom: 2rem;
+      box-shadow: 0 0 40px rgba(201,168,76,0.3);
+    }
+
+    .hero-eyebrow {
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: bold;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      line-height: 1;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #f0f0f0 0%, var(--gold-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-location {
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.25em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-style {
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      padding: 0.9rem 2.5rem;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      text-decoration: none;
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: all 0.3s;
+    }
+
+    .hero-cta:hover {
+      background: var(--gold);
+      color: #0a0a0a;
+    }
+
+    .scroll-line {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--text-muted);
+    }
+
+    .scroll-line::after {
+      content: '';
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollDown 1.5s ease-in-out infinite;
+    }
+
+    @keyframes scrollDown {
+      0%, 100% { opacity: 0.3; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.2); }
+    }
+
+    /* ─── SECTIONS ─── */
+    section { padding: 6rem 2rem; }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-label {
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.35em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .gold-divider {
+      width: 60px;
+      height: 2px;
+      background: var(--gold);
+      margin: 1.5rem auto;
+    }
+
+    /* ─── ABOUT ─── */
+    .about {
+      background: var(--surface);
+      border-top: 1px solid rgba(201,168,76,0.15);
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+    }
+
+    .about-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .about-text p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-text p strong {
+      color: var(--gold);
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .stat-box {
+      background: var(--surface2);
+      border: 1px solid rgba(201,168,76,0.2);
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: bold;
+      color: var(--gold);
+      display: block;
+    }
+
+    .stat-label {
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-top: 0.3rem;
+    }
+
+    /* ─── GALLERY ─── */
+    .gallery { background: var(--bg); }
+
+    .masonry {
+      max-width: 1200px;
+      margin: 0 auto;
+      columns: 3;
+      column-gap: 12px;
+    }
+
+    .masonry-item {
+      break-inside: avoid;
+      margin-bottom: 12px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .masonry-item img {
+      width: 100%;
+      display: block;
+      transition: transform 0.4s ease;
+      filter: grayscale(10%);
+    }
+
+    .masonry-item:hover img {
+      transform: scale(1.03);
+      filter: grayscale(0%);
+    }
+
+    .masonry-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(201,168,76,0);
+      transition: background 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .masonry-item:hover .masonry-overlay {
+      background: rgba(201,168,76,0.08);
+    }
+
+    /* ─── BOOK ─── */
+    .book {
+      background: var(--surface);
+      text-align: center;
+      border-top: 1px solid rgba(201,168,76,0.15);
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+    }
+
+    .book-inner { max-width: 700px; margin: 0 auto; }
+
+    .book-subtitle {
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+    }
+
+    .book-btn {
+      display: inline-block;
+      padding: 1rem 3rem;
+      background: var(--gold);
+      color: #0a0a0a;
+      text-decoration: none;
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 0.85rem;
+      font-weight: bold;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: all 0.3s;
+    }
+
+    .book-btn:hover {
+      background: var(--gold-light);
+      box-shadow: 0 0 30px rgba(201,168,76,0.4);
+    }
+
+    /* ─── CONTACT ─── */
+    .contact { background: var(--bg); }
+
+    .contact-grid {
+      max-width: 800px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .contact-item {
+      background: var(--surface2);
+      border: 1px solid rgba(201,168,76,0.15);
+      padding: 2rem;
+      text-align: center;
+      transition: border-color 0.3s;
+    }
+
+    .contact-item:hover { border-color: var(--gold); }
+
+    .contact-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .contact-label {
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-value {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .contact-value a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .contact-value a:hover { color: var(--gold); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #050505;
+      border-top: 1px solid rgba(201,168,76,0.1);
+      padding: 2rem;
+      text-align: center;
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+    }
+
+    footer a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    /* ─── FLOATING BTN ─── */
+    .float-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 200;
+      background: var(--gold);
+      color: #0a0a0a;
+      padding: 0.9rem 1.8rem;
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 0.8rem;
+      font-weight: bold;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s;
+      box-shadow: 0 4px 20px rgba(201,168,76,0.4);
+    }
+
+    .float-btn:hover {
+      background: var(--gold-light);
+      box-shadow: 0 6px 30px rgba(201,168,76,0.6);
+      transform: translateY(-2px);
+    }
+
+    /* ─── LIGHTBOX ─── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      background: rgba(0,0,0,0.95);
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .lightbox.active { display: flex; }
+
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+      border: 1px solid rgba(201,168,76,0.3);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 2rem;
+      font-size: 2rem;
+      color: var(--gold);
+      cursor: pointer;
+      background: none;
+      border: none;
+      line-height: 1;
+    }
+
+    .lightbox-prev, .lightbox-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(201,168,76,0.2);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-size: 1.5rem;
+      padding: 0.8rem 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .lightbox-prev { left: 1rem; }
+    .lightbox-next { right: 1rem; }
+    .lightbox-prev:hover, .lightbox-next:hover { background: rgba(201,168,76,0.4); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.2rem; }
+      .nav-links { gap: 1rem; }
+      .nav-links a { font-size: 0.7rem; }
+
+      .about-inner {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .masonry { columns: 2; }
+
+      .contact-grid { grid-template-columns: 1fr; gap: 1rem; }
+
+      .float-btn { bottom: 1.5rem; right: 1.5rem; padding: 0.8rem 1.4rem; }
+    }
+
+    @media (max-width: 480px) {
+      .masonry { columns: 1; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#inicio" class="nav-logo">Oskar Sekeres</a>
+    <ul class="nav-links">
+      <li><a href="#sobre-mi">Sobre Mí</a></li>
+      <li><a href="#galeria">Galería</a></li>
+      <li><a href="#citas">Citas</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="inicio">
+    <div class="hero-inner">
+      <img src="img/profile.jpg" alt="Oskar Sekeres Tatuador" class="hero-profile">
+      <p class="hero-eyebrow">Tatuador Profesional</p>
+      <h1 class="hero-title">Oskar Sekeres ☠️</h1>
+      <p class="hero-location">CDMX · Puebla, México</p>
+      <p class="hero-style">Geometría · Dotwork · Neo-Tradicional</p>
+      <a href="https://linktr.ee/Oskarsekeres" target="_blank" rel="noopener" class="hero-cta">Cotizar Cita</a>
+    </div>
+    <div class="scroll-line">Explorar</div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="sobre-mi">
+    <div class="about-inner">
+      <div class="about-text">
+        <p class="section-label">Sobre el Artista</p>
+        <h2 class="section-title" style="font-size:2rem; margin-bottom:1.5rem;">Arte que<br><span style="color:var(--gold)">Trasciende</span></h2>
+        <p>Oskar Sekeres es tatuador con base en <strong>CDMX y Puebla, México</strong> — especialista en geometría sagrada, dotwork de alta precisión y neo-tradicional con influencias del arte japonés y occidental.</p>
+        <p>Cada pieza es concebida como un mandala único: capas de <strong>puntos, líneas y símbolos</strong> que convergen en composiciones que marcan la piel con intención y significado.</p>
+        <p>Con más de <strong>173 publicaciones</strong> y una comunidad creciente, Oskar combina técnica depurada con visión artística propia.</p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-box">
+          <span class="stat-number">173</span>
+          <span class="stat-label">Publicaciones</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number">6K+</span>
+          <span class="stat-label">Seguidores</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number">3</span>
+          <span class="stat-label">Estilos</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number">MX</span>
+          <span class="stat-label">CDMX · Puebla</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="gallery" id="galeria">
+    <div class="section-header">
+      <p class="section-label">Portafolio</p>
+      <h2 class="section-title">Galería</h2>
+      <div class="gold-divider"></div>
+    </div>
+    <div class="masonry" id="gallery-grid">
+      <div class="masonry-item" onclick="openLightbox(0)">
+        <img src="img/post_00_0.jpg" alt="Tatuaje geometría Oskar Sekeres" loading="lazy">
+        <div class="masonry-overlay"></div>
+      </div>
+      <div class="masonry-item" onclick="openLightbox(1)">
+        <img src="img/post_01_0.jpg" alt="Tatuaje dotwork Oskar Sekeres" loading="lazy">
+        <div class="masonry-overlay"></div>
+      </div>
+      <div class="masonry-item" onclick="openLightbox(2)">
+        <img src="img/post_01_1.jpg" alt="Tatuaje mandala Oskar Sekeres" loading="lazy">
+        <div class="masonry-overlay"></div>
+      </div>
+      <div class="masonry-item" onclick="openLightbox(3)">
+        <img src="img/post_02.jpg" alt="Tatuaje neo-tradicional Oskar Sekeres" loading="lazy">
+        <div class="masonry-overlay"></div>
+      </div>
+      <div class="masonry-item" onclick="openLightbox(4)">
+        <img src="img/post_05_0.jpg" alt="Tatuaje geometría sagrada Oskar Sekeres" loading="lazy">
+        <div class="masonry-overlay"></div>
+      </div>
+      <div class="masonry-item" onclick="openLightbox(5)">
+        <img src="img/post_05_1.jpg" alt="Tatuaje ornamental Oskar Sekeres" loading="lazy">
+        <div class="masonry-overlay"></div>
+      </div>
+      <div class="masonry-item" onclick="openLightbox(6)">
+        <img src="img/post_08_0.jpg" alt="Tatuaje manga Oskar Sekeres" loading="lazy">
+        <div class="masonry-overlay"></div>
+      </div>
+      <div class="masonry-item" onclick="openLightbox(7)">
+        <img src="img/post_08_1.jpg" alt="Tatuaje dotwork detalle" loading="lazy">
+        <div class="masonry-overlay"></div>
+      </div>
+      <div class="masonry-item" onclick="openLightbox(8)">
+        <img src="img/post_10_0.jpg" alt="Tatuaje geométrico CDMX" loading="lazy">
+        <div class="masonry-overlay"></div>
+      </div>
+      <div class="masonry-item" onclick="openLightbox(9)">
+        <img src="img/post_10_1.jpg" alt="Tatuaje tradicional Puebla" loading="lazy">
+        <div class="masonry-overlay"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOK -->
+  <section class="book" id="citas">
+    <div class="book-inner">
+      <div class="section-header">
+        <p class="section-label">Reservaciones</p>
+        <h2 class="section-title">Agenda tu Cita</h2>
+        <div class="gold-divider"></div>
+      </div>
+      <p class="book-subtitle">
+        ¿Listo para llevar una pieza de geometría, dotwork o neo-tradicional en tu piel?<br>
+        Las citas se coordinan directamente — escríbenos por Instagram o a través del Linktree.
+      </p>
+      <a href="https://linktr.ee/Oskarsekeres" target="_blank" rel="noopener" class="book-btn">Citas disponibles — DM o Linktree</a>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contacto">
+    <div class="section-header">
+      <p class="section-label">Encuéntranos</p>
+      <h2 class="section-title">Contacto</h2>
+      <div class="gold-divider"></div>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div class="contact-label">Ubicación</div>
+        <div class="contact-value">CDMX · Puebla<br>México</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📷</div>
+        <div class="contact-label">Instagram</div>
+        <div class="contact-value">
+          <a href="https://www.instagram.com/sekerestattoo/" target="_blank" rel="noopener">@sekerestattoo</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">🔗</div>
+        <div class="contact-label">Linktree</div>
+        <div class="contact-value">
+          <a href="https://linktr.ee/Oskarsekeres" target="_blank" rel="noopener">linktr.ee/Oskarsekeres</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 Oskar Sekeres. Todos los derechos reservados.</p>
+    <p style="margin-top:0.5rem;">Sitio diseñado por <a href="https://bayouwebstudio.com" target="_blank" rel="noopener">Bayou Web Studio</a></p>
+  </footer>
+
+  <!-- FLOATING BUTTON -->
+  <a href="https://linktr.ee/Oskarsekeres" target="_blank" rel="noopener" class="float-btn">Cotizar ✦</a>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <button class="lightbox-prev" onclick="changeLightbox(-1)">‹</button>
+    <img id="lightbox-img" src="" alt="Tatuaje Oskar Sekeres">
+    <button class="lightbox-next" onclick="changeLightbox(1)">›</button>
+  </div>
+
+  <script>
+    const galleryImages = [
+      'img/post_00_0.jpg',
+      'img/post_01_0.jpg',
+      'img/post_01_1.jpg',
+      'img/post_02.jpg',
+      'img/post_05_0.jpg',
+      'img/post_05_1.jpg',
+      'img/post_08_0.jpg',
+      'img/post_08_1.jpg',
+      'img/post_10_0.jpg',
+      'img/post_10_1.jpg',
+    ];
+
+    let currentIdx = 0;
+
+    function openLightbox(idx) {
+      currentIdx = idx;
+      document.getElementById('lightbox-img').src = galleryImages[idx];
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function changeLightbox(dir) {
+      currentIdx = (currentIdx + dir + galleryImages.length) % galleryImages.length;
+      document.getElementById('lightbox-img').src = galleryImages[currentIdx];
+    }
+
+    document.getElementById('lightbox').addEventListener('click', function(e) {
+      if (e.target === this) closeLightbox();
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (!document.getElementById('lightbox').classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') changeLightbox(-1);
+      if (e.key === 'ArrowRight') changeLightbox(1);
+    });
+  </script>
+</body>
+</html>

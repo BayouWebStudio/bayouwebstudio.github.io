@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Mint Editor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0a0a0a;
+  --card: #111;
+  --mint: #98E8C1;
+  --mint-dim: rgba(152, 232, 193, 0.15);
+  --mint-glow: rgba(152, 232, 193, 0.3);
+  --text: #e0e0e0;
+  --text-dim: #888;
+  --border: #222;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Grid background */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(152,232,193,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(152,232,193,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  height: 100dvh;
+  position: relative;
+  z-index: 1;
+}
+
+/* === TOP SECTION === */
+.top-section {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 16px 12px;
+  position: relative;
+}
+
+.welcome {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-bottom: 16px;
+  letter-spacing: 0.3px;
+}
+.welcome span { color: var(--mint); font-weight: 600; }
+
+/* Mint Character */
+.mint-wrap {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  animation: float 4s ease-in-out infinite;
+}
+.mint-wrap.thinking { animation: float 1.5s ease-in-out infinite; }
+.mint-wrap.celebrate { animation: celebrate 0.6s ease; }
+.mint-wrap.curious { animation: curious 3s ease-in-out infinite; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  25% { transform: translateY(-8px) rotate(2deg); }
+  50% { transform: translateY(-4px) rotate(0deg); }
+  75% { transform: translateY(-10px) rotate(-2deg); }
+}
+@keyframes celebrate {
+  0% { transform: scale(1) translateY(0); }
+  30% { transform: scale(1.15) translateY(-16px); }
+  50% { transform: scale(1) translateY(-8px); }
+  70% { transform: scale(1.08) translateY(-12px); }
+  100% { transform: scale(1) translateY(0); }
+}
+@keyframes curious {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  20% { transform: translateY(-4px) rotate(-8deg); }
+  40% { transform: translateY(-2px) rotate(5deg); }
+  60% { transform: translateY(-6px) rotate(-3deg); }
+  80% { transform: translateY(-3px) rotate(6deg); }
+}
+
+.mint-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 20px var(--mint-glow));
+}
+
+/* Eyes */
+.mint-eye {
+  transition: transform 0.3s ease;
+}
+.mint-wrap.thinking .mint-eye {
+  animation: blink 0.8s ease-in-out infinite;
+}
+@keyframes blink {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(0.1); }
+}
+
+/* Speech bubble */
+.speech-bubble {
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100%);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 8px 14px;
+  font-size: 13px;
+  color: var(--text);
+  white-space: nowrap;
+  max-width: 260px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  z-index: 10;
+}
+.speech-bubble.visible { opacity: 1; }
+.speech-bubble::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 10px;
+  height: 10px;
+  background: var(--card);
+  border-left: 1px solid var(--border);
+  border-top: 1px solid var(--border);
+}
+
+/* === QUICK ACTIONS === */
+.quick-actions {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 10px;
+  padding: 12px 16px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.quick-actions::-webkit-scrollbar { display: none; }
+
+.action-pill {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--text);
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+.action-pill:hover, .action-pill:active {
+  border-color: var(--mint);
+  background: var(--mint-dim);
+}
+.action-pill .icon { font-size: 16px; }
+
+/* === CHAT SECTION === */
+.chat-section {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0 12px 12px;
+  min-height: 0;
+  padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+}
+
+.chat-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+.msg {
+  max-width: 85%;
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: 14px;
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+.msg a { color: var(--mint); }
+.msg.bot {
+  align-self: flex-start;
+  background: rgba(152,232,193,0.08);
+  border: 1px solid rgba(152,232,193,0.12);
+  border-bottom-left-radius: 4px;
+}
+.msg.user {
+  align-self: flex-end;
+  background: var(--mint-dim);
+  border: 1px solid rgba(152,232,193,0.2);
+  border-bottom-right-radius: 4px;
+}
+.msg.system {
+  align-self: center;
+  font-size: 12px;
+  color: var(--text-dim);
+  background: none;
+  padding: 4px 0;
+}
+
+/* Input */
+.input-bar {
+  display: flex;
+  gap: 8px;
+  padding: 12px;
+  border-top: 1px solid var(--border);
+  background: var(--card);
+}
+.input-bar input {
+  flex: 1;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  color: var(--text);
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.input-bar input:focus { border-color: var(--mint); }
+.input-bar input::placeholder { color: var(--text-dim); }
+
+.send-btn {
+  flex: 0 0 auto;
+  width: 42px;
+  height: 42px;
+  background: var(--mint);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s, transform 0.1s;
+}
+.send-btn:hover { opacity: 0.85; }
+.send-btn:active { transform: scale(0.93); }
+.send-btn svg { width: 18px; height: 18px; }
+
+/* Drop zone overlay */
+.drop-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(10,10,10,0.85);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+  color: var(--mint);
+  font-size: 18px;
+  font-weight: 600;
+  border: 3px dashed var(--mint);
+  margin: 16px;
+  border-radius: 20px;
+}
+.drop-overlay.active { display: flex; }
+
+/* Hidden file input */
+#fileInput { display: none; }
+
+/* Mobile */
+@media (max-width: 600px) {
+  .mint-wrap { width: 80px; height: 80px; }
+  .top-section { padding: 14px 12px 8px; }
+  .speech-bubble { font-size: 12px; max-width: 200px; }
+  .quick-actions { padding: 8px 12px; }
+  .chat-section { padding: 0 8px 8px; padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px)); }
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <!-- Top Section -->
+  <div class="top-section">
+    <div class="welcome">Welcome back, <span id="siteName">...</span></div>
+    <div class="mint-wrap" id="mintChar">
+      <svg class="mint-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <!-- Body: hexagon wireframe -->
+        <polygon points="60,10 104,32 104,78 60,100 16,78 16,32"
+          fill="none" stroke="#98E8C1" stroke-width="2" stroke-linejoin="round"/>
+        <!-- Inner hex -->
+        <polygon points="60,25 88,40 88,72 60,87 32,72 32,40"
+          fill="rgba(152,232,193,0.04)" stroke="#98E8C1" stroke-width="1" stroke-linejoin="round" opacity="0.5"/>
+        <!-- Eyes -->
+        <circle class="mint-eye" cx="47" cy="52" r="4" fill="#98E8C1"/>
+        <circle class="mint-eye" cx="73" cy="52" r="4" fill="#98E8C1"/>
+        <!-- Mouth: small smile -->
+        <path d="M52,65 Q60,72 68,65" fill="none" stroke="#98E8C1" stroke-width="1.5" stroke-linecap="round"/>
+        <!-- Antenna -->
+        <line x1="60" y1="10" x2="60" y2="2" stroke="#98E8C1" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="60" cy="1" r="2.5" fill="#98E8C1" opacity="0.6"/>
+        <!-- Small arms -->
+        <line x1="16" y1="55" x2="6" y2="48" stroke="#98E8C1" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+        <line x1="104" y1="55" x2="114" y2="48" stroke="#98E8C1" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+      </svg>
+      <div class="speech-bubble" id="speechBubble"></div>
+    </div>
+  </div>
+
+  <!-- Quick Actions -->
+  <div class="quick-actions">
+    <button class="action-pill" id="btnUpload"><span class="icon">📸</span> Upload Photos</button>
+    <button class="action-pill" data-action="edit my bio"><span class="icon">✏️</span> Edit Bio</button>
+    <button class="action-pill" data-action="change my booking link"><span class="icon">🔗</span> Booking Link</button>
+    <button class="action-pill" data-action="update my site colors"><span class="icon">🎨</span> Update Colors</button>
+    <button class="action-pill" id="btnStats"><span class="icon">📊</span> Site Stats</button>
+  </div>
+
+  <!-- Chat -->
+  <div class="chat-section">
+    <div class="chat-card">
+      <div class="messages" id="messages"></div>
+      <div class="input-bar">
+        <input type="text" id="chatInput" placeholder="Ask Mint anything..." autocomplete="off">
+        <button class="send-btn" id="sendBtn">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="#0a0a0a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <input type="file" id="fileInput" multiple accept="image/jpeg,image/png">
+</div>
+
+<div class="drop-overlay" id="dropOverlay">
+  <span>📷</span>
+  Drop photos here
+</div>
+
+<script>
+const API = 'https://api.bayouwebstudio.com/api/mint';
+const params = new URLSearchParams(location.search);
+const TOKEN = params.get('token');
+if (!TOKEN) document.body.innerHTML = '<p style="color:#888;text-align:center;margin-top:40vh">Missing token</p>';
+
+const $ = s => document.querySelector(s);
+const msgs = $('#messages');
+const input = $('#chatInput');
+const mintChar = $('#mintChar');
+const bubble = $('#speechBubble');
+const dropOverlay = $('#dropOverlay');
+const fileInput = $('#fileInput');
+
+let idleTimer;
+
+// --- Speech bubble ---
+function showBubble(text, duration = 4000) {
+  bubble.textContent = text;
+  bubble.classList.add('visible');
+  clearTimeout(bubble._t);
+  if (duration) bubble._t = setTimeout(() => bubble.classList.remove('visible'), duration);
+}
+
+// --- Mint states ---
+function setMintState(state) {
+  mintChar.classList.remove('thinking', 'celebrate', 'curious');
+  if (state) mintChar.classList.add(state);
+  resetIdle();
+}
+
+function resetIdle() {
+  clearTimeout(idleTimer);
+  idleTimer = setTimeout(() => setMintState('curious'), 12000);
+}
+
+// --- Messages ---
+function addMsg(text, type = 'bot') {
+  const d = document.createElement('div');
+  d.className = 'msg ' + type;
+  d.innerHTML = text;
+  msgs.appendChild(d);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+// --- Send message ---
+async function sendMessage(text) {
+  if (!text.trim()) return;
+  addMsg(text, 'user');
+  input.value = '';
+  setMintState('thinking');
+  showBubble('Thinking...', 0);
+
+  try {
+    const res = await fetch(API + '/edit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token: TOKEN, message: text })
+    });
+    const data = await res.json();
+    const reply = data.reply || data.message || 'Done!';
+    addMsg(reply, 'bot');
+    showBubble('Done! ✨');
+    setMintState('celebrate');
+    setTimeout(() => setMintState(null), 700);
+  } catch (e) {
+    addMsg('Something went wrong. Try again?', 'bot');
+    showBubble('Oops... 😅');
+    setMintState(null);
+  }
+}
+
+// --- Upload ---
+async function uploadFiles(files) {
+  if (!files.length) return;
+  addMsg(`Uploading ${files.length} photo${files.length > 1 ? 's' : ''}...`, 'system');
+  setMintState('thinking');
+  showBubble('Uploading...', 0);
+
+  const fd = new FormData();
+  fd.append('token', TOKEN);
+  for (const f of files) fd.append('photos', f);
+
+  try {
+    const res = await fetch(API + '/upload', { method: 'POST', body: fd });
+    const data = await res.json();
+    const reply = data.reply || data.message || `Uploaded ${files.length} photo(s)!`;
+    addMsg(reply, 'bot');
+    showBubble('Photos uploaded! 🎉');
+    setMintState('celebrate');
+    setTimeout(() => setMintState(null), 700);
+  } catch (e) {
+    addMsg('Upload failed. Try again?', 'bot');
+    showBubble('Upload failed 😅');
+    setMintState(null);
+  }
+}
+
+// --- Site info ---
+async function loadSiteInfo() {
+  try {
+    const res = await fetch(API + '/site-info?token=' + TOKEN);
+    const data = await res.json();
+    $('#siteName').textContent = data.name || data.siteName || 'friend';
+  } catch { $('#siteName').textContent = 'friend'; }
+}
+
+// --- Events ---
+$('#sendBtn').addEventListener('click', () => sendMessage(input.value));
+input.addEventListener('keydown', e => { if (e.key === 'Enter') sendMessage(input.value); });
+
+$('#btnUpload').addEventListener('click', () => fileInput.click());
+fileInput.addEventListener('change', () => { uploadFiles(fileInput.files); fileInput.value = ''; });
+
+$('#btnStats').addEventListener('click', () => sendMessage('show me my site stats'));
+
+document.querySelectorAll('.action-pill[data-action]').forEach(btn => {
+  btn.addEventListener('click', () => sendMessage(btn.dataset.action));
+});
+
+// Drag & drop
+let dragCounter = 0;
+document.addEventListener('dragenter', e => { e.preventDefault(); dragCounter++; dropOverlay.classList.add('active'); });
+document.addEventListener('dragleave', e => { e.preventDefault(); dragCounter--; if (dragCounter <= 0) { dragCounter = 0; dropOverlay.classList.remove('active'); } });
+document.addEventListener('dragover', e => e.preventDefault());
+document.addEventListener('drop', e => {
+  e.preventDefault(); dragCounter = 0; dropOverlay.classList.remove('active');
+  const files = [...e.dataTransfer.files].filter(f => f.type.startsWith('image/'));
+  if (files.length) uploadFiles(files);
+});
+
+// Init
+loadSiteInfo();
+showBubble('Hey! 👋 What can I do for your site today?', 6000);
+addMsg("Hey! 👋 What can I do for your site today?", 'bot');
+resetIdle();
+</script>
+</body>
+</html>

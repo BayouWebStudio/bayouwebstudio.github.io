@@ -3,35 +3,37 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Froyvargas — Fine Art &amp; Illustration Portfolio</title>
+  <title>Froyvargas — Fine Art & Illustration Portfolio</title>
   <meta name="description" content="Jonatan 'Froy' Vargas — fine art, illustration, and painting portfolio. Explore original artworks and creative works." />
-  <meta name="keywords" content="Froyvargas, Jonatan Vargas, fine art, illustration, painting, creative portfolio, artist" />
-  <meta property="og:title" content="Froyvargas — Fine Art &amp; Illustration" />
-  <meta property="og:description" content="Original artworks, illustrations, and paintings by Jonatan 'Froy' Vargas." />
-  <meta property="og:image" content="https://iili.io/qqFKMpp.jpg" />
-  <meta property="og:url" content="https://bayouwebstudio.github.io/froyvargas/" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Froyvargas — Fine Art & Illustration Portfolio" />
+  <meta property="og:description" content="Jonatan 'Froy' Vargas — fine art, illustration, and painting portfolio. Explore original artworks and creative works." />
+  <meta property="og:image" content="img/photo_01.jpg" />
+  <meta property="og:url" content="https://bayouwebstudio.com/froyvargas/" />
   <meta property="og:type" content="website" />
-  <meta name="twitter:card" content="summary_large_image" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #0d0d0d;
-      --surface: #161616;
-      --border: #242424;
-      --text: #e8e2d9;
-      --muted: #7a7570;
       --accent: #c9a96e;
-      --white: #f5f0ea;
+      --accent-light: #e0c088;
+      --black: #0a0a0a;
+      --dark: #111111;
+      --darker: #0d0d0d;
+      --text: #e8e8e8;
+      --muted: #888;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      background: var(--bg);
+      background: var(--black);
       color: var(--text);
       font-family: 'Inter', sans-serif;
       font-weight: 300;
@@ -39,542 +41,297 @@
       overflow-x: hidden;
     }
 
-    /* ─── NAV ─────────────────────────────────────── */
+    /* NAV */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      padding: 1.25rem 2.5rem;
-      background: rgba(13,13,13,0.85);
+      align-items: center;
+      padding: 1.2rem 2.5rem;
+      background: rgba(10,10,10,0.95);
       backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
     }
 
     .nav-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.4rem;
-      font-weight: 300;
-      letter-spacing: 0.12em;
-      color: var(--white);
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--accent);
       text-decoration: none;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
+      letter-spacing: 0.04em;
     }
 
     .nav-links a {
       color: var(--muted);
       text-decoration: none;
-      font-size: 0.78rem;
-      letter-spacing: 0.15em;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      transition: color 0.25s;
+      margin-left: 2rem;
+      transition: color 0.2s;
     }
+    .nav-links a:hover { color: var(--text); }
 
-    .nav-links a:hover { color: var(--white); }
-
-    /* ─── HERO ────────────────────────────────────── */
-    #hero {
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-      text-align: center;
-    }
-
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background-image: url('https://iili.io/qqFKMpp.jpg');
-      background-size: cover;
-      background-position: center;
-      filter: brightness(0.22);
-      transform: scale(1.04);
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 680px;
-      padding: 0 2rem;
-    }
-
-    .hero-eyebrow {
-      font-size: 0.72rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1.25rem;
-    }
-
-    .hero-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(3.5rem, 8vw, 6.5rem);
-      font-weight: 300;
-      line-height: 1.05;
-      color: var(--white);
-      margin-bottom: 1.5rem;
-      letter-spacing: 0.02em;
-    }
-
-    .hero-sub {
-      font-size: 1rem;
-      color: var(--muted);
-      letter-spacing: 0.05em;
-      margin-bottom: 2.5rem;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 0.75rem 2.25rem;
-      border: 1px solid var(--accent);
-      color: var(--accent);
-      text-decoration: none;
-      font-size: 0.78rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      transition: background 0.25s, color 0.25s;
-    }
-
-    .btn:hover {
-      background: var(--accent);
-      color: var(--bg);
-    }
-
-    .scroll-hint {
-      position: absolute;
-      bottom: 2.5rem;
-      left: 50%;
-      transform: translateX(-50%);
+    /* HERO */
+    .hero {
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0.5rem;
-      color: var(--muted);
-      font-size: 0.65rem;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 5rem;
+      background: radial-gradient(ellipse at center top, rgba(201,169,110, 0.08) 0%, transparent 60%);
+    }
+
+    .hero-eyebrow {
+      font-size: 0.75rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      animation: bounce 2s infinite;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
     }
 
-    .scroll-hint::after {
-      content: '';
-      display: block;
-      width: 1px;
-      height: 40px;
-      background: var(--muted);
-      margin-top: 0.3rem;
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 700;
+      line-height: 1.05;
+      color: var(--text);
+      margin-bottom: 1.2rem;
     }
 
-    @keyframes bounce {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50% { transform: translateX(-50%) translateY(6px); }
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 480px;
+      margin-bottom: 1rem;
     }
 
-    /* ─── SECTION WRAPPER ─────────────────────────── */
-    section { padding: 7rem 2rem; }
+    .hero-location {
+      font-size: 0.9rem;
+      color: var(--accent);
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      padding: 0.9rem 2.8rem;
+      background: var(--accent);
+      color: #000;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .hero-cta:hover { background: var(--accent-light); transform: translateY(-2px); }
+
+    /* GALLERY */
+    .gallery-section {
+      padding: 5rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
 
     .section-label {
+      text-align: center;
       font-size: 0.7rem;
-      letter-spacing: 0.3em;
+      letter-spacing: 0.25em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 1rem;
+      margin-bottom: 3rem;
     }
 
-    .section-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.2rem, 4vw, 3.5rem);
-      font-weight: 300;
-      line-height: 1.15;
-      color: var(--white);
-      margin-bottom: 2rem;
-    }
-
-    /* ─── ABOUT ───────────────────────────────────── */
-    #about {
-      max-width: 1100px;
-      margin: 0 auto;
+    .photo-grid {
       display: grid;
-      grid-template-columns: 1fr 1.6fr;
-      gap: 5rem;
-      align-items: center;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
     }
 
-    .about-img-wrap {
-      position: relative;
-    }
-
-    .about-img-wrap::before {
-      content: '';
-      position: absolute;
-      inset: -14px 14px 14px -14px;
-      border: 1px solid var(--border);
-      z-index: 0;
-    }
-
-    .about-img {
-      position: relative;
-      z-index: 1;
-      width: 100%;
+    .photo-item {
       aspect-ratio: 1;
-      object-fit: cover;
-      display: block;
-      filter: grayscale(15%);
-    }
-
-    .about-body p {
-      color: var(--muted);
-      font-size: 1.05rem;
-      margin-bottom: 1.25rem;
-      line-height: 1.8;
-    }
-
-    .about-body p strong {
-      color: var(--text);
-      font-weight: 400;
-    }
-
-    .ig-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: var(--accent);
-      text-decoration: none;
-      font-size: 0.82rem;
-      letter-spacing: 0.12em;
-      margin-top: 0.75rem;
-      transition: opacity 0.2s;
-    }
-
-    .ig-link:hover { opacity: 0.7; }
-
-    .ig-link svg { width: 16px; height: 16px; fill: currentColor; }
-
-    /* ─── GALLERY ─────────────────────────────────── */
-    #gallery {
-      background: var(--surface);
-      padding: 7rem 2rem;
-    }
-
-    .gallery-header {
-      max-width: 1200px;
-      margin: 0 auto 3.5rem;
-    }
-
-    .masonry {
-      max-width: 1200px;
-      margin: 0 auto;
-      columns: 3;
-      column-gap: 1rem;
-    }
-
-    .masonry-item {
-      break-inside: avoid;
-      margin-bottom: 1rem;
       overflow: hidden;
-      cursor: pointer;
-      position: relative;
+      background: var(--dark);
     }
 
-    .masonry-item img {
+    .photo-item img {
       width: 100%;
-      display: block;
-      transition: transform 0.45s ease, filter 0.45s ease;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease, filter 0.3s;
       filter: brightness(0.92);
     }
-
-    .masonry-item:hover img {
+    .photo-item:hover img {
       transform: scale(1.04);
       filter: brightness(1);
     }
 
-    .masonry-item .overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(13,13,13,0);
-      transition: background 0.3s;
-      display: flex;
-      align-items: flex-end;
-      padding: 1.25rem;
+    /* CONTACT */
+    .contact-section {
+      text-align: center;
+      padding: 5rem 2rem 6rem;
+      background: var(--darker);
     }
 
-    .masonry-item:hover .overlay {
-      background: rgba(13,13,13,0.35);
+    .contact-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      margin-bottom: 1rem;
+      color: var(--text);
     }
 
-    /* ─── LIGHTBOX ────────────────────────────────── */
-    #lightbox {
-      display: none;
+    .contact-section p {
+      color: var(--muted);
+      margin-bottom: 2rem;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .contact-btn {
+      display: inline-block;
+      padding: 0.85rem 2.5rem;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    .contact-btn:hover { background: var(--accent); color: #000; }
+
+    /* FLOATING BOOK NOW */
+    .float-book {
       position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.92);
-      z-index: 999;
-      align-items: center;
-      justify-content: center;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 200;
+      background: var(--accent);
+      color: #000;
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.8rem 1.6rem;
+      border-radius: 2px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      transition: background 0.2s, transform 0.2s;
     }
+    .float-book:hover { background: var(--accent-light); transform: translateY(-2px); }
 
-    #lightbox.active { display: flex; }
-
-    #lightbox img {
-      max-width: 90vw;
-      max-height: 88vh;
-      object-fit: contain;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.5);
-    }
-
-    #lightbox-close {
-      position: absolute;
-      top: 1.5rem; right: 2rem;
-      font-size: 2rem;
-      color: var(--muted);
-      cursor: pointer;
-      background: none;
-      border: none;
-      line-height: 1;
-      transition: color 0.2s;
-    }
-
-    #lightbox-close:hover { color: var(--white); }
-
-    /* ─── CONTACT ─────────────────────────────────── */
-    #contact {
-      max-width: 680px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    #contact .section-title { margin-bottom: 1rem; }
-
-    #contact p {
-      color: var(--muted);
-      margin-bottom: 2.5rem;
-      font-size: 1rem;
-      line-height: 1.8;
-    }
-
-    .contact-links {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
-
-    /* ─── FOOTER ──────────────────────────────────── */
+    /* FOOTER */
     footer {
-      border-top: 1px solid var(--border);
-      padding: 2rem;
+      background: var(--black);
       text-align: center;
+      padding: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    footer p {
+      font-size: 0.75rem;
       color: var(--muted);
-      font-size: 0.8rem;
     }
 
-    footer span { opacity: 0.5; }
-
-    /* ─── RESPONSIVE ──────────────────────────────── */
-    @media (max-width: 900px) {
-      #about {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-        max-width: 560px;
-      }
-
-      .masonry { columns: 2; }
-
-      nav { padding: 1rem 1.5rem; }
-
-      .nav-links { gap: 1.25rem; }
+    .bws-credit {
+      opacity: 0.5;
+      font-size: 0.7rem;
+      margin-top: 0.5rem;
+      color: var(--muted);
     }
 
-    @media (max-width: 560px) {
-      .masonry { columns: 1; }
+    .bws-credit a {
+      color: var(--accent);
+      text-decoration: none;
+    }
 
-      nav { padding: 1rem; }
-
+    @media (max-width: 600px) {
+      nav { padding: 1rem 1.2rem; }
       .nav-links { display: none; }
+      .photo-grid { grid-template-columns: repeat(2, 1fr); gap: 0.4rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
   <nav>
-    <a href="#hero" class="nav-logo">Froyvargas</a>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#gallery">Gallery</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
+    <a href="#" class="nav-logo">Jonatan 'Froy' Vargas</a>
+    <div class="nav-links">
+      <a href="#gallery">Work</a>
+      <a href="#contact">Contact</a>
+      <a href="https://www.instagram.com/froyvargas/" target="_blank" rel="noopener">Instagram</a>
+    </div>
   </nav>
 
-  <!-- HERO -->
-  <section id="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-content">
-      <p class="hero-eyebrow">Fine Art &middot; Illustration &middot; Painting</p>
-      <h1 class="hero-title">Jonatan<br><em>Vargas</em></h1>
-      <p class="hero-sub">Where imagination becomes form</p>
-      <a href="#gallery" class="btn">View Gallery</a>
-    </div>
-    <div class="scroll-hint">Scroll</div>
+  <section class="hero">
+    <p class="hero-eyebrow">Tattoo Artist</p>
+    <h1>Jonatan 'Froy' Vargas</h1>
+    <p class="hero-sub">Fine Art, Illustration, Painting</p>
+    
+    <a href="https://www.instagram.com/froyvargas/" target="_blank" rel="noopener" class="hero-cta">Book a Consultation</a>
   </section>
 
-  <!-- ABOUT -->
-  <section>
-    <div id="about">
-      <div class="about-img-wrap">
-        <img
-          class="about-img"
-          src="https://iili.io/qqfAMut.jpg"
-          alt="Jonatan Vargas — Froyvargas"
-          loading="lazy"
-        />
-      </div>
-      <div class="about-body">
-        <p class="section-label">About the Artist</p>
-        <h2 class="section-title">Froy Vargas</h2>
-        <p>
-          <strong>Jonatan "Froy" Vargas</strong> is a multidisciplinary visual artist whose work explores
-          the liminal space between imagination and reality. Through painting, illustration, and fine art,
-          he builds worlds that feel simultaneously familiar and otherworldly.
-        </p>
-        <p>
-          His work channels a deep sense of narrative — each piece an invitation into a scene, a moment,
-          a feeling that outlasts the canvas. Froy's practice is driven by curiosity, craft, and an
-          unrelenting commitment to bringing the invisible to light.
-        </p>
-        <a
-          href="https://www.instagram.com/froyvargas/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="ig-link"
-        >
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
-          </svg>
-          @froyvargas
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- GALLERY -->
-  <section id="gallery">
-    <div class="gallery-header">
-      <p class="section-label">Portfolio</p>
-      <h2 class="section-title">Selected Works</h2>
-    </div>
-
-    <div class="masonry">
-
-      <div class="masonry-item" onclick="openLightbox('https://iili.io/qqFKMpp.jpg')">
-        <img src="https://iili.io/qqFKMpp.jpg" alt="Artwork by Froyvargas" loading="lazy" />
-        <div class="overlay"></div>
-      </div>
-
-      <div class="masonry-item" onclick="openLightbox('https://iili.io/qqFKWTN.jpg')">
-        <img src="https://iili.io/qqFKWTN.jpg" alt="Artwork by Froyvargas" loading="lazy" />
-        <div class="overlay"></div>
-      </div>
-
-      <div class="masonry-item" onclick="openLightbox('https://iili.io/qqFKk3G.jpg')">
-        <img src="https://iili.io/qqFKk3G.jpg" alt="Artwork by Froyvargas" loading="lazy" />
-        <div class="overlay"></div>
-      </div>
-
-      <div class="masonry-item" onclick="openLightbox('https://iili.io/qqFKiGe.jpg')">
-        <img src="https://iili.io/qqFKiGe.jpg" alt="Artwork by Froyvargas" loading="lazy" />
-        <div class="overlay"></div>
-      </div>
-
-      <div class="masonry-item" onclick="openLightbox('https://iili.io/qqFKDyQ.jpg')">
-        <img src="https://iili.io/qqFKDyQ.jpg" alt="Artwork by Froyvargas" loading="lazy" />
-        <div class="overlay"></div>
-      </div>
-
-      <div class="masonry-item" onclick="openLightbox('https://iili.io/qqFKmuV.jpg')">
-        <img src="https://iili.io/qqFKmuV.jpg" alt="Artwork by Froyvargas" loading="lazy" />
-        <div class="overlay"></div>
-      </div>
-
-      <div class="masonry-item" onclick="openLightbox('https://iili.io/qqFfd6g.jpg')">
-        <img src="https://iili.io/qqFfd6g.jpg" alt="Artwork by Froyvargas" loading="lazy" />
-        <div class="overlay"></div>
-      </div>
-
-      <div class="masonry-item" onclick="openLightbox('https://iili.io/qqFfntI.jpg')">
-        <img src="https://iili.io/qqFfntI.jpg" alt="Artwork by Froyvargas" loading="lazy" />
-        <div class="overlay"></div>
-      </div>
-
-      <div class="masonry-item" onclick="openLightbox('https://iili.io/qqFfzMX.jpg')">
-        <img src="https://iili.io/qqFfzMX.jpg" alt="Artwork by Froyvargas" loading="lazy" />
-        <div class="overlay"></div>
-      </div>
-
+  <section class="gallery-section" id="gallery">
+    <p class="section-label">Portfolio</p>
+    <div class="photo-grid">
+        <div class="photo-item">
+          <img src="img/photo_01.jpg" alt="Jonatan 'Froy' Vargas tattoo 1" loading="lazy" />
+        </div>
+        <div class="photo-item">
+          <img src="img/photo_02.jpg" alt="Jonatan 'Froy' Vargas tattoo 2" loading="lazy" />
+        </div>
+        <div class="photo-item">
+          <img src="img/photo_03.jpg" alt="Jonatan 'Froy' Vargas tattoo 3" loading="lazy" />
+        </div>
+        <div class="photo-item">
+          <img src="img/photo_04.jpg" alt="Jonatan 'Froy' Vargas tattoo 4" loading="lazy" />
+        </div>
+        <div class="photo-item">
+          <img src="img/photo_05.jpg" alt="Jonatan 'Froy' Vargas tattoo 5" loading="lazy" />
+        </div>
+        <div class="photo-item">
+          <img src="img/photo_06.jpg" alt="Jonatan 'Froy' Vargas tattoo 6" loading="lazy" />
+        </div>
+        <div class="photo-item">
+          <img src="img/photo_07.jpg" alt="Jonatan 'Froy' Vargas tattoo 7" loading="lazy" />
+        </div>
+        <div class="photo-item">
+          <img src="img/photo_08.jpg" alt="Jonatan 'Froy' Vargas tattoo 8" loading="lazy" />
+        </div>
+        <div class="photo-item">
+          <img src="img/photo_09.jpg" alt="Jonatan 'Froy' Vargas tattoo 9" loading="lazy" />
+        </div>
+        <div class="photo-item">
+          <img src="img/photo_10.jpg" alt="Jonatan 'Froy' Vargas tattoo 10" loading="lazy" />
+        </div>
+        <div class="photo-item">
+          <img src="img/photo_11.jpg" alt="Jonatan 'Froy' Vargas tattoo 11" loading="lazy" />
+        </div>
+        <div class="photo-item">
+          <img src="img/photo_12.jpg" alt="Jonatan 'Froy' Vargas tattoo 12" loading="lazy" />
+        </div>
     </div>
   </section>
 
-  <!-- CONTACT -->
-  <section>
-    <div id="contact">
-      <p class="section-label">Get in Touch</p>
-      <h2 class="section-title">Let's create<br><em>something</em></h2>
-      <p>
-        Interested in original works, commissions, or collaborations?
-        Reach out through Instagram or drop a message — Froy would love to hear from you.
-      </p>
-      <div class="contact-links">
-        <a
-          href="https://www.instagram.com/froyvargas/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="btn"
-        >Follow on Instagram</a>
-      </div>
-    </div>
+  <section class="contact-section" id="contact">
+    <h2>Let's Create Together</h2>
+    <p>Ready for a custom piece? Reach out on Instagram or book a consultation.</p>
+    <a href="https://www.instagram.com/froyvargas/" target="_blank" rel="noopener" class="contact-btn">DM on Instagram</a>
   </section>
 
-  <!-- FOOTER -->
+  <a href="https://www.instagram.com/froyvargas/" target="_blank" rel="noopener" class="float-book">Book Now</a>
+
   <footer>
-    <span>© 2024 Froyvargas &mdash; Jonatan Vargas &nbsp;|&nbsp;</span>
-    <a href="https://bayouwebstudio.com" target="_blank" style="color:inherit;text-decoration:none;opacity:0.5;font-size:12px;">Powered by BWS</a>
+    <p>© 2025 Jonatan 'Froy' Vargas — All rights reserved</p>
+    <p class="bws-credit">Site by <a href="https://bayouwebstudio.com" target="_blank">Bayou Web Studio</a></p>
   </footer>
-
-  <!-- LIGHTBOX -->
-  <div id="lightbox">
-    <button id="lightbox-close" onclick="closeLightbox()">&times;</button>
-    <img id="lightbox-img" src="" alt="Artwork" />
-  </div>
-
-  <script>
-    function openLightbox(src) {
-      document.getElementById('lightbox-img').src = src;
-      document.getElementById('lightbox').classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeLightbox() {
-      document.getElementById('lightbox').classList.remove('active');
-      document.body.style.overflow = '';
-    }
-
-    document.getElementById('lightbox').addEventListener('click', function(e) {
-      if (e.target === this) closeLightbox();
-    });
-
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') closeLightbox();
-    });
-  </script>
 
 </body>
 </html>

@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ScalpDynamics | Scalp Micropigmentation Sydney</title>
+  <meta name="description" content="Joey Kintz – Premium Scalp Micropigmentation (SMP) specialist based in Manly Beach, Sydney. Life-changing, confidence-boosting hair tattoo procedures for men and women. Book a free consultation." />
+  <meta name="keywords" content="scalp micropigmentation, SMP Sydney, hair tattoo Sydney, Manly Beach SMP, Joey Kintz, scalp dynamics, hair loss treatment Sydney" />
+  <meta property="og:title" content="ScalpDynamics | Scalp Micropigmentation Sydney" />
+  <meta property="og:description" content="Premium SMP specialist in Manly Beach, Sydney. Individually crafted hairlines and meticulously placed impressions." />
+  <meta property="og:image" content="photos/smp_01.jpg" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="canonical" href="https://bayouwebstudio.github.io/scalpdynamics/" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0a;
+      --surface: #111111;
+      --surface2: #1a1a1a;
+      --gold: #C9A84C;
+      --gold-light: #e0c070;
+      --text: #f0f0f0;
+      --text-muted: #888;
+      --radius: 8px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+    }
+
+    .nav-logo {
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      opacity: 0.18;
+    }
+
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(100%);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(10,10,10,0.6) 0%, rgba(10,10,10,0.85) 60%, var(--bg) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.8rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 6vw, 4.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      color: var(--gold);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .hero-location {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+    }
+
+    .hero-location svg { width: 14px; height: 14px; fill: var(--gold); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.9rem 2rem;
+      border-radius: var(--radius);
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      transition: all 0.25s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: #0a0a0a;
+    }
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(201,168,76,0.35);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--gold);
+      border: 1.5px solid var(--gold);
+    }
+    .btn-outline:hover {
+      background: rgba(201,168,76,0.1);
+      transform: translateY(-2px);
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 5rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .section-divider {
+      width: 48px;
+      height: 3px;
+      background: var(--gold);
+      border-radius: 2px;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .about-img {
+      border-radius: 12px;
+      overflow: hidden;
+      aspect-ratio: 4/5;
+    }
+
+    .about-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .about-text p {
+      color: var(--text-muted);
+      margin-bottom: 1.2rem;
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(201,168,76,0.2);
+    }
+
+    .stat h3 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--gold);
+    }
+
+    .stat p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin: 0;
+    }
+
+    /* ── SERVICES ── */
+    .services-section {
+      background: var(--surface);
+      border-radius: 16px;
+      padding: 4rem 3rem;
+      margin: 0 2rem;
+      max-width: 1160px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 2.5rem;
+    }
+
+    .service-card {
+      background: var(--surface2);
+      border-radius: var(--radius);
+      padding: 2rem;
+      border: 1px solid rgba(201,168,76,0.1);
+      transition: border-color 0.25s, transform 0.25s;
+    }
+
+    .service-card:hover {
+      border-color: rgba(201,168,76,0.4);
+      transform: translateY(-4px);
+    }
+
+    .service-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .service-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: var(--text);
+    }
+
+    .service-card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+
+    /* ── GALLERY ── */
+    .gallery-section { max-width: 1200px; }
+
+    .masonry-grid {
+      columns: 3;
+      column-gap: 16px;
+      margin-top: 2.5rem;
+    }
+
+    .masonry-item {
+      break-inside: avoid;
+      margin-bottom: 16px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .masonry-item img {
+      width: 100%;
+      display: block;
+      transition: transform 0.4s;
+    }
+
+    .masonry-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(201,168,76,0);
+      transition: background 0.3s;
+    }
+
+    .masonry-item:hover img { transform: scale(1.04); }
+    .masonry-item:hover::after { background: rgba(201,168,76,0.12); }
+
+    /* ── LIGHTBOX ── */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.95);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    #lightbox.active { display: flex; }
+
+    #lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: var(--radius);
+    }
+
+    #lightbox-close {
+      position: fixed;
+      top: 1.5rem;
+      right: 1.5rem;
+      width: 44px;
+      height: 44px;
+      background: rgba(255,255,255,0.1);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      font-size: 1.4rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    #lightbox-close:hover { background: rgba(255,255,255,0.2); }
+
+    /* ── BOOKING ── */
+    .booking-section {
+      text-align: center;
+      background: var(--surface);
+      border-radius: 16px;
+      padding: 5rem 3rem;
+      margin: 0 2rem;
+      max-width: 1160px;
+      border: 1px solid rgba(201,168,76,0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .booking-section::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .booking-section h2 {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    .booking-section p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 500px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+
+    .booking-ctas {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ── FLOATING BOOK NOW ── */
+    #float-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 200;
+      background: var(--gold);
+      color: #0a0a0a;
+      padding: 0.9rem 1.6rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(201,168,76,0.4);
+      transition: all 0.25s;
+      letter-spacing: 0.03em;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    #float-btn:hover {
+      background: var(--gold-light);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(201,168,76,0.5);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    footer a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    .bws-credit {
+      opacity: 0.5;
+      font-size: 0.78rem;
+      margin-top: 0.5rem;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .about-img { aspect-ratio: 16/9; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .masonry-grid { columns: 2; }
+      nav { padding: 1rem; }
+      .nav-links { gap: 1.2rem; }
+    }
+
+    @media (max-width: 600px) {
+      .services-grid { grid-template-columns: 1fr; }
+      .masonry-grid { columns: 2; }
+      .about-stats { grid-template-columns: repeat(3, 1fr); }
+      .services-section, .booking-section { margin: 0; border-radius: 0; }
+      .hero-bg { grid-template-columns: 1fr 1fr; }
+      .hero-bg img:last-child { display: none; }
+      .nav-links { display: none; }
+      #float-btn { bottom: 1rem; right: 1rem; padding: 0.75rem 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">ScalpDynamics</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#booking">Book</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg">
+    <img src="photos/smp_01.jpg" alt="SMP result" />
+    <img src="photos/smp_05.jpg" alt="SMP result" />
+    <img src="photos/smp_09.jpg" alt="SMP result" />
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Premium Hair Restoration</p>
+    <h1>ScalpDynamics</h1>
+    <p class="hero-subtitle">Scalp Micropigmentation</p>
+    <p class="hero-location">
+      <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+      Manly Beach, Sydney Australia
+    </p>
+    <div class="hero-ctas">
+      <a href="https://www.instagram.com/scalpdynamics/" target="_blank" class="btn btn-primary">
+        Book Free Consultation
+      </a>
+      <a href="#gallery" class="btn btn-outline">View Work</a>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <p class="section-label">About</p>
+  <div class="about-grid">
+    <div class="about-img">
+      <img src="photos/smp_03.jpg" alt="SMP procedure" loading="lazy" />
+    </div>
+    <div class="about-text">
+      <h2 class="section-title">Joey Kintz</h2>
+      <div class="section-divider"></div>
+      <p>
+        Based in Manly Beach, Sydney, ScalpDynamics is a specialist scalp micropigmentation studio dedicated to delivering life-changing results. Every procedure is individually crafted — from meticulously designed hairlines to perfectly placed impressions that replicate the natural look of hair follicles.
+      </p>
+      <p>
+        Whether you're dealing with hair loss, thinning, alopecia, or scars, SMP offers a permanent, low-maintenance solution that restores confidence and transforms how you see yourself. Each session is a precise, artistic process — because the devil is in the details.
+      </p>
+      <p>
+        SMP at ScalpDynamics is typically completed over 2–3 sessions, allowing the skin to settle and ensuring the most natural, long-lasting result possible.
+      </p>
+      <div class="about-stats">
+        <div class="stat">
+          <h3>3</h3>
+          <p>Session Process</p>
+        </div>
+        <div class="stat">
+          <h3>100%</h3>
+          <p>Natural Look</p>
+        </div>
+        <div class="stat">
+          <h3>∞</h3>
+          <p>Confidence</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<div style="max-width:1200px; margin:0 auto;">
+<div id="services" class="services-section">
+  <p class="section-label">What We Do</p>
+  <h2 class="section-title">SMP Services</h2>
+  <div class="section-divider"></div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">✂️</div>
+      <h3>Buzz Cut Look</h3>
+      <p>Replicate the appearance of a freshly shaved head with individually crafted impressions. Perfect for complete hair loss or those who prefer a clean, confident look.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">💇</div>
+      <h3>Density & Thinning</h3>
+      <p>Add the appearance of thickness to thinning areas. Blend seamlessly with your existing hair for a fuller, younger look without surgery.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔬</div>
+      <h3>Hairline Restoration</h3>
+      <p>Artistically designed hairlines that complement your facial structure. Individually placed micro-impressions create a natural, undetectable result.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">⭕</div>
+      <h3>Alopecia Coverage</h3>
+      <p>Specialized treatment for alopecia areata, totalis, and universalis. Restore a uniform appearance and reclaim your confidence.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🩹</div>
+      <h3>Scar Camouflage</h3>
+      <p>Conceal transplant scars, injury scars, or scalp irregularities with precise pigmentation that blends naturally into surrounding tissue.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔄</div>
+      <h3>Touch-Up & Refresh</h3>
+      <p>Maintain your SMP with periodic refresh sessions. Keep your look sharp, consistent, and vibrant for years to come.</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- GALLERY -->
+<section id="gallery" class="gallery-section">
+  <p class="section-label">Portfolio</p>
+  <h2 class="section-title">Our Work</h2>
+  <div class="section-divider"></div>
+  <div class="masonry-grid">
+    <div class="masonry-item" onclick="openLightbox('photos/smp_01.jpg')">
+      <img src="photos/smp_01.jpg" alt="SMP result 1" loading="lazy" />
+    </div>
+    <div class="masonry-item" onclick="openLightbox('photos/smp_02.jpg')">
+      <img src="photos/smp_02.jpg" alt="SMP procedure" loading="lazy" />
+    </div>
+    <div class="masonry-item" onclick="openLightbox('photos/smp_04.jpg')">
+      <img src="photos/smp_04.jpg" alt="SMP result 2" loading="lazy" />
+    </div>
+    <div class="masonry-item" onclick="openLightbox('photos/smp_05.jpg')">
+      <img src="photos/smp_05.jpg" alt="SMP before after" loading="lazy" />
+    </div>
+    <div class="masonry-item" onclick="openLightbox('photos/smp_06.jpg')">
+      <img src="photos/smp_06.jpg" alt="SMP result 3" loading="lazy" />
+    </div>
+    <div class="masonry-item" onclick="openLightbox('photos/smp_07.jpg')">
+      <img src="photos/smp_07.jpg" alt="SMP before after 2" loading="lazy" />
+    </div>
+    <div class="masonry-item" onclick="openLightbox('photos/smp_08.jpg')">
+      <img src="photos/smp_08.jpg" alt="SMP procedure 2" loading="lazy" />
+    </div>
+    <div class="masonry-item" onclick="openLightbox('photos/smp_09.jpg')">
+      <img src="photos/smp_09.jpg" alt="SMP result 4" loading="lazy" />
+    </div>
+    <div class="masonry-item" onclick="openLightbox('photos/smp_10.jpg')">
+      <img src="photos/smp_10.jpg" alt="SMP before after 3" loading="lazy" />
+    </div>
+    <div class="masonry-item" onclick="openLightbox('photos/smp_11.jpg')">
+      <img src="photos/smp_11.jpg" alt="SMP result 5" loading="lazy" />
+    </div>
+    <div class="masonry-item" onclick="openLightbox('photos/smp_12.jpg')">
+      <img src="photos/smp_12.jpg" alt="SMP result 6" loading="lazy" />
+    </div>
+    <div class="masonry-item" onclick="openLightbox('photos/smp_03.jpg')">
+      <img src="photos/smp_03.jpg" alt="SMP procedure close" loading="lazy" />
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" onclick="closeLightbox()">
+  <button id="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt="SMP work" onclick="event.stopPropagation()" />
+</div>
+
+<!-- BOOKING -->
+<div style="max-width:1200px; margin:0 auto 4rem;">
+<div id="booking" class="booking-section">
+  <p class="section-label">Get Started</p>
+  <h2>Ready to Transform?</h2>
+  <p>Book a free consultation and discover how ScalpDynamics can restore your confidence. DM on Instagram to get started — no pressure, just a conversation.</p>
+  <div class="booking-ctas">
+    <a href="https://www.instagram.com/scalpdynamics/" target="_blank" class="btn btn-primary">
+      DM on Instagram
+    </a>
+    <a href="mailto:scalpdynamics@gmail.com" class="btn btn-outline">
+      Email Us
+    </a>
+  </div>
+</div>
+</div>
+
+<!-- FLOATING BOOK NOW -->
+<a id="float-btn" href="https://www.instagram.com/scalpdynamics/" target="_blank">
+  📅 Book Now
+</a>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2025 ScalpDynamics · Manly Beach, Sydney Australia</p>
+  <p><a href="https://www.instagram.com/scalpdynamics/" target="_blank">@scalpdynamics</a> · <a href="mailto:scalpdynamics@gmail.com">scalpdynamics@gmail.com</a></p>
+  <p class="bws-credit">Website by <a href="https://bayouwebstudio.com" target="_blank">Bayou Web Studio</a></p>
+</footer>
+
+<script>
+  // Lightbox
+  function openLightbox(src) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  // Hide float btn when booking section is visible
+  const floatBtn = document.getElementById('float-btn');
+  const bookingSection = document.getElementById('booking');
+  const observer = new IntersectionObserver((entries) => {
+    floatBtn.style.opacity = entries[0].isIntersecting ? '0' : '1';
+    floatBtn.style.pointerEvents = entries[0].isIntersecting ? 'none' : 'auto';
+  }, { threshold: 0.2 });
+  observer.observe(bookingSection);
+</script>
+
+</body>
+</html>

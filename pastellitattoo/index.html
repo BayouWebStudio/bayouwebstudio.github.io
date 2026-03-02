@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pastorelli | Blackwork Mandala Tattoo Artist | Pompano Beach FL</title>
+  <meta name="description" content="Pastorelli (•MāNdâląMäKēR•) — Heavy blackwork, geometric mandala, and full body suit tattoo artist based in Pompano Beach, South Florida. Book via Instagram." />
+  <meta name="keywords" content="blackwork tattoo, mandala tattoo, geometric tattoo, full body suit, Pompano Beach tattoo artist, South Florida tattoo, Pastorelli tattoo" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Pastorelli | Blackwork Mandala Tattoo Artist | Pompano Beach FL" />
+  <meta property="og:description" content="Heavy blackwork, geometric mandala, and full body suit tattoo artist in Pompano Beach, South Florida." />
+  <meta property="og:image" content="https://bayouwebstudio.com/pastellitattoo/img/profile.jpg" />
+  <meta property="og:url" content="https://bayouwebstudio.com/pastellitattoo/" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Pastorelli | Blackwork Mandala Tattoo Artist | Pompano Beach FL" />
+  <meta name="twitter:description" content="Heavy blackwork, geometric mandala, full body suits — Pompano Beach, FL." />
+  <meta name="twitter:image" content="https://bayouwebstudio.com/pastellitattoo/img/profile.jpg" />
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Pastorelli Tattoo",
+    "alternateName": "•MāNdâląMäKēR•",
+    "description": "Heavy blackwork, geometric mandala, and full body suit tattoo artist in Pompano Beach, South Florida.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Pompano Beach",
+      "addressRegion": "FL",
+      "addressCountry": "US"
+    },
+    "sameAs": ["https://www.instagram.com/pastorelli_tattoo/"],
+    "image": "https://bayouwebstudio.com/pastellitattoo/img/profile.jpg"
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #050505;
+      --text: #e0e0e0;
+      --accent: #ffffff;
+      --border: #333;
+      --muted: #888;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.2rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(5,5,5,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #111;
+    }
+    .nav-logo {
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ===== HERO ===== */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, #0d0d0d 0%, #050505 70%);
+      z-index: 0;
+    }
+    .hero-content { position: relative; z-index: 1; }
+
+    .hero-profile {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid var(--border);
+      margin-bottom: 2.5rem;
+      filter: grayscale(20%);
+    }
+
+    .hero-name {
+      font-size: clamp(3.5rem, 12vw, 9rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: var(--accent);
+      line-height: 0.9;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(0.9rem, 2.5vw, 1.3rem);
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .hero-location {
+      font-size: 0.7rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: #555;
+      margin-bottom: 3rem;
+    }
+
+    .hero-divider {
+      width: 40px;
+      height: 1px;
+      background: var(--border);
+      margin: 0 auto;
+    }
+
+    /* ===== ABOUT ===== */
+    #about {
+      padding: 6rem 2rem;
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .section-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+    #about p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #bbb;
+    }
+    #about strong {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* ===== AFFILIATIONS ===== */
+    #affiliations {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .affil-item {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .affil-item:hover { color: var(--accent); }
+    .affil-sep {
+      color: #333;
+      font-size: 0.8rem;
+    }
+
+    /* ===== GALLERY ===== */
+    #gallery {
+      padding: 5rem 1rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    #gallery .section-label {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .masonry {
+      columns: 2;
+      column-gap: 8px;
+    }
+    @media (min-width: 600px) { .masonry { columns: 3; } }
+    @media (min-width: 900px) { .masonry { columns: 4; } }
+    @media (min-width: 1200px) { .masonry { columns: 5; } }
+
+    .masonry-item {
+      break-inside: avoid;
+      margin-bottom: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      cursor: pointer;
+    }
+    .masonry-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.4s ease, filter 0.3s ease;
+      filter: brightness(0.9);
+    }
+    .masonry-item:hover img {
+      transform: scale(1.03);
+      filter: brightness(1);
+    }
+
+    /* ===== LIGHTBOX ===== */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0,0,0,0.95);
+      align-items: center;
+      justify-content: center;
+    }
+    #lightbox.active { display: flex; }
+    #lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+      border: 1px solid #222;
+    }
+    #lightbox-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      font-size: 1.5rem;
+      color: var(--muted);
+      cursor: pointer;
+      background: none;
+      border: none;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+    #lightbox-close:hover { color: var(--accent); }
+    #lightbox-prev, #lightbox-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 2rem;
+      cursor: pointer;
+      padding: 1rem;
+      transition: color 0.2s;
+    }
+    #lightbox-prev:hover, #lightbox-next:hover { color: var(--accent); }
+    #lightbox-prev { left: 1rem; }
+    #lightbox-next { right: 1rem; }
+
+    /* ===== BOOK CTA ===== */
+    #book {
+      padding: 8rem 2rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    #book h2 {
+      font-size: clamp(2rem, 6vw, 4rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    #book p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      margin-bottom: 3rem;
+    }
+    .cta-btn {
+      display: inline-block;
+      padding: 1rem 3rem;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.7rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      transition: background 0.3s, color 0.3s;
+    }
+    .cta-btn:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    /* ===== CONTACT ===== */
+    #contact {
+      padding: 4rem 2rem 6rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    .contact-handle {
+      font-size: 1.2rem;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      display: block;
+      margin-bottom: 0.5rem;
+      transition: color 0.2s;
+    }
+    .contact-handle:hover { color: var(--accent); }
+    .contact-location {
+      font-size: 0.65rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: #555;
+    }
+
+    /* ===== FLOATING BOOK BTN ===== */
+    .float-book {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 200;
+      background: var(--accent);
+      color: var(--bg);
+      text-decoration: none;
+      padding: 0.85rem 1.6rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      font-weight: 700;
+      transition: opacity 0.2s, transform 0.2s;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.6);
+    }
+    .float-book:hover {
+      opacity: 0.85;
+      transform: translateY(-2px);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      padding: 2rem;
+      text-align: center;
+      border-top: 1px solid #111;
+    }
+    footer p {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: #3a3a3a;
+      text-transform: uppercase;
+    }
+    footer a { color: #555; text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: var(--muted); }
+
+    /* ===== RESPONSIVE NAV ===== */
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#hero">Pastorelli</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#book">Book</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-content">
+      <img class="hero-profile" src="img/profile.jpg" alt="Pastorelli — Blackwork Mandala Tattoo Artist" />
+      <h1 class="hero-name">Pastorelli</h1>
+      <p class="hero-subtitle">•MāNdâląMäKēR•</p>
+      <p class="hero-location">Pompano Beach &nbsp;·&nbsp; South Florida</p>
+      <div class="hero-divider"></div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <p class="section-label">About</p>
+    <p>
+      <strong>Mandala maker and blackwork specialist.</strong> Based in Pompano Beach, South Florida,
+      Pastorelli creates heavy blackwork, geometric mandala, ornamental, and full body suit tattoos
+      that push the limits of what ink on skin can become. Large-scale coverage. Dark and bold.
+      Every piece a commitment.
+    </p>
+    <br />
+    <p>
+      Member of <strong>@atramentumtattoosociety</strong>. Working with
+      <strong>@hustlebutterdeluxe</strong> and <strong>@radiantcolorsink</strong> inks.
+      44 posts — every single one a masterpiece.
+    </p>
+  </section>
+
+  <!-- AFFILIATIONS -->
+  <div id="affiliations">
+    <a class="affil-item" href="https://www.instagram.com/atramentumtattoosociety/" target="_blank" rel="noopener">@atramentumtattoosociety</a>
+    <span class="affil-sep">|</span>
+    <a class="affil-item" href="https://www.instagram.com/hustlebutterdeluxe/" target="_blank" rel="noopener">@hustlebutterdeluxe</a>
+    <span class="affil-sep">|</span>
+    <a class="affil-item" href="https://www.instagram.com/radiantcolorsink/" target="_blank" rel="noopener">@radiantcolorsink</a>
+  </div>
+
+  <!-- GALLERY -->
+  <section id="gallery">
+    <p class="section-label">Gallery</p>
+    <div class="masonry" id="masonry-grid">
+      <!-- JS will populate this -->
+    </div>
+  </section>
+
+  <!-- BOOK CTA -->
+  <section id="book">
+    <h2>Ready for your<br/>transformation?</h2>
+    <p>DM on Instagram to start the conversation.</p>
+    <a class="cta-btn" href="https://www.instagram.com/pastorelli_tattoo/" target="_blank" rel="noopener">Book via Instagram</a>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="section-label">Contact</p>
+    <a class="contact-handle" href="https://www.instagram.com/pastorelli_tattoo/" target="_blank" rel="noopener">@pastorelli_tattoo</a>
+    <p class="contact-location">Pompano Beach, FL &nbsp;·&nbsp; South Florida</p>
+  </section>
+
+  <!-- FLOATING BOOK -->
+  <a class="float-book" href="https://www.instagram.com/pastorelli_tattoo/" target="_blank" rel="noopener">Book Now</a>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Site by <a href="https://bayouwebstudio.com" target="_blank" rel="noopener">Bayou Web Studio</a></p>
+  </footer>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" role="dialog" aria-label="Image lightbox">
+    <button id="lightbox-close" aria-label="Close">&times;</button>
+    <button id="lightbox-prev" aria-label="Previous">&#8592;</button>
+    <img id="lightbox-img" src="" alt="Tattoo by Pastorelli" />
+    <button id="lightbox-next" aria-label="Next">&#8594;</button>
+  </div>
+
+  <script>
+    // Gallery images (exclude profile)
+    const galleryImages = [
+      'post_00.jpg','post_01_0.jpg','post_01_1.jpg','post_02_0.jpg','post_02_1.jpg',
+      'post_03_0.jpg','post_03_1.jpg','post_04_0.jpg','post_04_1.jpg','post_05.jpg',
+      'post_06_0.jpg','post_06_1.jpg','post_07.jpg','post_08_0.jpg','post_08_1.jpg',
+      'post_09_0.jpg','post_09_1.jpg','post_10.jpg','post_11.jpg'
+    ];
+
+    const grid = document.getElementById('masonry-grid');
+    let currentIndex = 0;
+
+    galleryImages.forEach((src, i) => {
+      const item = document.createElement('div');
+      item.className = 'masonry-item';
+      const img = document.createElement('img');
+      img.src = `img/${src}`;
+      img.alt = `Blackwork tattoo by Pastorelli — piece ${i + 1}`;
+      img.loading = 'lazy';
+      img.addEventListener('click', () => openLightbox(i));
+      item.appendChild(img);
+      grid.appendChild(item);
+    });
+
+    // Lightbox
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-img');
+
+    function openLightbox(i) {
+      currentIndex = i;
+      lbImg.src = `img/${galleryImages[i]}`;
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function nextImg() {
+      currentIndex = (currentIndex + 1) % galleryImages.length;
+      lbImg.src = `img/${galleryImages[currentIndex]}`;
+    }
+
+    function prevImg() {
+      currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+      lbImg.src = `img/${galleryImages[currentIndex]}`;
+    }
+
+    document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+    document.getElementById('lightbox-next').addEventListener('click', nextImg);
+    document.getElementById('lightbox-prev').addEventListener('click', prevImg);
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') nextImg();
+      if (e.key === 'ArrowLeft') prevImg();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Changes - {{ARTIST_NAME}}</title>
+    <meta name="description" content="Request changes to your {{ARTIST_NAME}} website. Fast turnaround, usually within 24 hours.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html" style="text-decoration: none;">
+                    <span class="logo-text">{{ARTIST_NAME}}</span>
+                </a>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="index.html#gallery" class="nav-link">Gallery</a>
+                <a href="shop.html" class="nav-link">Shop</a>
+                <a href="stats.html" class="nav-link">Analytics</a>
+                <a href="{{BOOKING_LINK}}" class="nav-link cta-nav" target="_blank">{{BOOKING_TEXT}}</a>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Changes Hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content" style="grid-template-columns: 1fr; text-align: center; max-width: 800px; margin: 0 auto;">
+                <div class="hero-text">
+                    <h1 class="hero-title">Request Changes</h1>
+                    <p class="hero-subtitle">Need something updated on your site? We've got you covered.</p>
+                    <p class="hero-bio">Most changes are live within 24 hours. For urgent requests, please call or text directly.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Actions -->
+    <section class="quick-actions">
+        <div class="container">
+            <div class="section-header">
+                <h2>Quick Actions</h2>
+                <p>Common requests you can handle yourself</p>
+            </div>
+            <div class="actions-grid">
+                <div class="action-card" id="toggleBooks">
+                    <div class="action-icon">📖</div>
+                    <h3>Toggle Books Status</h3>
+                    <p>Switch between "Books Open" and "Books Closed"</p>
+                    <button class="btn btn-outline" onclick="toggleBooksStatus()">
+                        <span id="booksToggleText">Close Books</span>
+                    </button>
+                </div>
+                <div class="action-card">
+                    <div class="action-icon">📱</div>
+                    <h3>Emergency Contact</h3>
+                    <p>For urgent changes or technical issues</p>
+                    <a href="tel:{{ARTIST_PHONE}}" class="btn btn-outline">Call Now</a>
+                </div>
+                <div class="action-card">
+                    <div class="action-icon">💬</div>
+                    <h3>Quick Text</h3>
+                    <p>Text us for same-day updates</p>
+                    <a href="sms:{{ARTIST_PHONE}}?body=Hi, I need to update my website:" class="btn btn-outline">Text Us</a>
+                </div>
+                <div class="action-card">
+                    <div class="action-icon">📧</div>
+                    <h3>Email Update</h3>
+                    <p>For non-urgent changes and additions</p>
+                    <a href="mailto:bayouwebstudio@gmail.com?subject=Website Changes - {{ARTIST_NAME}}" class="btn btn-outline">Send Email</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Change Request Form -->
+    <section class="change-form-section">
+        <div class="container">
+            <div class="form-content">
+                <div class="form-info">
+                    <h2>Submit a Change Request</h2>
+                    <p>Fill out the form below and we'll get your changes live ASAP.</p>
+                    
+                    <div class="turnaround-info">
+                        <h3>⏱️ Typical Turnaround Times</h3>
+                        <ul>
+                            <li><strong>Text/Phone Updates:</strong> 2-4 hours</li>
+                            <li><strong>Image Changes:</strong> 4-8 hours</li>
+                            <li><strong>New Sections:</strong> 24-48 hours</li>
+                            <li><strong>Major Redesigns:</strong> 2-5 days</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="contact-info">
+                        <h3>📞 Need It Faster?</h3>
+                        <p><strong>Phone:</strong> {{ARTIST_PHONE}}</p>
+                        <p><strong>Text:</strong> {{ARTIST_PHONE}}</p>
+                        <p><strong>Email:</strong> bayouwebstudio@gmail.com</p>
+                    </div>
+                </div>
+                
+                <div class="change-form">
+                    <form action="https://formsubmit.co/bayouwebstudio@gmail.com" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="_subject" value="Website Change Request - {{ARTIST_NAME}}">
+                        <input type="hidden" name="_next" value="{{SITE_URL}}/changes-submitted.html">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="website" value="{{SITE_URL}}">
+                        <input type="hidden" name="artist_name" value="{{ARTIST_NAME}}">
+                        
+                        <div class="form-group">
+                            <label for="change_type">Type of Change *</label>
+                            <select name="change_type" id="change_type" required>
+                                <option value="">Select change type...</option>
+                                <option value="text">Text/Content Update</option>
+                                <option value="images">Image Changes</option>
+                                <option value="prices">Price Updates</option>
+                                <option value="hours">Hours/Availability</option>
+                                <option value="contact">Contact Info</option>
+                                <option value="new_section">Add New Section</option>
+                                <option value="design">Design/Layout Change</option>
+                                <option value="bug">Bug Fix/Technical Issue</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="urgency">Urgency Level *</label>
+                            <select name="urgency" id="urgency" required>
+                                <option value="">How urgent is this?</option>
+                                <option value="low">Low - Within a week is fine</option>
+                                <option value="medium">Medium - Within 2-3 days</option>
+                                <option value="high">High - Within 24 hours</option>
+                                <option value="urgent">Urgent - ASAP (will call/text)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="description">Detailed Description *</label>
+                            <textarea name="description" id="description" rows="6" placeholder="Please describe exactly what you want changed. Be as specific as possible. Include page names, section names, current text vs. new text, etc." required></textarea>
+                            <small>Be specific! "Change my bio" vs "Update the About section bio from 'I've been tattooing for 5 years' to 'I've been tattooing for 6 years'"</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="current_content">Current Content (if applicable)</label>
+                            <textarea name="current_content" id="current_content" rows="3" placeholder="Copy/paste the current text you want to replace"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="new_content">New Content</label>
+                            <textarea name="new_content" id="new_content" rows="3" placeholder="Type the exact new text you want, or describe the new images/layout you need"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="files">Attach Files (if needed)</label>
+                            <input type="file" name="files" id="files" multiple accept="image/*,.pdf,.doc,.docx">
+                            <small>Upload images, documents, or references. Max 10MB per file.</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contact_method">Preferred Contact Method *</label>
+                            <select name="contact_method" id="contact_method" required>
+                                <option value="">How should we update you?</option>
+                                <option value="email">Email</option>
+                                <option value="text">Text Message</option>
+                                <option value="phone">Phone Call</option>
+                                <option value="no_contact">No update needed, just do it</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" name="phone" id="phone" placeholder="For text/call updates">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" name="email" id="email" placeholder="For email updates">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="additional_notes">Additional Notes</label>
+                            <textarea name="additional_notes" id="additional_notes" rows="3" placeholder="Anything else we should know?"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Change Request</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Change Examples -->
+    <section class="examples">
+        <div class="container">
+            <div class="section-header">
+                <h2>Example Requests</h2>
+                <p>Here's how to write good change requests</p>
+            </div>
+            <div class="examples-grid">
+                <div class="example-card good">
+                    <div class="example-header">
+                        <div class="example-icon good">✅</div>
+                        <h3>Good Request</h3>
+                    </div>
+                    <div class="example-content">
+                        <p><strong>Type:</strong> Text Update</p>
+                        <p><strong>Description:</strong> "On the About section of the homepage, please change 'I've been tattooing for 5 years' to 'I've been tattooing for 6 years'"</p>
+                        <p><strong>Why it's good:</strong> Specific location, exact current text, exact new text.</p>
+                    </div>
+                </div>
+                
+                <div class="example-card bad">
+                    <div class="example-header">
+                        <div class="example-icon bad">❌</div>
+                        <h3>Unclear Request</h3>
+                    </div>
+                    <div class="example-content">
+                        <p><strong>Type:</strong> Text Update</p>
+                        <p><strong>Description:</strong> "Update my bio"</p>
+                        <p><strong>Why it's unclear:</strong> Which bio? What page? Change to what?</p>
+                    </div>
+                </div>
+                
+                <div class="example-card good">
+                    <div class="example-header">
+                        <div class="example-icon good">✅</div>
+                        <h3>Good Request</h3>
+                    </div>
+                    <div class="example-content">
+                        <p><strong>Type:</strong> Image Change</p>
+                        <p><strong>Description:</strong> "Replace the 3rd image in the gallery (the rose tattoo) with the attached dragon piece. Title should be 'Dragon Back Piece - Fresh'"</p>
+                        <p><strong>Why it's good:</strong> Specific location, clear replacement, includes new image and title.</p>
+                    </div>
+                </div>
+                
+                <div class="example-card good">
+                    <div class="example-header">
+                        <div class="example-icon good">✅</div>
+                        <h3>Good Request</h3>
+                    </div>
+                    <div class="example-content">
+                        <p><strong>Type:</strong> Price Update</p>
+                        <p><strong>Description:</strong> "In the Services section, change 'Small tattoos: $120 minimum' to 'Small tattoos: $150 minimum'"</p>
+                        <p><strong>Why it's good:</strong> Exact section, exact current pricing, exact new pricing.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>{{ARTIST_NAME}}</h3>
+                    <p>{{ARTIST_TAGLINE}}</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Client Portal</h4>
+                        <a href="stats.html">Analytics</a>
+                        <a href="shop.html">Shop</a>
+                        <a href="changes.html">Request Changes</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Support</h4>
+                        <a href="tel:{{ARTIST_PHONE}}">Call Us</a>
+                        <a href="mailto:bayouwebstudio@gmail.com">Email Support</a>
+                        <a href="https://bayouwebstudio.com" target="_blank">BWS Main Site</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; {{CURRENT_YEAR}} {{ARTIST_NAME}}. All rights reserved.</p>
+                <p class="footer-credit">Website by <a href="https://bayouwebstudio.com" target="_blank" style="opacity: 0.5;">Bayou Web Studios</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Update toggle button text based on current books status
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedStatus = localStorage.getItem('booksStatus');
+            const toggleText = document.getElementById('booksToggleText');
+            
+            if (savedStatus === 'closed') {
+                toggleText.textContent = 'Open Books';
+            } else {
+                toggleText.textContent = 'Close Books';
+            }
+        });
+        
+        // Update toggle button text after toggling
+        function toggleBooksStatus() {
+            const banner = document.getElementById('booksStatusBanner');
+            const toggleText = document.getElementById('booksToggleText');
+            const wasOpen = banner?.classList.contains('books-open');
+            
+            if (wasOpen) {
+                toggleText.textContent = 'Open Books';
+            } else {
+                toggleText.textContent = 'Close Books';
+            }
+            
+            // Show confirmation
+            const confirmation = document.createElement('div');
+            confirmation.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: var(--success);
+                color: white;
+                padding: 16px 24px;
+                border-radius: 8px;
+                z-index: 10000;
+                font-weight: 600;
+                box-shadow: var(--shadow);
+            `;
+            confirmation.textContent = wasOpen ? 'Books status set to CLOSED' : 'Books status set to OPEN';
+            
+            document.body.appendChild(confirmation);
+            
+            setTimeout(() => {
+                confirmation.remove();
+            }, 3000);
+        }
+        
+        // Form enhancements
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('form');
+            const changeType = document.getElementById('change_type');
+            const urgency = document.getElementById('urgency');
+            const description = document.getElementById('description');
+            
+            // Auto-populate description based on change type
+            changeType.addEventListener('change', function() {
+                const placeholders = {
+                    'text': 'Please specify which page and section needs updating, what the current text says, and what it should say instead.',
+                    'images': 'Please specify which image to replace, on which page, and upload the new image. Include any caption or title changes.',
+                    'prices': 'Please specify which service prices to update, current prices, and new prices.',
+                    'hours': 'Please provide your new hours of operation or availability schedule.',
+                    'contact': 'Please specify what contact information needs to be updated (phone, email, address, etc.).',
+                    'new_section': 'Please describe the new section you want added, which page it should go on, and what content it should include.',
+                    'design': 'Please describe what design or layout changes you want made and on which pages.',
+                    'bug': 'Please describe the technical issue you\'re experiencing, which page it\'s on, and what browser you\'re using.'
+                };
+                
+                if (placeholders[this.value]) {
+                    description.placeholder = placeholders[this.value];
+                }
+            });
+            
+            // Warning for urgent requests
+            urgency.addEventListener('change', function() {
+                if (this.value === 'urgent') {
+                    alert('For urgent requests, please also call or text us directly at ' + '{{ARTIST_PHONE}}' + ' to ensure we see your request immediately.');
+                }
+            });
+            
+            // File size validation
+            document.getElementById('files').addEventListener('change', function() {
+                const files = this.files;
+                const maxSize = 10 * 1024 * 1024; // 10MB
+                
+                for (let i = 0; i < files.length; i++) {
+                    if (files[i].size > maxSize) {
+                        alert(`File "${files[i].name}" is too large. Maximum size is 10MB.`);
+                        this.value = '';
+                        break;
+                    }
+                }
+            });
+        });
+    </script>
+    
+    <style>
+        /* Changes page specific styles */
+        .quick-actions {
+            padding: 60px 0;
+            background: var(--bg-secondary);
+        }
+        
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+        }
+        
+        .action-card {
+            background: var(--card-bg);
+            padding: 32px 24px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .action-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow);
+        }
+        
+        .action-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+        
+        .action-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .action-card p {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        .change-form-section {
+            padding: 80px 0;
+        }
+        
+        .form-content {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 64px;
+            align-items: start;
+        }
+        
+        .form-info h2 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        
+        .form-info > p {
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            font-size: 18px;
+        }
+        
+        .turnaround-info,
+        .contact-info {
+            background: var(--card-bg);
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            margin-bottom: 24px;
+        }
+        
+        .turnaround-info h3,
+        .contact-info h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--primary);
+        }
+        
+        .turnaround-info ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .turnaround-info li {
+            padding: 4px 0;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+        
+        .contact-info p {
+            color: var(--text-muted);
+            margin-bottom: 4px;
+            font-size: 14px;
+        }
+        
+        .change-form {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+        
+        .form-group {
+            margin-bottom: 24px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 16px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-family: inherit;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .form-group small {
+            display: block;
+            color: var(--text-muted);
+            font-size: 12px;
+            margin-top: 4px;
+        }
+        
+        .examples {
+            padding: 80px 0;
+            background: var(--bg-secondary);
+        }
+        
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+        
+        .example-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+        
+        .example-card.good {
+            border-color: var(--success);
+        }
+        
+        .example-card.bad {
+            border-color: var(--error);
+        }
+        
+        .example-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 20px 24px;
+            background: var(--bg-secondary);
+        }
+        
+        .example-icon {
+            font-size: 20px;
+        }
+        
+        .example-icon.good {
+            color: var(--success);
+        }
+        
+        .example-icon.bad {
+            color: var(--error);
+        }
+        
+        .example-header h3 {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .example-content {
+            padding: 24px;
+        }
+        
+        .example-content p {
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+        
+        .example-content strong {
+            color: var(--text);
+        }
+        
+        @media (max-width: 768px) {
+            .actions-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .change-form {
+                padding: 24px;
+            }
+            
+            .examples-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</body>
+</html>

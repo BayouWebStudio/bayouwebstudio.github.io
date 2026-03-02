@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Starter Plan — $25/mo | Bayou Web Studios</title>
+  <meta name="description" content="Everything you need to get found on Google. Custom domain, professional website, SEO, gallery, booking integration — starting at $25/mo. No setup fee.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='16' fill='%230a0a0a'/><text y='.9em' font-size='72' x='10' fill='%23c9a84c'>B</text></svg>">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0a0a; --bg2: #111111; --bg3: #1a1a1a;
+      --gold: #c9a84c; --accent: #2ecc71; --white: #ffffff; --gray: #a0a0a0;
+      --radius: 12px;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--white); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+    .back-bar { padding: 20px 24px; }
+    .back-link { color: var(--gray); font-size: 0.875rem; transition: color 0.2s; }
+    .back-link:hover { color: var(--white); }
+    .hero { padding: 60px 24px 80px; text-align: center; }
+    .tier-badge { display: inline-block; background: var(--accent); color: #000; font-size: 0.75rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; padding: 6px 18px; border-radius: 100px; margin-bottom: 24px; }
+    .hero h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 900; letter-spacing: -0.03em; line-height: 1.05; }
+    .hero h1 .price { color: var(--accent); }
+    .hero .tagline { font-size: 1.15rem; color: var(--gray); margin: 16px auto 36px; max-width: 520px; }
+    .btn-primary { display: inline-block; background: var(--accent); color: #000; font-weight: 800; font-size: 1.05rem; padding: 18px 40px; border-radius: 10px; transition: transform 0.2s, opacity 0.2s; }
+    .btn-primary:hover { transform: translateY(-2px); opacity: 0.9; }
+    .no-setup { font-size: 0.8rem; color: var(--gray); margin-top: 12px; }
+    section { padding: 64px 0; }
+    section:nth-child(even) { background: var(--bg2); }
+    .section-label { font-size: 0.75rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    .section-title { font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 900; letter-spacing: -0.02em; margin-bottom: 8px; }
+    .section-sub { color: var(--gray); margin-bottom: 40px; }
+    .checklist { list-style: none; display: grid; gap: 4px; }
+    .checklist li { display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; background: var(--bg3); border-radius: 8px; font-size: 0.95rem; }
+    .checklist li .icon { flex-shrink: 0; }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+    .card { background: var(--bg3); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); padding: 28px 24px; transition: transform 0.2s, border-color 0.2s; }
+    .card:hover { transform: translateY(-4px); border-color: var(--accent); }
+    .card-name { font-weight: 800; font-size: 1.05rem; margin-bottom: 6px; }
+    .card-url { font-size: 0.8rem; color: var(--gray); margin-bottom: 16px; }
+    .card-link { font-size: 0.85rem; font-weight: 700; color: var(--accent); }
+    .card-link:hover { text-decoration: underline; }
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px; }
+    .step { text-align: center; }
+    .step-num { width: 52px; height: 52px; border-radius: 50%; background: var(--accent); color: #000; font-weight: 900; font-size: 1.3rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+    .step-title { font-weight: 800; font-size: 1.05rem; margin-bottom: 8px; }
+    .step-desc { font-size: 0.875rem; color: var(--gray); }
+    .faq { display: grid; gap: 16px; }
+    .faq-item { background: var(--bg3); border-radius: var(--radius); padding: 24px; border-left: 3px solid var(--accent); }
+    .faq-q { font-weight: 700; font-size: 0.95rem; margin-bottom: 10px; }
+    .faq-a { font-size: 0.875rem; color: var(--gray); line-height: 1.7; }
+    .final-cta { text-align: center; padding: 80px 24px; }
+    .final-cta h2 { font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 900; letter-spacing: -0.02em; margin-bottom: 16px; }
+    .final-cta p { color: var(--gray); margin-bottom: 36px; }
+    .btn-final { display: inline-block; background: var(--accent); color: #000; font-weight: 800; font-size: 1.1rem; padding: 20px 48px; border-radius: 10px; transition: transform 0.2s, opacity 0.2s; }
+    .btn-final:hover { transform: translateY(-2px); opacity: 0.9; }
+    footer { background: #000; padding: 32px 24px; text-align: center; font-size: 0.8rem; color: var(--gray); border-top: 1px solid rgba(255,255,255,0.06); }
+    footer a { color: var(--gold); }
+    footer a:hover { text-decoration: underline; }
+    .lang-toggle {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      z-index: 999;
+      transition: .2s;
+    }
+    .lang-toggle:hover { background: rgba(255,255,255,0.2); }
+  </style>
+</head>
+<body>
+
+  <button class="lang-toggle" onclick="toggleLang()">🌐 ES</button>
+
+  <div class="back-bar container">
+    <a class="back-link" href="https://bayouwebstudio.com">← Back to bayouwebstudio.com</a>
+  </div>
+
+  <div class="hero">
+    <div class="tier-badge">Starter Plan</div>
+    <h1>$<span class="price">25</span>/mo</h1>
+    <p class="tagline" data-en="Everything you need to get found on Google." data-es="Todo lo que necesitas para aparecer en Google.">Everything you need to get found on Google.</p>
+    <a class="btn-primary" href="https://buy.stripe.com/6oU00j8TIfbn6hW34L3Je06" target="_blank" rel="noopener" data-en="Start Free — No Setup Fee" data-es="Empieza Gratis — Sin Costo de Configuración">Start Free — No Setup Fee</a>
+    <p class="no-setup" data-en="No contracts. Cancel anytime." data-es="Sin contratos. Cancela cuando quieras.">No contracts. Cancel anytime.</p>
+  </div>
+
+  <section>
+    <div class="container">
+      <div class="section-label" data-en="What You Get" data-es="Lo Que Incluye">What You Get</div>
+      <h2 class="section-title" data-en="Everything's Included" data-es="¿Qué Incluye?">Everything's Included</h2>
+      <p class="section-sub" data-en="One flat monthly price covers everything below. Nothing hidden." data-es="Un precio mensual fijo cubre todo lo de abajo. Sin costos ocultos.">One flat monthly price covers everything below. Nothing hidden.</p>
+      <ul class="checklist">
+        <li><span class="icon">✅</span> <span data-en="Custom .com Domain (we buy it for you)" data-es="Dominio .com personalizado (lo compramos nosotros)">Custom .com Domain (we buy it for you)</span></li>
+        <li><span class="icon">✅</span> <span data-en="Professional Website Design" data-es="Diseño de sitio web profesional">Professional Website Design</span></li>
+        <li><span class="icon">✅</span> <span data-en="Google Ranking &amp; SEO Optimization" data-es="Posicionamiento en Google y optimización SEO">Google Ranking &amp; SEO Optimization</span></li>
+        <li><span class="icon">✅</span> <span data-en="Mobile-First, Fast-Loading Site" data-es="Sitio móvil, de carga rápida">Mobile-First, Fast-Loading Site</span></li>
+        <li><span class="icon">✅</span> <span data-en="Gallery with Lightbox" data-es="Galería con Lightbox">Gallery with Lightbox</span></li>
+        <li><span class="icon">✅</span> <span data-en="Booking Link Integration" data-es="Integración de enlace de reservas">Booking Link Integration</span></li>
+        <li><span class="icon">✅</span> <span data-en="Google Maps Integration" data-es="Integración con Google Maps">Google Maps Integration</span></li>
+        <li><span class="icon">✅</span> <span data-en="Unlimited Change Requests" data-es="Solicitudes de cambios ilimitadas">Unlimited Change Requests</span></li>
+        <li><span class="icon">✅</span> <span data-en="SSL Certificate (HTTPS)" data-es="Certificado SSL (HTTPS)">SSL Certificate (HTTPS)</span></li>
+        <li><span class="icon">✅</span> <span data-en="Professional Hosting" data-es="Hosting profesional">Professional Hosting</span></li>
+        <li><span class="icon">✅</span> <span data-en="Email Support" data-es="Soporte por correo electrónico">Email Support</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-label" data-en="Real Client Sites" data-es="Sitios Reales de Clientes">Real Client Sites</div>
+      <h2 class="section-title" data-en="See What We Build" data-es="Sitios que Hemos Construido">See What We Build</h2>
+      <p class="section-sub" data-en="These are real sites — built for real artists, just like you." data-es="Estos son sitios reales — construidos para artistas reales, como tú.">These are real sites — built for real artists, just like you.</p>
+      <div class="cards">
+        <div class="card">
+          <div class="card-name">Tatsu Ink</div>
+          <div class="card-url">tatsuink.com</div>
+          <a class="card-link" href="https://tatsuink.com" target="_blank" rel="noopener" data-en="View Live →" data-es="Ver en Vivo →">View Live →</a>
+        </div>
+        <div class="card">
+          <div class="card-name">Alan Gutiérrez</div>
+          <div class="card-url">guccierrezz.com</div>
+          <a class="card-link" href="https://guccierrezz.com" target="_blank" rel="noopener" data-en="View Live →" data-es="Ver en Vivo →">View Live →</a>
+        </div>
+        <div class="card">
+          <div class="card-name">Julia Claire</div>
+          <div class="card-url">jujubrilliart.com</div>
+          <a class="card-link" href="https://jujubrilliart.com" target="_blank" rel="noopener" data-en="View Live →" data-es="Ver en Vivo →">View Live →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-label" data-en="The Process" data-es="El Proceso">The Process</div>
+      <h2 class="section-title" data-en="How It Works" data-es="¿Cómo Funciona?">How It Works</h2>
+      <p class="section-sub" data-en="Three steps. Usually live within 1 hour." data-es="Tres pasos. Generalmente en línea en 24 horas.">Three steps. Usually live within 1 hour.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-title" data-en="Send Your IG" data-es="Envíanos tu Instagram">Send Your IG</div>
+          <div class="step-desc" data-en="Sign up and drop us your Instagram handle. That's literally it." data-es="Tomamos tus fotos y construimos tu sitio.">Sign up and drop us your Instagram handle. That's literally it.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-title" data-en="We Build It" data-es="¿Te gusta? $25/mes">We Build It</div>
+          <div class="step-desc" data-en="We pull your photos, write your copy, set up your domain, and build your site." data-es="Sin contratos, cancela cuando quieras.">We pull your photos, write your copy, set up your domain, and build your site.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-title" data-en="You're Live" data-es="Nosotros manejamos todo">You're Live</div>
+          <div class="step-desc" data-en="You approve, we flip the switch. Your site is live and ranking on Google." data-es="Dominio, hosting, SEO, actualizaciones.">You approve, we flip the switch. Your site is live and ranking on Google.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title" data-en="Common Questions" data-es="Preguntas Frecuentes">Common Questions</h2>
+      <p class="section-sub" data-en="If you don't see your question, email us." data-es="Si no ves tu pregunta, escríbenos.">If you don't see your question, email us.</p>
+      <div class="faq">
+        <div class="faq-item">
+          <div class="faq-q" data-en="What's the difference between Starter and Pro?" data-es="¿Cuál es la diferencia entre Starter y Pro?">What's the difference between Starter and Pro?</div>
+          <div class="faq-a" data-en="Pro adds an analytics dashboard so you can see your traffic, store integration (Shopify, Etsy, etc.), and priority support with faster response times." data-es="Pro agrega un panel de análisis para ver tu tráfico, integración de tienda (Shopify, Etsy, etc.) y soporte prioritario con tiempos de respuesta más rápidos.">Pro adds an analytics dashboard so you can see your traffic, store integration (Shopify, Etsy, etc.), and priority support with faster response times.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" data-en="Do you really buy the domain for me?" data-es="¿Realmente compran el dominio por mí?">Do you really buy the domain for me?</div>
+          <div class="faq-a" data-en="Yes — included in the $25/mo. We register it, point it to your site, handle everything. You don't touch a single DNS record." data-es="Sí — incluido en los $25/mes. Lo registramos, lo apuntamos a tu sitio, manejamos todo. No tienes que tocar ningún registro DNS.">Yes — included in the $25/mo. We register it, point it to your site, handle everything. You don't touch a single DNS record.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" data-en="How fast will my site be live?" data-es="¿Qué tan rápido estará mi sitio en línea?">How fast will my site be live?</div>
+          <div class="faq-a" data-en="Usually within 1 hour of signing up. Send us your IG, we build, you approve, we go live." data-es="Generalmente dentro de 24 horas de registrarte. Envíanos tu IG, construimos, tú apruebas, salimos en vivo.">Usually within 1 hour of signing up. Send us your IG, we build, you approve, we go live.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" data-en="Can I cancel anytime?" data-es="¿Puedo cancelar en cualquier momento?">Can I cancel anytime?</div>
+          <div class="faq-a" data-en="Yes. No contracts, no cancellation fees. Cancel anytime — just email us." data-es="Sí. Sin contratos, sin cargos por cancelación. Cancela cuando quieras — solo escríbenos.">Yes. No contracts, no cancellation fees. Cancel anytime — just email us.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" data-en="What if I already have a domain?" data-es="¿Qué pasa si ya tengo un dominio?">What if I already have a domain?</div>
+          <div class="faq-a" data-en="No problem. We can use your existing domain. Just let us know when you sign up." data-es="Sin problema. Podemos usar tu dominio existente. Solo avísanos cuando te registres.">No problem. We can use your existing domain. Just let us know when you sign up.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="final-cta">
+    <h2 data-en="Ready to get found on Google?" data-es="¿Listo para que te encuentren en Google?">Ready to get found on Google?</h2>
+    <p data-en="$25/mo. No setup fee. Cancel anytime." data-es="$25/mes. Sin costo de configuración. Cancela cuando quieras.">$25/mo. No setup fee. Cancel anytime.</p>
+    <a class="btn-final" href="https://buy.stripe.com/6oU00j8TIfbn6hW34L3Je06" target="_blank" rel="noopener" data-en="Start Free — No Setup Fee" data-es="Empieza Gratis — Sin Costo de Configuración">Start Free — No Setup Fee</a>
+  </div>
+
+  <footer>
+    <p><span data-en="Bayou Web Studios | " data-es="Bayou Web Studios | Houston, TX | ">Bayou Web Studios | </span><a href="mailto:support@bayouwebstudio.com">support@bayouwebstudio.com</a> | <a href="https://bayouwebstudio.com">bayouwebstudio.com</a></p>
+  </footer>
+
+  <script>
+    let currentLang = localStorage.getItem('bws_lang') || 'en';
+    function toggleLang() {
+      currentLang = currentLang === 'en' ? 'es' : 'en';
+      localStorage.setItem('bws_lang', currentLang);
+      document.querySelectorAll('[data-en]').forEach(el => {
+        el.textContent = currentLang === 'es' ? el.dataset.es : el.dataset.en;
+      });
+      document.querySelector('.lang-toggle').textContent = currentLang === 'en' ? '🌐 ES' : '🌐 EN';
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      if (currentLang === 'es') {
+        document.querySelectorAll('[data-en]').forEach(el => {
+          el.textContent = el.dataset.es;
+        });
+        document.querySelector('.lang-toggle').textContent = '🌐 EN';
+      }
+    });
+  </script>
+
+</body>
+</html>

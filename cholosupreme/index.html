@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cholo Supreme | Adam Medina | Award Winning Tattoo Artist | Fort Knox KY</title>
+  <meta name="description" content="Adam Medina 'Cholo Supreme' — Award Winning Tattoo Artist in Radcliff / Fort Knox, Kentucky. Specializing in cholo lettering, traditional, americana & black and grey. Founder of Black Heart Tattoo Company & Triple Crown Tattoo Expos. DM for appointments." />
+  <meta property="og:title" content="Cholo Supreme | Adam Medina | Award Winning Tattoo Artist | Fort Knox KY" />
+  <meta property="og:description" content="Award Winning Tattoo Artist in Radcliff / Fort Knox, Kentucky. Cholo lettering, traditional, americana & black and grey. Founder of Black Heart Tattoo Company." />
+  <meta property="og:image" content="https://bayouwebstudio.github.io/cholosupreme/img/profile.jpg" />
+  <meta property="og:url" content="https://bayouwebstudio.github.io/cholosupreme/" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Cholo Supreme | Adam Medina | Award Winning Tattoo Artist" />
+  <meta name="twitter:description" content="Award Winning Tattoo Artist in Radcliff / Fort Knox, KY. Cholo lettering, traditional & black and grey." />
+  <meta name="twitter:image" content="https://bayouwebstudio.github.io/cholosupreme/img/profile.jpg" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Cholo Supreme — Adam Medina",
+    "description": "Award Winning Tattoo Artist specializing in cholo lettering, traditional, americana and black and grey. Founder of Black Heart Tattoo Company.",
+    "url": "https://bayouwebstudio.github.io/cholosupreme/",
+    "image": "https://bayouwebstudio.github.io/cholosupreme/img/profile.jpg",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Radcliff",
+      "addressRegion": "KY",
+      "addressCountry": "US"
+    },
+    "telephone": "+19787645522",
+    "email": "cholosupremetattoos@gmail.com",
+    "sameAs": [
+      "https://www.instagram.com/cholo_supremetattoos/",
+      "https://www.instagram.com/blackhearttattoocompany/"
+    ]
+  }
+  </script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=IM+Fell+English:ital@0;1&display=swap');
+
+    :root {
+      --gold: #c9a84c;
+      --gold-light: #e8c96a;
+      --gold-dark: #9a7a30;
+      --red: #8b0000;
+      --red-light: #b00000;
+      --bg: #0a0a0a;
+      --bg2: #111111;
+      --bg3: #181818;
+      --text: #f0f0f0;
+      --text-muted: #aaaaaa;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'IM Fell English', Georgia, serif;
+      overflow-x: hidden;
+    }
+
+    /* ===================== FLOATING BOOK BUTTON ===================== */
+    .float-book {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 999;
+      background: var(--gold);
+      color: #0a0a0a;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 14px 22px;
+      border-radius: 3px;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(201,168,76,0.4);
+      transition: all 0.2s ease;
+      border: 1px solid var(--gold-dark);
+    }
+    .float-book:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 28px rgba(201,168,76,0.6);
+    }
+
+    /* ===================== NAV ===================== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(10,10,10,0.95);
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 24px;
+      backdrop-filter: blur(8px);
+    }
+    .nav-logo {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1rem;
+      color: var(--gold);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ===================== HERO ===================== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 100px 24px 60px;
+      position: relative;
+      background: 
+        radial-gradient(ellipse at 50% 0%, rgba(139,0,0,0.15) 0%, transparent 60%),
+        radial-gradient(ellipse at 50% 100%, rgba(201,168,76,0.08) 0%, transparent 60%),
+        var(--bg);
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: 
+        repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(201,168,76,0.04) 60px),
+        repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(201,168,76,0.04) 60px);
+      pointer-events: none;
+    }
+
+    .hero-ornament {
+      font-size: 1.2rem;
+      color: var(--gold);
+      letter-spacing: 0.5em;
+      margin-bottom: 24px;
+      opacity: 0.7;
+    }
+
+    .hero-profile {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      border: 3px solid var(--gold);
+      object-fit: cover;
+      margin-bottom: 28px;
+      box-shadow: 0 0 40px rgba(201,168,76,0.3), 0 0 80px rgba(201,168,76,0.1);
+    }
+
+    .hero h1 {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(2.4rem, 8vw, 5.5rem);
+      font-weight: 900;
+      color: var(--gold);
+      letter-spacing: 0.05em;
+      line-height: 1.1;
+      text-shadow: 0 0 40px rgba(201,168,76,0.4), 2px 2px 0 rgba(0,0,0,0.8);
+      margin-bottom: 12px;
+    }
+
+    .hero-name {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1rem, 3vw, 1.4rem);
+      font-weight: 400;
+      color: var(--text-muted);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .hero-award {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(0.85rem, 2.5vw, 1.1rem);
+      color: var(--gold);
+      letter-spacing: 0.15em;
+      margin-bottom: 12px;
+    }
+
+    .hero-location {
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 36px;
+    }
+
+    .hero-divider {
+      width: 200px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 0 auto 36px;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 14px 32px;
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+    .hero-cta:hover {
+      background: var(--gold);
+      color: var(--bg);
+    }
+
+    /* ===================== CREDENTIALS BAR ===================== */
+    .creds-bar {
+      background: var(--red);
+      padding: 16px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0;
+      border-top: 1px solid rgba(201,168,76,0.3);
+      border-bottom: 1px solid rgba(201,168,76,0.3);
+    }
+    .cred-item {
+      font-family: 'Cinzel', serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      padding: 4px 20px;
+      white-space: nowrap;
+    }
+    .cred-item:not(:last-child) {
+      border-right: 1px solid rgba(201,168,76,0.4);
+    }
+
+    /* ===================== SECTION BASE ===================== */
+    section {
+      padding: 80px 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(1.6rem, 4vw, 2.6rem);
+      font-weight: 700;
+      color: var(--text);
+      text-align: center;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .section-divider {
+      width: 80px;
+      height: 2px;
+      background: var(--gold);
+      margin: 0 auto 48px;
+    }
+
+    /* ===================== ABOUT ===================== */
+    #about {
+      background: var(--bg2);
+      max-width: 100%;
+      padding: 80px 24px;
+    }
+    .about-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .about-text {
+      font-size: 1.15rem;
+      line-height: 1.9;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+    }
+    .about-text strong {
+      color: var(--gold);
+      font-style: normal;
+    }
+
+    .about-tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 32px;
+    }
+    .tag {
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(201,168,76,0.4);
+      padding: 6px 16px;
+      border-radius: 2px;
+    }
+
+    /* ===================== GALLERY ===================== */
+    #gallery {
+      background: var(--bg);
+    }
+
+    .gallery-grid {
+      columns: 3 300px;
+      column-gap: 12px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .gallery-item {
+      break-inside: avoid;
+      margin-bottom: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      border: 1px solid rgba(201,168,76,0.1);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.03);
+    }
+
+    .gallery-item::after {
+      content: '+';
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: var(--gold);
+      background: rgba(10,10,10,0.5);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .gallery-item:hover::after { opacity: 1; }
+
+    /* ===================== LIGHTBOX ===================== */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0,0,0,0.94);
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox.active { display: flex; }
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+      border: 1px solid rgba(201,168,76,0.3);
+      box-shadow: 0 0 60px rgba(0,0,0,0.8);
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 20px; right: 28px;
+      font-size: 2rem;
+      color: var(--gold);
+      cursor: pointer;
+      line-height: 1;
+      background: none;
+      border: none;
+      font-family: 'Cinzel', serif;
+    }
+    .lightbox-prev, .lightbox-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2rem;
+      color: var(--gold);
+      cursor: pointer;
+      background: rgba(10,10,10,0.7);
+      border: 1px solid rgba(201,168,76,0.3);
+      padding: 12px 18px;
+      line-height: 1;
+    }
+    .lightbox-prev { left: 16px; }
+    .lightbox-next { right: 16px; }
+
+    /* ===================== BOOK CTA ===================== */
+    #book {
+      background: 
+        linear-gradient(135deg, rgba(139,0,0,0.3) 0%, rgba(10,10,10,0) 50%, rgba(201,168,76,0.1) 100%),
+        var(--bg3);
+      max-width: 100%;
+      text-align: center;
+    }
+    .book-inner {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .book-text {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-bottom: 36px;
+      line-height: 1.8;
+    }
+    .book-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--gold);
+      color: var(--bg);
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 16px 36px;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all 0.2s;
+      border: 1px solid var(--gold-dark);
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: transparent;
+      color: var(--gold);
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 16px 36px;
+      text-decoration: none;
+      border-radius: 2px;
+      border: 1px solid var(--gold);
+      transition: all 0.2s;
+    }
+    .btn-secondary:hover { background: rgba(201,168,76,0.1); }
+
+    /* ===================== CONTACT ===================== */
+    #contact {
+      background: var(--bg2);
+      max-width: 100%;
+    }
+    .contact-inner {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .contact-card {
+      background: var(--bg3);
+      border: 1px solid rgba(201,168,76,0.15);
+      padding: 24px;
+      border-radius: 2px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .contact-card:hover {
+      border-color: var(--gold);
+      background: rgba(201,168,76,0.05);
+    }
+    .contact-icon {
+      font-size: 1.4rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .contact-info {
+      flex: 1;
+    }
+    .contact-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+    .contact-value {
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    /* ===================== FOOTER ===================== */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid rgba(201,168,76,0.15);
+      text-align: center;
+      padding: 32px 24px;
+    }
+    .footer-divider {
+      width: 60px;
+      height: 1px;
+      background: var(--gold);
+      margin: 0 auto 20px;
+      opacity: 0.4;
+    }
+    .footer-text {
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      opacity: 0.6;
+    }
+    .footer-text a {
+      color: var(--gold);
+      text-decoration: none;
+      opacity: 0.8;
+    }
+    .footer-text a:hover { opacity: 1; }
+
+    /* ===================== RESPONSIVE ===================== */
+    @media (max-width: 600px) {
+      nav { padding: 12px 16px; }
+      .nav-links { display: none; }
+      .creds-bar { gap: 8px; }
+      .cred-item { border-right: none !important; font-size: 0.65rem; }
+      .gallery-grid { columns: 2 150px; }
+      .lightbox-prev, .lightbox-next { padding: 8px 12px; font-size: 1.5rem; }
+      .float-book { bottom: 16px; right: 16px; padding: 12px 18px; font-size: 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Book Button -->
+  <a class="float-book" href="https://www.instagram.com/cholo_supremetattoos/" target="_blank" rel="noopener">
+    📱 Book Now
+  </a>
+
+  <!-- Nav -->
+  <nav>
+    <a class="nav-logo" href="#hero">C.S.</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#book">Book</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section id="hero" class="hero" style="max-width:100%; padding-top:100px;">
+    <p class="hero-ornament">✦ ✦ ✦</p>
+    <img class="hero-profile" src="img/profile.jpg" alt="Adam Medina — Cholo Supreme" />
+    <h1>Cholo Supreme</h1>
+    <p class="hero-name">Adam Medina</p>
+    <p class="hero-award">🏆 Award Winning Tattoo Artist 🏆</p>
+    <p class="hero-location">📍 Radcliff / Fort Knox, Kentucky</p>
+    <div class="hero-divider"></div>
+    <a class="hero-cta" href="https://www.instagram.com/cholo_supremetattoos/" target="_blank" rel="noopener">
+      📱 DM for Appointments
+    </a>
+  </section>
+
+  <!-- Credentials Bar -->
+  <div class="creds-bar">
+    <span class="cred-item">🏆 Award Winning</span>
+    <span class="cred-item">404 Posts</span>
+    <span class="cred-item">Founder — Black Heart Tattoo Co.</span>
+    <span class="cred-item">Triple Crown Tattoo Expos</span>
+  </div>
+
+  <!-- About -->
+  <section id="about">
+    <div class="about-inner">
+      <p class="section-label">About the Artist</p>
+      <h2 class="section-title">Born to Ink</h2>
+      <div class="section-divider"></div>
+      <p class="about-text">
+        <strong>Adam Medina</strong>, known throughout the tattoo world as <strong>"Cholo Supreme,"</strong> is an award-winning tattoo artist based in <strong>Radcliff / Fort Knox, Kentucky.</strong> With roots in cholo lettering, traditional, americana, and black & grey — his work is instantly recognizable for its bold execution and ornate precision.
+      </p>
+      <p class="about-text">
+        Adam is the founder of <strong>Black Heart Tattoo Company</strong> and the creator of <strong>Triple Crown Tattoo Expos</strong> — a testament to his passion for the culture and community of tattooing. His dedication to the craft has earned him recognition across the industry, and a loyal following that spans the country.
+      </p>
+      <p class="about-text">
+        <strong>DM on Instagram for appointment inquiries.</strong>
+      </p>
+      <div class="about-tags">
+        <span class="tag">Cholo Lettering</span>
+        <span class="tag">Traditional</span>
+        <span class="tag">Americana</span>
+        <span class="tag">Black & Grey</span>
+        <span class="tag">Custom Work</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section id="gallery">
+    <p class="section-label">Portfolio</p>
+    <h2 class="section-title">The Work</h2>
+    <div class="section-divider"></div>
+
+    <div class="gallery-grid" id="galleryGrid">
+      <div class="gallery-item" onclick="openLightbox(0)"><img src="img/post_3.jpg" alt="Tattoo work by Cholo Supreme" loading="lazy" /></div>
+      <div class="gallery-item" onclick="openLightbox(1)"><img src="img/post_4.jpg" alt="Tattoo work by Cholo Supreme" loading="lazy" /></div>
+      <div class="gallery-item" onclick="openLightbox(2)"><img src="img/post_5.jpg" alt="Tattoo work by Cholo Supreme" loading="lazy" /></div>
+      <div class="gallery-item" onclick="openLightbox(3)"><img src="img/post_6.jpg" alt="Tattoo work by Cholo Supreme" loading="lazy" /></div>
+      <div class="gallery-item" onclick="openLightbox(4)"><img src="img/post_8.jpg" alt="Tattoo work by Cholo Supreme" loading="lazy" /></div>
+      <div class="gallery-item" onclick="openLightbox(5)"><img src="img/post_9.jpg" alt="Tattoo work by Cholo Supreme" loading="lazy" /></div>
+      <div class="gallery-item" onclick="openLightbox(6)"><img src="img/post_10.jpg" alt="Tattoo work by Cholo Supreme" loading="lazy" /></div>
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" onclick="closeLightboxOnBg(event)">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <button class="lightbox-prev" onclick="prevImage()">‹</button>
+    <img id="lightboxImg" src="" alt="Gallery image" />
+    <button class="lightbox-next" onclick="nextImage()">›</button>
+  </div>
+
+  <!-- Book CTA -->
+  <section id="book" style="background:linear-gradient(135deg,rgba(139,0,0,0.3) 0%,rgba(10,10,10,0) 50%,rgba(201,168,76,0.1) 100%), #181818; max-width:100%; text-align:center; padding:80px 24px;">
+    <div class="book-inner" style="max-width:700px; margin:0 auto;">
+      <p class="section-label">Book Your Session</p>
+      <h2 class="section-title">Ready to Get Tattooed?</h2>
+      <div class="section-divider"></div>
+      <p class="book-text">
+        Adam takes appointments via Instagram DM. Reach out with your idea, reference photos, and preferred placement. Consultations are welcome.
+      </p>
+      <p style="font-family:'Cinzel',serif; font-size:0.8rem; color:var(--text-muted); letter-spacing:0.1em; margin-bottom:36px;">
+        📧 cholosupremetattoos@gmail.com
+      </p>
+      <div class="book-buttons">
+        <a class="btn-primary" href="https://www.instagram.com/cholo_supremetattoos/" target="_blank" rel="noopener">
+          📱 DM on Instagram
+        </a>
+        <a class="btn-secondary" href="mailto:cholosupremetattoos@gmail.com">
+          ✉️ Send Email
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="contact-inner">
+      <p class="section-label">Get in Touch</p>
+      <h2 class="section-title">Contact</h2>
+      <div class="section-divider"></div>
+      <div class="contact-grid">
+
+        <a class="contact-card" href="https://www.instagram.com/cholo_supremetattoos/" target="_blank" rel="noopener">
+          <span class="contact-icon">📱</span>
+          <div class="contact-info">
+            <p class="contact-label">Instagram</p>
+            <p class="contact-value">@cholo_supremetattoos</p>
+          </div>
+        </a>
+
+        <a class="contact-card" href="mailto:cholosupremetattoos@gmail.com">
+          <span class="contact-icon">📧</span>
+          <div class="contact-info">
+            <p class="contact-label">Email</p>
+            <p class="contact-value">cholosupremetattoos@gmail.com</p>
+          </div>
+        </a>
+
+        <a class="contact-card" href="tel:+19787645522">
+          <span class="contact-icon">📞</span>
+          <div class="contact-info">
+            <p class="contact-label">Phone</p>
+            <p class="contact-value">(978) 764-5522</p>
+          </div>
+        </a>
+
+        <a class="contact-card" href="https://www.instagram.com/blackhearttattoocompany/" target="_blank" rel="noopener">
+          <span class="contact-icon">🏪</span>
+          <div class="contact-info">
+            <p class="contact-label">Shop</p>
+            <p class="contact-value">@blackhearttattoocompany<br><small style="color:var(--text-muted);">Radcliff / Fort Knox, KY</small></p>
+          </div>
+        </a>
+
+        <a class="contact-card" href="https://venmo.com/u/cholo_supremetattoos1" target="_blank" rel="noopener">
+          <span class="contact-icon">💰</span>
+          <div class="contact-info">
+            <p class="contact-label">Venmo</p>
+            <p class="contact-value">@cholo_supremetattoos1</p>
+          </div>
+        </a>
+
+        <div class="contact-card" style="cursor:default;">
+          <span class="contact-icon">💚</span>
+          <div class="contact-info">
+            <p class="contact-label">Cash App</p>
+            <p class="contact-value">$cholo1004</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-divider"></div>
+    <p class="footer-text">
+      © 2025 Cholo Supreme — Adam Medina &nbsp;·&nbsp; Radcliff / Fort Knox, KY<br>
+      <span style="font-size:0.65rem; opacity:0.5; margin-top:8px; display:block;">
+        Demo site crafted by <a href="https://bayouwebstudio.com" target="_blank" rel="noopener">Bayou Web Studio</a>
+      </span>
+    </p>
+  </footer>
+
+  <script>
+    const galleryImages = [
+      'img/post_3.jpg','img/post_4.jpg','img/post_5.jpg','img/post_6.jpg',
+      'img/post_8.jpg','img/post_9.jpg','img/post_10.jpg'
+    ];
+    let currentIndex = 0;
+
+    function openLightbox(idx) {
+      currentIndex = idx;
+      document.getElementById('lightboxImg').src = galleryImages[idx];
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    function closeLightboxOnBg(e) {
+      if (e.target === document.getElementById('lightbox')) closeLightbox();
+    }
+    function prevImage() {
+      currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+      document.getElementById('lightboxImg').src = galleryImages[currentIndex];
+    }
+    function nextImage() {
+      currentIndex = (currentIndex + 1) % galleryImages.length;
+      document.getElementById('lightboxImg').src = galleryImages[currentIndex];
+    }
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') prevImage();
+      if (e.key === 'ArrowRight') nextImage();
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ruben Charre | Tatuador Neo-Tradicional | San Luis Potosí</title>
+  <meta name="description" content="Ruben Charre 鬼 — Especialista en tatuajes neo-tradicionales, anime y japonés. San Luis Potosí, México. Solo Neo Tats. Cotiza tu tatuaje hoy." />
+  <meta name="keywords" content="tatuajes neo-tradicional, tatuador San Luis Potosí, anime tattoo, japonés tradicional, Ruben Charre, blacksoul tattoo" />
+  <meta name="author" content="Ruben Charre" />
+  <meta property="og:title" content="Ruben Charre | Tatuador Neo-Tradicional | San Luis Potosí" />
+  <meta property="og:description" content="Solo Neo Tats — Arte neo-tradicional con influencia anime y japonesa. San Luis Potosí, México." />
+  <meta property="og:image" content="img/profile.jpg" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Ruben Charre — Tatuador Neo-Tradicional",
+    "description": "Especialista en tatuajes neo-tradicionales, anime y japonés en San Luis Potosí, México.",
+    "url": "https://bayouwebstudio.com/rubencharre/",
+    "image": "https://bayouwebstudio.com/rubencharre/img/profile.jpg",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "San Luis Potosí",
+      "addressCountry": "MX"
+    },
+    "sameAs": [
+      "https://www.instagram.com/rubencharre/",
+      "https://www.threads.net/@rubencharre"
+    ]
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0a;
+      --surface: #111111;
+      --surface2: #1a1a1a;
+      --text: #f0f0f0;
+      --muted: #888;
+      --accent: #e8472a;
+      --accent2: #ff6b45;
+      --gold: #c9a84c;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(232,71,42,0.15);
+    }
+
+    .nav-logo {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1rem;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 1.5rem 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 30%, rgba(232,71,42,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 80% 60% at 50% 80%, rgba(201,168,76,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-grid-lines {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(232,71,42,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(232,71,42,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    .hero-profile {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--accent);
+      box-shadow: 0 0 0 6px rgba(232,71,42,0.15), 0 0 40px rgba(232,71,42,0.25);
+      margin-bottom: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(232,71,42,0.12);
+      border: 1px solid rgba(232,71,42,0.3);
+      border-radius: 2rem;
+      padding: 0.3rem 1rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 1.2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(2.2rem, 8vw, 5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      color: var(--text);
+      position: relative;
+      z-index: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero h1 span { color: var(--accent); }
+
+    .hero-kanji {
+      font-size: clamp(1.2rem, 4vw, 2rem);
+      color: var(--gold);
+      font-family: 'Cinzel Decorative', serif;
+      margin-bottom: 0.8rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-location {
+      color: var(--muted);
+      font-size: 0.85rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-tagline {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(1rem, 3vw, 1.6rem);
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      margin-bottom: 2.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      padding: 0.9rem 2.5rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border-radius: 3px;
+      transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 4px 20px rgba(232,71,42,0.35);
+    }
+
+    .hero-cta:hover {
+      background: var(--accent2);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(232,71,42,0.5);
+    }
+
+    /* ── SCROLL INDICATOR ── */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--muted);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      z-index: 1;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.1); }
+    }
+
+    /* ── SECTION STYLES ── */
+    section { padding: 5rem 1.5rem; }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+    }
+
+    .section-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    .section-divider {
+      width: 60px;
+      height: 2px;
+      background: var(--accent);
+      margin: 1.2rem auto 0;
+    }
+
+    /* ── ABOUT ── */
+    .about { background: var(--surface); }
+
+    .about-grid {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .about-text p {
+      color: #bbb;
+      margin-bottom: 1.2rem;
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .stat-card {
+      background: var(--surface2);
+      border: 1px solid rgba(232,71,42,0.15);
+      border-radius: 8px;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      transition: border-color 0.3s, transform 0.2s;
+    }
+
+    .stat-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    .stat-number {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1.8rem;
+      color: var(--accent);
+      display: block;
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+
+    .stat-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .about-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 1.5rem;
+    }
+
+    .tag {
+      background: rgba(232,71,42,0.1);
+      border: 1px solid rgba(232,71,42,0.25);
+      border-radius: 3px;
+      padding: 0.3rem 0.8rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent2);
+    }
+
+    /* ── GALLERY ── */
+    .gallery { background: var(--bg); }
+
+    .masonry-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      columns: 3;
+      column-gap: 12px;
+    }
+
+    .masonry-item {
+      break-inside: avoid;
+      margin-bottom: 12px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .masonry-item img {
+      width: 100%;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .masonry-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,10,10,0.7) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .masonry-item:hover img { transform: scale(1.06); }
+    .masonry-item:hover::after { opacity: 1; }
+
+    .masonry-item .zoom-icon {
+      position: absolute;
+      bottom: 1rem;
+      right: 1rem;
+      width: 36px;
+      height: 36px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: 2;
+    }
+
+    .masonry-item:hover .zoom-icon { opacity: 1; }
+
+    /* ── QUOTE CTA ── */
+    .quote-cta {
+      background: var(--surface);
+      text-align: center;
+    }
+
+    .quote-cta-inner {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .quote-cta-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(1.6rem, 5vw, 2.8rem);
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    .quote-cta-title span { color: var(--accent); }
+
+    .quote-cta p {
+      color: #bbb;
+      margin-bottom: 2.5rem;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .cta-btn-large {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      padding: 1.1rem 3rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border-radius: 3px;
+      transition: all 0.3s;
+      box-shadow: 0 6px 25px rgba(232,71,42,0.4);
+    }
+
+    .cta-btn-large:hover {
+      background: var(--accent2);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(232,71,42,0.55);
+    }
+
+    /* ── CONTACT ── */
+    .contact { background: var(--bg); }
+
+    .contact-grid {
+      max-width: 800px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      text-decoration: none;
+      transition: border-color 0.3s, transform 0.2s;
+      display: block;
+    }
+
+    .contact-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+    }
+
+    .contact-icon {
+      font-size: 2rem;
+      margin-bottom: 0.8rem;
+      display: block;
+    }
+
+    .contact-card h3 {
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-card p {
+      color: var(--text);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #050505;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    footer a:hover { color: var(--accent2); }
+
+    /* ── FLOATING BUTTON ── */
+    .floating-cta {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 200;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      padding: 0.85rem 1.6rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 50px;
+      box-shadow: 0 6px 25px rgba(232,71,42,0.5);
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      animation: floatPulse 3s ease-in-out infinite;
+    }
+
+    .floating-cta:hover {
+      background: var(--accent2);
+      transform: translateY(-3px) scale(1.04);
+      box-shadow: 0 10px 35px rgba(232,71,42,0.65);
+    }
+
+    @keyframes floatPulse {
+      0%, 100% { box-shadow: 0 6px 25px rgba(232,71,42,0.5); }
+      50% { box-shadow: 0 6px 35px rgba(232,71,42,0.75); }
+    }
+
+    /* ── LIGHTBOX ── */
+    .lightbox-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.96);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s;
+    }
+
+    .lightbox-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .lightbox-img {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 4px;
+      transform: scale(0.9);
+      transition: transform 0.35s;
+      box-shadow: 0 0 60px rgba(232,71,42,0.2);
+    }
+
+    .lightbox-overlay.active .lightbox-img { transform: scale(1); }
+
+    .lightbox-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 2rem;
+      color: #fff;
+      font-size: 2.5rem;
+      cursor: pointer;
+      opacity: 0.6;
+      transition: opacity 0.2s;
+      background: none;
+      border: none;
+      line-height: 1;
+    }
+
+    .lightbox-close:hover { opacity: 1; }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(232,71,42,0.15);
+      border: 1px solid rgba(232,71,42,0.3);
+      color: #fff;
+      font-size: 1.5rem;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox-nav:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .lightbox-prev { left: 1.5rem; }
+    .lightbox-next { right: 1.5rem; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .about-grid { grid-template-columns: 1fr; }
+      .masonry-grid { columns: 2; }
+      .contact-grid { grid-template-columns: 1fr; max-width: 360px; }
+      .floating-cta { bottom: 1.2rem; right: 1.2rem; padding: 0.75rem 1.2rem; }
+    }
+
+    @media (max-width: 480px) {
+      .masonry-grid { columns: 1; }
+      .about-stats { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-logo">Ruben Charre 鬼</a>
+    <ul class="nav-links">
+      <li><a href="#sobre">Sobre mí</a></li>
+      <li><a href="#galeria">Galería</a></li>
+      <li><a href="#cotizar">Cotizar</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-grid-lines"></div>
+    <img src="img/profile.jpg" alt="Ruben Charre — Tatuador Neo-Tradicional" class="hero-profile" />
+    <div class="hero-badge">✓ Verificado · 42K Seguidores</div>
+    <div class="hero-kanji">鬼</div>
+    <h1>Ruben <span>Charre</span></h1>
+    <p class="hero-location">📍 San Luis Potosí, México</p>
+    <p class="hero-tagline">Solo Neo Tats</p>
+    <a href="https://www.instagram.com/rubencharre/" target="_blank" rel="noopener" class="hero-cta">
+      Cotiza Tu Tatuaje
+    </a>
+    <div class="scroll-indicator">
+      <div class="scroll-line"></div>
+      <span>Explorar</span>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="sobre">
+    <div class="section-header">
+      <span class="section-label">Acerca de</span>
+      <h2 class="section-title">El Arte del Neo-Tradicional</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          Ruben Charre 鬼 es un tatuador especializado en el estilo <strong>neo-tradicional</strong>, con una fuerte influencia del mundo <strong>anime y la cultura japonesa</strong>. Con más de una década perfeccionando su técnica, su trabajo destaca por líneas audaces, colores vibrantes y composiciones cinematográficas.
+        </p>
+        <p>
+          Basado en <strong>San Luis Potosí, México</strong>, trabaja en el estudio <strong>@blacksoul_tattooslp</strong>. Sus piezas cuentan historias — geishas, oni, personajes de anime — cada trazo es una declaración artística.
+        </p>
+        <p>
+          Solo acepta proyectos neo-tradicionales. Si buscas arte de calidad con alma, estás en el lugar correcto.
+        </p>
+        <div class="about-tags">
+          <span class="tag">Neo-Tradicional</span>
+          <span class="tag">Anime</span>
+          <span class="tag">Japonés</span>
+          <span class="tag">Color Bold</span>
+          <span class="tag">Retratos</span>
+          <span class="tag">Geisha</span>
+          <span class="tag">Oni</span>
+        </div>
+      </div>
+      <div class="about-stats">
+        <div class="stat-card">
+          <span class="stat-number">42K</span>
+          <span class="stat-label">Seguidores</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">331</span>
+          <span class="stat-label">Publicaciones</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">SLP</span>
+          <span class="stat-label">México</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">Neo</span>
+          <span class="stat-label">Solo Neo Tats</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="gallery" id="galeria">
+    <div class="section-header">
+      <span class="section-label">Portafolio</span>
+      <h2 class="section-title">Obra Reciente</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="masonry-grid" id="gallery-grid">
+      <!-- Populated by JS -->
+    </div>
+  </section>
+
+  <!-- QUOTE CTA -->
+  <section class="quote-cta" id="cotizar">
+    <div class="quote-cta-inner">
+      <h2 class="quote-cta-title">¿Listo para tu <span>Tatuaje?</span></h2>
+      <p>
+        Agenda una consulta o cotiza tu proyecto directamente por Instagram. Ruben trabaja exclusivamente en piezas neo-tradicionales — cuéntale tu idea y él la lleva al siguiente nivel.
+      </p>
+      <a href="https://www.instagram.com/rubencharre/" target="_blank" rel="noopener" class="cta-btn-large">
+        📩 Cotizar por Instagram
+      </a>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contacto">
+    <div class="section-header">
+      <span class="section-label">Contacto</span>
+      <h2 class="section-title">Encuéntrame</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="contact-grid">
+      <a href="https://www.instagram.com/rubencharre/" target="_blank" rel="noopener" class="contact-card">
+        <span class="contact-icon">📸</span>
+        <h3>Instagram</h3>
+        <p>@rubencharre</p>
+      </a>
+      <a href="https://www.instagram.com/blacksoul_tattooslp/" target="_blank" rel="noopener" class="contact-card">
+        <span class="contact-icon">💀</span>
+        <h3>Estudio</h3>
+        <p>@blacksoul_tattooslp</p>
+      </a>
+      <div class="contact-card">
+        <span class="contact-icon">📍</span>
+        <h3>Ubicación</h3>
+        <p>San Luis Potosí, MX</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 Ruben Charre 鬼 · San Luis Potosí, México · Solo Neo Tats</p>
+    <p style="margin-top:0.5rem;">
+      Sitio web por <a href="https://bayouwebstudio.com" target="_blank" rel="noopener">Bayou Web Studio</a>
+    </p>
+  </footer>
+
+  <!-- FLOATING CTA -->
+  <a href="https://www.instagram.com/rubencharre/" target="_blank" rel="noopener" class="floating-cta">
+    ✏️ Cotizar
+  </a>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox-overlay" id="lightbox">
+    <button class="lightbox-close" id="lb-close">×</button>
+    <button class="lightbox-nav lightbox-prev" id="lb-prev">‹</button>
+    <img src="" alt="" class="lightbox-img" id="lb-img" />
+    <button class="lightbox-nav lightbox-next" id="lb-next">›</button>
+  </div>
+
+  <script>
+    // Gallery images
+    const tattooImages = [
+      'img/img_001.jpg','img/img_002.jpg','img/img_003.jpg','img/img_004.jpg',
+      'img/img_005.jpg','img/img_006.jpg','img/img_007.jpg','img/img_008.jpg',
+      'img/img_009.jpg','img/img_010.jpg','img/img_011.jpg','img/img_012.jpg',
+      'img/img_013.jpg','img/img_014.jpg','img/img_018.jpg','img/img_020.jpg',
+      'img/img_027.jpg','img/img_028.jpg','img/img_029.jpg','img/img_030.jpg',
+      'img/img_031.jpg','img/img_032.jpg','img/img_037.jpg'
+    ];
+
+    // Build masonry grid
+    const grid = document.getElementById('gallery-grid');
+    tattooImages.forEach((src, i) => {
+      const item = document.createElement('div');
+      item.className = 'masonry-item';
+      item.innerHTML = `
+        <img src="${src}" alt="Tatuaje neo-tradicional por Ruben Charre" loading="lazy" />
+        <div class="zoom-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+        </div>
+      `;
+      item.addEventListener('click', () => openLightbox(i));
+      grid.appendChild(item);
+    });
+
+    // Lightbox
+    let currentIdx = 0;
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lb-img');
+
+    function openLightbox(idx) {
+      currentIdx = idx;
+      lbImg.src = tattooImages[idx];
+      lb.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lb.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function navigate(dir) {
+      currentIdx = (currentIdx + dir + tattooImages.length) % tattooImages.length;
+      lbImg.style.opacity = '0';
+      setTimeout(() => {
+        lbImg.src = tattooImages[currentIdx];
+        lbImg.style.opacity = '1';
+      }, 150);
+    }
+
+    document.getElementById('lb-close').addEventListener('click', closeLightbox);
+    document.getElementById('lb-prev').addEventListener('click', () => navigate(-1));
+    document.getElementById('lb-next').addEventListener('click', () => navigate(1));
+
+    lb.addEventListener('click', (e) => {
+      if (e.target === lb) closeLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!lb.classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') navigate(-1);
+      if (e.key === 'ArrowRight') navigate(1);
+    });
+
+    lbImg.style.transition = 'opacity 0.15s ease';
+  </script>
+</body>
+</html>
