@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mint Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --mint: #98E8C1;
+      --mint-dim: rgba(152, 232, 193, 0.15);
+      --mint-border: rgba(152, 232, 193, 0.3);
+      --bg: #0a0d0f;
+      --surface: #111417;
+      --surface2: #181c20;
+      --surface3: #1e2328;
+      --text: #e8edf2;
+      --text-dim: #8a9aa8;
+      --text-muted: #4a5a68;
+      --border: rgba(255,255,255,0.07);
+      --radius: 12px;
+      --radius-sm: 8px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Loading Screen ── */
+    #loading-screen {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .loading-logo {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--mint);
+      letter-spacing: -0.5px;
+    }
+
+    .loading-spinner {
+      width: 32px;
+      height: 32px;
+      border: 2px solid var(--border);
+      border-top-color: var(--mint);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Sign In Screen ── */
+    #sign-in-screen {
+      display: none;
+      min-height: 100vh;
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #sign-in-screen::before {
+      content: '';
+      position: absolute;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(152,232,193,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .signin-container {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .signin-card {
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .signin-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .signin-logo {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--mint);
+      letter-spacing: -1px;
+      margin-bottom: 8px;
+    }
+
+    .signin-tagline {
+      color: var(--text-dim);
+      font-size: 15px;
+    }
+
+    #clerk-sign-in {
+      /* Clerk will inject styles — just positioning */
+    }
+
+    /* ── Dashboard Layout ── */
+    #dashboard {
+      display: none;
+      min-height: 100vh;
+    }
+
+    /* Header */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 13, 15, 0.9);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header-logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--mint);
+      letter-spacing: -0.5px;
+    }
+
+    .header-badge {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 20px;
+      background: var(--mint-dim);
+      color: var(--mint);
+      border: 1px solid var(--mint-border);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .user-menu {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .user-menu:hover { background: var(--surface2); }
+
+    .user-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--mint-dim);
+      border: 1.5px solid var(--mint-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--mint);
+      overflow: hidden;
+    }
+
+    .user-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .user-name {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      max-width: 120px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .btn-logout {
+      font-size: 13px;
+      color: var(--text-dim);
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 6px 12px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .btn-logout:hover {
+      border-color: var(--mint-border);
+      color: var(--mint);
+    }
+
+    /* Main layout */
+    .main-layout {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 0;
+      min-height: calc(100vh - 60px);
+    }
+
+    /* Left panel */
+    .left-panel {
+      padding: 24px;
+      overflow-y: auto;
+      border-right: 1px solid var(--border);
+    }
+
+    /* Right panel — chat */
+    .right-panel {
+      display: flex;
+      flex-direction: column;
+      height: calc(100vh - 60px);
+      position: sticky;
+      top: 60px;
+    }
+
+    /* Section title */
+    .section-title {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    /* Site Preview Card */
+    .site-preview-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .site-preview-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface2);
+    }
+
+    .site-preview-dots {
+      display: flex;
+      gap: 5px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .dot-red { background: #ff5f57; }
+    .dot-yellow { background: #ffbd2e; }
+    .dot-green { background: #28ca41; }
+
+    .site-preview-url {
+      flex: 1;
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-dim);
+      font-family: monospace;
+      padding: 0 12px;
+    }
+
+    .site-preview-link {
+      font-size: 12px;
+      color: var(--mint);
+      text-decoration: none;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .site-preview-link:hover { text-decoration: underline; }
+
+    .site-preview-iframe-wrapper {
+      position: relative;
+      height: 320px;
+      overflow: hidden;
+    }
+
+    .site-preview-iframe {
+      width: 100%;
+      height: 320px;
+      border: none;
+      transform-origin: top left;
+      pointer-events: none;
+    }
+
+    .preview-overlay {
+      position: absolute;
+      inset: 0;
+      background: transparent;
+      cursor: default;
+    }
+
+    /* Quick Actions */
+    .quick-actions {
+      margin-bottom: 20px;
+    }
+
+    .actions-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .action-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s;
+      text-align: left;
+    }
+
+    .action-btn:hover {
+      background: var(--surface2);
+      border-color: var(--mint-border);
+      color: var(--mint);
+    }
+
+    .action-btn .action-icon {
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    /* Site Info Card */
+    .info-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .info-item {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .info-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 500;
+    }
+
+    .info-value {
+      font-size: 13px;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .info-value.mint { color: var(--mint); }
+
+    .plan-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .plan-free { background: rgba(138,154,168,0.15); color: #8a9aa8; }
+    .plan-starter { background: rgba(152,232,193,0.15); color: var(--mint); border: 1px solid var(--mint-border); }
+    .plan-pro { background: rgba(180,130,255,0.15); color: #b482ff; border: 1px solid rgba(180,130,255,0.3); }
+
+    /* Change History */
+    .change-history {
+      margin-bottom: 20px;
+    }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: flex-start;
+    }
+
+    .timeline-item:last-child { border-bottom: none; }
+
+    .timeline-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--mint);
+      margin-top: 4px;
+      flex-shrink: 0;
+    }
+
+    .timeline-content {
+      flex: 1;
+    }
+
+    .timeline-action {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .timeline-details {
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+
+    .timeline-time {
+      font-size: 11px;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 20px;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    /* ── Right Panel — Mint Chat ── */
+    .chat-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .chat-header-icon {
+      width: 32px;
+      height: 32px;
+      background: var(--mint-dim);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    .chat-header-title {
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .chat-header-sub {
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+
+    .chat-status {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #28ca41;
+      margin-left: auto;
+      box-shadow: 0 0 6px #28ca41;
+    }
+
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      scroll-behavior: smooth;
+    }
+
+    .chat-messages::-webkit-scrollbar { width: 4px; }
+    .chat-messages::-webkit-scrollbar-track { background: transparent; }
+    .chat-messages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+    .message {
+      display: flex;
+      gap: 8px;
+      animation: fadeIn 0.2s ease;
+    }
+
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+    .message.user { flex-direction: row-reverse; }
+
+    .message-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--surface3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+
+    .message.user .message-avatar {
+      background: var(--mint-dim);
+      color: var(--mint);
+    }
+
+    .message-bubble {
+      max-width: 80%;
+      padding: 10px 12px;
+      border-radius: var(--radius);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .message.assistant .message-bubble {
+      background: var(--surface2);
+      color: var(--text);
+      border-bottom-left-radius: 4px;
+    }
+
+    .message.user .message-bubble {
+      background: var(--mint-dim);
+      color: var(--mint);
+      border: 1px solid var(--mint-border);
+      border-bottom-right-radius: 4px;
+    }
+
+    .typing-indicator {
+      display: flex;
+      gap: 4px;
+      padding: 4px 0;
+      align-items: center;
+    }
+
+    .typing-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--text-muted);
+      animation: typingBounce 1.2s ease-in-out infinite;
+    }
+
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes typingBounce {
+      0%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-4px); }
+    }
+
+    /* Chat quick actions */
+    .chat-quick-actions {
+      padding: 8px 16px;
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .quick-msg-btn {
+      font-size: 11px;
+      padding: 5px 10px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: none;
+      color: var(--text-dim);
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+
+    .quick-msg-btn:hover {
+      border-color: var(--mint-border);
+      color: var(--mint);
+      background: var(--mint-dim);
+    }
+
+    /* Chat input area */
+    .chat-input-area {
+      padding: 12px 16px;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+    }
+
+    .upload-drop-zone {
+      border: 1.5px dashed var(--border);
+      border-radius: var(--radius-sm);
+      padding: 10px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: all 0.15s;
+      display: none;
+    }
+
+    .upload-drop-zone.active,
+    .upload-drop-zone.dragging {
+      display: block;
+      border-color: var(--mint-border);
+      background: var(--mint-dim);
+      color: var(--mint);
+    }
+
+    .chat-input-row {
+      display: flex;
+      gap: 8px;
+      align-items: flex-end;
+    }
+
+    .chat-input {
+      flex: 1;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      font-size: 13px;
+      font-family: inherit;
+      padding: 10px 12px;
+      resize: none;
+      min-height: 40px;
+      max-height: 120px;
+      transition: border-color 0.15s;
+      line-height: 1.4;
+    }
+
+    .chat-input:focus {
+      outline: none;
+      border-color: var(--mint-border);
+    }
+
+    .chat-input::placeholder { color: var(--text-muted); }
+
+    .btn-upload-icon, .btn-send {
+      width: 40px;
+      height: 40px;
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s;
+      flex-shrink: 0;
+    }
+
+    .btn-upload-icon {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      font-size: 16px;
+    }
+
+    .btn-upload-icon:hover {
+      border-color: var(--mint-border);
+      color: var(--mint);
+    }
+
+    .btn-send {
+      background: var(--mint);
+      color: #0a0d0f;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .btn-send:hover { background: #7ed4a8; }
+    .btn-send:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    #file-input { display: none; }
+
+    /* Upload progress */
+    .upload-progress {
+      font-size: 12px;
+      color: var(--mint);
+      padding: 4px 0;
+      display: none;
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 768px) {
+      .main-layout {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+      }
+
+      .left-panel {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        overflow-y: visible;
+      }
+
+      .right-panel {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 55vh;
+        z-index: 50;
+        border-top: 1px solid var(--mint-border);
+        box-shadow: 0 -20px 40px rgba(0,0,0,0.5);
+      }
+
+      .main-layout {
+        padding-bottom: 55vh;
+      }
+
+      .header-logo { font-size: 18px; }
+      .user-name { display: none; }
+      .info-grid { grid-template-columns: 1fr; }
+      .actions-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    /* Clerk overrides */
+    .cl-card {
+      background: var(--surface) !important;
+      border: 1px solid var(--border) !important;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5) !important;
+    }
+
+    .cl-headerTitle { color: var(--text) !important; }
+    .cl-socialButtonsBlockButton {
+      background: var(--surface2) !important;
+      border-color: var(--border) !important;
+      color: var(--text) !important;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Loading -->
+<div id="loading-screen">
+  <div class="loading-logo">✦ mint</div>
+  <div class="loading-spinner"></div>
+</div>
+
+<!-- Sign In -->
+<div id="sign-in-screen">
+  <div class="signin-container">
+    <div class="signin-card">
+      <div class="signin-header">
+        <div class="signin-logo">✦ mint</div>
+        <div class="signin-tagline">Your AI-powered website dashboard</div>
+      </div>
+      <div id="clerk-sign-in"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Dashboard -->
+<div id="dashboard">
+  <header class="header">
+    <div class="header-left">
+      <span class="header-logo">✦ mint</span>
+      <span class="header-badge" id="plan-badge">Free</span>
+    </div>
+    <div class="header-right">
+      <div class="user-menu" id="user-menu">
+        <div class="user-avatar" id="user-avatar">?</div>
+        <span class="user-name" id="user-name-display">Loading...</span>
+      </div>
+      <button class="btn-logout" id="btn-logout">Sign out</button>
+    </div>
+  </header>
+
+  <div class="main-layout">
+    <!-- Left panel -->
+    <div class="left-panel">
+
+      <!-- Site Preview -->
+      <div style="margin-bottom: 20px;">
+        <div class="section-title">Your Site</div>
+        <div class="site-preview-card">
+          <div class="site-preview-bar">
+            <div class="site-preview-dots">
+              <div class="dot dot-red"></div>
+              <div class="dot dot-yellow"></div>
+              <div class="dot dot-green"></div>
+            </div>
+            <div class="site-preview-url" id="preview-url">getminted.ai/...</div>
+            <a class="site-preview-link" id="visit-site-link" href="#" target="_blank">↗ Visit Site</a>
+          </div>
+          <div class="site-preview-iframe-wrapper">
+            <iframe class="site-preview-iframe" id="site-preview-iframe" src="about:blank" loading="lazy" scrolling="no"></iframe>
+            <div class="preview-overlay"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="quick-actions">
+        <div class="section-title">Quick Actions</div>
+        <div class="actions-grid">
+          <button class="action-btn" onclick="sendQuickMessage('I want to upload new photos to my gallery')">
+            <span class="action-icon">📸</span>
+            <span>Upload Photos</span>
+          </button>
+          <button class="action-btn" onclick="sendQuickMessage('I want to update my bio / about section')">
+            <span class="action-icon">✏️</span>
+            <span>Update Bio</span>
+          </button>
+          <button class="action-btn" onclick="sendQuickMessage('I need to change my booking link')">
+            <span class="action-icon">📅</span>
+            <span>Booking Link</span>
+          </button>
+          <button class="action-btn" onclick="sendQuickMessage('Show me my site info and what can be improved')">
+            <span class="action-icon">📊</span>
+            <span>View Info</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Site Info -->
+      <div style="margin-bottom: 20px;">
+        <div class="section-title">Site Info</div>
+        <div class="info-card">
+          <div class="info-grid">
+            <div class="info-item">
+              <span class="info-label">Domain</span>
+              <span class="info-value mint" id="info-domain">Loading...</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Plan</span>
+              <span class="info-value" id="info-plan"><span class="plan-badge plan-free">Free</span></span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Site Slug</span>
+              <span class="info-value" id="info-slug">—</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Status</span>
+              <span class="info-value" style="color:#28ca41;">● Live</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Changes -->
+      <div class="change-history">
+        <div class="section-title">Recent Changes</div>
+        <div class="timeline" id="change-timeline">
+          <div class="empty-state">No changes yet. Ask Mint to edit your site!</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right panel — Mint Chat -->
+    <div class="right-panel">
+      <div class="chat-header">
+        <div class="chat-header-icon">🌿</div>
+        <div>
+          <div class="chat-header-title">Mint Editor</div>
+          <div class="chat-header-sub">Talk to Mint to edit your site</div>
+        </div>
+        <div class="chat-status" title="Connected"></div>
+      </div>
+
+      <div class="chat-messages" id="chat-messages">
+        <div class="message assistant">
+          <div class="message-avatar">🌿</div>
+          <div class="message-bubble">
+            Hey! I'm Mint, your AI website editor. I can update your bio, change your booking link, swap photos, and more — just ask me anything about your site!
+          </div>
+        </div>
+      </div>
+
+      <div class="chat-quick-actions">
+        <button class="quick-msg-btn" onclick="sendQuickMessage('What does my site look like right now?')">Current site</button>
+        <button class="quick-msg-btn" onclick="sendQuickMessage('Update my hero title')">Hero title</button>
+        <button class="quick-msg-btn" onclick="sendQuickMessage('Change my booking link')">Booking link</button>
+        <button class="quick-msg-btn" onclick="sendQuickMessage('What photos are in my gallery?')">Gallery</button>
+      </div>
+
+      <div class="chat-input-area">
+        <div class="upload-drop-zone" id="drop-zone">
+          📸 Drop photos here to upload to your gallery
+        </div>
+        <div class="upload-progress" id="upload-progress"></div>
+        <div class="chat-input-row">
+          <button class="btn-upload-icon" title="Upload photos" onclick="document.getElementById('file-input').click()">📎</button>
+          <textarea
+            class="chat-input"
+            id="chat-input"
+            placeholder="Ask Mint to edit your site..."
+            rows="1"
+          ></textarea>
+          <button class="btn-send" id="btn-send" title="Send">↑</button>
+        </div>
+        <input type="file" id="file-input" multiple accept="image/*" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@clerk/clerk-js@latest/dist/clerk.browser.js"></script>
+<script>
+(async () => {
+  const CLERK_KEY = 'pk_test_Y2hhbXBpb24tc3RhcmxpbmctOC5jbGVyay5hY2NvdW50cy5kZXYk';
+  const CONVEX_URL = 'https://curious-lemming-262.convex.site';
+
+  let clerkToken = null;
+  let threadId = null;
+  let siteSlug = null;
+  let isStreaming = false;
+
+  // ── Init Clerk ──
+  const clerk = new Clerk(CLERK_KEY);
+  await clerk.load();
+
+  const loading = document.getElementById('loading-screen');
+  const signInScreen = document.getElementById('sign-in-screen');
+  const dashboard = document.getElementById('dashboard');
+
+  if (!clerk.user) {
+    loading.style.display = 'none';
+    signInScreen.style.display = 'block';
+    clerk.mountSignIn(document.getElementById('clerk-sign-in'), {
+      afterSignInUrl: window.location.href,
+      afterSignUpUrl: window.location.href,
+    });
+
+    // Listen for sign in
+    clerk.addListener(({ user }) => {
+      if (user) initDashboard();
+    });
+  } else {
+    await initDashboard();
+  }
+
+  async function getToken() {
+    try {
+      clerkToken = await clerk.session.getToken({ template: 'convex' });
+      return clerkToken;
+    } catch {
+      // Fallback: get raw session token
+      clerkToken = await clerk.session.getToken();
+      return clerkToken;
+    }
+  }
+
+  async function apiGet(path) {
+    const token = await getToken();
+    const res = await fetch(`${CONVEX_URL}${path}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    if (!res.ok) throw new Error(`API ${path}: ${res.status}`);
+    return res.json();
+  }
+
+  async function initDashboard() {
+    loading.style.display = 'none';
+    signInScreen.style.display = 'none';
+    dashboard.style.display = 'block';
+
+    const user = clerk.user;
+
+    // Set user info in header
+    document.getElementById('user-name-display').textContent = user.firstName || user.emailAddresses[0]?.emailAddress || 'You';
+
+    const avatarEl = document.getElementById('user-avatar');
+    if (user.imageUrl) {
+      avatarEl.innerHTML = `<img src="${user.imageUrl}" alt="avatar" />`;
+    } else {
+      const initials = (user.firstName?.[0] || '') + (user.lastName?.[0] || '');
+      avatarEl.textContent = initials || user.emailAddresses[0]?.emailAddress[0]?.toUpperCase() || '?';
+    }
+
+    // Load profile + site info
+    try {
+      const [profile, siteInfo] = await Promise.all([
+        apiGet('/api/dashboard/profile').catch(() => null),
+        apiGet('/api/dashboard/site').catch(() => null),
+      ]);
+
+      if (profile) {
+        siteSlug = profile.siteSlug;
+        updateSiteUI(profile, siteInfo);
+      } else {
+        // No client record — use fallback from Clerk email
+        const email = user.emailAddresses[0]?.emailAddress || '';
+        document.getElementById('info-domain').textContent = 'getminted.ai/your-site';
+        document.getElementById('info-slug').textContent = 'Not set up yet';
+        addMessage('assistant', "Welcome to Mint! Your site is being set up. If you just signed up, it'll be ready shortly. Ask me anything in the meantime!");
+      }
+
+      if (siteInfo?.siteUrl && siteInfo.siteSlug) {
+        siteSlug = siteInfo.siteSlug;
+        const previewUrl = siteInfo.siteUrl;
+        document.getElementById('preview-url').textContent = previewUrl.replace('https://', '');
+        const visitLink = document.getElementById('visit-site-link');
+        visitLink.href = previewUrl;
+
+        // Load preview iframe
+        const iframe = document.getElementById('site-preview-iframe');
+        iframe.src = previewUrl;
+      }
+
+      // Load change history
+      loadChangeHistory();
+
+    } catch (e) {
+      console.warn('Dashboard load error:', e);
+    }
+  }
+
+  function updateSiteUI(profile, siteInfo) {
+    const slug = profile.siteSlug;
+    const domain = profile.domain || `getminted.ai/${slug}`;
+
+    document.getElementById('info-domain').textContent = domain;
+    document.getElementById('info-slug').textContent = slug;
+
+    const planMap = {
+      free: 'plan-free',
+      starter: 'plan-starter',
+      pro: 'plan-pro',
+    };
+    const plan = profile.plan || 'free';
+    const planClass = planMap[plan] || 'plan-free';
+    document.getElementById('info-plan').innerHTML = `<span class="plan-badge ${planClass}">${plan.charAt(0).toUpperCase() + plan.slice(1)}</span>`;
+    document.getElementById('plan-badge').textContent = plan.charAt(0).toUpperCase() + plan.slice(1);
+  }
+
+  async function loadChangeHistory() {
+    try {
+      const data = await apiGet('/api/dashboard/changes');
+      const timeline = document.getElementById('change-timeline');
+      const changes = data.changes || [];
+
+      if (changes.length === 0) {
+        timeline.innerHTML = '<div class="empty-state">No changes yet. Ask Mint to edit your site!</div>';
+        return;
+      }
+
+      const actionLabels = {
+        text_edit: '✏️ Text Updated',
+        photo_swap: '📸 Photo Changed',
+        booking_update: '📅 Booking Link Updated',
+        site_build: '🏗️ Site Built',
+        domain_setup: '🌐 Domain Configured',
+      };
+
+      timeline.innerHTML = changes.map(ch => {
+        const label = actionLabels[ch.action] || ch.action;
+        const time = formatTime(ch.timestamp);
+        return `
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-action">${label}</div>
+              <div class="timeline-details">${escapeHtml(ch.details)}</div>
+            </div>
+            <div class="timeline-time">${time}</div>
+          </div>`;
+      }).join('');
+    } catch {
+      // silent
+    }
+  }
+
+  // ── Chat ──
+
+  function addMessage(role, text) {
+    const msgs = document.getElementById('chat-messages');
+    const div = document.createElement('div');
+    div.className = `message ${role}`;
+
+    const avatar = role === 'assistant'
+      ? '<div class="message-avatar">🌿</div>'
+      : `<div class="message-avatar">${clerk.user?.firstName?.[0] || '?'}</div>`;
+
+    div.innerHTML = `${avatar}<div class="message-bubble" id="msg-${Date.now()}">${escapeHtml(text)}</div>`;
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+    return div.querySelector('.message-bubble');
+  }
+
+  function showTyping() {
+    const msgs = document.getElementById('chat-messages');
+    const div = document.createElement('div');
+    div.className = 'message assistant';
+    div.id = 'typing-indicator';
+    div.innerHTML = `<div class="message-avatar">🌿</div><div class="message-bubble"><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div>`;
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+    return div;
+  }
+
+  async function sendMessage(userMsg) {
+    if (!userMsg.trim() || isStreaming) return;
+    isStreaming = true;
+
+    const input = document.getElementById('chat-input');
+    const sendBtn = document.getElementById('btn-send');
+    input.value = '';
+    input.style.height = 'auto';
+    sendBtn.disabled = true;
+
+    addMessage('user', userMsg);
+    const typingEl = showTyping();
+
+    try {
+      const token = await getToken();
+      const res = await fetch(`${CONVEX_URL}/api/dashboard/chat`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          message: userMsg,
+          threadId,
+          context: siteSlug || 'getminted',
+        }),
+      });
+
+      // Get thread ID from header
+      const newThreadId = res.headers.get('X-Thread-Id');
+      if (newThreadId) threadId = newThreadId;
+
+      typingEl.remove();
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({ error: 'Request failed' }));
+        addMessage('assistant', `Sorry, something went wrong: ${err.error || res.status}`);
+        isStreaming = false;
+        sendBtn.disabled = false;
+        return;
+      }
+
+      // Stream response
+      const msgs = document.getElementById('chat-messages');
+      const div = document.createElement('div');
+      div.className = 'message assistant';
+      div.innerHTML = '<div class="message-avatar">🌿</div><div class="message-bubble"></div>';
+      msgs.appendChild(div);
+      const bubble = div.querySelector('.message-bubble');
+
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let fullText = '';
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        const chunk = decoder.decode(value, { stream: true });
+        fullText += chunk;
+        bubble.textContent = fullText;
+        msgs.scrollTop = msgs.scrollHeight;
+      }
+
+      // Reload change history after potential edits
+      setTimeout(loadChangeHistory, 1500);
+
+    } catch (e) {
+      typingEl?.remove();
+      addMessage('assistant', `Connection error: ${e.message}`);
+    }
+
+    isStreaming = false;
+    sendBtn.disabled = false;
+  }
+
+  // Send button
+  document.getElementById('btn-send').addEventListener('click', () => {
+    const val = document.getElementById('chat-input').value.trim();
+    if (val) sendMessage(val);
+  });
+
+  // Enter key (shift+enter for newline)
+  document.getElementById('chat-input').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      const val = e.target.value.trim();
+      if (val) sendMessage(val);
+    }
+  });
+
+  // Auto-resize textarea
+  document.getElementById('chat-input').addEventListener('input', function() {
+    this.style.height = 'auto';
+    this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+  });
+
+  // Quick messages
+  window.sendQuickMessage = (msg) => {
+    document.getElementById('chat-input').value = msg;
+    sendMessage(msg);
+  };
+
+  // ── File Upload ──
+
+  const dropZone = document.getElementById('drop-zone');
+  const fileInput = document.getElementById('file-input');
+  const uploadProgress = document.getElementById('upload-progress');
+
+  // Show drop zone on drag
+  document.querySelector('.chat-input-area').addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dropZone.classList.add('active', 'dragging');
+  });
+
+  document.querySelector('.chat-input-area').addEventListener('dragleave', (e) => {
+    if (!e.currentTarget.contains(e.relatedTarget)) {
+      dropZone.classList.remove('dragging');
+    }
+  });
+
+  document.querySelector('.chat-input-area').addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropZone.classList.remove('dragging');
+    const files = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/'));
+    if (files.length) uploadFiles(files);
+  });
+
+  fileInput.addEventListener('change', () => {
+    const files = Array.from(fileInput.files);
+    if (files.length) uploadFiles(files);
+    fileInput.value = '';
+  });
+
+  async function uploadFiles(files) {
+    if (!siteSlug) {
+      addMessage('assistant', "I don't know your site slug yet — your account may still be setting up. Please try again in a moment!");
+      return;
+    }
+
+    uploadProgress.style.display = 'block';
+    uploadProgress.textContent = `Uploading ${files.length} photo${files.length > 1 ? 's' : ''}...`;
+    dropZone.classList.remove('active');
+
+    try {
+      const token = await getToken();
+      const formData = new FormData();
+      formData.append('token', token);
+      formData.append('slug', siteSlug);
+      files.forEach(f => formData.append('files', f));
+
+      const res = await fetch(`${CONVEX_URL}/api/mint/upload`, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}` },
+        body: formData,
+      });
+
+      const data = await res.json();
+      uploadProgress.style.display = 'none';
+
+      if (res.ok) {
+        addMessage('assistant', `✅ ${data.message} Your gallery has been updated! Refresh the site preview to see the changes.`);
+        setTimeout(loadChangeHistory, 1000);
+      } else {
+        addMessage('assistant', `Upload issue: ${data.error || data.message}`);
+      }
+    } catch (e) {
+      uploadProgress.style.display = 'none';
+      addMessage('assistant', `Upload failed: ${e.message}`);
+    }
+  }
+
+  // ── Logout ──
+
+  document.getElementById('btn-logout').addEventListener('click', async () => {
+    await clerk.signOut();
+    window.location.reload();
+  });
+
+  // ── Helpers ──
+
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function formatTime(timestamp) {
+    const d = new Date(timestamp);
+    const now = new Date();
+    const diff = now - d;
+    if (diff < 60000) return 'just now';
+    if (diff < 3600000) return `${Math.floor(diff / 60000)}m ago`;
+    if (diff < 86400000) return `${Math.floor(diff / 3600000)}h ago`;
+    return d.toLocaleDateString();
+  }
+
+})();
+</script>
+</body>
+</html>
