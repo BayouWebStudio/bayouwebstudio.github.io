@@ -64,7 +64,7 @@ win.innerHTML=`
 </div>
 <div class="mint-messages"></div>
 <div class="mint-input-wrap">
-  <input class="mint-input" placeholder="Ask about this artist..." maxlength="500">
+  <input class="mint-input" placeholder="Ask me anything..." maxlength="500">
   <button class="mint-send" disabled>${sendIcon}</button>
 </div>`;
 
@@ -93,7 +93,7 @@ function toggle(){
     win.classList.add('open');
     bubble.classList.add('no-bounce');
     bubble.style.display='none';
-    if(!msgs.children.length)addMsg("Hey! I'm Mint, your AI concierge. Ask me anything about this artist.","bot");
+    if(!msgs.children.length)addMsg("Hey! I'm Mint 🌿 Ask me anything about this site!","bot");
     input.focus();
   }else{
     win.classList.remove('open');
@@ -118,7 +118,7 @@ async function send(){
   const typing=document.createElement('div');typing.className='mint-typing';typing.textContent='Mint is typing...';msgs.appendChild(typing);msgs.scrollTop=msgs.scrollHeight;
 
   try{
-    const r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:text,context:'weschetattoo',history:history.slice(-10)})});
+    const r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:text,context:(window.location.hostname.replace('www.','').replace('.com','').replace('.ai','').replace('.io','').replace('bayouwebstudio.github.io','').split('/').pop()||window.location.pathname.split('/').filter(Boolean)[0]||'general'),history:history.slice(-10)})});
     const d=await r.json();
     typing.remove();
     if(d.reply){addMsg(d.reply,'bot');history.push({role:'assistant',content:d.reply})}
