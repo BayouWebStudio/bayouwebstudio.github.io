@@ -1,72 +1,207 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cory Salls | Portfolio</title>
-  <meta name="description" content="Artist✍🏻💥Appointment only💥 all deposits and transactions are non-refundable (832) 208-9528">
-  <meta property="og:title" content="Cory Salls | Portfolio">
-  <meta property="og:description" content="Artist✍🏻💥Appointment only💥 all deposits and transactions are non-refundable (832) 208-9528">
-  <meta property="og:url" content="https://getminted.ai/corysalls/">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="https://getminted.ai/corysalls/img/photo_01.jpg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cory Salls | Tattoo Artist</title>
+  <meta name="description" content="Artist✍🏻💥Appointment only💥 all deposits and transactions are non-refundable (832) 208-9528" />
+  <meta name="keywords" content="Cory Salls, cory_salls, tattoo artist, tattoo" />
+
+  <meta property="og:title" content="Cory Salls | Tattoo Artist" />
+  <meta property="og:description" content="Artist✍🏻💥Appointment only💥 all deposits and transactions are non-refundable (832) 208-9528" />
+  <meta property="og:image" content="img/photo_01.jpg" />
+  <meta property="og:url" content="https://getminted.ai/corysalls/" />
+  <meta property="og:type" content="website" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Cory Salls | Tattoo Artist" />
+  <meta name="twitter:image" content="img/photo_01.jpg" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Cory Salls — Tattoo Artist",
+    "description": "Artist✍🏻💥Appointment only💥 all deposits and transactions are non-refundable (832) 208-9528",
+    "url": "https://getminted.ai/corysalls/",
+    "image": "img/photo_01.jpg",
+    "sameAs": ["https://www.instagram.com/cory_salls/"]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
   <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{background:#0a0a0a;color:#fff;font-family:'Inter',sans-serif;overflow-x:hidden}
-    .hero{min-height:60vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem}
-    .hero h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:700;margin-bottom:0.5rem}
-    .hero .accent{color:#C9A84C}
-    .hero p{max-width:600px;color:#aaa;font-size:1.1rem;line-height:1.6;margin-top:1rem}
-    .gallery{columns:2;column-gap:8px;padding:0 8px;max-width:1200px;margin:0 auto 4rem}
-    @media(min-width:768px){.gallery{columns:3}}
-    .gallery-item{break-inside:avoid;margin-bottom:8px;border-radius:8px;overflow:hidden;opacity:0;transform:translateY(20px);transition:opacity 0.6s,transform 0.6s}
-    .gallery-item.visible{opacity:1;transform:translateY(0)}
-    .gallery-item img{width:100%;display:block;cursor:pointer;transition:transform 0.3s}
-    .gallery-item img:hover{transform:scale(1.02)}
-    .book-btn{position:fixed;bottom:24px;right:24px;background:#C9A84C;color:#0a0a0a;border:none;padding:14px 28px;border-radius:50px;font-size:1rem;font-weight:600;cursor:pointer;text-decoration:none;z-index:100;box-shadow:0 4px 20px #C9A84C44;transition:transform 0.2s}
-    .book-btn:hover{transform:scale(1.05)}
-    .lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:200;align-items:center;justify-content:center;cursor:pointer}
-    .lightbox.open{display:flex}
-    .lightbox img{max-width:90vw;max-height:90vh;border-radius:8px}
-    footer{text-align:center;padding:2rem;color:#555;font-size:12px}
-    footer a{color:inherit;text-decoration:none;opacity:0.5}
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --accent: #C9A84C;
+      --black: #0a0a0a;
+      --dark: #111111;
+      --darker: #0d0d0d;
+      --text: #e8e8e8;
+      --muted: #888;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--black); color: var(--text); font-family: 'Inter', sans-serif; font-weight: 300; line-height: 1.6; overflow-x: hidden; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 2.5rem; background: rgba(10,10,10,0.88); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: var(--accent); letter-spacing: 0.05em; text-decoration: none; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.3s; }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* HERO */
+    #hero { position: relative; height: 100vh; min-height: 600px; display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; background-image: url('img/photo_01.jpg'); background-size: cover; background-position: center; filter: brightness(0.28); transform: scale(1.05); transition: transform 8s ease; }
+    #hero:hover .hero-bg { transform: scale(1.0); }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(10,10,10,0.2) 0%, rgba(10,10,10,0.75) 100%); }
+    .hero-content { position: relative; z-index: 2; max-width: 800px; padding: 0 1.5rem; }
+    .hero-eyebrow { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.32em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.2rem; }
+    .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 8vw, 6.5rem); font-weight: 900; line-height: 1.0; color: #fff; margin-bottom: 1.2rem; }
+    .hero-subtitle { font-size: clamp(0.9rem, 2vw, 1.1rem); color: rgba(255,255,255,0.6); font-weight: 300; letter-spacing: 0.06em; margin-bottom: 2.5rem; }
+    .hero-cta { display: inline-block; padding: 0.9rem 2.8rem; background: var(--accent); color: var(--black); text-decoration: none; font-weight: 600; font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; border: 2px solid var(--accent); transition: all 0.3s; }
+    .hero-cta:hover { background: transparent; color: var(--accent); }
+    .hero-scroll { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; color: rgba(255,255,255,0.35); font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; animation: bounce 2.2s infinite; }
+    .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--accent), transparent); }
+    @keyframes bounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(7px); } }
+
+    /* SECTIONS */
+    section { padding: 7rem 1.5rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.35em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; line-height: 1.15; margin-bottom: 1.5rem; }
+    .divider { width: 48px; height: 1px; background: var(--accent); margin: 1.5rem 0 2rem; }
+
+    /* ABOUT */
+    #about { background: var(--dark); }
+    .about-text p { color: rgba(232,232,232,0.72); font-size: 1rem; line-height: 1.85; margin-bottom: 1.4rem; }
+
+    /* GALLERY */
+    #gallery { background: var(--black); }
+    .gallery-grid { columns: 2; column-gap: 10px; }
+    @media(min-width: 768px) { .gallery-grid { columns: 3; } }
+    .gallery-item { break-inside: avoid; margin-bottom: 10px; position: relative; overflow: hidden; cursor: pointer; }
+    .gallery-item img { width: 100%; display: block; transition: transform 0.6s ease, filter 0.4s ease; filter: grayscale(10%); }
+    .gallery-item:hover img { transform: scale(1.06); filter: grayscale(0%); }
+    .gallery-item-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,10,10,0.7) 0%, transparent 50%); opacity: 0; transition: opacity 0.4s; }
+    .gallery-item:hover .gallery-item-overlay { opacity: 1; }
+
+    /* FLOAT BOOK */
+    .float-book { position: fixed; bottom: 2rem; right: 2rem; z-index: 200; background: var(--accent); color: var(--black); padding: 0.85rem 1.8rem; text-decoration: none; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; box-shadow: 0 8px 32px color-mix(in srgb, var(--accent) 35%, transparent); transition: all 0.3s; border: 2px solid var(--accent); }
+    .float-book:hover { background: transparent; color: var(--accent); }
+
+    /* LIGHTBOX */
+    .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 300; align-items: center; justify-content: center; cursor: pointer; }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 90vw; max-height: 90vh; }
+
+    /* FOOTER */
+    footer { background: var(--darker); border-top: 1px solid rgba(255,255,255,0.05); padding: 3rem 1.5rem; text-align: center; }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--accent); margin-bottom: 1rem; display: block; }
+    .footer-links { display: flex; justify-content: center; gap: 2rem; margin: 1.5rem 0; list-style: none; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.8rem; transition: color 0.3s; }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-copy { font-size: 0.75rem; color: rgba(136,136,136,0.5); margin-top: 1.5rem; }
+    .mint-credit { font-size: 0.7rem; color: rgba(136,136,136,0.5); margin-top: 0.6rem; }
+    .mint-credit a { color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.3s; }
+    .mint-credit a:hover { color: var(--accent); }
+
+    /* FADE IN */
+    .fade-in { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .float-book { bottom: 1.2rem; right: 1.2rem; padding: 0.75rem 1.4rem; }
+    }
   </style>
 </head>
 <body>
-  <section class="hero">
-    <h1><span class="accent">Cory Salls</span></h1>
-    <p>Artist✍🏻💥Appointment only💥 all deposits and transactions are non-refundable (832) 208-9528</p>
+
+  <nav>
+    <a href="#hero" class="nav-logo">Cory Salls</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#gallery">Portfolio</a></li>
+      <li><a href="https://instagram.com/cory_salls">Book</a></li>
+    </ul>
+  </nav>
+
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Tattoo Artist</p>
+      <h1 class="hero-title">Cory Salls</h1>
+      <p class="hero-subtitle">@cory_salls</p>
+      <a href="https://instagram.com/cory_salls" target="_blank" class="hero-cta">Book a Session</a>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
   </section>
 
-  <section class="gallery">
-    <div class="gallery-item" style="animation-delay:0s"><img src="img/photo_01.jpg" alt="Cory Salls work 1" loading="lazy" onclick="openLightbox(this.src)"></div>
-          <div class="gallery-item" style="animation-delay:0.1s"><img src="img/photo_02.jpg" alt="Cory Salls work 2" loading="lazy" onclick="openLightbox(this.src)"></div>
-          <div class="gallery-item" style="animation-delay:0.2s"><img src="img/photo_03.jpg" alt="Cory Salls work 3" loading="lazy" onclick="openLightbox(this.src)"></div>
-          <div class="gallery-item" style="animation-delay:0.30000000000000004s"><img src="img/photo_04.jpg" alt="Cory Salls work 4" loading="lazy" onclick="openLightbox(this.src)"></div>
-          <div class="gallery-item" style="animation-delay:0.4s"><img src="img/photo_05.jpg" alt="Cory Salls work 5" loading="lazy" onclick="openLightbox(this.src)"></div>
-          <div class="gallery-item" style="animation-delay:0.5s"><img src="img/photo_06.jpg" alt="Cory Salls work 6" loading="lazy" onclick="openLightbox(this.src)"></div>
-          <div class="gallery-item" style="animation-delay:0.6000000000000001s"><img src="img/photo_07.jpg" alt="Cory Salls work 7" loading="lazy" onclick="openLightbox(this.src)"></div>
-          <div class="gallery-item" style="animation-delay:0.7000000000000001s"><img src="img/photo_08.jpg" alt="Cory Salls work 8" loading="lazy" onclick="openLightbox(this.src)"></div>
+  <section id="about">
+    <div class="container">
+      <div class="fade-in">
+        <p class="section-label">About the Artist</p>
+        <h2 class="section-title">Cory Salls</h2>
+        <div class="divider"></div>
+        <div class="about-text">
+          <p>Artist✍🏻💥Appointment only💥 all deposits and transactions are non-refundable (832) 208-9528</p>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <a href="https://instagram.com/cory_salls" target="_blank" class="book-btn">Book Now</a>
+  <section id="gallery">
+    <div class="container">
+      <p class="section-label fade-in">Portfolio</p>
+      <h2 class="section-title fade-in">Recent Work</h2>
+      <div class="divider fade-in"></div>
+      <div class="gallery-grid">
+        <div class="gallery-item fade-in" style="transition-delay:0s"><img src="img/photo_01.jpg" alt="Cory Salls work 1" loading="lazy" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"></div></div>
+        <div class="gallery-item fade-in" style="transition-delay:0.07s"><img src="img/photo_02.jpg" alt="Cory Salls work 2" loading="lazy" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"></div></div>
+        <div class="gallery-item fade-in" style="transition-delay:0.14s"><img src="img/photo_03.jpg" alt="Cory Salls work 3" loading="lazy" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"></div></div>
+        <div class="gallery-item fade-in" style="transition-delay:0.21000000000000002s"><img src="img/photo_04.jpg" alt="Cory Salls work 4" loading="lazy" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"></div></div>
+        <div class="gallery-item fade-in" style="transition-delay:0.28s"><img src="img/photo_05.jpg" alt="Cory Salls work 5" loading="lazy" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"></div></div>
+        <div class="gallery-item fade-in" style="transition-delay:0.35000000000000003s"><img src="img/photo_06.jpg" alt="Cory Salls work 6" loading="lazy" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"></div></div>
+        <div class="gallery-item fade-in" style="transition-delay:0.42000000000000004s"><img src="img/photo_07.jpg" alt="Cory Salls work 7" loading="lazy" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"></div></div>
+        <div class="gallery-item fade-in" style="transition-delay:0.49000000000000005s"><img src="img/photo_08.jpg" alt="Cory Salls work 8" loading="lazy" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"></div></div>
+        <div class="gallery-item fade-in" style="transition-delay:0.56s"><img src="img/photo_09.jpg" alt="Cory Salls work 9" loading="lazy" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <a href="https://instagram.com/cory_salls" target="_blank" class="float-book">Book Now</a>
 
   <div class="lightbox" id="lightbox" onclick="this.classList.remove('open')">
-    <img id="lightbox-img" src="" alt="Full size">
+    <img id="lightbox-img" src="" alt="Full size" />
   </div>
 
   <footer>
-    <a href="https://getminted.ai" target="_blank" style="color:inherit;text-decoration:none;opacity:0.5;font-size:12px;">Minted by Mint 🌿</a>
+    <span class="footer-logo">Cory Salls</span>
+    <ul class="footer-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="https://instagram.com/cory_salls" target="_blank" rel="noopener">Instagram</a></li>
+    </ul>
+    <p class="footer-copy">&copy; 2026 Cory Salls. All rights reserved.</p>
+    <p class="mint-credit">Minted by <a href="https://getminted.ai" target="_blank" rel="noopener">Mint 🌿</a></p>
   </footer>
 
   <script>
     function openLightbox(src){document.getElementById('lightbox-img').src=src;document.getElementById('lightbox').classList.add('open')}
-    const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:0.1});
-    document.querySelectorAll('.gallery-item').forEach(el=>observer.observe(el));
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
   </script>
   <script src="https://getminted.ai/mint-widget.js"></script>
 </body>
-<!-- v1772485166 -->
 </html>
