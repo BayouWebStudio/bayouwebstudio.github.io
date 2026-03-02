@@ -77,6 +77,10 @@
 
     /* ABOUT */
     #about { background: var(--dark); }
+    .about-grid { display: grid; grid-template-columns: 1fr; gap: 3rem; align-items: center; }
+    @media(min-width: 768px) { .about-grid { grid-template-columns: 280px 1fr; } }
+    .about-portrait { width: 100%; max-width: 280px; aspect-ratio: 1; object-fit: cover; border-radius: 8px; filter: grayscale(20%); transition: filter 0.4s; }
+    .about-portrait:hover { filter: grayscale(0%); }
     .about-text p { color: rgba(232,232,232,0.72); font-size: 1rem; line-height: 1.85; margin-bottom: 1.4rem; }
 
     /* GALLERY */
@@ -152,8 +156,11 @@
         <p class="section-label">About the Artist</p>
         <h2 class="section-title">Cory Salls</h2>
         <div class="divider"></div>
-        <div class="about-text">
-          <p>Artist✍🏻💥Appointment only💥 all deposits and transactions are non-refundable (832) 208-9528</p>
+        <div class="about-grid">
+          <img src="img/profile.jpg" alt="Cory Salls" class="about-portrait" loading="lazy">
+          <div class="about-text">
+            <p>Artist✍🏻💥Appointment only💥 all deposits and transactions are non-refundable (832) 208-9528</p>
+          </div>
         </div>
       </div>
     </div>
