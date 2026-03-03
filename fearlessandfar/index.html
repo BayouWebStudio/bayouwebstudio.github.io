@@ -1,376 +1,590 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mike Corey - Adventure Travel Expert | Artist</title>
-  <meta name="description" content="🐉 Helping You Live an Adventurous Life
-🌋 Retreats, Expeditions, and Glory 
-🤘🏻 3M on YouTube + TV Emmy 
-@fearlessexpeditions" />
-  <meta name="keywords" content="Mike Corey - Adventure Travel Expert, fearlessandfar, artist" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fearless & Far — Mike Corey | Adventure Travel & Emmy Award-Winning Host</title>
+<meta name="description" content="Mike Corey is an Emmy Award-winning adventure travel host, YouTuber with 2.8M+ subscribers, BBC presenter, and filmmaker. Explore the world fearlessly.">
+<meta property="og:title" content="Fearless & Far — Mike Corey">
+<meta property="og:description" content="Emmy Award-winning adventure travel host, YouTuber with 2.8M+ subscribers, BBC presenter, and filmmaker.">
+<meta property="og:image" content="img/photo_01.jpg">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fearlessandfar.com">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Fearless & Far — Mike Corey">
+<meta name="twitter:description" content="Emmy Award-winning adventure travel host with 2.8M+ YouTube subscribers.">
+<meta name="twitter:image" content="img/photo_01.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Mike Corey",
+  "alternateName": "Fearless & Far",
+  "url": "https://fearlessandfar.com",
+  "jobTitle": "Adventure Travel Host & Filmmaker",
+  "description": "Emmy Award-winning adventure travel host with 2.8M+ YouTube subscribers",
+  "sameAs": [
+    "https://youtube.com/@fearlessandfar",
+    "https://instagram.com/fearlessandfar",
+    "https://tiktok.com/@fearlessandfar"
+  ],
+  "award": "Emmy Award for Outstanding Host"
+}
+</script>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-  <meta property="og:title" content="Mike Corey - Adventure Travel Expert | Artist" />
-  <meta property="og:description" content="🐉 Helping You Live an Adventurous Life
-🌋 Retreats, Expeditions, and Glory 
-🤘🏻 3M on YouTube + TV Emmy 
-@fearlessexpeditions" />
-  <meta property="og:image" content="img/photo_01.jpg" />
-  <meta property="og:url" content="https://getminted.ai/fearlessandfar/" />
-  <meta property="og:type" content="website" />
+:root {
+  --navy: #0a0f1a;
+  --navy-light: #111827;
+  --amber: #E8A838;
+  --amber-dark: #c98e2a;
+  --teal: #2A9D8F;
+  --offwhite: #f0ece4;
+  --gray: #9ca3af;
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', -apple-system, sans-serif;
+}
 
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Mike Corey - Adventure Travel Expert | Artist" />
-  <meta name="twitter:image" content="img/photo_01.jpg" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="format-detection" content="telephone=no" />
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--font-body);
+  background: var(--navy);
+  color: var(--offwhite);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-  <script>document.documentElement.classList.add('js-loaded')</script>
+/* Fade-in animations — only when JS loaded */
+.fade-section { opacity: 0; -webkit-transform: translateY(40px); transform: translateY(40px); -webkit-transition: opacity 0.8s ease, -webkit-transform 0.8s ease; transition: opacity 0.8s ease, transform 0.8s ease; }
+.js-loaded .fade-section.visible { opacity: 1; -webkit-transform: translateY(0); transform: translateY(0); }
 
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "Mike Corey - Adventure Travel Expert — Artist",
-    "description": "🐉 Helping You Live an Adventurous Life
-🌋 Retreats, Expeditions, and Glory 
-🤘🏻 3M on YouTube + TV Emmy 
-@fearlessexpeditions",
-    "url": "https://getminted.ai/fearlessandfar/",
-    "image": "img/photo_01.jpg",
-    "sameAs": ["https://www.instagram.com/fearlessandfar/"]
-  }
-  </script>
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: -webkit-flex; display: flex;
+  -webkit-justify-content: space-between; justify-content: space-between;
+  -webkit-align-items: center; align-items: center;
+  padding: 1.2rem 2.5rem;
+  background: transparent;
+  -webkit-transition: background 0.4s ease, box-shadow 0.4s ease;
+  transition: background 0.4s ease, box-shadow 0.4s ease;
+}
+nav.scrolled { background: rgba(10,15,26,0.95); box-shadow: 0 2px 20px rgba(0,0,0,0.3); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.nav-logo { font-family: var(--font-heading); font-weight: 700; font-size: 1.2rem; letter-spacing: 3px; color: var(--offwhite); text-decoration: none; text-transform: uppercase; }
+.nav-links { display: -webkit-flex; display: flex; gap: 2rem; list-style: none; }
+.nav-links a { color: var(--gray); text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; -webkit-transition: color 0.3s; transition: color 0.3s; }
+.nav-links a:hover { color: var(--amber); }
+.nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; }
+.nav-toggle span { display: block; width: 24px; height: 2px; background: var(--offwhite); margin: 5px 0; -webkit-transition: all 0.3s; transition: all 0.3s; }
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+/* HERO */
+.hero {
+  position: relative; height: 100vh; min-height: 600px;
+  display: -webkit-flex; display: flex;
+  -webkit-flex-direction: column; flex-direction: column;
+  -webkit-justify-content: center; justify-content: center;
+  -webkit-align-items: center; align-items: center;
+  text-align: center;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background: url('img/photo_01.jpg') center center / cover no-repeat;
+  -webkit-filter: brightness(0.35); filter: brightness(0.35);
+}
+.hero-overlay {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(180deg, rgba(10,15,26,0.4) 0%, rgba(10,15,26,0.2) 50%, rgba(10,15,26,0.8) 100%);
+}
+.hero-content { position: relative; z-index: 2; padding: 0 1.5rem; }
+.hero-content h1 {
+  font-family: var(--font-heading); font-weight: 900;
+  font-size: clamp(3rem, 10vw, 7rem);
+  letter-spacing: 0.15em; line-height: 1;
+  margin-bottom: 1.2rem;
+  text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+}
+.hero-content h1 .amp { color: var(--amber); }
+.hero-sub {
+  font-size: clamp(0.85rem, 2vw, 1.1rem);
+  font-weight: 400; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--gray); margin-bottom: 2.5rem;
+}
+.hero-sub span { color: var(--amber); }
+.btn-primary {
+  display: inline-block; padding: 1rem 2.5rem;
+  background: var(--amber); color: var(--navy);
+  font-family: var(--font-body); font-weight: 700; font-size: 0.9rem;
+  letter-spacing: 2px; text-transform: uppercase; text-decoration: none;
+  border: none; cursor: pointer;
+  -webkit-transition: background 0.3s, -webkit-transform 0.2s;
+  transition: background 0.3s, transform 0.2s;
+}
+.btn-primary:hover { background: var(--amber-dark); -webkit-transform: translateY(-2px); transform: translateY(-2px); }
+.scroll-indicator {
+  position: absolute; bottom: 2rem; left: 50%;
+  -webkit-transform: translateX(-50%); transform: translateX(-50%);
+  z-index: 2; opacity: 0.6;
+  -webkit-animation: bounce 2s infinite; animation: bounce 2s infinite;
+}
+.scroll-indicator svg { width: 28px; height: 28px; stroke: var(--offwhite); fill: none; stroke-width: 2; }
+@-webkit-keyframes bounce { 0%,100% { -webkit-transform: translateX(-50%) translateY(0); } 50% { -webkit-transform: translateX(-50%) translateY(10px); } }
+@keyframes bounce { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(10px); } }
 
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --accent: #98E8C1;
-      --black: #0a0a0a;
-      --dark: #111111;
-      --darker: #0d0d0d;
-      --text: #e8e8e8;
-      --muted: #888;
-    }
-    html { scroll-behavior: smooth; /* may not work in IG WebView — links still work */ }
-    body { background: var(--black); color: var(--text); font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif; font-weight: 300; line-height: 1.6; overflow-x: hidden; }
+/* SECTIONS */
+section { padding: 6rem 2rem; }
+.section-inner { max-width: 1200px; margin: 0 auto; }
+.section-label {
+  font-size: 0.75rem; font-weight: 600; letter-spacing: 4px; text-transform: uppercase;
+  color: var(--amber); margin-bottom: 0.8rem;
+}
+.section-title {
+  font-family: var(--font-heading); font-weight: 700;
+  font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1.5rem; line-height: 1.2;
+}
 
-    /* NAV */
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 2.5rem; background: rgba(10,10,10,0.88); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.06); }
-    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: var(--accent); letter-spacing: 0.05em; text-decoration: none; }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.3s; }
-    .nav-links a:hover { color: var(--accent); }
+/* ABOUT */
+.about-grid {
+  display: -webkit-flex; display: flex; gap: 4rem;
+  -webkit-align-items: center; align-items: center;
+}
+.about-img-wrap { -webkit-flex: 0 0 320px; flex: 0 0 320px; position: relative; }
+.about-img-wrap img {
+  width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block;
+  border: 3px solid var(--amber);
+}
+.about-img-frame {
+  position: absolute; top: 12px; left: 12px; right: -12px; bottom: -12px;
+  border: 2px solid var(--teal); z-index: -1;
+}
+.about-text p { color: var(--gray); line-height: 1.8; margin-bottom: 1.2rem; font-size: 1.05rem; }
+.stats-row {
+  display: -webkit-flex; display: flex; gap: 2rem;
+  margin-top: 2.5rem; padding-top: 2rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  -webkit-flex-wrap: wrap; flex-wrap: wrap;
+}
+.stat { text-align: center; -webkit-flex: 1; flex: 1; min-width: 100px; }
+.stat-num { font-family: var(--font-heading); font-size: 1.8rem; font-weight: 800; color: var(--amber); }
+.stat-label { font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); margin-top: 0.3rem; }
 
-    /* HERO */
-    #hero { position: relative; height: 100vh; min-height: 600px; display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden; }
-    .hero-bg { position: absolute; top:0;right:0;bottom:0;left:0; background-image: url('img/photo_01.jpg'); background-size: cover; background-position: center; filter: brightness(0.42); -webkit-transform: scale(1.05); transform: scale(1.05); -webkit-transition: -webkit-transform 8s ease; transition: transform 8s ease; }
-    #hero:hover .hero-bg { -webkit-transform: scale(1.0); transform: scale(1.0); }
-    .hero-overlay { position: absolute; top:0;right:0;bottom:0;left:0; background: linear-gradient(to bottom, rgba(10,10,10,0.2) 0%, rgba(10,10,10,0.75) 100%); }
-    .hero-content { position: relative; z-index: 2; max-width: 800px; padding: 0 1.5rem; }
-    .hero-eyebrow { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.32em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.2rem; }
-    .hero-title { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(3rem, 8vw, 6.5rem); font-weight: 900; line-height: 1.0; color: #fff; margin-bottom: 1.2rem; }
-    .hero-subtitle { font-size: clamp(0.9rem, 2vw, 1.1rem); color: rgba(255,255,255,0.6); font-weight: 300; letter-spacing: 0.06em; margin-bottom: 2.5rem; }
-    .hero-cta { display: inline-block; padding: 0.9rem 2.8rem; background: var(--accent); color: var(--black); text-decoration: none; font-weight: 600; font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; border: 2px solid var(--accent); transition: all 0.3s; }
-    .hero-cta:hover { background: transparent; color: var(--accent); }
-    .hero-scroll { position: absolute; bottom: 2rem; left: 50%; -webkit-transform: translateX(-50%); transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; color: rgba(255,255,255,0.35); font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; -webkit-animation: bounce 2.2s infinite; animation: bounce 2.2s infinite; }
-    .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--accent), transparent); }
-    @-webkit-keyframes bounce { 0%, 100% { -webkit-transform: translateX(-50%) translateY(0); } 50% { -webkit-transform: translateX(-50%) translateY(7px); } }
-    @keyframes bounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(7px); } }
+/* WHAT I DO */
+.pillars {
+  display: -webkit-flex; display: flex; gap: 2rem;
+  -webkit-flex-wrap: wrap; flex-wrap: wrap;
+}
+.pillar {
+  -webkit-flex: 1; flex: 1; min-width: 280px;
+  background: var(--navy-light); padding: 2.5rem 2rem;
+  border: 1px solid rgba(255,255,255,0.06);
+  -webkit-transition: border-color 0.3s, -webkit-transform 0.3s;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.pillar:hover { border-color: var(--amber); -webkit-transform: translateY(-4px); transform: translateY(-4px); }
+.pillar-icon { font-size: 2rem; margin-bottom: 1rem; }
+.pillar h3 { font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 0.8rem; }
+.pillar p { color: var(--gray); line-height: 1.7; font-size: 0.95rem; }
 
-    /* SECTIONS */
-    section { padding: 7rem 1.5rem; }
-    .container { max-width: 1100px; margin: 0 auto; }
-    .section-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.35em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem; }
-    .section-title { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; line-height: 1.15; margin-bottom: 1.5rem; }
-    .divider { width: 48px; height: 1px; background: var(--accent); margin: 1.5rem 0 2rem; }
+/* GALLERY */
+.gallery-section { background: var(--navy-light); }
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 280px;
+  gap: 8px;
+}
+.gallery-item {
+  position: relative; overflow: hidden; cursor: pointer;
+}
+.gallery-item img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  -webkit-transition: -webkit-transform 0.6s ease; transition: transform 0.6s ease;
+}
+.gallery-item:hover img { -webkit-transform: scale(1.08); transform: scale(1.08); }
+.gallery-item .g-overlay {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(transparent 50%, rgba(10,15,26,0.8));
+  opacity: 0; -webkit-transition: opacity 0.4s; transition: opacity 0.4s;
+  display: -webkit-flex; display: flex;
+  -webkit-align-items: flex-end; align-items: flex-end;
+  padding: 1.2rem;
+}
+.gallery-item:hover .g-overlay { opacity: 1; }
+.g-overlay span { font-size: 0.85rem; font-weight: 500; letter-spacing: 1px; }
+.gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+.gallery-item:nth-child(5) { grid-column: span 2; }
 
-    /* ABOUT */
-    #about { background: var(--dark); }
-    .about-grid { display: grid; grid-template-columns: 1fr; gap: 3rem; align-items: center; }
-    @media(min-width: 768px) { .about-grid { grid-template-columns: 1fr 1fr; gap: 5rem; } }
-    .about-img-wrap { position: relative; display: inline-block; }
-    .about-img-wrap::before { content: ''; position: absolute; top: -12px; left: -12px; right: 12px; bottom: 12px; border: 1px solid rgba(152,232,193,0.35); pointer-events: none; }
-    .about-portrait { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; filter: grayscale(20%); -webkit-transition: filter 0.4s; transition: filter 0.4s; }
-    .about-portrait:hover { filter: grayscale(0%); }
-    .about-content { display: flex; flex-direction: column; justify-content: center; }
-    .about-text p { color: rgba(232,232,232,0.72); font-size: 1rem; line-height: 1.85; margin-bottom: 1.4rem; }
-    .about-stats { display: flex; gap: 2.5rem; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.07); }
-    .stat-block { display: flex; flex-direction: column; }
-    .stat-number { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--accent); }
-    .stat-label { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-top: 0.2rem; }
+/* LIGHTBOX */
+.lightbox {
+  display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 1000; background: rgba(0,0,0,0.92);
+  -webkit-justify-content: center; justify-content: center;
+  -webkit-align-items: center; align-items: center;
+}
+.lightbox.active { display: -webkit-flex; display: flex; }
+.lightbox img { max-width: 90vw; max-height: 85vh; object-fit: contain; }
+.lightbox-close {
+  position: absolute; top: 1.5rem; right: 2rem;
+  background: none; border: none; color: white; font-size: 2.5rem;
+  cursor: pointer; line-height: 1;
+}
+.lightbox-nav {
+  position: absolute; top: 50%; background: none; border: none;
+  color: white; font-size: 3rem; cursor: pointer; padding: 1rem;
+  -webkit-transform: translateY(-50%); transform: translateY(-50%);
+}
+.lightbox-prev { left: 1rem; }
+.lightbox-next { right: 1rem; }
 
-    /* GALLERY */
-    #gallery { background: var(--black); }
-    .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    .gallery-item { position: relative; overflow: hidden; cursor: pointer; }
-    .gallery-item img { width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block; -webkit-transition: -webkit-transform 0.6s ease, filter 0.4s ease; transition: transform 0.6s ease, filter 0.4s ease; filter: grayscale(10%); }
-    .gallery-item:hover img { -webkit-transform: scale(1.06); transform: scale(1.06); filter: grayscale(0%); }
-    .gallery-item-overlay { position: absolute; top:0;right:0;bottom:0;left:0; background: linear-gradient(to top, rgba(10,10,10,0.8) 0%, transparent 55%); opacity: 0; -webkit-transition: opacity 0.4s; transition: opacity 0.4s; display: flex; align-items: flex-end; padding: 1.2rem; }
-    .gallery-item:hover .gallery-item-overlay { opacity: 1; }
-    .gallery-item-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); }
+/* FEATURED IN */
+.featured-logos {
+  display: -webkit-flex; display: flex;
+  -webkit-justify-content: center; justify-content: center;
+  -webkit-align-items: center; align-items: center;
+  gap: 4rem;
+  -webkit-flex-wrap: wrap; flex-wrap: wrap;
+  margin-top: 2rem;
+}
+.featured-logo {
+  font-family: var(--font-heading); font-size: 1.6rem; font-weight: 700;
+  color: rgba(240,236,228,0.25); letter-spacing: 3px; text-transform: uppercase;
+  -webkit-transition: color 0.3s; transition: color 0.3s;
+}
+.featured-logo:hover { color: rgba(240,236,228,0.6); }
 
-    /* SPECIALTIES */
-    #styles { background: var(--darker); }
-    .styles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
-    .style-card { border: 1px solid rgba(152,232,193,0.18); padding: 2rem 1.5rem; -webkit-transition: border-color 0.3s, background 0.3s; transition: border-color 0.3s, background 0.3s; }
-    .style-card:hover { border-color: var(--accent); background: rgba(152,232,193,0.04); }
-    .style-icon { font-size: 1.8rem; margin-bottom: 1rem; }
-    .style-card h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; margin-bottom: 0.7rem; }
-    .style-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
-    @media (max-width: 900px) { .styles-grid { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 600px) { .styles-grid { grid-template-columns: 1fr; } }
+/* YOUTUBE CTA */
+.yt-cta {
+  background: linear-gradient(135deg, var(--navy) 0%, #111827 100%);
+  text-align: center; position: relative; overflow: hidden;
+}
+.yt-cta::before {
+  content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+  background: radial-gradient(circle at 50% 50%, rgba(232,168,56,0.06) 0%, transparent 60%);
+}
+.yt-cta .section-inner { position: relative; z-index: 1; }
+.yt-cta .section-title { font-size: clamp(2rem, 5vw, 3.5rem); }
+.yt-quote {
+  font-family: var(--font-heading); font-style: italic;
+  font-size: 1.3rem; color: var(--gray); max-width: 600px;
+  margin: 0 auto 2.5rem; line-height: 1.6;
+}
+.yt-quote::before { content: '"'; color: var(--amber); font-size: 3rem; line-height: 0; vertical-align: -0.5rem; margin-right: 0.2rem; }
 
-    /* BOOKING */
-    #booking { background: var(--dark); }
-    .booking-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
-    .booking-info p { color: rgba(232,232,232,0.7); font-size: 0.95rem; line-height: 1.9; margin-bottom: 1.2rem; }
-    .booking-contact-list { list-style: none; margin-top: 2rem; }
-    .booking-contact-list li { padding: 1rem 0; border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; gap: 1rem; }
-    .booking-contact-list li:first-child { border-top: 1px solid rgba(255,255,255,0.06); }
-    .contact-icon { width: 38px; height: 38px; border-radius: 50%; background: rgba(152,232,193,0.1); border: 1px solid rgba(152,232,193,0.25); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
-    .contact-detail { display: flex; flex-direction: column; }
-    .contact-label { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
-    .contact-value { font-size: 0.92rem; color: var(--text); }
-    .contact-value a { color: var(--accent); text-decoration: none; }
-    .booking-form-box { background: rgba(255,255,255,0.02); border: 1px solid rgba(152,232,193,0.15); padding: 2.5rem; }
-    .booking-form-box h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 0.5rem; }
-    .booking-form-box > p { font-size: 0.88rem; color: var(--muted); margin-bottom: 2rem; }
-    .form-group { margin-bottom: 1.2rem; }
-    .form-group label { display: block; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
-    .form-group input, .form-group textarea, .form-group select { width: 100%; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); color: var(--text); padding: 0.75rem 1rem; font-family: 'Inter', sans-serif; font-size: 0.9rem; outline: none; -webkit-transition: border-color 0.3s; transition: border-color 0.3s; -webkit-appearance: none; }
-    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--accent); }
-    .form-group textarea { resize: vertical; min-height: 110px; }
-    .form-submit { width: 100%; background: var(--accent); color: var(--black); border: 2px solid var(--accent); padding: 0.9rem 2rem; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; cursor: pointer; -webkit-transition: all 0.3s; transition: all 0.3s; }
-    .form-submit:hover { background: transparent; color: var(--accent); }
-    @media (max-width: 900px) { .booking-grid { grid-template-columns: 1fr; gap: 3rem; } }
+/* CONTACT */
+.contact-grid {
+  display: -webkit-flex; display: flex; gap: 4rem;
+  -webkit-flex-wrap: wrap; flex-wrap: wrap;
+}
+.contact-left, .contact-right { -webkit-flex: 1; flex: 1; min-width: 300px; }
+.contact-left h3, .contact-right h3 { font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 1rem; }
+.contact-left p { color: var(--gray); line-height: 1.7; margin-bottom: 1rem; }
+.contact-email { color: var(--amber); text-decoration: none; font-weight: 600; font-size: 1.1rem; }
+.contact-email:hover { text-decoration: underline; }
+.social-links { display: -webkit-flex; display: flex; gap: 1rem; margin-top: 1.5rem; }
+.social-links a {
+  width: 44px; height: 44px;
+  display: -webkit-flex; display: flex;
+  -webkit-justify-content: center; justify-content: center;
+  -webkit-align-items: center; align-items: center;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: var(--offwhite); text-decoration: none; font-size: 1.1rem;
+  -webkit-transition: border-color 0.3s, color 0.3s;
+  transition: border-color 0.3s, color 0.3s;
+}
+.social-links a:hover { border-color: var(--amber); color: var(--amber); }
+.contact-form { display: -webkit-flex; display: flex; -webkit-flex-direction: column; flex-direction: column; gap: 1rem; }
+.contact-form input, .contact-form select, .contact-form textarea {
+  background: var(--navy-light); border: 1px solid rgba(255,255,255,0.1);
+  color: var(--offwhite); padding: 0.9rem 1rem; font-family: var(--font-body);
+  font-size: 0.95rem; -webkit-appearance: none; appearance: none;
+  -webkit-transition: border-color 0.3s; transition: border-color 0.3s;
+}
+.contact-form input:focus, .contact-form select:focus, .contact-form textarea:focus {
+  outline: none; border-color: var(--amber);
+}
+.contact-form textarea { min-height: 120px; resize: vertical; }
+.contact-form select { cursor: pointer; }
+.contact-form option { background: var(--navy); }
+.btn-submit {
+  padding: 1rem 2rem; background: var(--amber); color: var(--navy);
+  font-weight: 700; font-size: 0.85rem; letter-spacing: 2px;
+  text-transform: uppercase; border: none; cursor: pointer;
+  -webkit-transition: background 0.3s; transition: background 0.3s;
+  font-family: var(--font-body);
+}
+.btn-submit:hover { background: var(--amber-dark); }
 
-    /* FLOAT BOOK */
-    .float-book { position: fixed; bottom: 2rem; right: 2rem; z-index: 200; background: var(--accent); color: var(--black); padding: 0.85rem 1.8rem; text-decoration: none; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; box-shadow: 0 8px 32px rgba(152,232,193,0.35); -webkit-transition: all 0.3s; transition: all 0.3s; border: 2px solid var(--accent); }
-    .float-book:hover { background: transparent; color: var(--accent); }
+/* FOOTER */
+footer {
+  padding: 3rem 2rem; border-top: 1px solid rgba(255,255,255,0.06);
+  text-align: center;
+}
+footer .footer-brand { font-family: var(--font-heading); font-weight: 700; letter-spacing: 3px; font-size: 1rem; margin-bottom: 1rem; }
+footer .footer-links { display: -webkit-flex; display: flex; -webkit-justify-content: center; justify-content: center; gap: 1.5rem; margin-bottom: 1.5rem; }
+footer .footer-links a { color: var(--gray); text-decoration: none; font-size: 0.85rem; -webkit-transition: color 0.3s; transition: color 0.3s; }
+footer .footer-links a:hover { color: var(--amber); }
+footer .footer-credit { font-size: 0.75rem; color: rgba(255,255,255,0.25); }
+footer .footer-credit a { color: rgba(255,255,255,0.35); text-decoration: none; }
 
-    /* LIGHTBOX */
-    .lightbox { visibility: hidden; opacity: 0; pointer-events: none; position: fixed; top:0;right:0;bottom:0;left:0; background: rgba(0,0,0,0.95); z-index: 300; display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; -webkit-justify-content: center; justify-content: center; cursor: pointer; -webkit-transition: opacity 0.3s; transition: opacity 0.3s; }
-    .lightbox.open { visibility: visible; opacity: 1; pointer-events: auto; }
-    .lightbox img { max-width: 90vw; max-height: 90vh; }
+/* FLOAT BTN */
+.float-btn {
+  position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 90;
+  padding: 0.9rem 1.8rem;
+  background: #ff0000; color: white;
+  font-family: var(--font-body); font-weight: 700; font-size: 0.8rem;
+  letter-spacing: 1px; text-transform: uppercase; text-decoration: none;
+  box-shadow: 0 4px 20px rgba(255,0,0,0.3);
+  display: -webkit-flex; display: flex;
+  -webkit-align-items: center; align-items: center; gap: 0.5rem;
+  -webkit-transition: -webkit-transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.float-btn:hover { -webkit-transform: translateY(-2px); transform: translateY(-2px); box-shadow: 0 6px 25px rgba(255,0,0,0.4); }
+.float-btn svg { width: 18px; height: 18px; fill: white; }
 
-    /* FOOTER */
-    footer { background: var(--darker); border-top: 1px solid rgba(255,255,255,0.05); padding: 3rem 1.5rem; text-align: center; }
-    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--accent); margin-bottom: 1rem; display: block; }
-    .footer-links { display: flex; justify-content: center; gap: 2rem; margin: 1.5rem 0; list-style: none; flex-wrap: wrap; }
-    .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.8rem; transition: color 0.3s; }
-    .footer-links a:hover { color: var(--accent); }
-    .footer-copy { font-size: 0.75rem; color: rgba(136,136,136,0.5); margin-top: 1.5rem; }
-    .mint-credit { font-size: 0.7rem; color: rgba(136,136,136,0.5); margin-top: 0.6rem; }
-    .mint-credit a { color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.3s; }
-    .mint-credit a:hover { color: var(--accent); }
-
-    /* FADE IN — visible by default (IG/no-JS fallback), JS enhances */
-    .fade-in { opacity: 1; -webkit-transform: none; transform: none; }
-    .js-loaded .fade-in { opacity: 0; -webkit-transform: translateY(28px); transform: translateY(28px); -webkit-transition: opacity 0.7s ease, -webkit-transform 0.7s ease; transition: opacity 0.7s ease, transform 0.7s ease; }
-    .js-loaded .fade-in.visible { opacity: 1; -webkit-transform: none; transform: none; }
-
-    /* IG in-app browser fallbacks */
-    @supports not (backdrop-filter: blur(1px)) {
-      nav { background: rgba(10,10,10,0.95) !important; }
-    }
-
-    /* RESPONSIVE */
-    @media (max-width: 600px) {
-      .nav-links { display: none; }
-      .float-book { bottom: 1.2rem; right: 1.2rem; padding: 0.75rem 1.4rem; }
-      .about-img-wrap::before { display: none; }
-    }
-  </style>
+/* MOBILE */
+@media (max-width: 900px) {
+  .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: rgba(10,15,26,0.98); -webkit-flex-direction: column; flex-direction: column; padding: 2rem; gap: 1.5rem; }
+  .nav-links.open { display: -webkit-flex; display: flex; }
+  .nav-toggle { display: block; }
+  .about-grid { -webkit-flex-direction: column; flex-direction: column; gap: 2rem; }
+  .about-img-wrap { -webkit-flex: none; flex: none; width: 250px; margin: 0 auto; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 200px; }
+  .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 1; }
+  .gallery-item:nth-child(5) { grid-column: span 1; }
+  .contact-grid { -webkit-flex-direction: column; flex-direction: column; gap: 2.5rem; }
+  .featured-logos { gap: 2rem; }
+  .pillars { -webkit-flex-direction: column; flex-direction: column; }
+  section { padding: 4rem 1.5rem; }
+}
+@media (max-width: 480px) {
+  .gallery-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: 180px; }
+  .stats-row { gap: 1rem; }
+  .stat-num { font-size: 1.4rem; }
+}
+</style>
 </head>
 <body>
 
-  <nav>
-    <a href="#hero" class="nav-logo">Mike Corey - Adventure Travel Expert</a>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#gallery">Portfolio</a></li>
-      <li><a href="#styles">Styles</a></li>
-      <li><a href="#booking">Book</a></li>
-    </ul>
-  </nav>
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">Fearless & Far</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
 
-  <section id="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <p class="hero-eyebrow">Artist</p>
-      <h1 class="hero-title">Mike Corey - Adventure Travel Expert</h1>
-      <p class="hero-subtitle">@fearlessandfar</p>
-      <a href="#booking" class="hero-cta">Book a Session</a>
-    </div>
-    <div class="hero-scroll">
-      <div class="scroll-line"></div>
-      <span>Scroll</span>
-    </div>
-  </section>
-
-  <section id="about">
-    <div class="container">
-      <div class="fade-in">
-        <p class="section-label">About the Artist</p>
-        <h2 class="section-title">Mike Corey - Adventure Travel Expert</h2>
-        <div class="divider"></div>
-        <div class="about-grid">
-          <div class="about-img-wrap"><img src="img/profile.jpg" alt="Mike Corey - Adventure Travel Expert" class="about-portrait" loading="lazy"></div>
-          <div class="about-content">
-            <div class="about-text">
-              <p>Mike Corey is a celebrated adventure travel expert dedicated to helping others unlock a life filled with thrilling experiences. With a reach of millions on YouTube and an Emmy for his television work, Mike leads transformative retreats and expeditions designed to ignite the adventurer within.</p>
-            </div>
-            <div class="about-stats">
-              <div class="stat-block">
-                <span class="stat-number">IG</span>
-                <span class="stat-label">@fearlessandfar</span>
-              </div>
-              <div class="stat-block">
-                <span class="stat-number">Custom Work</span>
-                <span class="stat-label">Specialty</span>
-              </div>
-              <div class="stat-block">
-                <span class="stat-number">2026</span>
-                <span class="stat-label">Booking Now</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="gallery">
-    <div class="container">
-      <p class="section-label fade-in">Portfolio</p>
-      <h2 class="section-title fade-in">Recent Work</h2>
-      <div class="divider fade-in"></div>
-      <div class="gallery-grid">
-        <div class="gallery-item fade-in" style="transition-delay:0s"><img src="img/photo_01.jpg" alt="Mike Corey - Adventure Travel Expert work 1" loading="lazy" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Custom Work</span></div></div>
-        <div class="gallery-item fade-in" style="transition-delay:0.07s"><img src="img/photo_02.jpg" alt="Mike Corey - Adventure Travel Expert work 2" loading="lazy" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Consultations</span></div></div>
-        <div class="gallery-item fade-in" style="transition-delay:0.14s"><img src="img/photo_03.jpg" alt="Mike Corey - Adventure Travel Expert work 3" loading="lazy" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Signature Style</span></div></div>
-        <div class="gallery-item fade-in" style="transition-delay:0.21000000000000002s"><img src="img/photo_04.jpg" alt="Mike Corey - Adventure Travel Expert work 4" loading="lazy" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Custom Work</span></div></div>
-        <div class="gallery-item fade-in" style="transition-delay:0.28s"><img src="img/photo_05.jpg" alt="Mike Corey - Adventure Travel Expert work 5" loading="lazy" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Consultations</span></div></div>
-        <div class="gallery-item fade-in" style="transition-delay:0.35000000000000003s"><img src="img/photo_06.jpg" alt="Mike Corey - Adventure Travel Expert work 6" loading="lazy" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Signature Style</span></div></div>
-        <div class="gallery-item fade-in" style="transition-delay:0.42000000000000004s"><img src="img/photo_07.jpg" alt="Mike Corey - Adventure Travel Expert work 7" loading="lazy" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Custom Work</span></div></div>
-        <div class="gallery-item fade-in" style="transition-delay:0.49000000000000005s"><img src="img/photo_08.jpg" alt="Mike Corey - Adventure Travel Expert work 8" loading="lazy" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Consultations</span></div></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="styles">
-    <div class="container">
-      <p class="section-label fade-in">Specialties</p>
-      <h2 class="section-title fade-in">What I Create</h2>
-      <div class="divider fade-in"></div>
-      <div class="styles-grid">
-        <div class="style-card fade-in">
-          <div class="style-icon">◆</div>
-          <h3>Custom Work</h3>
-          <p>One-of-a-kind creations tailored to your vision and style.</p>
-        </div>
-        <div class="style-card fade-in">
-          <div class="style-icon">✦</div>
-          <h3>Consultations</h3>
-          <p>In-depth design consultations to bring your concept to life.</p>
-        </div>
-        <div class="style-card fade-in">
-          <div class="style-icon">❧</div>
-          <h3>Signature Style</h3>
-          <p>A distinctive aesthetic you won't find anywhere else.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="booking">
-    <div class="container">
-      <p class="section-label fade-in">Get In Touch</p>
-      <h2 class="section-title fade-in">Book a Session</h2>
-      <div class="divider fade-in"></div>
-      <div class="booking-grid fade-in">
-        <div class="booking-info">
-          <p>Ready to get started? Fill out the inquiry form and I'll get back to you to discuss your vision, timeline, and pricing.</p>
-          <p>Follow along on Instagram for the latest work and flash availability.</p>
-          <ul class="booking-contact-list">
-
-              <li>
-                <div class="contact-icon">◈</div>
-                <div class="contact-detail">
-                  <span class="contact-label">Instagram</span>
-                  <span class="contact-value"><a href="https://instagram.com/fearlessandfar" target="_blank" rel="noopener">@fearlessandfar</a></span>
-                </div>
-              </li>
-          </ul>
-        </div>
-        <div class="booking-form-box">
-          <h3>Start Your Inquiry</h3>
-          <p>Tell me about your idea and I'll be in touch soon.</p>
-          <form action="https://instagram.com/fearlessandfar" method="POST" enctype="text/plain">
-            <div class="form-group">
-              <label for="bname">Your Name</label>
-              <input type="text" id="bname" name="Name" placeholder="First & Last" required />
-            </div>
-            <div class="form-group">
-              <label for="bemail">Email Address</label>
-              <input type="email" id="bemail" name="Email" placeholder="you@example.com" required />
-            </div>
-            <div class="form-group">
-              <label for="bstyle">Style / Service</label>
-              <select id="bstyle" name="Style">
-                <option>Custom Work</option><option>Consultations</option><option>Signature Style</option>
-                <option>Other / Not Sure</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="bmessage">Your Idea</label>
-              <textarea id="bmessage" name="Message" placeholder="Describe your idea, placement, size, and any reference images you have in mind..."></textarea>
-            </div>
-            <button type="submit" class="form-submit">Send Inquiry</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <a href="#booking" class="float-book">Book Now</a>
-
-  <div class="lightbox" id="lightbox" onclick="this.classList.remove('open')">
-    <img id="lightbox-img" src="" alt="Full size" />
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1>FEARLESS <span class="amp">&</span> FAR</h1>
+    <p class="hero-sub">Adventure Travel <span>|</span> Emmy Award-Winning Host <span>|</span> 2.8M+ Subscribers</p>
+    <a href="https://youtube.com/@fearlessandfar" target="_blank" rel="noopener" class="btn-primary">▶ Watch on YouTube</a>
   </div>
+  <div class="scroll-indicator">
+    <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+  </div>
+</section>
 
-  <footer>
-    <span class="footer-logo">Mike Corey - Adventure Travel Expert</span>
-    <ul class="footer-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#gallery">Gallery</a></li>
-      <li><a href="#styles">Styles</a></li>
-      <li><a href="#booking">Book</a></li>
-      <li><a href="https://instagram.com/fearlessandfar" target="_blank" rel="noopener">Instagram</a></li>
-    </ul>
-    <p class="footer-copy">&copy; 2026 Mike Corey - Adventure Travel Expert. All rights reserved.</p>
-    <p class="mint-credit">Built by <a href="https://bayouwebstudio.com" target="_blank" rel="noopener">Bayou Web Studio</a></p>
-  </footer>
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner fade-section">
+    <div class="about-grid">
+      <div class="about-img-wrap">
+        <img src="img/profile.jpg" alt="Mike Corey — Fearless & Far" loading="lazy">
+        <div class="about-img-frame"></div>
+      </div>
+      <div class="about-text">
+        <p class="section-label">About Mike</p>
+        <h2 class="section-title">Biology Grad Turned<br>Global Adventurer</h2>
+        <p>Mike Corey traded a biology degree and five years of backpacking into one of the most-watched adventure travel channels on the planet. From swimming with whale sharks in the Philippines to eating the world's most dangerous foods, his content doesn't just show places — it dares you to experience them.</p>
+        <p>An Emmy Award winner for Outstanding Host on <em>Uncharted Adventure</em> (The Weather Channel) and a BBC television presenter, Mike has turned raw curiosity into a career that spans YouTube, network TV, podcasting, and ocean conservation research. His podcast <em>Against the Odds</em> earned an Ambie nomination, proving his storytelling works in any medium.</p>
+        <p>His mission is simple and relentless: help people conquer their fears so they can see the world for themselves.</p>
+        <div class="stats-row">
+          <div class="stat"><div class="stat-num">2.8M+</div><div class="stat-label">Subscribers</div></div>
+          <div class="stat"><div class="stat-num">Emmy</div><div class="stat-label">Award Winner</div></div>
+          <div class="stat"><div class="stat-num">80+</div><div class="stat-label">Countries</div></div>
+          <div class="stat"><div class="stat-num">BBC</div><div class="stat-label">TV Host</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <script>
-    function openLightbox(src){document.getElementById('lightbox-img').src=src;document.getElementById('lightbox').classList.add('open')}
-    // IntersectionObserver with fallback for IG WebView
-    if('IntersectionObserver' in window){
-      var observer=new IntersectionObserver(function(entries){
-        entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});
-      },{threshold:0.12});
-      document.querySelectorAll('.fade-in').forEach(function(el){observer.observe(el);});
-    } else {
-      // Fallback: just make everything visible immediately
-      document.querySelectorAll('.fade-in').forEach(function(el){el.classList.add('visible');});
-    }
-  </script>
-  <script src="https://getminted.ai/mint-widget.js"></script>
+<!-- WHAT I DO -->
+<section id="work" style="background:var(--navy-light)">
+  <div class="section-inner fade-section">
+    <p class="section-label" style="text-align:center">What I Do</p>
+    <h2 class="section-title" style="text-align:center;margin-bottom:3rem">Three Ways I Tell Stories</h2>
+    <div class="pillars">
+      <div class="pillar">
+        <div class="pillar-icon">🎬</div>
+        <h3>YouTube</h3>
+        <p>Adventure travel content that pushes limits and inspires millions. From the world's most extreme foods to its most remote locations — every video is a dare to live bigger.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">📺</div>
+        <h3>Television</h3>
+        <p>Emmy Award-winning host of <em>Uncharted Adventure</em> on The Weather Channel and BBC presenter. Broadcast storytelling at the highest level.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">🎤</div>
+        <h3>Speaking & Brand Work</h3>
+        <p>Keynote speeches, brand partnerships, and content creation for organizations that believe in exploration, conservation, and pushing boundaries.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" class="gallery-section">
+  <div class="section-inner fade-section">
+    <p class="section-label" style="text-align:center">Gallery</p>
+    <h2 class="section-title" style="text-align:center;margin-bottom:2.5rem">Life on the Road</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item" onclick="openLightbox(0)"><img src="img/photo_01.jpg" alt="Adventure photo 1" loading="lazy"><div class="g-overlay"><span>Into the Unknown</span></div></div>
+      <div class="gallery-item" onclick="openLightbox(1)"><img src="img/photo_02.jpg" alt="Adventure photo 2" loading="lazy"><div class="g-overlay"><span>Uncharted Territory</span></div></div>
+      <div class="gallery-item" onclick="openLightbox(2)"><img src="img/photo_03.jpg" alt="Adventure photo 3" loading="lazy"><div class="g-overlay"><span>Pushing Limits</span></div></div>
+      <div class="gallery-item" onclick="openLightbox(3)"><img src="img/photo_04.jpg" alt="Adventure photo 4" loading="lazy"><div class="g-overlay"><span>No Boundaries</span></div></div>
+      <div class="gallery-item" onclick="openLightbox(4)"><img src="img/photo_05.jpg" alt="Adventure photo 5" loading="lazy"><div class="g-overlay"><span>Wild Encounters</span></div></div>
+      <div class="gallery-item" onclick="openLightbox(5)"><img src="img/photo_06.jpg" alt="Adventure photo 6" loading="lazy"><div class="g-overlay"><span>Edge of the World</span></div></div>
+      <div class="gallery-item" onclick="openLightbox(6)"><img src="img/photo_07.jpg" alt="Adventure photo 7" loading="lazy"><div class="g-overlay"><span>Fearless Moments</span></div></div>
+      <div class="gallery-item" onclick="openLightbox(7)"><img src="img/photo_08.jpg" alt="Adventure photo 8" loading="lazy"><div class="g-overlay"><span>Far From Home</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+  <button class="lightbox-nav lightbox-prev" onclick="navLightbox(-1)">&#8249;</button>
+  <img id="lightboxImg" src="" alt="Gallery photo">
+  <button class="lightbox-nav lightbox-next" onclick="navLightbox(1)">&#8250;</button>
+</div>
+
+<!-- FEATURED IN -->
+<section>
+  <div class="section-inner fade-section" style="text-align:center">
+    <p class="section-label">As Seen On</p>
+    <h2 class="section-title">Featured In</h2>
+    <div class="featured-logos">
+      <div class="featured-logo">BBC</div>
+      <div class="featured-logo">The Weather Channel</div>
+      <div class="featured-logo">Emmy Awards</div>
+      <div class="featured-logo">Wondery</div>
+    </div>
+  </div>
+</section>
+
+<!-- YOUTUBE CTA -->
+<section class="yt-cta">
+  <div class="section-inner fade-section">
+    <p class="section-label">YouTube</p>
+    <h2 class="section-title">Join 2.8 Million Adventurers</h2>
+    <p class="yt-quote">I help people conquer their fears so they can travel the world.</p>
+    <a href="https://youtube.com/@fearlessandfar?sub_confirmation=1" target="_blank" rel="noopener" class="btn-primary">Subscribe on YouTube</a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner fade-section">
+    <p class="section-label">Get in Touch</p>
+    <h2 class="section-title">Work With Me</h2>
+    <div class="contact-grid">
+      <div class="contact-left">
+        <h3>Business Inquiries</h3>
+        <p>For brand partnerships, speaking engagements, media appearances, and collaborations — let's talk.</p>
+        <a href="mailto:contact@fearlessandfar.com" class="contact-email">contact@fearlessandfar.com</a>
+        <h3 style="margin-top:2.5rem">Follow Along</h3>
+        <div class="social-links">
+          <a href="https://youtube.com/@fearlessandfar" target="_blank" rel="noopener" aria-label="YouTube">▶</a>
+          <a href="https://instagram.com/fearlessandfar" target="_blank" rel="noopener" aria-label="Instagram">📷</a>
+          <a href="https://tiktok.com/@fearlessandfar" target="_blank" rel="noopener" aria-label="TikTok">♪</a>
+          <a href="https://podcasts.apple.com/us/podcast/against-the-odds" target="_blank" rel="noopener" aria-label="Podcast">🎙</a>
+        </div>
+      </div>
+      <div class="contact-right">
+        <form class="contact-form" onsubmit="return handleForm(event)">
+          <input type="text" name="name" placeholder="Your Name" required>
+          <input type="email" name="email" placeholder="Your Email" required>
+          <select name="subject" required>
+            <option value="" disabled selected>Subject</option>
+            <option>Brand Partnership</option>
+            <option>Speaking Engagement</option>
+            <option>Media Inquiry</option>
+            <option>Other</option>
+          </select>
+          <textarea name="message" placeholder="Your Message" required></textarea>
+          <button type="submit" class="btn-submit">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">FEARLESS & FAR</div>
+  <div class="footer-links">
+    <a href="https://youtube.com/@fearlessandfar" target="_blank" rel="noopener">YouTube</a>
+    <a href="https://instagram.com/fearlessandfar" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://tiktok.com/@fearlessandfar" target="_blank" rel="noopener">TikTok</a>
+    <a href="https://podcasts.apple.com/us/podcast/against-the-odds" target="_blank" rel="noopener">Podcast</a>
+  </div>
+  <p class="footer-credit">&copy; 2026 Fearless & Far. All rights reserved. Built by <a href="https://bayouwebstudio.com" target="_blank" rel="noopener">Bayou Web Studio</a></p>
+</footer>
+
+<!-- FLOAT BTN -->
+<a href="https://youtube.com/@fearlessandfar" target="_blank" rel="noopener" class="float-btn">
+  <svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+  Watch Now
+</a>
+
+<script>
+document.documentElement.classList.add('js-loaded');
+
+// NAV SCROLL
+var nav=document.getElementById('navbar');
+window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>50);},{passive:true});
+
+// NAV TOGGLE
+var toggle=document.getElementById('navToggle'),links=document.getElementById('navLinks');
+toggle.addEventListener('click',function(){links.classList.toggle('open');});
+links.addEventListener('click',function(e){if(e.target.tagName==='A')links.classList.remove('open');});
+
+// INTERSECTION OBSERVER FADE-IN
+var fades=document.querySelectorAll('.fade-section');
+if('IntersectionObserver' in window){
+  var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.15});
+  fades.forEach(function(f){obs.observe(f);});
+} else { fades.forEach(function(f){f.classList.add('visible');}); }
+
+// LIGHTBOX
+var lbPhotos=['img/photo_01.jpg','img/photo_02.jpg','img/photo_03.jpg','img/photo_04.jpg','img/photo_05.jpg','img/photo_06.jpg','img/photo_07.jpg','img/photo_08.jpg'];
+var lbIdx=0,lb=document.getElementById('lightbox'),lbImg=document.getElementById('lightboxImg');
+function openLightbox(i){lbIdx=i;lbImg.src=lbPhotos[i];lb.classList.add('active');document.body.style.overflow='hidden';}
+function closeLightbox(){lb.classList.remove('active');document.body.style.overflow='';}
+function navLightbox(d){lbIdx=(lbIdx+d+lbPhotos.length)%lbPhotos.length;lbImg.src=lbPhotos[lbIdx];}
+lb.addEventListener('click',function(e){if(e.target===lb)closeLightbox();});
+document.addEventListener('keydown',function(e){if(!lb.classList.contains('active'))return;if(e.key==='Escape')closeLightbox();if(e.key==='ArrowLeft')navLightbox(-1);if(e.key==='ArrowRight')navLightbox(1);});
+
+// FORM HANDLER
+function handleForm(e){e.preventDefault();var f=e.target;var subj=f.subject.value;var body='Name: '+f.name.value+'%0D%0AEmail: '+f.email.value+'%0D%0A%0D%0A'+encodeURIComponent(f.message.value);window.location.href='mailto:contact@fearlessandfar.com?subject='+encodeURIComponent(subj)+'&body='+body;return false;}
+</script>
+<script src="https://bayouwebstudio.com/mint-widget.js"></script>
 </body>
 </html>
