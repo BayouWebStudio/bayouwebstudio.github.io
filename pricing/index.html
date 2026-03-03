@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Get Minted — AI Websites for Creatives | $25/mo</title>
+  <meta name="description" content="Get a stunning professional website in under 1 hour. AI-built, AI-managed. Custom domain included. $25/month. No contracts." />
+
+  <!-- OG Meta -->
+  <meta property="og:title" content="Get Minted — AI Websites for Creatives | $25/mo" />
+  <meta property="og:description" content="Get a stunning professional website in under 1 hour. AI-built, AI-managed. Custom domain included. $25/month." />
+  <meta property="og:image" content="https://getminted.ai/og-image.png" />
+  <meta property="og:url" content="https://getminted.ai/pricing/" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Get Minted — AI Websites for Creatives | $25/mo" />
+  <meta name="twitter:description" content="AI-built website in under 1 hour. Custom domain included. $25/month." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --mint: #98E8C1;
+      --mint-dim: rgba(152, 232, 193, 0.15);
+      --mint-glow: rgba(152, 232, 193, 0.25);
+      --bg: #0a0a0a;
+      --surface: #111111;
+      --surface2: #161616;
+      --border: rgba(255,255,255,0.08);
+      --text: #f0f0f0;
+      --muted: #888;
+      --font-sans: 'Inter', system-ui, sans-serif;
+      --font-serif: 'Playfair Display', Georgia, serif;
+    }
+
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* ── Animations ── */
+    .fade-in {
+      opacity: 0;
+      -webkit-transform: translateY(24px);
+      transform: translateY(24px);
+      -webkit-transition: opacity 0.7s ease, -webkit-transform 0.7s ease;
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .js-loaded .fade-in.visible {
+      opacity: 1;
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+    }
+    .fade-in.delay-1 { -webkit-transition-delay: 0.1s; transition-delay: 0.1s; }
+    .fade-in.delay-2 { -webkit-transition-delay: 0.2s; transition-delay: 0.2s; }
+    .fade-in.delay-3 { -webkit-transition-delay: 0.3s; transition-delay: 0.3s; }
+    .fade-in.delay-4 { -webkit-transition-delay: 0.4s; transition-delay: 0.4s; }
+    .fade-in.delay-5 { -webkit-transition-delay: 0.5s; transition-delay: 0.5s; }
+
+    /* ── Layout ── */
+    .container {
+      width: 100%;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section { padding: 96px 0; }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background-color: rgba(10,10,10,0.85);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+      -webkit-box-pack: justify;
+      -webkit-justify-content: space-between;
+      justify-content: space-between;
+      height: 64px;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .nav-logo {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--mint);
+      letter-spacing: -0.5px;
+    }
+    .nav-cta {
+      display: inline-block;
+      background-color: var(--mint);
+      color: #0a0a0a;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 10px 20px;
+      border-radius: 8px;
+      -webkit-transition: opacity 0.2s;
+      transition: opacity 0.2s;
+    }
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* ── Hero ── */
+    #hero {
+      padding: 160px 0 96px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute;
+      top: -200px;
+      left: 50%;
+      -webkit-transform: translateX(-50%);
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(152,232,193,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--mint);
+      margin-bottom: 24px;
+      padding: 6px 16px;
+      border: 1px solid rgba(152,232,193,0.3);
+      border-radius: 100px;
+    }
+    .hero-headline {
+      font-family: var(--font-serif);
+      font-size: clamp(40px, 7vw, 76px);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -2px;
+      margin-bottom: 24px;
+      color: #ffffff;
+    }
+    .hero-headline span { color: var(--mint); }
+    .hero-sub {
+      font-size: clamp(17px, 2.5vw, 20px);
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+    .hero-sub strong { color: var(--text); }
+    .btn-primary {
+      display: inline-block;
+      background-color: var(--mint);
+      color: #0a0a0a;
+      font-family: var(--font-sans);
+      font-weight: 700;
+      font-size: 18px;
+      padding: 18px 40px;
+      border-radius: 12px;
+      -webkit-transition: opacity 0.2s, -webkit-transform 0.2s;
+      transition: opacity 0.2s, transform 0.2s;
+      box-shadow: 0 0 40px rgba(152,232,193,0.3);
+    }
+    .btn-primary:hover {
+      opacity: 0.9;
+      -webkit-transform: translateY(-2px);
+      transform: translateY(-2px);
+    }
+    .hero-trust {
+      margin-top: 20px;
+      font-size: 14px;
+      color: var(--muted);
+      letter-spacing: 0.5px;
+    }
+    .hero-trust span { margin: 0 8px; }
+
+    /* ── Section Labels ── */
+    .section-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--mint);
+      margin-bottom: 16px;
+      display: block;
+    }
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 700;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+    .section-sub {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 560px;
+    }
+    .section-header { margin-bottom: 64px; }
+    .section-header.center { text-align: center; }
+    .section-header.center .section-sub { margin: 0 auto; }
+
+    /* ── How It Works ── */
+    #how { background-color: var(--surface); }
+    .steps {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      gap: 32px;
+      -webkit-flex-wrap: wrap;
+      flex-wrap: wrap;
+    }
+    .step {
+      -webkit-box-flex: 1;
+      -webkit-flex: 1 1 280px;
+      flex: 1 1 280px;
+      background-color: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 36px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .step::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--mint), transparent);
+    }
+    .step-number {
+      font-family: var(--font-serif);
+      font-size: 64px;
+      font-weight: 900;
+      color: rgba(152,232,193,0.08);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+    .step-title {
+      font-weight: 700;
+      font-size: 20px;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+    .step-desc { color: var(--muted); line-height: 1.7; }
+    .step-icon { font-size: 32px; margin-bottom: 16px; }
+
+    /* ── Features ── */
+    .features-grid {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-flex-wrap: wrap;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .feature-card {
+      -webkit-box-flex: 1;
+      -webkit-flex: 1 1 200px;
+      flex: 1 1 200px;
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      -webkit-transition: border-color 0.3s, -webkit-transform 0.3s;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .feature-card:hover {
+      border-color: rgba(152,232,193,0.3);
+      -webkit-transform: translateY(-4px);
+      transform: translateY(-4px);
+    }
+    .feature-icon { font-size: 28px; margin-bottom: 12px; }
+    .feature-title {
+      font-weight: 600;
+      font-size: 15px;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .feature-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    /* ── Example Sites ── */
+    #examples { background-color: var(--surface); }
+    .examples-grid {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      gap: 24px;
+      -webkit-flex-wrap: wrap;
+      flex-wrap: wrap;
+    }
+    .example-card {
+      -webkit-box-flex: 1;
+      -webkit-flex: 1 1 280px;
+      flex: 1 1 280px;
+      background-color: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      -webkit-transition: border-color 0.3s, -webkit-transform 0.3s;
+      transition: border-color 0.3s, transform 0.3s;
+      display: block;
+    }
+    .example-card:hover {
+      border-color: rgba(152,232,193,0.4);
+      -webkit-transform: translateY(-6px);
+      transform: translateY(-6px);
+    }
+    .example-preview {
+      height: 200px;
+      background: linear-gradient(135deg, #111 0%, #1a1a1a 100%);
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .example-preview::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 30% 50%, rgba(152,232,193,0.08) 0%, transparent 60%);
+    }
+    .example-preview-text {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--mint);
+      text-align: center;
+      z-index: 1;
+      opacity: 0.7;
+    }
+    .example-info { padding: 24px; }
+    .example-name {
+      font-weight: 700;
+      font-size: 16px;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .example-handle {
+      font-size: 13px;
+      color: var(--mint);
+      margin-bottom: 8px;
+    }
+    .example-type { font-size: 13px; color: var(--muted); }
+    .example-link {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--mint);
+      border-bottom: 1px solid rgba(152,232,193,0.3);
+      padding-bottom: 2px;
+    }
+
+    /* ── Pricing ── */
+    #pricing { text-align: center; }
+    .pricing-card {
+      max-width: 480px;
+      margin: 0 auto;
+      background-color: var(--surface);
+      border: 2px solid var(--mint);
+      border-radius: 24px;
+      padding: 52px 44px;
+      position: relative;
+      box-shadow: 0 0 80px rgba(152,232,193,0.12), 0 0 30px rgba(152,232,193,0.08);
+    }
+    .pricing-badge {
+      position: absolute;
+      top: -16px;
+      left: 50%;
+      -webkit-transform: translateX(-50%);
+      transform: translateX(-50%);
+      background-color: var(--mint);
+      color: #0a0a0a;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 6px 20px;
+      border-radius: 100px;
+      white-space: nowrap;
+    }
+    .pricing-price {
+      margin: 8px 0 8px;
+    }
+    .pricing-amount {
+      font-family: var(--font-serif);
+      font-size: 72px;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1;
+    }
+    .pricing-period {
+      font-size: 18px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+    .pricing-domain {
+      display: inline-block;
+      background-color: var(--mint-dim);
+      border: 1px solid rgba(152,232,193,0.3);
+      color: var(--mint);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin: 16px 0 32px;
+    }
+    .pricing-features {
+      list-style: none;
+      text-align: left;
+      margin-bottom: 36px;
+    }
+    .pricing-features li {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 15px;
+      color: var(--text);
+    }
+    .pricing-features li:last-child { border-bottom: none; }
+    .check {
+      width: 22px;
+      height: 22px;
+      background-color: var(--mint-dim);
+      border-radius: 50%;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      color: var(--mint);
+      font-size: 12px;
+      -webkit-flex-shrink: 0;
+      flex-shrink: 0;
+    }
+    .pricing-cta {
+      width: 100%;
+      display: block;
+      background-color: var(--mint);
+      color: #0a0a0a;
+      font-family: var(--font-sans);
+      font-weight: 700;
+      font-size: 18px;
+      padding: 18px;
+      border-radius: 12px;
+      text-align: center;
+      -webkit-transition: opacity 0.2s, -webkit-transform 0.2s;
+      transition: opacity 0.2s, transform 0.2s;
+      box-shadow: 0 0 30px rgba(152,232,193,0.25);
+      border: none;
+      cursor: pointer;
+    }
+    .pricing-cta:hover {
+      opacity: 0.9;
+      -webkit-transform: translateY(-2px);
+      transform: translateY(-2px);
+    }
+    .pricing-fine {
+      margin-top: 20px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .pricing-fine span { margin: 0 6px; }
+
+    /* ── FAQ ── */
+    #faq { background-color: var(--surface); }
+    .faq-grid {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-flex-direction: column;
+      flex-direction: column;
+      gap: 16px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .faq-item {
+      background-color: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .faq-q {
+      padding: 20px 24px;
+      font-weight: 600;
+      font-size: 16px;
+      color: #fff;
+      cursor: pointer;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-pack: justify;
+      -webkit-justify-content: space-between;
+      justify-content: space-between;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+      -webkit-user-select: none;
+      user-select: none;
+      -webkit-transition: color 0.2s;
+      transition: color 0.2s;
+    }
+    .faq-q:hover { color: var(--mint); }
+    .faq-arrow {
+      width: 24px;
+      height: 24px;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      color: var(--mint);
+      font-size: 20px;
+      -webkit-flex-shrink: 0;
+      flex-shrink: 0;
+      -webkit-transition: -webkit-transform 0.3s;
+      transition: transform 0.3s;
+    }
+    .faq-item.open .faq-arrow { -webkit-transform: rotate(45deg); transform: rotate(45deg); }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      -webkit-transition: max-height 0.4s ease, padding 0.3s;
+      transition: max-height 0.4s ease, padding 0.3s;
+      padding: 0 24px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+    .faq-item.open .faq-a { max-height: 200px; padding: 0 24px 20px; }
+
+    /* ── Final CTA ── */
+    #final-cta {
+      text-align: center;
+      background: radial-gradient(ellipse at 50% 0%, rgba(152,232,193,0.08) 0%, transparent 70%);
+    }
+    .final-title {
+      font-family: var(--font-serif);
+      font-size: clamp(36px, 6vw, 64px);
+      font-weight: 900;
+      letter-spacing: -2px;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+    .final-title span { color: var(--mint); }
+    .final-sub {
+      font-size: 17px;
+      color: var(--muted);
+      margin-bottom: 40px;
+    }
+
+    /* ── Footer ── */
+    footer {
+      background-color: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 40px 0;
+    }
+    .footer-inner {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-pack: justify;
+      -webkit-justify-content: space-between;
+      justify-content: space-between;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+      -webkit-flex-wrap: wrap;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-brand {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--mint);
+    }
+    .footer-brand small {
+      display: block;
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+    .footer-links {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      gap: 24px;
+      -webkit-flex-wrap: wrap;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      font-size: 14px;
+      color: var(--muted);
+      -webkit-transition: color 0.2s;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--mint); }
+    .footer-copy {
+      width: 100%;
+      font-size: 12px;
+      color: rgba(136,136,136,0.6);
+      margin-top: 16px;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      section { padding: 72px 0; }
+      #hero { padding: 120px 0 72px; }
+      .steps { -webkit-flex-direction: column; flex-direction: column; }
+      .pricing-card { padding: 44px 28px; }
+      .footer-inner { -webkit-flex-direction: column; flex-direction: column; -webkit-box-align: start; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <div class="nav-inner">
+      <a href="https://getminted.ai" class="nav-logo">Get Minted</a>
+      <a href="https://buy.stripe.com/7sYcN51rgfbn8q46gX3Je0a" class="nav-cta">Get Started — $25/mo</a>
+    </div>
+  </nav>
+
+  <!-- ── Hero ── -->
+  <section id="hero">
+    <div class="container">
+      <div class="hero-eyebrow fade-in">AI-Powered • Houston, TX</div>
+      <h1 class="hero-headline fade-in delay-1">
+        Your Website.<br />
+        Built by <span>AI</span>.<br />
+        Managed by <span>AI</span>.
+      </h1>
+      <p class="hero-sub fade-in delay-2">
+        Get a stunning professional website in under 1 hour.
+        Edit it by talking to Mint. <strong>$25/month. That's it.</strong>
+      </p>
+      <a href="https://buy.stripe.com/7sYcN51rgfbn8q46gX3Je0a" class="btn-primary fade-in delay-3">
+        Get Started — $25/mo
+      </a>
+      <p class="hero-trust fade-in delay-4">
+        <span>No contracts.</span>
+        <span>Cancel anytime.</span>
+        <span>Domain included.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ── How It Works ── -->
+  <section id="how">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label fade-in">How It Works</span>
+        <h2 class="section-title fade-in delay-1">From zero to live<br />in under an hour.</h2>
+        <p class="section-sub fade-in delay-2">Three steps. No code. No designers. Just Mint.</p>
+      </div>
+      <div class="steps">
+        <div class="step fade-in delay-1">
+          <div class="step-icon">📸</div>
+          <div class="step-number">01</div>
+          <div class="step-title">Share your Instagram</div>
+          <p class="step-desc">Drop your IG handle. Mint scrapes your photos, bio, and style — everything it needs to build your site.</p>
+        </div>
+        <div class="step fade-in delay-2">
+          <div class="step-icon">⚡</div>
+          <div class="step-number">02</div>
+          <div class="step-title">Mint builds your site</div>
+          <p class="step-desc">In under 1 hour, you get a custom website with gallery, booking form, AI chatbot, and your custom .com domain.</p>
+        </div>
+        <div class="step fade-in delay-3">
+          <div class="step-icon">💬</div>
+          <div class="step-number">03</div>
+          <div class="step-title">Edit by talking</div>
+          <p class="step-desc">Want to change something? Just tell Mint. "Update my booking link." "Add this photo." It updates your site instantly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Features ── -->
+  <section id="features">
+    <div class="container">
+      <div class="section-header center">
+        <span class="section-label fade-in">What's Included</span>
+        <h2 class="section-title fade-in delay-1">Everything. For $25/mo.</h2>
+        <p class="section-sub fade-in delay-2">No add-ons, no hidden fees. Everything your business needs is already in the box.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card fade-in delay-1">
+          <div class="feature-icon">🌐</div>
+          <div class="feature-title">Custom .com Domain</div>
+          <p class="feature-desc">We buy your domain — yourname.com is yours, included in your plan.</p>
+        </div>
+        <div class="feature-card fade-in delay-2">
+          <div class="feature-icon">✨</div>
+          <div class="feature-title">Professional Design</div>
+          <p class="feature-desc">Sleek, modern websites built to match your aesthetic and brand.</p>
+        </div>
+        <div class="feature-card fade-in delay-3">
+          <div class="feature-icon">🤖</div>
+          <div class="feature-title">Mint AI Chatbot</div>
+          <p class="feature-desc">Mint answers visitor questions 24/7 — pricing, availability, portfolio — automatically.</p>
+        </div>
+        <div class="feature-card fade-in delay-4">
+          <div class="feature-icon">📅</div>
+          <div class="feature-title">Booking Form</div>
+          <p class="feature-desc">Built-in contact and booking form so clients can reach you instantly.</p>
+        </div>
+        <div class="feature-card fade-in delay-1">
+          <div class="feature-icon">🖼️</div>
+          <div class="feature-title">Photo Gallery</div>
+          <p class="feature-desc">Unlimited photo uploads. Showcase your work beautifully, automatically organized.</p>
+        </div>
+        <div class="feature-card fade-in delay-2">
+          <div class="feature-icon">📱</div>
+          <div class="feature-title">Mobile Optimized</div>
+          <p class="feature-desc">Looks perfect on every device — phone, tablet, desktop.</p>
+        </div>
+        <div class="feature-card fade-in delay-3">
+          <div class="feature-icon">🔍</div>
+          <div class="feature-title">SEO Built-In</div>
+          <p class="feature-desc">Show up on Google. Mint handles meta tags, sitemaps, and structure automatically.</p>
+        </div>
+        <div class="feature-card fade-in delay-4">
+          <div class="feature-icon">🔒</div>
+          <div class="feature-title">SSL / HTTPS</div>
+          <p class="feature-desc">Secure by default. Your visitors see the padlock. Always.</p>
+        </div>
+        <div class="feature-card fade-in delay-1">
+          <div class="feature-icon">♾️</div>
+          <div class="feature-title">Unlimited Edits</div>
+          <p class="feature-desc">Talk to Mint anytime. Changes go live instantly, no limits.</p>
+        </div>
+        <div class="feature-card fade-in delay-2">
+          <div class="feature-icon">📲</div>
+          <div class="feature-title">IG Browser Ready</div>
+          <p class="feature-desc">Works perfectly when visitors tap your link straight from Instagram Stories.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Example Sites ── -->
+  <section id="examples">
+    <div class="container">
+      <div class="section-header center">
+        <span class="section-label fade-in">Live Examples</span>
+        <h2 class="section-title fade-in delay-1">See what Mint builds.</h2>
+        <p class="section-sub fade-in delay-2">Real sites, real creatives. Built in under an hour.</p>
+      </div>
+      <div class="examples-grid">
+        <a href="https://tattoosbypaketh.com" target="_blank" rel="noopener" class="example-card fade-in delay-1">
+          <div class="example-preview">
+            <div class="example-preview-text">tattoosby<br/>paketh.com</div>
+          </div>
+          <div class="example-info">
+            <div class="example-name">Israel Paketh</div>
+            <div class="example-handle">tattoosbypaketh.com</div>
+            <div class="example-type">Blackwork &amp; Ornamental</div>
+            <span class="example-link">Visit site →</span>
+          </div>
+        </a>
+        <a href="https://getminted.ai/tattsby44/" target="_blank" rel="noopener" class="example-card fade-in delay-2">
+          <div class="example-preview">
+            <div class="example-preview-text">tattsby44</div>
+          </div>
+          <div class="example-info">
+            <div class="example-name">tattsby44</div>
+            <div class="example-handle">getminted.ai/tattsby44/</div>
+            <div class="example-type">Tattoo Artist</div>
+            <span class="example-link">Visit site →</span>
+          </div>
+        </a>
+        <a href="https://getminted.ai/godspeedhtx/" target="_blank" rel="noopener" class="example-card fade-in delay-3">
+          <div class="example-preview">
+            <div class="example-preview-text">Godspeed<br/>HTX</div>
+          </div>
+          <div class="example-info">
+            <div class="example-name">Godspeed</div>
+            <div class="example-handle">getminted.ai/godspeedhtx/</div>
+            <div class="example-type">Tattoo Studio — Houston, TX</div>
+            <span class="example-link">Visit site →</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Pricing ── -->
+  <section id="pricing">
+    <div class="container">
+      <div class="section-header center">
+        <span class="section-label fade-in">Pricing</span>
+        <h2 class="section-title fade-in delay-1">One plan. Everything included.</h2>
+        <p class="section-sub fade-in delay-2">No tiers, no upgrades, no surprises.</p>
+      </div>
+      <div class="pricing-card fade-in delay-2">
+        <div class="pricing-badge">Most Popular</div>
+        <div class="pricing-price">
+          <span class="pricing-amount">$25</span>
+          <span class="pricing-period">/month</span>
+        </div>
+        <div class="pricing-domain">✦ Custom .com domain included</div>
+        <ul class="pricing-features">
+          <li><span class="check">✓</span> Custom .com domain (we buy it)</li>
+          <li><span class="check">✓</span> AI-built website in under 1 hour</li>
+          <li><span class="check">✓</span> Mint AI chatbot (24/7 on your site)</li>
+          <li><span class="check">✓</span> Mint AI editor (edit by talking)</li>
+          <li><span class="check">✓</span> Photo gallery — unlimited uploads</li>
+          <li><span class="check">✓</span> Booking &amp; contact form</li>
+          <li><span class="check">✓</span> Mobile &amp; IG browser optimized</li>
+          <li><span class="check">✓</span> SEO optimization built-in</li>
+          <li><span class="check">✓</span> SSL / HTTPS security</li>
+          <li><span class="check">✓</span> Unlimited edits through Mint</li>
+        </ul>
+        <a href="https://buy.stripe.com/7sYcN51rgfbn8q46gX3Je0a" class="pricing-cta">
+          Get Minted →
+        </a>
+        <p class="pricing-fine">
+          <span>No contracts</span>•<span>Cancel anytime</span>•<span>100% AI-powered</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FAQ ── -->
+  <section id="faq">
+    <div class="container">
+      <div class="section-header center">
+        <span class="section-label fade-in">FAQ</span>
+        <h2 class="section-title fade-in delay-1">Questions? Answered.</h2>
+      </div>
+      <div class="faq-grid">
+        <div class="faq-item fade-in delay-1">
+          <div class="faq-q">How fast do I get my website? <span class="faq-arrow">+</span></div>
+          <div class="faq-a">Under 1 hour from the moment you sign up. Seriously — share your Instagram, and Mint gets to work immediately.</div>
+        </div>
+        <div class="faq-item fade-in delay-2">
+          <div class="faq-q">Do I need to know how to code? <span class="faq-arrow">+</span></div>
+          <div class="faq-a">No. You talk to Mint and it handles everything. No code, no dashboards, no designers — just a conversation.</div>
+        </div>
+        <div class="faq-item fade-in delay-3">
+          <div class="faq-q">Can I use my own domain? <span class="faq-arrow">+</span></div>
+          <div class="faq-a">We buy you a custom .com domain — it's included in your plan. No extra cost, no domain registrar accounts to manage.</div>
+        </div>
+        <div class="faq-item fade-in delay-4">
+          <div class="faq-q">What if I want to cancel? <span class="faq-arrow">+</span></div>
+          <div class="faq-a">Cancel anytime. No contracts, no cancellation fees. Your site stays up until the end of your billing period.</div>
+        </div>
+        <div class="faq-item fade-in delay-5">
+          <div class="faq-q">Can Mint really edit my site? <span class="faq-arrow">+</span></div>
+          <div class="faq-a">Yes. Tell Mint to change your bio, swap photos, update your booking link — it does it live. No tickets, no waiting, no back-and-forth.</div>
+        </div>
+        <div class="faq-item fade-in delay-1">
+          <div class="faq-q">What kind of businesses is this for? <span class="faq-arrow">+</span></div>
+          <div class="faq-a">Tattoo artists, barbers, salons, piercers, photographers, and any creative professional who needs a stunning website without the hassle.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Final CTA ── -->
+  <section id="final-cta">
+    <div class="container">
+      <h2 class="final-title fade-in">Ready to Get <span>Minted</span>?</h2>
+      <p class="final-sub fade-in delay-1">Join Tatsu Ink, Israel Paketh, and more Houston creatives.</p>
+      <a href="https://buy.stripe.com/7sYcN51rgfbn8q46gX3Je0a" class="btn-primary fade-in delay-2">
+        Get Minted — $25/mo
+      </a>
+      <p class="hero-trust fade-in delay-3" style="margin-top:20px;">
+        <span>No contracts.</span>
+        <span>Cancel anytime.</span>
+        <span>Domain included.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          Get Minted
+          <small>by Bayou Web Studio — Houston, TX</small>
+        </div>
+        <nav class="footer-links">
+          <a href="https://getminted.ai">Home</a>
+          <a href="https://getminted.ai/pricing/">Pricing</a>
+          <a href="https://getminted.ai/dashboard/">Dashboard</a>
+        </nav>
+        <p class="footer-copy">© 2026 Bayou Web Studio. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── JS-loaded class for animations ──
+    document.documentElement.classList.add('js-loaded');
+
+    // ── IntersectionObserver fade-ins ──
+    (function() {
+      var els = document.querySelectorAll('.fade-in');
+      if (!('IntersectionObserver' in window)) {
+        for (var i = 0; i < els.length; i++) els[i].classList.add('visible');
+        return;
+      }
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      for (var i = 0; i < els.length; i++) observer.observe(els[i]);
+    })();
+
+    // ── FAQ accordion ──
+    (function() {
+      var items = document.querySelectorAll('.faq-item');
+      items.forEach(function(item) {
+        item.querySelector('.faq-q').addEventListener('click', function() {
+          var isOpen = item.classList.contains('open');
+          items.forEach(function(i) { i.classList.remove('open'); });
+          if (!isOpen) item.classList.add('open');
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
