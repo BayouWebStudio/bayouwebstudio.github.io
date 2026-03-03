@@ -776,39 +776,42 @@
 
     /* ── Mobile ── */
     @media (max-width: 768px) {
-      /* Header compact */
+      /* Header: tight single line, 40px */
       .header {
-        padding: 0 14px;
-        height: 50px;
+        padding: 0 12px;
+        height: 40px;
       }
 
-      .header-logo { font-size: 17px; }
-      .header-badge { font-size: 10px; padding: 2px 6px; }
+      .header-logo { font-size: 16px; }
+      .header-badge { font-size: 9px; padding: 1px 6px; }
       .user-name { display: none; }
-      .btn-logout { font-size: 12px; padding: 5px 10px; }
+      .btn-logout { display: none; }
+      .user-menu { padding: 4px; }
+      .user-avatar { width: 28px; height: 28px; font-size: 11px; }
+
+      /* Hide chat header (Mint Editor title) on mobile — redundant */
+      .chat-header { display: none; }
 
       /* Single-column layout, chat on top */
       .main-layout {
         display: flex;
         flex-direction: column;
-        min-height: calc(100vh - 50px);
+        min-height: calc(100vh - 40px);
         padding-bottom: 0;
       }
 
-      /* Chat panel: fixed full-screen-ish, stacked first */
+      /* Chat panel: fill viewport minus header */
       .right-panel {
         order: 1;
         position: relative;
-        height: auto;
+        height: calc(100vh - 40px);
         min-height: 0;
         top: auto;
-        flex: 1;
+        flex: none;
         display: flex;
         flex-direction: column;
         border-top: none;
         box-shadow: none;
-        /* fill remaining viewport height minus header */
-        height: calc(100vh - 50px);
       }
 
       /* Chat messages fill available space */
@@ -817,7 +820,7 @@
         overflow-y: auto;
       }
 
-      /* Sticky input at bottom */
+      /* Sticky input at bottom of chat area */
       .chat-input-area {
         position: sticky;
         bottom: 0;
@@ -831,16 +834,22 @@
         order: 2;
         border-right: none;
         border-top: 1px solid var(--border);
-        padding: 16px 14px;
+        padding: 12px 14px;
         overflow-y: visible;
       }
 
-      /* Hide quick action cards (chips below chat already cover this) */
+      /* Hide quick action cards on mobile */
       .quick-actions {
         display: none;
       }
 
-      /* Site preview: tighter */
+      /* ALL left-panel sections become collapsible on mobile */
+      /* Site preview wrapper — make it collapsible */
+      .left-panel > div[style*="margin-bottom"] > .section-title {
+        /* Will be handled by JS-injected collapsible wrapper */
+      }
+
+      /* Site preview: tighter when expanded */
       .site-preview-iframe-wrapper {
         height: 180px;
       }
@@ -871,11 +880,11 @@
 
       /* Collapsible section spacing */
       .collapsible-section {
-        margin-bottom: 12px;
+        margin-bottom: 8px;
       }
 
       .collapsible-header {
-        padding: 8px 0;
+        padding: 10px 0;
         border-bottom: 1px solid var(--border);
         margin-bottom: 0;
       }
@@ -888,7 +897,7 @@
         padding-top: 10px;
       }
 
-      /* Chat quick chips: allow horizontal scroll on very small screens */
+      /* Chat quick chips: horizontal scroll */
       .chat-quick-actions {
         flex-wrap: nowrap;
         overflow-x: auto;
@@ -900,11 +909,6 @@
 
       .quick-msg-btn {
         flex-shrink: 0;
-      }
-
-      /* Chat header compact */
-      .chat-header {
-        padding: 10px 14px;
       }
     }
 
@@ -969,9 +973,13 @@
     <!-- Left panel -->
     <div class="left-panel">
 
-      <!-- Site Preview -->
-      <div style="margin-bottom: 20px;">
-        <div class="section-title">Your Site</div>
+      <!-- Site Preview (collapsible on mobile) -->
+      <div class="collapsible-section" style="margin-bottom: 20px;">
+        <div class="collapsible-header" onclick="toggleSection(this)" data-default-collapsed="true">
+          <div class="section-title">Your Site</div>
+          <span class="collapsible-toggle">▼</span>
+        </div>
+        <div class="collapsible-body">
         <div class="site-preview-card">
           <div class="site-preview-bar">
             <div class="site-preview-dots">
@@ -986,6 +994,7 @@
             <iframe class="site-preview-iframe" id="site-preview-iframe" src="about:blank" loading="lazy" scrolling="no"></iframe>
             <div class="preview-overlay"></div>
           </div>
+        </div>
         </div>
       </div>
 
