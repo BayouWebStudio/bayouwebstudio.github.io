@@ -746,38 +746,166 @@
       display: none;
     }
 
+    /* ── Collapsible sections ── */
+    .collapsible-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .collapsible-header .section-title {
+      margin-bottom: 0;
+    }
+
+    .collapsible-toggle {
+      font-size: 12px;
+      color: var(--text-muted);
+      transition: transform 0.2s;
+      display: none; /* hidden on desktop */
+    }
+
+    .collapsible-toggle.open {
+      transform: rotate(180deg);
+    }
+
+    .collapsible-body {
+      /* always visible on desktop */
+    }
+
     /* ── Mobile ── */
     @media (max-width: 768px) {
-      .main-layout {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto 1fr;
+      /* Header compact */
+      .header {
+        padding: 0 14px;
+        height: 50px;
       }
 
+      .header-logo { font-size: 17px; }
+      .header-badge { font-size: 10px; padding: 2px 6px; }
+      .user-name { display: none; }
+      .btn-logout { font-size: 12px; padding: 5px 10px; }
+
+      /* Single-column layout, chat on top */
+      .main-layout {
+        display: flex;
+        flex-direction: column;
+        min-height: calc(100vh - 50px);
+        padding-bottom: 0;
+      }
+
+      /* Chat panel: fixed full-screen-ish, stacked first */
+      .right-panel {
+        order: 1;
+        position: relative;
+        height: auto;
+        min-height: 0;
+        top: auto;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        border-top: none;
+        box-shadow: none;
+        /* fill remaining viewport height minus header */
+        height: calc(100vh - 50px);
+      }
+
+      /* Chat messages fill available space */
+      .chat-messages {
+        flex: 1;
+        overflow-y: auto;
+      }
+
+      /* Sticky input at bottom */
+      .chat-input-area {
+        position: sticky;
+        bottom: 0;
+        z-index: 10;
+        background: var(--surface);
+        border-top: 1px solid var(--border);
+      }
+
+      /* Left panel: below chat, collapsible sections */
       .left-panel {
+        order: 2;
         border-right: none;
-        border-bottom: 1px solid var(--border);
+        border-top: 1px solid var(--border);
+        padding: 16px 14px;
         overflow-y: visible;
       }
 
-      .right-panel {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 55vh;
-        z-index: 50;
-        border-top: 1px solid var(--mint-border);
-        box-shadow: 0 -20px 40px rgba(0,0,0,0.5);
+      /* Hide quick action cards (chips below chat already cover this) */
+      .quick-actions {
+        display: none;
       }
 
-      .main-layout {
-        padding-bottom: 55vh;
+      /* Site preview: tighter */
+      .site-preview-iframe-wrapper {
+        height: 180px;
       }
 
-      .header-logo { font-size: 18px; }
-      .user-name { display: none; }
-      .info-grid { grid-template-columns: 1fr; }
-      .actions-grid { grid-template-columns: 1fr; }
+      .site-preview-iframe {
+        height: 180px;
+      }
+
+      /* Tighten section spacing */
+      .info-card {
+        padding: 12px;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+
+      /* Collapsible toggles visible on mobile */
+      .collapsible-toggle {
+        display: block;
+      }
+
+      /* Collapsed sections */
+      .collapsible-body.collapsed {
+        display: none;
+      }
+
+      /* Collapsible section spacing */
+      .collapsible-section {
+        margin-bottom: 12px;
+      }
+
+      .collapsible-header {
+        padding: 8px 0;
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 0;
+      }
+
+      .collapsible-header.open {
+        border-bottom-color: transparent;
+      }
+
+      .collapsible-header.open + .collapsible-body {
+        padding-top: 10px;
+      }
+
+      /* Chat quick chips: allow horizontal scroll on very small screens */
+      .chat-quick-actions {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+
+      .chat-quick-actions::-webkit-scrollbar { display: none; }
+
+      .quick-msg-btn {
+        flex-shrink: 0;
+      }
+
+      /* Chat header compact */
+      .chat-header {
+        padding: 10px 14px;
+      }
     }
 
     /* Scrollbar */
@@ -888,50 +1016,65 @@
         </div>
       </div>
 
-      <!-- Make Store -->
-      <div style="margin-bottom: 20px;">
-        <div class="section-title">Make Store</div>
-        <div class="info-card" style="text-align: center; padding: 24px;">
-          <span style="font-size: 32px; display: block; margin-bottom: 12px;">🛍️</span>
-          <p style="color: var(--text); font-weight: 600; margin-bottom: 6px;">Start selling from your site</p>
-          <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 16px;">Accept deposits, sell products, or offer services — powered by Stripe</p>
-          <button class="action-btn" style="width: 100%; justify-content: center; padding: 12px;" onclick="sendQuickMessage('I want to set up a store on my site to accept payments and sell products')">
-            <span class="action-icon">⚡</span>
-            <span>Set Up My Store</span>
-          </button>
+      <!-- Make Store (collapsible on mobile, collapsed by default) -->
+      <div class="collapsible-section" style="margin-bottom: 20px;">
+        <div class="collapsible-header" onclick="toggleSection(this)" data-default-collapsed="true">
+          <div class="section-title">Make Store</div>
+          <span class="collapsible-toggle">▼</span>
+        </div>
+        <div class="collapsible-body">
+          <div class="info-card" style="text-align: center; padding: 24px;">
+            <span style="font-size: 32px; display: block; margin-bottom: 12px;">🛍️</span>
+            <p style="color: var(--text); font-weight: 600; margin-bottom: 6px;">Start selling from your site</p>
+            <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 16px;">Accept deposits, sell products, or offer services — powered by Stripe</p>
+            <button class="action-btn" style="width: 100%; justify-content: center; padding: 12px;" onclick="sendQuickMessage('I want to set up a store on my site to accept payments and sell products')">
+              <span class="action-icon">⚡</span>
+              <span>Set Up My Store</span>
+            </button>
+          </div>
         </div>
       </div>
 
-      <!-- Site Info -->
-      <div style="margin-bottom: 20px;">
-        <div class="section-title">Site Info</div>
-        <div class="info-card">
-          <div class="info-grid">
-            <div class="info-item">
-              <span class="info-label">Domain</span>
-              <span class="info-value mint" id="info-domain">Loading...</span>
-            </div>
-            <div class="info-item">
-              <span class="info-label">Plan</span>
-              <span class="info-value" id="info-plan"><span class="plan-badge plan-free">Free</span></span>
-            </div>
-            <div class="info-item">
-              <span class="info-label">Site Slug</span>
-              <span class="info-value" id="info-slug">—</span>
-            </div>
-            <div class="info-item">
-              <span class="info-label">Status</span>
-              <span class="info-value" style="color:#28ca41;">● Live</span>
+      <!-- Site Info (collapsible on mobile, collapsed by default) -->
+      <div class="collapsible-section" style="margin-bottom: 20px;">
+        <div class="collapsible-header" onclick="toggleSection(this)" data-default-collapsed="true">
+          <div class="section-title">Site Info</div>
+          <span class="collapsible-toggle">▼</span>
+        </div>
+        <div class="collapsible-body">
+          <div class="info-card">
+            <div class="info-grid">
+              <div class="info-item">
+                <span class="info-label">Domain</span>
+                <span class="info-value mint" id="info-domain">Loading...</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Plan</span>
+                <span class="info-value" id="info-plan"><span class="plan-badge plan-free">Free</span></span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Site Slug</span>
+                <span class="info-value" id="info-slug">—</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Status</span>
+                <span class="info-value" style="color:#28ca41;">● Live</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Recent Changes -->
-      <div class="change-history">
-        <div class="section-title">Recent Changes</div>
-        <div class="timeline" id="change-timeline">
-          <div class="empty-state">No changes yet. Ask Mint to edit your site!</div>
+      <!-- Recent Changes (collapsible on mobile, collapsed by default) -->
+      <div class="collapsible-section change-history">
+        <div class="collapsible-header" onclick="toggleSection(this)" data-default-collapsed="true">
+          <div class="section-title">Recent Changes</div>
+          <span class="collapsible-toggle">▼</span>
+        </div>
+        <div class="collapsible-body">
+          <div class="timeline" id="change-timeline">
+            <div class="empty-state">No changes yet. Ask Mint to edit your site!</div>
+          </div>
         </div>
       </div>
 
@@ -1444,6 +1587,43 @@
   }
 
   } // end startApp
+
+  // ── Collapsible sections (mobile only) ──
+  function isMobile() { return window.innerWidth <= 768; }
+
+  window.toggleSection = function(header) {
+    if (!isMobile()) return; // desktop: always open
+    const body = header.nextElementSibling;
+    const toggle = header.querySelector('.collapsible-toggle');
+    const isCollapsed = body.classList.contains('collapsed');
+    if (isCollapsed) {
+      body.classList.remove('collapsed');
+      toggle.classList.add('open');
+      header.classList.add('open');
+    } else {
+      body.classList.add('collapsed');
+      toggle.classList.remove('open');
+      header.classList.remove('open');
+    }
+  };
+
+  // On mobile: collapse sections that have data-default-collapsed="true"
+  function initCollapsibles() {
+    if (!isMobile()) return;
+    document.querySelectorAll('.collapsible-header[data-default-collapsed="true"]').forEach(header => {
+      const body = header.nextElementSibling;
+      const toggle = header.querySelector('.collapsible-toggle');
+      body.classList.add('collapsed');
+      if (toggle) toggle.classList.remove('open');
+    });
+  }
+
+  // Run on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCollapsibles);
+  } else {
+    initCollapsibles();
+  }
 </script>
 </body>
 </html>
