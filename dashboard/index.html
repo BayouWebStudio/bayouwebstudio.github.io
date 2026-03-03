@@ -980,8 +980,17 @@
 
   // ── Init Clerk ──
   try {
-    var clerk = new window.Clerk(CLERK_KEY);
-    await clerk.load();
+    // ClerkJS CDN exposes window.Clerk as a constructor OR pre-initialized instance
+    var clerk;
+    if (typeof window.Clerk === 'function') {
+      clerk = new window.Clerk(CLERK_KEY);
+      await clerk.load();
+    } else if (window.Clerk && typeof window.Clerk.load === 'function') {
+      clerk = window.Clerk;
+      await clerk.load();
+    } else {
+      throw new Error('Clerk SDK not found on window');
+    }
   } catch (e) {
     document.getElementById('loading-screen').innerHTML =
       '<div style="color:#ff6b6b;text-align:center;padding:20px;font-family:monospace">' +
