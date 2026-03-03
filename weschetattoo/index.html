@@ -1,258 +1,385 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>weschetattoo | Tattoo Artist</title>
-<meta name="description" content="weschetattoo — Tattoo Artist. Professional tattoo artist creating custom, one-of-a-kind pieces. Every tattoo is a collaboration — designed specificall">
-<meta name="keywords" content="weschetattoo, tattoo artist, weschetattoo, book online">
-<meta property="og:title" content="weschetattoo | Tattoo Artist">
-<meta property="og:description" content="weschetattoo — Tattoo Artist. View portfolio and book online.">
-<meta property="og:image" content="">
-<meta property="og:url" content="https://bayouwebstudio.com/weschetattoo/">
-<meta property="og:type" content="website">
-<meta name="twitter:card" content="summary_large_image">
-<link rel="canonical" href="https://bayouwebstudio.com/weschetattoo/">
-<script type="application/ld+json">{
-  "@context":"https://schema.org",
-  "@type":"TattooParlor",
-  "name":"weschetattoo",
-  "image":"",
-  "url":"https://bayouwebstudio.com/weschetattoo/",
-  "sameAs":["https://www.instagram.com/weschetattoo/"]
-}</script>
-<style>
-:root{--bg:#0a0a0a;--bg2:#111;--text:#f0f0f0;--muted:#999;--accent:#C9A84C;--card:#141414;--border:rgba(255,255,255,0.08)}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,-apple-system,sans-serif;line-height:1.6;overflow-x:hidden}
-/* --- Nav --- */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;background:rgba(10,10,10,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
-.nav-logo{font-size:1.2rem;font-weight:900;letter-spacing:0.1em;color:var(--accent);text-decoration:none;text-transform:uppercase}
-.nav-links{display:flex;gap:1.8rem;list-style:none}
-.nav-links a{color:var(--muted);text-decoration:none;font-size:0.85rem;letter-spacing:0.06em;text-transform:uppercase;transition:color 0.2s}
-.nav-links a:hover{color:var(--accent)}
-/* --- Hero --- */
-.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:8rem 2rem 4rem}
-.hero-title{font-size:clamp(3rem,9vw,6.5rem);font-weight:900;letter-spacing:0.06em;line-height:1;margin-bottom:0.5rem;text-transform:uppercase}
-.hero-tagline{font-size:clamp(0.9rem,2.5vw,1.2rem);color:var(--accent);font-weight:600;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.6rem}
-.hero-location{color:var(--muted);font-size:1rem;margin-bottom:2rem}
-.hero-location span{color:var(--accent);font-weight:600}
-.hero-cta{display:inline-flex;align-items:center;gap:0.5rem;background:var(--accent);color:var(--bg);padding:0.9rem 2.5rem;border-radius:0.5rem;text-decoration:none;font-weight:800;font-size:1rem;letter-spacing:0.05em;text-transform:uppercase;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 0 30px rgba(201,168,76,0.3)}
-.hero-cta:hover{transform:translateY(-2px);box-shadow:0 0 50px rgba(201,168,76,0.5)}
-.scroll-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);color:var(--muted);font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;animation:bounce 2s infinite}
-.scroll-hint::after{content:'\25BC';display:block;text-align:center;margin-top:0.3rem;font-size:0.7rem}
-@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
-/* --- Sections --- */
-section{position:relative;max-width:1100px;margin:0 auto;padding:5rem 2rem}
-.section-label{font-size:0.75rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:0.75rem}
-.section-title{font-size:clamp(1.6rem,4vw,2.5rem);font-weight:900;line-height:1.15;margin-bottom:1.5rem}
-.section-title span{color:var(--accent)}
-/* --- About --- */
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
-.about-text p{color:var(--muted);font-size:1.05rem;margin-bottom:1rem;line-height:1.8}
-.about-text p strong{color:var(--text)}
-.about-tags{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1.5rem}
-.tag{background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);color:var(--accent);padding:0.3rem 0.85rem;border-radius:2rem;font-size:0.78rem;font-weight:600;letter-spacing:0.04em}
-.about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2rem;text-align:center}
-.stat-num{font-size:2rem;font-weight:900;color:var(--accent)}
-.stat-label{font-size:0.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em}
-/* --- Services --- */
-.svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem;margin-top:1rem}
-.svc-card{background:var(--card);border:1px solid var(--border);border-radius:1rem;padding:1.5rem;text-align:center;transition:border-color 0.2s,transform 0.2s}
-.svc-card:hover{border-color:var(--accent);transform:translateY(-3px)}
-.svc-icon{font-size:1.8rem;margin-bottom:0.5rem}
-.svc-card h3{font-size:1rem;font-weight:800;margin-bottom:0.4rem}
-.svc-card p{color:var(--muted);font-size:0.88rem;line-height:1.5}
-/* --- Artists (shop) --- */
-.artists-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem}
-.artist-card{background:var(--card);border:1px solid var(--border);border-radius:1rem;padding:2rem 1.5rem;text-align:center;transition:border-color 0.3s,transform 0.3s}
-.artist-card:hover{border-color:var(--accent);transform:translateY(-4px)}
-.artist-photo{width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid var(--accent);margin:0 auto 1rem;display:block}
-.artist-photo-placeholder{width:90px;height:90px;border-radius:50%;background:var(--bg2);border:3px solid #333;margin:0 auto 1rem;display:flex;align-items:center;justify-content:center;font-size:2rem;color:#555}
-.artist-card h3{font-size:1.1rem;font-weight:800;margin-bottom:0.5rem}
-.artist-ig{color:var(--accent);font-size:0.85rem;text-decoration:none;display:block;margin-bottom:0.75rem;opacity:0.8}
-.artist-ig:hover{opacity:1}
-.btn-sm{background:var(--accent);color:var(--bg);padding:0.5rem 1.5rem;border-radius:0.4rem;text-decoration:none;font-weight:700;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.04em;display:inline-block;transition:opacity 0.2s}
-.btn-sm:hover{opacity:0.85}
-/* --- Gallery (CSS masonry) --- */
-#gallery{max-width:1200px}
-.gallery-grid{columns:2;column-gap:12px}
-.gallery-item{break-inside:avoid;margin-bottom:12px;border-radius:0.75rem;overflow:hidden;cursor:pointer;position:relative;border:1px solid var(--border);transition:transform 0.3s,box-shadow 0.3s}
-.gallery-item:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(201,168,76,0.2);border-color:var(--accent)}
-.gallery-item img{width:100%;display:block;transition:transform 0.4s}
-.gallery-item:hover img{transform:scale(1.03)}
-.gallery-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(201,168,76,0.4) 0%,transparent 50%);opacity:0;transition:opacity 0.3s;display:flex;align-items:flex-end;padding:1rem}
-.gallery-item:hover .gallery-overlay{opacity:1}
-/* --- Lightbox --- */
-.lightbox{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,0.94);align-items:center;justify-content:center;padding:1rem}
-.lightbox.active{display:flex}
-.lightbox-img{max-width:90vw;max-height:90vh;border-radius:0.75rem;box-shadow:0 0 60px rgba(201,168,76,0.3);border:1px solid var(--accent)}
-.lightbox-close,.lightbox-prev,.lightbox-next{position:absolute;background:rgba(201,168,76,0.2);border:1px solid var(--accent);color:#fff;font-size:1.5rem;width:3rem;height:3rem;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s}
-.lightbox-close{top:1.5rem;right:1.5rem}
-.lightbox-prev{top:50%;left:1.5rem;transform:translateY(-50%)}
-.lightbox-next{top:50%;right:1.5rem;transform:translateY(-50%)}
-.lightbox-close:hover,.lightbox-prev:hover,.lightbox-next:hover{background:rgba(201,168,76,0.5)}
-/* --- Booking CTA --- */
-.booking-section{position:relative;max-width:1100px;margin:0 auto;padding:5rem 2rem}
-.booking-inner{background:linear-gradient(135deg,rgba(201,168,76,0.1) 0%,rgba(201,168,76,0.03) 100%);border:1px solid rgba(201,168,76,0.2);border-radius:1.5rem;padding:4rem 2rem;text-align:center;max-width:800px;margin:0 auto}
-.booking-inner p{color:var(--muted);font-size:1.05rem;margin-bottom:2rem;max-width:500px;margin-left:auto;margin-right:auto}
-.book-btn{display:inline-flex;align-items:center;gap:0.6rem;background:var(--accent);color:var(--bg);padding:1rem 3rem;border-radius:0.6rem;text-decoration:none;font-weight:800;font-size:1.1rem;letter-spacing:0.05em;text-transform:uppercase;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 0 30px rgba(201,168,76,0.3)}
-.book-btn:hover{transform:translateY(-3px);box-shadow:0 0 50px rgba(201,168,76,0.5)}
-/* --- Contact cards --- */
-.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.25rem;margin-top:2rem}
-.contact-card{background:var(--card);border:1px solid var(--border);border-radius:1rem;padding:1.5rem;text-align:center;transition:border-color 0.2s,transform 0.2s}
-.contact-card:hover{border-color:var(--accent);transform:translateY(-2px)}
-.contact-card-icon{font-size:1.8rem;margin-bottom:0.4rem}
-.contact-card-label{color:var(--muted);font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem}
-.contact-card-value{font-weight:700;font-size:0.95rem}
-.contact-card a{color:var(--accent);text-decoration:none}
-.contact-card a:hover{opacity:0.8}
-/* --- Floating CTA --- */
-.float-btn{position:fixed;bottom:2rem;right:2rem;z-index:200;background:var(--accent);color:var(--bg);padding:0.85rem 1.6rem;border-radius:3rem;text-decoration:none;font-weight:800;font-size:0.85rem;letter-spacing:0.05em;text-transform:uppercase;box-shadow:0 4px 24px rgba(201,168,76,0.35);transition:transform 0.2s,box-shadow 0.2s;display:flex;align-items:center;gap:0.5rem}
-.float-btn:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 8px 32px rgba(201,168,76,0.5)}
-.pulse{display:inline-block;width:8px;height:8px;background:#fff;border-radius:50%;animation:pulseAnim 1.5s infinite}
-@keyframes pulseAnim{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(1.4)}}
-/* --- Footer --- */
-footer{background:var(--card);border-top:1px solid var(--border);text-align:center;padding:2rem;color:var(--muted);font-size:0.85rem}
-footer a{color:var(--accent);text-decoration:none}
-footer a:hover{opacity:0.8}
-/* --- Scroll reveal --- */
-.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.6s ease,transform 0.6s ease}
-.reveal.visible{opacity:1;transform:translateY(0)}
-/* --- Responsive --- */
-@media(max-width:768px){
-  nav{padding:0.75rem 1.25rem}
-  .nav-links{display:none}
-  .about-grid{grid-template-columns:1fr}
-  .gallery-grid{columns:2}
-  .about-stats{grid-template-columns:repeat(3,1fr);gap:0.5rem}
-  .float-btn{bottom:1.25rem;right:1.25rem;padding:0.75rem 1.2rem;font-size:0.8rem}
-  section,.booking-section{padding:3rem 1.25rem}
-}
-@media(min-width:900px){
-  .gallery-grid{columns:3}
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Raul Wesche | Tattoo Artist</title>
+  <meta name="description" content="Geometric Tattoo Artist Books open November 1st  Houston Texas @tattootemple_houston  @allegoryink @masttattoo.official  @inkedhaus @wesche.machines" />
+  <meta name="keywords" content="Raul Wesche, weschetattoo, tattoo artist" />
+
+  <meta property="og:title" content="Raul Wesche | Tattoo Artist" />
+  <meta property="og:description" content="Geometric Tattoo Artist Books open November 1st  Houston Texas @tattootemple_houston  @allegoryink @masttattoo.official  @inkedhaus @wesche.machines" />
+  <meta property="og:image" content="img/photo_01.jpg" />
+  <meta property="og:url" content="https://getminted.ai/weschetattoo/" />
+  <meta property="og:type" content="website" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Raul Wesche | Tattoo Artist" />
+  <meta name="twitter:image" content="img/photo_01.jpg" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <script>document.documentElement.classList.add('js-loaded')</script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Raul Wesche — Tattoo Artist",
+    "description": "Geometric Tattoo Artist Books open November 1st  Houston Texas @tattootemple_houston  @allegoryink @masttattoo.official  @inkedhaus @wesche.machines",
+    "url": "https://getminted.ai/weschetattoo/",
+    "image": "img/photo_01.jpg",
+    "sameAs": ["https://www.instagram.com/weschetattoo/"]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --accent: #C9A84C;
+      --black: #0a0a0a;
+      --dark: #111111;
+      --darker: #0d0d0d;
+      --text: #e8e8e8;
+      --muted: #888;
+    }
+    html { scroll-behavior: smooth; /* may not work in IG WebView — links still work */ }
+    body { background: var(--black); color: var(--text); font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif; font-weight: 300; line-height: 1.6; overflow-x: hidden; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 2.5rem; background: rgba(10,10,10,0.88); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: var(--accent); letter-spacing: 0.05em; text-decoration: none; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.3s; }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* HERO */
+    #hero { position: relative; height: 100vh; min-height: 600px; display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden; }
+    .hero-bg { position: absolute; top:0;right:0;bottom:0;left:0; background-image: url('img/photo_01.jpg'); background-size: cover; background-position: center; filter: brightness(0.42); -webkit-transform: scale(1.05); transform: scale(1.05); -webkit-transition: -webkit-transform 8s ease; transition: transform 8s ease; }
+    #hero:hover .hero-bg { -webkit-transform: scale(1.0); transform: scale(1.0); }
+    .hero-overlay { position: absolute; top:0;right:0;bottom:0;left:0; background: linear-gradient(to bottom, rgba(10,10,10,0.2) 0%, rgba(10,10,10,0.75) 100%); }
+    .hero-content { position: relative; z-index: 2; max-width: 800px; padding: 0 1.5rem; }
+    .hero-eyebrow { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.32em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.2rem; }
+    .hero-title { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(3rem, 8vw, 6.5rem); font-weight: 900; line-height: 1.0; color: #fff; margin-bottom: 1.2rem; }
+    .hero-subtitle { font-size: clamp(0.9rem, 2vw, 1.1rem); color: rgba(255,255,255,0.6); font-weight: 300; letter-spacing: 0.06em; margin-bottom: 2.5rem; }
+    .hero-cta { display: inline-block; padding: 0.9rem 2.8rem; background: var(--accent); color: var(--black); text-decoration: none; font-weight: 600; font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; border: 2px solid var(--accent); transition: all 0.3s; }
+    .hero-cta:hover { background: transparent; color: var(--accent); }
+    .hero-scroll { position: absolute; bottom: 2rem; left: 50%; -webkit-transform: translateX(-50%); transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; color: rgba(255,255,255,0.35); font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; -webkit-animation: bounce 2.2s infinite; animation: bounce 2.2s infinite; }
+    .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--accent), transparent); }
+    @-webkit-keyframes bounce { 0%, 100% { -webkit-transform: translateX(-50%) translateY(0); } 50% { -webkit-transform: translateX(-50%) translateY(7px); } }
+    @keyframes bounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(7px); } }
+
+    /* SECTIONS */
+    section { padding: 7rem 1.5rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.35em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem; }
+    .section-title { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; line-height: 1.15; margin-bottom: 1.5rem; }
+    .divider { width: 48px; height: 1px; background: var(--accent); margin: 1.5rem 0 2rem; }
+
+    /* ABOUT */
+    #about { background: var(--dark); }
+    .about-grid { display: grid; grid-template-columns: 1fr; gap: 3rem; align-items: center; }
+    @media(min-width: 768px) { .about-grid { grid-template-columns: 1fr 1fr; gap: 5rem; } }
+    .about-img-wrap { position: relative; display: inline-block; }
+    .about-img-wrap::before { content: ''; position: absolute; top: -12px; left: -12px; right: 12px; bottom: 12px; border: 1px solid rgba(201,168,76,0.35); pointer-events: none; }
+    .about-portrait { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; filter: grayscale(20%); -webkit-transition: filter 0.4s; transition: filter 0.4s; }
+    .about-portrait:hover { filter: grayscale(0%); }
+    .about-content { display: flex; flex-direction: column; justify-content: center; }
+    .about-text p { color: rgba(232,232,232,0.72); font-size: 1rem; line-height: 1.85; margin-bottom: 1.4rem; }
+    .about-stats { display: flex; gap: 2.5rem; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.07); }
+    .stat-block { display: flex; flex-direction: column; }
+    .stat-number { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--accent); }
+    .stat-label { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-top: 0.2rem; }
+
+    /* GALLERY */
+    #gallery { background: var(--black); }
+    .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .gallery-item { position: relative; overflow: hidden; cursor: pointer; }
+    .gallery-item img { width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block; -webkit-transition: -webkit-transform 0.6s ease, filter 0.4s ease; transition: transform 0.6s ease, filter 0.4s ease; filter: grayscale(10%); }
+    .gallery-item:hover img { -webkit-transform: scale(1.06); transform: scale(1.06); filter: grayscale(0%); }
+    .gallery-item-overlay { position: absolute; top:0;right:0;bottom:0;left:0; background: linear-gradient(to top, rgba(10,10,10,0.8) 0%, transparent 55%); opacity: 0; -webkit-transition: opacity 0.4s; transition: opacity 0.4s; display: flex; align-items: flex-end; padding: 1.2rem; }
+    .gallery-item:hover .gallery-item-overlay { opacity: 1; }
+    .gallery-item-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); }
+
+    /* SPECIALTIES */
+    #styles { background: var(--darker); }
+    .styles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+    .style-card { border: 1px solid rgba(201,168,76,0.18); padding: 2rem 1.5rem; -webkit-transition: border-color 0.3s, background 0.3s; transition: border-color 0.3s, background 0.3s; }
+    .style-card:hover { border-color: var(--accent); background: rgba(201,168,76,0.04); }
+    .style-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+    .style-card h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; margin-bottom: 0.7rem; }
+    .style-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+    @media (max-width: 900px) { .styles-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 600px) { .styles-grid { grid-template-columns: 1fr; } }
+
+    /* BOOKING */
+    #booking { background: var(--dark); }
+    .booking-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .booking-info p { color: rgba(232,232,232,0.7); font-size: 0.95rem; line-height: 1.9; margin-bottom: 1.2rem; }
+    .booking-contact-list { list-style: none; margin-top: 2rem; }
+    .booking-contact-list li { padding: 1rem 0; border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; gap: 1rem; }
+    .booking-contact-list li:first-child { border-top: 1px solid rgba(255,255,255,0.06); }
+    .contact-icon { width: 38px; height: 38px; border-radius: 50%; background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.25); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+    .contact-detail { display: flex; flex-direction: column; }
+    .contact-label { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+    .contact-value { font-size: 0.92rem; color: var(--text); }
+    .contact-value a { color: var(--accent); text-decoration: none; }
+    .booking-form-box { background: rgba(255,255,255,0.02); border: 1px solid rgba(201,168,76,0.15); padding: 2.5rem; }
+    .booking-form-box h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 0.5rem; }
+    .booking-form-box > p { font-size: 0.88rem; color: var(--muted); margin-bottom: 2rem; }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label { display: block; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
+    .form-group input, .form-group textarea, .form-group select { width: 100%; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); color: var(--text); padding: 0.75rem 1rem; font-family: 'Inter', sans-serif; font-size: 0.9rem; outline: none; -webkit-transition: border-color 0.3s; transition: border-color 0.3s; -webkit-appearance: none; }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--accent); }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .form-submit { width: 100%; background: var(--accent); color: var(--black); border: 2px solid var(--accent); padding: 0.9rem 2rem; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; cursor: pointer; -webkit-transition: all 0.3s; transition: all 0.3s; }
+    .form-submit:hover { background: transparent; color: var(--accent); }
+    @media (max-width: 900px) { .booking-grid { grid-template-columns: 1fr; gap: 3rem; } }
+
+    /* FLOAT BOOK */
+    .float-book { position: fixed; bottom: 2rem; right: 2rem; z-index: 200; background: var(--accent); color: var(--black); padding: 0.85rem 1.8rem; text-decoration: none; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; box-shadow: 0 8px 32px rgba(201,168,76,0.35); -webkit-transition: all 0.3s; transition: all 0.3s; border: 2px solid var(--accent); }
+    .float-book:hover { background: transparent; color: var(--accent); }
+
+    /* LIGHTBOX */
+    .lightbox { visibility: hidden; opacity: 0; pointer-events: none; position: fixed; top:0;right:0;bottom:0;left:0; background: rgba(0,0,0,0.95); z-index: 300; display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; -webkit-justify-content: center; justify-content: center; cursor: pointer; -webkit-transition: opacity 0.3s; transition: opacity 0.3s; }
+    .lightbox.open { visibility: visible; opacity: 1; pointer-events: auto; }
+    .lightbox img { max-width: 90vw; max-height: 90vh; }
+
+    /* FOOTER */
+    footer { background: var(--darker); border-top: 1px solid rgba(255,255,255,0.05); padding: 3rem 1.5rem; text-align: center; }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--accent); margin-bottom: 1rem; display: block; }
+    .footer-links { display: flex; justify-content: center; gap: 2rem; margin: 1.5rem 0; list-style: none; flex-wrap: wrap; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.8rem; transition: color 0.3s; }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-copy { font-size: 0.75rem; color: rgba(136,136,136,0.5); margin-top: 1.5rem; }
+    .mint-credit { font-size: 0.7rem; color: rgba(136,136,136,0.5); margin-top: 0.6rem; }
+    .mint-credit a { color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.3s; }
+    .mint-credit a:hover { color: var(--accent); }
+
+    /* FADE IN — visible by default (IG/no-JS fallback), JS enhances */
+    .fade-in { opacity: 1; -webkit-transform: none; transform: none; }
+    .js-loaded .fade-in { opacity: 0; -webkit-transform: translateY(28px); transform: translateY(28px); -webkit-transition: opacity 0.7s ease, -webkit-transform 0.7s ease; transition: opacity 0.7s ease, transform 0.7s ease; }
+    .js-loaded .fade-in.visible { opacity: 1; -webkit-transform: none; transform: none; }
+
+    /* IG in-app browser fallbacks */
+    @supports not (backdrop-filter: blur(1px)) {
+      nav { background: rgba(10,10,10,0.95) !important; }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .float-book { bottom: 1.2rem; right: 1.2rem; padding: 0.75rem 1.4rem; }
+      .about-img-wrap::before { display: none; }
+    }
+  </style>
 </head>
 <body>
 
-<nav>
-  <a class="nav-logo" href="#">weschetattoo</a>
-  <div class="nav-links">
-    <a href="#about">About</a> <a href="#gallery">Gallery</a> <a href="#book">Book</a>
-  </div>
-</nav>
+  <nav>
+    <a href="#hero" class="nav-logo">Raul Wesche</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#gallery">Portfolio</a></li>
+      <li><a href="#styles">Styles</a></li>
+      <li><a href="#booking">Book</a></li>
+    </ul>
+  </nav>
 
-<div class="hero">
-  <div>
-    <h1 class="hero-title">weschetattoo</h1>
-    <p class="hero-tagline">Custom Tattoos · Fine Art on Skin</p>
-    <p class="hero-location">&#128205; <span>@weschetattoo</span></p>
-    <a class="hero-cta" href="https://www.instagram.com/weschetattoo/" target="_blank" rel="noopener">Book Your Session &#10022;</a>
-  </div>
-  <div class="scroll-hint">Scroll</div>
-</div>
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Tattoo Artist</p>
+      <h1 class="hero-title">Raul Wesche</h1>
+      <p class="hero-subtitle">@weschetattoo</p>
+      <a href="#booking" class="hero-cta">Book a Session</a>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
 
-<section id="about">
-  <div class="section-label">About the Artist</div>
-  <div class="about-grid">
-    <div class="about-text reveal">
-      <h2 class="section-title">Custom <span>Tattoo Art</span> Made for You</h2>
-      <p>Geometric Tattoo Artist Books open November 1st Houston Texas .official .machines</p>
-      <div class="about-tags">
-        <span class="tag">@weschetattoo</span>
+  <section id="about">
+    <div class="container">
+      <div class="fade-in">
+        <p class="section-label">About the Artist</p>
+        <h2 class="section-title">Raul Wesche</h2>
+        <div class="divider"></div>
+        <div class="about-grid">
+          <div class="about-img-wrap"><img src="img/profile.jpg" alt="Raul Wesche" class="about-portrait" loading="lazy"></div>
+          <div class="about-content">
+            <div class="about-text">
+              <p>Raul Wesche is a Houston-based geometric tattoo artist known for his precise linework and captivating designs. With a distinct style and meticulous approach, Raul brings a unique artistic vision to every custom tattoo.</p>
+            </div>
+            <div class="about-stats">
+              <div class="stat-block">
+                <span class="stat-number">IG</span>
+                <span class="stat-label">@weschetattoo</span>
+              </div>
+              <div class="stat-block">
+                <span class="stat-number">Geometric Tattooing</span>
+                <span class="stat-label">Specialty</span>
+              </div>
+              <div class="stat-block">
+                <span class="stat-number">2026</span>
+                <span class="stat-label">Booking Now</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="about-stats reveal">
-      <div><div class="stat-num">&#9733;</div><div class="stat-label">Quality Work</div></div>
-      <div><div class="stat-num">&#9829;</div><div class="stat-label">Happy Clients</div></div>
-      <div><div class="stat-num">&#9998;</div><div class="stat-label">Custom Only</div></div>
+  </section>
+
+  <section id="gallery">
+    <div class="container">
+      <p class="section-label fade-in">Portfolio</p>
+      <h2 class="section-title fade-in">Recent Work</h2>
+      <div class="divider fade-in"></div>
+      <div class="gallery-grid">
+        <div class="gallery-item fade-in" style="transition-delay:0s"><img src="img/photo_01.jpg" alt="Raul Wesche work 1" loading="lazy" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Geometric Tattooing</span></div></div>
+        <div class="gallery-item fade-in" style="transition-delay:0.07s"><img src="img/photo_02.jpg" alt="Raul Wesche work 2" loading="lazy" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Blackwork Tattooing</span></div></div>
+        <div class="gallery-item fade-in" style="transition-delay:0.14s"><img src="img/photo_03.jpg" alt="Raul Wesche work 3" loading="lazy" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Ornamental Tattooing</span></div></div>
+        <div class="gallery-item fade-in" style="transition-delay:0.21000000000000002s"><img src="img/photo_04.jpg" alt="Raul Wesche work 4" loading="lazy" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Geometric Tattooing</span></div></div>
+        <div class="gallery-item fade-in" style="transition-delay:0.28s"><img src="img/photo_05.jpg" alt="Raul Wesche work 5" loading="lazy" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Blackwork Tattooing</span></div></div>
+        <div class="gallery-item fade-in" style="transition-delay:0.35000000000000003s"><img src="img/photo_06.jpg" alt="Raul Wesche work 6" loading="lazy" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Ornamental Tattooing</span></div></div>
+        <div class="gallery-item fade-in" style="transition-delay:0.42000000000000004s"><img src="img/photo_07.jpg" alt="Raul Wesche work 7" loading="lazy" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Geometric Tattooing</span></div></div>
+        <div class="gallery-item fade-in" style="transition-delay:0.49000000000000005s"><img src="img/photo_08.jpg" alt="Raul Wesche work 8" loading="lazy" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Blackwork Tattooing</span></div></div>
+        <div class="gallery-item fade-in" style="transition-delay:0.56s"><img src="img/photo_09.jpg" alt="Raul Wesche work 9" loading="lazy" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Ornamental Tattooing</span></div></div>
+        <div class="gallery-item fade-in" style="transition-delay:0.6300000000000001s"><img src="img/photo_10.jpg" alt="Raul Wesche work 10" loading="lazy" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Geometric Tattooing</span></div></div>
+        <div class="gallery-item fade-in" style="transition-delay:0.7000000000000001s"><img src="img/photo_11.jpg" alt="Raul Wesche work 11" loading="lazy" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Blackwork Tattooing</span></div></div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-
-
-<section id="gallery" style="max-width:1200px">
-  <div class="section-label">Portfolio</div>
-  <h2 class="section-title">Recent <span>Work</span></h2>
-  <div class="gallery-grid" id="galleryGrid"></div>
-</section>
-
-<div class="booking-section" id="book">
-  <div class="booking-inner reveal">
-    <div class="section-label">Ready?</div>
-    <h2 class="section-title" style="margin-bottom:1rem">Book Your <span>Session</span></h2>
-    <p>Ready to get your next piece? Send a message with your idea, placement, and size — let's make it happen.</p>
-    <a class="book-btn" href="https://www.instagram.com/weschetattoo/" target="_blank" rel="noopener">Book Your Session &#10022;</a>
-  </div>
-</div>
-
-<section id="contact">
-  <div class="section-label">Get in Touch</div>
-  <h2 class="section-title"><span>Contact</span></h2>
-  <div class="contact-grid">
-    <div class="contact-card reveal">
-      <div class="contact-card-icon">&#128248;</div>
-      <div class="contact-card-label">Instagram</div>
-      <div class="contact-card-value"><a href="https://www.instagram.com/weschetattoo/" target="_blank" rel="noopener">@weschetattoo</a></div>
+  <section id="styles">
+    <div class="container">
+      <p class="section-label fade-in">Specialties</p>
+      <h2 class="section-title fade-in">What I Create</h2>
+      <div class="divider fade-in"></div>
+      <div class="styles-grid">
+        <div class="style-card fade-in">
+          <div class="style-icon">◆</div>
+          <h3>Geometric Tattooing</h3>
+          <p>The artist specializes in creating tattoos composed of intricate geometric patterns and shapes, often with a mandala-inspired design.</p>
+        </div>
+        <div class="style-card fade-in">
+          <div class="style-icon">✦</div>
+          <h3>Blackwork Tattooing</h3>
+          <p>The artist utilizes primarily black ink to create bold, high-contrast designs with little to no color.</p>
+        </div>
+        <div class="style-card fade-in">
+          <div class="style-icon">❧</div>
+          <h3>Ornamental Tattooing</h3>
+          <p>The artist creates decorative, complex designs that often mimic patterns found in nature or traditional art, applied to enhance and adorn the body.</p>
+        </div>
+      </div>
     </div>
-    <div class="contact-card reveal">
-      <div class="contact-card-icon">&#128197;</div>
-      <div class="contact-card-label">Booking</div>
-      <div class="contact-card-value"><a href="https://www.instagram.com/weschetattoo/" target="_blank" rel="noopener">Book Online</a></div>
+  </section>
+
+  <section id="booking">
+    <div class="container">
+      <p class="section-label fade-in">Get In Touch</p>
+      <h2 class="section-title fade-in">Book a Session</h2>
+      <div class="divider fade-in"></div>
+      <div class="booking-grid fade-in">
+        <div class="booking-info">
+          <p>Ready to get started? Fill out the inquiry form and I'll get back to you to discuss your vision, timeline, and pricing.</p>
+          <p>Follow along on Instagram for the latest work and flash availability.</p>
+          <ul class="booking-contact-list">
+
+              <li>
+                <div class="contact-icon">◈</div>
+                <div class="contact-detail">
+                  <span class="contact-label">Instagram</span>
+                  <span class="contact-value"><a href="https://instagram.com/weschetattoo" target="_blank" rel="noopener">@weschetattoo</a></span>
+                </div>
+              </li>
+          </ul>
+        </div>
+        <div class="booking-form-box">
+          <h3>Start Your Inquiry</h3>
+          <p>Tell me about your idea and I'll be in touch soon.</p>
+          <form action="https://instagram.com/weschetattoo" method="POST" enctype="text/plain">
+            <div class="form-group">
+              <label for="bname">Your Name</label>
+              <input type="text" id="bname" name="Name" placeholder="First & Last" required />
+            </div>
+            <div class="form-group">
+              <label for="bemail">Email Address</label>
+              <input type="email" id="bemail" name="Email" placeholder="you@example.com" required />
+            </div>
+            <div class="form-group">
+              <label for="bstyle">Style / Service</label>
+              <select id="bstyle" name="Style">
+                <option>Geometric Tattooing</option><option>Blackwork Tattooing</option><option>Ornamental Tattooing</option>
+                <option>Other / Not Sure</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="bmessage">Your Idea</label>
+              <textarea id="bmessage" name="Message" placeholder="Describe your idea, placement, size, and any reference images you have in mind..."></textarea>
+            </div>
+            <button type="submit" class="form-submit">Send Inquiry</button>
+          </form>
+        </div>
+      </div>
     </div>
+  </section>
+
+  <a href="#booking" class="float-book">Book Now</a>
+
+  <div class="lightbox" id="lightbox" onclick="this.classList.remove('open')">
+    <img id="lightbox-img" src="" alt="Full size" />
   </div>
-</section>
 
-<footer>
-  <p>&copy; 2025 weschetattoo &middot; All Rights Reserved</p>
-  <p style="margin-top:0.5rem">
-    <a href="https://www.instagram.com/weschetattoo/" target="_blank" rel="noopener">@weschetattoo</a>
-    &nbsp;&middot;&nbsp;
-    <a href="https://bayouwebstudio.com" target="_blank" rel="noopener" style="opacity:0.5">Bayou Web Studio</a>
-  </p>
-</footer>
+  <footer>
+    <span class="footer-logo">Raul Wesche</span>
+    <ul class="footer-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#styles">Styles</a></li>
+      <li><a href="#booking">Book</a></li>
+      <li><a href="https://instagram.com/weschetattoo" target="_blank" rel="noopener">Instagram</a></li>
+    </ul>
+    <p class="footer-copy">&copy; 2026 Raul Wesche. All rights reserved.</p>
+    <p class="mint-credit">Built by <a href="https://bayouwebstudio.com" target="_blank" rel="noopener">Bayou Web Studio</a></p>
+  </footer>
 
-<a class="float-btn" href="https://www.instagram.com/weschetattoo/" target="_blank" rel="noopener">
-  <span class="pulse"></span> Book Now
-</a>
-
-<div class="lightbox" id="lightbox">
-  <button class="lightbox-close" id="lbClose">&#10005;</button>
-  <button class="lightbox-prev" id="lbPrev">&#8249;</button>
-  <img class="lightbox-img" id="lbImg" src="" alt="weschetattoo work">
-  <button class="lightbox-next" id="lbNext">&#8250;</button>
-</div>
-
-<script>
-// Gallery + Lightbox
-const images=[];
-const grid=document.getElementById('galleryGrid');
-images.forEach((src,i)=>{
-  const item=document.createElement('div');
-  item.className='gallery-item';
-  item.innerHTML='<img src="'+src+'" alt="weschetattoo work" loading="lazy"><div class="gallery-overlay"><span style="color:#fff;font-size:1.5rem">&#10021;</span></div>';
-  item.addEventListener('click',()=>openLb(i));
-  grid.appendChild(item);
-});
-let ci=0;
-const lb=document.getElementById('lightbox'),lbImg=document.getElementById('lbImg');
-function openLb(i){ci=i;lbImg.src=images[i];lb.classList.add('active');document.body.style.overflow='hidden'}
-function closeLb(){lb.classList.remove('active');document.body.style.overflow=''}
-function navLb(d){ci=(ci+d+images.length)%images.length;lbImg.src=images[ci]}
-document.getElementById('lbClose').onclick=closeLb;
-document.getElementById('lbPrev').onclick=()=>navLb(-1);
-document.getElementById('lbNext').onclick=()=>navLb(1);
-lb.addEventListener('click',e=>{if(e.target===lb)closeLb()});
-document.addEventListener('keydown',e=>{if(!lb.classList.contains('active'))return;if(e.key==='Escape')closeLb();if(e.key==='ArrowLeft')navLb(-1);if(e.key==='ArrowRight')navLb(1)});
-
-// Scroll reveal
-const obs=new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}});
-},{threshold:0.15});
-document.querySelectorAll('.reveal,.gallery-item,.contact-card,.svc-card,.artist-card').forEach(el=>obs.observe(el));
-</script>
+  <script>
+    function openLightbox(src){document.getElementById('lightbox-img').src=src;document.getElementById('lightbox').classList.add('open')}
+    // IntersectionObserver with multiple fallbacks for IG WebView
+    try {
+      if('IntersectionObserver' in window){
+        var observer=new IntersectionObserver(function(entries){
+          entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);}});
+        },{threshold:0.05, rootMargin:'50px'});
+        document.querySelectorAll('.fade-in').forEach(function(el){observer.observe(el);});
+      } else {
+        document.querySelectorAll('.fade-in').forEach(function(el){el.classList.add('visible');});
+      }
+    } catch(e) {
+      document.querySelectorAll('.fade-in').forEach(function(el){el.classList.add('visible');});
+    }
+    // Safety net: if any fade-in is still invisible after 2s, force all visible
+    setTimeout(function(){
+      document.querySelectorAll('.fade-in').forEach(function(el){
+        if(!el.classList.contains('visible')) el.classList.add('visible');
+      });
+    }, 2000);
+    // IG in-app browser detection: skip animations entirely
+    var ua = navigator.userAgent || '';
+    if(ua.indexOf('Instagram') !== -1 || ua.indexOf('FBAN') !== -1 || ua.indexOf('FBAV') !== -1){
+      document.querySelectorAll('.fade-in').forEach(function(el){el.classList.add('visible');});
+      document.documentElement.classList.remove('js-loaded');
+    }
+  </script>
+  <script src="https://getminted.ai/mint-widget.js"></script>
 </body>
 </html>
