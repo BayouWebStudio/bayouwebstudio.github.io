@@ -226,9 +226,61 @@ footer .tagline{font-size:1.1rem;margin-bottom:16px;color:var(--text)}
 footer .links{margin-bottom:12px}
 footer .links a{margin:0 12px;color:var(--text-dim);transition:color .2s}
 footer .links a:hover{color:var(--mint)}
+
+/* ── Top Nav ── */
+.top-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 28px;
+  background: rgba(10,10,10,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(152,232,193,0.08);
+}
+.top-nav-logo {
+  font-family: "Playfair Display", serif;
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: #98E8C1;
+  text-decoration: none;
+}
+.top-nav-right { display: flex; align-items: center; gap: 16px; }
+.nav-signin {
+  color: #b0b0b0;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-signin:hover { color: #98E8C1; }
+.nav-getstarted {
+  background: linear-gradient(135deg,#98E8C1,#6dd5a0);
+  color: #0a0a0a;
+  padding: 9px 20px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.875rem;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.nav-getstarted:hover { opacity: 0.85; }
+body { padding-top: 60px; }
 </style>
 </head>
 <body>
+<nav class="top-nav">
+  <a href="/" class="top-nav-logo">🌿 mint</a>
+  <div class="top-nav-right">
+    <a href="/dashboard/" class="nav-signin">Sign In</a>
+    <a href="#signup" class="nav-getstarted">Get Started →</a>
+  </div>
+</nav>
+
 
 <!-- Hero -->
 <section class="hero">
