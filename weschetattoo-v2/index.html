@@ -20,7 +20,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="format-detection" content="telephone=no" />
 
-  <script>document.documentElement.classList.add('js-loaded')</script>
+
 
   <script type="application/ld+json">
   {
@@ -41,34 +41,34 @@
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "Do you offer consultations before booking a tattoo appointment?",
+        "name": "I'm looking for a geometric sleeve, but I'm not sure about specific designs. Can you help with the design process?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes, I offer free consultations to discuss your design ideas, placement, and any questions you may have. Contact me to schedule a meeting."
+          "text": "Absolutely! I specialize in custom geometric designs. We can discuss your preferences, explore different patterns and placements, and develop a unique sleeve that reflects your vision."
         }
       },
       {
         "@type": "Question",
-        "name": "I'm interested in a geometric piece, but I'm unsure about the best placement on my body. Do you offer guidance on that?",
+        "name": "What type of ink do you use, and is it vegan-friendly?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Absolutely! I can assess your anatomy and provide suggestions based on the flow of your body, ensuring the design complements your shape and movement."
+          "text": "I use high-quality, ethically sourced inks that are known for their vibrancy and longevity. While not all are explicitly labeled vegan, I can confirm the specific inks I use are vegan-friendly upon request, and I can always order if needed."
         }
       },
       {
         "@type": "Question",
-        "name": "What type of geometric styles do you specialize in, and what kind of reference materials should I bring to a consultation?",
+        "name": "I've seen some artists using dotwork shading in geometric tattoos. Is this a style you offer?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "I focus on sacred geometry, dotwork patterns, and linework mandalas; feel free to bring examples of geometric art, architecture, or any visual inspirations that resonate with you."
+          "text": "Yes, dotwork shading is a fantastic technique that I often incorporate into my geometric designs to add depth and texture; I'm happy to discuss how it might work within your desired piece."
         }
       },
       {
         "@type": "Question",
-        "name": "What kind of aftercare instructions do you provide for my new geometric tattoo?",
+        "name": "I'm traveling to Houston from out of state. How far in advance should I book an appointment with you?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "I provide detailed written and verbal aftercare instructions specific to geometric tattoos, emphasizing keeping the area clean, moisturized, and protected from the sun to ensure optimal healing and line clarity."
+          "text": "Given my schedule and the detail involved in geometric work, I recommend booking 2-3 months in advance, especially for larger pieces, to ensure availability during your visit."
         }
       }
     ]
@@ -204,8 +204,8 @@
     .gallery-item-overlay { position: absolute; top:0;right:0;bottom:0;left:0; background: linear-gradient(to top, var(--gallery-overlay) 0%, transparent 55%); opacity: 0; -webkit-transition: opacity 0.4s; transition: opacity 0.4s; display: -webkit-flex; display: flex; -webkit-align-items: flex-end; align-items: flex-end; padding: 1.2rem; }
     .gallery-item:hover .gallery-item-overlay { opacity: 1; }
     .gallery-item-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); }
-    @media (max-width: 900px) { .gallery-grid { -webkit-column-count: 2; -moz-column-count: 2; column-count: 2; } }
-    @media (max-width: 600px) { .gallery-grid { -webkit-column-count: 1; -moz-column-count: 1; column-count: 1; } }
+    @media (max-width: 900px) { .gallery-grid { -webkit-column-count: 3; -moz-column-count: 3; column-count: 3; } }
+    @media (max-width: 600px) { .gallery-grid { -webkit-column-count: 2; -moz-column-count: 2; column-count: 2; } }
 
     /* ── SPECIALTIES ── */
     #styles { background: var(--darker); }
@@ -321,6 +321,12 @@
     .mint-credit a { color: rgba(136,136,136,0.5); text-decoration: none; -webkit-transition: color 0.3s; transition: color 0.3s; }
     .mint-credit a:hover { color: var(--accent); }
 
+    /* GetMinted promo banner (free tier) */
+    .minted-banner { background: var(--accent); padding: 0.7rem 1.5rem; text-align: center; }
+    .minted-banner a { color: var(--black); text-decoration: none; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; }
+    .minted-banner a:hover { text-decoration: underline; }
+    .minted-banner span { font-weight: 400; }
+
     /* ── FADE IN — visible by default (IG/no-JS fallback), JS enhances ── */
     .fade-in { opacity: 1; -webkit-transform: none; transform: none; }
     .js-loaded .fade-in { opacity: 0; -webkit-transform: translateY(28px); transform: translateY(28px); -webkit-transition: opacity 0.7s ease, -webkit-transform 0.7s ease; transition: opacity 0.7s ease, transform 0.7s ease; }
@@ -365,8 +371,8 @@
     <div class="hero-content">
       <p class="hero-eyebrow">Tattoo Artist</p>
       <h1 class="hero-title">Raul Wesche</h1>
-      <p class="hero-subtitle">Precision geometric tattoos meticulously crafted in Houston, Texas.</p>
-      <a href="#booking" class="hero-cta" aria-label="Design Your Geometric Tattoo">Design Your Geometric Tattoo</a>
+      <p class="hero-subtitle">Precision Ink, Geometric Artistry in Houston.</p>
+      <a href="#booking" class="hero-cta" aria-label="Book Geometric Tattoo">Book Geometric Tattoo</a>
       <div class="hero-trust"><span class="trust-badge"><span class="trust-icon">★</span>5-Star Rated</span><span class="trust-badge"><span class="trust-icon">✓</span>By Appointment</span></div>
     </div>
     <div class="hero-scroll" aria-hidden="true">
@@ -385,7 +391,7 @@
           <div class="about-img-wrap"><img src="img/profile.jpg" alt="Raul Wesche" class="about-portrait" loading="lazy" decoding="async"></div>
           <div class="about-content">
             <div class="about-text">
-              <p>Raul Wesche is a geometric tattoo artist based in Houston, Texas, known for his precise lines and intricate designs. His dedication to the craft results in stunning, visually captivating body art that clients cherish for a lifetime.</p>
+              <p>Raul Wesche is a geometric tattoo artist based in Houston, Texas, creating captivating and precise designs. With a focus on clean lines and intricate patterns, Raul offers clients distinct and visually striking body art.</p>
             </div>
             <div class="about-stats">
               <div class="stat-block">
@@ -438,17 +444,17 @@
         <div class="style-card fade-in">
           <div class="style-icon">◆</div>
           <h3>Geometric Tattoos</h3>
-          <p>Tattoos featuring precise geometric shapes and patterns, often repeated and symmetrical.</p>
+          <p>The artist specializes in geometric designs using precise lines and shapes to create intricate patterns.</p>
         </div>
         <div class="style-card fade-in">
           <div class="style-icon">✦</div>
           <h3>Mandala Tattoos</h3>
-          <p>Tattoos based on the mandala design, incorporating circular and symmetrical patterns, often with intricate details.</p>
+          <p>They create mandala tattoos featuring symmetrical and detailed circular patterns, often incorporating floral or geometric elements.</p>
         </div>
         <div class="style-card fade-in">
           <div class="style-icon">❧</div>
           <h3>Blackwork Tattoos</h3>
-          <p>Tattoos primarily using black ink to create bold, graphic designs with a strong emphasis on contrast and negative space.</p>
+          <p>The artist creates exclusively black tattoos with bold shading techniques, resulting in high contrast designs.</p>
         </div>
       </div>
     </div>
@@ -463,21 +469,21 @@
             <div class="service-card fade-in" style="-webkit-transition-delay:0s;transition-delay:0s">
               <div class="service-icon">◆</div>
               <h3>Geometric Tattoos</h3>
-              <p>Tattoos featuring precise geometric shapes and patterns, often repeated and symmetrical.</p>
+              <p>The artist specializes in geometric designs using precise lines and shapes to create intricate patterns.</p>
               <span class="service-price">Contact for Pricing</span>
             </div>
 
             <div class="service-card fade-in" style="-webkit-transition-delay:0.1s;transition-delay:0.1s">
               <div class="service-icon">✦</div>
               <h3>Mandala Tattoos</h3>
-              <p>Tattoos based on the mandala design, incorporating circular and symmetrical patterns, often with intricate details.</p>
+              <p>They create mandala tattoos featuring symmetrical and detailed circular patterns, often incorporating floral or geometric elements.</p>
               <span class="service-price">Contact for Pricing</span>
             </div>
 
             <div class="service-card fade-in" style="-webkit-transition-delay:0.2s;transition-delay:0.2s">
               <div class="service-icon">❧</div>
               <h3>Blackwork Tattoos</h3>
-              <p>Tattoos primarily using black ink to create bold, graphic designs with a strong emphasis on contrast and negative space.</p>
+              <p>The artist creates exclusively black tattoos with bold shading techniques, resulting in high contrast designs.</p>
               <span class="service-price">Contact for Pricing</span>
             </div>
       </div>
@@ -492,41 +498,41 @@
       <div class="faq-list">
             <div class="faq-item fade-in" style="-webkit-transition-delay:0s;transition-delay:0s">
               <button class="faq-question" onclick="this.parentElement.classList.toggle('open')" aria-expanded="false">
-                <span>Do you offer consultations before booking a tattoo appointment?</span>
+                <span>I'm looking for a geometric sleeve, but I'm not sure about specific designs. Can you help with the design process?</span>
                 <span class="faq-icon">+</span>
               </button>
               <div class="faq-answer">
-                <p>Yes, I offer free consultations to discuss your design ideas, placement, and any questions you may have. Contact me to schedule a meeting.</p>
+                <p>Absolutely! I specialize in custom geometric designs. We can discuss your preferences, explore different patterns and placements, and develop a unique sleeve that reflects your vision.</p>
               </div>
             </div>
 
             <div class="faq-item fade-in" style="-webkit-transition-delay:0.08s;transition-delay:0.08s">
               <button class="faq-question" onclick="this.parentElement.classList.toggle('open')" aria-expanded="false">
-                <span>I'm interested in a geometric piece, but I'm unsure about the best placement on my body. Do you offer guidance on that?</span>
+                <span>What type of ink do you use, and is it vegan-friendly?</span>
                 <span class="faq-icon">+</span>
               </button>
               <div class="faq-answer">
-                <p>Absolutely! I can assess your anatomy and provide suggestions based on the flow of your body, ensuring the design complements your shape and movement.</p>
+                <p>I use high-quality, ethically sourced inks that are known for their vibrancy and longevity. While not all are explicitly labeled vegan, I can confirm the specific inks I use are vegan-friendly upon request, and I can always order if needed.</p>
               </div>
             </div>
 
             <div class="faq-item fade-in" style="-webkit-transition-delay:0.16s;transition-delay:0.16s">
               <button class="faq-question" onclick="this.parentElement.classList.toggle('open')" aria-expanded="false">
-                <span>What type of geometric styles do you specialize in, and what kind of reference materials should I bring to a consultation?</span>
+                <span>I've seen some artists using dotwork shading in geometric tattoos. Is this a style you offer?</span>
                 <span class="faq-icon">+</span>
               </button>
               <div class="faq-answer">
-                <p>I focus on sacred geometry, dotwork patterns, and linework mandalas; feel free to bring examples of geometric art, architecture, or any visual inspirations that resonate with you.</p>
+                <p>Yes, dotwork shading is a fantastic technique that I often incorporate into my geometric designs to add depth and texture; I'm happy to discuss how it might work within your desired piece.</p>
               </div>
             </div>
 
             <div class="faq-item fade-in" style="-webkit-transition-delay:0.24s;transition-delay:0.24s">
               <button class="faq-question" onclick="this.parentElement.classList.toggle('open')" aria-expanded="false">
-                <span>What kind of aftercare instructions do you provide for my new geometric tattoo?</span>
+                <span>I'm traveling to Houston from out of state. How far in advance should I book an appointment with you?</span>
                 <span class="faq-icon">+</span>
               </button>
               <div class="faq-answer">
-                <p>I provide detailed written and verbal aftercare instructions specific to geometric tattoos, emphasizing keeping the area clean, moisturized, and protected from the sun to ensure optimal healing and line clarity.</p>
+                <p>Given my schedule and the detail involved in geometric work, I recommend booking 2-3 months in advance, especially for larger pieces, to ensure availability during your visit.</p>
               </div>
             </div>
       </div>
@@ -620,6 +626,8 @@
     <img id="lightbox-img" src="" alt="Full size view" />
   </div>
 
+  <div class="minted-banner"><a href="https://getminted.ai?ref=site" target="_blank" rel="noopener">🌿 Want a free website like this? <span>Get yours at getminted.ai</span></a></div>
+
   <footer>
     <span class="footer-logo">Raul Wesche</span>
     <ul class="footer-links" role="list">
@@ -638,32 +646,36 @@
     function openLightbox(src){document.getElementById('lightbox-img').src=src;document.getElementById('lightbox').classList.add('open');}
     document.addEventListener('keydown',function(e){if(e.key==='Escape')document.getElementById('lightbox').classList.remove('open');});
 
-    /* IntersectionObserver with fallbacks for IG WebView */
-    try {
-      if('IntersectionObserver' in window){
-        var observer=new IntersectionObserver(function(entries){
-          entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);}});
-        },{threshold:0.05, rootMargin:'50px'});
-        document.querySelectorAll('.fade-in').forEach(function(el){observer.observe(el);});
-      } else {
-        document.querySelectorAll('.fade-in').forEach(function(el){el.classList.add('visible');});
-      }
-    } catch(e) {
-      document.querySelectorAll('.fade-in').forEach(function(el){el.classList.add('visible');});
-    }
-
-    /* Safety net: force all visible after 2s */
-    setTimeout(function(){
-      document.querySelectorAll('.fade-in').forEach(function(el){
-        if(!el.classList.contains('visible')) el.classList.add('visible');
-      });
-    }, 2000);
-
-    /* IG in-app browser detection: skip animations */
+    /* IG in-app browser detection: skip ALL animations */
     var ua = navigator.userAgent || '';
-    if(ua.indexOf('Instagram') !== -1 || ua.indexOf('FBAN') !== -1 || ua.indexOf('FBAV') !== -1){
+    var isIgBrowser = ua.indexOf('Instagram') !== -1 || ua.indexOf('FBAN') !== -1 || ua.indexOf('FBAV') !== -1;
+
+    if(isIgBrowser){
+      /* IG WebView: no animations, everything visible immediately */
       document.querySelectorAll('.fade-in').forEach(function(el){el.classList.add('visible');});
-      document.documentElement.classList.remove('js-loaded');
+    } else {
+      /* Normal browser: enable fade-in animations */
+      document.documentElement.classList.add('js-loaded');
+      try {
+        if('IntersectionObserver' in window){
+          var observer=new IntersectionObserver(function(entries){
+            entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);}});
+          },{threshold:0.05, rootMargin:'50px'});
+          document.querySelectorAll('.fade-in').forEach(function(el){observer.observe(el);});
+        } else {
+          document.querySelectorAll('.fade-in').forEach(function(el){el.classList.add('visible');});
+        }
+      } catch(e) {
+        document.querySelectorAll('.fade-in').forEach(function(el){el.classList.add('visible');});
+        document.documentElement.classList.remove('js-loaded');
+      }
+
+      /* Safety net: force all visible after 2s */
+      setTimeout(function(){
+        document.querySelectorAll('.fade-in').forEach(function(el){
+          if(!el.classList.contains('visible')) el.classList.add('visible');
+        });
+      }, 2000);
     }
 
     /* Mobile CTA bar — show after scrolling past hero */
