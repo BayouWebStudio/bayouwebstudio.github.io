@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Website Changes | Britt's Body Art</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #0e0b0d;
+            --secondary-bg: #1a1418;
+            --card-bg: #1e181c;
+            --accent-rose: #c9747a;
+            --accent-gold: #c9a96e;
+            --accent-cream: #f5ede8;
+            --text-primary: #f5ede8;
+            --text-secondary: #b8a8a2;
+            --text-muted: #7a6a65;
+            --border: rgba(201, 116, 122, 0.2);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--primary-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container { max-width: 700px; margin: 0 auto; }
+        .header { text-align: center; margin-bottom: 3rem; }
+        .eyebrow {
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--accent-rose);
+            display: block;
+            margin-bottom: 0.75rem;
+        }
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--accent-cream);
+            margin-bottom: 0.75rem;
+        }
+        p.subtitle { color: var(--text-secondary); font-size: 0.95rem; }
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--accent-cream);
+            margin-bottom: 1.5rem;
+        }
+        label {
+            display: block;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+        input, textarea, select {
+            width: 100%;
+            background: rgba(201, 116, 122, 0.05);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 12px 16px;
+            border-radius: 4px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            transition: border-color 0.3s;
+        }
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--accent-rose);
+        }
+        textarea { height: 140px; resize: vertical; }
+        select option { background: var(--card-bg); }
+        .btn {
+            background: linear-gradient(135deg, var(--accent-rose), var(--accent-gold));
+            color: #fff;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+        }
+        .btn:hover { opacity: 0.9; transform: translateY(-1px); }
+        .back-link {
+            display: inline-block;
+            color: var(--accent-rose);
+            text-decoration: none;
+            font-size: 0.85rem;
+            margin-bottom: 2rem;
+        }
+        .back-link:hover { text-decoration: underline; }
+        .note {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to Site</a>
+        <div class="header">
+            <span class="eyebrow">Your Site</span>
+            <h1>Request a Change</h1>
+            <p class="subtitle">Need to update your portfolio, text, pricing, or anything else? Let us know below.</p>
+        </div>
+
+        <div class="card">
+            <h2>Change Request</h2>
+            <form action="https://formspree.io/f/placeholder" method="POST">
+                <label>Your Name</label>
+                <input type="text" name="name" placeholder="Britt" required>
+
+                <label>Your Email</label>
+                <input type="email" name="email" placeholder="your@email.com" required>
+
+                <label>Type of Change</label>
+                <select name="change_type">
+                    <option value="">Select a category...</option>
+                    <option value="text">Update text / copy</option>
+                    <option value="images">Add / swap images</option>
+                    <option value="booking">Update booking link</option>
+                    <option value="social">Update social links</option>
+                    <option value="new_section">Add a new section</option>
+                    <option value="seo">SEO / keyword update</option>
+                    <option value="other">Something else</option>
+                </select>
+
+                <label>Describe What You Need</label>
+                <textarea name="message" placeholder="Be as specific as you like — what section, what text, what images, etc." required></textarea>
+
+                <button type="submit" class="btn">Send Request</button>
+                <p class="note">We'll respond within 24 hours and deploy your changes same-day.</p>
+            </form>
+        </div>
+    </div>
+    <script src="https://bayouwebstudio.com/mint-widget.js"></script>
+</body>
+</html>
