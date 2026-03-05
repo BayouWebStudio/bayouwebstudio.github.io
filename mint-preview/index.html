@@ -222,7 +222,7 @@ html, body {
   will-change: transform, opacity;
 }
 
-/* Face container */
+/* Face container — stays above stretch canvas */
 .mint-face {
   position: absolute;
   top: 0;
@@ -230,7 +230,7 @@ html, body {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 2;
+  z-index: 17;
   will-change: transform;
 }
 
@@ -859,9 +859,9 @@ html, body {
     const tipY = blobY + Math.sin(angle) * tendrilDist;
 
     // Neck width thins as stretch increases — this is the money
-    const baseNeckWidth = BLOB_RADIUS * 0.45;
-    const neckWidth = baseNeckWidth * (1 - stretch * 0.75);
-    const tipRadius = Math.max(8, neckWidth * 0.6 + stretch * 12);
+    const baseNeckWidth = BLOB_RADIUS * 0.55;
+    const neckWidth = baseNeckWidth * (1 - stretch * 0.7);
+    const tipRadius = Math.max(12, neckWidth * 0.65 + stretch * 18);
 
     // Connection points on main body (where neck meets the blob)
     const bodyNeckAngleSpread = Math.asin(Math.min(1, neckWidth / r1));
@@ -878,15 +878,19 @@ html, body {
     const tn2y = tipY - Math.sin(perpAngle) * tipNeckWidth;
 
     // Control points for bezier curves — the neck shape
-    const cpDist = tendrilDist * 0.4;
-    const cp1ax = bn1x + Math.cos(angle) * cpDist;
-    const cp1ay = bn1y + Math.sin(angle) * cpDist;
-    const cp1bx = tn1x - Math.cos(angle) * cpDist * 0.6;
-    const cp1by = tn1y - Math.sin(angle) * cpDist * 0.6;
-    const cp2ax = tn2x - Math.cos(angle) * cpDist * 0.6;
-    const cp2ay = tn2y - Math.sin(angle) * cpDist * 0.6;
-    const cp2bx = bn2x + Math.cos(angle) * cpDist;
-    const cp2by = bn2y + Math.sin(angle) * cpDist;
+    // Wider control at the base, tighter at the tip for organic taper
+    const cpDistBase = tendrilDist * 0.45;
+    const cpDistTip = tendrilDist * 0.35;
+    // Add slight outward bow to the neck sides for organic fullness
+    const bowOut = neckWidth * 0.3;
+    const cp1ax = bn1x + Math.cos(angle) * cpDistBase + Math.cos(perpAngle) * bowOut;
+    const cp1ay = bn1y + Math.sin(angle) * cpDistBase + Math.sin(perpAngle) * bowOut;
+    const cp1bx = tn1x - Math.cos(angle) * cpDistTip;
+    const cp1by = tn1y - Math.sin(angle) * cpDistTip;
+    const cp2ax = tn2x - Math.cos(angle) * cpDistTip;
+    const cp2ay = tn2y - Math.sin(angle) * cpDistTip;
+    const cp2bx = bn2x + Math.cos(angle) * cpDistBase - Math.cos(perpAngle) * bowOut;
+    const cp2by = bn2y + Math.sin(angle) * cpDistBase - Math.sin(perpAngle) * bowOut;
 
     // === Draw the main blob body ===
     ctx.save();
@@ -1015,6 +1019,7 @@ html, body {
       if (!stretchActive) {
         blobBody.style.opacity = '1';
         shadow.style.opacity = '';
+        document.querySelector('.mint-glow').style.opacity = '';
         // Reset stretch expression
         if (currentExpression !== 'idle' && currentExpression !== 'happy') {
           setExpression('idle');
@@ -1026,6 +1031,7 @@ html, body {
     // Keep blob body hidden while canvas is drawing
     blobBody.style.opacity = '0';
     shadow.style.opacity = '0';
+    document.querySelector('.mint-glow').style.opacity = '0';
 
     // Calculate finger position (during drag: actual finger, during retract: last known angle)
     let fx, fy;
