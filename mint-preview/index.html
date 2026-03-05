@@ -515,6 +515,18 @@ html, body {
     <button class="login-btn" onclick="window.location.href='https://getminted.ai/dashboard/'">Log in</button>
   </div>
 
+  <!-- PRIMARY: IG handle input — always visible at top, chat can never cover it -->
+  <div class="ig-section" style="padding-top:12px;padding-bottom:8px;">
+    <div class="ig-input-row">
+      <div class="ig-input-wrap">
+        <span class="ig-at">@</span>
+        <input type="text" id="ig-input" placeholder="yourhandle" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+      </div>
+      <button class="ig-build-btn" id="ig-build-btn" onclick="igSubmit()">Build My Site →</button>
+    </div>
+    <p class="disclaimer" style="margin-top:6px;text-align:center;font-size:0.78rem;">Free forever · No credit card · 30 seconds</p>
+  </div>
+
   <div class="character-zone" id="character-zone">
     <div class="speech-bubble pop" id="speech-bubble">Hey! I'm Mint 🌿 Talk to me!</div>
     <div id="mint-wrapper">
@@ -562,18 +574,7 @@ html, body {
     </div>
   </div>
 
-  <!-- PRIMARY: IG handle input -->
-  <div class="ig-section">
-    <p class="ig-label">Drop your Instagram handle</p>
-    <div class="ig-input-row">
-      <div class="ig-input-wrap">
-        <span class="ig-at">@</span>
-        <input type="text" id="ig-input" placeholder="yourhandle" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
-      </div>
-      <button class="ig-build-btn" id="ig-build-btn" onclick="igSubmit()">Build My Site →</button>
-    </div>
-    <p class="disclaimer">Free forever · No credit card · 30 seconds</p>
-  </div>
+
 
   <!-- SECONDARY: Mint chat popup (slides up after 3s) -->
   <div class="mint-chat-popup" id="mint-chat-popup">
