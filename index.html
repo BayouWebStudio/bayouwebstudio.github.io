@@ -280,6 +280,21 @@ footer .links a:hover{color:var(--mint)}
 .nav-getstarted:hover { opacity: 0.85; }
 body { padding-top: 60px; }
 </style>
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#00C882" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="GetMinted" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js');
+      });
+    }
+  </script>
 </head>
 <body>
 <nav class="top-nav">
