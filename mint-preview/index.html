@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>GetMinted</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  background: #1A1A2E;
+  font-family: -apple-system, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
+  color: #F0F4F8;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#app {
+  width: 100%; height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+/* Wordmark */
+.wordmark {
+  margin-top: max(env(safe-area-inset-top, 16px), 16px);
+  padding-top: 12px;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #00C882;
+  opacity: 0.7;
+  text-transform: uppercase;
+  z-index: 10;
+}
+
+/* Character area */
+.character-zone {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+}
+
+/* Speech bubble */
+.speech-bubble {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 200, 130, 0.12);
+  border: 1px solid rgba(0, 200, 130, 0.25);
+  border-radius: 20px;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #F0F4F8;
+  white-space: nowrap;
+  max-width: 90vw;
+  text-align: center;
+  opacity: 1;
+  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 20;
+  pointer-events: none;
+}
+.speech-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 14px; height: 14px;
+  background: rgba(0, 200, 130, 0.12);
+  border-right: 1px solid rgba(0, 200, 130, 0.25);
+  border-bottom: 1px solid rgba(0, 200, 130, 0.25);
+}
+.speech-bubble.pop {
+  animation: bubblePop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes bubblePop {
+  0% { transform: translateX(-50%) scale(0.7); opacity: 0; }
+  100% { transform: translateX(-50%) scale(1); opacity: 1; }
+}
+
+/* Mint wrapper */
+#mint-wrapper {
+  position: relative;
+  width: 200px; height: 220px;
+  cursor: grab;
+  z-index: 15;
+  will-change: transform;
+}
+#mint-wrapper:active { cursor: grabbing; }
+
+/* Idle float animation */
+@keyframes idleFloat {
+  0%, 100% { transform: translateY(0) rotate(-1.5deg); }
+  50% { transform: translateY(-14px) rotate(1.5deg); }
+}
+#mint-wrapper.idle {
+  animation: idleFloat 3s ease-in-out infinite;
+}
+
+/* Squish on tap */
+@keyframes squish {
+  0% { transform: scale(1, 1); }
+  30% { transform: scale(1.15, 0.85); }
+  50% { transform: scale(0.9, 1.1); }
+  70% { transform: scale(1.05, 0.95); }
+  100% { transform: scale(1, 1); }
+}
+#mint-svg.squish {
+  animation: squish 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Spin on double tap */
+@keyframes happySpin {
+  0% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.25) rotate(180deg); }
+  100% { transform: scale(1) rotate(360deg); }
+}
+#mint-svg.spin {
+  animation: happySpin 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Glow behind mint */
+.mint-glow {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 180px; height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,200,130,0.2) 0%, transparent 70%);
+  filter: blur(20px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Bottom section */
+.bottom-section {
+  width: 100%;
+  padding: 0 28px;
+  padding-bottom: max(env(safe-area-inset-bottom, 20px), 20px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  z-index: 10;
+}
+
+.bottom-section .label {
+  font-size: 17px;
+  font-weight: 600;
+  color: #F0F4F8;
+  letter-spacing: 0.3px;
+}
+
+.input-wrapper {
+  width: 100%;
+  max-width: 360px;
+  position: relative;
+}
+.input-wrapper .at-prefix {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  font-weight: 600;
+  color: #8A9AA8;
+  pointer-events: none;
+  transition: color 0.2s;
+}
+.input-wrapper input {
+  width: 100%;
+  padding: 16px 18px 16px 38px;
+  background: #111417;
+  border: 2px solid transparent;
+  border-radius: 14px;
+  color: #F0F4F8;
+  font-size: 18px;
+  font-weight: 500;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.input-wrapper input::placeholder {
+  color: #555e68;
+  font-weight: 400;
+}
+.input-wrapper input:focus {
+  border-color: #00C882;
+  box-shadow: 0 0 0 4px rgba(0, 200, 130, 0.15);
+}
+.input-wrapper input:focus ~ .at-prefix {
+  color: #00C882;
+}
+
+.cta-button {
+  width: 100%;
+  max-width: 360px;
+  padding: 17px 24px;
+  background: #00C882;
+  border: none;
+  border-radius: 14px;
+  color: #1A1A2E;
+  font-size: 18px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.cta-button:active {
+  transform: scale(0.97);
+  background: #00b374;
+}
+.cta-button:hover {
+  box-shadow: 0 4px 20px rgba(0, 200, 130, 0.3);
+}
+
+.disclaimer {
+  font-size: 13px;
+  color: #8A9AA8;
+  letter-spacing: 0.2px;
+}
+
+/* Particles */
+.particle {
+  position: absolute;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #00C882;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 5;
+}
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="wordmark">GetMinted</div>
+
+  <div class="character-zone" id="character-zone">
+    <div class="speech-bubble pop" id="speech-bubble">Hey! I'm Mint 🌿 Tap me!</div>
+    <div id="mint-wrapper" class="idle">
+      <div class="mint-glow"></div>
+      <svg id="mint-svg" viewBox="0 0 200 220" width="200" height="220" xmlns="http://www.w3.org/2000/svg">
+        <!-- Shadow -->
+        <ellipse cx="100" cy="210" rx="50" ry="8" fill="rgba(0,0,0,0.2)"/>
+        <!-- Stem -->
+        <path d="M100 45 Q98 30 102 15" stroke="#00a86b" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <!-- Leaf body -->
+        <ellipse cx="100" cy="120" rx="72" ry="85" fill="#00C882"/>
+        <!-- Leaf highlight -->
+        <ellipse cx="85" cy="100" rx="35" ry="50" fill="rgba(255,255,255,0.08)" transform="rotate(-10 85 100)"/>
+        <!-- Veins -->
+        <path d="M100 50 Q100 120 100 195" stroke="rgba(0,100,65,0.25)" stroke-width="2.5" fill="none"/>
+        <path d="M100 80 Q75 100 50 105" stroke="rgba(0,100,65,0.18)" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <path d="M100 80 Q125 100 150 105" stroke="rgba(0,100,65,0.18)" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <path d="M100 115 Q70 135 45 145" stroke="rgba(0,100,65,0.15)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <path d="M100 115 Q130 135 155 145" stroke="rgba(0,100,65,0.15)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <path d="M100 150 Q78 165 60 175" stroke="rgba(0,100,65,0.12)" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+        <path d="M100 150 Q122 165 140 175" stroke="rgba(0,100,65,0.12)" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+        <!-- Face -->
+        <!-- Eyes -->
+        <ellipse id="eye-left" cx="78" cy="110" rx="7" ry="8" fill="#1A1A2E"/>
+        <ellipse id="eye-right" cx="122" cy="110" rx="7" ry="8" fill="#1A1A2E"/>
+        <!-- Eye shine -->
+        <circle cx="81" cy="107" r="2.5" fill="rgba(255,255,255,0.7)"/>
+        <circle cx="125" cy="107" r="2.5" fill="rgba(255,255,255,0.7)"/>
+        <!-- Smile -->
+        <path id="mouth" d="M85 135 Q100 150 115 135" stroke="#1A1A2E" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <!-- Blush -->
+        <ellipse cx="62" cy="128" rx="10" ry="6" fill="rgba(255,100,130,0.2)"/>
+        <ellipse cx="138" cy="128" rx="10" ry="6" fill="rgba(255,100,130,0.2)"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="bottom-section">
+    <div class="label">Drop your Instagram handle</div>
+    <div class="input-wrapper">
+      <input type="text" id="ig-input" placeholder="yourusername" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+      <span class="at-prefix">@</span>
+    </div>
+    <button class="cta-button" id="cta-btn">Build My Website →</button>
+    <div class="disclaimer">Free. No credit card. 30 seconds.</div>
+  </div>
+</div>
+
+<script>
+(function() {
+  const wrapper = document.getElementById('mint-wrapper');
+  const svg = document.getElementById('mint-svg');
+  const bubble = document.getElementById('speech-bubble');
+  const zone = document.getElementById('character-zone');
+  const input = document.getElementById('ig-input');
+  const ctaBtn = document.getElementById('cta-btn');
+
+  // Messages
+  const msgs = {
+    idle: ["Hey! I'm Mint 🌿 Tap me!"],
+    tap: [
+      "I build websites from Instagram! ✨",
+      "30 seconds. That's all I need. 🚀",
+      "No templates. No drag-and-drop. Just magic. 🪄",
+      "Your followers deserve a real website. 😤"
+    ],
+    doubleTap: [
+      "Let's GOOO! 🔥",
+      "I'm SO ready for this! 💚"
+    ],
+    nudge: [
+      "Psst... drop your IG handle below 👀",
+      "Still here... waiting... 👁️",
+      "Your website won't build itself.\n(Well, actually it will. With me.) 🌿"
+    ],
+    focus: ["Ooh ooh ooh! Type it! Type it! 🤩"]
+  };
+
+  function pick(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+  }
+
+  // Speech bubble
+  function showBubble(text) {
+    bubble.classList.remove('pop');
+    bubble.textContent = text;
+    void bubble.offsetWidth; // reflow
+    bubble.classList.add('pop');
+  }
+
+  // Idle timeout
+  let idleTimer = null;
+  function resetIdle() {
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(() => {
+      if (!isDragging) showBubble(pick(msgs.nudge));
+    }, 4000);
+  }
+  resetIdle();
+
+  // Spring physics state
+  let posX = 0, posY = 0; // offset from center
+  let velX = 0, velY = 0;
+  let isDragging = false;
+  let dragStartX = 0, dragStartY = 0;
+  let dragOffsetX = 0, dragOffsetY = 0;
+  let animating = false;
+
+  function applyTransform() {
+    wrapper.style.transform = `translate(${posX}px, ${posY}px)`;
+  }
+
+  // Spring animation loop
+  const springK = 0.12;
+  const damping = 0.75;
+
+  function springAnimate() {
+    if (isDragging) { animating = false; return; }
+
+    const ax = -springK * posX;
+    const ay = -springK * posY;
+    velX = (velX + ax) * damping;
+    velY = (velY + ay) * damping;
+    posX += velX;
+    posY += velY;
+
+    if (Math.abs(posX) < 0.3 && Math.abs(posY) < 0.3 && Math.abs(velX) < 0.3 && Math.abs(velY) < 0.3) {
+      posX = 0; posY = 0;
+      applyTransform();
+      animating = false;
+      wrapper.classList.add('idle');
+      return;
+    }
+
+    applyTransform();
+    requestAnimationFrame(springAnimate);
+  }
+
+  function startSpring() {
+    if (!animating) {
+      animating = true;
+      requestAnimationFrame(springAnimate);
+    }
+  }
+
+  // Event coords helper
+  function getXY(e) {
+    if (e.touches && e.touches.length) return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    return { x: e.clientX, y: e.clientY };
+  }
+
+  // Double tap detection
+  let lastTapTime = 0;
+  let tapCount = 0;
+  let tapTimer = null;
+
+  function handleTapStart(e) {
+    if (e.target === input || e.target === ctaBtn) return;
+    const { x, y } = getXY(e);
+    dragStartX = x;
+    dragStartY = y;
+    dragOffsetX = posX;
+    dragOffsetY = posY;
+    isDragging = true;
+    wrapper.classList.remove('idle');
+  }
+
+  function handleTapMove(e) {
+    if (!isDragging) return;
+    e.preventDefault();
+    const { x, y } = getXY(e);
+    posX = dragOffsetX + (x - dragStartX);
+    posY = dragOffsetY + (y - dragStartY);
+    applyTransform();
+  }
+
+  function handleTapEnd(e) {
+    if (!isDragging) return;
+    const { x, y } = e.changedTouches ? { x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY } : { x: e.clientX, y: e.clientY };
+    const dx = Math.abs(x - dragStartX);
+    const dy = Math.abs(y - dragStartY);
+    isDragging = false;
+
+    // Was it a tap (not a drag)?
+    if (dx < 10 && dy < 10) {
+      const now = Date.now();
+      if (now - lastTapTime < 300) {
+        // Double tap
+        clearTimeout(tapTimer);
+        doDoubleTap();
+        lastTapTime = 0;
+      } else {
+        lastTapTime = now;
+        tapTimer = setTimeout(() => {
+          doSingleTap();
+          lastTapTime = 0;
+        }, 300);
+      }
+    }
+
+    // Spring back
+    startSpring();
+    resetIdle();
+  }
+
+  function doSingleTap() {
+    svg.classList.remove('squish', 'spin');
+    void svg.offsetWidth;
+    svg.classList.add('squish');
+    showBubble(pick(msgs.tap));
+    spawnParticles(4);
+    resetIdle();
+  }
+
+  function doDoubleTap() {
+    svg.classList.remove('squish', 'spin');
+    void svg.offsetWidth;
+    svg.classList.add('spin');
+    showBubble(pick(msgs.doubleTap));
+    spawnParticles(8);
+    resetIdle();
+  }
+
+  // Particles
+  function spawnParticles(count) {
+    const rect = wrapper.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+
+    for (let i = 0; i < count; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.5;
+      const dist = 60 + Math.random() * 50;
+      const tx = Math.cos(angle) * dist;
+      const ty = Math.sin(angle) * dist;
+      const size = 4 + Math.random() * 5;
+      p.style.width = size + 'px';
+      p.style.height = size + 'px';
+      p.style.left = cx + 'px';
+      p.style.top = cy + 'px';
+      p.style.opacity = '1';
+      p.style.transition = `all ${0.4 + Math.random() * 0.3}s cubic-bezier(0.34, 1.56, 0.64, 1)`;
+      document.body.appendChild(p);
+      requestAnimationFrame(() => {
+        p.style.transform = `translate(${tx}px, ${ty}px)`;
+        p.style.opacity = '0';
+      });
+      setTimeout(() => p.remove(), 800);
+    }
+  }
+
+  // Touch events on wrapper
+  wrapper.addEventListener('touchstart', handleTapStart, { passive: true });
+  wrapper.addEventListener('touchmove', handleTapMove, { passive: false });
+  wrapper.addEventListener('touchend', handleTapEnd, { passive: true });
+
+  // Mouse events on wrapper
+  wrapper.addEventListener('mousedown', handleTapStart);
+  document.addEventListener('mousemove', handleTapMove);
+  document.addEventListener('mouseup', handleTapEnd);
+
+  // Input focus
+  input.addEventListener('focus', () => {
+    showBubble(pick(msgs.focus));
+    resetIdle();
+  });
+
+  // CTA button
+  ctaBtn.addEventListener('click', () => {
+    const handle = input.value.trim().replace(/^@/, '');
+    if (!handle) {
+      input.focus();
+      input.style.borderColor = '#ff5555';
+      setTimeout(() => { input.style.borderColor = ''; }, 1000);
+      showBubble("You gotta type your handle first! 👆");
+      return;
+    }
+    // Redirect
+    window.location.href = 'https://getminted.ai/dashboard/';
+  });
+
+  // Clean up animation classes
+  svg.addEventListener('animationend', () => {
+    svg.classList.remove('squish', 'spin');
+  });
+
+  // Position the bubble relative to character zone
+  function layoutBubble() {
+    const zoneRect = zone.getBoundingClientRect();
+    const wrapperRect = wrapper.getBoundingClientRect();
+    const bubbleTop = wrapperRect.top - zoneRect.top - 60;
+    bubble.style.top = Math.max(10, bubbleTop) + 'px';
+  }
+
+  // Initial layout + on resize
+  layoutBubble();
+  window.addEventListener('resize', layoutBubble);
+
+  // Re-layout bubble on idle animation frames
+  const observer = new MutationObserver(layoutBubble);
+  // Simpler: just update periodically during idle
+  setInterval(layoutBubble, 200);
+
+})();
+</script>
+</body>
+</html>
