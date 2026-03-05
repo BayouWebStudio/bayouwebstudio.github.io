@@ -1084,6 +1084,24 @@
 </head>
 <body>
 
+<!-- Upgrade Bar (free tier only) -->
+<div id="upgrade-bar" style="display:none;position:sticky;top:0;z-index:1000;background:linear-gradient(90deg,#0a1a12 0%,#0d2a1a 100%);border-bottom:1px solid rgba(0,200,130,0.25);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+  <div style="display:flex;align-items:center;gap:10px;flex:1;min-width:0;">
+    <span style="font-size:1.1rem;">⚡</span>
+    <span style="color:#fff;font-size:0.875rem;font-weight:600;">You're on the <span style="color:#00C882;">Free</span> plan — upgrade to Pro for a custom .com, SEO, and full site editing.</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+    <a href="https://buy.stripe.com/dRm5kD6LA7IVgWAeNt3Je07" target="_blank"
+       style="background:#00C882;color:#0a1a12;font-weight:700;font-size:0.85rem;padding:8px 20px;border-radius:50px;text-decoration:none;white-space:nowrap;transition:opacity .2s;"
+       onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+      Upgrade to Pro — $25/mo →
+    </a>
+    <button onclick="document.getElementById('upgrade-bar').style.display='none';sessionStorage.setItem('upgrade_bar_dismissed','1')"
+            style="background:none;border:none;color:rgba(255,255,255,0.4);font-size:1.2rem;cursor:pointer;padding:4px 6px;line-height:1;"
+            title="Dismiss">✕</button>
+  </div>
+</div>
+
 <!-- Loading -->
 <div id="loading-screen">
   <div class="loading-logo">✦ mint</div>
@@ -1569,6 +1587,17 @@
     // Show domain picker for Pro clients without a domain
     if (plan === 'pro' && !profile.domain && !profile.requestedDomain) {
       showDomainPicker(slug);
+    }
+
+    // Show/hide upgrade bar based on plan
+    const upgradeBar = document.getElementById('upgrade-bar');
+    if (upgradeBar) {
+      const dismissed = sessionStorage.getItem('upgrade_bar_dismissed');
+      if (plan === 'free' && !dismissed) {
+        upgradeBar.style.display = 'flex';
+      } else {
+        upgradeBar.style.display = 'none';
+      }
     }
   }
 
