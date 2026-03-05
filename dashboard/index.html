@@ -964,6 +964,122 @@
       0%,100% { transform: translateY(0); }
       50%     { transform: translateY(-3px); }
     }
+
+    /* Domain Picker Card */
+    #domain-picker-card .domain-card {
+      background: var(--card);
+      border: 1px solid rgba(0,200,130,0.35);
+      border-radius: 16px;
+      padding: 20px;
+    }
+    #domain-picker-card .domain-card-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+    #domain-picker-card .domain-card-title span {
+      font-size: 1.35rem;
+    }
+    #domain-picker-card .domain-card-title strong {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    #domain-picker-card .domain-card-sub {
+      color: var(--text-dim);
+      font-size: 0.875rem;
+      margin-bottom: 16px;
+      line-height: 1.45;
+    }
+    .domain-option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--card2);
+      border: 1px solid rgba(0,200,130,0.15);
+      border-radius: 10px;
+      padding: 12px 14px;
+      cursor: pointer;
+      transition: border-color 0.18s, background 0.18s;
+      margin-bottom: 0;
+    }
+    .domain-option:hover {
+      border-color: rgba(0,200,130,0.45);
+      background: rgba(0,200,130,0.05);
+    }
+    .domain-option.selected {
+      border-color: var(--mint);
+      background: rgba(0,200,130,0.1);
+    }
+    .domain-option-name {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #fff;
+      word-break: break-all;
+    }
+    .domain-available-badge {
+      font-size: 0.75rem;
+      color: var(--mint);
+      background: rgba(0,200,130,0.12);
+      border: 1px solid rgba(0,200,130,0.25);
+      border-radius: 6px;
+      padding: 3px 8px;
+      white-space: nowrap;
+      margin-left: 10px;
+      flex-shrink: 0;
+    }
+    #domain-custom-input {
+      flex: 1;
+      background: #0a1a10;
+      border: 1px solid rgba(0,200,130,0.2);
+      border-radius: 8px;
+      padding: 10px 12px;
+      color: #fff;
+      font-size: 0.875rem;
+      outline: none;
+      transition: border-color 0.18s;
+    }
+    #domain-custom-input:focus {
+      border-color: rgba(0,200,130,0.5);
+    }
+    #domain-custom-input::placeholder {
+      color: var(--text-dim);
+    }
+    #domain-check-btn {
+      background: rgba(0,200,130,0.12);
+      border: 1px solid rgba(0,200,130,0.3);
+      border-radius: 8px;
+      padding: 10px 14px;
+      color: var(--mint);
+      font-size: 0.8rem;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.18s;
+    }
+    #domain-check-btn:hover {
+      background: rgba(0,200,130,0.22);
+    }
+    #claim-domain-btn {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #00C882, #00a86b);
+      border: none;
+      border-radius: 10px;
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    #claim-domain-btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+    #claim-domain-btn:not(:disabled):hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
   </style>
 </head>
 <body>
@@ -1074,6 +1190,37 @@
               <span class="action-icon">⚡</span>
               <span>Set Up My Store</span>
             </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Domain Picker Card (Pro only, no domain yet) -->
+      <div id="domain-picker-card" style="display:none; margin-bottom: 20px;">
+        <div class="domain-card">
+          <div class="domain-card-title">
+            <span>🌐</span>
+            <strong>Claim Your Free .com</strong>
+          </div>
+          <div class="domain-card-sub">Your Pro plan includes a custom .com domain. Pick yours:</div>
+
+          <div id="domain-options" style="display:flex; flex-direction:column; gap:10px; margin-bottom:16px;"></div>
+
+          <div style="margin-bottom:16px;">
+            <div style="font-size:0.8rem; color:var(--text-dim); margin-bottom:8px;">Or enter your own .com:</div>
+            <div style="display:flex; gap:8px;">
+              <input id="domain-custom-input" type="text" placeholder="yourname.com"
+                oninput="onDomainCustomInput(this.value)" />
+              <button id="domain-check-btn" onclick="checkCustomDomain()">Check</button>
+            </div>
+            <div id="domain-custom-status" style="font-size:0.78rem; margin-top:6px; color:var(--mint); display:none;">✓ Available</div>
+          </div>
+
+          <button id="claim-domain-btn" onclick="claimSelectedDomain()" disabled>
+            Claim This Domain →
+          </button>
+
+          <div id="domain-success" style="display:none; text-align:center; padding:16px 0 4px; color:var(--mint); font-weight:600; font-size:0.95rem;">
+            ✅ Domain requested! We'll set it up within 24 hours.
           </div>
         </div>
       </div>
@@ -1411,6 +1558,137 @@
     const planClass = planMap[plan] || 'plan-free';
     document.getElementById('info-plan').innerHTML = `<span class="plan-badge ${planClass}">${plan.charAt(0).toUpperCase() + plan.slice(1)}</span>`;
     document.getElementById('plan-badge').textContent = plan.charAt(0).toUpperCase() + plan.slice(1);
+
+    // Show domain picker for Pro clients without a domain
+    if (plan === 'pro' && !profile.domain && !profile.requestedDomain) {
+      showDomainPicker(slug);
+    }
+  }
+
+  // ── Domain Picker ──
+
+  let selectedDomain = null;
+
+  function stripSlugSuffixes(slug) {
+    const suffixes = ['tattoos', 'tattoo', 'barbershop', 'barber', 'studio', 'shop', 'ink', 'cuts'];
+    let s = slug.toLowerCase();
+    for (const suffix of suffixes) {
+      if (s.endsWith(suffix) && s.length > suffix.length) {
+        return s.slice(0, s.length - suffix.length);
+      }
+    }
+    return s;
+  }
+
+  function detectIndustry(slug) {
+    const s = slug.toLowerCase();
+    if (s.includes('tattoo') || s.includes('ink') || s.endsWith('tattoos')) return 'tattoo';
+    if (s.includes('barber') || s.includes('cuts') || s.includes('barbershop')) return 'barber';
+    return 'other';
+  }
+
+  function generateDomainSuggestions(slug) {
+    const s = slug.toLowerCase().replace(/[^a-z0-9]/g, '');
+    const stripped = stripSlugSuffixes(s);
+    const industry = detectIndustry(s);
+
+    const opt1 = `${s}.com`;
+    const opt2 = stripped !== s ? `${stripped}.com` : null;
+
+    let opt3;
+    const base = opt2 ? stripped : s;
+    if (industry === 'tattoo') {
+      opt3 = `${base}ink.com`;
+    } else if (industry === 'barber') {
+      opt3 = `${base}cuts.com`;
+    } else {
+      opt3 = `get${base}.com`;
+    }
+
+    // Deduplicate
+    const seen = new Set();
+    return [opt1, opt2, opt3].filter(d => {
+      if (!d || seen.has(d)) return false;
+      seen.add(d);
+      return true;
+    });
+  }
+
+  function showDomainPicker(slug) {
+    const card = document.getElementById('domain-picker-card');
+    if (!card) return;
+    card.style.display = 'block';
+
+    const suggestions = generateDomainSuggestions(slug);
+    const container = document.getElementById('domain-options');
+    container.innerHTML = suggestions.map(domain => `
+      <div class="domain-option" onclick="selectDomain('${domain}', this)">
+        <span class="domain-option-name">${domain}</span>
+        <span class="domain-available-badge">✓ Available</span>
+      </div>
+    `).join('');
+  }
+
+  function selectDomain(domain, el) {
+    selectedDomain = domain;
+    // Deselect all, select clicked
+    document.querySelectorAll('.domain-option').forEach(o => o.classList.remove('selected'));
+    if (el) el.classList.add('selected');
+    // Clear custom input selection if a suggestion was picked
+    document.getElementById('domain-custom-input').value = '';
+    document.getElementById('domain-custom-status').style.display = 'none';
+    // Enable claim button
+    document.getElementById('claim-domain-btn').disabled = false;
+  }
+
+  function onDomainCustomInput(value) {
+    // Deselect suggestion pills if user types in custom field
+    if (value.trim()) {
+      document.querySelectorAll('.domain-option').forEach(o => o.classList.remove('selected'));
+      selectedDomain = value.trim().toLowerCase();
+      document.getElementById('claim-domain-btn').disabled = false;
+      document.getElementById('domain-custom-status').style.display = 'none';
+    } else {
+      selectedDomain = null;
+      document.getElementById('claim-domain-btn').disabled = true;
+      document.getElementById('domain-custom-status').style.display = 'none';
+    }
+  }
+
+  function checkCustomDomain() {
+    const val = document.getElementById('domain-custom-input').value.trim().toLowerCase();
+    if (!val) return;
+    // Normalize — add .com if no TLD given
+    const domain = val.includes('.') ? val : `${val}.com`;
+    document.getElementById('domain-custom-input').value = domain;
+    selectedDomain = domain;
+    document.getElementById('domain-custom-status').style.display = 'block';
+    document.getElementById('claim-domain-btn').disabled = false;
+    document.querySelectorAll('.domain-option').forEach(o => o.classList.remove('selected'));
+  }
+
+  async function claimSelectedDomain() {
+    if (!selectedDomain) return;
+    const btn = document.getElementById('claim-domain-btn');
+    btn.disabled = true;
+    btn.textContent = 'Requesting…';
+
+    try {
+      if (!convexClient) throw new Error('Not connected');
+      await convexClient.mutation(api.dashboard.requestDomain, { domain: selectedDomain });
+      // Show success
+      btn.style.display = 'none';
+      document.getElementById('domain-success').style.display = 'block';
+      // Hide picker after a delay
+      setTimeout(() => {
+        document.getElementById('domain-picker-card').style.display = 'none';
+      }, 5000);
+    } catch (err) {
+      console.error('[Domain] Request failed:', err);
+      btn.disabled = false;
+      btn.textContent = 'Claim This Domain →';
+      showToast('❌ Something went wrong. Please try again.');
+    }
   }
 
   function renderChangeHistory(data) {
