@@ -1186,7 +1186,11 @@
             <a class="site-preview-link" id="visit-site-link" href="#" target="_blank">↗ Visit Site</a>
           </div>
           <div class="site-preview-iframe-wrapper">
-            <iframe class="site-preview-iframe" id="site-preview-iframe" src="about:blank" loading="lazy" scrolling="no"></iframe>
+            <a id="site-preview-link-wrap" href="#" target="_blank" style="display:block;width:100%;height:100%;text-decoration:none;">
+              <img id="site-preview-img" src="" alt="Site preview"
+                   style="width:100%;height:100%;object-fit:cover;object-position:top;display:none;border-radius:inherit;" />
+              <iframe class="site-preview-iframe" id="site-preview-iframe" src="about:blank" loading="lazy" scrolling="no"></iframe>
+            </a>
             <div class="preview-overlay"></div>
           </div>
         </div>
@@ -1517,14 +1521,31 @@
 
         const previewUrl = siteInfo.siteUrl;
         document.getElementById('preview-url').textContent = previewUrl.replace('https://', '');
+
+        // Fix visit site link
         const visitLink = document.getElementById('visit-site-link');
         visitLink.href = previewUrl;
+        const previewLinkWrap = document.getElementById('site-preview-link-wrap');
+        if (previewLinkWrap) previewLinkWrap.href = previewUrl;
 
-        // Load preview iframe (only set src if different to avoid reload flicker)
+        // Show screenshot preview if available, else fall back to iframe
+        const slug = siteInfo.siteSlug;
+        const screenshotUrl = `https://raw.githubusercontent.com/BayouWebStudio/bayouwebstudio.github.io/main/getminted-assets/${slug}_preview.jpg`;
+        const img = document.getElementById('site-preview-img');
         const iframe = document.getElementById('site-preview-iframe');
-        if (iframe.src !== previewUrl) {
-          iframe.src = previewUrl;
-        }
+        const testImg = new Image();
+        testImg.onload = () => {
+          img.src = screenshotUrl;
+          img.style.display = 'block';
+          iframe.style.display = 'none';
+        };
+        testImg.onerror = () => {
+          // No screenshot yet — fall back to iframe
+          img.style.display = 'none';
+          iframe.style.display = 'block';
+          if (iframe.src !== previewUrl) iframe.src = previewUrl;
+        };
+        testImg.src = screenshotUrl;
       } else if (siteInfo === null) {
         // Signed in but no site linked — show connect prompt
         showConnectSiteBanner();
