@@ -847,151 +847,137 @@ html, body {
     const dy = fingerY - blobY;
     const dist = Math.hypot(dx, dy) || 1;
     const angle = Math.atan2(dy, dx);
-    const perpAngle = angle + Math.PI / 2;
-
-    // Main body radius shrinks slightly as you stretch
-    const r1 = BLOB_RADIUS * (1 - stretch * 0.15);
+    const perp = angle + Math.PI / 2;
 
     // How far the tendril tip extends
     const tendrilDist = dist * stretch;
     const tipX = blobX + Math.cos(angle) * tendrilDist;
     const tipY = blobY + Math.sin(angle) * tendrilDist;
 
-    // Neck width thins as stretch increases — this is the money
-    const baseNeckWidth = BLOB_RADIUS * 0.55;
-    const neckWidth = baseNeckWidth * (1 - stretch * 0.7);
-    const tipRadius = Math.max(12, neckWidth * 0.65 + stretch * 18);
+    // Volume conservation — body squishes slightly as you stretch
+    const bodyR = BLOB_RADIUS * (1 - stretch * 0.15);
 
-    // Connection points on main body (where neck meets the blob)
-    const bodyNeckAngleSpread = Math.asin(Math.min(1, neckWidth / r1));
-    const bn1x = blobX + Math.cos(angle + bodyNeckAngleSpread) * r1;
-    const bn1y = blobY + Math.sin(angle + bodyNeckAngleSpread) * r1;
-    const bn2x = blobX + Math.cos(angle - bodyNeckAngleSpread) * r1;
-    const bn2y = blobY + Math.sin(angle - bodyNeckAngleSpread) * r1;
+    // Neck width: wide at base, narrows toward tip
+    const neckBase = bodyR * (0.55 - stretch * 0.25);
+    const neckTip = Math.max(4, bodyR * (0.15 - stretch * 0.05));
 
-    // Tip connection points
-    const tipNeckWidth = tipRadius * 0.9;
-    const tn1x = tipX + Math.cos(perpAngle) * tipNeckWidth;
-    const tn1y = tipY + Math.sin(perpAngle) * tipNeckWidth;
-    const tn2x = tipX - Math.cos(perpAngle) * tipNeckWidth;
-    const tn2y = tipY - Math.sin(perpAngle) * tipNeckWidth;
-
-    // Control points for bezier curves — the neck shape
-    // Wider control at the base, tighter at the tip for organic taper
-    const cpDistBase = tendrilDist * 0.45;
-    const cpDistTip = tendrilDist * 0.35;
-    // Add slight outward bow to the neck sides for organic fullness
-    const bowOut = neckWidth * 0.3;
-    const cp1ax = bn1x + Math.cos(angle) * cpDistBase + Math.cos(perpAngle) * bowOut;
-    const cp1ay = bn1y + Math.sin(angle) * cpDistBase + Math.sin(perpAngle) * bowOut;
-    const cp1bx = tn1x - Math.cos(angle) * cpDistTip;
-    const cp1by = tn1y - Math.sin(angle) * cpDistTip;
-    const cp2ax = tn2x - Math.cos(angle) * cpDistTip;
-    const cp2ay = tn2y - Math.sin(angle) * cpDistTip;
-    const cp2bx = bn2x + Math.cos(angle) * cpDistBase - Math.cos(perpAngle) * bowOut;
-    const cp2by = bn2y + Math.sin(angle) * cpDistBase - Math.sin(perpAngle) * bowOut;
-
-    // === Draw the main blob body ===
     ctx.save();
+
+    // === Draw main blob body (slight elongation toward pull) ===
     ctx.beginPath();
-
-    // Main blob circle (with a subtle indent on the stretch side)
-    const indentAmount = stretch * 0.15;
-    const segments = 64;
-    for (let i = 0; i <= segments; i++) {
-      const a = (i / segments) * Math.PI * 2;
-      // Calculate indent: points near the stretch angle get pulled in
-      const angleDiff = Math.abs(((a - angle + Math.PI * 3) % (Math.PI * 2)) - Math.PI);
-      const indent = angleDiff < 0.8 ? (1 - angleDiff / 0.8) * indentAmount : 0;
-      const r = r1 * (1 - indent);
-      const px = blobX + Math.cos(a) * r;
-      const py = blobY + Math.sin(a) * r;
-      if (i === 0) ctx.moveTo(px, py);
-      else ctx.lineTo(px, py);
-    }
-    ctx.closePath();
-
-    // Gradient matching the CSS blob
-    const grad1 = ctx.createRadialGradient(
-      blobX - r1 * 0.25, blobY - r1 * 0.25, 0,
-      blobX, blobY, r1 * 1.1
-    );
-    grad1.addColorStop(0, '#4DFFC0');
-    grad1.addColorStop(0.45, '#00C882');
-    grad1.addColorStop(1, '#008A5A');
-    ctx.fillStyle = grad1;
-    ctx.fill();
-
-    // Highlight
-    ctx.beginPath();
-    ctx.ellipse(blobX - r1 * 0.2, blobY - r1 * 0.25, r1 * 0.35, r1 * 0.22, -0.25, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(255,255,255,0.18)';
-    ctx.fill();
-
-    // Inner shadow
-    const innerShadow = ctx.createRadialGradient(blobX, blobY + r1 * 0.3, 0, blobX, blobY, r1);
-    innerShadow.addColorStop(0, 'transparent');
-    innerShadow.addColorStop(0.7, 'transparent');
-    innerShadow.addColorStop(1, 'rgba(0,50,30,0.15)');
-    ctx.beginPath();
-    ctx.arc(blobX, blobY, r1, 0, Math.PI * 2);
-    ctx.fillStyle = innerShadow;
-    ctx.fill();
+    ctx.save();
+    ctx.translate(blobX, blobY);
+    ctx.rotate(angle);
+    ctx.scale(1 - stretch * 0.1, 1 + stretch * 0.05);
+    ctx.arc(0, 0, bodyR, 0, Math.PI * 2);
     ctx.restore();
 
-    // === Draw the neck/tendril ===
+    // Radial gradient for the main body
+    const blobGrad = ctx.createRadialGradient(
+      blobX - bodyR * 0.3, blobY - bodyR * 0.35, 0,
+      blobX, blobY, bodyR * 1.1
+    );
+    blobGrad.addColorStop(0, '#6EFFD4');
+    blobGrad.addColorStop(0.35, '#00C882');
+    blobGrad.addColorStop(0.75, '#00A86B');
+    blobGrad.addColorStop(1, '#007A4D');
+    ctx.fillStyle = blobGrad;
+    ctx.fill();
+
+    // === Draw the tendril — starts INSIDE the blob for seamless overlap ===
     if (stretch > 0.05) {
-      ctx.save();
+      // Overlap origin inside the blob body so there's zero seam
+      const overlapX = blobX + Math.cos(angle) * bodyR * 0.5;
+      const overlapY = blobY + Math.sin(angle) * bodyR * 0.5;
+      const overlapL = { x: overlapX + Math.cos(perp) * neckBase * 1.1, y: overlapY + Math.sin(perp) * neckBase * 1.1 };
+      const overlapR = { x: overlapX - Math.cos(perp) * neckBase * 1.1, y: overlapY - Math.sin(perp) * neckBase * 1.1 };
+
+      // Tip edge points
+      const tipL = { x: tipX + Math.cos(perp) * neckTip, y: tipY + Math.sin(perp) * neckTip };
+      const tipR = { x: tipX - Math.cos(perp) * neckTip, y: tipY - Math.sin(perp) * neckTip };
+
+      // Bezier control point distances
+      const cpDist = tendrilDist * 0.4;
+      const cpL2 = { x: tipL.x - Math.cos(angle) * cpDist * 0.5, y: tipL.y - Math.sin(angle) * cpDist * 0.5 };
+      const cpR2 = { x: tipR.x - Math.cos(angle) * cpDist * 0.5, y: tipR.y - Math.sin(angle) * cpDist * 0.5 };
+
       ctx.beginPath();
-      ctx.moveTo(bn1x, bn1y);
-      ctx.bezierCurveTo(cp1ax, cp1ay, cp1bx, cp1by, tn1x, tn1y);
-      // Rounded tip
-      ctx.arc(tipX, tipY, tipNeckWidth, perpAngle, perpAngle + Math.PI, false);
-      ctx.bezierCurveTo(cp2ax, cp2ay, cp2bx, cp2by, bn2x, bn2y);
-      // Close back along the body arc between the two neck connection points
-      ctx.arc(blobX, blobY, r1, angle - bodyNeckAngleSpread, angle + bodyNeckAngleSpread, false);
+      ctx.moveTo(overlapL.x, overlapL.y);
+      // Left side of tendril
+      ctx.bezierCurveTo(
+        overlapL.x + Math.cos(angle) * cpDist,
+        overlapL.y + Math.sin(angle) * cpDist,
+        cpL2.x, cpL2.y,
+        tipL.x, tipL.y
+      );
+      // Round tip
+      ctx.arc(tipX, tipY, neckTip, perp, perp + Math.PI, false);
+      // Right side back
+      ctx.bezierCurveTo(
+        cpR2.x, cpR2.y,
+        overlapR.x + Math.cos(angle) * cpDist,
+        overlapR.y + Math.sin(angle) * cpDist,
+        overlapR.x, overlapR.y
+      );
+      // Close back through the blob interior
+      ctx.quadraticCurveTo(
+        overlapX - Math.cos(angle) * 10,
+        overlapY - Math.sin(angle) * 10,
+        overlapL.x, overlapL.y
+      );
       ctx.closePath();
 
-      // Tendril gradient — slightly darker/more saturated
-      const gradT = ctx.createLinearGradient(blobX, blobY, tipX, tipY);
-      gradT.addColorStop(0, '#00C882');
-      gradT.addColorStop(0.5, '#00B876');
-      gradT.addColorStop(1, '#00A06A');
-      ctx.fillStyle = gradT;
+      // Gradient along the tendril length — continuous with body colors
+      const tendrilGrad = ctx.createLinearGradient(blobX, blobY, tipX, tipY);
+      tendrilGrad.addColorStop(0, '#00C882');
+      tendrilGrad.addColorStop(0.5, '#00A86B');
+      tendrilGrad.addColorStop(1, '#007A4D');
+      ctx.fillStyle = tendrilGrad;
       ctx.fill();
 
-      // Tendril highlight on top edge
+      // Specular highlight on tendril for 3D roundness
       ctx.beginPath();
-      ctx.moveTo(bn1x, bn1y);
-      ctx.bezierCurveTo(cp1ax, cp1ay, cp1bx, cp1by, tn1x, tn1y);
-      ctx.strokeStyle = 'rgba(77,255,192,0.25)';
-      ctx.lineWidth = 2;
+      const hiliteW = neckBase * 0.3;
+      const hiliteX = blobX + Math.cos(angle) * bodyR + Math.cos(perp) * hiliteW;
+      const hiliteY = blobY + Math.sin(angle) * bodyR + Math.sin(perp) * hiliteW;
+      const hiliteEndX = tipX + Math.cos(perp) * neckTip * 0.3;
+      const hiliteEndY = tipY + Math.sin(perp) * neckTip * 0.3;
+      ctx.moveTo(hiliteX, hiliteY);
+      ctx.lineTo(hiliteEndX, hiliteEndY);
+      ctx.strokeStyle = 'rgba(255,255,255,0.15)';
+      ctx.lineWidth = hiliteW * 1.5;
+      ctx.lineCap = 'round';
       ctx.stroke();
-
-      // Tip blob (rounder, slightly glossy)
-      ctx.beginPath();
-      ctx.arc(tipX, tipY, tipRadius * 0.7, 0, Math.PI * 2);
-      const gradTip = ctx.createRadialGradient(
-        tipX - tipRadius * 0.2, tipY - tipRadius * 0.2, 0,
-        tipX, tipY, tipRadius
-      );
-      gradTip.addColorStop(0, 'rgba(77,255,192,0.3)');
-      gradTip.addColorStop(1, 'transparent');
-      ctx.fillStyle = gradTip;
-      ctx.fill();
-
-      ctx.restore();
     }
+
+    // === Blob specular highlight on top ===
+    ctx.beginPath();
+    ctx.save();
+    ctx.translate(blobX - bodyR * 0.22, blobY - bodyR * 0.28);
+    ctx.scale(bodyR * 0.45, bodyR * 0.28);
+    ctx.arc(0, 0, 1, 0, Math.PI * 2);
+    ctx.restore();
+    const specGrad = ctx.createRadialGradient(0, 0, 0, 0, 0, 1);
+    specGrad.addColorStop(0, 'rgba(255,255,255,0.35)');
+    specGrad.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.save();
+    ctx.translate(blobX - bodyR * 0.22, blobY - bodyR * 0.28);
+    ctx.scale(bodyR * 0.45, bodyR * 0.28);
+    ctx.fillStyle = specGrad;
+    ctx.fill();
+    ctx.restore();
 
     // === Drop shadow under everything ===
     ctx.save();
     ctx.globalCompositeOperation = 'destination-over';
     ctx.beginPath();
-    ctx.arc(blobX, blobY, r1 + 5, 0, Math.PI * 2);
+    ctx.arc(blobX, blobY, bodyR + 5, 0, Math.PI * 2);
     ctx.fillStyle = 'rgba(0,200,130,0.12)';
     ctx.filter = 'blur(15px)';
     ctx.fill();
     ctx.filter = 'none';
+    ctx.restore();
+
     ctx.restore();
   }
 
