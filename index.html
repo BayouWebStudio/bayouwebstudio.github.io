@@ -408,7 +408,7 @@ body { padding-top: 60px; }
     function heroSubmit() {
       const val = document.getElementById('hero-ig-input').value.trim().replace(/^@/, '');
       if (!val) { document.getElementById('hero-ig-input').focus(); return; }
-      window.location.href = 'https://getminted.ai/dashboard/?ig=' + encodeURIComponent(val);
+      window.location.href = '/build/?ig=' + encodeURIComponent(val);
     }
     document.getElementById('hero-ig-input').addEventListener('keydown', function(e) {
       if (e.key === 'Enter') heroSubmit();
