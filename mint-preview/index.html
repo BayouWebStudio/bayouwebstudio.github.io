@@ -655,7 +655,7 @@ html, body {
   window.igSubmit = function() {
     const val = document.getElementById('ig-input').value.trim().replace(/^@/, '');
     if (!val) { document.getElementById('ig-input').focus(); return; }
-    window.location.href = 'https://getminted.ai/dashboard/?ig=' + encodeURIComponent(val);
+    window.location.href = 'https://getminted.ai/dashboard/?claim=' + encodeURIComponent(val);
   };
   document.addEventListener('DOMContentLoaded', function() {
     const igInput = document.getElementById('ig-input');

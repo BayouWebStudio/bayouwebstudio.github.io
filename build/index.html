@@ -402,7 +402,7 @@
     document.getElementById('slugReady').textContent = slug;
     document.getElementById('foreverSlug').textContent = slug;
     document.getElementById('seeMysite').href = siteUrl;
-    document.getElementById('claimLink').href = `/dashboard/?ig=${encodeURIComponent(handle)}`;
+    document.getElementById('claimLink').href = `/dashboard/?claim=${encodeURIComponent(slug)}`;
 
     // ── Steps rotation ──
     const steps = [
