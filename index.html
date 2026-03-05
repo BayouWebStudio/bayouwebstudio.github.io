@@ -399,18 +399,19 @@ body { padding-top: 60px; }
 <!-- Mint popup widget -->
 <div id="mint-widget" style="position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:10px;">
   <!-- Chat bubble -->
-  <div id="mint-bubble" style="display:none;background:#111417;border:1px solid rgba(152,232,193,0.25);border-radius:16px 16px 4px 16px;padding:14px 18px;max-width:230px;box-shadow:0 8px 32px rgba(0,0,0,0.4);animation:bubblePop .3s ease;">
+  <div id="mint-bubble" style="display:none;background:#111417;border:1px solid rgba(152,232,193,0.25);border-radius:16px 16px 4px 16px;padding:14px 18px;max-width:240px;box-shadow:0 8px 32px rgba(0,0,0,0.4);animation:bubblePop .3s ease;">
     <p id="mint-bubble-text" style="margin:0;font-size:0.9rem;line-height:1.5;color:#e8edf2;"></p>
     <button onclick="document.getElementById('mint-bubble').style.display='none'" style="background:none;border:none;color:rgba(152,232,193,0.5);font-size:0.75rem;cursor:pointer;margin-top:6px;padding:0;">dismiss</button>
   </div>
   <!-- Mint button -->
-  <div id="mint-fab" onclick="toggleMintBubble()" style="width:56px;height:56px;background:linear-gradient(135deg,#00C882,#00a86b);border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,200,130,0.35);transition:transform .2s;animation:mintFloat 3s ease-in-out infinite;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+  <div id="mint-fab" onclick="toggleMintBubble()" style="width:56px;height:56px;background:linear-gradient(135deg,#00C882,#00a86b);border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,200,130,0.35);transition:transform .2s;animation:mintFloat 3s ease-in-out infinite, mintPulse 1.5s ease-in-out 3;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
     <span style="font-size:1.6rem;line-height:1;">🌿</span>
   </div>
 </div>
 <style>
 @keyframes bubblePop { from { opacity:0; transform:scale(0.85) translateY(8px); } to { opacity:1; transform:scale(1) translateY(0); } }
 @keyframes mintFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
+@keyframes mintPulse { 0%,100%{box-shadow:0 4px 20px rgba(0,200,130,0.35)} 50%{box-shadow:0 4px 32px rgba(0,200,130,0.65)} }
 </style>
 <script>
   const mintMessages = [
@@ -431,14 +432,14 @@ body { padding-top: 60px; }
       bubble.style.display = 'none';
     }
   }
-  // Auto-pop after 4 seconds
+  // Auto-pop bubble after 3 seconds
   setTimeout(function() {
     if (!mintShown) {
       mintShown = true;
       document.getElementById('mint-bubble-text').textContent = mintMessages[Math.floor(Math.random()*mintMessages.length)];
       document.getElementById('mint-bubble').style.display = 'block';
     }
-  }, 4000);
+  }, 3000);
 </script>
 
 <!-- How It Works -->
