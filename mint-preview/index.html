@@ -370,25 +370,8 @@ html, body {
 
 <script>
 (function() {
-  // Obfuscated — move to backend proxy before production launch
-  const _e = '3e26602c2339602c3d247d7e60020b2a121b2c203e06153a3578350a29241c3a787c061b3c27062c7f1a351c193805280202190a34340f207b2e0b2100743a09012e7a3e22182b3b3f3c143c1c3d7e3f25142124002934173d1f122c7c7f09757d282a601e2174153c3a0c0c';
-  const API_KEY = _e.match(/.{2}/g).map(h => String.fromCharCode(parseInt(h,16) ^ 0x4D)).join('');
-  const SYSTEM_PROMPT = `You are Mint, the AI mascot for GetMinted.ai. You're a cute, playful mint leaf character who helps creative professionals (barbers, tattoo artists, nail techs, stylists, lash techs, makeup artists, photographers) get a free website built from their Instagram in 30 seconds.
-
-Your personality: playful, witty, encouraging, a little sassy, hype-man energy. You use emojis naturally but don't overdo it.
-
-Your goal: Have a fun quick chat, then naturally guide them to share their Instagram handle so you can build their website.
-
-Strategy:
-- If they say hi or something casual, be warm and ask what they do
-- If they mention their profession, compliment their craft and pitch the free website
-- If they seem hesitant, reassure them (it's free, takes 30 seconds, no credit card)
-- If they ask what GetMinted does, explain briefly: "I turn your Instagram into a gorgeous website — portfolio, booking, the works — in about 30 seconds. And it's free."
-- When you want their handle, ask naturally: "Drop your IG handle and I'll build it right now 🚀" or similar
-- If they give you a handle (starts with @ or looks like a username), get HYPED and say something like "LET'S GO! Building your site now... 🔥"
-
-Keep responses SHORT — 1-3 sentences max. This is mobile chat. Be concise. Never use more than 40 words.
-Never break character. You ARE Mint, the leaf.`;
+  const CONVEX_URL = 'https://curious-lemming-262.convex.site/api/mint/chat';
+  let threadId = null;
 
   const wrapper = document.getElementById('mint-wrapper');
   const svg = document.getElementById('mint-svg');
@@ -476,24 +459,21 @@ Never break character. You ARE Mint, the leaf.`;
     svg.classList.add('squish');
 
     try {
-      const resp = await fetch('https://api.anthropic.com/v1/messages', {
+      const resp = await fetch(CONVEX_URL, {
         method: 'POST',
-        headers: {
-          'x-api-key': API_KEY,
-          'anthropic-version': '2023-06-01',
-          'content-type': 'application/json',
-          'anthropic-dangerous-direct-browser-access': 'true'
-        },
+        headers: { 'content-type': 'application/json' },
         body: JSON.stringify({
-          model: 'claude-haiku-4-20250414',
-          max_tokens: 150,
-          system: SYSTEM_PROMPT + (handle ? `\n\nThe user just gave their Instagram handle: @${handle}. Get HYPED! Tell them you're building their site now. Be excited! Use fire/rocket emojis.` : ''),
-          messages: conversationHistory
+          message: text + (handle ? ` (my instagram handle is @${handle})` : ''),
+          context: 'getminted',
+          threadId: threadId
         })
       });
 
-      const data = await resp.json();
-      const reply = data.content?.[0]?.text || "Hmm, my brain glitched. Try again? 😅";
+      // Persist thread ID for conversation continuity
+      const newThreadId = resp.headers.get('X-Thread-Id');
+      if (newThreadId) threadId = newThreadId;
+
+      const reply = (await resp.text()) || "Hmm, my brain glitched. Try again? 😅";
 
       conversationHistory.push({ role: 'assistant', content: reply });
 
