@@ -366,12 +366,14 @@
   </div>
 
   <script>
+    const CONVEX = 'https://curious-lemming-262.convex.site';
+
     // ── Parse params ──
     const params = new URLSearchParams(location.search);
     const rawHandle = (params.get('ig') || '').replace(/^@/, '').trim();
     const handle = rawHandle || 'yourhandle';
     const slug = handle.toLowerCase().replace(/[^a-z0-9]/g, '');
-    const siteUrl = `https://getminted.ai/${slug}/`;
+    let siteUrl = `https://getminted.ai/${slug}/`;
 
     // ── Populate UI ──
     document.getElementById('handleDisplay').textContent = '@' + handle;
@@ -389,10 +391,8 @@
       '⚡ Setting up your booking form...',
       '🚀 Going live...',
     ];
-
     let stepIdx = 0;
     const stepEl = document.getElementById('stepText');
-
     function nextStep() {
       stepEl.style.opacity = '0';
       setTimeout(() => {
@@ -401,174 +401,102 @@
         stepIdx++;
       }, 300);
     }
-
     nextStep();
     const stepInterval = setInterval(nextStep, 4000);
 
-    // ── Progress bar (fake, UX only) ──
-    // Targets: 30% in 30s, 60% in 90s, 85% in 150s, stalls at 92%
+    // ── Progress bar (maps to real build stages) ──
     const progressEl = document.getElementById('progressBar');
-    let currentProgress = 0;
-    const progressStops = [
-      { time: 5000,   pct: 8  },
-      { time: 15000,  pct: 20 },
-      { time: 30000,  pct: 35 },
-      { time: 60000,  pct: 55 },
-      { time: 90000,  pct: 70 },
-      { time: 120000, pct: 82 },
-      { time: 150000, pct: 90 },
-      { time: 180000, pct: 93 },
-    ];
-
-    const buildStart = Date.now();
-
-    function updateProgress() {
-      const elapsed = Date.now() - buildStart;
-      let target = 93;
-      for (const stop of progressStops) {
-        if (elapsed >= stop.time) target = stop.pct;
-      }
-      if (target > currentProgress) {
-        currentProgress = target;
-        progressEl.style.width = currentProgress + '%';
+    const stageProgress = {
+      pending: 5, scraping: 15, generating: 40,
+      uploading: 65, deploying: 80, complete: 100,
+    };
+    function setProgress(pct) {
+      if (pct > parseFloat(progressEl.style.width || '0')) {
+        progressEl.style.width = pct + '%';
       }
     }
+    setProgress(5);
 
-    const progressInterval = setInterval(updateProgress, 2000);
-
-    // ── Kick off build (fire and forget) ──
-    if (handle && handle !== 'yourhandle') {
-      fetch('https://curious-lemming-262.convex.cloud/api/build', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ igHandle: handle, slug: slug, industry: 'auto' }),
-      }).catch(() => {}); // ignore errors — just fire
-    }
-
-    // ── Polling ──
-    let pollCount = 0;
+    // ── Kick off build, then poll status ──
+    let buildId = null;
     let pollInterval = null;
     let isLive = false;
 
-    async function checkIfLive() {
-      if (isLive) return;
+    async function startBuild() {
+      if (!handle || handle === 'yourhandle') return;
       try {
-        const res = await fetch(siteUrl, { method: 'HEAD', mode: 'no-cors' });
-        // no-cors always "succeeds" with opaque response — use a GET with cors as fallback
-        // Try a regular fetch with CORS; if CORS-blocked it throws, but if 404 it returns
-        const check = await fetch(siteUrl, { method: 'GET', cache: 'no-cache' });
-        if (check.ok) {
-          goLive();
-          return;
-        }
-      } catch (e) {
-        // CORS block = likely the page exists (GitHub Pages doesn't CORS-block but 404 pages do)
-        // If we get a network error vs CORS error vs 404 — treat opaque as "maybe live"
-        // Better heuristic: use a no-cors HEAD and check via image trick or accept opaque as live
-      }
-      pollCount++;
-    }
-
-    // Better polling: use no-cors fetch; opaque = page exists; error = 404 or offline
-    async function checkIfLiveV2() {
-      if (isLive) return;
-      try {
-        // GitHub Pages: a 404 still returns opaque with no-cors but status=0
-        // We can't distinguish 200 vs 404 in no-cors... use an img probe instead
-        await probeWithImage();
-      } catch (e) {
-        // not live yet
-      }
-      pollCount++;
-    }
-
-    function probeWithImage() {
-      return new Promise((resolve, reject) => {
-        // Probe a unique asset that only exists on the real site
-        // Fall back to a JS fetch with CORS if needed
-        const img = new Image();
-        const probe = siteUrl + '?_probe=' + Date.now();
-        // Actually: just try to fetch the page URL — GitHub Pages 404 returns a 404 status
-        // which fetch() can read even cross-origin (only body is blocked, status is not for same-origin)
-        // For cross-origin with no-cors, status is always 0. So we need a different approach.
-        // 
-        // Best approach: hit a canonical endpoint that responds with JSON
-        // OR: redirect user when page eventually 200s via a server-side check
-        // 
-        // Since this is all static, let's just use a timed approach:
-        // After 3 minutes, assume it MIGHT be live and check optimistically
-        img.src = probe;
-        img.onload = () => resolve(true);
-        img.onerror = () => reject(false);
-      });
-    }
-
-    // Simplified polling: use fetch with CORS mode to detect 200 vs 404
-    async function pollSite() {
-      if (isLive) return;
-      try {
-        const controller = new AbortController();
-        const timeout = setTimeout(() => controller.abort(), 8000);
-        const res = await fetch(siteUrl, {
-          method: 'GET',
-          mode: 'cors',
-          cache: 'no-store',
-          signal: controller.signal,
+        const res = await fetch(`${CONVEX}/api/build`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ igHandle: handle, slug, industry: 'auto' }),
         });
-        clearTimeout(timeout);
         if (res.ok) {
-          goLive();
+          const data = await res.json();
+          buildId = data.buildId;
+          // Start polling immediately
+          pollInterval = setInterval(pollStatus, 8000);
+          pollStatus();
+        } else {
+          // Build API failed — fall back to polling GitHub Pages directly
+          pollInterval = setInterval(pollGitHub, 15000);
+          setTimeout(pollGitHub, 5000);
         }
-      } catch (err) {
-        // If CORS error (not a 404), the page might be live but blocking CORS.
-        // GitHub Pages typically allows CORS. If we get a TypeError (CORS), treat as uncertain.
-        // If we get a 404, fetch returns normally with !res.ok.
-        // A genuine CORS block on a real page: err.name === 'TypeError'
-        if (err && err.name === 'TypeError' && !err.message.includes('abort')) {
-          // Could be live behind a CORS wall — try redirect check
-          // For now: after 5 minutes, just show the button optimistically
-          if (Date.now() - buildStart > 300000) {
-            goLive();
-          }
-        }
+      } catch (e) {
+        // Fall back to GitHub Pages polling
+        pollInterval = setInterval(pollGitHub, 15000);
+        setTimeout(pollGitHub, 5000);
       }
     }
 
-    // Start polling after 30 seconds (give build time to kick off)
-    setTimeout(() => {
-      pollSite();
-      pollInterval = setInterval(pollSite, 15000);
-    }, 30000);
+    async function pollStatus() {
+      if (isLive || !buildId) return;
+      try {
+        const res = await fetch(`${CONVEX}/api/build/status?id=${buildId}`);
+        if (!res.ok) return;
+        const data = await res.json();
+        const pct = stageProgress[data.status] || 5;
+        setProgress(pct);
+        if (data.siteUrl) {
+          siteUrl = data.siteUrl;
+          document.getElementById('seeMysite').href = siteUrl;
+        }
+        if (data.status === 'complete') {
+          goLive();
+        } else if (data.status === 'error') {
+          stepEl.textContent = '⚠️ Something went wrong — try again';
+        }
+      } catch (e) { /* keep polling */ }
+    }
 
-    // ── Go Live transition ──
+    async function pollGitHub() {
+      if (isLive) return;
+      try {
+        const res = await fetch(siteUrl, { method: 'GET', cache: 'no-store' });
+        if (res.ok) goLive();
+      } catch (e) { /* keep polling */ }
+    }
+
+    startBuild();
+
+    // ── Go Live ──
     function goLive() {
       if (isLive) return;
       isLive = true;
-
       clearInterval(pollInterval);
       clearInterval(stepInterval);
-      clearInterval(progressInterval);
+      setProgress(100);
 
-      // Complete the progress bar
-      progressEl.style.width = '100%';
-
-      // Update URL pill
       const pill = document.getElementById('urlPill');
       pill.classList.add('live');
-      document.getElementById('urlText').textContent = `getminted.ai/${slug}`;
 
-      // Short delay then switch phases
       setTimeout(() => {
         const building = document.getElementById('phaseBuilding');
         building.classList.add('fade-out');
-
         setTimeout(() => {
           building.style.display = 'none';
           const ready = document.getElementById('phaseReady');
           ready.style.display = 'block';
           ready.classList.add('fade-in');
-
-          // 🎉 Confetti!
           launchConfetti();
         }, 500);
       }, 600);
@@ -577,41 +505,15 @@
     // ── Confetti ──
     function launchConfetti() {
       const colors = ['#00C882', '#ffffff', '#00a06a', '#80ffc7', '#003d1f'];
-
-      confetti({
-        particleCount: 120,
-        spread: 80,
-        origin: { y: 0.5 },
-        colors,
-        startVelocity: 35,
-        gravity: 0.9,
-        ticks: 200,
-      });
-
+      confetti({ particleCount: 120, spread: 80, origin: { y: 0.5 }, colors, startVelocity: 35, gravity: 0.9, ticks: 200 });
       setTimeout(() => {
-        confetti({
-          particleCount: 60,
-          spread: 50,
-          origin: { y: 0.4, x: 0.2 },
-          colors,
-          startVelocity: 25,
-          angle: 60,
-        });
-        confetti({
-          particleCount: 60,
-          spread: 50,
-          origin: { y: 0.4, x: 0.8 },
-          colors,
-          startVelocity: 25,
-          angle: 120,
-        });
+        confetti({ particleCount: 60, spread: 50, origin: { y: 0.4, x: 0.2 }, colors, startVelocity: 25, angle: 60 });
+        confetti({ particleCount: 60, spread: 50, origin: { y: 0.4, x: 0.8 }, colors, startVelocity: 25, angle: 120 });
       }, 300);
     }
 
-    // ── Dev/test shortcut: ?test=live in URL skips straight to Phase 3 ──
-    if (params.get('test') === 'live') {
-      setTimeout(goLive, 1500);
-    }
+    // ── Dev shortcut: ?test=live ──
+    if (params.get('test') === 'live') setTimeout(goLive, 1500);
   </script>
 </body>
 </html>
