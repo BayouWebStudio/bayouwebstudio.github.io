@@ -460,6 +460,52 @@ html, body {
   opacity: 0;
   z-index: 5;
 }
+
+/* Touch ripple */
+.touch-ripple {
+  position: fixed;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 50;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0.6;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.35s ease-out;
+}
+.touch-ripple.expand {
+  transform: translate(-50%, -50%) scale(4);
+  opacity: 0;
+}
+
+/* Blob arms for face-cover reaction */
+.mint-arm {
+  position: absolute;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 35% 30%, #4DFFC0 0%, #00C882 50%, #008A5A 100%);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  z-index: 3;
+  top: 40%;
+  opacity: 0;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease;
+  pointer-events: none;
+}
+.mint-arm.left-arm {
+  left: -10px;
+  transform: translateX(-20px) scale(0.5);
+}
+.mint-arm.right-arm {
+  right: -10px;
+  transform: translateX(20px) scale(0.5);
+}
+.mint-arm.left-arm.covering {
+  opacity: 1;
+  transform: translateX(30px) scale(1);
+}
+.mint-arm.right-arm.covering {
+  opacity: 1;
+  transform: translateX(-30px) scale(1);
+}
 </style>
 </head>
 <body>
@@ -476,6 +522,8 @@ html, body {
       <div class="mint-shadow" id="mint-shadow"></div>
       <div class="mint-blob" id="mint-blob">
         <div class="mint-blob-body" id="mint-blob-body"></div>
+        <div class="mint-arm left-arm" id="arm-left"></div>
+        <div class="mint-arm right-arm" id="arm-right"></div>
         <svg class="mint-face" id="mint-face" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
           <!-- Eyebrows -->
           <path id="brow-left" d="M52,62 Q62,56 72,60" stroke="rgba(0,60,35,0.5)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
@@ -814,6 +862,8 @@ html, body {
     if (e.target === chatInput || e.target === sendBtn || e.target.closest('.send-btn') || e.target.closest('.login-btn')) return;
 
     const { x, y } = getXY(e);
+    tapTouchX = x;
+    tapTouchY = y;
     dragStartX = x;
     dragStartY = y;
     dragOffsetX = springPosX.value;
@@ -959,33 +1009,290 @@ html, body {
   }
 
   // ═══════════════════════════════════════════════════════
-  // TAP INTERACTIONS
+  // ZONE DETECTION
+  // ═══════════════════════════════════════════════════════
+  const armLeft = document.getElementById('arm-left');
+  const armRight = document.getElementById('arm-right');
+
+  function getZone(touchX, touchY) {
+    const rect = blobBody.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    const relX = touchX - cx;
+    const relY = touchY - cy;
+    const relXNorm = relX / (rect.width / 2);
+    const relYNorm = relY / (rect.height / 2);
+
+    // Face zone: center region
+    if (Math.abs(relXNorm) < 0.4 && relYNorm > -0.3 && relYNorm < 0.3) return 'face';
+    // Head: top quarter
+    if (relYNorm < -0.4) return 'head';
+    // Bottom: bottom quarter
+    if (relYNorm > 0.4) return 'bottom';
+    // Left/right sides
+    if (relXNorm < -0.3) return 'left';
+    if (relXNorm > 0.3) return 'right';
+    // Default center
+    return 'belly';
+  }
+
+  // Zone speech bubbles
+  const zoneBubbles = {
+    head:   ["Hey, that's my head! 😳", "Careful up there 🥺", "...hi 👀"],
+    belly:  ["hehehe 😂", "STOP that tickles 🤣", "okay okay I'm ticklish 😭"],
+    left:   ["OW— wait that didn't hurt 😅", "Poke! 👈", "Rude! (jk) 😂"],
+    right:  ["Hey! 👉", "Did you just poke me? 😤", "bold move 😅"],
+    bottom: ["WOOHOO 🚀", "to infinity and beyond 🌿", "wheeee!! 😵‍💫"],
+    face:   ["My face! 😤", "👀 Hey, eyes up here", "That's personal! 😂"],
+  };
+
+  // Zone ripple colors
+  const zoneColors = {
+    head: 'rgba(100,180,255,0.5)',
+    belly: 'rgba(0,200,130,0.5)',
+    left: 'rgba(255,160,60,0.5)',
+    right: 'rgba(255,160,60,0.5)',
+    bottom: 'rgba(255,80,120,0.5)',
+    face: 'rgba(200,130,255,0.5)',
+  };
+
+  function spawnRipple(x, y, zone) {
+    const r = document.createElement('div');
+    r.className = 'touch-ripple';
+    r.style.left = x + 'px';
+    r.style.top = y + 'px';
+    r.style.background = zoneColors[zone] || 'rgba(0,200,130,0.5)';
+    document.body.appendChild(r);
+    requestAnimationFrame(() => r.classList.add('expand'));
+    setTimeout(() => r.remove(), 400);
+  }
+
+  // Store touch start position for zone detection on tap
+  let tapTouchX = 0, tapTouchY = 0;
+
+  // Tickle jitter state
+  let jitterCount = 0;
+  let jitterTimer = null;
+
+  function doTickleJitter() {
+    jitterCount = 0;
+    clearInterval(jitterTimer);
+    jitterTimer = setInterval(() => {
+      if (jitterCount >= 4) { clearInterval(jitterTimer); return; }
+      const dir = jitterCount % 2 === 0 ? 1 : -1;
+      springScaleX.impulse(dir * 0.12);
+      springJiggle1.impulse(dir * 0.4);
+      springJiggle2.impulse(-dir * 0.3);
+      jitterCount++;
+    }, 90);
+  }
+
+  // Bottom zone landing detection
+  let bottomLaunchActive = false;
+
+  // Face cover animation
+  function coverFace() {
+    armLeft.classList.add('covering');
+    armRight.classList.add('covering');
+    setTimeout(() => {
+      armLeft.classList.remove('covering');
+      armRight.classList.remove('covering');
+    }, 800);
+  }
+
+  // ═══════════════════════════════════════════════════════
+  // ADDITIONAL EXPRESSIONS (shy, tickle, cross-eyed)
+  // ═══════════════════════════════════════════════════════
+  function setExpressionZone(expr) {
+    currentExpression = expr;
+    switch (expr) {
+      case 'shy':
+        eyeLeftWhite.setAttribute('ry', '14');
+        eyeRightWhite.setAttribute('ry', '14');
+        eyeLeftPupil.setAttribute('ry', '7');
+        eyeRightPupil.setAttribute('ry', '7');
+        eyeLeftPupil.setAttribute('rx', '7');
+        eyeRightPupil.setAttribute('rx', '7');
+        mouth.setAttribute('d', 'M80,112 Q90,118 100,112');
+        mouth.setAttribute('fill', 'none');
+        browLeft.setAttribute('d', 'M54,60 Q62,58 70,62');
+        browRight.setAttribute('d', 'M110,62 Q118,58 126,60');
+        sparkles.setAttribute('opacity', '0');
+        // Eyes look down-left
+        setPupilOffset(-4, 4);
+        // Blush intensify via inline style
+        document.querySelectorAll('.mint-face ellipse[cx="44"], .mint-face ellipse[cx="136"]').forEach(el => {
+          el.setAttribute('fill', 'rgba(255,130,160,0.45)');
+        });
+        break;
+      case 'tickle':
+        // Squint-laugh eyes (happy eyes but more squished)
+        eyeLeftWhite.setAttribute('ry', '4');
+        eyeRightWhite.setAttribute('ry', '4');
+        eyeLeftPupil.setAttribute('ry', '3');
+        eyeRightPupil.setAttribute('ry', '3');
+        eyeLeftPupil.setAttribute('rx', '7');
+        eyeRightPupil.setAttribute('rx', '7');
+        // Huge open smile
+        mouth.setAttribute('d', 'M66,106 Q90,140 114,106');
+        mouth.setAttribute('fill', 'rgba(0,60,35,0.35)');
+        browLeft.setAttribute('d', 'M52,58 Q62,54 72,58');
+        browRight.setAttribute('d', 'M108,58 Q118,54 128,58');
+        sparkles.setAttribute('opacity', '0');
+        break;
+      case 'crosseyed':
+        eyeLeftWhite.setAttribute('ry', '18');
+        eyeRightWhite.setAttribute('ry', '18');
+        eyeLeftPupil.setAttribute('ry', '9');
+        eyeRightPupil.setAttribute('ry', '9');
+        eyeLeftPupil.setAttribute('rx', '8');
+        eyeRightPupil.setAttribute('rx', '8');
+        // Cross: left pupil moves right, right pupil moves left
+        eyeLeftPupil.setAttribute('cx', LEFT_EYE.cx + 6);
+        eyeRightPupil.setAttribute('cx', RIGHT_EYE.cx - 6);
+        eyeLeftPupil.setAttribute('cy', LEFT_EYE.cy);
+        eyeRightPupil.setAttribute('cy', RIGHT_EYE.cy);
+        eyeLeftHighlight.setAttribute('cx', LEFT_EYE.cx + 10);
+        eyeLeftHighlight.setAttribute('cy', LEFT_EYE.cy - 5);
+        eyeRightHighlight.setAttribute('cx', RIGHT_EYE.cx - 2);
+        eyeRightHighlight.setAttribute('cy', RIGHT_EYE.cy - 5);
+        mouth.setAttribute('d', 'M78,112 Q88,118 100,112');
+        mouth.setAttribute('fill', 'none');
+        browLeft.setAttribute('d', 'M50,56 Q62,50 74,58');
+        browRight.setAttribute('d', 'M106,58 Q118,50 130,56');
+        sparkles.setAttribute('opacity', '0');
+        break;
+      default:
+        setExpression(expr);
+        return;
+    }
+  }
+
+  function resetBlush() {
+    document.querySelectorAll('.mint-face ellipse[cx="44"], .mint-face ellipse[cx="136"]').forEach(el => {
+      el.setAttribute('fill', 'rgba(255,130,160,0.2)');
+    });
+  }
+
+  // ═══════════════════════════════════════════════════════
+  // ZONE-BASED TAP REACTIONS
+  // ═══════════════════════════════════════════════════════
+  function doZoneTap(zone, x, y) {
+    spawnRipple(x, y, zone);
+    showBubble(pick(zoneBubbles[zone]));
+    resetIdle();
+
+    switch (zone) {
+      case 'head':
+        // Gentle tilt forward, shy expression
+        springScaleY.velocity -= 0.03;
+        springScaleX.velocity += 0.02;
+        springRotation.impulse(4);
+        springPosY.impulse(1.5);
+        springJiggle1.impulse(0.15);
+        setExpressionZone('shy');
+        setTimeout(() => { resetBlush(); setExpression('idle'); }, 2000);
+        spawnParticles(3);
+        break;
+
+      case 'belly':
+        // TICKLISH — rapid jitter, laugh expression
+        setExpressionZone('tickle');
+        doTickleJitter();
+        springScaleX.impulse(0.08);
+        springScaleY.impulse(-0.06);
+        spawnParticles(6);
+        setTimeout(() => {
+          setExpression('happy');
+          setTimeout(() => setExpression('idle'), 1200);
+        }, 1000);
+        break;
+
+      case 'left':
+        // Lurch RIGHT (away from left poke)
+        springPosX.velocity += 15;
+        springScaleX.velocity += 0.15;
+        springJiggle1.impulse(0.6);
+        springJiggle2.impulse(-0.4);
+        setExpression('surprised');
+        setTimeout(() => {
+          setExpression('happy');
+          setTimeout(() => setExpression('idle'), 1200);
+        }, 500);
+        spawnParticles(4);
+        break;
+
+      case 'right':
+        // Lurch LEFT (away from right poke)
+        springPosX.velocity -= 15;
+        springScaleX.velocity += 0.15;
+        springJiggle1.impulse(-0.6);
+        springJiggle2.impulse(0.4);
+        setExpression('surprised');
+        setTimeout(() => {
+          setExpression('happy');
+          setTimeout(() => setExpression('idle'), 1200);
+        }, 500);
+        spawnParticles(4);
+        break;
+
+      case 'bottom':
+        // BIG upward launch
+        springPosY.velocity -= 22;
+        bottomLaunchActive = true;
+        // Stretch tall at launch
+        springScaleY.impulse(0.25);
+        springScaleX.impulse(-0.15);
+        setExpression('excited');
+        spawnParticles(8);
+
+        // Landing squish detection — poll until returning down
+        let launchCheck = setInterval(() => {
+          if (bottomLaunchActive && springPosY.velocity > 0 && springPosY.value < 5) {
+            // Landing! Big squish
+            springScaleY.impulse(-0.35);
+            springScaleX.impulse(0.3);
+            springJiggle1.impulse(0.8);
+            springJiggle2.impulse(-0.6);
+            bottomLaunchActive = false;
+            clearInterval(launchCheck);
+            setTimeout(() => {
+              setExpression('happy');
+              setTimeout(() => setExpression('idle'), 1200);
+            }, 400);
+          }
+        }, 16);
+        // Safety timeout
+        setTimeout(() => { clearInterval(launchCheck); bottomLaunchActive = false; }, 2000);
+        break;
+
+      case 'face':
+        // Cover face with arms, cross eyes
+        coverFace();
+        setExpressionZone('crosseyed');
+        springScaleX.impulse(0.08);
+        springScaleY.impulse(-0.06);
+        springJiggle1.impulse(0.3);
+        spawnParticles(4);
+        setTimeout(() => {
+          setExpression('surprised');
+          setTimeout(() => setExpression('idle'), 1200);
+        }, 800);
+        break;
+    }
+  }
+
+  // ═══════════════════════════════════════════════════════
+  // TAP INTERACTIONS (zone-aware)
   // ═══════════════════════════════════════════════════════
 
   function doSingleTap() {
-    // Small happy bounce via spring impulse
-    springScaleX.impulse(0.12);
-    springScaleY.impulse(-0.15);
-    springJiggle1.impulse(0.5);
-    springJiggle2.impulse(-0.3);
-
-    // Pop upward slightly
-    springPosY.impulse(-2);
-
-    setExpression('surprised');
-    setTimeout(() => {
-      setExpression('happy');
-      setTimeout(() => setExpression('idle'), 1500);
-    }, 300);
-
-    const tapMsgs = ["Hehe, that tickles! 😆", "Type something below! 👇", "Let's chat! Ask me anything 🌿"];
-    showBubble(pick(tapMsgs));
-    spawnParticles(5);
-    resetIdle();
+    const zone = getZone(tapTouchX, tapTouchY);
+    doZoneTap(zone, tapTouchX, tapTouchY);
   }
 
   function doDoubleTap() {
-    // BIG excited bounce — Flubber-style overshoot
+    // BIG excited bounce — Flubber-style overshoot (unchanged)
     springScaleX.impulse(0.3);
     springScaleY.impulse(-0.35);
     springJiggle1.impulse(1.0);
