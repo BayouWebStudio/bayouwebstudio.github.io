@@ -237,6 +237,99 @@ html, body {
 }
 
 /* Chat section */
+/* IG Primary Input */
+.ig-section {
+  width: 100%;
+  max-width: 420px;
+  padding: 0 20px;
+  padding-bottom: max(env(safe-area-inset-bottom, 20px), 20px);
+  flex-shrink: 0;
+  z-index: 10;
+}
+.ig-label {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #e8edf2;
+  margin-bottom: 12px;
+}
+.ig-input-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.ig-input-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  background: rgba(255,255,255,0.06);
+  border: 1.5px solid rgba(152,232,193,0.3);
+  border-radius: 12px;
+  padding: 0 14px;
+  gap: 6px;
+  transition: border-color 0.2s;
+}
+.ig-input-wrap:focus-within { border-color: #00C882; }
+.ig-at { color: #00C882; font-weight: 700; font-size: 1.1rem; }
+.ig-input-wrap input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #e8edf2;
+  font-size: 1rem;
+  padding: 14px 0;
+  width: 100%;
+  font-family: inherit;
+}
+.ig-input-wrap input::placeholder { color: #4a5a68; }
+.ig-build-btn {
+  background: #00C882;
+  color: #1A1A2E;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 18px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.2s, transform 0.1s;
+  font-family: inherit;
+}
+.ig-build-btn:active { transform: scale(0.96); opacity: 0.85; }
+
+/* Mint Chat Popup */
+.mint-chat-popup {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-width: 480px;
+  margin: 0 auto;
+  background: #111417;
+  border-top: 1px solid rgba(152,232,193,0.2);
+  border-radius: 20px 20px 0 0;
+  padding: 0 0 max(env(safe-area-inset-bottom,12px),12px);
+  z-index: 100;
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  box-shadow: 0 -8px 40px rgba(0,0,0,0.4);
+}
+.mint-chat-popup.open { transform: translateY(0); }
+.mint-chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.chat-close-btn {
+  background: none;
+  border: none;
+  color: #4a5a68;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 4px 8px;
+}
 .chat-section {
   width: 100%;
   max-width: 420px;
@@ -418,17 +511,34 @@ html, body {
     </div>
   </div>
 
-  <div class="chat-section">
+  <!-- PRIMARY: IG handle input -->
+  <div class="ig-section">
+    <p class="ig-label">Drop your Instagram handle</p>
+    <div class="ig-input-row">
+      <div class="ig-input-wrap">
+        <span class="ig-at">@</span>
+        <input type="text" id="ig-input" placeholder="yourhandle" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+      </div>
+      <button class="ig-build-btn" id="ig-build-btn" onclick="igSubmit()">Build My Site →</button>
+    </div>
+    <p class="disclaimer">Free forever · No credit card · 30 seconds</p>
+  </div>
+
+  <!-- SECONDARY: Mint chat popup (slides up after 3s) -->
+  <div class="mint-chat-popup" id="mint-chat-popup">
+    <div class="mint-chat-header">
+      <span style="font-size:0.85rem;font-weight:600;color:#98E8C1;">Mint 🌿</span>
+      <button class="chat-close-btn" onclick="closeMintChat()">✕</button>
+    </div>
     <div class="chat-history" id="chat-history"></div>
     <div class="chat-input-bar">
-      <input type="text" id="chat-input" placeholder="Say something to Mint..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+      <input type="text" id="chat-input" placeholder="Chat with Mint..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
       <button class="send-btn" id="send-btn">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M5 12L3 3l19 9-19 9 2-9zm0 0h8" stroke="#1A1A2E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </button>
     </div>
-    <div class="disclaimer">Free website from your IG. 30 seconds. No credit card.</div>
   </div>
 </div>
 
@@ -464,6 +574,41 @@ html, body {
   // ═══════════════════════════════════════════════════════
   const CONVEX_URL = 'https://curious-lemming-262.convex.site/api/mint/chat';
   let threadId = null;
+
+  // IG handle submit
+  window.igSubmit = function() {
+    const val = document.getElementById('ig-input').value.trim().replace(/^@/, '');
+    if (!val) { document.getElementById('ig-input').focus(); return; }
+    window.location.href = 'https://getminted.ai/dashboard/?ig=' + encodeURIComponent(val);
+  };
+  document.addEventListener('DOMContentLoaded', function() {
+    const igInput = document.getElementById('ig-input');
+    if (igInput) igInput.addEventListener('keydown', function(e) { if (e.key === 'Enter') window.igSubmit(); });
+  });
+
+  // Mint chat popup
+  const mintChatMessages = [
+    "Hey! 👀 I already know your vibe from your IG. Want me to build your site real quick?",
+    "Psst — drop your handle above and I'll have your site ready before you finish this sentence 🚀",
+    "No cap, I built 164 sites already. Yours would take me 30 seconds 🌿",
+    "Your competitors have websites. Do you? 😤 Let me fix that.",
+    "What if your Instagram actually sent people somewhere? I can make that happen — free 💚",
+  ];
+  let chatPopupShown = false;
+  window.closeMintChat = function() {
+    document.getElementById('mint-chat-popup').classList.remove('open');
+  };
+  window.openMintChat = function() {
+    const popup = document.getElementById('mint-chat-popup');
+    popup.classList.add('open');
+    if (!chatPopupShown) {
+      chatPopupShown = true;
+      const msg = mintChatMessages[Math.floor(Math.random() * mintChatMessages.length)];
+      setTimeout(() => addMessage(msg, 'mint'), 300);
+    }
+  };
+  // Auto-open after 3 seconds
+  setTimeout(window.openMintChat, 3000);
 
   const wrapper = document.getElementById('mint-wrapper');
   const blob = document.getElementById('mint-blob');
