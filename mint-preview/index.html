@@ -136,6 +136,15 @@ html, body {
   30% { opacity: 1; transform: scale(1.2); }
 }
 
+/* Stretch canvas overlay */
+#stretch-canvas {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 14;
+}
+
 /* Mint wrapper */
 #mint-wrapper {
   position: relative;
@@ -167,7 +176,8 @@ html, body {
     0 2px 10px rgba(0, 0, 0, 0.3);
   position: relative;
   overflow: hidden;
-  will-change: border-radius;
+  will-change: border-radius, opacity;
+  transition: opacity 0.15s ease;
 }
 
 /* Inner glow / highlight */
@@ -542,6 +552,7 @@ html, body {
   </div>
 
   <div class="character-zone" id="character-zone">
+    <canvas id="stretch-canvas"></canvas>
     <div class="speech-bubble pop" id="speech-bubble">Hey! I'm Mint 🌿 Talk to me!</div>
     <div id="mint-wrapper">
       <div class="mint-glow"></div>
@@ -790,6 +801,264 @@ html, body {
   let pressStartTime = 0;
 
   // ═══════════════════════════════════════════════════════
+  // STRETCH DEFORMATION SYSTEM
+  // ═══════════════════════════════════════════════════════
+  const stretchCanvas = document.getElementById('stretch-canvas');
+  const stretchCtx = stretchCanvas.getContext('2d');
+  let isStretching = false;
+  let stretchFingerX = 0, stretchFingerY = 0;
+  const springStretch = new Spring(0, 0.25, 0.45); // bouncy snap-back
+  const springStretchAngle = new Spring(0, 0.12, 0.65);
+  let stretchAngle = 0;
+  let stretchReleaseJiggle = 0; // extra jiggle on snap-back
+  const MAX_STRETCH_DIST = 160; // max pixels you can stretch
+  const BLOB_RADIUS = 90;
+  let stretchActive = false; // true when canvas is rendering the stretch
+  let stretchDragStarted = false; // differentiate tap from drag
+
+  function resizeStretchCanvas() {
+    const dpr = window.devicePixelRatio || 1;
+    const rect = zone.getBoundingClientRect();
+    stretchCanvas.width = rect.width * dpr;
+    stretchCanvas.height = rect.height * dpr;
+    stretchCanvas.style.width = rect.width + 'px';
+    stretchCanvas.style.height = rect.height + 'px';
+    stretchCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  resizeStretchCanvas();
+  window.addEventListener('resize', resizeStretchCanvas);
+
+  function getBlobCenter() {
+    const wrapperRect = wrapper.getBoundingClientRect();
+    const zoneRect = zone.getBoundingClientRect();
+    return {
+      x: wrapperRect.left + wrapperRect.width / 2 - zoneRect.left,
+      y: wrapperRect.top + wrapperRect.height / 2 - zoneRect.top
+    };
+  }
+
+  function drawStretchBlob(blobX, blobY, fingerX, fingerY, stretch) {
+    const ctx = stretchCtx;
+    const canvasRect = zone.getBoundingClientRect();
+    ctx.clearRect(0, 0, canvasRect.width, canvasRect.height);
+
+    if (stretch < 0.02) return;
+
+    const dx = fingerX - blobX;
+    const dy = fingerY - blobY;
+    const dist = Math.hypot(dx, dy) || 1;
+    const angle = Math.atan2(dy, dx);
+    const perpAngle = angle + Math.PI / 2;
+
+    // Main body radius shrinks slightly as you stretch
+    const r1 = BLOB_RADIUS * (1 - stretch * 0.15);
+
+    // How far the tendril tip extends
+    const tendrilDist = dist * stretch;
+    const tipX = blobX + Math.cos(angle) * tendrilDist;
+    const tipY = blobY + Math.sin(angle) * tendrilDist;
+
+    // Neck width thins as stretch increases — this is the money
+    const baseNeckWidth = BLOB_RADIUS * 0.45;
+    const neckWidth = baseNeckWidth * (1 - stretch * 0.75);
+    const tipRadius = Math.max(8, neckWidth * 0.6 + stretch * 12);
+
+    // Connection points on main body (where neck meets the blob)
+    const bodyNeckAngleSpread = Math.asin(Math.min(1, neckWidth / r1));
+    const bn1x = blobX + Math.cos(angle + bodyNeckAngleSpread) * r1;
+    const bn1y = blobY + Math.sin(angle + bodyNeckAngleSpread) * r1;
+    const bn2x = blobX + Math.cos(angle - bodyNeckAngleSpread) * r1;
+    const bn2y = blobY + Math.sin(angle - bodyNeckAngleSpread) * r1;
+
+    // Tip connection points
+    const tipNeckWidth = tipRadius * 0.9;
+    const tn1x = tipX + Math.cos(perpAngle) * tipNeckWidth;
+    const tn1y = tipY + Math.sin(perpAngle) * tipNeckWidth;
+    const tn2x = tipX - Math.cos(perpAngle) * tipNeckWidth;
+    const tn2y = tipY - Math.sin(perpAngle) * tipNeckWidth;
+
+    // Control points for bezier curves — the neck shape
+    const cpDist = tendrilDist * 0.4;
+    const cp1ax = bn1x + Math.cos(angle) * cpDist;
+    const cp1ay = bn1y + Math.sin(angle) * cpDist;
+    const cp1bx = tn1x - Math.cos(angle) * cpDist * 0.6;
+    const cp1by = tn1y - Math.sin(angle) * cpDist * 0.6;
+    const cp2ax = tn2x - Math.cos(angle) * cpDist * 0.6;
+    const cp2ay = tn2y - Math.sin(angle) * cpDist * 0.6;
+    const cp2bx = bn2x + Math.cos(angle) * cpDist;
+    const cp2by = bn2y + Math.sin(angle) * cpDist;
+
+    // === Draw the main blob body ===
+    ctx.save();
+    ctx.beginPath();
+
+    // Main blob circle (with a subtle indent on the stretch side)
+    const indentAmount = stretch * 0.15;
+    const segments = 64;
+    for (let i = 0; i <= segments; i++) {
+      const a = (i / segments) * Math.PI * 2;
+      // Calculate indent: points near the stretch angle get pulled in
+      const angleDiff = Math.abs(((a - angle + Math.PI * 3) % (Math.PI * 2)) - Math.PI);
+      const indent = angleDiff < 0.8 ? (1 - angleDiff / 0.8) * indentAmount : 0;
+      const r = r1 * (1 - indent);
+      const px = blobX + Math.cos(a) * r;
+      const py = blobY + Math.sin(a) * r;
+      if (i === 0) ctx.moveTo(px, py);
+      else ctx.lineTo(px, py);
+    }
+    ctx.closePath();
+
+    // Gradient matching the CSS blob
+    const grad1 = ctx.createRadialGradient(
+      blobX - r1 * 0.25, blobY - r1 * 0.25, 0,
+      blobX, blobY, r1 * 1.1
+    );
+    grad1.addColorStop(0, '#4DFFC0');
+    grad1.addColorStop(0.45, '#00C882');
+    grad1.addColorStop(1, '#008A5A');
+    ctx.fillStyle = grad1;
+    ctx.fill();
+
+    // Highlight
+    ctx.beginPath();
+    ctx.ellipse(blobX - r1 * 0.2, blobY - r1 * 0.25, r1 * 0.35, r1 * 0.22, -0.25, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(255,255,255,0.18)';
+    ctx.fill();
+
+    // Inner shadow
+    const innerShadow = ctx.createRadialGradient(blobX, blobY + r1 * 0.3, 0, blobX, blobY, r1);
+    innerShadow.addColorStop(0, 'transparent');
+    innerShadow.addColorStop(0.7, 'transparent');
+    innerShadow.addColorStop(1, 'rgba(0,50,30,0.15)');
+    ctx.beginPath();
+    ctx.arc(blobX, blobY, r1, 0, Math.PI * 2);
+    ctx.fillStyle = innerShadow;
+    ctx.fill();
+    ctx.restore();
+
+    // === Draw the neck/tendril ===
+    if (stretch > 0.05) {
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(bn1x, bn1y);
+      ctx.bezierCurveTo(cp1ax, cp1ay, cp1bx, cp1by, tn1x, tn1y);
+      // Rounded tip
+      ctx.arc(tipX, tipY, tipNeckWidth, perpAngle, perpAngle + Math.PI, false);
+      ctx.bezierCurveTo(cp2ax, cp2ay, cp2bx, cp2by, bn2x, bn2y);
+      // Close back along the body arc between the two neck connection points
+      ctx.arc(blobX, blobY, r1, angle - bodyNeckAngleSpread, angle + bodyNeckAngleSpread, false);
+      ctx.closePath();
+
+      // Tendril gradient — slightly darker/more saturated
+      const gradT = ctx.createLinearGradient(blobX, blobY, tipX, tipY);
+      gradT.addColorStop(0, '#00C882');
+      gradT.addColorStop(0.5, '#00B876');
+      gradT.addColorStop(1, '#00A06A');
+      ctx.fillStyle = gradT;
+      ctx.fill();
+
+      // Tendril highlight on top edge
+      ctx.beginPath();
+      ctx.moveTo(bn1x, bn1y);
+      ctx.bezierCurveTo(cp1ax, cp1ay, cp1bx, cp1by, tn1x, tn1y);
+      ctx.strokeStyle = 'rgba(77,255,192,0.25)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      // Tip blob (rounder, slightly glossy)
+      ctx.beginPath();
+      ctx.arc(tipX, tipY, tipRadius * 0.7, 0, Math.PI * 2);
+      const gradTip = ctx.createRadialGradient(
+        tipX - tipRadius * 0.2, tipY - tipRadius * 0.2, 0,
+        tipX, tipY, tipRadius
+      );
+      gradTip.addColorStop(0, 'rgba(77,255,192,0.3)');
+      gradTip.addColorStop(1, 'transparent');
+      ctx.fillStyle = gradTip;
+      ctx.fill();
+
+      ctx.restore();
+    }
+
+    // === Drop shadow under everything ===
+    ctx.save();
+    ctx.globalCompositeOperation = 'destination-over';
+    ctx.beginPath();
+    ctx.arc(blobX, blobY, r1 + 5, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(0,200,130,0.12)';
+    ctx.filter = 'blur(15px)';
+    ctx.fill();
+    ctx.filter = 'none';
+    ctx.restore();
+  }
+
+  // Stretch animation loop (runs alongside main physics loop)
+  function stretchRenderLoop() {
+    requestAnimationFrame(stretchRenderLoop);
+
+    if (!stretchActive && springStretch.isSettled()) {
+      // Nothing to render, clear canvas
+      const canvasRect = zone.getBoundingClientRect();
+      stretchCtx.clearRect(0, 0, canvasRect.width, canvasRect.height);
+      return;
+    }
+
+    springStretch.update();
+
+    const center = getBlobCenter();
+    const stretch = Math.max(0, springStretch.value);
+
+    if (stretch < 0.01) {
+      // Done retracting — hide canvas, show blob body
+      const canvasRect = zone.getBoundingClientRect();
+      stretchCtx.clearRect(0, 0, canvasRect.width, canvasRect.height);
+      if (!stretchActive) {
+        blobBody.style.opacity = '1';
+        // Reset stretch expression
+        if (currentExpression !== 'idle' && currentExpression !== 'happy') {
+          setExpression('idle');
+        }
+      }
+      return;
+    }
+
+    // Keep blob body hidden while canvas is drawing
+    blobBody.style.opacity = '0';
+
+    // Calculate finger position (during drag: actual finger, during retract: last known angle)
+    let fx, fy;
+    if (stretchActive) {
+      const zoneRect = zone.getBoundingClientRect();
+      fx = stretchFingerX - zoneRect.left;
+      fy = stretchFingerY - zoneRect.top;
+    } else {
+      // Retracting: project from center along last angle
+      const retractDist = stretch * MAX_STRETCH_DIST;
+      fx = center.x + Math.cos(stretchAngle) * retractDist;
+      fy = center.y + Math.sin(stretchAngle) * retractDist;
+    }
+
+    drawStretchBlob(center.x, center.y, fx, fy, stretch);
+
+    // Face expression based on stretch amount
+    if (stretch > 0.02) {
+      if (stretch < 0.35) {
+        if (currentExpression !== 'thinking') setExpression('thinking');
+      } else if (stretch < 0.7) {
+        if (currentExpression !== 'surprised') setExpression('surprised');
+      } else {
+        if (currentExpression !== 'excited') setExpression('excited');
+      }
+
+      // Eyes look toward stretch direction
+      const eyeOx = Math.cos(stretchAngle) * MAX_PUPIL_OFFSET;
+      const eyeOy = Math.sin(stretchAngle) * MAX_PUPIL_OFFSET;
+      setPupilOffset(eyeOx, eyeOy);
+    }
+  }
+  requestAnimationFrame(stretchRenderLoop);
+
+  // ═══════════════════════════════════════════════════════
   // MAIN ANIMATION LOOP — runs continuously via rAF
   // ═══════════════════════════════════════════════════════
   let lastFrameTime = performance.now();
@@ -881,11 +1150,10 @@ html, body {
     tapTouchY = y;
     dragStartX = x;
     dragStartY = y;
-    dragOffsetX = springPosX.value;
-    dragOffsetY = springPosY.value;
     isDragging = true;
     isPressed = true;
     pressStartTime = performance.now();
+    stretchDragStarted = false;
 
     // Reset velocity history
     velocityHistory.length = 0;
@@ -912,7 +1180,7 @@ html, body {
     // Track velocity
     const dtMs = now - lastDragTime;
     if (dtMs > 0) {
-      const vx = (x - lastDragX) / dtMs * 16; // per-frame velocity
+      const vx = (x - lastDragX) / dtMs * 16;
       const vy = (y - lastDragY) / dtMs * 16;
       velocityHistory.push({ vx, vy, t: now });
       if (velocityHistory.length > VELOCITY_SAMPLES) velocityHistory.shift();
@@ -921,44 +1189,46 @@ html, body {
     lastDragY = y;
     lastDragTime = now;
 
-    // Blob follows pointer with slight lag (lerp via spring target)
-    const targetX = dragOffsetX + (x - dragStartX);
-    const targetY = dragOffsetY + (y - dragStartY);
-    springPosX.target = targetX;
-    springPosY.target = targetY;
-    // Make position springs snappier during drag
-    springPosX.value += (targetX - springPosX.value) * 0.25;
-    springPosY.value += (targetY - springPosY.value) * 0.25;
+    // Distance from drag start
+    const totalDx = x - dragStartX;
+    const totalDy = y - dragStartY;
+    const totalDist = Math.hypot(totalDx, totalDy);
 
-    // Stretch in movement direction based on velocity
-    const speed = Math.sqrt(
-      Math.pow(x - dragStartX, 2) + Math.pow(y - dragStartY, 2)
-    );
-    const dx = x - lastDragX || 0;
-    const dy = y - lastDragY || 0;
-    const moveSpeed = Math.sqrt(dx * dx + dy * dy);
+    // Switch to stretch mode after moving 12px (not a tap)
+    if (!stretchDragStarted && totalDist > 12) {
+      stretchDragStarted = true;
+      stretchActive = true;
+      // Reset position springs (blob stays centered)
+      springPosX.target = 0;
+      springPosY.value = 0;
+      springPosX.value = 0;
+      springPosY.target = 0;
+      springScaleX.target = 1;
+      springScaleY.target = 1;
+      springRotation.target = 0;
+    }
 
-    // Tilt toward movement direction
-    springRotation.target = dx * 1.5;
+    if (stretchDragStarted) {
+      // === STRETCH MODE ===
+      stretchFingerX = x;
+      stretchFingerY = y;
 
-    // Stretch based on movement speed (volume-conserving)
-    const stretchFactor = Math.min(moveSpeed * 0.02, 0.3);
-    const moveAngle = Math.atan2(dy, dx);
-    const absCos = Math.abs(Math.cos(moveAngle));
-    const absSin = Math.abs(Math.sin(moveAngle));
+      // Calculate stretch amount (0 to 1)
+      const center = getBlobCenter();
+      const zoneRect = zone.getBoundingClientRect();
+      const fx = x - zoneRect.left;
+      const fy = y - zoneRect.top;
+      const distFromCenter = Math.hypot(fx - center.x, fy - center.y);
 
-    // Horizontal motion → stretch X, squish Y. Vertical → opposite
-    springScaleX.target = 1 + stretchFactor * (absCos * 0.8 - absSin * 0.3);
-    springScaleY.target = 1 + stretchFactor * (absSin * 0.8 - absCos * 0.3);
+      // Stretch starts from the surface of the blob
+      const distFromSurface = Math.max(0, distFromCenter - BLOB_RADIUS * 0.4);
+      const stretchAmt = Math.min(distFromSurface / MAX_STRETCH_DIST, 1);
 
-    // Eyes look in drag direction
-    if (currentExpression !== 'thinking' && currentExpression !== 'happy') {
-      const normX = (x - dragStartX) / (speed || 1) * MAX_PUPIL_OFFSET;
-      const normY = (y - dragStartY) / (speed || 1) * MAX_PUPIL_OFFSET;
-      setPupilOffset(
-        Math.max(-MAX_PUPIL_OFFSET, Math.min(MAX_PUPIL_OFFSET, normX)),
-        Math.max(-MAX_PUPIL_OFFSET, Math.min(MAX_PUPIL_OFFSET, normY))
-      );
+      springStretch.value = stretchAmt;
+      springStretch.target = stretchAmt;
+      springStretch.velocity = 0; // no spring during active drag
+
+      stretchAngle = Math.atan2(fy - center.y, fx - center.x);
     }
   }
 
@@ -968,10 +1238,50 @@ html, body {
     const pt = e.changedTouches ? e.changedTouches[0] : e;
     const dx = Math.abs(pt.clientX - dragStartX);
     const dy = Math.abs(pt.clientY - dragStartY);
-    const pressDuration = performance.now() - pressStartTime;
 
     isDragging = false;
     isPressed = false;
+
+    if (stretchDragStarted) {
+      // === RELEASE STRETCH ===
+      stretchActive = false;
+      stretchDragStarted = false;
+
+      const releasedStretch = springStretch.value;
+
+      // Snap the stretch spring back to 0
+      springStretch.target = 0;
+      // Extra velocity for snappy snap-back — the more stretched, the more satisfying
+      springStretch.velocity = -releasedStretch * 1.8;
+
+      // JIGGLE the blob body on snap-back — this is the payoff
+      const snapForce = releasedStretch;
+      springJiggle1.impulse(snapForce * 2.5);
+      springJiggle2.impulse(-snapForce * 2.0);
+      springScaleX.impulse(snapForce * 0.4);
+      springScaleY.impulse(-snapForce * 0.4);
+
+      // Extra big snap if stretched far
+      if (releasedStretch > 0.7) {
+        springJiggle1.impulse(snapForce * 1.5);
+        springJiggle2.impulse(-snapForce * 1.0);
+        // Small position bounce away from stretch direction
+        springPosX.impulse(-Math.cos(stretchAngle) * snapForce * 8);
+        springPosY.impulse(-Math.sin(stretchAngle) * snapForce * 8);
+      }
+
+      // Reset deformation
+      springScaleX.target = 1;
+      springScaleY.target = 1;
+      springRotation.target = 0;
+      springPosX.target = 0;
+      springPosY.target = 0;
+
+      resetIdle();
+      return;
+    }
+
+    // === NOT A STRETCH — regular release (tap/quick drag) ===
 
     // Calculate release velocity from history
     let releaseVX = 0, releaseVY = 0;
@@ -984,26 +1294,20 @@ html, body {
       releaseVY /= velocityHistory.length;
     }
 
-    // Apply momentum on release
-    springPosX.velocity += releaseVX * 0.5;
-    springPosY.velocity += releaseVY * 0.5;
-
     // Spring back to center
     springPosX.target = 0;
     springPosY.target = 0;
 
-    // Reset deformation — spring overshoots naturally (Flubber bounce!)
+    // Reset deformation
     springScaleX.target = 1;
     springScaleY.target = 1;
     springRotation.target = 0;
 
-    // Release pop! — impulse the scale springs for overshoot bounce
+    // Release pop
     const releaseSpeed = Math.sqrt(releaseVX * releaseVX + releaseVY * releaseVY);
     const popForce = Math.min(0.15 + releaseSpeed * 0.03, 0.5);
-    springScaleX.impulse(-popForce * 0.8); // squish X first
-    springScaleY.impulse(popForce);         // stretch Y (pop up!)
-
-    // Jiggle on release — multiple springs for organic wobble
+    springScaleX.impulse(-popForce * 0.8);
+    springScaleY.impulse(popForce);
     springJiggle1.impulse(popForce * 2);
     springJiggle2.impulse(-popForce * 1.5);
 
@@ -1717,10 +2021,15 @@ html, body {
   // ═══════════════════════════════════════════════════════
   // EVENT LISTENERS
   // ═══════════════════════════════════════════════════════
+  // Touch/mouse on the wrapper to START the interaction
   wrapper.addEventListener('touchstart', handlePointerDown, { passive: true });
-  wrapper.addEventListener('touchmove', handlePointerMove, { passive: false });
-  wrapper.addEventListener('touchend', handlePointerUp, { passive: true });
   wrapper.addEventListener('mousedown', handlePointerDown);
+
+  // Move & up on the whole document so stretch can go beyond the blob
+  document.addEventListener('touchmove', (e) => {
+    if (isDragging) handlePointerMove(e);
+  }, { passive: false });
+  document.addEventListener('touchend', handlePointerUp, { passive: true });
   document.addEventListener('mousemove', (e) => {
     if (isDragging) handlePointerMove(e);
   });
