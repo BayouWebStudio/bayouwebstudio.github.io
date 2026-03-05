@@ -396,24 +396,102 @@ body { padding-top: 60px; }
   </script>
 </section>
 
-<!-- Mint popup widget -->
+<!-- Mint popup widget — Flubber-style blob -->
 <div id="mint-widget" style="position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:10px;">
   <!-- Chat bubble -->
   <div id="mint-bubble" style="display:none;background:#111417;border:1px solid rgba(152,232,193,0.25);border-radius:16px 16px 4px 16px;padding:14px 18px;max-width:240px;box-shadow:0 8px 32px rgba(0,0,0,0.4);animation:bubblePop .3s ease;">
     <p id="mint-bubble-text" style="margin:0;font-size:0.9rem;line-height:1.5;color:#e8edf2;"></p>
     <button onclick="document.getElementById('mint-bubble').style.display='none'" style="background:none;border:none;color:rgba(152,232,193,0.5);font-size:0.75rem;cursor:pointer;margin-top:6px;padding:0;">dismiss</button>
   </div>
-  <!-- Mint button -->
-  <div id="mint-fab" onclick="toggleMintBubble()" style="width:56px;height:56px;background:linear-gradient(135deg,#00C882,#00a86b);border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,200,130,0.35);transition:transform .2s;animation:mintFloat 3s ease-in-out infinite, mintPulse 1.5s ease-in-out 3;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-    <span style="font-size:1.6rem;line-height:1;">🌿</span>
+  <!-- Mint blob FAB -->
+  <div id="mint-fab" onclick="toggleMintBubble()" style="width:56px;height:56px;cursor:pointer;position:relative;animation:mintFloat 3s ease-in-out infinite;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+    <div id="mint-fab-blob" style="width:56px;height:56px;background:radial-gradient(ellipse at 35% 30%,#4DFFC0,#00C882 50%,#008A5A);box-shadow:inset 0 -3px 8px rgba(0,80,50,0.3),inset 0 3px 8px rgba(77,255,192,0.2),0 4px 20px rgba(0,200,130,0.35),0 2px 6px rgba(0,0,0,0.3);animation:fabBlobMorph 6s ease-in-out infinite,mintPulse 1.5s ease-in-out 3;position:relative;overflow:hidden;">
+      <!-- Highlight -->
+      <div style="position:absolute;top:10%;left:15%;width:35%;height:25%;border-radius:50%;background:radial-gradient(ellipse,rgba(255,255,255,0.25),transparent 70%);transform:rotate(-15deg);pointer-events:none;"></div>
+      <!-- Mini face SVG -->
+      <svg viewBox="0 0 56 56" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;" xmlns="http://www.w3.org/2000/svg">
+        <!-- Eyes -->
+        <ellipse id="fab-eye-l-w" cx="20" cy="24" rx="5.5" ry="6" fill="white"/>
+        <ellipse id="fab-eye-l-p" cx="20" cy="24" rx="3" ry="3.5" fill="#1A1A2E"/>
+        <circle cx="21.5" cy="22" r="1.2" fill="rgba(255,255,255,0.8)"/>
+        <ellipse id="fab-eye-r-w" cx="36" cy="24" rx="5.5" ry="6" fill="white"/>
+        <ellipse id="fab-eye-r-p" cx="36" cy="24" rx="3" ry="3.5" fill="#1A1A2E"/>
+        <circle cx="37.5" cy="22" r="1.2" fill="rgba(255,255,255,0.8)"/>
+        <!-- Blink lids -->
+        <ellipse id="fab-lid-l" cx="20" cy="24" rx="6" ry="0" fill="#00C882" opacity="0"/>
+        <ellipse id="fab-lid-r" cx="36" cy="24" rx="6" ry="0" fill="#00C882" opacity="0"/>
+        <!-- Mouth -->
+        <path d="M22,34 Q28,40 34,34" stroke="#006040" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      </svg>
+    </div>
   </div>
 </div>
 <style>
 @keyframes bubblePop { from { opacity:0; transform:scale(0.85) translateY(8px); } to { opacity:1; transform:scale(1) translateY(0); } }
 @keyframes mintFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
-@keyframes mintPulse { 0%,100%{box-shadow:0 4px 20px rgba(0,200,130,0.35)} 50%{box-shadow:0 4px 32px rgba(0,200,130,0.65)} }
+@keyframes mintPulse { 0%,100%{box-shadow:inset 0 -3px 8px rgba(0,80,50,0.3),inset 0 3px 8px rgba(77,255,192,0.2),0 4px 20px rgba(0,200,130,0.35)} 50%{box-shadow:inset 0 -3px 8px rgba(0,80,50,0.3),inset 0 3px 8px rgba(77,255,192,0.2),0 4px 32px rgba(0,200,130,0.65)} }
+@keyframes fabBlobMorph {
+  0%   { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  25%  { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+  50%  { border-radius: 50% 60% 30% 60% / 40% 70% 60% 30%; }
+  75%  { border-radius: 40% 30% 60% 50% / 60% 40% 50% 70%; }
+  100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+}
 </style>
 <script>
+(function(){
+  // FAB mini-Mint eye wander + blink
+  const fabEyeLP = document.getElementById('fab-eye-l-p');
+  const fabEyeRP = document.getElementById('fab-eye-r-p');
+  const fabLidL = document.getElementById('fab-lid-l');
+  const fabLidR = document.getElementById('fab-lid-r');
+  const fabLC = {cx:20,cy:24}, fabRC = {cx:36,cy:24};
+  const FAB_MAX = 2.5;
+
+  function fabSetPupil(ox,oy){
+    fabEyeLP.setAttribute('cx', fabLC.cx+ox);
+    fabEyeLP.setAttribute('cy', fabLC.cy+oy);
+    fabEyeRP.setAttribute('cx', fabRC.cx+ox);
+    fabEyeRP.setAttribute('cy', fabRC.cy+oy);
+  }
+
+  // Wander eyes
+  const dirs=[{x:-2,y:-1},{x:2,y:-1},{x:-2,y:1},{x:2,y:1},{x:0,y:-2},{x:0,y:0},{x:-2.5,y:0},{x:2.5,y:0}];
+  setInterval(function(){
+    const d=dirs[Math.floor(Math.random()*dirs.length)];
+    fabSetPupil(d.x,d.y);
+  }, 2200);
+
+  // Track mouse
+  document.addEventListener('mousemove',function(e){
+    const fab=document.getElementById('mint-fab');
+    if(!fab)return;
+    const r=fab.getBoundingClientRect();
+    const cx=r.left+r.width/2, cy=r.top+r.height/2;
+    const dx=e.clientX-cx, dy=e.clientY-cy;
+    const dist=Math.sqrt(dx*dx+dy*dy)||1;
+    // Only track when mouse is within 300px
+    if(dist<300){
+      const f=Math.min(dist/300,1);
+      fabSetPupil((dx/dist)*FAB_MAX*f,(dy/dist)*FAB_MAX*f);
+    }
+  });
+
+  // Blink
+  function fabBlink(){
+    fabLidL.setAttribute('ry','7'); fabLidL.setAttribute('opacity','1');
+    fabLidR.setAttribute('ry','7'); fabLidR.setAttribute('opacity','1');
+    setTimeout(function(){
+      fabLidL.setAttribute('ry','0'); fabLidL.setAttribute('opacity','0');
+      fabLidR.setAttribute('ry','0'); fabLidR.setAttribute('opacity','0');
+    },150);
+  }
+  function schedFabBlink(){
+    setTimeout(function(){ fabBlink(); schedFabBlink(); }, 2000+Math.random()*3000);
+  }
+  schedFabBlink();
+})();
+
   const mintMessages = [
     "Hey! Drop your IG handle and I'll build your site in 30 seconds 🚀",
     "March deal: free website + custom .com for creatives 🌿",
@@ -432,7 +510,6 @@ body { padding-top: 60px; }
       bubble.style.display = 'none';
     }
   }
-  // Auto-pop bubble after 3 seconds
   setTimeout(function() {
     if (!mintShown) {
       mintShown = true;

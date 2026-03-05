@@ -64,9 +64,7 @@ html, body {
   transition: opacity 0.2s;
   -webkit-tap-highlight-color: transparent;
 }
-.login-btn:hover, .login-btn:active {
-  opacity: 0.85;
-}
+.login-btn:hover, .login-btn:active { opacity: 0.85; }
 
 /* Character area */
 .character-zone {
@@ -141,7 +139,7 @@ html, body {
 /* Mint wrapper */
 #mint-wrapper {
   position: relative;
-  width: 160px; height: 176px;
+  width: 180px; height: 180px;
   cursor: grab;
   z-index: 15;
   will-change: transform;
@@ -150,37 +148,126 @@ html, body {
 #mint-wrapper:active { cursor: grabbing; }
 
 @keyframes idleFloat {
-  0%, 100% { transform: translateY(0) rotate(-1.5deg); }
-  50% { transform: translateY(-14px) rotate(1.5deg); }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }
 #mint-wrapper.idle {
   animation: idleFloat 3s ease-in-out infinite;
 }
 
+/* Blob body */
+.mint-blob {
+  width: 180px;
+  height: 180px;
+  position: relative;
+  animation: blobMorph 6s ease-in-out infinite;
+  transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes blobMorph {
+  0%   { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  25%  { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+  50%  { border-radius: 50% 60% 30% 60% / 40% 70% 60% 30%; }
+  75%  { border-radius: 40% 30% 60% 50% / 60% 40% 50% 70%; }
+  100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+}
+
+.mint-blob-body {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background: radial-gradient(ellipse at 35% 30%, #4DFFC0 0%, #00C882 40%, #008A5A 100%);
+  box-shadow:
+    inset 0 -8px 20px rgba(0, 80, 50, 0.3),
+    inset 0 8px 20px rgba(77, 255, 192, 0.2),
+    0 8px 40px rgba(0, 200, 130, 0.25),
+    0 2px 10px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Inner glow / highlight */
+.mint-blob-body::before {
+  content: '';
+  position: absolute;
+  top: 12%;
+  left: 18%;
+  width: 40%;
+  height: 30%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(255,255,255,0.25) 0%, transparent 70%);
+  transform: rotate(-15deg);
+  pointer-events: none;
+}
+
+.mint-blob-body::after {
+  content: '';
+  position: absolute;
+  bottom: 15%;
+  right: 15%;
+  width: 25%;
+  height: 20%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(0,138,90,0.3) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Squish animation */
 @keyframes squish {
   0% { transform: scale(1, 1); }
-  30% { transform: scale(1.15, 0.85); }
-  50% { transform: scale(0.9, 1.1); }
-  70% { transform: scale(1.05, 0.95); }
+  20% { transform: scale(1.18, 0.82); }
+  40% { transform: scale(0.88, 1.12); }
+  55% { transform: scale(1.08, 0.92); }
+  70% { transform: scale(0.96, 1.04); }
+  85% { transform: scale(1.02, 0.98); }
   100% { transform: scale(1, 1); }
 }
-#mint-svg.squish { animation: squish 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.mint-blob.squish { animation: squish 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); }
 
+/* Spin animation */
 @keyframes happySpin {
-  0% { transform: scale(1) rotate(0deg); }
-  50% { transform: scale(1.25) rotate(180deg); }
-  100% { transform: scale(1) rotate(360deg); }
+  0% { transform: scale(1, 1) rotate(0deg); }
+  25% { transform: scale(1.2, 0.8) rotate(90deg); }
+  50% { transform: scale(1.3, 0.7) rotate(180deg); }
+  75% { transform: scale(1.2, 0.8) rotate(270deg); }
+  100% { transform: scale(1, 1) rotate(360deg); }
 }
-#mint-svg.spin { animation: happySpin 0.7s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.mint-blob.spin { animation: happySpin 0.7s cubic-bezier(0.34, 1.56, 0.64, 1); }
+
+/* Shadow underneath */
+.mint-shadow {
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 16px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.25);
+  filter: blur(6px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Face container - SVG overlaid on blob */
+.mint-face {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
 
 .mint-glow {
   position: absolute;
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
-  width: 140px; height: 140px;
+  width: 200px; height: 200px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(0,200,130,0.2) 0%, transparent 70%);
-  filter: blur(20px);
+  background: radial-gradient(circle, rgba(0,200,130,0.15) 0%, transparent 70%);
+  filter: blur(25px);
   pointer-events: none;
   z-index: -1;
 }
@@ -197,7 +284,6 @@ html, body {
   flex-shrink: 0;
 }
 
-/* Chat history */
 .chat-history {
   display: flex;
   flex-direction: column;
@@ -207,7 +293,6 @@ html, body {
   padding: 8px 0;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  -ms-overflow-style: none;
 }
 .chat-history::-webkit-scrollbar { display: none; }
 
@@ -255,7 +340,6 @@ html, body {
   font-weight: 500;
 }
 
-/* Chat input bar */
 .chat-input-bar {
   display: flex;
   align-items: center;
@@ -276,9 +360,7 @@ html, body {
   outline: none;
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
-.chat-input-bar input::placeholder {
-  color: #555e68;
-}
+.chat-input-bar input::placeholder { color: #555e68; }
 .chat-input-bar input:focus {
   border-color: #00C882;
   box-shadow: 0 0 0 3px rgba(0, 200, 130, 0.12);
@@ -331,26 +413,46 @@ html, body {
     <div class="speech-bubble pop" id="speech-bubble">Hey! I'm Mint 🌿 Talk to me!</div>
     <div id="mint-wrapper" class="idle">
       <div class="mint-glow"></div>
-      <svg id="mint-svg" viewBox="0 0 200 220" width="200" height="220" xmlns="http://www.w3.org/2000/svg">
-        <ellipse cx="100" cy="210" rx="50" ry="8" fill="rgba(0,0,0,0.2)"/>
-        <path d="M100 45 Q98 30 102 15" stroke="#00a86b" stroke-width="4" fill="none" stroke-linecap="round"/>
-        <ellipse cx="100" cy="120" rx="72" ry="85" fill="#00C882"/>
-        <ellipse cx="85" cy="100" rx="35" ry="50" fill="rgba(255,255,255,0.08)" transform="rotate(-10 85 100)"/>
-        <path d="M100 50 Q100 120 100 195" stroke="rgba(0,100,65,0.25)" stroke-width="2.5" fill="none"/>
-        <path d="M100 80 Q75 100 50 105" stroke="rgba(0,100,65,0.18)" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-        <path d="M100 80 Q125 100 150 105" stroke="rgba(0,100,65,0.18)" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-        <path d="M100 115 Q70 135 45 145" stroke="rgba(0,100,65,0.15)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-        <path d="M100 115 Q130 135 155 145" stroke="rgba(0,100,65,0.15)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-        <path d="M100 150 Q78 165 60 175" stroke="rgba(0,100,65,0.12)" stroke-width="1.2" fill="none" stroke-linecap="round"/>
-        <path d="M100 150 Q122 165 140 175" stroke="rgba(0,100,65,0.12)" stroke-width="1.2" fill="none" stroke-linecap="round"/>
-        <ellipse id="eye-left" cx="78" cy="110" rx="7" ry="8" fill="#1A1A2E"/>
-        <ellipse id="eye-right" cx="122" cy="110" rx="7" ry="8" fill="#1A1A2E"/>
-        <circle cx="81" cy="107" r="2.5" fill="rgba(255,255,255,0.7)"/>
-        <circle cx="125" cy="107" r="2.5" fill="rgba(255,255,255,0.7)"/>
-        <path id="mouth" d="M85 135 Q100 150 115 135" stroke="#1A1A2E" stroke-width="3" fill="none" stroke-linecap="round"/>
-        <ellipse cx="62" cy="128" rx="10" ry="6" fill="rgba(255,100,130,0.2)"/>
-        <ellipse cx="138" cy="128" rx="10" ry="6" fill="rgba(255,100,130,0.2)"/>
-      </svg>
+      <div class="mint-shadow"></div>
+      <div class="mint-blob" id="mint-blob">
+        <div class="mint-blob-body"></div>
+        <svg class="mint-face" id="mint-face" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
+          <!-- Eyebrows -->
+          <path id="brow-left" d="M52,62 Q62,56 72,60" stroke="rgba(0,60,35,0.5)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <path id="brow-right" d="M108,60 Q118,56 128,62" stroke="rgba(0,60,35,0.5)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+          <!-- Left eye -->
+          <g id="eye-left-group">
+            <ellipse id="eye-left-white" cx="66" cy="78" rx="16" ry="18" fill="white"/>
+            <ellipse id="eye-left-pupil" cx="66" cy="78" rx="8" ry="9" fill="#1A1A2E"/>
+            <circle id="eye-left-highlight" cx="70" cy="73" r="3.5" fill="rgba(255,255,255,0.85)"/>
+            <!-- Eyelid for blink -->
+            <ellipse id="eye-left-lid" cx="66" cy="78" rx="17" ry="0" fill="#00C882" opacity="0"/>
+          </g>
+
+          <!-- Right eye -->
+          <g id="eye-right-group">
+            <ellipse id="eye-right-white" cx="114" cy="78" rx="16" ry="18" fill="white"/>
+            <ellipse id="eye-right-pupil" cx="114" cy="78" rx="8" ry="9" fill="#1A1A2E"/>
+            <circle id="eye-right-highlight" cx="118" cy="73" r="3.5" fill="rgba(255,255,255,0.85)"/>
+            <!-- Eyelid for blink -->
+            <ellipse id="eye-right-lid" cx="114" cy="78" rx="17" ry="0" fill="#00C882" opacity="0"/>
+          </g>
+
+          <!-- Sparkle highlights (hidden by default, shown on excited) -->
+          <g id="sparkles" opacity="0">
+            <polygon points="55,65 56,62 57,65 60,66 57,67 56,70 55,67 52,66" fill="white" opacity="0.9"/>
+            <polygon points="123,65 124,62 125,65 128,66 125,67 124,70 123,67 120,66" fill="white" opacity="0.9"/>
+          </g>
+
+          <!-- Cheek blush -->
+          <ellipse cx="44" cy="95" rx="12" ry="7" fill="rgba(255,130,160,0.2)"/>
+          <ellipse cx="136" cy="95" rx="12" ry="7" fill="rgba(255,130,160,0.2)"/>
+
+          <!-- Mouth -->
+          <path id="mouth" d="M76,110 Q90,122 104,110" stroke="#006040" stroke-width="3" fill="none" stroke-linecap="round"/>
+        </svg>
+      </div>
     </div>
   </div>
 
@@ -374,33 +476,242 @@ html, body {
   let threadId = null;
 
   const wrapper = document.getElementById('mint-wrapper');
-  const svg = document.getElementById('mint-svg');
+  const blob = document.getElementById('mint-blob');
   const bubble = document.getElementById('speech-bubble');
   const zone = document.getElementById('character-zone');
   const chatInput = document.getElementById('chat-input');
   const sendBtn = document.getElementById('send-btn');
   const chatHistory = document.getElementById('chat-history');
 
+  // Face elements
+  const eyeLeftPupil = document.getElementById('eye-left-pupil');
+  const eyeRightPupil = document.getElementById('eye-right-pupil');
+  const eyeLeftHighlight = document.getElementById('eye-left-highlight');
+  const eyeRightHighlight = document.getElementById('eye-right-highlight');
+  const eyeLeftWhite = document.getElementById('eye-left-white');
+  const eyeRightWhite = document.getElementById('eye-right-white');
+  const eyeLeftLid = document.getElementById('eye-left-lid');
+  const eyeRightLid = document.getElementById('eye-right-lid');
+  const mouth = document.getElementById('mouth');
+  const browLeft = document.getElementById('brow-left');
+  const browRight = document.getElementById('brow-right');
+  const sparkles = document.getElementById('sparkles');
+
+  // Eye centers (in SVG coords)
+  const LEFT_EYE = { cx: 66, cy: 78 };
+  const RIGHT_EYE = { cx: 114, cy: 78 };
+  const MAX_PUPIL_OFFSET = 6;
+
   let conversationHistory = [];
   let isSending = false;
   let hasAskedForHandle = false;
+  let currentExpression = 'idle';
+  let isTrackingMouse = false;
+  let mouseX = 0, mouseY = 0;
 
-  // --- Chat Functions ---
+  // ─── Expression System ───
+  function setExpression(expr) {
+    currentExpression = expr;
+    switch (expr) {
+      case 'idle':
+        eyeLeftWhite.setAttribute('ry', '18');
+        eyeRightWhite.setAttribute('ry', '18');
+        eyeLeftPupil.setAttribute('ry', '9');
+        eyeRightPupil.setAttribute('ry', '9');
+        eyeLeftPupil.setAttribute('rx', '8');
+        eyeRightPupil.setAttribute('rx', '8');
+        mouth.setAttribute('d', 'M76,110 Q90,122 104,110');
+        mouth.setAttribute('fill', 'none');
+        browLeft.setAttribute('d', 'M52,62 Q62,56 72,60');
+        browRight.setAttribute('d', 'M108,60 Q118,56 128,62');
+        sparkles.setAttribute('opacity', '0');
+        break;
 
+      case 'happy':
+        // Squinty happy eyes (^ ^)
+        eyeLeftWhite.setAttribute('ry', '6');
+        eyeRightWhite.setAttribute('ry', '6');
+        eyeLeftPupil.setAttribute('ry', '4');
+        eyeRightPupil.setAttribute('ry', '4');
+        // Big smile with fill
+        mouth.setAttribute('d', 'M70,108 Q90,132 110,108');
+        mouth.setAttribute('fill', 'rgba(0,60,35,0.3)');
+        browLeft.setAttribute('d', 'M52,60 Q62,55 72,58');
+        browRight.setAttribute('d', 'M108,58 Q118,55 128,60');
+        sparkles.setAttribute('opacity', '0');
+        break;
+
+      case 'surprised':
+        // Wide eyes, small pupils
+        eyeLeftWhite.setAttribute('ry', '22');
+        eyeRightWhite.setAttribute('ry', '22');
+        eyeLeftPupil.setAttribute('ry', '5');
+        eyeRightPupil.setAttribute('ry', '5');
+        eyeLeftPupil.setAttribute('rx', '5');
+        eyeRightPupil.setAttribute('rx', '5');
+        // O mouth
+        mouth.setAttribute('d', 'M82,108 Q82,124 90,124 Q98,124 98,108 Q98,100 90,100 Q82,100 82,108 Z');
+        mouth.setAttribute('fill', 'rgba(0,60,35,0.3)');
+        // Raised brows
+        browLeft.setAttribute('d', 'M50,55 Q62,46 74,55');
+        browRight.setAttribute('d', 'M106,55 Q118,46 130,55');
+        sparkles.setAttribute('opacity', '0');
+        break;
+
+      case 'excited':
+        // Big eyes with sparkles
+        eyeLeftWhite.setAttribute('ry', '20');
+        eyeRightWhite.setAttribute('ry', '20');
+        eyeLeftPupil.setAttribute('ry', '10');
+        eyeRightPupil.setAttribute('ry', '10');
+        eyeLeftPupil.setAttribute('rx', '9');
+        eyeRightPupil.setAttribute('rx', '9');
+        mouth.setAttribute('d', 'M68,108 Q90,136 112,108');
+        mouth.setAttribute('fill', 'rgba(0,60,35,0.3)');
+        browLeft.setAttribute('d', 'M50,56 Q62,48 74,56');
+        browRight.setAttribute('d', 'M106,56 Q118,48 130,56');
+        sparkles.setAttribute('opacity', '1');
+        break;
+
+      case 'thinking':
+        eyeLeftWhite.setAttribute('ry', '14');
+        eyeRightWhite.setAttribute('ry', '18');
+        eyeLeftPupil.setAttribute('ry', '7');
+        eyeRightPupil.setAttribute('ry', '9');
+        eyeLeftPupil.setAttribute('rx', '7');
+        eyeRightPupil.setAttribute('rx', '8');
+        // Smirk
+        mouth.setAttribute('d', 'M78,112 Q88,118 100,112');
+        mouth.setAttribute('fill', 'none');
+        browLeft.setAttribute('d', 'M52,60 Q60,56 68,62');
+        browRight.setAttribute('d', 'M110,62 Q118,56 128,60');
+        sparkles.setAttribute('opacity', '0');
+        // Look up-left
+        setPupilOffset(-4, -3);
+        break;
+    }
+  }
+
+  // ─── Pupil Movement ───
+  function setPupilOffset(ox, oy) {
+    eyeLeftPupil.setAttribute('cx', LEFT_EYE.cx + ox);
+    eyeLeftPupil.setAttribute('cy', LEFT_EYE.cy + oy);
+    eyeRightPupil.setAttribute('cx', RIGHT_EYE.cx + ox);
+    eyeRightPupil.setAttribute('cy', RIGHT_EYE.cy + oy);
+    eyeLeftHighlight.setAttribute('cx', LEFT_EYE.cx + ox + 4);
+    eyeLeftHighlight.setAttribute('cy', LEFT_EYE.cy + oy - 5);
+    eyeRightHighlight.setAttribute('cx', RIGHT_EYE.cx + ox + 4);
+    eyeRightHighlight.setAttribute('cy', RIGHT_EYE.cy + oy - 5);
+  }
+
+  // Track mouse/touch for eye following
+  function trackEyes(clientX, clientY) {
+    const rect = wrapper.getBoundingClientRect();
+    const blobCX = rect.left + rect.width / 2;
+    const blobCY = rect.top + rect.height / 2;
+
+    const dx = clientX - blobCX;
+    const dy = clientY - blobCY;
+    const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+    const maxDist = Math.max(window.innerWidth, window.innerHeight);
+    const factor = Math.min(dist / maxDist * 3, 1);
+
+    const ox = (dx / dist) * MAX_PUPIL_OFFSET * factor;
+    const oy = (dy / dist) * MAX_PUPIL_OFFSET * factor;
+    setPupilOffset(ox, oy);
+  }
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    isTrackingMouse = true;
+    if (currentExpression !== 'thinking' && currentExpression !== 'happy') {
+      trackEyes(e.clientX, e.clientY);
+    }
+    resetIdleEyes();
+  });
+
+  document.addEventListener('touchmove', (e) => {
+    if (e.touches.length) {
+      mouseX = e.touches[0].clientX;
+      mouseY = e.touches[0].clientY;
+      isTrackingMouse = true;
+      if (currentExpression !== 'thinking' && currentExpression !== 'happy') {
+        trackEyes(e.touches[0].clientX, e.touches[0].clientY);
+      }
+    }
+  });
+
+  // ─── Blink System ───
+  let blinkInterval;
+  function blink() {
+    if (currentExpression === 'happy') return; // Already squinted
+    eyeLeftLid.setAttribute('ry', '19');
+    eyeLeftLid.setAttribute('opacity', '1');
+    eyeRightLid.setAttribute('ry', '19');
+    eyeRightLid.setAttribute('opacity', '1');
+    setTimeout(() => {
+      eyeLeftLid.setAttribute('ry', '0');
+      eyeLeftLid.setAttribute('opacity', '0');
+      eyeRightLid.setAttribute('ry', '0');
+      eyeRightLid.setAttribute('opacity', '0');
+    }, 150);
+  }
+
+  function scheduleNextBlink() {
+    const delay = 2000 + Math.random() * 3000;
+    blinkInterval = setTimeout(() => {
+      blink();
+      scheduleNextBlink();
+    }, delay);
+  }
+  scheduleNextBlink();
+
+  // ─── Idle Eye Wandering ───
+  let idleEyeTimer;
+  let eyeWanderTimer;
+
+  function wanderEyes() {
+    if (isTrackingMouse || currentExpression === 'thinking') return;
+    const targets = [
+      { x: -4, y: -2 },  // up-left
+      { x: 4, y: -2 },   // up-right
+      { x: -3, y: 2 },   // down-left
+      { x: 3, y: 2 },    // down-right
+      { x: 0, y: -4 },   // up
+      { x: 0, y: 0 },    // center
+      { x: -5, y: 0 },   // left
+      { x: 5, y: 0 },    // right
+    ];
+    const t = targets[Math.floor(Math.random() * targets.length)];
+    setPupilOffset(t.x, t.y);
+  }
+
+  function startEyeWander() {
+    eyeWanderTimer = setInterval(wanderEyes, 2000 + Math.random() * 1500);
+  }
+  startEyeWander();
+
+  function resetIdleEyes() {
+    clearTimeout(idleEyeTimer);
+    idleEyeTimer = setTimeout(() => {
+      isTrackingMouse = false;
+      startEyeWander();
+    }, 3000);
+    clearInterval(eyeWanderTimer);
+  }
+
+  // ─── Chat Functions ───
   function addMessage(text, sender) {
     const msgEl = document.createElement('div');
     msgEl.className = `chat-msg ${sender}`;
-
     if (sender === 'mint') {
       msgEl.innerHTML = `<div class="leaf-icon">🌿</div><div class="bubble">${escapeHtml(text)}</div>`;
     } else {
       msgEl.innerHTML = `<div class="bubble">${escapeHtml(text)}</div>`;
     }
-
     chatHistory.appendChild(msgEl);
     chatHistory.scrollTop = chatHistory.scrollHeight;
-
-    // Trim to last 6 visible messages
     while (chatHistory.children.length > 6) {
       chatHistory.removeChild(chatHistory.firstChild);
     }
@@ -417,21 +728,16 @@ html, body {
     bubble.innerHTML = '<span class="thinking-dots"><span></span><span></span><span></span></span>';
     void bubble.offsetWidth;
     bubble.classList.add('pop');
+    setExpression('thinking');
   }
 
   function detectIgHandle(text) {
-    // Direct @handle pattern
     const atMatch = text.match(/@([a-zA-Z0-9_.]{1,30})/);
     if (atMatch) return atMatch[1];
-
-    // After Mint has asked for handle, treat single word that looks like username
     if (hasAskedForHandle) {
       const cleaned = text.trim().replace(/^@/, '');
-      if (/^[a-zA-Z0-9_.]{2,30}$/.test(cleaned) && !cleaned.includes(' ')) {
-        return cleaned;
-      }
+      if (/^[a-zA-Z0-9_.]{2,30}$/.test(cleaned) && !cleaned.includes(' ')) return cleaned;
     }
-
     return null;
   }
 
@@ -443,20 +749,17 @@ html, body {
     sendBtn.disabled = true;
     chatInput.value = '';
 
-    // Add user message
     addMessage(text, 'user');
     conversationHistory.push({ role: 'user', content: text });
 
-    // Check for IG handle
     const handle = detectIgHandle(text);
 
-    // Show thinking
     showThinking();
 
-    // Squish Mint
-    svg.classList.remove('squish', 'spin');
-    void svg.offsetWidth;
-    svg.classList.add('squish');
+    // Squish on send
+    blob.classList.remove('squish', 'spin');
+    void blob.offsetWidth;
+    blob.classList.add('squish');
 
     try {
       const resp = await fetch(CONVEX_URL, {
@@ -469,7 +772,6 @@ html, body {
         })
       });
 
-      // Persist thread ID for conversation continuity
       const newThreadId = resp.headers.get('X-Thread-Id');
       if (newThreadId) threadId = newThreadId;
 
@@ -477,21 +779,23 @@ html, body {
 
       conversationHistory.push({ role: 'assistant', content: reply });
 
-      // Track if Mint has asked for handle (check reply for handle-asking patterns)
       if (/handle|instagram|ig |@|username|what'?s your/i.test(reply)) {
         hasAskedForHandle = true;
       }
 
-      // Show reply
+      // Happy expression on reply
+      setExpression('happy');
+      setTimeout(() => setExpression('idle'), 2000);
+
       addMessage(reply, 'mint');
       showBubble(reply.length > 50 ? reply.slice(0, 47) + '...' : reply);
 
-      // If handle detected, redirect after delay
       if (handle) {
         spawnParticles(12);
-        svg.classList.remove('squish', 'spin');
-        void svg.offsetWidth;
-        svg.classList.add('spin');
+        blob.classList.remove('squish', 'spin');
+        void blob.offsetWidth;
+        blob.classList.add('spin');
+        setExpression('excited');
 
         setTimeout(() => {
           showBubble("Building your site... 🚀");
@@ -507,6 +811,8 @@ html, body {
       const fallback = "Oops, bad signal! Try that again? 📡";
       addMessage(fallback, 'mint');
       showBubble(fallback);
+      setExpression('surprised');
+      setTimeout(() => setExpression('idle'), 1500);
     }
 
     isSending = false;
@@ -514,7 +820,6 @@ html, body {
     resetIdle();
   }
 
-  // Send on button click or Enter
   sendBtn.addEventListener('click', sendMessage);
   chatInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -523,7 +828,7 @@ html, body {
     }
   });
 
-  // --- Speech Bubble ---
+  // ─── Speech Bubble ───
   function showBubble(text) {
     bubble.classList.remove('pop', 'hidden');
     bubble.textContent = text;
@@ -531,7 +836,7 @@ html, body {
     bubble.classList.add('pop');
   }
 
-  // --- Idle Timer ---
+  // ─── Idle Timer ───
   let idleTimer = null;
   const nudges = [
     "Go ahead, type something! 👇",
@@ -544,13 +849,21 @@ html, body {
     clearTimeout(idleTimer);
     idleTimer = setTimeout(() => {
       if (!isDragging && conversationHistory.length === 0) {
+        // Look at user
+        setPupilOffset(0, 0);
+        browLeft.setAttribute('d', 'M50,58 Q62,50 74,58');
+        browRight.setAttribute('d', 'M106,58 Q118,50 130,58');
         showBubble(pick(nudges));
+        setTimeout(() => {
+          browLeft.setAttribute('d', 'M52,62 Q62,56 72,60');
+          browRight.setAttribute('d', 'M108,60 Q118,56 128,62');
+        }, 3000);
       }
-    }, 5000);
+    }, 4000);
   }
   resetIdle();
 
-  // --- Spring Physics & Drag (unchanged from v1) ---
+  // ─── Spring Physics & Drag ───
   let posX = 0, posY = 0;
   let velX = 0, velY = 0;
   let isDragging = false;
@@ -579,6 +892,10 @@ html, body {
       applyTransform();
       animating = false;
       wrapper.classList.add('idle');
+      // Landing squish
+      blob.classList.remove('squish');
+      void blob.offsetWidth;
+      blob.classList.add('squish');
       return;
     }
     applyTransform();
@@ -612,6 +929,20 @@ html, body {
     const { x, y } = getXY(e);
     posX = dragOffsetX + (x - dragStartX);
     posY = dragOffsetY + (y - dragStartY);
+
+    // Stretch blob in drag direction
+    const dx = x - dragStartX;
+    const dy = y - dragStartY;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+    const stretch = Math.min(dist / 200, 0.2);
+    blob.style.transform = `rotate(${angle}deg) scale(${1 + stretch}, ${1 - stretch * 0.5})`;
+
+    // Eyes look in drag direction
+    const normX = dx / (dist || 1) * MAX_PUPIL_OFFSET;
+    const normY = dy / (dist || 1) * MAX_PUPIL_OFFSET;
+    setPupilOffset(normX, normY);
+
     applyTransform();
   }
 
@@ -621,6 +952,9 @@ html, body {
     const dx = Math.abs(pt.clientX - dragStartX);
     const dy = Math.abs(pt.clientY - dragStartY);
     isDragging = false;
+
+    // Reset blob stretch
+    blob.style.transform = '';
 
     if (dx < 10 && dy < 10) {
       const now = Date.now();
@@ -638,21 +972,36 @@ html, body {
   }
 
   function doSingleTap() {
-    svg.classList.remove('squish', 'spin');
-    void svg.offsetWidth;
-    svg.classList.add('squish');
+    blob.classList.remove('squish', 'spin');
+    void blob.offsetWidth;
+    blob.classList.add('squish');
+
+    // Surprised then happy
+    setExpression('surprised');
+    setTimeout(() => {
+      setExpression('happy');
+      setTimeout(() => setExpression('idle'), 1500);
+    }, 300);
+
     const tapMsgs = ["Hehe, that tickles! 😆", "Type something below! 👇", "Let's chat! Ask me anything 🌿"];
     showBubble(pick(tapMsgs));
-    spawnParticles(4);
+    spawnParticles(5);
     resetIdle();
   }
 
   function doDoubleTap() {
-    svg.classList.remove('squish', 'spin');
-    void svg.offsetWidth;
-    svg.classList.add('spin');
+    blob.classList.remove('squish', 'spin');
+    void blob.offsetWidth;
+    blob.classList.add('spin');
+
+    setExpression('excited');
+    setTimeout(() => {
+      setExpression('happy');
+      setTimeout(() => setExpression('idle'), 1500);
+    }, 700);
+
     showBubble("Let's GOOO! 🔥");
-    spawnParticles(8);
+    spawnParticles(10);
     resetIdle();
   }
 
@@ -686,7 +1035,7 @@ html, body {
   document.addEventListener('mousemove', handleTapMove);
   document.addEventListener('mouseup', handleTapEnd);
 
-  svg.addEventListener('animationend', () => { svg.classList.remove('squish', 'spin'); });
+  blob.addEventListener('animationend', () => { blob.classList.remove('squish', 'spin'); });
 
   // Layout bubble above character
   function layoutBubble() {
@@ -699,10 +1048,10 @@ html, body {
   window.addEventListener('resize', layoutBubble);
   setInterval(layoutBubble, 200);
 
-  // Focus input → focus handling for keyboard on mobile
-  chatInput.addEventListener('focus', () => {
-    resetIdle();
-  });
+  chatInput.addEventListener('focus', () => { resetIdle(); });
+
+  // Init
+  setExpression('idle');
 
 })();
 </script>
