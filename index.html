@@ -370,8 +370,28 @@ body { padding-top: 60px; }
   <div style="display:inline-flex;align-items:center;gap:10px;background:rgba(152,232,193,0.08);border:1px solid rgba(152,232,193,0.25);border-radius:100px;padding:12px 28px;margin-bottom:28px;font-size:clamp(1rem,2.2vw,1.2rem);font-weight:700;color:#98E8C1;letter-spacing:0.5px;">
     <span style="font-size:1.3em;">⚡</span> Free forever — no signup, no credit card
   </div>
-  <h1>Your Free Website in 30 Seconds</h1>
+  <h1>Free Website for <span id="typed-industry" style="color:var(--mint);border-right:3px solid var(--mint);padding-right:4px;white-space:nowrap;"></span></h1>
   <p class="hero-subtext" style="font-size:1.15rem;margin-bottom:12px!important;">Get found. Get booked. Get Minted. 🌿</p>
+  <script>
+  (function(){
+    const words = ['Tattoo Artists.','Barbers.','Nail Techs.','Photographers.','Stylists.','Piercers.','Lash Techs.','Makeup Artists.','Trainers.','Creatives.'];
+    let wi=0, ci=0, deleting=false;
+    const el = document.getElementById('typed-industry');
+    function tick(){
+      const word = words[wi];
+      if(!deleting){
+        el.textContent = word.slice(0,++ci);
+        if(ci===word.length){ deleting=true; setTimeout(tick,1800); return; }
+        setTimeout(tick, 80);
+      } else {
+        el.textContent = word.slice(0,--ci);
+        if(ci===0){ deleting=false; wi=(wi+1)%words.length; setTimeout(tick,300); return; }
+        setTimeout(tick, 40);
+      }
+    }
+    tick();
+  })();
+  </script>
   <p>Drop your Instagram handle. Mint eats your photos and builds your entire website — gallery, booking, bio. It's free and it's yours.</p>
   <p class="hero-subtext">Free forever. Custom .com from $15/mo. Unlimited edits + store from $25/mo.</p>
   <!-- Hero IG input -->
