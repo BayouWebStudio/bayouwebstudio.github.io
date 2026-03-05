@@ -136,13 +136,13 @@ html, body {
   30% { opacity: 1; transform: scale(1.2); }
 }
 
-/* Stretch canvas overlay */
+/* Stretch canvas overlay — ABOVE the blob wrapper */
 #stretch-canvas {
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
   pointer-events: none;
-  z-index: 14;
+  z-index: 16;
 }
 
 /* Mint wrapper */
@@ -1014,6 +1014,7 @@ html, body {
       stretchCtx.clearRect(0, 0, canvasRect.width, canvasRect.height);
       if (!stretchActive) {
         blobBody.style.opacity = '1';
+        shadow.style.opacity = '';
         // Reset stretch expression
         if (currentExpression !== 'idle' && currentExpression !== 'happy') {
           setExpression('idle');
@@ -1024,6 +1025,7 @@ html, body {
 
     // Keep blob body hidden while canvas is drawing
     blobBody.style.opacity = '0';
+    shadow.style.opacity = '0';
 
     // Calculate finger position (during drag: actual finger, during retract: last known angle)
     let fx, fy;
@@ -1209,9 +1211,16 @@ html, body {
     }
 
     if (stretchDragStarted) {
-      // === STRETCH MODE ===
+      // === STRETCH MODE — blob stays put, surface stretches ===
       stretchFingerX = x;
       stretchFingerY = y;
+
+      // Lock position springs to center
+      springPosX.value = 0; springPosX.target = 0; springPosX.velocity = 0;
+      springPosY.value = 0; springPosY.target = 0; springPosY.velocity = 0;
+      springScaleX.value = 1; springScaleX.target = 1; springScaleX.velocity = 0;
+      springScaleY.value = 1; springScaleY.target = 1; springScaleY.velocity = 0;
+      springRotation.value = 0; springRotation.target = 0; springRotation.velocity = 0;
 
       // Calculate stretch amount (0 to 1)
       const center = getBlobCenter();
@@ -1221,7 +1230,7 @@ html, body {
       const distFromCenter = Math.hypot(fx - center.x, fy - center.y);
 
       // Stretch starts from the surface of the blob
-      const distFromSurface = Math.max(0, distFromCenter - BLOB_RADIUS * 0.4);
+      const distFromSurface = Math.max(0, distFromCenter - BLOB_RADIUS * 0.3);
       const stretchAmt = Math.min(distFromSurface / MAX_STRETCH_DIST, 1);
 
       springStretch.value = stretchAmt;
