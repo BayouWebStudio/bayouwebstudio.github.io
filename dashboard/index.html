@@ -1354,6 +1354,45 @@
 
     // Initialize the Convex realtime client with Clerk auth
     initConvexClient();
+
+    // ── Handle ?claim=slug parameter ──
+    const urlParams = new URLSearchParams(window.location.search);
+    const claimSlug = urlParams.get('claim');
+    if (claimSlug) {
+      // Wait briefly for Convex auth to be ready
+      setTimeout(async () => {
+        try {
+          if (convexClient) {
+            const result = await convexClient.mutation(api.dashboard.claimSite, { slug: claimSlug });
+            if (result && result.success) {
+              // Show success toast
+              showClaimToast(result.alreadyOwned
+                ? 'Welcome back! This site is already yours 🌿'
+                : 'Site claimed! Welcome to GetMinted 🌿');
+            }
+          }
+        } catch (err) {
+          console.error('Claim failed:', err);
+          showClaimToast('Claim failed: ' + (err.message || 'Unknown error'), true);
+        }
+        // Clean URL regardless
+        window.history.replaceState({}, '', '/dashboard/');
+      }, 2000);
+    }
+  }
+
+  function showClaimToast(message, isError) {
+    const toast = document.createElement('div');
+    toast.style.cssText = 'position:fixed;top:72px;left:50%;transform:translateX(-50%);z-index:1000;' +
+      'background:' + (isError ? '#2a1a1a' : '#0d2018') + ';' +
+      'border:1px solid ' + (isError ? 'rgba(255,100,100,0.3)' : 'rgba(0,200,130,0.3)') + ';' +
+      'color:' + (isError ? '#ff6b6b' : '#98E8C1') + ';' +
+      'padding:12px 24px;border-radius:12px;font-size:14px;font-weight:600;' +
+      'box-shadow:0 8px 32px rgba(0,0,0,0.4);animation:fadeIn 0.3s ease;';
+    toast.textContent = (isError ? '❌ ' : '✅ ') + message;
+    document.body.appendChild(toast);
+    setTimeout(() => { toast.style.opacity = '0'; toast.style.transition = 'opacity 0.3s'; }, 4000);
+    setTimeout(() => toast.remove(), 4500);
   }
 
   function updateSiteUI(profile, siteInfo) {

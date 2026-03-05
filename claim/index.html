@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Claim Your Free Website — GetMinted</title>
+  <meta name="description" content="Claim your free AI-built website on GetMinted. Edit by talking to Mint, connect your domain, and make it yours." />
+  <meta name="theme-color" content="#00C882" />
+  <meta property="og:title" content="Claim Your Free Website — GetMinted" />
+  <meta property="og:description" content="Your free website is ready. Create an account to edit it, connect your domain, and chat with Mint." />
+  <meta property="og:url" content="https://getminted.ai/claim/" />
+  <meta property="og:type" content="website" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #1A1A2E;
+      color: #e8edf2;
+      font-family: 'Inter', -apple-system, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      -webkit-font-smoothing: antialiased;
+      overflow: hidden;
+    }
+    /* Ambient glow */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(0,200,130,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .container {
+      max-width: 480px;
+      width: 100%;
+      padding: 40px 24px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    /* Animated mint blob */
+    .mint-blob {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 24px;
+      background: radial-gradient(circle at 35% 35%, #4DFFC0, #00C882 60%, #008A5A);
+      border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+      animation: blobMorph 6s ease-in-out infinite, blobFloat 3s ease-in-out infinite;
+      box-shadow: 0 8px 40px rgba(0,200,130,0.3);
+    }
+    @keyframes blobMorph {
+      0%   { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+      25%  { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+      50%  { border-radius: 50% 60% 30% 60% / 40% 70% 60% 30%; }
+      75%  { border-radius: 40% 50% 60% 30% / 70% 30% 50% 60%; }
+      100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+    }
+    @keyframes blobFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    h1 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin: 0 0 8px;
+      letter-spacing: -0.5px;
+    }
+    #site-url-display {
+      color: #00C882;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .subtitle {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.9rem;
+      margin-bottom: 32px;
+      line-height: 1.5;
+    }
+    #claim-btn {
+      display: block;
+      background: #00C882;
+      color: #0a1a12;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 16px;
+      border-radius: 12px;
+      text-decoration: none;
+      margin-bottom: 12px;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    #claim-btn:hover {
+      opacity: 0.9;
+      transform: scale(1.02);
+    }
+    #login-btn {
+      display: block;
+      color: rgba(255,255,255,0.4);
+      font-size: 0.85rem;
+      text-decoration: none;
+      padding: 8px;
+      transition: color 0.2s;
+    }
+    #login-btn:hover {
+      color: rgba(255,255,255,0.7);
+    }
+    .footer-line {
+      margin-top: 32px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 24px;
+    }
+    .footer-line p {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.25);
+    }
+    /* Preview card */
+    .preview-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 24px;
+    }
+    .preview-card .label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 4px;
+    }
+    .preview-card .url {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #00C882;
+    }
+    /* Fallback for no slug */
+    #no-slug-msg {
+      display: none;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.9rem;
+      margin-bottom: 24px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="mint-blob"></div>
+    <h1>Your site is ready 🌿</h1>
+
+    <div class="preview-card" id="preview-card">
+      <div class="label">Your free website</div>
+      <div class="url" id="site-url-display"></div>
+    </div>
+
+    <p id="no-slug-msg">Visit your site and click "Claim My Site" to get started.</p>
+
+    <p class="subtitle">Create a free account to edit it, connect your domain, and chat with Mint.</p>
+
+    <a id="claim-btn" href="#">Claim My Free Site →</a>
+    <a id="login-btn" href="#">Already have an account? Log in</a>
+
+    <div class="footer-line">
+      <p>Free forever · No credit card · Edit by talking to Mint</p>
+    </div>
+  </div>
+
+  <script>
+    // Read slug from URL path: /claim/weschetattoo → "weschetattoo"
+    var pathParts = window.location.pathname.split('/').filter(Boolean);
+    var slug = pathParts.length > 1 ? pathParts[pathParts.length - 1] : null;
+
+    if (slug && slug !== 'claim') {
+      document.getElementById('site-url-display').textContent = 'getminted.ai/' + slug + '/';
+      document.getElementById('claim-btn').href =
+        'https://clerk.getminted.ai/sign-up?redirect_url=' +
+        encodeURIComponent('https://getminted.ai/dashboard/?claim=' + slug);
+      document.getElementById('login-btn').href =
+        'https://clerk.getminted.ai/sign-in?redirect_url=' +
+        encodeURIComponent('https://getminted.ai/dashboard/?claim=' + slug);
+      document.getElementById('preview-card').style.display = 'block';
+      document.getElementById('no-slug-msg').style.display = 'none';
+    } else {
+      document.getElementById('preview-card').style.display = 'none';
+      document.getElementById('no-slug-msg').style.display = 'block';
+      document.getElementById('claim-btn').href = 'https://getminted.ai';
+      document.getElementById('claim-btn').textContent = 'Visit GetMinted.ai →';
+      document.getElementById('login-btn').href = 'https://getminted.ai/dashboard/';
+    }
+  </script>
+</body>
+</html>
