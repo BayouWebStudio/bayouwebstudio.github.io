@@ -1388,8 +1388,14 @@
   if (!clerk.user) {
     loading.style.display = 'none';
     signInScreen.style.display = 'block';
+    // Persist ?claim= across sign-up redirect so it survives the Account Portal round-trip
+    const claimParam = new URLSearchParams(window.location.search).get('claim');
+    if (claimParam) sessionStorage.setItem('getminted_claim', claimParam);
+
     clerk.mountSignIn(document.getElementById('clerk-sign-in'), {
-      fallbackRedirectUrl: window.location.href,
+      forceRedirectUrl: window.location.href,
+      afterSignUpUrl: window.location.href,
+      afterSignInUrl: window.location.href,
     });
 
     // Listen for sign in
@@ -1502,9 +1508,10 @@
     // Initialize the Convex realtime client with Clerk auth
     initConvexClient();
 
-    // ── Handle ?claim=slug parameter ──
+    // ── Handle ?claim=slug parameter (also check sessionStorage fallback) ──
     const urlParams = new URLSearchParams(window.location.search);
-    const claimSlug = urlParams.get('claim');
+    const claimSlug = urlParams.get('claim') || sessionStorage.getItem('getminted_claim');
+    if (claimSlug) sessionStorage.removeItem('getminted_claim'); // consume it once
     if (claimSlug) {
       // Wait briefly for Convex auth to be ready
       setTimeout(async () => {
