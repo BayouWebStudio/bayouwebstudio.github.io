@@ -222,15 +222,13 @@ html, body {
   will-change: transform, opacity;
 }
 
-/* Face container — stays above stretch canvas */
+/* Face container — positioned absolutely over blob center, above stretch canvas */
 .mint-face {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  width: 180px;
+  height: 180px;
   pointer-events: none;
-  z-index: 17;
+  z-index: 18;
   will-change: transform;
 }
 
@@ -561,7 +559,10 @@ html, body {
         <div class="mint-blob-body" id="mint-blob-body"></div>
         <div class="mint-arm left-arm" id="arm-left"></div>
         <div class="mint-arm right-arm" id="arm-right"></div>
-        <svg class="mint-face" id="mint-face" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
+      </div>
+    </div>
+    <!-- Face SVG is OUTSIDE wrapper so it can be above stretch canvas -->
+    <svg class="mint-face" id="mint-face" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
           <!-- Eyebrows -->
           <path id="brow-left" d="M52,62 Q62,56 72,60" stroke="rgba(0,60,35,0.5)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
           <path id="brow-right" d="M108,60 Q118,56 128,62" stroke="rgba(0,60,35,0.5)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
@@ -594,9 +595,7 @@ html, body {
 
           <!-- Mouth -->
           <path id="mouth" d="M76,110 Q90,122 104,110" stroke="#006040" stroke-width="3" fill="none" stroke-linecap="round"/>
-        </svg>
-      </div>
-    </div>
+    </svg>
   </div>
 
 
@@ -1133,7 +1132,14 @@ html, body {
     // Face lags behind body (secondary motion!)
     springEyeX.target = (springScaleX.value - 1) * -15 + springRotation.value * 0.3;
     springEyeY.target = (springScaleY.value - 1) * -10;
-    face.style.transform = `translate(${springEyeX.value}px, ${springEyeY.value}px)`;
+
+    // Face is now outside wrapper — position it over blob center
+    const wrapperRect = wrapper.getBoundingClientRect();
+    const zoneRect = zone.getBoundingClientRect();
+    const faceCenterX = wrapperRect.left - zoneRect.left + wrapperRect.width / 2 - 90;
+    const faceCenterY = wrapperRect.top - zoneRect.top + wrapperRect.height / 2 - 90;
+    face.style.left = faceCenterX + springEyeX.value + 'px';
+    face.style.top = faceCenterY + springEyeY.value + 'px';
   }
 
   requestAnimationFrame(physicsLoop);
