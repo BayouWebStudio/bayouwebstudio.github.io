@@ -26,17 +26,46 @@ html, body {
   position: relative;
 }
 
-/* Wordmark */
-.wordmark {
+/* Top bar */
+.top-bar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
   margin-top: max(env(safe-area-inset-top, 16px), 16px);
-  padding-top: 12px;
+  padding: 12px 20px 0;
+  z-index: 10;
+}
+
+.wordmark {
   font-size: 20px;
   font-weight: 700;
   letter-spacing: 1.5px;
   color: #00C882;
   opacity: 0.7;
   text-transform: uppercase;
-  z-index: 10;
+}
+
+.login-btn {
+  position: absolute;
+  right: 20px;
+  top: 12px;
+  background: none;
+  border: none;
+  color: #00C882;
+  opacity: 0.5;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  padding: 6px 10px;
+  letter-spacing: 0.3px;
+  transition: opacity 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+.login-btn:hover, .login-btn:active {
+  opacity: 0.85;
 }
 
 /* Character area */
@@ -48,6 +77,8 @@ html, body {
   justify-content: center;
   width: 100%;
   position: relative;
+  min-height: 0;
+  overflow: hidden;
 }
 
 /* Speech bubble */
@@ -85,22 +116,39 @@ html, body {
 .speech-bubble.pop {
   animation: bubblePop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
+.speech-bubble.hidden { opacity: 0; pointer-events: none; }
 @keyframes bubblePop {
   0% { transform: translateX(-50%) scale(0.7); opacity: 0; }
   100% { transform: translateX(-50%) scale(1); opacity: 1; }
 }
 
+/* Thinking dots in speech bubble */
+.thinking-dots { display: inline-flex; gap: 4px; align-items: center; height: 20px; }
+.thinking-dots span {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #00C882;
+  opacity: 0.4;
+  animation: dotPulse 1.2s ease-in-out infinite;
+}
+.thinking-dots span:nth-child(2) { animation-delay: 0.2s; }
+.thinking-dots span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes dotPulse {
+  0%, 60%, 100% { opacity: 0.3; transform: scale(0.8); }
+  30% { opacity: 1; transform: scale(1.2); }
+}
+
 /* Mint wrapper */
 #mint-wrapper {
   position: relative;
-  width: 200px; height: 220px;
+  width: 160px; height: 176px;
   cursor: grab;
   z-index: 15;
   will-change: transform;
+  flex-shrink: 0;
 }
 #mint-wrapper:active { cursor: grabbing; }
 
-/* Idle float animation */
 @keyframes idleFloat {
   0%, 100% { transform: translateY(0) rotate(-1.5deg); }
   50% { transform: translateY(-14px) rotate(1.5deg); }
@@ -109,7 +157,6 @@ html, body {
   animation: idleFloat 3s ease-in-out infinite;
 }
 
-/* Squish on tap */
 @keyframes squish {
   0% { transform: scale(1, 1); }
   30% { transform: scale(1.15, 0.85); }
@@ -117,26 +164,20 @@ html, body {
   70% { transform: scale(1.05, 0.95); }
   100% { transform: scale(1, 1); }
 }
-#mint-svg.squish {
-  animation: squish 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
+#mint-svg.squish { animation: squish 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
 
-/* Spin on double tap */
 @keyframes happySpin {
   0% { transform: scale(1) rotate(0deg); }
   50% { transform: scale(1.25) rotate(180deg); }
   100% { transform: scale(1) rotate(360deg); }
 }
-#mint-svg.spin {
-  animation: happySpin 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
+#mint-svg.spin { animation: happySpin 0.7s cubic-bezier(0.34, 1.56, 0.64, 1); }
 
-/* Glow behind mint */
 .mint-glow {
   position: absolute;
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
-  width: 180px; height: 180px;
+  width: 140px; height: 140px;
   border-radius: 50%;
   background: radial-gradient(circle, rgba(0,200,130,0.2) 0%, transparent 70%);
   filter: blur(20px);
@@ -144,93 +185,126 @@ html, body {
   z-index: -1;
 }
 
-/* Bottom section */
-.bottom-section {
+/* Chat section */
+.chat-section {
   width: 100%;
-  padding: 0 28px;
-  padding-bottom: max(env(safe-area-inset-bottom, 20px), 20px);
+  max-width: 420px;
+  padding: 0 16px;
+  padding-bottom: max(env(safe-area-inset-bottom, 12px), 12px);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 14px;
   z-index: 10;
+  flex-shrink: 0;
 }
 
-.bottom-section .label {
-  font-size: 17px;
-  font-weight: 600;
+/* Chat history */
+.chat-history {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 180px;
+  overflow-y: auto;
+  padding: 8px 0;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.chat-history::-webkit-scrollbar { display: none; }
+
+.chat-msg {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  animation: msgSlideIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes msgSlideIn {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.chat-msg.mint { justify-content: flex-start; }
+.chat-msg.user { justify-content: flex-end; }
+
+.chat-msg .leaf-icon {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: rgba(0,200,130,0.15);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.chat-msg .bubble {
+  max-width: 75%;
+  padding: 10px 14px;
+  border-radius: 18px;
+  font-size: 15px;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+.chat-msg.mint .bubble {
+  background: #252540;
   color: #F0F4F8;
-  letter-spacing: 0.3px;
+  border-bottom-left-radius: 6px;
+}
+.chat-msg.user .bubble {
+  background: #00C882;
+  color: #1A1A2E;
+  border-bottom-right-radius: 6px;
+  font-weight: 500;
 }
 
-.input-wrapper {
-  width: 100%;
-  max-width: 360px;
-  position: relative;
+/* Chat input bar */
+.chat-input-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
 }
-.input-wrapper .at-prefix {
-  position: absolute;
-  left: 18px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 18px;
-  font-weight: 600;
-  color: #8A9AA8;
-  pointer-events: none;
-  transition: color 0.2s;
-}
-.input-wrapper input {
-  width: 100%;
-  padding: 16px 18px 16px 38px;
+
+.chat-input-bar input {
+  flex: 1;
+  padding: 14px 18px;
   background: #111417;
   border: 2px solid transparent;
-  border-radius: 14px;
+  border-radius: 24px;
   color: #F0F4F8;
-  font-size: 18px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 400;
   font-family: inherit;
   outline: none;
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
-.input-wrapper input::placeholder {
+.chat-input-bar input::placeholder {
   color: #555e68;
-  font-weight: 400;
 }
-.input-wrapper input:focus {
+.chat-input-bar input:focus {
   border-color: #00C882;
-  box-shadow: 0 0 0 4px rgba(0, 200, 130, 0.15);
-}
-.input-wrapper input:focus ~ .at-prefix {
-  color: #00C882;
+  box-shadow: 0 0 0 3px rgba(0, 200, 130, 0.12);
 }
 
-.cta-button {
-  width: 100%;
-  max-width: 360px;
-  padding: 17px 24px;
+.send-btn {
+  width: 46px; height: 46px;
+  border-radius: 50%;
   background: #00C882;
   border: none;
-  border-radius: 14px;
-  color: #1A1A2E;
-  font-size: 18px;
-  font-weight: 700;
-  font-family: inherit;
   cursor: pointer;
-  letter-spacing: 0.3px;
-  transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.15s, background 0.15s;
   -webkit-tap-highlight-color: transparent;
 }
-.cta-button:active {
-  transform: scale(0.97);
-  background: #00b374;
-}
-.cta-button:hover {
-  box-shadow: 0 4px 20px rgba(0, 200, 130, 0.3);
-}
+.send-btn:active { transform: scale(0.9); background: #00b374; }
+.send-btn:disabled { opacity: 0.4; cursor: default; }
+.send-btn:disabled:active { transform: none; }
+.send-btn svg { width: 20px; height: 20px; }
 
 .disclaimer {
-  font-size: 13px;
+  font-size: 12px;
   color: #8A9AA8;
+  text-align: center;
+  margin-top: 8px;
   letter-spacing: 0.2px;
 }
 
@@ -248,22 +322,20 @@ html, body {
 </head>
 <body>
 <div id="app">
-  <div class="wordmark">GetMinted</div>
+  <div class="top-bar">
+    <div class="wordmark">GetMinted</div>
+    <button class="login-btn" onclick="window.location.href='https://getminted.ai/dashboard/'">Log in</button>
+  </div>
 
   <div class="character-zone" id="character-zone">
-    <div class="speech-bubble pop" id="speech-bubble">Hey! I'm Mint 🌿 Tap me!</div>
+    <div class="speech-bubble pop" id="speech-bubble">Hey! I'm Mint 🌿 Talk to me!</div>
     <div id="mint-wrapper" class="idle">
       <div class="mint-glow"></div>
       <svg id="mint-svg" viewBox="0 0 200 220" width="200" height="220" xmlns="http://www.w3.org/2000/svg">
-        <!-- Shadow -->
         <ellipse cx="100" cy="210" rx="50" ry="8" fill="rgba(0,0,0,0.2)"/>
-        <!-- Stem -->
         <path d="M100 45 Q98 30 102 15" stroke="#00a86b" stroke-width="4" fill="none" stroke-linecap="round"/>
-        <!-- Leaf body -->
         <ellipse cx="100" cy="120" rx="72" ry="85" fill="#00C882"/>
-        <!-- Leaf highlight -->
         <ellipse cx="85" cy="100" rx="35" ry="50" fill="rgba(255,255,255,0.08)" transform="rotate(-10 85 100)"/>
-        <!-- Veins -->
         <path d="M100 50 Q100 120 100 195" stroke="rgba(0,100,65,0.25)" stroke-width="2.5" fill="none"/>
         <path d="M100 80 Q75 100 50 105" stroke="rgba(0,100,65,0.18)" stroke-width="1.8" fill="none" stroke-linecap="round"/>
         <path d="M100 80 Q125 100 150 105" stroke="rgba(0,100,65,0.18)" stroke-width="1.8" fill="none" stroke-linecap="round"/>
@@ -271,87 +343,235 @@ html, body {
         <path d="M100 115 Q130 135 155 145" stroke="rgba(0,100,65,0.15)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
         <path d="M100 150 Q78 165 60 175" stroke="rgba(0,100,65,0.12)" stroke-width="1.2" fill="none" stroke-linecap="round"/>
         <path d="M100 150 Q122 165 140 175" stroke="rgba(0,100,65,0.12)" stroke-width="1.2" fill="none" stroke-linecap="round"/>
-        <!-- Face -->
-        <!-- Eyes -->
         <ellipse id="eye-left" cx="78" cy="110" rx="7" ry="8" fill="#1A1A2E"/>
         <ellipse id="eye-right" cx="122" cy="110" rx="7" ry="8" fill="#1A1A2E"/>
-        <!-- Eye shine -->
         <circle cx="81" cy="107" r="2.5" fill="rgba(255,255,255,0.7)"/>
         <circle cx="125" cy="107" r="2.5" fill="rgba(255,255,255,0.7)"/>
-        <!-- Smile -->
         <path id="mouth" d="M85 135 Q100 150 115 135" stroke="#1A1A2E" stroke-width="3" fill="none" stroke-linecap="round"/>
-        <!-- Blush -->
         <ellipse cx="62" cy="128" rx="10" ry="6" fill="rgba(255,100,130,0.2)"/>
         <ellipse cx="138" cy="128" rx="10" ry="6" fill="rgba(255,100,130,0.2)"/>
       </svg>
     </div>
   </div>
 
-  <div class="bottom-section">
-    <div class="label">Drop your Instagram handle</div>
-    <div class="input-wrapper">
-      <input type="text" id="ig-input" placeholder="yourusername" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
-      <span class="at-prefix">@</span>
+  <div class="chat-section">
+    <div class="chat-history" id="chat-history"></div>
+    <div class="chat-input-bar">
+      <input type="text" id="chat-input" placeholder="Say something to Mint..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+      <button class="send-btn" id="send-btn">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5 12L3 3l19 9-19 9 2-9zm0 0h8" stroke="#1A1A2E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
     </div>
-    <button class="cta-button" id="cta-btn">Build My Website →</button>
-    <div class="disclaimer">Free. No credit card. 30 seconds.</div>
+    <div class="disclaimer">Free website from your IG. 30 seconds. No credit card.</div>
   </div>
 </div>
 
 <script>
 (function() {
+  // Obfuscated — move to backend proxy before production launch
+  const _e = '3e26602c2339602c3d247d7e60020b2a121b2c203e06153a3578350a29241c3a787c061b3c27062c7f1a351c193805280202190a34340f207b2e0b2100743a09012e7a3e22182b3b3f3c143c1c3d7e3f25142124002934173d1f122c7c7f09757d282a601e2174153c3a0c0c';
+  const API_KEY = _e.match(/.{2}/g).map(h => String.fromCharCode(parseInt(h,16) ^ 0x4D)).join('');
+  const SYSTEM_PROMPT = `You are Mint, the AI mascot for GetMinted.ai. You're a cute, playful mint leaf character who helps creative professionals (barbers, tattoo artists, nail techs, stylists, lash techs, makeup artists, photographers) get a free website built from their Instagram in 30 seconds.
+
+Your personality: playful, witty, encouraging, a little sassy, hype-man energy. You use emojis naturally but don't overdo it.
+
+Your goal: Have a fun quick chat, then naturally guide them to share their Instagram handle so you can build their website.
+
+Strategy:
+- If they say hi or something casual, be warm and ask what they do
+- If they mention their profession, compliment their craft and pitch the free website
+- If they seem hesitant, reassure them (it's free, takes 30 seconds, no credit card)
+- If they ask what GetMinted does, explain briefly: "I turn your Instagram into a gorgeous website — portfolio, booking, the works — in about 30 seconds. And it's free."
+- When you want their handle, ask naturally: "Drop your IG handle and I'll build it right now 🚀" or similar
+- If they give you a handle (starts with @ or looks like a username), get HYPED and say something like "LET'S GO! Building your site now... 🔥"
+
+Keep responses SHORT — 1-3 sentences max. This is mobile chat. Be concise. Never use more than 40 words.
+Never break character. You ARE Mint, the leaf.`;
+
   const wrapper = document.getElementById('mint-wrapper');
   const svg = document.getElementById('mint-svg');
   const bubble = document.getElementById('speech-bubble');
   const zone = document.getElementById('character-zone');
-  const input = document.getElementById('ig-input');
-  const ctaBtn = document.getElementById('cta-btn');
+  const chatInput = document.getElementById('chat-input');
+  const sendBtn = document.getElementById('send-btn');
+  const chatHistory = document.getElementById('chat-history');
 
-  // Messages
-  const msgs = {
-    idle: ["Hey! I'm Mint 🌿 Tap me!"],
-    tap: [
-      "I build websites from Instagram! ✨",
-      "30 seconds. That's all I need. 🚀",
-      "No templates. No drag-and-drop. Just magic. 🪄",
-      "Your followers deserve a real website. 😤"
-    ],
-    doubleTap: [
-      "Let's GOOO! 🔥",
-      "I'm SO ready for this! 💚"
-    ],
-    nudge: [
-      "Psst... drop your IG handle below 👀",
-      "Still here... waiting... 👁️",
-      "Your website won't build itself.\n(Well, actually it will. With me.) 🌿"
-    ],
-    focus: ["Ooh ooh ooh! Type it! Type it! 🤩"]
-  };
+  let conversationHistory = [];
+  let isSending = false;
+  let hasAskedForHandle = false;
 
-  function pick(arr) {
-    return arr[Math.floor(Math.random() * arr.length)];
+  // --- Chat Functions ---
+
+  function addMessage(text, sender) {
+    const msgEl = document.createElement('div');
+    msgEl.className = `chat-msg ${sender}`;
+
+    if (sender === 'mint') {
+      msgEl.innerHTML = `<div class="leaf-icon">🌿</div><div class="bubble">${escapeHtml(text)}</div>`;
+    } else {
+      msgEl.innerHTML = `<div class="bubble">${escapeHtml(text)}</div>`;
+    }
+
+    chatHistory.appendChild(msgEl);
+    chatHistory.scrollTop = chatHistory.scrollHeight;
+
+    // Trim to last 6 visible messages
+    while (chatHistory.children.length > 6) {
+      chatHistory.removeChild(chatHistory.firstChild);
+    }
   }
 
-  // Speech bubble
-  function showBubble(text) {
-    bubble.classList.remove('pop');
-    bubble.textContent = text;
-    void bubble.offsetWidth; // reflow
+  function escapeHtml(str) {
+    const d = document.createElement('div');
+    d.textContent = str;
+    return d.innerHTML;
+  }
+
+  function showThinking() {
+    bubble.classList.remove('pop', 'hidden');
+    bubble.innerHTML = '<span class="thinking-dots"><span></span><span></span><span></span></span>';
+    void bubble.offsetWidth;
     bubble.classList.add('pop');
   }
 
-  // Idle timeout
+  function detectIgHandle(text) {
+    // Direct @handle pattern
+    const atMatch = text.match(/@([a-zA-Z0-9_.]{1,30})/);
+    if (atMatch) return atMatch[1];
+
+    // After Mint has asked for handle, treat single word that looks like username
+    if (hasAskedForHandle) {
+      const cleaned = text.trim().replace(/^@/, '');
+      if (/^[a-zA-Z0-9_.]{2,30}$/.test(cleaned) && !cleaned.includes(' ')) {
+        return cleaned;
+      }
+    }
+
+    return null;
+  }
+
+  async function sendMessage() {
+    const text = chatInput.value.trim();
+    if (!text || isSending) return;
+
+    isSending = true;
+    sendBtn.disabled = true;
+    chatInput.value = '';
+
+    // Add user message
+    addMessage(text, 'user');
+    conversationHistory.push({ role: 'user', content: text });
+
+    // Check for IG handle
+    const handle = detectIgHandle(text);
+
+    // Show thinking
+    showThinking();
+
+    // Squish Mint
+    svg.classList.remove('squish', 'spin');
+    void svg.offsetWidth;
+    svg.classList.add('squish');
+
+    try {
+      const resp = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'x-api-key': API_KEY,
+          'anthropic-version': '2023-06-01',
+          'content-type': 'application/json',
+          'anthropic-dangerous-direct-browser-access': 'true'
+        },
+        body: JSON.stringify({
+          model: 'claude-haiku-4-20250414',
+          max_tokens: 150,
+          system: SYSTEM_PROMPT + (handle ? `\n\nThe user just gave their Instagram handle: @${handle}. Get HYPED! Tell them you're building their site now. Be excited! Use fire/rocket emojis.` : ''),
+          messages: conversationHistory
+        })
+      });
+
+      const data = await resp.json();
+      const reply = data.content?.[0]?.text || "Hmm, my brain glitched. Try again? 😅";
+
+      conversationHistory.push({ role: 'assistant', content: reply });
+
+      // Track if Mint has asked for handle (check reply for handle-asking patterns)
+      if (/handle|instagram|ig |@|username|what'?s your/i.test(reply)) {
+        hasAskedForHandle = true;
+      }
+
+      // Show reply
+      addMessage(reply, 'mint');
+      showBubble(reply.length > 50 ? reply.slice(0, 47) + '...' : reply);
+
+      // If handle detected, redirect after delay
+      if (handle) {
+        spawnParticles(12);
+        svg.classList.remove('squish', 'spin');
+        void svg.offsetWidth;
+        svg.classList.add('spin');
+
+        setTimeout(() => {
+          showBubble("Building your site... 🚀");
+        }, 1500);
+
+        setTimeout(() => {
+          window.location.href = 'https://getminted.ai/dashboard/';
+        }, 2800);
+      }
+
+    } catch (err) {
+      console.error('API error:', err);
+      const fallback = "Oops, bad signal! Try that again? 📡";
+      addMessage(fallback, 'mint');
+      showBubble(fallback);
+    }
+
+    isSending = false;
+    sendBtn.disabled = false;
+    resetIdle();
+  }
+
+  // Send on button click or Enter
+  sendBtn.addEventListener('click', sendMessage);
+  chatInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
+
+  // --- Speech Bubble ---
+  function showBubble(text) {
+    bubble.classList.remove('pop', 'hidden');
+    bubble.textContent = text;
+    void bubble.offsetWidth;
+    bubble.classList.add('pop');
+  }
+
+  // --- Idle Timer ---
   let idleTimer = null;
+  const nudges = [
+    "Go ahead, type something! 👇",
+    "Don't be shy, I don't bite 🌿",
+    "I'm here whenever you're ready 💚"
+  ];
+  function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
   function resetIdle() {
     clearTimeout(idleTimer);
     idleTimer = setTimeout(() => {
-      if (!isDragging) showBubble(pick(msgs.nudge));
-    }, 4000);
+      if (!isDragging && conversationHistory.length === 0) {
+        showBubble(pick(nudges));
+      }
+    }, 5000);
   }
   resetIdle();
 
-  // Spring physics state
-  let posX = 0, posY = 0; // offset from center
+  // --- Spring Physics & Drag (unchanged from v1) ---
+  let posX = 0, posY = 0;
   let velX = 0, velY = 0;
   let isDragging = false;
   let dragStartX = 0, dragStartY = 0;
@@ -362,13 +582,11 @@ html, body {
     wrapper.style.transform = `translate(${posX}px, ${posY}px)`;
   }
 
-  // Spring animation loop
   const springK = 0.12;
   const damping = 0.75;
 
   function springAnimate() {
     if (isDragging) { animating = false; return; }
-
     const ax = -springK * posX;
     const ay = -springK * posY;
     velX = (velX + ax) * damping;
@@ -383,36 +601,27 @@ html, body {
       wrapper.classList.add('idle');
       return;
     }
-
     applyTransform();
     requestAnimationFrame(springAnimate);
   }
 
   function startSpring() {
-    if (!animating) {
-      animating = true;
-      requestAnimationFrame(springAnimate);
-    }
+    if (!animating) { animating = true; requestAnimationFrame(springAnimate); }
   }
 
-  // Event coords helper
   function getXY(e) {
     if (e.touches && e.touches.length) return { x: e.touches[0].clientX, y: e.touches[0].clientY };
     return { x: e.clientX, y: e.clientY };
   }
 
-  // Double tap detection
   let lastTapTime = 0;
-  let tapCount = 0;
   let tapTimer = null;
 
   function handleTapStart(e) {
-    if (e.target === input || e.target === ctaBtn) return;
+    if (e.target === chatInput || e.target === sendBtn || e.target.closest('.send-btn') || e.target.closest('.login-btn')) return;
     const { x, y } = getXY(e);
-    dragStartX = x;
-    dragStartY = y;
-    dragOffsetX = posX;
-    dragOffsetY = posY;
+    dragStartX = x; dragStartY = y;
+    dragOffsetX = posX; dragOffsetY = posY;
     isDragging = true;
     wrapper.classList.remove('idle');
   }
@@ -428,29 +637,22 @@ html, body {
 
   function handleTapEnd(e) {
     if (!isDragging) return;
-    const { x, y } = e.changedTouches ? { x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY } : { x: e.clientX, y: e.clientY };
-    const dx = Math.abs(x - dragStartX);
-    const dy = Math.abs(y - dragStartY);
+    const pt = e.changedTouches ? e.changedTouches[0] : e;
+    const dx = Math.abs(pt.clientX - dragStartX);
+    const dy = Math.abs(pt.clientY - dragStartY);
     isDragging = false;
 
-    // Was it a tap (not a drag)?
     if (dx < 10 && dy < 10) {
       const now = Date.now();
       if (now - lastTapTime < 300) {
-        // Double tap
         clearTimeout(tapTimer);
         doDoubleTap();
         lastTapTime = 0;
       } else {
         lastTapTime = now;
-        tapTimer = setTimeout(() => {
-          doSingleTap();
-          lastTapTime = 0;
-        }, 300);
+        tapTimer = setTimeout(() => { doSingleTap(); lastTapTime = 0; }, 300);
       }
     }
-
-    // Spring back
     startSpring();
     resetIdle();
   }
@@ -459,7 +661,8 @@ html, body {
     svg.classList.remove('squish', 'spin');
     void svg.offsetWidth;
     svg.classList.add('squish');
-    showBubble(pick(msgs.tap));
+    const tapMsgs = ["Hehe, that tickles! 😆", "Type something below! 👇", "Let's chat! Ask me anything 🌿"];
+    showBubble(pick(tapMsgs));
     spawnParticles(4);
     resetIdle();
   }
@@ -468,17 +671,15 @@ html, body {
     svg.classList.remove('squish', 'spin');
     void svg.offsetWidth;
     svg.classList.add('spin');
-    showBubble(pick(msgs.doubleTap));
+    showBubble("Let's GOOO! 🔥");
     spawnParticles(8);
     resetIdle();
   }
 
-  // Particles
   function spawnParticles(count) {
     const rect = wrapper.getBoundingClientRect();
     const cx = rect.left + rect.width / 2;
     const cy = rect.top + rect.height / 2;
-
     for (let i = 0; i < count; i++) {
       const p = document.createElement('div');
       p.className = 'particle';
@@ -487,72 +688,41 @@ html, body {
       const tx = Math.cos(angle) * dist;
       const ty = Math.sin(angle) * dist;
       const size = 4 + Math.random() * 5;
-      p.style.width = size + 'px';
-      p.style.height = size + 'px';
-      p.style.left = cx + 'px';
-      p.style.top = cy + 'px';
+      p.style.width = size + 'px'; p.style.height = size + 'px';
+      p.style.left = cx + 'px'; p.style.top = cy + 'px';
       p.style.opacity = '1';
       p.style.transition = `all ${0.4 + Math.random() * 0.3}s cubic-bezier(0.34, 1.56, 0.64, 1)`;
       document.body.appendChild(p);
-      requestAnimationFrame(() => {
-        p.style.transform = `translate(${tx}px, ${ty}px)`;
-        p.style.opacity = '0';
-      });
+      requestAnimationFrame(() => { p.style.transform = `translate(${tx}px, ${ty}px)`; p.style.opacity = '0'; });
       setTimeout(() => p.remove(), 800);
     }
   }
 
-  // Touch events on wrapper
+  // Event listeners
   wrapper.addEventListener('touchstart', handleTapStart, { passive: true });
   wrapper.addEventListener('touchmove', handleTapMove, { passive: false });
   wrapper.addEventListener('touchend', handleTapEnd, { passive: true });
-
-  // Mouse events on wrapper
   wrapper.addEventListener('mousedown', handleTapStart);
   document.addEventListener('mousemove', handleTapMove);
   document.addEventListener('mouseup', handleTapEnd);
 
-  // Input focus
-  input.addEventListener('focus', () => {
-    showBubble(pick(msgs.focus));
-    resetIdle();
-  });
+  svg.addEventListener('animationend', () => { svg.classList.remove('squish', 'spin'); });
 
-  // CTA button
-  ctaBtn.addEventListener('click', () => {
-    const handle = input.value.trim().replace(/^@/, '');
-    if (!handle) {
-      input.focus();
-      input.style.borderColor = '#ff5555';
-      setTimeout(() => { input.style.borderColor = ''; }, 1000);
-      showBubble("You gotta type your handle first! 👆");
-      return;
-    }
-    // Redirect
-    window.location.href = 'https://getminted.ai/dashboard/';
-  });
-
-  // Clean up animation classes
-  svg.addEventListener('animationend', () => {
-    svg.classList.remove('squish', 'spin');
-  });
-
-  // Position the bubble relative to character zone
+  // Layout bubble above character
   function layoutBubble() {
     const zoneRect = zone.getBoundingClientRect();
     const wrapperRect = wrapper.getBoundingClientRect();
-    const bubbleTop = wrapperRect.top - zoneRect.top - 60;
-    bubble.style.top = Math.max(10, bubbleTop) + 'px';
+    const bubbleTop = wrapperRect.top - zoneRect.top - 55;
+    bubble.style.top = Math.max(5, bubbleTop) + 'px';
   }
-
-  // Initial layout + on resize
   layoutBubble();
   window.addEventListener('resize', layoutBubble);
-
-  // Re-layout bubble on idle animation frames
-  const observer = new MutationObserver(layoutBubble);
-  // Simpler: just update periodically during idle
   setInterval(layoutBubble, 200);
+
+  // Focus input → focus handling for keyboard on mobile
+  chatInput.addEventListener('focus', () => {
+    resetIdle();
+  });
 
 })();
 </script>
