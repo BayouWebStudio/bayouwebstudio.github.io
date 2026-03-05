@@ -339,6 +339,27 @@
         <div class="dot-loader"></div>
         <div class="dot-loader"></div>
       </div>
+
+      <!-- Email capture — shows after 15s -->
+      <div id="emailCapture" style="display:none; margin-top:40px; opacity:0; transition:opacity 0.6s ease;">
+        <p style="font-size:15px; color:rgba(255,255,255,0.45); margin-bottom:14px;">
+          Don't want to wait? We'll email it to you. 📬
+        </p>
+        <div id="emailForm" style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
+          <input id="emailInput" type="email" placeholder="your@email.com"
+            style="flex:1; min-width:220px; max-width:320px; padding:14px 18px; border-radius:50px;
+                   background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.15);
+                   color:#fff; font-size:15px; outline:none; font-family:inherit;" />
+          <button onclick="submitEmail()"
+            style="padding:14px 28px; border-radius:50px; background:#00C882; color:#0a1a12;
+                   font-size:15px; font-weight:800; border:none; cursor:pointer; white-space:nowrap;">
+            Email Me →
+          </button>
+        </div>
+        <div id="emailSuccess" style="display:none; color:#00C882; font-size:15px; font-weight:600; margin-top:12px;">
+          ✅ Got it! We'll email you at <span id="emailConfirm"></span> when it's ready.
+        </div>
+      </div>
     </div>
 
     <!-- Phase 3: Ready -->
@@ -510,6 +531,32 @@
         confetti({ particleCount: 60, spread: 50, origin: { y: 0.4, x: 0.2 }, colors, startVelocity: 25, angle: 60 });
         confetti({ particleCount: 60, spread: 50, origin: { y: 0.4, x: 0.8 }, colors, startVelocity: 25, angle: 120 });
       }, 300);
+    }
+
+    // ── Email capture — show after 15s ──
+    setTimeout(() => {
+      const el = document.getElementById('emailCapture');
+      el.style.display = 'block';
+      requestAnimationFrame(() => { el.style.opacity = '1'; });
+    }, 15000);
+
+    async function submitEmail() {
+      const email = document.getElementById('emailInput').value.trim();
+      if (!email || !email.includes('@')) {
+        document.getElementById('emailInput').style.borderColor = '#ff6b6b';
+        return;
+      }
+      document.getElementById('emailForm').style.display = 'none';
+      document.getElementById('emailConfirm').textContent = email;
+      document.getElementById('emailSuccess').style.display = 'block';
+      // Save to Convex
+      try {
+        await fetch(`${CONVEX}/api/build/email`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, slug, igHandle: handle }),
+        });
+      } catch(e) { /* silent — email saved client-side at minimum */ }
     }
 
     // ── Dev shortcut: ?test=live ──
