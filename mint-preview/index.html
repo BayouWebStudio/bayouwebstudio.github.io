@@ -517,6 +517,20 @@ html, body {
 
   <!-- PRIMARY: IG handle input — always visible at top, chat can never cover it -->
   <div class="ig-section" style="padding-top:12px;padding-bottom:8px;">
+    <p style="text-align:center;font-size:0.95rem;color:rgba(255,255,255,0.5);margin-bottom:8px;">Free website for <span id="app-typed" style="color:#00C882;border-right:2px solid #00C882;padding-right:3px;font-weight:600;"></span></p>
+    <script>
+    (function(){
+      const w=['Tattoo Artists.','Barbers.','Nail Techs.','Photographers.','Stylists.','Piercers.','Lash Techs.','Creatives.'];
+      let wi=0,ci=0,del=false;
+      const el=document.getElementById('app-typed');
+      function tick(){
+        const word=w[wi];
+        if(!del){el.textContent=word.slice(0,++ci);if(ci===word.length){del=true;setTimeout(tick,1800);return;}setTimeout(tick,80);}
+        else{el.textContent=word.slice(0,--ci);if(ci===0){del=false;wi=(wi+1)%w.length;setTimeout(tick,300);return;}setTimeout(tick,40);}
+      }
+      tick();
+    })();
+    </script>
     <div class="ig-input-row">
       <div class="ig-input-wrap">
         <span class="ig-at">@</span>
