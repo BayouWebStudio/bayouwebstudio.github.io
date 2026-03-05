@@ -1512,6 +1512,8 @@
         // Hide "connect site" prompt if showing
         const connectBanner = document.getElementById('connect-site-banner');
         if (connectBanner) connectBanner.style.display = 'none';
+        // Persist email-based link silently (no-op if already linked by Clerk ID)
+        convexClient.mutation(api.dashboard.linkAccountByEmail, {}).catch(() => {});
 
         const previewUrl = siteInfo.siteUrl;
         document.getElementById('preview-url').textContent = previewUrl.replace('https://', '');
