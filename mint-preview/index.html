@@ -147,35 +147,18 @@ html, body {
 }
 #mint-wrapper:active { cursor: grabbing; }
 
-@keyframes idleFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-}
-#mint-wrapper.idle {
-  animation: idleFloat 3s ease-in-out infinite;
-}
-
-/* Blob body */
+/* Blob body — NO CSS animations, all driven by JS springs */
 .mint-blob {
   width: 180px;
   height: 180px;
   position: relative;
-  animation: blobMorph 6s ease-in-out infinite;
-  transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-@keyframes blobMorph {
-  0%   { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-  25%  { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
-  50%  { border-radius: 50% 60% 30% 60% / 40% 70% 60% 30%; }
-  75%  { border-radius: 40% 30% 60% 50% / 60% 40% 50% 70%; }
-  100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  will-change: transform;
 }
 
 .mint-blob-body {
   width: 100%;
   height: 100%;
-  border-radius: inherit;
+  border-radius: 50%;
   background: radial-gradient(ellipse at 35% 30%, #4DFFC0 0%, #00C882 40%, #008A5A 100%);
   box-shadow:
     inset 0 -8px 20px rgba(0, 80, 50, 0.3),
@@ -184,6 +167,7 @@ html, body {
     0 2px 10px rgba(0, 0, 0, 0.3);
   position: relative;
   overflow: hidden;
+  will-change: border-radius;
 }
 
 /* Inner glow / highlight */
@@ -212,28 +196,6 @@ html, body {
   pointer-events: none;
 }
 
-/* Squish animation */
-@keyframes squish {
-  0% { transform: scale(1, 1); }
-  20% { transform: scale(1.18, 0.82); }
-  40% { transform: scale(0.88, 1.12); }
-  55% { transform: scale(1.08, 0.92); }
-  70% { transform: scale(0.96, 1.04); }
-  85% { transform: scale(1.02, 0.98); }
-  100% { transform: scale(1, 1); }
-}
-.mint-blob.squish { animation: squish 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); }
-
-/* Spin animation */
-@keyframes happySpin {
-  0% { transform: scale(1, 1) rotate(0deg); }
-  25% { transform: scale(1.2, 0.8) rotate(90deg); }
-  50% { transform: scale(1.3, 0.7) rotate(180deg); }
-  75% { transform: scale(1.2, 0.8) rotate(270deg); }
-  100% { transform: scale(1, 1) rotate(360deg); }
-}
-.mint-blob.spin { animation: happySpin 0.7s cubic-bezier(0.34, 1.56, 0.64, 1); }
-
 /* Shadow underneath */
 .mint-shadow {
   position: absolute;
@@ -247,9 +209,10 @@ html, body {
   filter: blur(6px);
   pointer-events: none;
   z-index: -1;
+  will-change: transform, opacity;
 }
 
-/* Face container - SVG overlaid on blob */
+/* Face container */
 .mint-face {
   position: absolute;
   top: 0;
@@ -258,6 +221,7 @@ html, body {
   height: 100%;
   pointer-events: none;
   z-index: 2;
+  will-change: transform;
 }
 
 .mint-glow {
@@ -411,11 +375,11 @@ html, body {
 
   <div class="character-zone" id="character-zone">
     <div class="speech-bubble pop" id="speech-bubble">Hey! I'm Mint 🌿 Talk to me!</div>
-    <div id="mint-wrapper" class="idle">
+    <div id="mint-wrapper">
       <div class="mint-glow"></div>
-      <div class="mint-shadow"></div>
+      <div class="mint-shadow" id="mint-shadow"></div>
       <div class="mint-blob" id="mint-blob">
-        <div class="mint-blob-body"></div>
+        <div class="mint-blob-body" id="mint-blob-body"></div>
         <svg class="mint-face" id="mint-face" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
           <!-- Eyebrows -->
           <path id="brow-left" d="M52,62 Q62,56 72,60" stroke="rgba(0,60,35,0.5)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
@@ -426,7 +390,6 @@ html, body {
             <ellipse id="eye-left-white" cx="66" cy="78" rx="16" ry="18" fill="white"/>
             <ellipse id="eye-left-pupil" cx="66" cy="78" rx="8" ry="9" fill="#1A1A2E"/>
             <circle id="eye-left-highlight" cx="70" cy="73" r="3.5" fill="rgba(255,255,255,0.85)"/>
-            <!-- Eyelid for blink -->
             <ellipse id="eye-left-lid" cx="66" cy="78" rx="17" ry="0" fill="#00C882" opacity="0"/>
           </g>
 
@@ -435,11 +398,10 @@ html, body {
             <ellipse id="eye-right-white" cx="114" cy="78" rx="16" ry="18" fill="white"/>
             <ellipse id="eye-right-pupil" cx="114" cy="78" rx="8" ry="9" fill="#1A1A2E"/>
             <circle id="eye-right-highlight" cx="118" cy="73" r="3.5" fill="rgba(255,255,255,0.85)"/>
-            <!-- Eyelid for blink -->
             <ellipse id="eye-right-lid" cx="114" cy="78" rx="17" ry="0" fill="#00C882" opacity="0"/>
           </g>
 
-          <!-- Sparkle highlights (hidden by default, shown on excited) -->
+          <!-- Sparkle highlights -->
           <g id="sparkles" opacity="0">
             <polygon points="55,65 56,62 57,65 60,66 57,67 56,70 55,67 52,66" fill="white" opacity="0.9"/>
             <polygon points="123,65 124,62 125,65 128,66 125,67 124,70 123,67 120,66" fill="white" opacity="0.9"/>
@@ -472,13 +434,44 @@ html, body {
 
 <script>
 (function() {
+  // ═══════════════════════════════════════════════════════
+  // SPRING PHYSICS ENGINE
+  // ═══════════════════════════════════════════════════════
+  class Spring {
+    constructor(value = 0, stiffness = 0.15, damping = 0.72) {
+      this.value = value;
+      this.velocity = 0;
+      this.target = value;
+      this.stiffness = stiffness;
+      this.damping = damping;
+    }
+    update() {
+      const force = (this.target - this.value) * this.stiffness;
+      this.velocity = this.velocity * this.damping + force;
+      this.value += this.velocity;
+      return this.value;
+    }
+    impulse(v) {
+      this.velocity += v;
+    }
+    isSettled() {
+      return Math.abs(this.velocity) < 0.0005 && Math.abs(this.target - this.value) < 0.0005;
+    }
+  }
+
+  // ═══════════════════════════════════════════════════════
+  // DOM REFS
+  // ═══════════════════════════════════════════════════════
   const CONVEX_URL = 'https://curious-lemming-262.convex.site/api/mint/chat';
   let threadId = null;
 
   const wrapper = document.getElementById('mint-wrapper');
   const blob = document.getElementById('mint-blob');
+  const blobBody = document.getElementById('mint-blob-body');
+  const shadow = document.getElementById('mint-shadow');
   const bubble = document.getElementById('speech-bubble');
   const zone = document.getElementById('character-zone');
+  const face = document.getElementById('mint-face');
   const chatInput = document.getElementById('chat-input');
   const sendBtn = document.getElementById('send-btn');
   const chatHistory = document.getElementById('chat-history');
@@ -497,7 +490,6 @@ html, body {
   const browRight = document.getElementById('brow-right');
   const sparkles = document.getElementById('sparkles');
 
-  // Eye centers (in SVG coords)
   const LEFT_EYE = { cx: 66, cy: 78 };
   const RIGHT_EYE = { cx: 114, cy: 78 };
   const MAX_PUPIL_OFFSET = 6;
@@ -509,7 +501,354 @@ html, body {
   let isTrackingMouse = false;
   let mouseX = 0, mouseY = 0;
 
-  // ─── Expression System ───
+  // ═══════════════════════════════════════════════════════
+  // SPRING INSTANCES — THE HEART OF THE PHYSICS
+  // ═══════════════════════════════════════════════════════
+
+  // Position springs (for drag & return-to-center)
+  const springPosX = new Spring(0, 0.08, 0.78);
+  const springPosY = new Spring(0, 0.08, 0.78);
+
+  // Deformation springs (for squish/stretch) — underdamped for Flubber feel
+  const springScaleX = new Spring(1, 0.18, 0.55);  // bouncy!
+  const springScaleY = new Spring(1, 0.18, 0.55);
+
+  // Rotation spring (for tilt during drag)
+  const springRotation = new Spring(0, 0.1, 0.65);
+
+  // Idle float spring
+  const springFloat = new Spring(0, 0.02, 0.92);
+
+  // Eye lag springs (face reacts AFTER body)
+  const springEyeX = new Spring(0, 0.08, 0.7);
+  const springEyeY = new Spring(0, 0.08, 0.7);
+
+  // Jiggle system — separate springs for organic wobble
+  const springJiggle1 = new Spring(0, 0.12, 0.6);
+  const springJiggle2 = new Spring(0, 0.15, 0.58);
+
+  // ═══════════════════════════════════════════════════════
+  // BLOB SHAPE MORPHING (organic, multi-frequency sin waves)
+  // ═══════════════════════════════════════════════════════
+  let morphTime = 0;
+  const MORPH_POINTS = 8; // control points around the blob
+
+  function getOrganicBorderRadius(t) {
+    // Generate 8 "radius" values using layered sine waves
+    const radii = [];
+    for (let i = 0; i < MORPH_POINTS; i++) {
+      const noise =
+        Math.sin(t * 1.3 + i * 2.1) * 8 +
+        Math.sin(t * 0.7 + i * 3.7) * 5 +
+        Math.sin(t * 2.1 + i * 1.3) * 3;
+      radii.push(50 + noise); // base 50% ± organic noise
+    }
+    // CSS border-radius: TL TR BR BL / TL TR BR BL
+    return `${radii[0]}% ${radii[1]}% ${radii[2]}% ${radii[3]}% / ${radii[4]}% ${radii[5]}% ${radii[6]}% ${radii[7]}%`;
+  }
+
+  // ═══════════════════════════════════════════════════════
+  // DRAG & INTERACTION STATE
+  // ═══════════════════════════════════════════════════════
+  let isDragging = false;
+  let dragStartX = 0, dragStartY = 0;
+  let dragOffsetX = 0, dragOffsetY = 0;
+
+  // Velocity tracking (last N positions for smooth velocity calc)
+  const velocityHistory = [];
+  const VELOCITY_SAMPLES = 5;
+  let lastDragX = 0, lastDragY = 0;
+  let lastDragTime = 0;
+
+  // Pressed state for squish
+  let isPressed = false;
+  let pressStartTime = 0;
+
+  // ═══════════════════════════════════════════════════════
+  // MAIN ANIMATION LOOP — runs continuously via rAF
+  // ═══════════════════════════════════════════════════════
+  let lastFrameTime = performance.now();
+
+  function physicsLoop(now) {
+    requestAnimationFrame(physicsLoop);
+
+    const dt = Math.min((now - lastFrameTime) / 16.67, 3); // normalize to ~60fps, cap at 3x
+    lastFrameTime = now;
+
+    // Advance morph time
+    morphTime += 0.008 * dt;
+
+    // Update all springs
+    springPosX.update();
+    springPosY.update();
+    springScaleX.update();
+    springScaleY.update();
+    springRotation.update();
+    springFloat.update();
+    springEyeX.update();
+    springEyeY.update();
+    springJiggle1.update();
+    springJiggle2.update();
+
+    // Idle floating (gentle sine-driven target)
+    if (!isDragging && !isPressed) {
+      springFloat.target = Math.sin(now * 0.002) * 8;
+    }
+
+    // ─── Apply transforms ───
+
+    // Position (drag or spring-return + float)
+    const px = springPosX.value;
+    const py = springPosY.value + springFloat.value;
+
+    // Deformation with volume conservation
+    let sx = springScaleX.value;
+    let sy = springScaleY.value;
+
+    // Add jiggle on top
+    sx += springJiggle1.value * 0.15;
+    sy -= springJiggle1.value * 0.15; // opposite for volume conservation
+    sx -= springJiggle2.value * 0.08;
+    sy += springJiggle2.value * 0.08;
+
+    const rot = springRotation.value;
+
+    // Apply to wrapper (position)
+    wrapper.style.transform = `translate(${px}px, ${py}px)`;
+
+    // Apply to blob (deformation + rotation)
+    blob.style.transform = `scale(${sx}, ${sy}) rotate(${rot}deg)`;
+
+    // Organic blob shape morph
+    blobBody.style.borderRadius = getOrganicBorderRadius(morphTime);
+
+    // Shadow reacts to height/position
+    const shadowScale = 1 - Math.abs(springFloat.value) * 0.008;
+    const shadowOpacity = 0.25 - Math.abs(springFloat.value) * 0.008;
+    shadow.style.transform = `translateX(-50%) scaleX(${shadowScale + (sx - 1) * 0.3}) scaleY(${Math.max(0.3, shadowScale)})`;
+    shadow.style.opacity = Math.max(0.1, shadowOpacity);
+
+    // Face lags behind body (secondary motion!)
+    springEyeX.target = (springScaleX.value - 1) * -15 + springRotation.value * 0.3;
+    springEyeY.target = (springScaleY.value - 1) * -10;
+    face.style.transform = `translate(${springEyeX.value}px, ${springEyeY.value}px)`;
+  }
+
+  requestAnimationFrame(physicsLoop);
+
+  // ═══════════════════════════════════════════════════════
+  // TOUCH/MOUSE INTERACTION
+  // ═══════════════════════════════════════════════════════
+
+  function getXY(e) {
+    if (e.touches && e.touches.length) return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    return { x: e.clientX, y: e.clientY };
+  }
+
+  let lastTapTime = 0;
+  let tapTimer = null;
+
+  function handlePointerDown(e) {
+    if (e.target === chatInput || e.target === sendBtn || e.target.closest('.send-btn') || e.target.closest('.login-btn')) return;
+
+    const { x, y } = getXY(e);
+    dragStartX = x;
+    dragStartY = y;
+    dragOffsetX = springPosX.value;
+    dragOffsetY = springPosY.value;
+    isDragging = true;
+    isPressed = true;
+    pressStartTime = performance.now();
+
+    // Reset velocity history
+    velocityHistory.length = 0;
+    lastDragX = x;
+    lastDragY = y;
+    lastDragTime = performance.now();
+
+    // SQUISH! — press down like putty
+    springScaleX.target = 1.25;
+    springScaleY.target = 0.75;
+    springFloat.target = 0; // stop floating when held
+
+    // Trigger jiggle impulse
+    springJiggle1.impulse(0.3);
+  }
+
+  function handlePointerMove(e) {
+    if (!isDragging) return;
+    e.preventDefault();
+
+    const { x, y } = getXY(e);
+    const now = performance.now();
+
+    // Track velocity
+    const dtMs = now - lastDragTime;
+    if (dtMs > 0) {
+      const vx = (x - lastDragX) / dtMs * 16; // per-frame velocity
+      const vy = (y - lastDragY) / dtMs * 16;
+      velocityHistory.push({ vx, vy, t: now });
+      if (velocityHistory.length > VELOCITY_SAMPLES) velocityHistory.shift();
+    }
+    lastDragX = x;
+    lastDragY = y;
+    lastDragTime = now;
+
+    // Blob follows pointer with slight lag (lerp via spring target)
+    const targetX = dragOffsetX + (x - dragStartX);
+    const targetY = dragOffsetY + (y - dragStartY);
+    springPosX.target = targetX;
+    springPosY.target = targetY;
+    // Make position springs snappier during drag
+    springPosX.value += (targetX - springPosX.value) * 0.25;
+    springPosY.value += (targetY - springPosY.value) * 0.25;
+
+    // Stretch in movement direction based on velocity
+    const speed = Math.sqrt(
+      Math.pow(x - dragStartX, 2) + Math.pow(y - dragStartY, 2)
+    );
+    const dx = x - lastDragX || 0;
+    const dy = y - lastDragY || 0;
+    const moveSpeed = Math.sqrt(dx * dx + dy * dy);
+
+    // Tilt toward movement direction
+    springRotation.target = dx * 1.5;
+
+    // Stretch based on movement speed (volume-conserving)
+    const stretchFactor = Math.min(moveSpeed * 0.02, 0.3);
+    const moveAngle = Math.atan2(dy, dx);
+    const absCos = Math.abs(Math.cos(moveAngle));
+    const absSin = Math.abs(Math.sin(moveAngle));
+
+    // Horizontal motion → stretch X, squish Y. Vertical → opposite
+    springScaleX.target = 1 + stretchFactor * (absCos * 0.8 - absSin * 0.3);
+    springScaleY.target = 1 + stretchFactor * (absSin * 0.8 - absCos * 0.3);
+
+    // Eyes look in drag direction
+    if (currentExpression !== 'thinking' && currentExpression !== 'happy') {
+      const normX = (x - dragStartX) / (speed || 1) * MAX_PUPIL_OFFSET;
+      const normY = (y - dragStartY) / (speed || 1) * MAX_PUPIL_OFFSET;
+      setPupilOffset(
+        Math.max(-MAX_PUPIL_OFFSET, Math.min(MAX_PUPIL_OFFSET, normX)),
+        Math.max(-MAX_PUPIL_OFFSET, Math.min(MAX_PUPIL_OFFSET, normY))
+      );
+    }
+  }
+
+  function handlePointerUp(e) {
+    if (!isDragging) return;
+
+    const pt = e.changedTouches ? e.changedTouches[0] : e;
+    const dx = Math.abs(pt.clientX - dragStartX);
+    const dy = Math.abs(pt.clientY - dragStartY);
+    const pressDuration = performance.now() - pressStartTime;
+
+    isDragging = false;
+    isPressed = false;
+
+    // Calculate release velocity from history
+    let releaseVX = 0, releaseVY = 0;
+    if (velocityHistory.length > 0) {
+      for (const v of velocityHistory) {
+        releaseVX += v.vx;
+        releaseVY += v.vy;
+      }
+      releaseVX /= velocityHistory.length;
+      releaseVY /= velocityHistory.length;
+    }
+
+    // Apply momentum on release
+    springPosX.velocity += releaseVX * 0.5;
+    springPosY.velocity += releaseVY * 0.5;
+
+    // Spring back to center
+    springPosX.target = 0;
+    springPosY.target = 0;
+
+    // Reset deformation — spring overshoots naturally (Flubber bounce!)
+    springScaleX.target = 1;
+    springScaleY.target = 1;
+    springRotation.target = 0;
+
+    // Release pop! — impulse the scale springs for overshoot bounce
+    const releaseSpeed = Math.sqrt(releaseVX * releaseVX + releaseVY * releaseVY);
+    const popForce = Math.min(0.15 + releaseSpeed * 0.03, 0.5);
+    springScaleX.impulse(-popForce * 0.8); // squish X first
+    springScaleY.impulse(popForce);         // stretch Y (pop up!)
+
+    // Jiggle on release — multiple springs for organic wobble
+    springJiggle1.impulse(popForce * 2);
+    springJiggle2.impulse(-popForce * 1.5);
+
+    // Tap detection
+    if (dx < 10 && dy < 10) {
+      const now = Date.now();
+      if (now - lastTapTime < 300) {
+        clearTimeout(tapTimer);
+        doDoubleTap();
+        lastTapTime = 0;
+      } else {
+        lastTapTime = now;
+        tapTimer = setTimeout(() => { doSingleTap(); lastTapTime = 0; }, 300);
+      }
+    }
+
+    resetIdle();
+  }
+
+  // ═══════════════════════════════════════════════════════
+  // TAP INTERACTIONS
+  // ═══════════════════════════════════════════════════════
+
+  function doSingleTap() {
+    // Small happy bounce via spring impulse
+    springScaleX.impulse(0.12);
+    springScaleY.impulse(-0.15);
+    springJiggle1.impulse(0.5);
+    springJiggle2.impulse(-0.3);
+
+    // Pop upward slightly
+    springPosY.impulse(-2);
+
+    setExpression('surprised');
+    setTimeout(() => {
+      setExpression('happy');
+      setTimeout(() => setExpression('idle'), 1500);
+    }, 300);
+
+    const tapMsgs = ["Hehe, that tickles! 😆", "Type something below! 👇", "Let's chat! Ask me anything 🌿"];
+    showBubble(pick(tapMsgs));
+    spawnParticles(5);
+    resetIdle();
+  }
+
+  function doDoubleTap() {
+    // BIG excited bounce — Flubber-style overshoot
+    springScaleX.impulse(0.3);
+    springScaleY.impulse(-0.35);
+    springJiggle1.impulse(1.0);
+    springJiggle2.impulse(-0.8);
+
+    // Pop up high
+    springPosY.impulse(-5);
+
+    // Spin via rotation spring
+    springRotation.impulse(15);
+
+    setExpression('excited');
+    setTimeout(() => {
+      setExpression('happy');
+      setTimeout(() => setExpression('idle'), 1500);
+    }, 700);
+
+    showBubble("Let's GOOO! 🔥");
+    spawnParticles(10);
+    resetIdle();
+  }
+
+  // ═══════════════════════════════════════════════════════
+  // EXPRESSION SYSTEM (preserved from original)
+  // ═══════════════════════════════════════════════════════
   function setExpression(expr) {
     currentExpression = expr;
     switch (expr) {
@@ -526,40 +865,31 @@ html, body {
         browRight.setAttribute('d', 'M108,60 Q118,56 128,62');
         sparkles.setAttribute('opacity', '0');
         break;
-
       case 'happy':
-        // Squinty happy eyes (^ ^)
         eyeLeftWhite.setAttribute('ry', '6');
         eyeRightWhite.setAttribute('ry', '6');
         eyeLeftPupil.setAttribute('ry', '4');
         eyeRightPupil.setAttribute('ry', '4');
-        // Big smile with fill
         mouth.setAttribute('d', 'M70,108 Q90,132 110,108');
         mouth.setAttribute('fill', 'rgba(0,60,35,0.3)');
         browLeft.setAttribute('d', 'M52,60 Q62,55 72,58');
         browRight.setAttribute('d', 'M108,58 Q118,55 128,60');
         sparkles.setAttribute('opacity', '0');
         break;
-
       case 'surprised':
-        // Wide eyes, small pupils
         eyeLeftWhite.setAttribute('ry', '22');
         eyeRightWhite.setAttribute('ry', '22');
         eyeLeftPupil.setAttribute('ry', '5');
         eyeRightPupil.setAttribute('ry', '5');
         eyeLeftPupil.setAttribute('rx', '5');
         eyeRightPupil.setAttribute('rx', '5');
-        // O mouth
         mouth.setAttribute('d', 'M82,108 Q82,124 90,124 Q98,124 98,108 Q98,100 90,100 Q82,100 82,108 Z');
         mouth.setAttribute('fill', 'rgba(0,60,35,0.3)');
-        // Raised brows
         browLeft.setAttribute('d', 'M50,55 Q62,46 74,55');
         browRight.setAttribute('d', 'M106,55 Q118,46 130,55');
         sparkles.setAttribute('opacity', '0');
         break;
-
       case 'excited':
-        // Big eyes with sparkles
         eyeLeftWhite.setAttribute('ry', '20');
         eyeRightWhite.setAttribute('ry', '20');
         eyeLeftPupil.setAttribute('ry', '10');
@@ -572,7 +902,6 @@ html, body {
         browRight.setAttribute('d', 'M106,56 Q118,48 130,56');
         sparkles.setAttribute('opacity', '1');
         break;
-
       case 'thinking':
         eyeLeftWhite.setAttribute('ry', '14');
         eyeRightWhite.setAttribute('ry', '18');
@@ -580,19 +909,19 @@ html, body {
         eyeRightPupil.setAttribute('ry', '9');
         eyeLeftPupil.setAttribute('rx', '7');
         eyeRightPupil.setAttribute('rx', '8');
-        // Smirk
         mouth.setAttribute('d', 'M78,112 Q88,118 100,112');
         mouth.setAttribute('fill', 'none');
         browLeft.setAttribute('d', 'M52,60 Q60,56 68,62');
         browRight.setAttribute('d', 'M110,62 Q118,56 128,60');
         sparkles.setAttribute('opacity', '0');
-        // Look up-left
         setPupilOffset(-4, -3);
         break;
     }
   }
 
-  // ─── Pupil Movement ───
+  // ═══════════════════════════════════════════════════════
+  // PUPIL MOVEMENT
+  // ═══════════════════════════════════════════════════════
   function setPupilOffset(ox, oy) {
     eyeLeftPupil.setAttribute('cx', LEFT_EYE.cx + ox);
     eyeLeftPupil.setAttribute('cy', LEFT_EYE.cy + oy);
@@ -604,18 +933,15 @@ html, body {
     eyeRightHighlight.setAttribute('cy', RIGHT_EYE.cy + oy - 5);
   }
 
-  // Track mouse/touch for eye following
   function trackEyes(clientX, clientY) {
     const rect = wrapper.getBoundingClientRect();
     const blobCX = rect.left + rect.width / 2;
     const blobCY = rect.top + rect.height / 2;
-
     const dx = clientX - blobCX;
     const dy = clientY - blobCY;
     const dist = Math.sqrt(dx * dx + dy * dy) || 1;
     const maxDist = Math.max(window.innerWidth, window.innerHeight);
     const factor = Math.min(dist / maxDist * 3, 1);
-
     const ox = (dx / dist) * MAX_PUPIL_OFFSET * factor;
     const oy = (dy / dist) * MAX_PUPIL_OFFSET * factor;
     setPupilOffset(ox, oy);
@@ -640,12 +966,14 @@ html, body {
         trackEyes(e.touches[0].clientX, e.touches[0].clientY);
       }
     }
-  });
+  }, { passive: true });
 
-  // ─── Blink System ───
+  // ═══════════════════════════════════════════════════════
+  // BLINK SYSTEM
+  // ═══════════════════════════════════════════════════════
   let blinkInterval;
   function blink() {
-    if (currentExpression === 'happy') return; // Already squinted
+    if (currentExpression === 'happy') return;
     eyeLeftLid.setAttribute('ry', '19');
     eyeLeftLid.setAttribute('opacity', '1');
     eyeRightLid.setAttribute('ry', '19');
@@ -659,29 +987,26 @@ html, body {
   }
 
   function scheduleNextBlink() {
-    const delay = 2000 + Math.random() * 3000;
     blinkInterval = setTimeout(() => {
       blink();
       scheduleNextBlink();
-    }, delay);
+    }, 2000 + Math.random() * 3000);
   }
   scheduleNextBlink();
 
-  // ─── Idle Eye Wandering ───
+  // ═══════════════════════════════════════════════════════
+  // IDLE EYE WANDERING
+  // ═══════════════════════════════════════════════════════
   let idleEyeTimer;
   let eyeWanderTimer;
 
   function wanderEyes() {
     if (isTrackingMouse || currentExpression === 'thinking') return;
     const targets = [
-      { x: -4, y: -2 },  // up-left
-      { x: 4, y: -2 },   // up-right
-      { x: -3, y: 2 },   // down-left
-      { x: 3, y: 2 },    // down-right
-      { x: 0, y: -4 },   // up
-      { x: 0, y: 0 },    // center
-      { x: -5, y: 0 },   // left
-      { x: 5, y: 0 },    // right
+      { x: -4, y: -2 }, { x: 4, y: -2 },
+      { x: -3, y: 2 },  { x: 3, y: 2 },
+      { x: 0, y: -4 },  { x: 0, y: 0 },
+      { x: -5, y: 0 },  { x: 5, y: 0 },
     ];
     const t = targets[Math.floor(Math.random() * targets.length)];
     setPupilOffset(t.x, t.y);
@@ -701,7 +1026,9 @@ html, body {
     clearInterval(eyeWanderTimer);
   }
 
-  // ─── Chat Functions ───
+  // ═══════════════════════════════════════════════════════
+  // CHAT FUNCTIONS (preserved from original)
+  // ═══════════════════════════════════════════════════════
   function addMessage(text, sender) {
     const msgEl = document.createElement('div');
     msgEl.className = `chat-msg ${sender}`;
@@ -753,13 +1080,12 @@ html, body {
     conversationHistory.push({ role: 'user', content: text });
 
     const handle = detectIgHandle(text);
-
     showThinking();
 
-    // Squish on send
-    blob.classList.remove('squish', 'spin');
-    void blob.offsetWidth;
-    blob.classList.add('squish');
+    // Squish on send via spring impulse
+    springScaleX.impulse(0.15);
+    springScaleY.impulse(-0.2);
+    springJiggle1.impulse(0.4);
 
     try {
       const resp = await fetch(CONVEX_URL, {
@@ -776,15 +1102,17 @@ html, body {
       if (newThreadId) threadId = newThreadId;
 
       const reply = (await resp.text()) || "Hmm, my brain glitched. Try again? 😅";
-
       conversationHistory.push({ role: 'assistant', content: reply });
 
       if (/handle|instagram|ig |@|username|what'?s your/i.test(reply)) {
         hasAskedForHandle = true;
       }
 
-      // Happy expression on reply
+      // Happy bounce on reply
       setExpression('happy');
+      springScaleX.impulse(-0.1);
+      springScaleY.impulse(0.12);
+      springJiggle1.impulse(0.3);
       setTimeout(() => setExpression('idle'), 2000);
 
       addMessage(reply, 'mint');
@@ -792,9 +1120,12 @@ html, body {
 
       if (handle) {
         spawnParticles(12);
-        blob.classList.remove('squish', 'spin');
-        void blob.offsetWidth;
-        blob.classList.add('spin');
+        // Excited spin via rotation impulse
+        springRotation.impulse(25);
+        springScaleX.impulse(0.25);
+        springScaleY.impulse(-0.3);
+        springJiggle1.impulse(1.0);
+        springJiggle2.impulse(-0.7);
         setExpression('excited');
 
         setTimeout(() => {
@@ -812,6 +1143,8 @@ html, body {
       addMessage(fallback, 'mint');
       showBubble(fallback);
       setExpression('surprised');
+      springScaleX.impulse(0.1);
+      springScaleY.impulse(0.15);
       setTimeout(() => setExpression('idle'), 1500);
     }
 
@@ -828,7 +1161,9 @@ html, body {
     }
   });
 
-  // ─── Speech Bubble ───
+  // ═══════════════════════════════════════════════════════
+  // SPEECH BUBBLE
+  // ═══════════════════════════════════════════════════════
   function showBubble(text) {
     bubble.classList.remove('pop', 'hidden');
     bubble.textContent = text;
@@ -836,7 +1171,9 @@ html, body {
     bubble.classList.add('pop');
   }
 
-  // ─── Idle Timer ───
+  // ═══════════════════════════════════════════════════════
+  // IDLE TIMER
+  // ═══════════════════════════════════════════════════════
   let idleTimer = null;
   const nudges = [
     "Go ahead, type something! 👇",
@@ -849,11 +1186,16 @@ html, body {
     clearTimeout(idleTimer);
     idleTimer = setTimeout(() => {
       if (!isDragging && conversationHistory.length === 0) {
-        // Look at user
         setPupilOffset(0, 0);
         browLeft.setAttribute('d', 'M50,58 Q62,50 74,58');
         browRight.setAttribute('d', 'M106,58 Q118,50 130,58');
         showBubble(pick(nudges));
+
+        // Gentle attention-getting bounce
+        springScaleX.impulse(0.06);
+        springScaleY.impulse(-0.08);
+        springJiggle1.impulse(0.2);
+
         setTimeout(() => {
           browLeft.setAttribute('d', 'M52,62 Q62,56 72,60');
           browRight.setAttribute('d', 'M108,60 Q118,56 128,62');
@@ -863,148 +1205,9 @@ html, body {
   }
   resetIdle();
 
-  // ─── Spring Physics & Drag ───
-  let posX = 0, posY = 0;
-  let velX = 0, velY = 0;
-  let isDragging = false;
-  let dragStartX = 0, dragStartY = 0;
-  let dragOffsetX = 0, dragOffsetY = 0;
-  let animating = false;
-
-  function applyTransform() {
-    wrapper.style.transform = `translate(${posX}px, ${posY}px)`;
-  }
-
-  const springK = 0.12;
-  const damping = 0.75;
-
-  function springAnimate() {
-    if (isDragging) { animating = false; return; }
-    const ax = -springK * posX;
-    const ay = -springK * posY;
-    velX = (velX + ax) * damping;
-    velY = (velY + ay) * damping;
-    posX += velX;
-    posY += velY;
-
-    if (Math.abs(posX) < 0.3 && Math.abs(posY) < 0.3 && Math.abs(velX) < 0.3 && Math.abs(velY) < 0.3) {
-      posX = 0; posY = 0;
-      applyTransform();
-      animating = false;
-      wrapper.classList.add('idle');
-      // Landing squish
-      blob.classList.remove('squish');
-      void blob.offsetWidth;
-      blob.classList.add('squish');
-      return;
-    }
-    applyTransform();
-    requestAnimationFrame(springAnimate);
-  }
-
-  function startSpring() {
-    if (!animating) { animating = true; requestAnimationFrame(springAnimate); }
-  }
-
-  function getXY(e) {
-    if (e.touches && e.touches.length) return { x: e.touches[0].clientX, y: e.touches[0].clientY };
-    return { x: e.clientX, y: e.clientY };
-  }
-
-  let lastTapTime = 0;
-  let tapTimer = null;
-
-  function handleTapStart(e) {
-    if (e.target === chatInput || e.target === sendBtn || e.target.closest('.send-btn') || e.target.closest('.login-btn')) return;
-    const { x, y } = getXY(e);
-    dragStartX = x; dragStartY = y;
-    dragOffsetX = posX; dragOffsetY = posY;
-    isDragging = true;
-    wrapper.classList.remove('idle');
-  }
-
-  function handleTapMove(e) {
-    if (!isDragging) return;
-    e.preventDefault();
-    const { x, y } = getXY(e);
-    posX = dragOffsetX + (x - dragStartX);
-    posY = dragOffsetY + (y - dragStartY);
-
-    // Stretch blob in drag direction
-    const dx = x - dragStartX;
-    const dy = y - dragStartY;
-    const dist = Math.sqrt(dx * dx + dy * dy);
-    const angle = Math.atan2(dy, dx) * (180 / Math.PI);
-    const stretch = Math.min(dist / 200, 0.2);
-    blob.style.transform = `rotate(${angle}deg) scale(${1 + stretch}, ${1 - stretch * 0.5})`;
-
-    // Eyes look in drag direction
-    const normX = dx / (dist || 1) * MAX_PUPIL_OFFSET;
-    const normY = dy / (dist || 1) * MAX_PUPIL_OFFSET;
-    setPupilOffset(normX, normY);
-
-    applyTransform();
-  }
-
-  function handleTapEnd(e) {
-    if (!isDragging) return;
-    const pt = e.changedTouches ? e.changedTouches[0] : e;
-    const dx = Math.abs(pt.clientX - dragStartX);
-    const dy = Math.abs(pt.clientY - dragStartY);
-    isDragging = false;
-
-    // Reset blob stretch
-    blob.style.transform = '';
-
-    if (dx < 10 && dy < 10) {
-      const now = Date.now();
-      if (now - lastTapTime < 300) {
-        clearTimeout(tapTimer);
-        doDoubleTap();
-        lastTapTime = 0;
-      } else {
-        lastTapTime = now;
-        tapTimer = setTimeout(() => { doSingleTap(); lastTapTime = 0; }, 300);
-      }
-    }
-    startSpring();
-    resetIdle();
-  }
-
-  function doSingleTap() {
-    blob.classList.remove('squish', 'spin');
-    void blob.offsetWidth;
-    blob.classList.add('squish');
-
-    // Surprised then happy
-    setExpression('surprised');
-    setTimeout(() => {
-      setExpression('happy');
-      setTimeout(() => setExpression('idle'), 1500);
-    }, 300);
-
-    const tapMsgs = ["Hehe, that tickles! 😆", "Type something below! 👇", "Let's chat! Ask me anything 🌿"];
-    showBubble(pick(tapMsgs));
-    spawnParticles(5);
-    resetIdle();
-  }
-
-  function doDoubleTap() {
-    blob.classList.remove('squish', 'spin');
-    void blob.offsetWidth;
-    blob.classList.add('spin');
-
-    setExpression('excited');
-    setTimeout(() => {
-      setExpression('happy');
-      setTimeout(() => setExpression('idle'), 1500);
-    }, 700);
-
-    showBubble("Let's GOOO! 🔥");
-    spawnParticles(10);
-    resetIdle();
-  }
-
+  // ═══════════════════════════════════════════════════════
+  // PARTICLES
+  // ═══════════════════════════════════════════════════════
   function spawnParticles(count) {
     const rect = wrapper.getBoundingClientRect();
     const cx = rect.left + rect.width / 2;
@@ -1027,15 +1230,17 @@ html, body {
     }
   }
 
-  // Event listeners
-  wrapper.addEventListener('touchstart', handleTapStart, { passive: true });
-  wrapper.addEventListener('touchmove', handleTapMove, { passive: false });
-  wrapper.addEventListener('touchend', handleTapEnd, { passive: true });
-  wrapper.addEventListener('mousedown', handleTapStart);
-  document.addEventListener('mousemove', handleTapMove);
-  document.addEventListener('mouseup', handleTapEnd);
-
-  blob.addEventListener('animationend', () => { blob.classList.remove('squish', 'spin'); });
+  // ═══════════════════════════════════════════════════════
+  // EVENT LISTENERS
+  // ═══════════════════════════════════════════════════════
+  wrapper.addEventListener('touchstart', handlePointerDown, { passive: true });
+  wrapper.addEventListener('touchmove', handlePointerMove, { passive: false });
+  wrapper.addEventListener('touchend', handlePointerUp, { passive: true });
+  wrapper.addEventListener('mousedown', handlePointerDown);
+  document.addEventListener('mousemove', (e) => {
+    if (isDragging) handlePointerMove(e);
+  });
+  document.addEventListener('mouseup', handlePointerUp);
 
   // Layout bubble above character
   function layoutBubble() {
