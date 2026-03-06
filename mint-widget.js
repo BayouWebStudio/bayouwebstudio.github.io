@@ -1,7 +1,8 @@
 (function(){
 try{
 
-const API='https://api.bayouwebstudio.com/api/mint/chat';
+const API='https://curious-lemming-262.convex.site/api/mint/chat';
+const FALLBACK_API='https://api.bayouwebstudio.com/api/mint/chat';
 const ACCENT='#98E8C1';
 const BG='#0a0a0a';
 const BUBBLE_BG='#1a1a1a';
@@ -132,6 +133,9 @@ var closeBtn=win.querySelector('.mint-close');
 var history=[];
 var isOpen=false;
 var sending=false;
+var threadId=null;
+var retryCount=0;
+var MAX_RETRIES=2;
 
 function addMsg(text,type){
   var d=document.createElement('div');d.className='mint-msg '+type;
@@ -156,6 +160,49 @@ input.oninput=function(){sendBtn.disabled=!input.value.trim()||sending;};
 input.onkeydown=function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send();}};
 sendBtn.onclick=send;
 
+function parseResponse(r){
+  var tid=r.headers.get('X-Thread-Id');
+  if(tid)threadId=tid;
+  var ct=r.headers.get('content-type')||'';
+  if(!r.ok)return r.text().then(function(t){try{var j=JSON.parse(t);return{reply:null,error:j.error||'Server error'}}catch(e2){return{reply:null,error:'Server error ('+r.status+')'}}});
+  if(ct.indexOf('text/')>=0)return r.text().then(function(t){return{reply:t}});
+  return r.json();
+}
+
+function doFetch(url,payload,typing,attempt){
+  var controller=new AbortController();
+  var timeoutId=setTimeout(function(){controller.abort();},30000);
+  return fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),signal:controller.signal})
+    .then(function(r){clearTimeout(timeoutId);return parseResponse(r);})
+    .then(function(d){
+      if(d.reply){
+        typing.remove();
+        addMsg(d.reply,'bot');
+        history.push({role:'assistant',content:d.reply});
+        retryCount=0;
+        sending=false;sendBtn.disabled=!input.value.trim();
+        return;
+      }
+      throw new Error(d.error||'Empty response');
+    })
+    .catch(function(err){
+      clearTimeout(timeoutId);
+      // Try fallback API on first failure
+      if(url===API&&attempt===0){
+        return doFetch(FALLBACK_API,payload,typing,1);
+      }
+      // Retry once on the primary API
+      if(attempt<MAX_RETRIES){
+        typing.textContent='Reconnecting...';
+        return new Promise(function(resolve){setTimeout(resolve,1500);}).then(function(){return doFetch(API,payload,typing,attempt+1);});
+      }
+      typing.remove();
+      var errMsg=isIG?"Connection issue. Try opening in Safari for full experience.":"Hmm, I'm having trouble connecting. Try again in a moment!";
+      addMsg(errMsg,'bot');
+      sending=false;sendBtn.disabled=!input.value.trim();
+    });
+}
+
 function send(){
   var text=input.value.trim();if(!text||sending)return;
   sending=true;sendBtn.disabled=true;input.value='';
@@ -164,22 +211,11 @@ function send(){
 
   var typing=document.createElement('div');typing.className='mint-typing';typing.textContent='Mint is typing...';msgs.appendChild(typing);msgs.scrollTop=msgs.scrollHeight;
 
-  // Use simple fetch→JSON (works in IG WebView, no streaming needed)
   var SLUG=window.__mintSlug||(window.location.pathname.split('/').filter(Boolean)[0]||'');
-  var payload={message:text,slug:SLUG,context:SLUG};if(threadId)payload.threadId=threadId;
-  fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
-    .then(function(r){var tid=r.headers.get('X-Thread-Id');if(tid)threadId=tid;var ct=r.headers.get('content-type')||'';if(ct.indexOf('text/')>=0)return r.text().then(function(t){return{reply:t}});return r.json();})
-    .then(function(d){
-      typing.remove();
-      if(d.reply){addMsg(d.reply,'bot');history.push({role:'assistant',content:d.reply});}
-      else{addMsg("Sorry, I couldn't get a response. Try again!","bot");}
-    })
-    .catch(function(){
-      typing.remove();
-      var errMsg=isIG?"Connection issue. Try opening in Safari for full experience.":"Connection error. Please try again.";
-      addMsg(errMsg,'bot');
-    });
-  sending=false;sendBtn.disabled=!input.value.trim();
+  var payload={message:text,slug:SLUG,context:SLUG};
+  if(threadId)payload.threadId=threadId;
+
+  doFetch(API,payload,typing,0);
 }
 
 }catch(e){
