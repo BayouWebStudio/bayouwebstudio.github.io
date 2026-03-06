@@ -1227,18 +1227,93 @@
       <!-- Make Store (collapsible on mobile, collapsed by default) -->
       <div class="collapsible-section" style="margin-bottom: 20px;">
         <div class="collapsible-header" onclick="toggleSection(this)" data-default-collapsed="true">
-          <div class="section-title">Make Store</div>
+          <div class="section-title">Store</div>
           <span class="collapsible-toggle">▼</span>
         </div>
         <div class="collapsible-body">
-          <div class="info-card" style="text-align: center; padding: 24px;">
-            <span style="font-size: 32px; display: block; margin-bottom: 12px;">🛍️</span>
-            <p style="color: var(--text); font-weight: 600; margin-bottom: 6px;">Start selling from your site</p>
-            <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 16px;">Accept deposits, sell products, or offer services — powered by Stripe</p>
-            <button class="action-btn" style="width: 100%; justify-content: center; padding: 12px;" onclick="sendQuickMessage('I want to set up a store on my site to accept payments and sell products')">
-              <span class="action-icon">⚡</span>
-              <span>Set Up My Store</span>
-            </button>
+          <div id="store-section">
+            <!-- State A: Not connected -->
+            <div id="store-state-a" style="display:none;">
+              <div class="info-card" style="text-align: center; padding: 28px;">
+                <span style="font-size: 36px; display: block; margin-bottom: 12px;">🛍️</span>
+                <p style="color: var(--text); font-weight: 700; font-size: 16px; margin-bottom: 6px;">Start selling from your site</p>
+                <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 4px;">Accept deposits, sell products, or offer services — powered by Stripe</p>
+                <p style="color: var(--mint); font-size: 12px; font-weight: 600; margin-bottom: 20px;">Takes 2 minutes. You keep 95%, we take 5%.</p>
+                <button class="action-btn" style="width: 100%; justify-content: center; padding: 14px; font-weight: 600;" onclick="connectStripe()">
+                  <span class="action-icon">⚡</span>
+                  <span>Connect Stripe</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- State B: Connected, no products -->
+            <div id="store-state-b" style="display:none;">
+              <div style="display:flex; align-items:center; gap:8px; margin-bottom:16px;">
+                <span style="background:rgba(72,199,142,0.15); color:#48c78e; font-size:12px; font-weight:600; padding:4px 10px; border-radius:20px;">✅ Stripe Connected</span>
+              </div>
+              <div id="store-add-form" class="info-card" style="padding:20px;">
+                <p style="font-weight:600; margin-bottom:14px; font-size:14px;">Add Your First Product</p>
+                <div style="display:flex; flex-direction:column; gap:10px;">
+                  <input id="product-name" type="text" placeholder="Product name" style="background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius-sm); padding:10px 12px; color:var(--text); font-size:13px; outline:none;" />
+                  <textarea id="product-desc" placeholder="Description (optional)" rows="2" style="background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius-sm); padding:10px 12px; color:var(--text); font-size:13px; outline:none; resize:vertical; font-family:inherit;"></textarea>
+                  <input id="product-price" type="number" placeholder="Price (USD)" min="0.50" step="0.01" style="background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius-sm); padding:10px 12px; color:var(--text); font-size:13px; outline:none;" />
+                  <div style="display:flex; gap:8px;">
+                    <label style="flex:1; display:flex; align-items:center; gap:6px; padding:10px 12px; background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius-sm); cursor:pointer; font-size:13px; color:var(--text-dim);">
+                      <input type="radio" name="product-type" value="one_time" checked style="accent-color:var(--mint);" /> One-time
+                    </label>
+                    <label style="flex:1; display:flex; align-items:center; gap:6px; padding:10px 12px; background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius-sm); cursor:pointer; font-size:13px; color:var(--text-dim);">
+                      <input type="radio" name="product-type" value="recurring" style="accent-color:var(--mint);" /> Monthly
+                    </label>
+                  </div>
+                  <button id="btn-add-product" class="action-btn" style="width:100%; justify-content:center; padding:12px; font-weight:600;" onclick="addProduct()">
+                    <span class="action-icon">➕</span>
+                    <span>Add Product</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- State C: Has products -->
+            <div id="store-state-c" style="display:none;">
+              <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <span style="background:rgba(72,199,142,0.15); color:#48c78e; font-size:12px; font-weight:600; padding:4px 10px; border-radius:20px;">✅ Stripe Connected</span>
+                  <span id="store-product-count" style="color:var(--text-dim); font-size:12px;"></span>
+                </div>
+              </div>
+              <div id="store-product-list" style="display:flex; flex-direction:column; gap:8px; margin-bottom:12px;"></div>
+              <button class="action-btn" style="width:100%; justify-content:center; padding:10px; font-size:13px;" onclick="showAddProductForm()">
+                <span class="action-icon">➕</span>
+                <span>Add Another Product</span>
+              </button>
+              <div id="store-add-form-c" style="display:none; margin-top:12px;" class="info-card">
+                <div class="info-card" style="padding:20px;">
+                  <div style="display:flex; flex-direction:column; gap:10px;">
+                    <input id="product-name-c" type="text" placeholder="Product name" style="background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius-sm); padding:10px 12px; color:var(--text); font-size:13px; outline:none;" />
+                    <textarea id="product-desc-c" placeholder="Description (optional)" rows="2" style="background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius-sm); padding:10px 12px; color:var(--text); font-size:13px; outline:none; resize:vertical; font-family:inherit;"></textarea>
+                    <input id="product-price-c" type="number" placeholder="Price (USD)" min="0.50" step="0.01" style="background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius-sm); padding:10px 12px; color:var(--text); font-size:13px; outline:none;" />
+                    <div style="display:flex; gap:8px;">
+                      <label style="flex:1; display:flex; align-items:center; gap:6px; padding:10px 12px; background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius-sm); cursor:pointer; font-size:13px; color:var(--text-dim);">
+                        <input type="radio" name="product-type-c" value="one_time" checked style="accent-color:var(--mint);" /> One-time
+                      </label>
+                      <label style="flex:1; display:flex; align-items:center; gap:6px; padding:10px 12px; background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius-sm); cursor:pointer; font-size:13px; color:var(--text-dim);">
+                        <input type="radio" name="product-type-c" value="recurring" style="accent-color:var(--mint);" /> Monthly
+                      </label>
+                    </div>
+                    <button class="action-btn" style="width:100%; justify-content:center; padding:12px; font-weight:600;" onclick="addProductFromC()">
+                      <span class="action-icon">➕</span>
+                      <span>Add Product</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Loading state -->
+            <div id="store-loading" class="info-card" style="text-align:center; padding:24px;">
+              <div class="loading-spinner" style="margin:0 auto 8px;"></div>
+              <p style="color:var(--text-dim); font-size:13px;">Loading store...</p>
+            </div>
           </div>
         </div>
       </div>
@@ -2109,6 +2184,338 @@
     if (diff < 3600000) return `${Math.floor(diff / 60000)}m ago`;
     if (diff < 86400000) return `${Math.floor(diff / 3600000)}h ago`;
     return d.toLocaleDateString();
+  }
+
+  // ── Store Management ──
+
+  let storeProducts = [];
+  let stripeAccountId = null;
+
+  async function loadStoreStatus() {
+    try {
+      const token = await getToken();
+      const res = await fetch(`${CONVEX_HTTP_URL}/api/stripe/connect/status`, {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+        body: '{}',
+      });
+      const data = await res.json();
+
+      document.getElementById('store-loading').style.display = 'none';
+
+      if (!data.onboardingComplete) {
+        document.getElementById('store-state-a').style.display = 'block';
+        return;
+      }
+
+      stripeAccountId = data.stripeAccountId;
+
+      // Connected — load products
+      const prodRes = await fetch(`${CONVEX_HTTP_URL}/api/stripe/connect/products`, {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+        body: '{}',
+      });
+      const prodData = await prodRes.json();
+      storeProducts = prodData.products || [];
+
+      if (storeProducts.length === 0) {
+        document.getElementById('store-state-b').style.display = 'block';
+      } else {
+        renderStoreProducts();
+        document.getElementById('store-state-c').style.display = 'block';
+      }
+    } catch (e) {
+      console.error('[Store] Failed to load status:', e);
+      document.getElementById('store-loading').innerHTML =
+        '<p style="color:var(--text-dim); font-size:13px;">Failed to load store. <a href="javascript:loadStoreStatus()" style="color:var(--mint);">Retry</a></p>';
+    }
+  }
+
+  window.connectStripe = async function() {
+    if (!siteSlug) { showClaimToast('Site not loaded yet. Try again in a moment.', true); return; }
+    try {
+      const token = await getToken();
+      const res = await fetch(`${CONVEX_HTTP_URL}/api/stripe/connect/onboard`, {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ siteSlug }),
+      });
+      const data = await res.json();
+      if (data.url) window.location.href = data.url;
+      else showClaimToast(data.error || 'Failed to start Stripe setup', true);
+    } catch (e) {
+      showClaimToast('Connection error: ' + e.message, true);
+    }
+  };
+
+  async function addProductAPI(name, description, price, type) {
+    const token = await getToken();
+    const res = await fetch(`${CONVEX_HTTP_URL}/api/stripe/connect/create-product`, {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, description: description || undefined, price, type }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Failed to create product');
+    return data;
+  }
+
+  window.addProduct = async function() {
+    const name = document.getElementById('product-name').value.trim();
+    const desc = document.getElementById('product-desc').value.trim();
+    const priceVal = parseFloat(document.getElementById('product-price').value);
+    const type = document.querySelector('input[name="product-type"]:checked')?.value || 'one_time';
+
+    if (!name) { showClaimToast('Product name is required', true); return; }
+    if (!priceVal || priceVal < 0.50) { showClaimToast('Price must be at least $0.50', true); return; }
+
+    const btn = document.getElementById('btn-add-product');
+    btn.disabled = true;
+    btn.querySelector('span:last-child').textContent = 'Creating...';
+
+    try {
+      const priceCents = Math.round(priceVal * 100);
+      const result = await addProductAPI(name, desc, priceCents, type);
+
+      storeProducts.push({
+        id: result.productId,
+        name: result.name,
+        description: desc,
+        priceId: result.priceId,
+        amount: result.amount,
+        currency: 'usd',
+        recurring: type === 'recurring',
+      });
+
+      // Switch to state C
+      document.getElementById('store-state-b').style.display = 'none';
+      renderStoreProducts();
+      document.getElementById('store-state-c').style.display = 'block';
+
+      showClaimToast('Product added!');
+      pushStorePageToGitHub();
+    } catch (e) {
+      showClaimToast(e.message, true);
+      btn.disabled = false;
+      btn.querySelector('span:last-child').textContent = 'Add Product';
+    }
+  };
+
+  window.addProductFromC = async function() {
+    const name = document.getElementById('product-name-c').value.trim();
+    const desc = document.getElementById('product-desc-c').value.trim();
+    const priceVal = parseFloat(document.getElementById('product-price-c').value);
+    const type = document.querySelector('input[name="product-type-c"]:checked')?.value || 'one_time';
+
+    if (!name) { showClaimToast('Product name is required', true); return; }
+    if (!priceVal || priceVal < 0.50) { showClaimToast('Price must be at least $0.50', true); return; }
+
+    try {
+      const priceCents = Math.round(priceVal * 100);
+      const result = await addProductAPI(name, desc, priceCents, type);
+
+      storeProducts.push({
+        id: result.productId,
+        name: result.name,
+        description: desc,
+        priceId: result.priceId,
+        amount: result.amount,
+        currency: 'usd',
+        recurring: type === 'recurring',
+      });
+
+      renderStoreProducts();
+      document.getElementById('store-add-form-c').style.display = 'none';
+      document.getElementById('product-name-c').value = '';
+      document.getElementById('product-desc-c').value = '';
+      document.getElementById('product-price-c').value = '';
+
+      showClaimToast('Product added!');
+      pushStorePageToGitHub();
+    } catch (e) {
+      showClaimToast(e.message, true);
+    }
+  };
+
+  window.showAddProductForm = function() {
+    const form = document.getElementById('store-add-form-c');
+    form.style.display = form.style.display === 'none' ? 'block' : 'none';
+  };
+
+  function renderStoreProducts() {
+    const list = document.getElementById('store-product-list');
+    const count = document.getElementById('store-product-count');
+    count.textContent = `${storeProducts.length} product${storeProducts.length !== 1 ? 's' : ''}`;
+
+    list.innerHTML = storeProducts.map((p, i) => {
+      const price = p.amount ? `$${(p.amount / 100).toFixed(2)}` : '';
+      const typeBadge = p.recurring
+        ? '<span style="background:rgba(152,232,193,0.12); color:var(--mint); font-size:11px; padding:2px 8px; border-radius:10px; font-weight:600;">Monthly</span>'
+        : '<span style="background:rgba(255,255,255,0.06); color:var(--text-dim); font-size:11px; padding:2px 8px; border-radius:10px;">One-time</span>';
+
+      return `
+        <div style="background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius-sm); padding:12px 14px; display:flex; align-items:center; justify-content:space-between;">
+          <div>
+            <div style="font-weight:600; font-size:13px; color:var(--text); margin-bottom:3px;">${escapeHtml(p.name)}</div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="color:var(--mint); font-weight:700; font-size:14px;">${price}</span>
+              ${typeBadge}
+            </div>
+          </div>
+          <button onclick="copyBuyLink(${i})" style="background:var(--mint-dim); border:1px solid var(--mint-border); color:var(--mint); padding:6px 12px; border-radius:var(--radius-sm); cursor:pointer; font-size:12px; font-weight:600; white-space:nowrap;" title="Copy checkout link">
+            📋 Copy Link
+          </button>
+        </div>`;
+    }).join('');
+  }
+
+  window.copyBuyLink = async function(index) {
+    const product = storeProducts[index];
+    if (!product?.priceId) { showClaimToast('No price ID for this product', true); return; }
+
+    try {
+      const token = await getToken();
+      const slug = siteSlug;
+      const res = await fetch(`${CONVEX_HTTP_URL}/api/stripe/connect/create-checkout`, {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          priceId: product.priceId,
+          successUrl: `https://getminted.ai/${slug}/store/?payment=success`,
+          cancelUrl: `https://getminted.ai/${slug}/store/`,
+        }),
+      });
+      const data = await res.json();
+      if (data.url) {
+        await navigator.clipboard.writeText(data.url);
+        showClaimToast('Checkout link copied! 🔗');
+      } else {
+        showClaimToast(data.error || 'Failed to create link', true);
+      }
+    } catch (e) {
+      showClaimToast('Error: ' + e.message, true);
+    }
+  };
+
+  async function pushStorePageToGitHub() {
+    if (!siteSlug || !stripeAccountId || storeProducts.length === 0) return;
+
+    try {
+      const siteName = document.getElementById('info-slug')?.textContent || siteSlug;
+      const storeHtml = generateStorePageHTML(siteSlug, siteName, stripeAccountId, storeProducts);
+      const base64 = btoa(unescape(encodeURIComponent(storeHtml)));
+      const path = `${siteSlug}/store/index.html`;
+      const token = await getToken();
+
+      // Use the Convex endpoint to push to GitHub (matches existing upload pattern)
+      const ghRes = await fetch(`${CONVEX_HTTP_URL}/api/mint/push-file`, {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ slug: siteSlug, path: 'store/index.html', content: base64, message: `Store: update store page for ${siteSlug}` }),
+      }).catch(() => null);
+
+      // Fallback: if no push-file endpoint, we rely on the user's site build including the store
+      if (ghRes && ghRes.ok) {
+        console.log('[Store] Store page pushed to GitHub');
+      } else {
+        console.warn('[Store] Could not push store page (endpoint may not exist yet). Store still works via checkout links.');
+      }
+    } catch (e) {
+      console.warn('[Store] Push store page failed:', e);
+    }
+  }
+
+  function generateStorePageHTML(slug, siteName, accountId, products) {
+    const productCards = products.map(p => {
+      const price = p.amount ? `$${(p.amount / 100).toFixed(2)}` : '';
+      const typeLabel = p.recurring ? '/month' : '';
+      const desc = p.description ? `<p class="product-desc">${p.description}</p>` : '';
+      return `
+        <div class="product-card">
+          <h3 class="product-name">${p.name}</h3>
+          ${desc}
+          <div class="product-price">${price}<span class="product-interval">${typeLabel}</span></div>
+          <button class="buy-btn" onclick="buyProduct('${p.priceId}')">Buy Now →</button>
+        </div>`;
+    }).join('\n');
+
+    return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>${siteName} — Store</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#0a0d0f;color:#e8edf2;min-height:100vh;-webkit-font-smoothing:antialiased}
+.store-header{text-align:center;padding:48px 24px 32px;border-bottom:1px solid rgba(255,255,255,0.07)}
+.store-header h1{font-size:28px;font-weight:800;color:#98E8C1;margin-bottom:4px}
+.store-header p{color:#8a9aa8;font-size:14px}
+.store-header a{color:#98E8C1;text-decoration:none}
+.products-grid{max-width:720px;margin:0 auto;padding:32px 24px;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.product-card{background:#111417;border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:24px;display:flex;flex-direction:column}
+.product-name{font-size:16px;font-weight:700;margin-bottom:6px}
+.product-desc{color:#8a9aa8;font-size:13px;margin-bottom:12px;line-height:1.5}
+.product-price{font-size:24px;font-weight:800;color:#98E8C1;margin-bottom:16px;margin-top:auto}
+.product-interval{font-size:14px;font-weight:400;color:#8a9aa8}
+.buy-btn{background:#98E8C1;color:#0a0d0f;border:none;padding:12px 24px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;transition:opacity 0.2s}
+.buy-btn:hover{opacity:0.85}
+.buy-btn:disabled{opacity:0.5;cursor:wait}
+.footer{text-align:center;padding:32px 24px;color:#4a5a68;font-size:12px}
+.footer a{color:#98E8C1;text-decoration:none}
+.success-msg{max-width:480px;margin:80px auto;text-align:center;padding:24px}
+.success-msg h2{color:#98E8C1;font-size:24px;margin-bottom:8px}
+.success-msg p{color:#8a9aa8}
+</style>
+</head>
+<body>
+<div class="store-header">
+  <h1>${siteName}</h1>
+  <p><a href="https://getminted.ai/${slug}/">← Back to site</a></p>
+</div>
+<div id="success-banner" class="success-msg" style="display:none;">
+  <h2>✅ Payment Successful!</h2>
+  <p>Thank you for your purchase.</p>
+</div>
+<div class="products-grid" id="products-grid">
+${productCards}
+</div>
+<div class="footer">Powered by <a href="https://getminted.ai">GetMinted</a></div>
+<script>
+if(new URLSearchParams(window.location.search).get('payment')==='success'){
+  document.getElementById('success-banner').style.display='block';
+}
+const CONVEX='https://curious-lemming-262.convex.site';
+const ACCOUNT_ID='${accountId}';
+const SLUG='${slug}';
+async function buyProduct(priceId){
+  const btn=event.target;btn.disabled=true;btn.textContent='Redirecting...';
+  try{
+    const res=await fetch(CONVEX+'/api/store/checkout',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({priceId,stripeAccountId:ACCOUNT_ID,slug:SLUG})
+    });
+    const data=await res.json();
+    if(data.url)window.location.href=data.url;
+    else{alert(data.error||'Checkout failed');btn.disabled=false;btn.textContent='Buy Now →';}
+  }catch(e){alert('Error: '+e.message);btn.disabled=false;btn.textContent='Buy Now →';}
+}
+</script>
+</body>
+</html>`;
+  }
+
+  // Load store status after site info is ready
+  if (siteSlug) loadStoreStatus();
+  else {
+    // Wait for siteSlug to be set, then load store
+    const storeInterval = setInterval(() => {
+      if (siteSlug) { clearInterval(storeInterval); loadStoreStatus(); }
+    }, 500);
+    setTimeout(() => clearInterval(storeInterval), 15000); // give up after 15s
   }
 
   } // end startApp
