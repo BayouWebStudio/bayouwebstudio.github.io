@@ -1489,72 +1489,90 @@
     );
   }
 
+  // Also kick off site info load immediately after sign-in (don't wait for Convex auth callback)
+  async function loadSiteInfoOnSignIn() {
+    await new Promise(r => setTimeout(r, 500)); // small delay for Clerk session to settle
+    loadSiteInfo();
+  }
+
   // Track active subscriptions so we don't double-subscribe
   let subscriptionsStarted = false;
+
+  // ── Load site info via simple HTTP fetch (no WebSocket needed) ──
+  async function loadSiteInfo() {
+    try {
+      const token = await getToken();
+      const res = await fetch(`${CONVEX_HTTP_URL}/api/dashboard/info`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const data = await res.json();
+
+      if (!data.found) {
+        showConnectSiteBanner();
+        return;
+      }
+
+      siteSlug = data.siteSlug;
+      const previewUrl = data.siteUrl;
+      const plan = data.plan || 'free';
+
+      // Update site info panel
+      document.getElementById('preview-url').textContent = previewUrl.replace('https://', '');
+      document.getElementById('info-domain').textContent = data.domain || previewUrl.replace('https://', '');
+      document.getElementById('info-slug').textContent = data.siteSlug;
+
+      // Update plan badge
+      const planMap = { free: 'plan-free', starter: 'plan-starter', pro: 'plan-pro' };
+      const planClass = planMap[plan] || 'plan-free';
+      document.getElementById('info-plan').innerHTML = `<span class="plan-badge ${planClass}">${plan.charAt(0).toUpperCase() + plan.slice(1)}</span>`;
+      document.getElementById('plan-badge').textContent = plan.charAt(0).toUpperCase() + plan.slice(1);
+
+      // Visit site link
+      const visitLink = document.getElementById('visit-site-link');
+      if (visitLink) visitLink.href = previewUrl;
+      const previewLinkWrap = document.getElementById('site-preview-link-wrap');
+      if (previewLinkWrap) previewLinkWrap.href = previewUrl;
+
+      // Upgrade bar
+      const upgradeBar = document.getElementById('upgrade-bar');
+      if (upgradeBar) {
+        upgradeBar.style.display = (plan === 'free' && !sessionStorage.getItem('upgrade_bar_dismissed')) ? 'flex' : 'none';
+      }
+
+      // Domain picker for Pro without domain yet
+      if (plan === 'pro' && !data.domain && !data.requestedDomain) {
+        showDomainPicker(data.siteSlug);
+      }
+
+      // Hide connect banner if showing
+      const connectBanner = document.getElementById('connect-site-banner');
+      if (connectBanner) connectBanner.style.display = 'none';
+
+      // Preview: screenshot if available, iframe fallback
+      const screenshotUrl = `https://raw.githubusercontent.com/BayouWebStudio/bayouwebstudio.github.io/main/getminted-assets/${data.siteSlug}_preview.jpg`;
+      const img = document.getElementById('site-preview-img');
+      const iframe = document.getElementById('site-preview-iframe');
+      const testImg = new Image();
+      testImg.onload = () => { img.src = screenshotUrl; img.style.display = 'block'; iframe.style.display = 'none'; };
+      testImg.onerror = () => { img.style.display = 'none'; iframe.style.display = 'block'; if (iframe.src !== previewUrl) iframe.src = previewUrl; };
+      testImg.src = screenshotUrl;
+
+      // Silently link account by email if needed
+      convexClient.mutation(api.dashboard.linkAccountByEmail, {}).catch(() => {});
+
+    } catch (err) {
+      console.warn('[Dashboard] loadSiteInfo failed:', err);
+    }
+  }
 
   function startSubscriptions() {
     if (subscriptionsStarted) return;
     subscriptionsStarted = true;
 
-    // ── Profile subscription ──
-    convexClient.onUpdate(api.dashboard.getMyProfile, {}, (profile) => {
-      if (profile) {
-        siteSlug = profile.siteSlug;
-        updateSiteUI(profile, null);
-      } else {
-        document.getElementById('info-domain').textContent = 'getminted.ai/your-site';
-        document.getElementById('info-slug').textContent = 'Not set up yet';
-      }
-    }, (err) => {
-      console.warn('[Convex] Profile subscription error:', err);
-    });
+    // Load site info via simple REST (reliable, no WebSocket)
+    loadSiteInfo();
 
-    // ── Site info subscription ──
-    convexClient.onUpdate(api.dashboard.getMySiteInfo, {}, (siteInfo) => {
-      if (siteInfo?.siteUrl && siteInfo.siteSlug) {
-        siteSlug = siteInfo.siteSlug;
-        // Hide "connect site" prompt if showing
-        const connectBanner = document.getElementById('connect-site-banner');
-        if (connectBanner) connectBanner.style.display = 'none';
-        // Persist email-based link silently (no-op if already linked by Clerk ID)
-        convexClient.mutation(api.dashboard.linkAccountByEmail, {}).catch(() => {});
-
-        const previewUrl = siteInfo.siteUrl;
-        document.getElementById('preview-url').textContent = previewUrl.replace('https://', '');
-
-        // Fix visit site link
-        const visitLink = document.getElementById('visit-site-link');
-        visitLink.href = previewUrl;
-        const previewLinkWrap = document.getElementById('site-preview-link-wrap');
-        if (previewLinkWrap) previewLinkWrap.href = previewUrl;
-
-        // Show screenshot preview if available, else fall back to iframe
-        const slug = siteInfo.siteSlug;
-        const screenshotUrl = `https://raw.githubusercontent.com/BayouWebStudio/bayouwebstudio.github.io/main/getminted-assets/${slug}_preview.jpg`;
-        const img = document.getElementById('site-preview-img');
-        const iframe = document.getElementById('site-preview-iframe');
-        const testImg = new Image();
-        testImg.onload = () => {
-          img.src = screenshotUrl;
-          img.style.display = 'block';
-          iframe.style.display = 'none';
-        };
-        testImg.onerror = () => {
-          // No screenshot yet — fall back to iframe
-          img.style.display = 'none';
-          iframe.style.display = 'block';
-          if (iframe.src !== previewUrl) iframe.src = previewUrl;
-        };
-        testImg.src = screenshotUrl;
-      } else if (siteInfo === null) {
-        // Signed in but no site linked — show connect prompt
-        showConnectSiteBanner();
-      }
-    }, (err) => {
-      console.warn('[Convex] Site info subscription error:', err);
-    });
-
-    // ── Change history subscription ──
+    // ── Change history subscription (keep as realtime) ──
     convexClient.onUpdate(api.dashboard.getMyChangeHistory, {}, (data) => {
       renderChangeHistory(data);
     }, (err) => {
@@ -1582,6 +1600,9 @@
 
     // Initialize the Convex realtime client with Clerk auth
     initConvexClient();
+
+    // Load site info immediately via REST (doesn't wait for WebSocket auth)
+    loadSiteInfoOnSignIn();
 
     // ── Handle ?claim=slug parameter (also check sessionStorage fallback) ──
     const urlParams = new URLSearchParams(window.location.search);
