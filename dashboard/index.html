@@ -1422,6 +1422,12 @@
       </div>
 
       <div class="chat-input-area">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <label style="font-size:12px;color:var(--text-dim);font-weight:500;white-space:nowrap;">Add to:</label>
+          <select id="upload-section-select" style="flex:1;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:6px 10px;font-size:12px;color:var(--text);outline:none;cursor:pointer;">
+            <option value="gallery">📸 Main Gallery</option>
+          </select>
+        </div>
         <div class="upload-drop-zone" id="drop-zone">
           📸 Drop photos here to upload to your gallery
         </div>
@@ -1596,6 +1602,7 @@
       }
 
       siteSlug = data.siteSlug;
+      loadSiteSections(); // populate section picker for uploads
       const previewUrl = data.siteUrl;
       const plan = data.plan || 'free';
 
@@ -1729,6 +1736,29 @@
     document.body.appendChild(toast);
     setTimeout(() => { toast.style.opacity = '0'; toast.style.transition = 'opacity 0.3s'; }, 4000);
     setTimeout(() => toast.remove(), 4500);
+  }
+
+  async function loadSiteSections() {
+    if (!siteSlug) return;
+    try {
+      const token = await getToken();
+      const res = await fetch(`${CONVEX_HTTP_URL}/api/mint/site-info?slug=${encodeURIComponent(siteSlug)}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      if (!res.ok) return;
+      const data = await res.json();
+      const select = document.getElementById('upload-section-select');
+      if (!select || !data.sections?.length) return;
+      select.innerHTML = '<option value="gallery">📸 Main Gallery</option>';
+      data.sections.forEach(s => {
+        if (s.id && s.id !== 'gallery' && s.id !== 'hero') {
+          const option = document.createElement('option');
+          option.value = s.id;
+          option.textContent = `📁 ${s.label || s.id}`;
+          select.appendChild(option);
+        }
+      });
+    } catch { /* silent */ }
   }
 
   function updateSiteUI(profile, siteInfo) {
@@ -2149,9 +2179,11 @@
         uploadProgress.textContent = `Uploading photo ${i + 1} of ${compressed.length}...`;
 
         try {
+          const targetSection = document.getElementById('upload-section-select')?.value || 'gallery';
           const formData = new FormData();
           formData.append('token', token);
           formData.append('slug', siteSlug);
+          formData.append('targetSection', targetSection);
           formData.append('files', f);
 
           const res = await fetch(`${CONVEX_HTTP_URL}/api/mint/upload`, {
