@@ -49,34 +49,34 @@
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "I see you're ranked #1 in SF. Does that mean appointments at Gents Barber Club - Santana Row fill up quickly? How far in advance should I book?",
+        "name": "I see you're ranked #1 in San Francisco. What makes Gents Barber Club different from the other top-rated barbershops in the city?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes, due to our popularity, appointments can fill up quickly, especially on weekends. We recommend booking at least 3-5 days in advance to secure your preferred time and barber."
+          "text": "Beyond our ranking, we focus on a personalized experience, combining classic barbering techniques with modern styles. Our Santana Row location also offers a refined atmosphere and convenient access to shopping and dining."
         }
       },
       {
         "@type": "Question",
-        "name": "Your bio mentions being the most visited barbershop in the Mission by Lyft. Is there a discount or partnership with Lyft if I take one to the Santana Row location?",
+        "name": "Your bio mentions being 'most visited by Lyft' in the Mission. Does that mean parking is difficult at your Santana Row location, or is it easily accessible?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "While we don't currently have a direct discount partnership with Lyft for the Santana Row location, we are easily accessible via rideshare and public transportation, and we often run promotions, so be sure to check our website or social media!"
+          "text": "While our Mission location is popular with ride-sharing, our Santana Row location offers ample parking within the Santana Row complex, making it easy to drive and find a spot."
         }
       },
       {
         "@type": "Question",
-        "name": "You're listed as a Top Ten Most Stylish barbershop. Do you specialize in a specific style or trend at Gents Barber Club - Santana Row?",
+        "name": "As one of the 'top ten most stylish' barbershops, can you help me find a haircut that fits my face shape and personal style, even if I don't have a specific look in mind?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "We pride ourselves on our adaptability and expertise in a wide range of styles, from classic cuts to modern trends. We stay up-to-date on the latest looks and tailor each cut to the individual client's preferences and lifestyle."
+          "text": "Absolutely! Our barbers are skilled at consultations and can recommend styles that complement your features and reflect your individual preferences, ensuring you leave feeling confident and stylish."
         }
       },
       {
         "@type": "Question",
-        "name": "I'm looking for a beard trim and shaping. Do all the barbers at Gents Barber Club - Santana Row offer beard services, and are there different levels of experience that affect pricing?",
+        "name": "I see you're rated a top ten barbershop in SF. Do you offer any services beyond haircuts, such as beard trims, shaves, or facial treatments?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes, all our barbers are skilled in beard trims and shaping. Pricing varies slightly depending on the barber's experience level, which will be clearly indicated when booking."
+          "text": "Yes, we offer a full range of services including expert beard trims, hot towel shaves for a luxurious experience, and other grooming treatments to keep you looking your best."
         }
       }
     ]
@@ -347,6 +347,20 @@
       .mobile-cta-bar { background: rgba(10,10,10,0.98) !important; }
     }
 
+    /* ── ARTISTS (tattoo_shop) ── */
+    .artists-section { padding: 80px 20px; background: var(--dark); }
+    .artists-section .section-title { text-align: center; font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: 50px; color: var(--text); letter-spacing: 0.05em; text-transform: uppercase; font-family: 'Playfair Display', Georgia, serif; }
+    .artists-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; max-width: 1000px; margin: 0 auto; }
+    .artist-card { text-align: center; padding: 30px 20px; background: var(--card-bg); border-radius: 12px; border: 1px solid var(--card-border); -webkit-transition: transform 0.2s, border-color 0.2s; transition: transform 0.2s, border-color 0.2s; }
+    .artist-card:hover { -webkit-transform: translateY(-4px); transform: translateY(-4px); border-color: rgba(255,255,255,0.2); }
+    .artist-photo-placeholder { width: 100px; height: 100px; border-radius: 50%; background: rgba(255,255,255,0.1); margin: 0 auto 16px; display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; -webkit-justify-content: center; justify-content: center; }
+    .artist-photo { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin: 0 auto 16px; display: block; }
+    .artist-initials { font-size: 2rem; color: rgba(255,255,255,0.3); }
+    .artist-name { font-size: 1.1rem; font-weight: 600; color: var(--text); margin: 0 0 8px; }
+    .artist-specialty { font-size: 0.85rem; color: var(--muted); margin: 0 0 16px; line-height: 1.4; }
+    .artist-book-btn { display: inline-block; padding: 8px 20px; background: var(--accent); color: var(--black); border-radius: 6px; text-decoration: none; font-size: 0.85rem; font-weight: 600; -webkit-transition: opacity 0.2s; transition: opacity 0.2s; }
+    .artist-book-btn:hover { opacity: 0.85; }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       .nav-links { display: none; }
@@ -368,6 +382,7 @@
     <ul class="nav-links" role="list">
       <li><a href="#about">About</a></li>
       <li><a href="#gallery">Portfolio</a></li>
+      
       <li><a href="#styles">Styles</a></li>
       <li><a href="#booking">Book</a></li>
     </ul>
@@ -380,10 +395,10 @@
     <div class="hero-content">
       <p class="hero-eyebrow">Barber</p>
       <h1 class="hero-title">Gents Barber Club- San Francisco- Santana Row<br><span id="hero-typed" style="font-size:clamp(1.6rem,4vw,3rem);font-weight:600;opacity:0.75;border-right:3px solid var(--accent);padding-right:4px;"></span></h1>
-      <p class="hero-subtitle">Experience San Francisco's #1 Ranked Barbershop.</p>
+      <p class="hero-subtitle">Experience San Francisco's Top-Rated Barber, Where Style Meets Tradition.</p>
       <script>
       (function(){
-        const phrases = ["Experience San Francisco's #1 Ranked Bar","Barber","Book Your Cut Now","Book Now"];
+        const phrases = ["Experience San Francisco's Top-Rated Bar","Barber","Book Your Appointment Now","Book Now"];
         let wi=0,ci=0,del=false;
         const el=document.getElementById('hero-typed');
         if(!el) return;
@@ -395,7 +410,7 @@
         tick();
       })();
       </script>
-      <a href="#booking" class="hero-cta" aria-label="Book Your Cut Now">Book Your Cut Now</a>
+      <a href="#booking" class="hero-cta" aria-label="Book Your Appointment Now">Book Your Appointment Now</a>
       <div class="hero-trust"><span class="trust-badge"><span class="trust-icon">★</span>5-Star Rated</span><span class="trust-badge"><span class="trust-icon">✓</span>By Appointment</span></div>
     </div>
     <div class="hero-scroll" aria-hidden="true">
@@ -414,11 +429,11 @@
           <div class="about-img-wrap"><img src="img/profile.jpg" alt="Gents Barber Club- San Francisco- Santana Row" class="about-portrait" loading="lazy" decoding="async"></div>
           <div class="about-content">
             <div class="about-text">
-              <p>Gents Barber Club- San Francisco- Santana Row is consistently ranked as one of the best barbershops in the city. Recognized for its stylish atmosphere and skilled barbers, it remains a top choice for discerning clientele seeking exceptional grooming experiences.</p>
+              <p>Gents Barber Club - San Francisco - Santana Row is a premier grooming destination recognized among the top barbershops in the city. With a reputation for stylish cuts and exceptional service, Gents Barber Club is a trusted choice for discerning clientele.</p>
             </div>
             <div class="about-stats">
               <div class="stat-block">
-                <span class="stat-number">Classic Barbering</span>
+                <span class="stat-number">Traditional Shave</span>
                 <span class="stat-label">Specialty</span>
               </div>
               <div class="stat-block">
@@ -442,18 +457,21 @@
       <h2 class="section-title fade-in">Recent Work</h2>
       <div class="divider fade-in"></div>
       <div class="gallery-grid">
-        <div class="gallery-item fade-in" style="-webkit-transition-delay:0s;transition-delay:0s"><img src="img/photo_01.jpg" alt="Gents Barber Club- San Francisco- Santana Row work 1" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Classic Barbering</span></div></div>
-        <div class="gallery-item fade-in" style="-webkit-transition-delay:0.05s;transition-delay:0.05s"><img src="img/photo_02.jpg" alt="Gents Barber Club- San Francisco- Santana Row work 2" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Ear Waxing</span></div></div>
-        <div class="gallery-item fade-in" style="-webkit-transition-delay:0.1s;transition-delay:0.1s"><img src="img/photo_03.jpg" alt="Gents Barber Club- San Francisco- Santana Row work 3" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Tapered Haircuts</span></div></div>
-        <div class="gallery-item fade-in" style="-webkit-transition-delay:0.15000000000000002s;transition-delay:0.15000000000000002s"><img src="img/photo_04.jpg" alt="Gents Barber Club- San Francisco- Santana Row work 4" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Classic Barbering</span></div></div>
-        <div class="gallery-item fade-in" style="-webkit-transition-delay:0.2s;transition-delay:0.2s"><img src="img/photo_05.jpg" alt="Gents Barber Club- San Francisco- Santana Row work 5" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Ear Waxing</span></div></div>
-        <div class="gallery-item fade-in" style="-webkit-transition-delay:0.25s;transition-delay:0.25s"><img src="img/photo_06.jpg" alt="Gents Barber Club- San Francisco- Santana Row work 6" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Tapered Haircuts</span></div></div>
-        <div class="gallery-item fade-in" style="-webkit-transition-delay:0.30000000000000004s;transition-delay:0.30000000000000004s"><img src="img/photo_07.jpg" alt="Gents Barber Club- San Francisco- Santana Row work 7" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Classic Barbering</span></div></div>
-        <div class="gallery-item fade-in" style="-webkit-transition-delay:0.35000000000000003s;transition-delay:0.35000000000000003s"><img src="img/photo_08.jpg" alt="Gents Barber Club- San Francisco- Santana Row work 8" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Ear Waxing</span></div></div>
-        <div class="gallery-item fade-in" style="-webkit-transition-delay:0.4s;transition-delay:0.4s"><img src="img/photo_09.jpg" alt="Gents Barber Club- San Francisco- Santana Row work 9" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Tapered Haircuts</span></div></div>
+        <div class="gallery-item fade-in" style="-webkit-transition-delay:0s;transition-delay:0s"><img src="img/photo_01.jpg" alt="Gents Barber Club- San Francisco- Santana Row work 1" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Traditional Shave</span></div></div>
+        <div class="gallery-item fade-in" style="-webkit-transition-delay:0.05s;transition-delay:0.05s"><img src="img/photo_02.jpg" alt="Gents Barber Club- San Francisco- Santana Row work 2" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Men's grooming</span></div></div>
+        <div class="gallery-item fade-in" style="-webkit-transition-delay:0.1s;transition-delay:0.1s"><img src="img/photo_03.jpg" alt="Gents Barber Club- San Francisco- Santana Row work 3" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Classic Taper</span></div></div>
+        <div class="gallery-item fade-in" style="-webkit-transition-delay:0.15000000000000002s;transition-delay:0.15000000000000002s"><img src="img/photo_04.jpg" alt="Gents Barber Club- San Francisco- Santana Row work 4" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Traditional Shave</span></div></div>
+        <div class="gallery-item fade-in" style="-webkit-transition-delay:0.2s;transition-delay:0.2s"><img src="img/photo_05.jpg" alt="Gents Barber Club- San Francisco- Santana Row work 5" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Men's grooming</span></div></div>
+        <div class="gallery-item fade-in" style="-webkit-transition-delay:0.25s;transition-delay:0.25s"><img src="img/photo_06.jpg" alt="Gents Barber Club- San Francisco- Santana Row work 6" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Classic Taper</span></div></div>
+        <div class="gallery-item fade-in" style="-webkit-transition-delay:0.30000000000000004s;transition-delay:0.30000000000000004s"><img src="img/photo_07.jpg" alt="Gents Barber Club- San Francisco- Santana Row work 7" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Traditional Shave</span></div></div>
+        <div class="gallery-item fade-in" style="-webkit-transition-delay:0.35000000000000003s;transition-delay:0.35000000000000003s"><img src="img/photo_08.jpg" alt="Gents Barber Club- San Francisco- Santana Row work 8" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Men's grooming</span></div></div>
+        <div class="gallery-item fade-in" style="-webkit-transition-delay:0.4s;transition-delay:0.4s"><img src="img/photo_09.jpg" alt="Gents Barber Club- San Francisco- Santana Row work 9" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Classic Taper</span></div></div>
+        <div class="gallery-item fade-in" style="-webkit-transition-delay:0.45s;transition-delay:0.45s"><img src="img/photo_10.jpg" alt="Gents Barber Club- San Francisco- Santana Row work 10" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Traditional Shave</span></div></div>
       </div>
     </div>
   </section>
+
+  
 
   <section id="styles">
     <div class="container">
@@ -463,18 +481,18 @@
       <div class="styles-grid">
         <div class="style-card fade-in">
           <div class="style-icon">◆</div>
-          <h3>Classic Barbering</h3>
-          <p>Provides traditional barber services with a focus on hot towel treatments and a classic barbershop aesthetic.</p>
+          <h3>Traditional Shave</h3>
+          <p>Provides a classic hot towel shave experience.</p>
         </div>
         <div class="style-card fade-in">
           <div class="style-icon">✦</div>
-          <h3>Ear Waxing</h3>
-          <p>Offering ear waxing services for men</p>
+          <h3>Men's grooming</h3>
+          <p>Provides men's grooming services such as waxing</p>
         </div>
         <div class="style-card fade-in">
           <div class="style-icon">❧</div>
-          <h3>Tapered Haircuts</h3>
-          <p>Cutting men's hair with noticeable tapers that blend seamlessly.</p>
+          <h3>Classic Taper</h3>
+          <p>Seems to execute classic taper fades.</p>
         </div>
       </div>
     </div>
@@ -488,22 +506,22 @@
       <div class="services-grid">
             <div class="service-card fade-in" style="-webkit-transition-delay:0s;transition-delay:0s">
               <div class="service-icon">◆</div>
-              <h3>Classic Barbering</h3>
-              <p>Provides traditional barber services with a focus on hot towel treatments and a classic barbershop aesthetic.</p>
+              <h3>Traditional Shave</h3>
+              <p>Provides a classic hot towel shave experience.</p>
               <span class="service-price">Contact for Pricing</span>
             </div>
 
             <div class="service-card fade-in" style="-webkit-transition-delay:0.1s;transition-delay:0.1s">
               <div class="service-icon">✦</div>
-              <h3>Ear Waxing</h3>
-              <p>Offering ear waxing services for men</p>
+              <h3>Men's grooming</h3>
+              <p>Provides men's grooming services such as waxing</p>
               <span class="service-price">Contact for Pricing</span>
             </div>
 
             <div class="service-card fade-in" style="-webkit-transition-delay:0.2s;transition-delay:0.2s">
               <div class="service-icon">❧</div>
-              <h3>Tapered Haircuts</h3>
-              <p>Cutting men's hair with noticeable tapers that blend seamlessly.</p>
+              <h3>Classic Taper</h3>
+              <p>Seems to execute classic taper fades.</p>
               <span class="service-price">Contact for Pricing</span>
             </div>
       </div>
@@ -518,41 +536,41 @@
       <div class="faq-list">
             <div class="faq-item fade-in" style="-webkit-transition-delay:0s;transition-delay:0s">
               <button class="faq-question" onclick="this.parentElement.classList.toggle('open')" aria-expanded="false">
-                <span>I see you're ranked #1 in SF. Does that mean appointments at Gents Barber Club - Santana Row fill up quickly? How far in advance should I book?</span>
+                <span>I see you're ranked #1 in San Francisco. What makes Gents Barber Club different from the other top-rated barbershops in the city?</span>
                 <span class="faq-icon">+</span>
               </button>
               <div class="faq-answer">
-                <p>Yes, due to our popularity, appointments can fill up quickly, especially on weekends. We recommend booking at least 3-5 days in advance to secure your preferred time and barber.</p>
+                <p>Beyond our ranking, we focus on a personalized experience, combining classic barbering techniques with modern styles. Our Santana Row location also offers a refined atmosphere and convenient access to shopping and dining.</p>
               </div>
             </div>
 
             <div class="faq-item fade-in" style="-webkit-transition-delay:0.08s;transition-delay:0.08s">
               <button class="faq-question" onclick="this.parentElement.classList.toggle('open')" aria-expanded="false">
-                <span>Your bio mentions being the most visited barbershop in the Mission by Lyft. Is there a discount or partnership with Lyft if I take one to the Santana Row location?</span>
+                <span>Your bio mentions being 'most visited by Lyft' in the Mission. Does that mean parking is difficult at your Santana Row location, or is it easily accessible?</span>
                 <span class="faq-icon">+</span>
               </button>
               <div class="faq-answer">
-                <p>While we don't currently have a direct discount partnership with Lyft for the Santana Row location, we are easily accessible via rideshare and public transportation, and we often run promotions, so be sure to check our website or social media!</p>
+                <p>While our Mission location is popular with ride-sharing, our Santana Row location offers ample parking within the Santana Row complex, making it easy to drive and find a spot.</p>
               </div>
             </div>
 
             <div class="faq-item fade-in" style="-webkit-transition-delay:0.16s;transition-delay:0.16s">
               <button class="faq-question" onclick="this.parentElement.classList.toggle('open')" aria-expanded="false">
-                <span>You're listed as a Top Ten Most Stylish barbershop. Do you specialize in a specific style or trend at Gents Barber Club - Santana Row?</span>
+                <span>As one of the 'top ten most stylish' barbershops, can you help me find a haircut that fits my face shape and personal style, even if I don't have a specific look in mind?</span>
                 <span class="faq-icon">+</span>
               </button>
               <div class="faq-answer">
-                <p>We pride ourselves on our adaptability and expertise in a wide range of styles, from classic cuts to modern trends. We stay up-to-date on the latest looks and tailor each cut to the individual client's preferences and lifestyle.</p>
+                <p>Absolutely! Our barbers are skilled at consultations and can recommend styles that complement your features and reflect your individual preferences, ensuring you leave feeling confident and stylish.</p>
               </div>
             </div>
 
             <div class="faq-item fade-in" style="-webkit-transition-delay:0.24s;transition-delay:0.24s">
               <button class="faq-question" onclick="this.parentElement.classList.toggle('open')" aria-expanded="false">
-                <span>I'm looking for a beard trim and shaping. Do all the barbers at Gents Barber Club - Santana Row offer beard services, and are there different levels of experience that affect pricing?</span>
+                <span>I see you're rated a top ten barbershop in SF. Do you offer any services beyond haircuts, such as beard trims, shaves, or facial treatments?</span>
                 <span class="faq-icon">+</span>
               </button>
               <div class="faq-answer">
-                <p>Yes, all our barbers are skilled in beard trims and shaping. Pricing varies slightly depending on the barber's experience level, which will be clearly indicated when booking.</p>
+                <p>Yes, we offer a full range of services including expert beard trims, hot towel shaves for a luxurious experience, and other grooming treatments to keep you looking your best.</p>
               </div>
             </div>
       </div>
@@ -613,7 +631,7 @@
               <div class="form-group">
                 <label for="bstyle">Style / Service</label>
                 <select id="bstyle" name="Style" aria-label="Select a service type">
-                  <option>Classic Barbering</option><option>Ear Waxing</option><option>Tapered Haircuts</option>
+                  <option>Traditional Shave</option><option>Men's grooming</option><option>Classic Taper</option>
                   <option>Other / Not Sure</option>
                 </select>
               </div>
