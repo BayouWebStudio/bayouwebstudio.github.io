@@ -136,15 +136,6 @@ html, body {
   30% { opacity: 1; transform: scale(1.2); }
 }
 
-/* Stretch canvas overlay — ABOVE the blob wrapper */
-#stretch-canvas {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  pointer-events: none;
-  z-index: 16;
-}
-
 /* Mint wrapper */
 #mint-wrapper {
   position: relative;
@@ -176,8 +167,7 @@ html, body {
     0 2px 10px rgba(0, 0, 0, 0.3);
   position: relative;
   overflow: hidden;
-  will-change: border-radius, opacity;
-  transition: opacity 0.15s ease;
+  will-change: border-radius;
 }
 
 /* Inner glow / highlight */
@@ -222,13 +212,15 @@ html, body {
   will-change: transform, opacity;
 }
 
-/* Face container — positioned absolutely over blob center, above stretch canvas */
+/* Face container */
 .mint-face {
   position: absolute;
-  width: 180px;
-  height: 180px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
-  z-index: 18;
+  z-index: 2;
   will-change: transform;
 }
 
@@ -245,102 +237,6 @@ html, body {
 }
 
 /* Chat section */
-/* IG Primary Input */
-.ig-section {
-  width: 100%;
-  max-width: 420px;
-  padding: 0 20px;
-  padding-bottom: max(env(safe-area-inset-bottom, 20px), 20px);
-  flex-shrink: 0;
-  z-index: 10;
-}
-.ig-label {
-  text-align: center;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #e8edf2;
-  margin-bottom: 12px;
-}
-.ig-input-row {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-.ig-input-wrap {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  background: rgba(255,255,255,0.06);
-  border: 1.5px solid rgba(152,232,193,0.3);
-  border-radius: 12px;
-  padding: 0 14px;
-  gap: 6px;
-  transition: border-color 0.2s;
-}
-.ig-input-wrap:focus-within { border-color: #00C882; }
-.ig-at { color: #00C882; font-weight: 700; font-size: 1.1rem; }
-.ig-input-wrap input {
-  background: transparent;
-  border: none;
-  outline: none;
-  color: #e8edf2;
-  font-size: 1rem;
-  padding: 14px 0;
-  width: 100%;
-  font-family: inherit;
-}
-.ig-input-wrap input::placeholder { color: #4a5a68; }
-.ig-build-btn {
-  background: #00C882;
-  color: #1A1A2E;
-  border: none;
-  border-radius: 12px;
-  padding: 14px 18px;
-  font-size: 0.9rem;
-  font-weight: 700;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: opacity 0.2s, transform 0.1s;
-  font-family: inherit;
-}
-.ig-build-btn:active { transform: scale(0.96); opacity: 0.85; }
-
-/* Mint Chat Popup */
-.mint-chat-popup {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  max-width: 480px;
-  max-height: 42vh;
-  margin: 0 auto;
-  background: #111417;
-  border-top: 1px solid rgba(152,232,193,0.2);
-  border-radius: 20px 20px 0 0;
-  padding: 0 0 max(env(safe-area-inset-bottom,12px),12px);
-  z-index: 100;
-  transform: translateY(100%);
-  transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
-  box-shadow: 0 -8px 40px rgba(0,0,0,0.4);
-  display: flex;
-  flex-direction: column;
-}
-.mint-chat-popup.open { transform: translateY(0); }
-.mint-chat-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 16px 8px;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-}
-.chat-close-btn {
-  background: none;
-  border: none;
-  color: #4a5a68;
-  font-size: 1rem;
-  cursor: pointer;
-  padding: 4px 8px;
-}
 .chat-section {
   width: 100%;
   max-width: 420px;
@@ -468,52 +364,6 @@ html, body {
   opacity: 0;
   z-index: 5;
 }
-
-/* Touch ripple */
-.touch-ripple {
-  position: fixed;
-  width: 20px; height: 20px;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 50;
-  transform: translate(-50%, -50%) scale(0);
-  opacity: 0.6;
-  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.35s ease-out;
-}
-.touch-ripple.expand {
-  transform: translate(-50%, -50%) scale(4);
-  opacity: 0;
-}
-
-/* Blob arms for face-cover reaction */
-.mint-arm {
-  position: absolute;
-  width: 36px; height: 36px;
-  border-radius: 50%;
-  background: radial-gradient(ellipse at 35% 30%, #4DFFC0 0%, #00C882 50%, #008A5A 100%);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-  z-index: 3;
-  top: 40%;
-  opacity: 0;
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease;
-  pointer-events: none;
-}
-.mint-arm.left-arm {
-  left: -10px;
-  transform: translateX(-20px) scale(0.5);
-}
-.mint-arm.right-arm {
-  right: -10px;
-  transform: translateX(20px) scale(0.5);
-}
-.mint-arm.left-arm.covering {
-  opacity: 1;
-  transform: translateX(30px) scale(1);
-}
-.mint-arm.right-arm.covering {
-  opacity: 1;
-  transform: translateX(-30px) scale(1);
-}
 </style>
 </head>
 <body>
@@ -523,46 +373,14 @@ html, body {
     <button class="login-btn" onclick="window.location.href='https://getminted.ai/dashboard/'">Log in</button>
   </div>
 
-  <!-- PRIMARY: IG handle input — always visible at top, chat can never cover it -->
-  <div class="ig-section" style="padding-top:12px;padding-bottom:8px;">
-    <p style="text-align:center;font-size:0.95rem;color:rgba(255,255,255,0.5);margin-bottom:8px;">Free website for <span id="app-typed" style="color:#00C882;border-right:2px solid #00C882;padding-right:3px;font-weight:600;"></span></p>
-    <script>
-    (function(){
-      const w=['Tattoo Artists.','Barbers.','Nail Techs.','Photographers.','Stylists.','Piercers.','Lash Techs.','Creatives.'];
-      let wi=0,ci=0,del=false;
-      const el=document.getElementById('app-typed');
-      function tick(){
-        const word=w[wi];
-        if(!del){el.textContent=word.slice(0,++ci);if(ci===word.length){del=true;setTimeout(tick,1800);return;}setTimeout(tick,80);}
-        else{el.textContent=word.slice(0,--ci);if(ci===0){del=false;wi=(wi+1)%w.length;setTimeout(tick,300);return;}setTimeout(tick,40);}
-      }
-      tick();
-    })();
-    </script>
-    <div class="ig-input-row">
-      <div class="ig-input-wrap">
-        <span class="ig-at">@</span>
-        <input type="text" id="ig-input" placeholder="yourhandle" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
-      </div>
-      <button class="ig-build-btn" id="ig-build-btn" onclick="igSubmit()">Build My Site →</button>
-    </div>
-    <p class="disclaimer" style="margin-top:6px;text-align:center;font-size:0.78rem;">Free forever · No credit card · 30 seconds</p>
-  </div>
-
   <div class="character-zone" id="character-zone">
-    <canvas id="stretch-canvas"></canvas>
     <div class="speech-bubble pop" id="speech-bubble">Hey! I'm Mint 🌿 Talk to me!</div>
     <div id="mint-wrapper">
       <div class="mint-glow"></div>
       <div class="mint-shadow" id="mint-shadow"></div>
       <div class="mint-blob" id="mint-blob">
         <div class="mint-blob-body" id="mint-blob-body"></div>
-        <div class="mint-arm left-arm" id="arm-left"></div>
-        <div class="mint-arm right-arm" id="arm-right"></div>
-      </div>
-    </div>
-    <!-- Face SVG is OUTSIDE wrapper so it can be above stretch canvas -->
-    <svg class="mint-face" id="mint-face" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
+        <svg class="mint-face" id="mint-face" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
           <!-- Eyebrows -->
           <path id="brow-left" d="M52,62 Q62,56 72,60" stroke="rgba(0,60,35,0.5)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
           <path id="brow-right" d="M108,60 Q118,56 128,62" stroke="rgba(0,60,35,0.5)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
@@ -595,26 +413,22 @@ html, body {
 
           <!-- Mouth -->
           <path id="mouth" d="M76,110 Q90,122 104,110" stroke="#006040" stroke-width="3" fill="none" stroke-linecap="round"/>
-    </svg>
+        </svg>
+      </div>
+    </div>
   </div>
 
-
-
-  <!-- SECONDARY: Mint chat popup (slides up after 3s) -->
-  <div class="mint-chat-popup" id="mint-chat-popup">
-    <div class="mint-chat-header">
-      <span style="font-size:0.85rem;font-weight:600;color:#98E8C1;">Mint 🌿</span>
-      <button class="chat-close-btn" onclick="closeMintChat()">✕</button>
-    </div>
+  <div class="chat-section">
     <div class="chat-history" id="chat-history"></div>
     <div class="chat-input-bar">
-      <input type="text" id="chat-input" placeholder="Chat with Mint..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+      <input type="text" id="chat-input" placeholder="Say something to Mint..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
       <button class="send-btn" id="send-btn">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M5 12L3 3l19 9-19 9 2-9zm0 0h8" stroke="#1A1A2E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </button>
     </div>
+    <div class="disclaimer">Free website from your IG. 30 seconds. No credit card.</div>
   </div>
 </div>
 
@@ -650,55 +464,6 @@ html, body {
   // ═══════════════════════════════════════════════════════
   const CONVEX_URL = 'https://curious-lemming-262.convex.site/api/mint/chat';
   let threadId = null;
-
-  // IG handle submit
-  window.igSubmit = function() {
-    const val = document.getElementById('ig-input').value.trim().replace(/^@/, '');
-    if (!val) { document.getElementById('ig-input').focus(); return; }
-    window.location.href = 'https://getminted.ai/dashboard/?claim=' + encodeURIComponent(val);
-  };
-  document.addEventListener('DOMContentLoaded', function() {
-    const igInput = document.getElementById('ig-input');
-    if (igInput) igInput.addEventListener('keydown', function(e) { if (e.key === 'Enter') window.igSubmit(); });
-  });
-
-  // Mint chat popup
-  const mintChatMessages = [
-    "Hey! 👀 I already know your vibe from your IG. Want me to build your site real quick?",
-    "Psst — drop your handle above and I'll have your site ready before you finish this sentence 🚀",
-    "No cap, I built 164 sites already. Yours would take me 30 seconds 🌿",
-    "Your competitors have websites. Do you? 😤 Let me fix that.",
-    "What if your Instagram actually sent people somewhere? I can make that happen — free 💚",
-  ];
-  let chatPopupShown = false;
-  window.closeMintChat = function() {
-    document.getElementById('mint-chat-popup').classList.remove('open');
-  };
-  window.openMintChat = function() {
-    const popup = document.getElementById('mint-chat-popup');
-    popup.classList.add('open');
-    if (!chatPopupShown) {
-      chatPopupShown = true;
-      const msg = mintChatMessages[Math.floor(Math.random() * mintChatMessages.length)];
-      setTimeout(() => addMessage(msg, 'mint'), 300);
-    }
-  };
-  // Auto-open after 3 seconds
-  setTimeout(window.openMintChat, 3000);
-
-  // Push IG section up when chat opens so it stays visible
-  window.openMintChat = (function(orig) {
-    return function() {
-      orig();
-      document.getElementById('app').style.paddingBottom = '42vh';
-    };
-  })(window.openMintChat);
-  window.closeMintChat = (function(orig) {
-    return function() {
-      orig();
-      document.getElementById('app').style.paddingBottom = '';
-    };
-  })(window.closeMintChat);
 
   const wrapper = document.getElementById('mint-wrapper');
   const blob = document.getElementById('mint-blob');
@@ -800,258 +565,6 @@ html, body {
   let pressStartTime = 0;
 
   // ═══════════════════════════════════════════════════════
-  // STRETCH DEFORMATION SYSTEM
-  // ═══════════════════════════════════════════════════════
-  const stretchCanvas = document.getElementById('stretch-canvas');
-  const stretchCtx = stretchCanvas.getContext('2d');
-  let isStretching = false;
-  let stretchFingerX = 0, stretchFingerY = 0;
-  const springStretch = new Spring(0, 0.25, 0.45); // bouncy snap-back
-  const springStretchAngle = new Spring(0, 0.12, 0.65);
-  let stretchAngle = 0;
-  let stretchReleaseJiggle = 0; // extra jiggle on snap-back
-  const MAX_STRETCH_DIST = 160; // max pixels you can stretch
-  const BLOB_RADIUS = 90;
-  let stretchActive = false; // true when canvas is rendering the stretch
-  let stretchDragStarted = false; // differentiate tap from drag
-
-  function resizeStretchCanvas() {
-    const dpr = window.devicePixelRatio || 1;
-    const rect = zone.getBoundingClientRect();
-    stretchCanvas.width = rect.width * dpr;
-    stretchCanvas.height = rect.height * dpr;
-    stretchCanvas.style.width = rect.width + 'px';
-    stretchCanvas.style.height = rect.height + 'px';
-    stretchCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  }
-  resizeStretchCanvas();
-  window.addEventListener('resize', resizeStretchCanvas);
-
-  function getBlobCenter() {
-    const wrapperRect = wrapper.getBoundingClientRect();
-    const zoneRect = zone.getBoundingClientRect();
-    return {
-      x: wrapperRect.left + wrapperRect.width / 2 - zoneRect.left,
-      y: wrapperRect.top + wrapperRect.height / 2 - zoneRect.top
-    };
-  }
-
-  function drawStretchBlob(blobX, blobY, fingerX, fingerY, stretch) {
-    const ctx = stretchCtx;
-    const canvasRect = zone.getBoundingClientRect();
-    ctx.clearRect(0, 0, canvasRect.width, canvasRect.height);
-
-    if (stretch < 0.02) return;
-
-    const dx = fingerX - blobX;
-    const dy = fingerY - blobY;
-    const dist = Math.hypot(dx, dy) || 1;
-    const angle = Math.atan2(dy, dx);
-    const perp = angle + Math.PI / 2;
-
-    // How far the tendril tip extends
-    const tendrilDist = dist * stretch;
-    const tipX = blobX + Math.cos(angle) * tendrilDist;
-    const tipY = blobY + Math.sin(angle) * tendrilDist;
-
-    // Volume conservation — body squishes slightly as you stretch
-    const bodyR = BLOB_RADIUS * (1 - stretch * 0.15);
-
-    // Neck width: wide at base, narrows toward tip
-    const neckBase = bodyR * (0.55 - stretch * 0.25);
-    const neckTip = Math.max(4, bodyR * (0.15 - stretch * 0.05));
-
-    ctx.save();
-
-    // === Draw main blob body (slight elongation toward pull) ===
-    ctx.beginPath();
-    ctx.save();
-    ctx.translate(blobX, blobY);
-    ctx.rotate(angle);
-    ctx.scale(1 - stretch * 0.1, 1 + stretch * 0.05);
-    ctx.arc(0, 0, bodyR, 0, Math.PI * 2);
-    ctx.restore();
-
-    // Radial gradient for the main body
-    const blobGrad = ctx.createRadialGradient(
-      blobX - bodyR * 0.3, blobY - bodyR * 0.35, 0,
-      blobX, blobY, bodyR * 1.1
-    );
-    blobGrad.addColorStop(0, '#6EFFD4');
-    blobGrad.addColorStop(0.35, '#00C882');
-    blobGrad.addColorStop(0.75, '#00A86B');
-    blobGrad.addColorStop(1, '#007A4D');
-    ctx.fillStyle = blobGrad;
-    ctx.fill();
-
-    // === Draw the tendril — starts INSIDE the blob for seamless overlap ===
-    if (stretch > 0.05) {
-      // Overlap origin inside the blob body so there's zero seam
-      const overlapX = blobX + Math.cos(angle) * bodyR * 0.5;
-      const overlapY = blobY + Math.sin(angle) * bodyR * 0.5;
-      const overlapL = { x: overlapX + Math.cos(perp) * neckBase * 1.1, y: overlapY + Math.sin(perp) * neckBase * 1.1 };
-      const overlapR = { x: overlapX - Math.cos(perp) * neckBase * 1.1, y: overlapY - Math.sin(perp) * neckBase * 1.1 };
-
-      // Tip edge points
-      const tipL = { x: tipX + Math.cos(perp) * neckTip, y: tipY + Math.sin(perp) * neckTip };
-      const tipR = { x: tipX - Math.cos(perp) * neckTip, y: tipY - Math.sin(perp) * neckTip };
-
-      // Bezier control point distances
-      const cpDist = tendrilDist * 0.4;
-      const cpL2 = { x: tipL.x - Math.cos(angle) * cpDist * 0.5, y: tipL.y - Math.sin(angle) * cpDist * 0.5 };
-      const cpR2 = { x: tipR.x - Math.cos(angle) * cpDist * 0.5, y: tipR.y - Math.sin(angle) * cpDist * 0.5 };
-
-      ctx.beginPath();
-      ctx.moveTo(overlapL.x, overlapL.y);
-      // Left side of tendril
-      ctx.bezierCurveTo(
-        overlapL.x + Math.cos(angle) * cpDist,
-        overlapL.y + Math.sin(angle) * cpDist,
-        cpL2.x, cpL2.y,
-        tipL.x, tipL.y
-      );
-      // Round tip
-      ctx.arc(tipX, tipY, neckTip, perp, perp + Math.PI, false);
-      // Right side back
-      ctx.bezierCurveTo(
-        cpR2.x, cpR2.y,
-        overlapR.x + Math.cos(angle) * cpDist,
-        overlapR.y + Math.sin(angle) * cpDist,
-        overlapR.x, overlapR.y
-      );
-      // Close back through the blob interior
-      ctx.quadraticCurveTo(
-        overlapX - Math.cos(angle) * 10,
-        overlapY - Math.sin(angle) * 10,
-        overlapL.x, overlapL.y
-      );
-      ctx.closePath();
-
-      // Gradient along the tendril length — continuous with body colors
-      const tendrilGrad = ctx.createLinearGradient(blobX, blobY, tipX, tipY);
-      tendrilGrad.addColorStop(0, '#00C882');
-      tendrilGrad.addColorStop(0.5, '#00A86B');
-      tendrilGrad.addColorStop(1, '#007A4D');
-      ctx.fillStyle = tendrilGrad;
-      ctx.fill();
-
-      // Specular highlight on tendril for 3D roundness
-      ctx.beginPath();
-      const hiliteW = neckBase * 0.3;
-      const hiliteX = blobX + Math.cos(angle) * bodyR + Math.cos(perp) * hiliteW;
-      const hiliteY = blobY + Math.sin(angle) * bodyR + Math.sin(perp) * hiliteW;
-      const hiliteEndX = tipX + Math.cos(perp) * neckTip * 0.3;
-      const hiliteEndY = tipY + Math.sin(perp) * neckTip * 0.3;
-      ctx.moveTo(hiliteX, hiliteY);
-      ctx.lineTo(hiliteEndX, hiliteEndY);
-      ctx.strokeStyle = 'rgba(255,255,255,0.15)';
-      ctx.lineWidth = hiliteW * 1.5;
-      ctx.lineCap = 'round';
-      ctx.stroke();
-    }
-
-    // === Blob specular highlight on top ===
-    ctx.beginPath();
-    ctx.save();
-    ctx.translate(blobX - bodyR * 0.22, blobY - bodyR * 0.28);
-    ctx.scale(bodyR * 0.45, bodyR * 0.28);
-    ctx.arc(0, 0, 1, 0, Math.PI * 2);
-    ctx.restore();
-    const specGrad = ctx.createRadialGradient(0, 0, 0, 0, 0, 1);
-    specGrad.addColorStop(0, 'rgba(255,255,255,0.35)');
-    specGrad.addColorStop(1, 'rgba(255,255,255,0)');
-    ctx.save();
-    ctx.translate(blobX - bodyR * 0.22, blobY - bodyR * 0.28);
-    ctx.scale(bodyR * 0.45, bodyR * 0.28);
-    ctx.fillStyle = specGrad;
-    ctx.fill();
-    ctx.restore();
-
-    // === Drop shadow under everything ===
-    ctx.save();
-    ctx.globalCompositeOperation = 'destination-over';
-    ctx.beginPath();
-    ctx.arc(blobX, blobY, bodyR + 5, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(0,200,130,0.12)';
-    ctx.filter = 'blur(15px)';
-    ctx.fill();
-    ctx.filter = 'none';
-    ctx.restore();
-
-    ctx.restore();
-  }
-
-  // Stretch animation loop (runs alongside main physics loop)
-  function stretchRenderLoop() {
-    requestAnimationFrame(stretchRenderLoop);
-
-    if (!stretchActive && springStretch.isSettled()) {
-      // Nothing to render, clear canvas
-      const canvasRect = zone.getBoundingClientRect();
-      stretchCtx.clearRect(0, 0, canvasRect.width, canvasRect.height);
-      return;
-    }
-
-    springStretch.update();
-
-    const center = getBlobCenter();
-    const stretch = Math.max(0, springStretch.value);
-
-    if (stretch < 0.01) {
-      // Done retracting — hide canvas, show blob body
-      const canvasRect = zone.getBoundingClientRect();
-      stretchCtx.clearRect(0, 0, canvasRect.width, canvasRect.height);
-      if (!stretchActive) {
-        blobBody.style.opacity = '1';
-        shadow.style.opacity = '';
-        document.querySelector('.mint-glow').style.opacity = '';
-        // Reset stretch expression
-        if (currentExpression !== 'idle' && currentExpression !== 'happy') {
-          setExpression('idle');
-        }
-      }
-      return;
-    }
-
-    // Keep blob body hidden while canvas is drawing
-    blobBody.style.opacity = '0';
-    shadow.style.opacity = '0';
-    document.querySelector('.mint-glow').style.opacity = '0';
-
-    // Calculate finger position (during drag: actual finger, during retract: last known angle)
-    let fx, fy;
-    if (stretchActive) {
-      const zoneRect = zone.getBoundingClientRect();
-      fx = stretchFingerX - zoneRect.left;
-      fy = stretchFingerY - zoneRect.top;
-    } else {
-      // Retracting: project from center along last angle
-      const retractDist = stretch * MAX_STRETCH_DIST;
-      fx = center.x + Math.cos(stretchAngle) * retractDist;
-      fy = center.y + Math.sin(stretchAngle) * retractDist;
-    }
-
-    drawStretchBlob(center.x, center.y, fx, fy, stretch);
-
-    // Face expression based on stretch amount
-    if (stretch > 0.02) {
-      if (stretch < 0.35) {
-        if (currentExpression !== 'thinking') setExpression('thinking');
-      } else if (stretch < 0.7) {
-        if (currentExpression !== 'surprised') setExpression('surprised');
-      } else {
-        if (currentExpression !== 'excited') setExpression('excited');
-      }
-
-      // Eyes look toward stretch direction
-      const eyeOx = Math.cos(stretchAngle) * MAX_PUPIL_OFFSET;
-      const eyeOy = Math.sin(stretchAngle) * MAX_PUPIL_OFFSET;
-      setPupilOffset(eyeOx, eyeOy);
-    }
-  }
-  requestAnimationFrame(stretchRenderLoop);
-
-  // ═══════════════════════════════════════════════════════
   // MAIN ANIMATION LOOP — runs continuously via rAF
   // ═══════════════════════════════════════════════════════
   let lastFrameTime = performance.now();
@@ -1118,14 +631,7 @@ html, body {
     // Face lags behind body (secondary motion!)
     springEyeX.target = (springScaleX.value - 1) * -15 + springRotation.value * 0.3;
     springEyeY.target = (springScaleY.value - 1) * -10;
-
-    // Face is now outside wrapper — position it over blob center
-    const wrapperRect = wrapper.getBoundingClientRect();
-    const zoneRect = zone.getBoundingClientRect();
-    const faceCenterX = wrapperRect.left - zoneRect.left + wrapperRect.width / 2 - 90;
-    const faceCenterY = wrapperRect.top - zoneRect.top + wrapperRect.height / 2 - 90;
-    face.style.left = faceCenterX + springEyeX.value + 'px';
-    face.style.top = faceCenterY + springEyeY.value + 'px';
+    face.style.transform = `translate(${springEyeX.value}px, ${springEyeY.value}px)`;
   }
 
   requestAnimationFrame(physicsLoop);
@@ -1146,14 +652,13 @@ html, body {
     if (e.target === chatInput || e.target === sendBtn || e.target.closest('.send-btn') || e.target.closest('.login-btn')) return;
 
     const { x, y } = getXY(e);
-    tapTouchX = x;
-    tapTouchY = y;
     dragStartX = x;
     dragStartY = y;
+    dragOffsetX = springPosX.value;
+    dragOffsetY = springPosY.value;
     isDragging = true;
     isPressed = true;
     pressStartTime = performance.now();
-    stretchDragStarted = false;
 
     // Reset velocity history
     velocityHistory.length = 0;
@@ -1180,7 +685,7 @@ html, body {
     // Track velocity
     const dtMs = now - lastDragTime;
     if (dtMs > 0) {
-      const vx = (x - lastDragX) / dtMs * 16;
+      const vx = (x - lastDragX) / dtMs * 16; // per-frame velocity
       const vy = (y - lastDragY) / dtMs * 16;
       velocityHistory.push({ vx, vy, t: now });
       if (velocityHistory.length > VELOCITY_SAMPLES) velocityHistory.shift();
@@ -1189,53 +694,44 @@ html, body {
     lastDragY = y;
     lastDragTime = now;
 
-    // Distance from drag start
-    const totalDx = x - dragStartX;
-    const totalDy = y - dragStartY;
-    const totalDist = Math.hypot(totalDx, totalDy);
+    // Blob follows pointer with slight lag (lerp via spring target)
+    const targetX = dragOffsetX + (x - dragStartX);
+    const targetY = dragOffsetY + (y - dragStartY);
+    springPosX.target = targetX;
+    springPosY.target = targetY;
+    // Make position springs snappier during drag
+    springPosX.value += (targetX - springPosX.value) * 0.25;
+    springPosY.value += (targetY - springPosY.value) * 0.25;
 
-    // Switch to stretch mode after moving 12px (not a tap)
-    if (!stretchDragStarted && totalDist > 12) {
-      stretchDragStarted = true;
-      stretchActive = true;
-      // Reset position springs (blob stays centered)
-      springPosX.target = 0;
-      springPosY.value = 0;
-      springPosX.value = 0;
-      springPosY.target = 0;
-      springScaleX.target = 1;
-      springScaleY.target = 1;
-      springRotation.target = 0;
-    }
+    // Stretch in movement direction based on velocity
+    const speed = Math.sqrt(
+      Math.pow(x - dragStartX, 2) + Math.pow(y - dragStartY, 2)
+    );
+    const dx = x - lastDragX || 0;
+    const dy = y - lastDragY || 0;
+    const moveSpeed = Math.sqrt(dx * dx + dy * dy);
 
-    if (stretchDragStarted) {
-      // === STRETCH MODE — blob stays put, surface stretches ===
-      stretchFingerX = x;
-      stretchFingerY = y;
+    // Tilt toward movement direction
+    springRotation.target = dx * 1.5;
 
-      // Lock position springs to center
-      springPosX.value = 0; springPosX.target = 0; springPosX.velocity = 0;
-      springPosY.value = 0; springPosY.target = 0; springPosY.velocity = 0;
-      springScaleX.value = 1; springScaleX.target = 1; springScaleX.velocity = 0;
-      springScaleY.value = 1; springScaleY.target = 1; springScaleY.velocity = 0;
-      springRotation.value = 0; springRotation.target = 0; springRotation.velocity = 0;
+    // Stretch based on movement speed (volume-conserving)
+    const stretchFactor = Math.min(moveSpeed * 0.02, 0.3);
+    const moveAngle = Math.atan2(dy, dx);
+    const absCos = Math.abs(Math.cos(moveAngle));
+    const absSin = Math.abs(Math.sin(moveAngle));
 
-      // Calculate stretch amount (0 to 1)
-      const center = getBlobCenter();
-      const zoneRect = zone.getBoundingClientRect();
-      const fx = x - zoneRect.left;
-      const fy = y - zoneRect.top;
-      const distFromCenter = Math.hypot(fx - center.x, fy - center.y);
+    // Horizontal motion → stretch X, squish Y. Vertical → opposite
+    springScaleX.target = 1 + stretchFactor * (absCos * 0.8 - absSin * 0.3);
+    springScaleY.target = 1 + stretchFactor * (absSin * 0.8 - absCos * 0.3);
 
-      // Stretch starts from the surface of the blob
-      const distFromSurface = Math.max(0, distFromCenter - BLOB_RADIUS * 0.3);
-      const stretchAmt = Math.min(distFromSurface / MAX_STRETCH_DIST, 1);
-
-      springStretch.value = stretchAmt;
-      springStretch.target = stretchAmt;
-      springStretch.velocity = 0; // no spring during active drag
-
-      stretchAngle = Math.atan2(fy - center.y, fx - center.x);
+    // Eyes look in drag direction
+    if (currentExpression !== 'thinking' && currentExpression !== 'happy') {
+      const normX = (x - dragStartX) / (speed || 1) * MAX_PUPIL_OFFSET;
+      const normY = (y - dragStartY) / (speed || 1) * MAX_PUPIL_OFFSET;
+      setPupilOffset(
+        Math.max(-MAX_PUPIL_OFFSET, Math.min(MAX_PUPIL_OFFSET, normX)),
+        Math.max(-MAX_PUPIL_OFFSET, Math.min(MAX_PUPIL_OFFSET, normY))
+      );
     }
   }
 
@@ -1245,50 +741,10 @@ html, body {
     const pt = e.changedTouches ? e.changedTouches[0] : e;
     const dx = Math.abs(pt.clientX - dragStartX);
     const dy = Math.abs(pt.clientY - dragStartY);
+    const pressDuration = performance.now() - pressStartTime;
 
     isDragging = false;
     isPressed = false;
-
-    if (stretchDragStarted) {
-      // === RELEASE STRETCH ===
-      stretchActive = false;
-      stretchDragStarted = false;
-
-      const releasedStretch = springStretch.value;
-
-      // Snap the stretch spring back to 0
-      springStretch.target = 0;
-      // Extra velocity for snappy snap-back — the more stretched, the more satisfying
-      springStretch.velocity = -releasedStretch * 1.8;
-
-      // JIGGLE the blob body on snap-back — this is the payoff
-      const snapForce = releasedStretch;
-      springJiggle1.impulse(snapForce * 2.5);
-      springJiggle2.impulse(-snapForce * 2.0);
-      springScaleX.impulse(snapForce * 0.4);
-      springScaleY.impulse(-snapForce * 0.4);
-
-      // Extra big snap if stretched far
-      if (releasedStretch > 0.7) {
-        springJiggle1.impulse(snapForce * 1.5);
-        springJiggle2.impulse(-snapForce * 1.0);
-        // Small position bounce away from stretch direction
-        springPosX.impulse(-Math.cos(stretchAngle) * snapForce * 8);
-        springPosY.impulse(-Math.sin(stretchAngle) * snapForce * 8);
-      }
-
-      // Reset deformation
-      springScaleX.target = 1;
-      springScaleY.target = 1;
-      springRotation.target = 0;
-      springPosX.target = 0;
-      springPosY.target = 0;
-
-      resetIdle();
-      return;
-    }
-
-    // === NOT A STRETCH — regular release (tap/quick drag) ===
 
     // Calculate release velocity from history
     let releaseVX = 0, releaseVY = 0;
@@ -1301,20 +757,26 @@ html, body {
       releaseVY /= velocityHistory.length;
     }
 
+    // Apply momentum on release
+    springPosX.velocity += releaseVX * 0.5;
+    springPosY.velocity += releaseVY * 0.5;
+
     // Spring back to center
     springPosX.target = 0;
     springPosY.target = 0;
 
-    // Reset deformation
+    // Reset deformation — spring overshoots naturally (Flubber bounce!)
     springScaleX.target = 1;
     springScaleY.target = 1;
     springRotation.target = 0;
 
-    // Release pop
+    // Release pop! — impulse the scale springs for overshoot bounce
     const releaseSpeed = Math.sqrt(releaseVX * releaseVX + releaseVY * releaseVY);
     const popForce = Math.min(0.15 + releaseSpeed * 0.03, 0.5);
-    springScaleX.impulse(-popForce * 0.8);
-    springScaleY.impulse(popForce);
+    springScaleX.impulse(-popForce * 0.8); // squish X first
+    springScaleY.impulse(popForce);         // stretch Y (pop up!)
+
+    // Jiggle on release — multiple springs for organic wobble
     springJiggle1.impulse(popForce * 2);
     springJiggle2.impulse(-popForce * 1.5);
 
@@ -1335,290 +797,33 @@ html, body {
   }
 
   // ═══════════════════════════════════════════════════════
-  // ZONE DETECTION
-  // ═══════════════════════════════════════════════════════
-  const armLeft = document.getElementById('arm-left');
-  const armRight = document.getElementById('arm-right');
-
-  function getZone(touchX, touchY) {
-    const rect = blobBody.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + rect.height / 2;
-    const relX = touchX - cx;
-    const relY = touchY - cy;
-    const relXNorm = relX / (rect.width / 2);
-    const relYNorm = relY / (rect.height / 2);
-
-    // Face zone: center region
-    if (Math.abs(relXNorm) < 0.4 && relYNorm > -0.3 && relYNorm < 0.3) return 'face';
-    // Head: top quarter
-    if (relYNorm < -0.4) return 'head';
-    // Bottom: bottom quarter
-    if (relYNorm > 0.4) return 'bottom';
-    // Left/right sides
-    if (relXNorm < -0.3) return 'left';
-    if (relXNorm > 0.3) return 'right';
-    // Default center
-    return 'belly';
-  }
-
-  // Zone speech bubbles
-  const zoneBubbles = {
-    head:   ["Hey, that's my head! 😳", "Careful up there 🥺", "...hi 👀"],
-    belly:  ["hehehe 😂", "STOP that tickles 🤣", "okay okay I'm ticklish 😭"],
-    left:   ["OW— wait that didn't hurt 😅", "Poke! 👈", "Rude! (jk) 😂"],
-    right:  ["Hey! 👉", "Did you just poke me? 😤", "bold move 😅"],
-    bottom: ["WOOHOO 🚀", "to infinity and beyond 🌿", "wheeee!! 😵‍💫"],
-    face:   ["My face! 😤", "👀 Hey, eyes up here", "That's personal! 😂"],
-  };
-
-  // Zone ripple colors
-  const zoneColors = {
-    head: 'rgba(100,180,255,0.5)',
-    belly: 'rgba(0,200,130,0.5)',
-    left: 'rgba(255,160,60,0.5)',
-    right: 'rgba(255,160,60,0.5)',
-    bottom: 'rgba(255,80,120,0.5)',
-    face: 'rgba(200,130,255,0.5)',
-  };
-
-  function spawnRipple(x, y, zone) {
-    const r = document.createElement('div');
-    r.className = 'touch-ripple';
-    r.style.left = x + 'px';
-    r.style.top = y + 'px';
-    r.style.background = zoneColors[zone] || 'rgba(0,200,130,0.5)';
-    document.body.appendChild(r);
-    requestAnimationFrame(() => r.classList.add('expand'));
-    setTimeout(() => r.remove(), 400);
-  }
-
-  // Store touch start position for zone detection on tap
-  let tapTouchX = 0, tapTouchY = 0;
-
-  // Tickle jitter state
-  let jitterCount = 0;
-  let jitterTimer = null;
-
-  function doTickleJitter() {
-    jitterCount = 0;
-    clearInterval(jitterTimer);
-    jitterTimer = setInterval(() => {
-      if (jitterCount >= 4) { clearInterval(jitterTimer); return; }
-      const dir = jitterCount % 2 === 0 ? 1 : -1;
-      springScaleX.impulse(dir * 0.12);
-      springJiggle1.impulse(dir * 0.4);
-      springJiggle2.impulse(-dir * 0.3);
-      jitterCount++;
-    }, 90);
-  }
-
-  // Bottom zone landing detection
-  let bottomLaunchActive = false;
-
-  // Face cover animation
-  function coverFace() {
-    armLeft.classList.add('covering');
-    armRight.classList.add('covering');
-    setTimeout(() => {
-      armLeft.classList.remove('covering');
-      armRight.classList.remove('covering');
-    }, 800);
-  }
-
-  // ═══════════════════════════════════════════════════════
-  // ADDITIONAL EXPRESSIONS (shy, tickle, cross-eyed)
-  // ═══════════════════════════════════════════════════════
-  function setExpressionZone(expr) {
-    currentExpression = expr;
-    switch (expr) {
-      case 'shy':
-        eyeLeftWhite.setAttribute('ry', '14');
-        eyeRightWhite.setAttribute('ry', '14');
-        eyeLeftPupil.setAttribute('ry', '7');
-        eyeRightPupil.setAttribute('ry', '7');
-        eyeLeftPupil.setAttribute('rx', '7');
-        eyeRightPupil.setAttribute('rx', '7');
-        mouth.setAttribute('d', 'M80,112 Q90,118 100,112');
-        mouth.setAttribute('fill', 'none');
-        browLeft.setAttribute('d', 'M54,60 Q62,58 70,62');
-        browRight.setAttribute('d', 'M110,62 Q118,58 126,60');
-        sparkles.setAttribute('opacity', '0');
-        // Eyes look down-left
-        setPupilOffset(-4, 4);
-        // Blush intensify via inline style
-        document.querySelectorAll('.mint-face ellipse[cx="44"], .mint-face ellipse[cx="136"]').forEach(el => {
-          el.setAttribute('fill', 'rgba(255,130,160,0.45)');
-        });
-        break;
-      case 'tickle':
-        // Squint-laugh eyes (happy eyes but more squished)
-        eyeLeftWhite.setAttribute('ry', '4');
-        eyeRightWhite.setAttribute('ry', '4');
-        eyeLeftPupil.setAttribute('ry', '3');
-        eyeRightPupil.setAttribute('ry', '3');
-        eyeLeftPupil.setAttribute('rx', '7');
-        eyeRightPupil.setAttribute('rx', '7');
-        // Huge open smile
-        mouth.setAttribute('d', 'M66,106 Q90,140 114,106');
-        mouth.setAttribute('fill', 'rgba(0,60,35,0.35)');
-        browLeft.setAttribute('d', 'M52,58 Q62,54 72,58');
-        browRight.setAttribute('d', 'M108,58 Q118,54 128,58');
-        sparkles.setAttribute('opacity', '0');
-        break;
-      case 'crosseyed':
-        eyeLeftWhite.setAttribute('ry', '18');
-        eyeRightWhite.setAttribute('ry', '18');
-        eyeLeftPupil.setAttribute('ry', '9');
-        eyeRightPupil.setAttribute('ry', '9');
-        eyeLeftPupil.setAttribute('rx', '8');
-        eyeRightPupil.setAttribute('rx', '8');
-        // Cross: left pupil moves right, right pupil moves left
-        eyeLeftPupil.setAttribute('cx', LEFT_EYE.cx + 6);
-        eyeRightPupil.setAttribute('cx', RIGHT_EYE.cx - 6);
-        eyeLeftPupil.setAttribute('cy', LEFT_EYE.cy);
-        eyeRightPupil.setAttribute('cy', RIGHT_EYE.cy);
-        eyeLeftHighlight.setAttribute('cx', LEFT_EYE.cx + 10);
-        eyeLeftHighlight.setAttribute('cy', LEFT_EYE.cy - 5);
-        eyeRightHighlight.setAttribute('cx', RIGHT_EYE.cx - 2);
-        eyeRightHighlight.setAttribute('cy', RIGHT_EYE.cy - 5);
-        mouth.setAttribute('d', 'M78,112 Q88,118 100,112');
-        mouth.setAttribute('fill', 'none');
-        browLeft.setAttribute('d', 'M50,56 Q62,50 74,58');
-        browRight.setAttribute('d', 'M106,58 Q118,50 130,56');
-        sparkles.setAttribute('opacity', '0');
-        break;
-      default:
-        setExpression(expr);
-        return;
-    }
-  }
-
-  function resetBlush() {
-    document.querySelectorAll('.mint-face ellipse[cx="44"], .mint-face ellipse[cx="136"]').forEach(el => {
-      el.setAttribute('fill', 'rgba(255,130,160,0.2)');
-    });
-  }
-
-  // ═══════════════════════════════════════════════════════
-  // ZONE-BASED TAP REACTIONS
-  // ═══════════════════════════════════════════════════════
-  function doZoneTap(zone, x, y) {
-    spawnRipple(x, y, zone);
-    showBubble(pick(zoneBubbles[zone]));
-    resetIdle();
-
-    switch (zone) {
-      case 'head':
-        // Gentle tilt forward, shy expression
-        springScaleY.velocity -= 0.03;
-        springScaleX.velocity += 0.02;
-        springRotation.impulse(4);
-        springPosY.impulse(1.5);
-        springJiggle1.impulse(0.15);
-        setExpressionZone('shy');
-        setTimeout(() => { resetBlush(); setExpression('idle'); }, 2000);
-        spawnParticles(3);
-        break;
-
-      case 'belly':
-        // TICKLISH — rapid jitter, laugh expression
-        setExpressionZone('tickle');
-        doTickleJitter();
-        springScaleX.impulse(0.08);
-        springScaleY.impulse(-0.06);
-        spawnParticles(6);
-        setTimeout(() => {
-          setExpression('happy');
-          setTimeout(() => setExpression('idle'), 1200);
-        }, 1000);
-        break;
-
-      case 'left':
-        // Lurch RIGHT (away from left poke)
-        springPosX.velocity += 15;
-        springScaleX.velocity += 0.15;
-        springJiggle1.impulse(0.6);
-        springJiggle2.impulse(-0.4);
-        setExpression('surprised');
-        setTimeout(() => {
-          setExpression('happy');
-          setTimeout(() => setExpression('idle'), 1200);
-        }, 500);
-        spawnParticles(4);
-        break;
-
-      case 'right':
-        // Lurch LEFT (away from right poke)
-        springPosX.velocity -= 15;
-        springScaleX.velocity += 0.15;
-        springJiggle1.impulse(-0.6);
-        springJiggle2.impulse(0.4);
-        setExpression('surprised');
-        setTimeout(() => {
-          setExpression('happy');
-          setTimeout(() => setExpression('idle'), 1200);
-        }, 500);
-        spawnParticles(4);
-        break;
-
-      case 'bottom':
-        // BIG upward launch
-        springPosY.velocity -= 22;
-        bottomLaunchActive = true;
-        // Stretch tall at launch
-        springScaleY.impulse(0.25);
-        springScaleX.impulse(-0.15);
-        setExpression('excited');
-        spawnParticles(8);
-
-        // Landing squish detection — poll until returning down
-        let launchCheck = setInterval(() => {
-          if (bottomLaunchActive && springPosY.velocity > 0 && springPosY.value < 5) {
-            // Landing! Big squish
-            springScaleY.impulse(-0.35);
-            springScaleX.impulse(0.3);
-            springJiggle1.impulse(0.8);
-            springJiggle2.impulse(-0.6);
-            bottomLaunchActive = false;
-            clearInterval(launchCheck);
-            setTimeout(() => {
-              setExpression('happy');
-              setTimeout(() => setExpression('idle'), 1200);
-            }, 400);
-          }
-        }, 16);
-        // Safety timeout
-        setTimeout(() => { clearInterval(launchCheck); bottomLaunchActive = false; }, 2000);
-        break;
-
-      case 'face':
-        // Cover face with arms, cross eyes
-        coverFace();
-        setExpressionZone('crosseyed');
-        springScaleX.impulse(0.08);
-        springScaleY.impulse(-0.06);
-        springJiggle1.impulse(0.3);
-        spawnParticles(4);
-        setTimeout(() => {
-          setExpression('surprised');
-          setTimeout(() => setExpression('idle'), 1200);
-        }, 800);
-        break;
-    }
-  }
-
-  // ═══════════════════════════════════════════════════════
-  // TAP INTERACTIONS (zone-aware)
+  // TAP INTERACTIONS
   // ═══════════════════════════════════════════════════════
 
   function doSingleTap() {
-    const zone = getZone(tapTouchX, tapTouchY);
-    doZoneTap(zone, tapTouchX, tapTouchY);
+    // Small happy bounce via spring impulse
+    springScaleX.impulse(0.12);
+    springScaleY.impulse(-0.15);
+    springJiggle1.impulse(0.5);
+    springJiggle2.impulse(-0.3);
+
+    // Pop upward slightly
+    springPosY.impulse(-2);
+
+    setExpression('surprised');
+    setTimeout(() => {
+      setExpression('happy');
+      setTimeout(() => setExpression('idle'), 1500);
+    }, 300);
+
+    const tapMsgs = ["Hehe, that tickles! 😆", "Type something below! 👇", "Let's chat! Ask me anything 🌿"];
+    showBubble(pick(tapMsgs));
+    spawnParticles(5);
+    resetIdle();
   }
 
   function doDoubleTap() {
-    // BIG excited bounce — Flubber-style overshoot (unchanged)
+    // BIG excited bounce — Flubber-style overshoot
     springScaleX.impulse(0.3);
     springScaleY.impulse(-0.35);
     springJiggle1.impulse(1.0);
@@ -2028,15 +1233,10 @@ html, body {
   // ═══════════════════════════════════════════════════════
   // EVENT LISTENERS
   // ═══════════════════════════════════════════════════════
-  // Touch/mouse on the wrapper to START the interaction
   wrapper.addEventListener('touchstart', handlePointerDown, { passive: true });
+  wrapper.addEventListener('touchmove', handlePointerMove, { passive: false });
+  wrapper.addEventListener('touchend', handlePointerUp, { passive: true });
   wrapper.addEventListener('mousedown', handlePointerDown);
-
-  // Move & up on the whole document so stretch can go beyond the blob
-  document.addEventListener('touchmove', (e) => {
-    if (isDragging) handlePointerMove(e);
-  }, { passive: false });
-  document.addEventListener('touchend', handlePointerUp, { passive: true });
   document.addEventListener('mousemove', (e) => {
     if (isDragging) handlePointerMove(e);
   });
