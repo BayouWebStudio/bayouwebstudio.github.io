@@ -1535,9 +1535,17 @@
       clerkToken = await clerk.session.getToken({ template: 'convex' });
       return clerkToken;
     } catch {
-      // Fallback: get raw session token
       clerkToken = await clerk.session.getToken();
       return clerkToken;
+    }
+  }
+
+  // Raw Clerk JWT (no template) — used for our own backend endpoints (Stripe Connect, etc.)
+  async function getRawToken() {
+    try {
+      return await clerk.session.getToken();
+    } catch {
+      return await getToken();
     }
   }
 
@@ -2193,7 +2201,7 @@
 
   async function loadStoreStatus() {
     try {
-      const token = await getToken();
+      const token = await getRawToken();
       const res = await fetch(`${CONVEX_HTTP_URL}/api/stripe/connect/status`, {
         method: 'POST',
         headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
@@ -2235,7 +2243,7 @@
   window.connectStripe = async function() {
     if (!siteSlug) { showClaimToast('Site not loaded yet. Try again in a moment.', true); return; }
     try {
-      const token = await getToken();
+      const token = await getRawToken();
       const res = await fetch(`${CONVEX_HTTP_URL}/api/stripe/connect/onboard`, {
         method: 'POST',
         headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
@@ -2250,7 +2258,7 @@
   };
 
   async function addProductAPI(name, description, price, type) {
-    const token = await getToken();
+    const token = await getRawToken();
     const res = await fetch(`${CONVEX_HTTP_URL}/api/stripe/connect/create-product`, {
       method: 'POST',
       headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
@@ -2375,7 +2383,7 @@
     if (!product?.priceId) { showClaimToast('No price ID for this product', true); return; }
 
     try {
-      const token = await getToken();
+      const token = await getRawToken();
       const slug = siteSlug;
       const res = await fetch(`${CONVEX_HTTP_URL}/api/stripe/connect/create-checkout`, {
         method: 'POST',
