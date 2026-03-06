@@ -1433,6 +1433,14 @@
           📸 Drop photos here to upload to your gallery
         </div>
         <div class="upload-progress" id="upload-progress"></div>
+        <!-- Auto Gallery Sync -->
+        <div id="auto-gallery-row" style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:var(--surface2);border-radius:var(--radius-sm);border:1px solid var(--border);margin-top:8px;">
+          <div>
+            <div style="font-size:13px;font-weight:600;color:var(--text);">🔄 Auto Update Gallery</div>
+            <div style="font-size:11px;color:var(--text-dim);margin-top:2px;">Sync new posts from Instagram weekly</div>
+          </div>
+          <button id="auto-gallery-btn" onclick="toggleAutoGallery()" style="background:var(--surface3);border:1px solid var(--border);border-radius:20px;padding:5px 14px;font-size:12px;font-weight:600;color:var(--text-dim);cursor:pointer;transition:all 0.2s;">OFF</button>
+        </div>
         <div class="chat-input-row">
           <button class="btn-upload-icon" title="Upload photos" onclick="document.getElementById('file-input').click()">📎</button>
           <textarea
@@ -1604,6 +1612,7 @@
 
       siteSlug = data.siteSlug;
       loadSiteSections(); // populate section picker for uploads
+      loadAutoGalleryStatus(); // check auto-gallery toggle state
       const previewUrl = data.siteUrl;
       const plan = data.plan || 'free';
 
@@ -1760,6 +1769,68 @@
         }
       });
     } catch { /* silent */ }
+  }
+
+  // ── Auto Gallery ──
+  let autoGalleryEnabled = false;
+
+  async function loadAutoGalleryStatus() {
+    if (!siteSlug) return;
+    try {
+      const res = await fetch(`${CONVEX_HTTP_URL}/api/client/auto-gallery?slug=${encodeURIComponent(siteSlug)}`);
+      if (!res.ok) return;
+      const data = await res.json();
+      autoGalleryEnabled = data.autoGallery || false;
+      updateAutoGalleryBtn();
+    } catch { /* silent */ }
+  }
+
+  function updateAutoGalleryBtn() {
+    const btn = document.getElementById('auto-gallery-btn');
+    if (!btn) return;
+    if (autoGalleryEnabled) {
+      btn.textContent = 'ON';
+      btn.style.background = 'var(--accent)';
+      btn.style.color = '#000';
+      btn.style.borderColor = 'var(--accent)';
+    } else {
+      btn.textContent = 'OFF';
+      btn.style.background = 'var(--surface3)';
+      btn.style.color = 'var(--text-dim)';
+      btn.style.borderColor = 'var(--border)';
+    }
+  }
+
+  async function toggleAutoGallery() {
+    if (!siteSlug) return;
+    const btn = document.getElementById('auto-gallery-btn');
+    if (btn) btn.disabled = true;
+
+    try {
+      const token = await getToken();
+      const res = await fetch(`${CONVEX_HTTP_URL}/api/client/auto-gallery`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ slug: siteSlug }),
+      });
+      const data = await res.json();
+
+      if (res.status === 403 && data.error === 'upgrade_required') {
+        addMessage('user', 'I want to enable Auto Update Gallery');
+        await sendMessage('Enable auto update gallery for my site');
+        return;
+      }
+
+      if (res.ok) {
+        autoGalleryEnabled = data.autoGallery;
+        updateAutoGalleryBtn();
+      }
+    } catch (e) {
+      console.error('toggleAutoGallery error:', e);
+    } finally {
+      const btn = document.getElementById('auto-gallery-btn');
+      if (btn) btn.disabled = false;
+    }
   }
 
   function updateSiteUI(profile, siteInfo) {
