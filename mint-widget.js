@@ -165,7 +165,8 @@ function send(){
   var typing=document.createElement('div');typing.className='mint-typing';typing.textContent='Mint is typing...';msgs.appendChild(typing);msgs.scrollTop=msgs.scrollHeight;
 
   // Use simple fetch→JSON (works in IG WebView, no streaming needed)
-  var payload={message:text,context:SLUG};if(threadId)payload.threadId=threadId;
+  var SLUG=window.__mintSlug||(window.location.pathname.split('/').filter(Boolean)[0]||'');
+  var payload={message:text,slug:SLUG,context:SLUG};if(threadId)payload.threadId=threadId;
   fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
     .then(function(r){var tid=r.headers.get('X-Thread-Id');if(tid)threadId=tid;var ct=r.headers.get('content-type')||'';if(ct.indexOf('text/')>=0)return r.text().then(function(t){return{reply:t}});return r.json();})
     .then(function(d){
