@@ -1612,18 +1612,21 @@
       // Wait briefly for Convex auth to be ready
       setTimeout(async () => {
         try {
-          if (convexClient) {
-            const result = await convexClient.mutation(api.dashboard.claimSite, { slug: claimSlug });
-            if (result && result.success) {
-              // Show success toast
-              showClaimToast(result.alreadyOwned
-                ? 'Welcome back! This site is already yours 🌿'
-                : 'Site claimed! Welcome to GetMinted 🌿');
-            }
+          const token = await getToken();
+          const res = await fetch(`${CONVEX_HTTP_URL}/api/site/claim`, {
+            method: 'POST',
+            headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+            body: JSON.stringify({ slug: claimSlug }),
+          });
+          const result = await res.json();
+          if (result?.ok || result?.success) {
+            showClaimToast(result.alreadyOwned
+              ? 'Welcome back! This site is already yours 🌿'
+              : 'Site claimed! Welcome to GetMinted 🌿');
+            loadSiteInfo();
           }
         } catch (err) {
           console.error('Claim failed:', err);
-          showClaimToast('Claim failed: ' + (err.message || 'Unknown error'), true);
         }
         // Clean URL regardless
         window.history.replaceState({}, '', '/dashboard/');
@@ -2163,18 +2166,24 @@
     input.disabled = true;
 
     try {
-      const result = await convexClient.mutation(api.dashboard.claimSite, { slug: handle });
-      if (result?.success) {
+      const token = await getToken();
+      const res = await fetch(`${CONVEX_HTTP_URL}/api/site/claim`, {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ slug: handle }),
+      });
+      const result = await res.json();
+      if (result?.ok || result?.success) {
         document.getElementById('connect-site-banner').style.display = 'none';
-        // getMySiteInfo subscription auto-updates the dashboard
+        loadSiteInfo(); // refresh dashboard with new site info
       } else {
-        errEl.textContent = 'Could not find a site for that handle. Check the spelling.';
+        errEl.textContent = result?.error?.includes('already claimed')
+          ? 'That site is linked to a different account.'
+          : 'Could not find a site for that handle. Check the spelling.';
         input.disabled = false;
       }
     } catch (e) {
-      errEl.textContent = e.message?.includes('already claimed')
-        ? 'That site is linked to a different account.'
-        : 'Could not find a site for that handle. Check the spelling.';
+      errEl.textContent = 'Something went wrong. Try again.';
       input.disabled = false;
     }
   }
