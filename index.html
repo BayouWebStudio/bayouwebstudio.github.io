@@ -249,10 +249,9 @@ footer .links a:hover{color:var(--mint)}
   border-bottom: 1px solid rgba(152,232,193,0.08);
 }
 .top-nav-logo {
-  font-family: "Playfair Display", serif;
-  font-weight: 800;
-  font-size: 1.2rem;
-  color: #98E8C1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   text-decoration: none;
 }
 .top-nav-right { display: flex; align-items: center; gap: 16px; }
@@ -295,7 +294,30 @@ body { padding-top: 60px; }
 </head>
 <body>
 <nav class="top-nav">
-  <a href="/" class="top-nav-logo">🌿 mint</a>
+  <a href="/" class="top-nav-logo">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="32" height="32" style="flex-shrink:0;">
+      <defs>
+        <radialGradient id="logo-grad" cx="35%" cy="30%" r="65%">
+          <stop offset="0%" stop-color="#4DFFC0"/>
+          <stop offset="40%" stop-color="#00C882"/>
+          <stop offset="100%" stop-color="#008A5A"/>
+        </radialGradient>
+      </defs>
+      <ellipse cx="24" cy="25" rx="22" ry="21" fill="rgba(0,200,130,0.15)"/>
+      <path d="M24,4 C34,3 44,11 44,23 C44,37 36,44 24,44 C12,44 4,37 4,23 C4,11 14,5 24,4 Z" fill="url(#logo-grad)" style="filter:drop-shadow(0 3px 12px rgba(0,200,130,0.45))"/>
+      <ellipse cx="17" cy="15" rx="6" ry="4.5" fill="rgba(255,255,255,0.22)" transform="rotate(-15 17 15)"/>
+      <ellipse cx="17" cy="22" rx="5" ry="5.5" fill="white"/>
+      <ellipse cx="17" cy="22.5" rx="2.5" ry="2.9" fill="#1A1A2E"/>
+      <circle cx="18.5" cy="20.5" r="1.1" fill="rgba(255,255,255,0.9)"/>
+      <ellipse cx="31" cy="22" rx="5" ry="5.5" fill="white"/>
+      <ellipse cx="31" cy="22.5" rx="2.5" ry="2.9" fill="#1A1A2E"/>
+      <circle cx="32.5" cy="20.5" r="1.1" fill="rgba(255,255,255,0.9)"/>
+      <ellipse cx="10" cy="28" rx="3.5" ry="2" fill="rgba(255,130,160,0.25)"/>
+      <ellipse cx="38" cy="28" rx="3.5" ry="2" fill="rgba(255,130,160,0.25)"/>
+      <path d="M19,31 Q24,37 29,31" stroke="#006040" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+    </svg>
+    <span style="font-family:'Inter',system-ui,sans-serif;font-size:17px;font-weight:700;color:white;letter-spacing:-0.5px;">get<span style="color:#00C882;">minted</span></span>
+  </a>
   <div class="top-nav-right">
     <a href="/dashboard/" class="nav-signin">Sign In</a>
     <a href="#get-started" class="nav-getstarted">Get Started →</a>
