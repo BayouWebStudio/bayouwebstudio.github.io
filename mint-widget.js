@@ -214,6 +214,10 @@ function send(){
   var SLUG=window.__mintSlug||(window.location.pathname.split('/').filter(Boolean)[0]||'');
   var payload={message:text,slug:SLUG,context:SLUG};
   if(threadId)payload.threadId=threadId;
+  // Include auth token if owner is logged in (set by dashboard)
+  var ownerToken=null;
+  try{ownerToken=localStorage.getItem('mint-owner-token');}catch(e){}
+  if(ownerToken)payload.authToken=ownerToken;
 
   doFetch(API,payload,typing,0);
 }
