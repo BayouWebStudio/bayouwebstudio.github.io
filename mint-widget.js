@@ -22,11 +22,12 @@ if(!document.querySelector('link[href*="Inter"]')){
 // Styles
 var style=document.createElement('style');
 style.textContent=`
-.mint-bubble{position:fixed;bottom:90px;right:24px;width:56px;height:56px;border-radius:50%;background:${BG};border:2px solid ${ACCENT};cursor:pointer;z-index:99999;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;box-shadow:0 0 20px ${ACCENT}44,0 0 40px ${ACCENT}22;-webkit-animation:mint-pulse 3s ease-in-out infinite;animation:mint-pulse 3s ease-in-out infinite;-webkit-transition:-webkit-transform .2s;transition:transform .2s}
-.mint-bubble:hover{-webkit-transform:scale(1.08);transform:scale(1.08)}
-.mint-bubble svg{width:28px;height:28px}
-@-webkit-keyframes mint-pulse{0%,100%{box-shadow:0 0 20px ${ACCENT}44,0 0 40px ${ACCENT}22}50%{box-shadow:0 0 28px ${ACCENT}66,0 0 56px ${ACCENT}33}}
-@keyframes mint-pulse{0%,100%{box-shadow:0 0 20px ${ACCENT}44,0 0 40px ${ACCENT}22}50%{box-shadow:0 0 28px ${ACCENT}66,0 0 56px ${ACCENT}33}}
+.mint-bubble{position:fixed;bottom:90px;right:24px;width:56px;height:56px;cursor:pointer;z-index:99999;-webkit-animation:mint-float 3s ease-in-out infinite;animation:mint-float 3s ease-in-out infinite;-webkit-transition:-webkit-transform .2s;transition:transform .2s}
+.mint-bubble:hover{-webkit-transform:scale(1.1);transform:scale(1.1)}
+.mint-blob-inner{width:56px;height:56px;background:radial-gradient(ellipse at 35% 30%,#4DFFC0,#00C882 50%,#008A5A);box-shadow:inset 0 -3px 8px rgba(0,80,50,0.3),inset 0 3px 8px rgba(77,255,192,0.2),0 4px 20px rgba(0,200,130,0.35),0 2px 6px rgba(0,0,0,0.3);animation:mint-morph 6s ease-in-out infinite;position:relative;overflow:hidden;}
+@-webkit-keyframes mint-float{0%,100%{-webkit-transform:translateY(0);transform:translateY(0)}50%{-webkit-transform:translateY(-5px);transform:translateY(-5px)}}
+@keyframes mint-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes mint-morph{0%{border-radius:60% 40% 30% 70%/60% 30% 70% 40%}25%{border-radius:30% 60% 70% 40%/50% 60% 30% 60%}50%{border-radius:50% 60% 30% 60%/40% 70% 60% 30%}75%{border-radius:40% 30% 60% 50%/60% 40% 50% 70%}100%{border-radius:60% 40% 30% 70%/60% 30% 70% 40%}}
 .mint-window{position:fixed;bottom:90px;right:24px;width:380px;max-height:500px;background:${BG};border:1px solid #333;border-radius:16px;z-index:99999;display:none;-webkit-flex-direction:column;flex-direction:column;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;box-shadow:0 8px 32px rgba(0,0,0,.6);overflow:hidden;-webkit-animation:mint-slideup .25s ease-out;animation:mint-slideup .25s ease-out}
 .mint-window.open{display:-webkit-flex;display:flex}
 @-webkit-keyframes mint-slideup{from{opacity:0;-webkit-transform:translateY(16px)}to{opacity:1;-webkit-transform:translateY(0)}}
@@ -60,17 +61,21 @@ style.textContent=`
 `;
 document.head.appendChild(style);
 
-var hexIcon=`<svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M20 4L35 12V28L20 36L5 28V12L20 4Z" stroke="${ACCENT}" stroke-width="1.5" fill="none"/>
-<path d="M20 10L29 15V25L20 30L11 25V15L20 10Z" stroke="${ACCENT}" stroke-width="1" fill="none" opacity=".6"/>
-<circle cx="20" cy="20" r="3" fill="${ACCENT}" opacity=".8"/>
-<line x1="20" y1="4" x2="20" y2="10" stroke="${ACCENT}" stroke-width=".5" opacity=".4"/>
-<line x1="35" y1="12" x2="29" y2="15" stroke="${ACCENT}" stroke-width=".5" opacity=".4"/>
-<line x1="35" y1="28" x2="29" y2="25" stroke="${ACCENT}" stroke-width=".5" opacity=".4"/>
-<line x1="20" y1="36" x2="20" y2="30" stroke="${ACCENT}" stroke-width=".5" opacity=".4"/>
-<line x1="5" y1="28" x2="11" y2="25" stroke="${ACCENT}" stroke-width=".5" opacity=".4"/>
-<line x1="5" y1="12" x2="11" y2="15" stroke="${ACCENT}" stroke-width=".5" opacity=".4"/>
-</svg>`;
+var blobId='mb'+(Math.random()*9999|0);
+var hexIcon=`<div class="mint-blob-inner" id="${blobId}-blob">
+  <div style="position:absolute;top:10%;left:15%;width:35%;height:25%;border-radius:50%;background:radial-gradient(ellipse,rgba(255,255,255,0.25),transparent 70%);transform:rotate(-15deg);pointer-events:none;"></div>
+  <svg viewBox="0 0 56 56" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;" xmlns="http://www.w3.org/2000/svg">
+    <ellipse id="${blobId}-elw" cx="20" cy="24" rx="5.5" ry="6" fill="white"/>
+    <ellipse id="${blobId}-elp" cx="20" cy="24" rx="3" ry="3.5" fill="#1A1A2E"/>
+    <circle cx="21.5" cy="22" r="1.2" fill="rgba(255,255,255,0.8)"/>
+    <ellipse id="${blobId}-erw" cx="36" cy="24" rx="5.5" ry="6" fill="white"/>
+    <ellipse id="${blobId}-erp" cx="36" cy="24" rx="3" ry="3.5" fill="#1A1A2E"/>
+    <circle cx="37.5" cy="22" r="1.2" fill="rgba(255,255,255,0.8)"/>
+    <ellipse id="${blobId}-ll" cx="20" cy="24" rx="6" ry="0" fill="#00C882" opacity="0"/>
+    <ellipse id="${blobId}-lr" cx="36" cy="24" rx="6" ry="0" fill="#00C882" opacity="0"/>
+    <path d="M22,34 Q28,40 34,34" stroke="#006040" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  </svg>
+</div>`;
 
 var sendIcon=`<svg viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13" stroke="#0a0a0a" stroke-width="2" stroke-linecap="round"/><path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="#0a0a0a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="#0a0a0a"/></svg>`;
 
@@ -84,7 +89,7 @@ var win=document.createElement('div');win.className='mint-window';
 win.innerHTML=`
 ${igBarHtml}
 <div class="mint-header">
-  <div class="mint-header-left">${hexIcon}<span class="mint-header-name">Mint</span></div>
+  <div class="mint-header-left"><div style="width:24px;height:24px;background:radial-gradient(ellipse at 35% 30%,#4DFFC0,#00C882 50%,#008A5A);border-radius:60% 40% 30% 70%/60% 30% 70% 40%;flex-shrink:0;"></div><span class="mint-header-name">Mint</span></div>
   <button class="mint-close">&times;</button>
 </div>
 <div class="mint-messages"></div>
@@ -94,6 +99,29 @@ ${igBarHtml}
 </div>`;
 
 document.body.appendChild(bubble);
+
+// Eye tracking for blob
+(function(){
+  var lp=document.getElementById(blobId+'-elp');
+  var rp=document.getElementById(blobId+'-erp');
+  var ll=document.getElementById(blobId+'-ll');
+  var lr=document.getElementById(blobId+'-lr');
+  if(!lp)return;
+  var MAX=2.5;
+  function setPupil(ox,oy){lp.setAttribute('cx',20+ox);lp.setAttribute('cy',24+oy);rp.setAttribute('cx',36+ox);rp.setAttribute('cy',24+oy);}
+  var dirs=[{x:-2,y:-1},{x:2,y:-1},{x:-2,y:1},{x:2,y:1},{x:0,y:-2},{x:0,y:0},{x:-2.5,y:0},{x:2.5,y:0}];
+  setInterval(function(){var d=dirs[Math.random()*dirs.length|0];setPupil(d.x,d.y);},2200);
+  document.addEventListener('mousemove',function(e){
+    var r=bubble.getBoundingClientRect();
+    var cx=r.left+r.width/2,cy=r.top+r.height/2;
+    var dx=e.clientX-cx,dy=e.clientY-cy;
+    var dist=Math.sqrt(dx*dx+dy*dy)||1;
+    if(dist<300){var f=Math.min(dist/300,1);setPupil((dx/dist)*MAX*f,(dy/dist)*MAX*f);}
+  });
+  function blink(){ll.setAttribute('ry','7');ll.setAttribute('opacity','1');lr.setAttribute('ry','7');lr.setAttribute('opacity','1');setTimeout(function(){ll.setAttribute('ry','0');ll.setAttribute('opacity','0');lr.setAttribute('ry','0');lr.setAttribute('opacity','0');},150);}
+  function sched(){setTimeout(function(){blink();sched();},2000+Math.random()*3000);}
+  sched();
+})();
 document.body.appendChild(win);
 
 var msgs=win.querySelector('.mint-messages');
