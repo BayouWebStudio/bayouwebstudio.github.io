@@ -49,34 +49,34 @@
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "I'm running late for my appointment, what should I do?",
+        "name": "Do you offer beard trims or styling, or is it strictly haircuts?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Please text or call as soon as possible. Depending on how late you are, we may need to reschedule to avoid impacting other clients, as we run on a tight schedule with appointments only."
+          "text": "We focus primarily on haircuts and color. While we might tidy up a beard during a haircut to balance the look, we don't offer dedicated beard styling services."
         }
       },
       {
         "@type": "Question",
-        "name": "Do you offer beard trims or styling services?",
+        "name": "I'm highly allergic to dogs. Are dogs always present during appointments?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "While we specialize in haircuts and color for the hair on your head, we can tidy up a beard and offer some advice, but we don't do full beard styling services."
+          "text": "Yes, a friendly dog is usually in the shop. If you have severe allergies, please let us know *before* booking, and we can make arrangements for a dog-free appointment time, or recommend another salon."
         }
       },
       {
         "@type": "Question",
-        "name": "I'm allergic to dogs. Is there a way I can still come in for a haircut?",
+        "name": "What kind of hair color services do you offer? Do you do highlights, balayage, etc.?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Absolutely! Just let us know when you book your appointment, and we'll ensure the dog isn't in the shop during your visit. We want to make sure everyone is comfortable."
+          "text": "We provide single-process color and root touch-ups. We don't currently offer highlighting or balayage techniques."
         }
       },
       {
         "@type": "Question",
-        "name": "What type of hair color services do you provide?",
+        "name": "Since there's no receptionist, how early should I arrive for my appointment? Is there a waiting area?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "We offer single-process color, highlights, and lowlights. We don't offer more complex techniques like balayage or ombre."
+          "text": "Please arrive right on time for your scheduled appointment. Since there isn't a waiting area, arriving early may mean standing outside."
         }
       }
     ]
@@ -347,6 +347,20 @@
       .mobile-cta-bar { background: rgba(10,10,10,0.98) !important; }
     }
 
+    /* ── ARTISTS (tattoo_shop) ── */
+    .artists-section { padding: 80px 20px; background: var(--dark); }
+    .artists-section .section-title { text-align: center; font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: 50px; color: var(--text); letter-spacing: 0.05em; text-transform: uppercase; font-family: 'Playfair Display', Georgia, serif; }
+    .artists-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; max-width: 1000px; margin: 0 auto; }
+    .artist-card { text-align: center; padding: 30px 20px; background: var(--card-bg); border-radius: 12px; border: 1px solid var(--card-border); -webkit-transition: transform 0.2s, border-color 0.2s; transition: transform 0.2s, border-color 0.2s; }
+    .artist-card:hover { -webkit-transform: translateY(-4px); transform: translateY(-4px); border-color: rgba(255,255,255,0.2); }
+    .artist-photo-placeholder { width: 100px; height: 100px; border-radius: 50%; background: rgba(255,255,255,0.1); margin: 0 auto 16px; display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; -webkit-justify-content: center; justify-content: center; }
+    .artist-photo { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin: 0 auto 16px; display: block; }
+    .artist-initials { font-size: 2rem; color: rgba(255,255,255,0.3); }
+    .artist-name { font-size: 1.1rem; font-weight: 600; color: var(--text); margin: 0 0 8px; }
+    .artist-specialty { font-size: 0.85rem; color: var(--muted); margin: 0 0 16px; line-height: 1.4; }
+    .artist-book-btn { display: inline-block; padding: 8px 20px; background: var(--accent); color: var(--black); border-radius: 6px; text-decoration: none; font-size: 0.85rem; font-weight: 600; -webkit-transition: opacity 0.2s; transition: opacity 0.2s; }
+    .artist-book-btn:hover { opacity: 0.85; }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       .nav-links { display: none; }
@@ -368,6 +382,7 @@
     <ul class="nav-links" role="list">
       <li><a href="#about">About</a></li>
       <li><a href="#gallery">Portfolio</a></li>
+      
       <li><a href="#styles">Styles</a></li>
       <li><a href="#booking">Book</a></li>
     </ul>
@@ -380,10 +395,10 @@
     <div class="hero-content">
       <p class="hero-eyebrow">Barber</p>
       <h1 class="hero-title">The Bearded Lady<br><span id="hero-typed" style="font-size:clamp(1.6rem,4vw,3rem);font-weight:600;opacity:0.75;border-right:3px solid var(--accent);padding-right:4px;"></span></h1>
-      <p class="hero-subtitle">Get a sharp haircut and canine comfort in Corktown.</p>
+      <p class="hero-subtitle">Get a great haircut and chill with dogs in Corktown.</p>
       <script>
       (function(){
-        const phrases = ["Get a sharp haircut and canine comfort i","Barber","Book Your Cut Now","Book Now"];
+        const phrases = ["Get a great haircut and chill with dogs ","Barber","Book Your Cut Now","Book Now"];
         let wi=0,ci=0,del=false;
         const el=document.getElementById('hero-typed');
         if(!el) return;
@@ -414,7 +429,7 @@
           <div class="about-img-wrap"><img src="img/profile.jpg" alt="The Bearded Lady" class="about-portrait" loading="lazy" decoding="async"></div>
           <div class="about-content">
             <div class="about-text">
-              <p>The Bearded Lady offers straightforward haircuts and coloring services in a laid-back, appointment-only setting. Clients can expect a premium experience without unnecessary frills, a friendly atmosphere, and maybe even the chance to pet a dog while they relax.</p>
+              <p>The Bearded Lady offers a curated experience focused on exceptional haircuts and color services in a relaxed, dog-friendly environment. Appointments ensure each client receives personalized attention and a straightforward approach to achieving their desired style in the heart of Corktown.</p>
             </div>
             <div class="about-stats">
               <div class="stat-block">
@@ -444,12 +459,18 @@
       <div class="gallery-grid">
         <div class="gallery-item fade-in" style="-webkit-transition-delay:0s;transition-delay:0s"><img src="img/photo_01.jpg" alt="The Bearded Lady work 1" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Long Layered Blonde Highlights</span></div></div>
         <div class="gallery-item fade-in" style="-webkit-transition-delay:0.05s;transition-delay:0.05s"><img src="img/photo_02.jpg" alt="The Bearded Lady work 2" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Textured Pixie Cut</span></div></div>
-        <div class="gallery-item fade-in" style="-webkit-transition-delay:0.1s;transition-delay:0.1s"><img src="img/photo_03.jpg" alt="The Bearded Lady work 3" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Short Dark Hair with Subtle Red Highlights</span></div></div>
+        <div class="gallery-item fade-in" style="-webkit-transition-delay:0.1s;transition-delay:0.1s"><img src="img/photo_03.jpg" alt="The Bearded Lady work 3" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Classic Short Haircuts</span></div></div>
         <div class="gallery-item fade-in" style="-webkit-transition-delay:0.15000000000000002s;transition-delay:0.15000000000000002s"><img src="img/photo_04.jpg" alt="The Bearded Lady work 4" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Long Layered Blonde Highlights</span></div></div>
         <div class="gallery-item fade-in" style="-webkit-transition-delay:0.2s;transition-delay:0.2s"><img src="img/photo_05.jpg" alt="The Bearded Lady work 5" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Textured Pixie Cut</span></div></div>
+        <div class="gallery-item fade-in" style="-webkit-transition-delay:0.25s;transition-delay:0.25s"><img src="img/photo_06.jpg" alt="The Bearded Lady work 6" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Classic Short Haircuts</span></div></div>
+        <div class="gallery-item fade-in" style="-webkit-transition-delay:0.30000000000000004s;transition-delay:0.30000000000000004s"><img src="img/photo_07.jpg" alt="The Bearded Lady work 7" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Long Layered Blonde Highlights</span></div></div>
+        <div class="gallery-item fade-in" style="-webkit-transition-delay:0.35000000000000003s;transition-delay:0.35000000000000003s"><img src="img/photo_08.jpg" alt="The Bearded Lady work 8" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Textured Pixie Cut</span></div></div>
+        <div class="gallery-item fade-in" style="-webkit-transition-delay:0.4s;transition-delay:0.4s"><img src="img/photo_09.jpg" alt="The Bearded Lady work 9" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Classic Short Haircuts</span></div></div>
       </div>
     </div>
   </section>
+
+  
 
   <section id="styles">
     <div class="container">
@@ -460,17 +481,17 @@
         <div class="style-card fade-in">
           <div class="style-icon">◆</div>
           <h3>Long Layered Blonde Highlights</h3>
-          <p>A style with soft, blended highlights throughout long, layered hair for a natural sun-kissed look.</p>
+          <p>Creates long layered haircuts with blonde highlights and lowlights that create movement and dimension.</p>
         </div>
         <div class="style-card fade-in">
           <div class="style-icon">✦</div>
           <h3>Textured Pixie Cut</h3>
-          <p>A short, choppy pixie cut with lots of texture and volume, creating a playful and modern style.</p>
+          <p>Delivers modern, textured pixie cuts with varying lengths and layers that frame the face.</p>
         </div>
         <div class="style-card fade-in">
           <div class="style-icon">❧</div>
-          <h3>Short Dark Hair with Subtle Red Highlights</h3>
-          <p>A short, dark hairstyle with subtle red highlights, adding depth and dimension while maintaining a bold and edgy aesthetic.</p>
+          <h3>Classic Short Haircuts</h3>
+          <p>Provides classic, short haircuts for a mature clientele, including buzz cuts and tapered styles.</p>
         </div>
       </div>
     </div>
@@ -485,21 +506,21 @@
             <div class="service-card fade-in" style="-webkit-transition-delay:0s;transition-delay:0s">
               <div class="service-icon">◆</div>
               <h3>Long Layered Blonde Highlights</h3>
-              <p>A style with soft, blended highlights throughout long, layered hair for a natural sun-kissed look.</p>
+              <p>Creates long layered haircuts with blonde highlights and lowlights that create movement and dimension.</p>
               <span class="service-price">Contact for Pricing</span>
             </div>
 
             <div class="service-card fade-in" style="-webkit-transition-delay:0.1s;transition-delay:0.1s">
               <div class="service-icon">✦</div>
               <h3>Textured Pixie Cut</h3>
-              <p>A short, choppy pixie cut with lots of texture and volume, creating a playful and modern style.</p>
+              <p>Delivers modern, textured pixie cuts with varying lengths and layers that frame the face.</p>
               <span class="service-price">Contact for Pricing</span>
             </div>
 
             <div class="service-card fade-in" style="-webkit-transition-delay:0.2s;transition-delay:0.2s">
               <div class="service-icon">❧</div>
-              <h3>Short Dark Hair with Subtle Red Highlights</h3>
-              <p>A short, dark hairstyle with subtle red highlights, adding depth and dimension while maintaining a bold and edgy aesthetic.</p>
+              <h3>Classic Short Haircuts</h3>
+              <p>Provides classic, short haircuts for a mature clientele, including buzz cuts and tapered styles.</p>
               <span class="service-price">Contact for Pricing</span>
             </div>
       </div>
@@ -514,41 +535,41 @@
       <div class="faq-list">
             <div class="faq-item fade-in" style="-webkit-transition-delay:0s;transition-delay:0s">
               <button class="faq-question" onclick="this.parentElement.classList.toggle('open')" aria-expanded="false">
-                <span>I'm running late for my appointment, what should I do?</span>
+                <span>Do you offer beard trims or styling, or is it strictly haircuts?</span>
                 <span class="faq-icon">+</span>
               </button>
               <div class="faq-answer">
-                <p>Please text or call as soon as possible. Depending on how late you are, we may need to reschedule to avoid impacting other clients, as we run on a tight schedule with appointments only.</p>
+                <p>We focus primarily on haircuts and color. While we might tidy up a beard during a haircut to balance the look, we don't offer dedicated beard styling services.</p>
               </div>
             </div>
 
             <div class="faq-item fade-in" style="-webkit-transition-delay:0.08s;transition-delay:0.08s">
               <button class="faq-question" onclick="this.parentElement.classList.toggle('open')" aria-expanded="false">
-                <span>Do you offer beard trims or styling services?</span>
+                <span>I'm highly allergic to dogs. Are dogs always present during appointments?</span>
                 <span class="faq-icon">+</span>
               </button>
               <div class="faq-answer">
-                <p>While we specialize in haircuts and color for the hair on your head, we can tidy up a beard and offer some advice, but we don't do full beard styling services.</p>
+                <p>Yes, a friendly dog is usually in the shop. If you have severe allergies, please let us know *before* booking, and we can make arrangements for a dog-free appointment time, or recommend another salon.</p>
               </div>
             </div>
 
             <div class="faq-item fade-in" style="-webkit-transition-delay:0.16s;transition-delay:0.16s">
               <button class="faq-question" onclick="this.parentElement.classList.toggle('open')" aria-expanded="false">
-                <span>I'm allergic to dogs. Is there a way I can still come in for a haircut?</span>
+                <span>What kind of hair color services do you offer? Do you do highlights, balayage, etc.?</span>
                 <span class="faq-icon">+</span>
               </button>
               <div class="faq-answer">
-                <p>Absolutely! Just let us know when you book your appointment, and we'll ensure the dog isn't in the shop during your visit. We want to make sure everyone is comfortable.</p>
+                <p>We provide single-process color and root touch-ups. We don't currently offer highlighting or balayage techniques.</p>
               </div>
             </div>
 
             <div class="faq-item fade-in" style="-webkit-transition-delay:0.24s;transition-delay:0.24s">
               <button class="faq-question" onclick="this.parentElement.classList.toggle('open')" aria-expanded="false">
-                <span>What type of hair color services do you provide?</span>
+                <span>Since there's no receptionist, how early should I arrive for my appointment? Is there a waiting area?</span>
                 <span class="faq-icon">+</span>
               </button>
               <div class="faq-answer">
-                <p>We offer single-process color, highlights, and lowlights. We don't offer more complex techniques like balayage or ombre.</p>
+                <p>Please arrive right on time for your scheduled appointment. Since there isn't a waiting area, arriving early may mean standing outside.</p>
               </div>
             </div>
       </div>
@@ -609,7 +630,7 @@
               <div class="form-group">
                 <label for="bstyle">Style / Service</label>
                 <select id="bstyle" name="Style" aria-label="Select a service type">
-                  <option>Long Layered Blonde Highlights</option><option>Textured Pixie Cut</option><option>Short Dark Hair with Subtle Red Highlights</option>
+                  <option>Long Layered Blonde Highlights</option><option>Textured Pixie Cut</option><option>Classic Short Haircuts</option>
                   <option>Other / Not Sure</option>
                 </select>
               </div>
