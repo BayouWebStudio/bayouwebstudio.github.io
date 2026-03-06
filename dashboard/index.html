@@ -1427,6 +1427,7 @@
           <select id="upload-section-select" style="flex:1;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:6px 10px;font-size:12px;color:var(--text);outline:none;cursor:pointer;">
             <option value="gallery">📸 Main Gallery</option>
           </select>
+          <button onclick="loadSiteSections()" title="Refresh sections" style="background:none;border:none;cursor:pointer;font-size:14px;padding:4px;opacity:0.5;line-height:1;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.5'">🔄</button>
         </div>
         <div class="upload-drop-zone" id="drop-zone">
           📸 Drop photos here to upload to your gallery
@@ -2051,6 +2052,8 @@
 
     isStreaming = false;
     sendBtn.disabled = false;
+    // Refresh section picker after every Mint response (user may have just added a section)
+    loadSiteSections();
   }
 
   // Send button
