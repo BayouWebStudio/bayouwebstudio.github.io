@@ -218,6 +218,20 @@ function send(){
   doFetch(API,payload,typing,0);
 }
 
+// Auto-hide claim banner if site is already claimed
+(function(){
+  var banner=document.getElementById('claim-banner');
+  if(!banner)return;
+  var slug=window.__mintSlug||(window.location.pathname.split('/').filter(Boolean)[0]||'');
+  if(!slug)return;
+  fetch('https://curious-lemming-262.convex.site/api/site/claimed?slug='+encodeURIComponent(slug))
+    .then(function(r){return r.json();})
+    .then(function(d){
+      if(d&&d.claimed){banner.style.display='none';try{banner.remove();}catch(e){}}
+    })
+    .catch(function(){/* silent — show banner if check fails (fail-open for unclaimed sites) */});
+})();
+
 }catch(e){
   // Widget failed to initialize — show minimal fallback
   try{
