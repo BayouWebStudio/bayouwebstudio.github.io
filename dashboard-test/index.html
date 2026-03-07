@@ -803,6 +803,7 @@
         document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
         tab.classList.add('active');
         document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+        showTabBubble(tab.dataset.tab);
       });
     });
 
@@ -822,6 +823,7 @@
       }
 
       await loadSiteInfo();
+      loadFreeChangeCount();
       loadSiteHtml();
       loadChanges();
     }
@@ -848,6 +850,7 @@
         siteSlug = data.siteSlug;
         const previewUrl = data.siteUrl;
         const plan = data.plan || 'free';
+        window._currentPlan = plan;
 
         // ── Upgrade CTA: show for free accounts ──
         const hasPaidPlan = plan === 'pro' || plan === 'starter';
@@ -1055,6 +1058,7 @@
     };
 
     window.saveSection = async function(btn) {
+      if (!(await checkChangeLimit())) return;
       const key = btn.dataset.key;
       const textarea = btn.closest('.section-editor').querySelector('.section-textarea');
       const statusEl = document.getElementById('status-' + key);
@@ -1083,6 +1087,7 @@
           const preview = card.querySelector('.section-card-preview');
           if (preview) preview.textContent = newContent.substring(0, 150) + (newContent.length > 150 ? '...' : '');
           showToast('Section updated!');
+          afterSuccessfulChange();
           // Collapse after a moment
           setTimeout(() => {
             card.classList.remove('editing');
@@ -1130,6 +1135,7 @@
 
     window.uploadHeroBg = async function() {
       if (!heroBgFile) return;
+      if (!(await checkChangeLimit())) return;
       const btn = document.getElementById('btn-save-hero-bg');
       const progress = document.getElementById('hero-bg-progress');
       const statusEl = document.getElementById('status-hero_bg');
@@ -1165,6 +1171,7 @@
 
         if (res.ok && data.ok) {
           showToast('Background updated! Changes live in ~30 seconds');
+          afterSuccessfulChange();
           progress.textContent = '✅ Done! Changes propagating...';
           if (statusEl) { statusEl.className = 'save-status success'; statusEl.textContent = '✅ Background updated!'; }
           // Update preview with new URL
@@ -1244,6 +1251,7 @@
     }
 
     window.saveGalleryOrder = async function() {
+      if (!(await checkChangeLimit())) return;
       const btn = document.getElementById('btn-save-order');
       btn.disabled = true;
       btn.textContent = '💾 Saving...';
@@ -1262,6 +1270,7 @@
 
         if (res.ok && data.ok) {
           showToast('Gallery order saved!');
+          afterSuccessfulChange();
           galleryOrderChanged = false;
           btn.classList.remove('visible');
         } else {
@@ -1276,6 +1285,7 @@
     };
 
     window.deleteGalleryImage = async function(filename) {
+      if (!(await checkChangeLimit())) return;
       if (!confirm('Delete this photo from your gallery?')) return;
 
       try {
@@ -1296,6 +1306,7 @@
           document.getElementById('gallery-count').textContent = remaining.length + ' photo' + (remaining.length !== 1 ? 's' : '');
           remaining.forEach((el, i) => { el.querySelector('.gallery-thumb-index').textContent = i + 1; });
           showToast('Photo removed!');
+          afterSuccessfulChange();
         } else {
           showToast(data.error || 'Failed to delete', true);
         }
@@ -1601,6 +1612,180 @@
       setTimeout(() => { toast.style.opacity = '0'; }, 3000);
       setTimeout(() => toast.remove(), 3500);
     };
+
+    // ── Free Change Limit ──
+    window._freeChangeCount = 0;
+    window._freeLimitReached = false;
+    window._upgradeModalDismissed = false;
+    window._upgradeModalOpen = false;
+
+    async function loadFreeChangeCount() {
+      if (window._currentPlan !== 'free') return;
+      try {
+        const token = await getToken();
+        const res = await fetch(CONVEX_HTTP_URL + '/api/dashboard/change-count', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+          body: '{}',
+        });
+        const data = await res.json();
+        window._freeChangeCount = data.count || 0;
+        window._freeLimitReached = !!data.limitReached;
+        if (window._freeLimitReached) addLockIcons();
+      } catch (e) { console.warn('loadFreeChangeCount error:', e); }
+    }
+
+    function addLockIcons() {
+      document.querySelectorAll('.nav-tab').forEach(function(tab) {
+        var t = tab.dataset.tab;
+        if (['sections','gallery','store','themes'].indexOf(t) !== -1 && !tab.querySelector('.lock-icon')) {
+          var lock = document.createElement('span');
+          lock.className = 'lock-icon';
+          lock.textContent = ' 🔒';
+          lock.style.cssText = 'font-size:11px;opacity:0.7;';
+          tab.appendChild(lock);
+        }
+      });
+    }
+
+    function removeLockIcons() {
+      document.querySelectorAll('.lock-icon').forEach(function(el) { el.remove(); });
+    }
+
+    async function checkChangeLimit() {
+      if (window._currentPlan !== 'free') return true;
+      if (window._freeLimitReached) {
+        showUpgradeModal();
+        return false;
+      }
+      return true;
+    }
+
+    async function afterSuccessfulChange() {
+      if (window._currentPlan !== 'free') return;
+      window._freeChangeCount++;
+      if (window._freeChangeCount >= 2) {
+        window._freeLimitReached = true;
+        addLockIcons();
+      }
+    }
+
+    function showUpgradeModal() {
+      if (window._upgradeModalDismissed) return;
+      window._upgradeModalOpen = true;
+      var existing = document.getElementById('mint-upgrade-overlay');
+      if (existing) { existing.style.display = 'flex'; return; }
+
+      var overlay = document.createElement('div');
+      overlay.id = 'mint-upgrade-overlay';
+      overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.85);display:flex;align-items:center;justify-content:center;z-index:10000;padding:24px;animation:bubblePop .3s ease;';
+
+      overlay.innerHTML =
+        '<div style="display:flex;flex-direction:column;align-items:center;max-width:400px;width:100%;">' +
+          // Mint blob — large version sitting on top of card
+          '<div style="position:relative;z-index:2;margin-bottom:-40px;animation:mintFloat 3s ease-in-out infinite;">' +
+            '<div style="width:120px;height:120px;background:radial-gradient(ellipse at 35% 30%,#4DFFC0,#00C882 50%,#008A5A);box-shadow:inset 0 -3px 8px rgba(0,80,50,0.3),inset 0 3px 8px rgba(77,255,192,0.2),0 4px 32px rgba(0,200,130,0.5),0 2px 6px rgba(0,0,0,0.3);animation:fabBlobMorph 6s ease-in-out infinite;position:relative;overflow:hidden;">' +
+              '<div style="position:absolute;top:10%;left:15%;width:35%;height:25%;border-radius:50%;background:radial-gradient(ellipse,rgba(255,255,255,0.25),transparent 70%);transform:rotate(-15deg);pointer-events:none;"><\/div>' +
+              '<svg viewBox="0 0 56 56" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;" xmlns="http://www.w3.org/2000/svg">' +
+                '<ellipse id="modal-eye-l-w" cx="20" cy="24" rx="5.5" ry="6" fill="white"/>' +
+                '<ellipse id="modal-eye-l-p" cx="20" cy="24" rx="3" ry="3.5" fill="#1A1A2E"/>' +
+                '<circle cx="21.5" cy="22" r="1.2" fill="rgba(255,255,255,0.8)"/>' +
+                '<ellipse id="modal-eye-r-w" cx="36" cy="24" rx="5.5" ry="6" fill="white"/>' +
+                '<ellipse id="modal-eye-r-p" cx="36" cy="24" rx="3" ry="3.5" fill="#1A1A2E"/>' +
+                '<circle cx="37.5" cy="22" r="1.2" fill="rgba(255,255,255,0.8)"/>' +
+                '<ellipse id="modal-lid-l" cx="20" cy="24" rx="6" ry="0" fill="#00C882" opacity="0"/>' +
+                '<ellipse id="modal-lid-r" cx="36" cy="24" rx="6" ry="0" fill="#00C882" opacity="0"/>' +
+                '<path d="M22,34 Q28,40 34,34" stroke="#006040" stroke-width="1.5" fill="none" stroke-linecap="round"/>' +
+              '<\/svg>' +
+            '<\/div>' +
+          '<\/div>' +
+          // Card
+          '<div style="position:relative;z-index:1;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:56px 28px 28px;text-align:center;width:100%;">' +
+            '<h3 style="font-size:18px;font-weight:700;color:var(--text);margin-bottom:10px;">Hey! You\u2019ve used your 2 free edits \uD83D\uDC4B<\/h3>' +
+            '<p style="font-size:14px;color:var(--text-dim);line-height:1.6;margin-bottom:24px;">Upgrade to Pro to keep editing \u2014 plus get<br>your own .com, SEO, store, and auto IG sync.<\/p>' +
+            '<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">' +
+              '<a href="https://buy.stripe.com/8x2aEXb1Q2oB8q40WD3Je04" target="_blank" style="background:#00C882;color:#0a1a12;font-weight:700;font-size:14px;padding:12px 24px;border-radius:10px;text-decoration:none;white-space:nowrap;">Upgrade to Pro \u2014 $15/mo<\/a>' +
+              '<button id="btn-upgrade-dismiss" style="background:none;color:var(--text-dim);border:1px solid var(--border);font-size:13px;font-weight:500;padding:12px 20px;border-radius:10px;cursor:pointer;transition:all 0.15s;">Not right now<\/button>' +
+            '<\/div>' +
+          '<\/div>' +
+        '<\/div>';
+
+      document.body.appendChild(overlay);
+
+      // Dismiss button
+      document.getElementById('btn-upgrade-dismiss').addEventListener('click', function() {
+        overlay.style.display = 'none';
+        window._upgradeModalDismissed = true;
+        window._upgradeModalOpen = false;
+      });
+
+      // Modal blob eye animation
+      (function() {
+        var mELP = document.getElementById('modal-eye-l-p');
+        var mERP = document.getElementById('modal-eye-r-p');
+        var mLidL = document.getElementById('modal-lid-l');
+        var mLidR = document.getElementById('modal-lid-r');
+        var mLC = {cx:20,cy:24}, mRC = {cx:36,cy:24}, mMAX = 2.5;
+        var dirs = [{x:-2,y:-1},{x:2,y:-1},{x:-2,y:1},{x:2,y:1},{x:0,y:-2},{x:0,y:0},{x:-2.5,y:0},{x:2.5,y:0}];
+        // Random eye movement
+        var eyeTimer = setInterval(function() {
+          if (!document.getElementById('mint-upgrade-overlay')) { clearInterval(eyeTimer); return; }
+          var d = dirs[Math.floor(Math.random()*dirs.length)];
+          mELP.setAttribute('cx', mLC.cx+d.x); mELP.setAttribute('cy', mLC.cy+d.y);
+          mERP.setAttribute('cx', mRC.cx+d.x); mERP.setAttribute('cy', mRC.cy+d.y);
+        }, 2000);
+        // Mouse tracking
+        document.addEventListener('mousemove', function modalMouseMove(e) {
+          if (!document.getElementById('mint-upgrade-overlay')) { document.removeEventListener('mousemove', modalMouseMove); return; }
+          var blob = document.getElementById('mint-upgrade-overlay');
+          if (!blob || blob.style.display === 'none') return;
+          var r = blob.getBoundingClientRect();
+          var cx = r.left+r.width/2, cy = r.top+r.height/2 - 60;
+          var dx = e.clientX-cx, dy = e.clientY-cy;
+          var dist = Math.sqrt(dx*dx+dy*dy)||1;
+          if (dist < 400) {
+            var f = Math.min(dist/400,1);
+            mELP.setAttribute('cx', mLC.cx+(dx/dist)*mMAX*f); mELP.setAttribute('cy', mLC.cy+(dy/dist)*mMAX*f);
+            mERP.setAttribute('cx', mRC.cx+(dx/dist)*mMAX*f); mERP.setAttribute('cy', mRC.cy+(dy/dist)*mMAX*f);
+          }
+        });
+        // Blink
+        var blinkTimer = setInterval(function() {
+          if (!document.getElementById('mint-upgrade-overlay')) { clearInterval(blinkTimer); return; }
+          mLidL.setAttribute('ry','7'); mLidL.setAttribute('opacity','1');
+          mLidR.setAttribute('ry','7'); mLidR.setAttribute('opacity','1');
+          setTimeout(function() { mLidL.setAttribute('ry','0'); mLidL.setAttribute('opacity','0'); mLidR.setAttribute('ry','0'); mLidR.setAttribute('opacity','0'); }, 150);
+        }, 3500);
+      })();
+    }
+
+    // ── Mint Tab Messages ──
+    var _tabBubbleTimer = null;
+    var _tabMessages = {
+      overview: "Your site is live! \uD83C\uDF3F Let me know if you need anything.",
+      sections: "Move things around, tweak your text, make it yours! \u270F\uFE0F",
+      gallery: "Want to add new photos? Upload them here! \uD83D\uDCF8",
+      store: "Ready to start selling? Set up your store below \uD83D\uDECD\uFE0F",
+      themes: "Time for a new look? Pick your vibe \uD83C\uDFA8"
+    };
+
+    function showTabBubble(tabName) {
+      if (window._upgradeModalOpen) return;
+      var msg = _tabMessages[tabName];
+      if (!msg) return;
+      var bubble = document.getElementById('mint-bubble');
+      var bubbleText = document.getElementById('mint-bubble-text');
+      if (!bubble || !bubbleText) return;
+      bubbleText.textContent = msg;
+      bubble.style.opacity = '1';
+      bubble.style.transform = 'translateY(0)';
+      if (_tabBubbleTimer) clearTimeout(_tabBubbleTimer);
+      _tabBubbleTimer = setTimeout(function() {
+        bubble.style.opacity = '0';
+        bubble.style.transform = 'translateY(8px)';
+        _tabBubbleTimer = null;
+      }, 4000);
+    }
 
     // ── Auto Gallery Toggle ──
     let autoGalleryEnabled = false;
@@ -2105,6 +2290,7 @@
     }
 
     async function applyTheme(themeId, btn) {
+      if (!(await checkChangeLimit())) return;
       const theme = THEMES.find(t => t.id === themeId);
       if (!theme) return;
       const token = await getToken();
@@ -2118,6 +2304,7 @@
           body: JSON.stringify({ themeVars: theme.vars })
         });
         if (res.ok) {
+          afterSuccessfulChange();
           // Show confirmation screen with theme preview
           const grid = document.getElementById('themes-grid');
           const accentColor = theme.vars['--accent'] || '#00C882';
@@ -2365,6 +2552,7 @@
     };
 
     window.submitAddSection = async function() {
+      if (!(await checkChangeLimit())) return;
       const sectionType = document.getElementById('add-section-type').value;
       const title = document.getElementById('add-section-title').value.trim();
       const content = document.getElementById('add-section-content').value.trim();
@@ -2384,6 +2572,7 @@
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || 'Failed to add section');
         showToast('Section "' + title + '" added!');
+        afterSuccessfulChange();
         document.getElementById('modal-add-section').style.display = 'none';
         loadSiteHtml();
       } catch (e) {
@@ -2422,6 +2611,7 @@
     };
 
     window.submitRemoveSection = async function() {
+      if (!(await checkChangeLimit())) return;
       const selected = document.querySelector('input[name="remove-section"]:checked');
       if (!selected) { showToast('Select a section to remove', true); return; }
       const keyword = selected.value;
@@ -2438,6 +2628,7 @@
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || 'Failed to remove section');
         showToast('Section removed!');
+        afterSuccessfulChange();
         document.getElementById('modal-remove-section').style.display = 'none';
         loadSiteHtml();
       } catch (e) {
