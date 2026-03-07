@@ -1356,12 +1356,14 @@
       isStreaming = false; sendBtn.disabled = false;
     }
 
-    document.getElementById('btn-send').addEventListener('click', () => {
-      const val = document.getElementById('chat-input').value.trim();
+    const btnSend = document.getElementById('btn-send');
+    const chatInput = document.getElementById('chat-input');
+    if (btnSend) btnSend.addEventListener('click', () => {
+      const val = chatInput ? chatInput.value.trim() : '';
       if (val) sendMessage(val);
     });
 
-    document.getElementById('chat-input').addEventListener('keydown', (e) => {
+    if (chatInput) chatInput.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault();
         const val = e.target.value.trim();
@@ -1369,7 +1371,7 @@
       }
     });
 
-    document.getElementById('chat-input').addEventListener('input', function() {
+    if (chatInput) chatInput.addEventListener('input', function() {
       this.style.height = 'auto';
       this.style.height = Math.min(this.scrollHeight, 120) + 'px';
     });
