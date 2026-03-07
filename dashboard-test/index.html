@@ -1453,9 +1453,17 @@
 
     // ── Store Tab ──
     async function loadStore() {
-      if (!siteSlug) return;
       const token = await window._getClerkToken();
       if (!token) return;
+      // Ensure siteSlug is set — fetch if not
+      if (!siteSlug) {
+        try {
+          const infoRes = await fetch(CONVEX_HTTP_URL + '/api/dashboard/info', { headers: { Authorization: 'Bearer ' + token } });
+          const infoData = await infoRes.json();
+          if (infoData.siteSlug) siteSlug = infoData.siteSlug;
+        } catch(e) { /* ignore */ }
+      }
+      if (!siteSlug) return;
       const el = document.getElementById('store-content');
 
       try {
@@ -1687,17 +1695,27 @@
     }
 
     document.querySelector('[data-tab="themes"]').addEventListener('click', async () => {
+      const grid = document.getElementById('themes-grid');
       if (!siteHtml) {
-        // Fetch site HTML before rendering themes
         try {
-          document.getElementById('themes-grid').innerHTML = '<div class="empty-state">Loading themes...</div>';
+          grid.innerHTML = '<div class="empty-state">Loading themes...</div>';
+          // Ensure siteSlug is set first
+          if (!siteSlug) {
+            const tk = await window._getClerkToken();
+            if (tk) {
+              const ir = await fetch(CONVEX_HTTP_URL + '/api/dashboard/info', { headers: { Authorization: 'Bearer ' + tk } });
+              const id = await ir.json();
+              if (id.siteSlug) siteSlug = id.siteSlug;
+            }
+          }
           await loadSiteHtml();
         } catch(e) {
-          document.getElementById('themes-grid').innerHTML = '<div class="empty-state">Failed to load site data</div>';
+          grid.innerHTML = '<div class="empty-state">Failed to load site data</div>';
           return;
         }
       }
       if (siteHtml) renderThemes(siteHtml);
+      else grid.innerHTML = '<div class="empty-state">Could not load site — try refreshing</div>';
     });
 
     // ── Mint Floating Widget ──
