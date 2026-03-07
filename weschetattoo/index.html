@@ -51,12 +51,22 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
   <style>
+    :root {
+      --accent: #C9A84C;
+      --accent-rgb: 201,168,76;
+      --black: #0a0a0a;
+      --black-rgb: 10,10,10;
+      --dark: #111111;
+      --darker: #0d0d0d;
+      --nav-bg: rgba(10,10,10,0.95);
+    }
+
     /* ── Reset & Base ── */
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; scroll-padding-top: 70px; }
     body {
       font-family: 'Inter', -apple-system, sans-serif;
-      background: #0a0a0a;
+      background: var(--black);
       color: #e8e8e8;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
@@ -67,7 +77,7 @@
 
     /* ── Typography ── */
     .serif { font-family: 'Playfair Display', Georgia, serif; }
-    .gold { color: #c9a84c; }
+    .gold { color: var(--accent); }
 
     /* ── Utility ── */
     .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
@@ -76,7 +86,7 @@
       font-size: 11px;
       letter-spacing: 4px;
       text-transform: uppercase;
-      color: #c9a84c;
+      color: var(--accent);
       margin-bottom: 12px;
       font-weight: 500;
     }
@@ -111,10 +121,10 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: rgba(10, 10, 10, 0.85);
+      background: rgba(var(--black-rgb, 10,10,10), 0.85);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+      border-bottom: 1px solid rgba(var(--accent-rgb), 0.08);
       transition: background 0.3s;
     }
     .nav-logo {
@@ -132,7 +142,7 @@
       transition: color 0.3s;
       font-weight: 400;
     }
-    .nav-links a:hover { color: #c9a84c; }
+    .nav-links a:hover { color: var(--accent); }
 
     /* Hamburger */
     .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
@@ -152,7 +162,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: rgba(10, 10, 10, 0.97);
+        background: rgba(var(--black-rgb, 10,10,10), 0.97);
         flex-direction: column;
         align-items: center;
         justify-content: center;
@@ -181,8 +191,8 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse at 20% 50%, rgba(201, 168, 76, 0.04) 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 30%, rgba(201, 168, 76, 0.03) 0%, transparent 50%);
+        radial-gradient(ellipse at 20% 50%, rgba(var(--accent-rgb), 0.04) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 30%, rgba(var(--accent-rgb), 0.03) 0%, transparent 50%);
     }
     .hero-bg {
       position: absolute;
@@ -217,7 +227,7 @@
       font-family: 'Playfair Display', Georgia, serif;
       font-style: italic;
       font-size: clamp(16px, 2.5vw, 22px);
-      color: rgba(201, 168, 76, 0.8);
+      color: rgba(var(--accent-rgb), 0.8);
       margin-bottom: 48px;
       max-width: 500px;
       margin-left: auto;
@@ -226,8 +236,8 @@
     .hero-cta {
       display: inline-block;
       padding: 16px 48px;
-      border: 1px solid #c9a84c;
-      color: #c9a84c;
+      border: 1px solid var(--accent);
+      color: var(--accent);
       font-size: 12px;
       letter-spacing: 3px;
       text-transform: uppercase;
@@ -235,8 +245,8 @@
       transition: all 0.4s;
     }
     .hero-cta:hover {
-      background: #c9a84c;
-      color: #0a0a0a;
+      background: var(--accent);
+      color: var(--black);
     }
     .hero-scroll {
       position: absolute;
@@ -249,7 +259,7 @@
       display: block;
       width: 1px;
       height: 60px;
-      background: linear-gradient(to bottom, #c9a84c, transparent);
+      background: linear-gradient(to bottom, var(--accent), transparent);
       margin: 0 auto;
       animation: scrollPulse 2s ease-in-out infinite;
     }
@@ -279,7 +289,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      border: 1px solid rgba(201, 168, 76, 0.15);
+      border: 1px solid rgba(var(--accent-rgb), 0.15);
       pointer-events: none;
     }
     .about-text h2 {
@@ -306,7 +316,7 @@
     .about-stat-number {
       font-family: 'Playfair Display', Georgia, serif;
       font-size: 36px;
-      color: #c9a84c;
+      color: var(--accent);
       line-height: 1;
     }
     .about-stat-label {
@@ -343,7 +353,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(10,10,10,0.5) 0%, transparent 50%);
+      background: linear-gradient(to top, rgba(var(--black-rgb, 10,10,10),0.5) 0%, transparent 50%);
       opacity: 0;
       transition: opacity 0.4s;
     }
@@ -390,7 +400,7 @@
       justify-content: center;
       transition: border-color 0.3s;
     }
-    .lightbox-close:hover { border-color: #c9a84c; color: #c9a84c; }
+    .lightbox-close:hover { border-color: var(--accent); color: var(--accent); }
     .lightbox-nav {
       position: absolute;
       top: 50%;
@@ -407,7 +417,7 @@
       justify-content: center;
       transition: all 0.3s;
     }
-    .lightbox-nav:hover { border-color: #c9a84c; color: #c9a84c; }
+    .lightbox-nav:hover { border-color: var(--accent); color: var(--accent); }
     .lightbox-prev { left: 20px; }
     .lightbox-next { right: 20px; }
 
@@ -425,10 +435,10 @@
       transition: border-color 0.3s;
     }
     .testimonial-card:hover {
-      border-color: rgba(201, 168, 76, 0.2);
+      border-color: rgba(var(--accent-rgb), 0.2);
     }
     .testimonial-stars {
-      color: #c9a84c;
+      color: var(--accent);
       font-size: 14px;
       letter-spacing: 2px;
       margin-bottom: 20px;
@@ -456,8 +466,8 @@
     .pull-quote {
       text-align: center;
       padding: 80px 24px;
-      border-top: 1px solid rgba(201, 168, 76, 0.1);
-      border-bottom: 1px solid rgba(201, 168, 76, 0.1);
+      border-top: 1px solid rgba(var(--accent-rgb), 0.1);
+      border-bottom: 1px solid rgba(var(--accent-rgb), 0.1);
     }
     .pull-quote blockquote {
       font-family: 'Playfair Display', Georgia, serif;
@@ -476,15 +486,15 @@
       font-size: 12px;
       letter-spacing: 3px;
       text-transform: uppercase;
-      color: #c9a84c;
+      color: var(--accent);
     }
 
     /* ── Shop ── */
     .shop-section {
       text-align: center;
-      background: rgba(201, 168, 76, 0.03);
-      border-top: 1px solid rgba(201, 168, 76, 0.08);
-      border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+      background: rgba(var(--accent-rgb), 0.03);
+      border-top: 1px solid rgba(var(--accent-rgb), 0.08);
+      border-bottom: 1px solid rgba(var(--accent-rgb), 0.08);
     }
     .shop-section p {
       color: rgba(255,255,255,0.6);
@@ -496,8 +506,8 @@
     .btn-outline {
       display: inline-block;
       padding: 16px 48px;
-      border: 1px solid #c9a84c;
-      color: #c9a84c;
+      border: 1px solid var(--accent);
+      color: var(--accent);
       font-size: 12px;
       letter-spacing: 3px;
       text-transform: uppercase;
@@ -505,8 +515,8 @@
       transition: all 0.4s;
     }
     .btn-outline:hover {
-      background: #c9a84c;
-      color: #0a0a0a;
+      background: var(--accent);
+      color: var(--black);
     }
 
     /* ── Booking ── */
@@ -527,8 +537,8 @@
     .btn-gold {
       display: inline-block;
       padding: 18px 56px;
-      background: #c9a84c;
-      color: #0a0a0a;
+      background: var(--accent);
+      color: var(--black);
       font-size: 13px;
       letter-spacing: 3px;
       text-transform: uppercase;
@@ -539,7 +549,7 @@
     .btn-gold:hover {
       background: #d4b65e;
       transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(201, 168, 76, 0.25);
+      box-shadow: 0 8px 30px rgba(var(--accent-rgb), 0.25);
     }
 
     /* ── Footer ── */
@@ -561,7 +571,7 @@
       color: rgba(255,255,255,0.4);
       transition: color 0.3s;
     }
-    .footer-social a:hover { color: #c9a84c; }
+    .footer-social a:hover { color: var(--accent); }
     .footer-copy {
       font-size: 12px;
       color: rgba(255,255,255,0.25);
@@ -588,7 +598,7 @@
       line-height: 1.5;
       transition: color 0.3s;
     }
-    .faq-question:hover { color: #c9a84c; }
+    .faq-question:hover { color: var(--accent); }
     .faq-question::after {
       content: '+';
       position: absolute;
@@ -597,7 +607,7 @@
       transform: translateY(-50%);
       font-size: 22px;
       font-weight: 300;
-      color: #c9a84c;
+      color: var(--accent);
       transition: transform 0.3s;
     }
     .faq-item.open .faq-question::after {
@@ -648,7 +658,7 @@
     .booking-form input:focus,
     .booking-form textarea:focus {
       outline: none;
-      border-color: #c9a84c;
+      border-color: var(--accent);
     }
     .booking-form input::placeholder,
     .booking-form textarea::placeholder {
@@ -668,7 +678,7 @@
       font-family: 'Playfair Display', Georgia, serif;
       font-size: 28px;
       font-weight: 400;
-      color: #c9a84c;
+      color: var(--accent);
     }
   </style>
 </head>
