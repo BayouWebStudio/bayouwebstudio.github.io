@@ -171,12 +171,22 @@
     .testimonial-card {
       background: rgba(255,255,255,0.03);
       border: 1px solid rgba(255,255,255,0.06);
-      padding: 40px 32px;
+      padding: 0;
+      overflow: hidden;
       position: relative;
       transition: border-color 0.3s;
     }
     .testimonial-card:hover {
       border-color: rgba(201, 168, 76, 0.2);
+    }
+    .testimonial-card-photo {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+    }
+    .testimonial-card-body {
+      padding: 28px 28px 32px;
     }
     .testimonial-stars {
       color: #c9a84c;
@@ -315,34 +325,76 @@
     <div class="container">
       <div class="testimonials-grid">
         <div class="testimonial-card reveal">
-          <div class="testimonial-stars">★ ★ ★ ★ ★</div>
-          <p class="testimonial-text">"The most precise geometric work I've ever seen. Raul's attention to detail is unmatched — every line, every angle is perfect. Worth every penny and then some."</p>
-          <p class="testimonial-author">Tu Nguyen</p>
-          <p class="testimonial-location">Tampa, FL</p>
+          <img class="testimonial-card-photo" src="https://weschetattoo.com/cdn/shop/t/10/assets/testimonial-amir_bush.png?v=9319660119271557761771456523" alt="Amir Bush tattoo by Raul Wesche" loading="lazy">
+          <div class="testimonial-card-body">
+            <div class="testimonial-stars">★ ★ ★ ★ ★</div>
+            <p class="testimonial-text">"Best tattoo experience I ever had the whole staff was very nice I will be back this May."</p>
+            <p class="testimonial-author">Amir Bush</p>
+            <p class="testimonial-location">New Haven, CT</p>
+          </div>
         </div>
         <div class="testimonial-card reveal">
-          <div class="testimonial-stars">★ ★ ★ ★ ★</div>
-          <p class="testimonial-text">"Flew in from Pennsylvania for this and I'd do it again in a heartbeat. The sacred geometry piece he did blew everyone away. Raul is the real deal."</p>
-          <p class="testimonial-author">Rob</p>
-          <p class="testimonial-location">Airville, PA</p>
+          <img class="testimonial-card-photo" src="https://weschetattoo.com/cdn/shop/t/10/assets/testimonial-tu_nguyen.jpeg?v=102164954653466688941770603102" alt="Tu Nguyen tattoo by Raul Wesche" loading="lazy">
+          <div class="testimonial-card-body">
+            <div class="testimonial-stars">★ ★ ★ ★ ★</div>
+            <p class="testimonial-text">"Raul's dedication to his craft is always evolving. He's the only geometric artist that uses shading and contrast like the way he does. I travel from Tampa, FL to get tattooed by him and would travel further."</p>
+            <p class="testimonial-author">Tu Nguyen</p>
+            <p class="testimonial-location">Tampa, FL</p>
+          </div>
         </div>
         <div class="testimonial-card reveal">
-          <div class="testimonial-stars">★ ★ ★ ★ ★</div>
-          <p class="testimonial-text">"Had a full day session and it was the best tattoo experience I've ever had. The work speaks for itself — completely mind-blowing."</p>
-          <p class="testimonial-author">Nick Heppes</p>
-          <p class="testimonial-location">Oregon City, OR</p>
+          <img class="testimonial-card-photo" src="https://weschetattoo.com/cdn/shop/t/10/assets/testimonial-rob.jpeg?v=121750259493989633301770603103" alt="Rob tattoo by Raul Wesche" loading="lazy">
+          <div class="testimonial-card-body">
+            <div class="testimonial-stars">★ ★ ★ ★ ★</div>
+            <p class="testimonial-text">"I flew from out of state to have Raul put his art on my arm and I couldn't be happier. We did three days for a sleeve and Raul is a master of his craft. His style is unmatched and his eye for flow in his designs is amazing."</p>
+            <p class="testimonial-author">Rob</p>
+            <p class="testimonial-location">Airville, PA</p>
+          </div>
         </div>
         <div class="testimonial-card reveal">
-          <div class="testimonial-stars">★ ★ ★ ★ ★</div>
-          <p class="testimonial-text">"If you're serious about geometric tattoos, there's nobody better. Saved up for two years to fly out to Houston and it was absolutely worth it."</p>
-          <p class="testimonial-author">Keon Tucker</p>
-          <p class="testimonial-location">Denver, CO</p>
+          <img class="testimonial-card-photo" src="https://weschetattoo.com/cdn/shop/t/10/assets/testimonial-nick_heppes.jpg?v=6225655471909411241770603122" alt="Nick Heppes tattoo by Raul Wesche" loading="lazy">
+          <div class="testimonial-card-body">
+            <div class="testimonial-stars">★ ★ ★ ★ ★</div>
+            <p class="testimonial-text">"By far the best artist around. He is also kind and easy to talk to. Had a full day session and it was the best tattoo experience I've ever had. The work speaks for itself."</p>
+            <p class="testimonial-author">Nick Heppes</p>
+            <p class="testimonial-location">Oregon City, OR</p>
+          </div>
         </div>
         <div class="testimonial-card reveal">
-          <div class="testimonial-stars">★ ★ ★ ★ ★</div>
-          <p class="testimonial-text">"16 sessions over 3 years. Full back piece. There are no words. Raul is a living legend."</p>
-          <p class="testimonial-author">Jason</p>
-          <p class="testimonial-location">Jacksonville, FL</p>
+          <img class="testimonial-card-photo" src="https://weschetattoo.com/cdn/shop/t/10/assets/testimonial-keon_tucker_sm.jpeg?v=133855860235863975351770603123" alt="Keon Tucker tattoo by Raul Wesche" loading="lazy">
+          <div class="testimonial-card-body">
+            <div class="testimonial-stars">★ ★ ★ ★ ★</div>
+            <p class="testimonial-text">"Great experience for my first tattoo. Very creative — I had my input and Raul put his artist touch on the whole sleeve project. I couldn't be happier with the result. 10/10 experience."</p>
+            <p class="testimonial-author">Keon Tucker</p>
+            <p class="testimonial-location">Denver, CO</p>
+          </div>
+        </div>
+        <div class="testimonial-card reveal">
+          <img class="testimonial-card-photo" src="https://weschetattoo.com/cdn/shop/t/10/assets/testimonial-jason.jpeg?v=114564514476332331031770992468" alt="Jason tattoo by Raul Wesche" loading="lazy">
+          <div class="testimonial-card-body">
+            <div class="testimonial-stars">★ ★ ★ ★ ★</div>
+            <p class="testimonial-text">"I get compliments everywhere I go. Beyond the incredible artistry, he truly cares about his work and his clients — the only downside is knowing I'll eventually run out of skin."</p>
+            <p class="testimonial-author">Jason</p>
+            <p class="testimonial-location">Jacksonville, FL</p>
+          </div>
+        </div>
+        <div class="testimonial-card reveal">
+          <img class="testimonial-card-photo" src="https://weschetattoo.com/cdn/shop/t/10/assets/testimonial-adam_recker.jpeg?v=24690753589120371891770992469" alt="Adam Recker tattoo by Raul Wesche" loading="lazy">
+          <div class="testimonial-card-body">
+            <div class="testimonial-stars">★ ★ ★ ★ ★</div>
+            <p class="testimonial-text">"Amazing experience getting my arm sleeve with Raul. He was very collaborative with the design — and we did the first two days live at an expo where his skill and artistry took home a blue ribbon! Great person, great artist. 11/10."</p>
+            <p class="testimonial-author">Adam Recker</p>
+            <p class="testimonial-location">Denver, CO</p>
+          </div>
+        </div>
+        <div class="testimonial-card reveal">
+          <img class="testimonial-card-photo" src="https://weschetattoo.com/cdn/shop/t/10/assets/testimonial-louie_b.jpeg?v=157482487700763811841770992470" alt="Louie B tattoo by Raul Wesche" loading="lazy">
+          <div class="testimonial-card-body">
+            <div class="testimonial-stars">★ ★ ★ ★ ★</div>
+            <p class="testimonial-text">"Hands down Raul always provides the best tattoo experiences. We've spent multiple days hanging out while he worked on my leg and it's always such a good time. He is incredibly thoughtful about comfort. Incredible work by an even better human."</p>
+            <p class="testimonial-author">Louie B</p>
+            <p class="testimonial-location">Austin, TX</p>
+          </div>
         </div>
       </div>
     </div>
