@@ -1733,9 +1733,18 @@
           body: JSON.stringify({ themeVars: theme.vars })
         });
         if (res.ok) {
-          showToast('Theme applied! Refreshing...');
+          // Show confirmation banner in themes grid
+          const grid = document.getElementById('themes-grid');
+          grid.innerHTML =
+            '<div style="text-align:center;padding:48px 24px;">' +
+            '<div style="font-size:48px;margin-bottom:16px;">🎨</div>' +
+            '<h3 style="color:#fff;font-weight:700;font-size:20px;margin-bottom:8px;">' + theme.name + ' applied!</h3>' +
+            '<p style="color:rgba(255,255,255,0.6);font-size:14px;max-width:340px;margin:0 auto 28px;">Your site is being updated. Give it a minute or two to fully propagate — then visit your site to see the new look.</p>' +
+            '<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">' +
+            '<a href="https://getminted.ai/' + (siteSlug||'') + '/" target="_blank" style="background:#00C882;color:#0a1a12;font-weight:700;font-size:14px;padding:12px 24px;border-radius:10px;text-decoration:none;">Visit My Site →</a>' +
+            '<button onclick="loadSiteHtml().then(()=>renderThemes(siteHtml))" style="background:rgba(255,255,255,0.08);color:#fff;border:1px solid rgba(255,255,255,0.15);font-size:14px;font-weight:600;padding:12px 24px;border-radius:10px;cursor:pointer;">Change Theme</button>' +
+            '</div></div>';
           await loadSiteHtml();
-          renderThemes(siteHtml);
         } else {
           const data = await res.json().catch(() => ({}));
           showToast(data.error || 'Failed to apply theme', true);
