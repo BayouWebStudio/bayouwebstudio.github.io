@@ -507,6 +507,11 @@
   <div class="tab-content" id="tab-sections">
     <div class="section-title">Edit Your Site Sections</div>
     <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 20px;">Click any card to edit. Changes go live on your site instantly.</p>
+    <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;">
+      <button onclick="openAddSectionModal()" style="display:flex;align-items:center;gap:6px;padding:8px 16px;background:var(--mint-dim);color:var(--mint);border:1px solid var(--mint-border);border-radius:var(--radius-sm);font-size:13px;font-weight:500;cursor:pointer;transition:all 0.15s;">＋ Add Section</button>
+      <button onclick="openRemoveSectionModal()" style="display:flex;align-items:center;gap:6px;padding:8px 16px;background:var(--danger-dim);color:var(--danger);border:1px solid rgba(255,95,87,0.3);border-radius:var(--radius-sm);font-size:13px;font-weight:500;cursor:pointer;transition:all 0.15s;">− Remove Section</button>
+      <button onclick="openRearrangeModal()" style="display:flex;align-items:center;gap:6px;padding:8px 16px;background:var(--surface2);color:var(--text);border:1px solid var(--border);border-radius:var(--radius-sm);font-size:13px;font-weight:500;cursor:pointer;transition:all 0.15s;">↕ Rearrange</button>
+    </div>
     <div class="section-cards" id="section-cards">
       <div class="empty-state" style="grid-column: 1/-1;">Loading site content...</div>
     </div>
@@ -1433,6 +1438,221 @@
         messages.innerHTML += '<div style="color:#ff6b6b;font-size:13px;padding:8px;">Sorry, something went wrong.</div>';
       }
       messages.scrollTop = messages.scrollHeight;
+    };
+
+    // ── Section Management Modals ──
+
+    function createModalOverlay(id) {
+      let overlay = document.getElementById(id);
+      if (overlay) { overlay.style.display = 'flex'; return overlay; }
+      overlay = document.createElement('div');
+      overlay.id = id;
+      overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center;z-index:500;padding:24px;';
+      overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.style.display = 'none'; });
+      document.body.appendChild(overlay);
+      return overlay;
+    }
+
+    function modalCard(title) {
+      return '<div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px;width:100%;max-width:480px;max-height:80vh;overflow-y:auto;">' +
+        '<h3 style="font-size:18px;font-weight:600;color:var(--text);margin-bottom:20px;">' + title + '</h3>';
+    }
+
+    function detectSiteSections() {
+      if (!siteHtml) return [];
+      const sections = [];
+      const re = /<section[^>]*\bid\s*=\s*["']([^"']+)["'][^>]*>/gi;
+      let m;
+      while ((m = re.exec(siteHtml)) !== null) {
+        const id = m[1];
+        const label = id.replace(/[-_]/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+        sections.push({ id, label });
+      }
+      return sections;
+    }
+
+    // ── Add Section Modal ──
+    const addSectionPlaceholders = {
+      'services': 'e.g. Haircut - $30, Beard Trim - $15',
+      'pricing': 'e.g. Haircut - $30, Beard Trim - $15',
+      'faq': 'e.g. Q: How long does it take? A: 2-3 hours, Q: Do you do walk-ins? A: Yes',
+      'testimonials': 'e.g. John: Great experience!, Sarah: Amazing work!',
+      'hours': 'e.g. Mon-Fri: 9am-7pm, Sat: 10am-5pm, Sun: Closed',
+      'team': 'e.g. Alex (Lead Stylist), Maria (Colorist)',
+      'custom': 'Describe the section content...',
+    };
+
+    window.openAddSectionModal = function() {
+      const overlay = createModalOverlay('modal-add-section');
+      overlay.innerHTML = modalCard('Add New Section') +
+        '<label style="font-size:13px;color:var(--text-dim);display:block;margin-bottom:6px;">Section Type</label>' +
+        '<select id="add-section-type" style="width:100%;padding:10px 12px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:13px;font-family:inherit;margin-bottom:16px;outline:none;">' +
+          '<option value="services">Services / Pricing</option>' +
+          '<option value="faq">FAQ</option>' +
+          '<option value="testimonials">Testimonials</option>' +
+          '<option value="hours">Hours</option>' +
+          '<option value="team">Team</option>' +
+          '<option value="custom">Custom</option>' +
+        '</select>' +
+        '<label style="font-size:13px;color:var(--text-dim);display:block;margin-bottom:6px;">Title</label>' +
+        '<input id="add-section-title" type="text" placeholder="e.g. Our Services" style="width:100%;padding:10px 12px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:13px;font-family:inherit;margin-bottom:16px;outline:none;" />' +
+        '<label style="font-size:13px;color:var(--text-dim);display:block;margin-bottom:6px;">Content</label>' +
+        '<textarea id="add-section-content" rows="5" style="width:100%;padding:12px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:13px;font-family:inherit;resize:vertical;outline:none;line-height:1.5;margin-bottom:20px;" placeholder="' + addSectionPlaceholders['services'] + '"></textarea>' +
+        '<div style="display:flex;gap:8px;justify-content:flex-end;">' +
+          '<button class="btn-cancel" onclick="document.getElementById(\'modal-add-section\').style.display=\'none\'">Cancel</button>' +
+          '<button class="btn-save" id="btn-add-section-submit" onclick="submitAddSection()">Add Section</button>' +
+        '</div>' +
+      '</div>';
+
+      document.getElementById('add-section-type').addEventListener('change', function() {
+        document.getElementById('add-section-content').placeholder = addSectionPlaceholders[this.value] || '';
+      });
+    };
+
+    window.submitAddSection = async function() {
+      const sectionType = document.getElementById('add-section-type').value;
+      const title = document.getElementById('add-section-title').value.trim();
+      const content = document.getElementById('add-section-content').value.trim();
+      if (!title) { showToast('Title is required', true); return; }
+      if (!content) { showToast('Content is required', true); return; }
+
+      const btn = document.getElementById('btn-add-section-submit');
+      btn.disabled = true; btn.textContent = '⏳ Adding...';
+
+      try {
+        const token = await getToken();
+        const res = await fetch(CONVEX_HTTP_URL + '/api/dashboard/add-section', {
+          method: 'POST',
+          headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ sectionType, title, content }),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Failed to add section');
+        showToast('Section "' + title + '" added!');
+        document.getElementById('modal-add-section').style.display = 'none';
+        loadSiteHtml();
+      } catch (e) {
+        showToast('Error: ' + e.message, true);
+      } finally {
+        btn.disabled = false; btn.textContent = 'Add Section';
+      }
+    };
+
+    // ── Remove Section Modal ──
+    window.openRemoveSectionModal = function() {
+      const sections = detectSiteSections();
+      const overlay = createModalOverlay('modal-remove-section');
+      if (sections.length === 0) {
+        overlay.innerHTML = modalCard('Remove Section') +
+          '<p style="color:var(--text-dim);font-size:13px;">No sections detected. Load your site first.</p>' +
+          '<div style="display:flex;justify-content:flex-end;margin-top:20px;"><button class="btn-cancel" onclick="document.getElementById(\'modal-remove-section\').style.display=\'none\'">Close</button></div></div>';
+        return;
+      }
+      overlay.innerHTML = modalCard('Remove Section') +
+        '<p style="color:var(--danger);font-size:12px;margin-bottom:16px;">⚠️ This permanently removes the section from your site.</p>' +
+        '<div id="remove-section-list">' +
+          sections.map((s, i) =>
+            '<label style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:8px;cursor:pointer;transition:border-color 0.15s;" onmouseover="this.style.borderColor=\'var(--danger)\'" onmouseout="this.style.borderColor=\'var(--border)\'">' +
+              '<input type="radio" name="remove-section" value="' + s.id + '" style="accent-color:var(--danger);" ' + (i === 0 ? 'checked' : '') + '/>' +
+              '<span style="font-size:13px;color:var(--text);">' + s.label + '</span>' +
+              '<span style="font-size:11px;color:var(--text-muted);margin-left:auto;">#' + s.id + '</span>' +
+            '</label>'
+          ).join('') +
+        '</div>' +
+        '<div style="display:flex;gap:8px;justify-content:flex-end;margin-top:20px;">' +
+          '<button class="btn-cancel" onclick="document.getElementById(\'modal-remove-section\').style.display=\'none\'">Cancel</button>' +
+          '<button id="btn-remove-section-submit" style="padding:8px 20px;background:var(--danger);color:#fff;border:none;border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;" onclick="submitRemoveSection()">Remove Section</button>' +
+        '</div>' +
+      '</div>';
+    };
+
+    window.submitRemoveSection = async function() {
+      const selected = document.querySelector('input[name="remove-section"]:checked');
+      if (!selected) { showToast('Select a section to remove', true); return; }
+      const keyword = selected.value;
+      const btn = document.getElementById('btn-remove-section-submit');
+      btn.disabled = true; btn.textContent = '⏳ Removing...';
+
+      try {
+        const token = await getToken();
+        const res = await fetch(CONVEX_HTTP_URL + '/api/dashboard/remove-section', {
+          method: 'POST',
+          headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ sectionKeyword: keyword }),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Failed to remove section');
+        showToast('Section removed!');
+        document.getElementById('modal-remove-section').style.display = 'none';
+        loadSiteHtml();
+      } catch (e) {
+        showToast('Error: ' + e.message, true);
+      } finally {
+        btn.disabled = false; btn.textContent = 'Remove Section';
+      }
+    };
+
+    // ── Rearrange Sections Modal ──
+    window.openRearrangeModal = function() {
+      const sections = detectSiteSections();
+      const overlay = createModalOverlay('modal-rearrange');
+      if (sections.length === 0) {
+        overlay.innerHTML = modalCard('Rearrange Sections') +
+          '<p style="color:var(--text-dim);font-size:13px;">No sections detected. Load your site first.</p>' +
+          '<div style="display:flex;justify-content:flex-end;margin-top:20px;"><button class="btn-cancel" onclick="document.getElementById(\'modal-rearrange\').style.display=\'none\'">Close</button></div></div>';
+        return;
+      }
+      overlay.innerHTML = modalCard('Rearrange Sections') +
+        '<p style="color:var(--text-dim);font-size:12px;margin-bottom:16px;">Drag sections to reorder. Changes go live when you save.</p>' +
+        '<div id="rearrange-list">' +
+          sections.map(s =>
+            '<div data-section-id="' + s.id + '" style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:8px;cursor:grab;transition:border-color 0.15s;user-select:none;">' +
+              '<span style="color:var(--text-muted);font-size:16px;">⠿</span>' +
+              '<span style="font-size:13px;color:var(--text);flex:1;">' + s.label + '</span>' +
+              '<span style="font-size:11px;color:var(--text-muted);">#' + s.id + '</span>' +
+            '</div>'
+          ).join('') +
+        '</div>' +
+        '<div style="display:flex;gap:8px;justify-content:flex-end;margin-top:20px;">' +
+          '<button class="btn-cancel" onclick="document.getElementById(\'modal-rearrange\').style.display=\'none\'">Cancel</button>' +
+          '<button class="btn-save" id="btn-rearrange-submit" onclick="submitRearrange()">Save Order</button>' +
+        '</div>' +
+      '</div>';
+
+      // Initialize SortableJS
+      if (typeof Sortable !== 'undefined') {
+        Sortable.create(document.getElementById('rearrange-list'), {
+          animation: 150,
+          ghostClass: 'sortable-ghost',
+          chosenClass: 'sortable-chosen',
+        });
+      }
+    };
+
+    window.submitRearrange = async function() {
+      const items = document.querySelectorAll('#rearrange-list [data-section-id]');
+      const sectionOrder = Array.from(items).map(el => el.getAttribute('data-section-id'));
+
+      const btn = document.getElementById('btn-rearrange-submit');
+      btn.disabled = true; btn.textContent = '⏳ Saving...';
+
+      try {
+        const token = await getToken();
+        const res = await fetch(CONVEX_HTTP_URL + '/api/dashboard/reorder-sections', {
+          method: 'POST',
+          headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ sectionOrder }),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Failed to reorder sections');
+        showToast('Section order saved!');
+        document.getElementById('modal-rearrange').style.display = 'none';
+        loadSiteHtml();
+      } catch (e) {
+        showToast('Error: ' + e.message, true);
+      } finally {
+        btn.disabled = false; btn.textContent = 'Save Order';
+      }
     };
 
   } // end startApp
