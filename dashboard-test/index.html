@@ -584,6 +584,8 @@
         <button class="btn-secondary" id="btn-auto-gallery" onclick="toggleAutoGallery()" style="background:var(--card-bg);border:1px solid var(--mint-border);color:var(--mint);padding:8px 14px;border-radius:8px;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:6px;">
           <span id="auto-gallery-icon">🔄</span> <span id="auto-gallery-label">Auto Update from IG</span>
         </button>
+        <button class="btn-secondary" id="btn-sync-now" onclick="syncGalleryNow()" style="display:none;background:var(--card-bg);border:1px solid var(--mint-border);color:var(--mint);padding:8px 10px;border-radius:8px;font-size:13px;cursor:pointer;" title="Sync now from Instagram">🔄</button>
+        <span id="auto-gallery-last-sync" style="display:none;font-size:11px;color:var(--text-dim);align-self:center;"></span>
         <button class="btn-upload" onclick="document.getElementById('gallery-file-input').click()">📸 Upload Photos</button>
         <input type="file" id="gallery-file-input" multiple accept="image/*" style="display:none" />
       </div>
@@ -902,6 +904,17 @@
       if (heroMatch) {
         const text = heroMatch[1].replace(/<[^>]+>/g, '').trim();
         sections.push({ key: 'hero_title', icon: '🎯', title: 'Hero Title', preview: text, value: text });
+      }
+
+      // Hero background image
+      const heroBgMatch = html.match(/\.hero-bg\s*\{[^}]*(?:background-image|background)\s*:\s*[^;]*url\(\s*['"]?([^'")]+)['"]?\s*\)/i)
+        || html.match(/\.hero\s*\{[^}]*(?:background-image|background)\s*:\s*[^;]*url\(\s*['"]?([^'")]+)['"]?\s*\)/i)
+        || html.match(/class="[^"]*hero[^"]*"[^>]*style="[^"]*background(?:-image)?\s*:[^;]*url\(\s*['"]?([^'")]+)['"]?\s*\)/i);
+      if (heroBgMatch) {
+        const bgUrl = heroBgMatch[1] || heroBgMatch[2] || heroBgMatch[3];
+        if (bgUrl) {
+          sections.push({ key: 'hero_bg', icon: '🖼️', title: 'Hero Background Photo', preview: 'Current background image', value: bgUrl, type: 'image' });
+        }
       }
 
       // Hero subtitle
@@ -1461,48 +1474,104 @@
           headers: { 'Authorization': 'Bearer ' + clerkToken }
         });
         const data = await res.json();
-        autoGalleryEnabled = !!data.enabled;
+        autoGalleryEnabled = !!data.autoGallery;
         updateAutoGalleryBtn();
+        // Show last synced info
+        var lastSyncEl = document.getElementById('auto-gallery-last-sync');
+        if (lastSyncEl && data.autoGalleryLastRun) {
+          var ago = Math.floor((Date.now() - data.autoGalleryLastRun) / 86400000);
+          lastSyncEl.textContent = ago === 0 ? 'Last synced: today' : ago === 1 ? 'Last synced: yesterday' : 'Last synced: ' + ago + ' days ago';
+          lastSyncEl.style.display = 'inline';
+        } else if (lastSyncEl) {
+          lastSyncEl.style.display = 'none';
+        }
       } catch(e) {}
     }
 
     function updateAutoGalleryBtn() {
-      const icon = document.getElementById('auto-gallery-icon');
-      const label = document.getElementById('auto-gallery-label');
-      const btn = document.getElementById('btn-auto-gallery');
+      var icon = document.getElementById('auto-gallery-icon');
+      var label = document.getElementById('auto-gallery-label');
+      var btn = document.getElementById('btn-auto-gallery');
+      var syncBtn = document.getElementById('btn-sync-now');
       if (!icon || !label) return;
       if (autoGalleryEnabled) {
         icon.textContent = '✅';
         label.textContent = 'Auto Update: ON';
         btn.style.borderColor = 'var(--mint)';
         btn.style.background = 'rgba(0,200,130,0.1)';
+        if (syncBtn) syncBtn.style.display = 'inline-flex';
       } else {
         icon.textContent = '🔄';
         label.textContent = 'Auto Update from IG';
         btn.style.borderColor = 'var(--mint-border)';
         btn.style.background = 'var(--card-bg)';
+        if (syncBtn) syncBtn.style.display = 'none';
       }
     }
 
     window.toggleAutoGallery = async function() {
       if (!clerkToken || !siteSlug) return;
-      const newState = !autoGalleryEnabled;
+      var newState = !autoGalleryEnabled;
       try {
-        const res = await fetch(CONVEX_HTTP_URL + '/api/client/auto-gallery', {
+        var res = await fetch(CONVEX_HTTP_URL + '/api/client/auto-gallery', {
           method: 'POST',
           headers: { 'Authorization': 'Bearer ' + clerkToken, 'Content-Type': 'application/json' },
-          body: JSON.stringify({ enabled: newState })
+          body: JSON.stringify({ slug: siteSlug, enabled: newState })
         });
         if (res.ok) {
           autoGalleryEnabled = newState;
           updateAutoGalleryBtn();
-          showToast(newState ? 'Auto gallery enabled — updates weekly from Instagram' : 'Auto gallery disabled');
+          if (newState) {
+            showToast('Auto gallery enabled — syncing from Instagram...');
+            // Trigger immediate sync
+            syncGalleryNow();
+          } else {
+            showToast('Auto gallery disabled');
+          }
+        } else {
+          var errData = await res.json().catch(function() { return {}; });
+          if (errData.error === 'upgrade_required') {
+            showToast('Auto Gallery requires Pro plan', true);
+          } else {
+            showToast('Failed to update auto gallery', true);
+          }
         }
       } catch(e) { showToast('Failed to update auto gallery', true); }
     };
 
+    window.syncGalleryNow = async function() {
+      if (!clerkToken) return;
+      var syncBtn = document.getElementById('btn-sync-now');
+      if (syncBtn) { syncBtn.disabled = true; syncBtn.textContent = '⏳'; }
+      showToast('Syncing from Instagram...');
+      try {
+        var res = await fetch(CONVEX_HTTP_URL + '/api/client/auto-gallery/run-now', {
+          method: 'POST',
+          headers: { 'Authorization': 'Bearer ' + clerkToken, 'Content-Type': 'application/json' },
+          body: JSON.stringify({})
+        });
+        var data = await res.json();
+        if (res.ok && data.ok) {
+          if (data.newPhotos > 0) {
+            showToast('Gallery updated! ' + data.newPhotos + ' new photo' + (data.newPhotos !== 1 ? 's' : '') + ' added');
+            // Refresh gallery
+            if (typeof loadGallery === 'function') loadGallery();
+          } else {
+            showToast('Already up to date — no new photos found');
+          }
+          loadAutoGalleryStatus();
+        } else {
+          showToast(data.error || 'Sync failed', true);
+        }
+      } catch(e) {
+        showToast('Sync failed: ' + (e.message || 'network error'), true);
+      } finally {
+        if (syncBtn) { syncBtn.disabled = false; syncBtn.textContent = '🔄'; }
+      }
+    };
+
     // Load auto gallery status when gallery tab opens
-    document.querySelector('[data-tab="gallery"]').addEventListener('click', () => {
+    document.querySelector('[data-tab="gallery"]').addEventListener('click', function() {
       loadAutoGalleryStatus();
     });
 
