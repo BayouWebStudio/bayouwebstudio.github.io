@@ -1507,6 +1507,157 @@
     });
 
     // ── Store Tab ──
+    var _printifyConnected = false;
+    var _printifyShopName = '';
+    var _inventoryMap = {};
+
+    async function loadPrintifyStatus(token) {
+      try {
+        var res = await fetch(CONVEX_HTTP_URL + '/api/printify/status', {
+          method: 'POST',
+          headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
+          body: JSON.stringify({})
+        });
+        var data = await res.json();
+        _printifyConnected = data.connected;
+        return data;
+      } catch(e) { return { connected: false }; }
+    }
+
+    async function loadInventoryData() {
+      if (!siteSlug) return;
+      try {
+        var res = await fetch(CONVEX_HTTP_URL + '/api/store/inventory?slug=' + encodeURIComponent(siteSlug));
+        var data = await res.json();
+        _inventoryMap = {};
+        (data.products || []).forEach(function(p) {
+          _inventoryMap[p.stripePriceId] = p;
+        });
+      } catch(e) { /* ignore */ }
+    }
+
+    function renderPrintifyCard(token) {
+      var html = '<div style="background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:16px 20px;margin-bottom:20px;display:flex;align-items:center;gap:16px;">' +
+        '<div style="font-size:28px;">🖨️</div>' +
+        '<div style="flex:1;min-width:0;">' +
+        '<div style="font-weight:600;color:var(--text);font-size:14px;">Printify</div>' +
+        '<div style="color:var(--text-dim);font-size:12px;">Sell print-on-demand products. Auto-fulfill orders.</div>' +
+        '</div>';
+      if (_printifyConnected) {
+        html += '<button id="btn-printify-sync" style="background:var(--mint);color:#0a1a12;border:none;border-radius:8px;padding:8px 14px;font-weight:700;cursor:pointer;font-size:12px;margin-right:8px;">Sync Products</button>' +
+          '<button id="btn-printify-disconnect" style="background:transparent;color:var(--text-dim);border:1px solid var(--border);border-radius:8px;padding:8px 14px;font-weight:600;cursor:pointer;font-size:12px;">Disconnect</button>';
+      } else {
+        html += '<button id="btn-printify-connect" style="background:var(--mint);color:#0a1a12;border:none;border-radius:8px;padding:8px 14px;font-weight:700;cursor:pointer;font-size:12px;">Connect</button>';
+      }
+      html += '</div>';
+      return html;
+    }
+
+    function bindPrintifyButtons(token) {
+      var connectBtn = document.getElementById('btn-printify-connect');
+      if (connectBtn) {
+        connectBtn.addEventListener('click', function() {
+          var overlay = createModalOverlay('printify-connect-modal');
+          overlay.innerHTML = modalCard('Connect Printify') +
+            '<div style="display:flex;flex-direction:column;gap:14px;">' +
+            '<p style="color:var(--text-dim);font-size:13px;margin:0;">Enter your Printify API key. You can find it at <a href="https://printify.com/app/account/connections" target="_blank" style="color:var(--mint);">Printify &rarr; Account &rarr; Connections</a>.</p>' +
+            '<div><label style="font-size:12px;color:var(--text-dim);display:block;margin-bottom:4px;">API Key</label>' +
+            '<input id="printify-api-key" type="text" placeholder="eyJhbGci..." style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;color:var(--text);font-size:14px;outline:none;font-family:monospace;" /></div>' +
+            '<button id="btn-printify-save" style="background:var(--mint);color:#0a1a12;border:none;border-radius:10px;padding:12px;font-weight:700;cursor:pointer;font-size:14px;">Connect Printify</button>' +
+            '</div></div>';
+          document.getElementById('btn-printify-save').addEventListener('click', async function() {
+            var btn = this;
+            var apiKey = document.getElementById('printify-api-key').value.trim();
+            if (!apiKey) { showToast('API key required', true); return; }
+            btn.textContent = 'Connecting...'; btn.disabled = true;
+            try {
+              var tk = await window._getClerkToken();
+              var res = await fetch(CONVEX_HTTP_URL + '/api/printify/connect', {
+                method: 'POST',
+                headers: { 'Authorization': 'Bearer ' + tk, 'Content-Type': 'application/json' },
+                body: JSON.stringify({ apiKey: apiKey })
+              });
+              var data = await res.json();
+              if (res.ok && data.ok) {
+                showToast('Printify connected — ' + (data.shopName || 'Shop'));
+                overlay.style.display = 'none';
+                loadStore();
+              } else {
+                showToast(data.error || 'Failed to connect', true);
+                btn.textContent = 'Connect Printify'; btn.disabled = false;
+              }
+            } catch(e) {
+              showToast('Error connecting Printify', true);
+              btn.textContent = 'Connect Printify'; btn.disabled = false;
+            }
+          });
+        });
+      }
+
+      var syncBtn = document.getElementById('btn-printify-sync');
+      if (syncBtn) {
+        syncBtn.addEventListener('click', async function() {
+          this.textContent = 'Syncing...'; this.disabled = true;
+          try {
+            var tk = await window._getClerkToken();
+            var res = await fetch(CONVEX_HTTP_URL + '/api/printify/sync', {
+              method: 'POST',
+              headers: { 'Authorization': 'Bearer ' + tk, 'Content-Type': 'application/json' },
+              body: JSON.stringify({})
+            });
+            var data = await res.json();
+            if (res.ok && data.ok) {
+              showToast('Synced ' + data.synced + ' product(s) from Printify');
+              loadStore();
+            } else {
+              showToast(data.error || 'Sync failed', true);
+              this.textContent = 'Sync Products'; this.disabled = false;
+            }
+          } catch(e) {
+            showToast('Error syncing', true);
+            this.textContent = 'Sync Products'; this.disabled = false;
+          }
+        });
+      }
+
+      var disconnectBtn = document.getElementById('btn-printify-disconnect');
+      if (disconnectBtn) {
+        disconnectBtn.addEventListener('click', async function() {
+          if (!confirm('Disconnect Printify? Synced products will remain.')) return;
+          try {
+            var tk = await window._getClerkToken();
+            await fetch(CONVEX_HTTP_URL + '/api/printify/disconnect', {
+              method: 'POST',
+              headers: { 'Authorization': 'Bearer ' + tk, 'Content-Type': 'application/json' },
+              body: JSON.stringify({})
+            });
+            showToast('Printify disconnected');
+            loadStore();
+          } catch(e) { showToast('Error disconnecting', true); }
+        });
+      }
+    }
+
+    function renderInventoryBadge(p) {
+      var inv = _inventoryMap[p.priceId];
+      if (!inv || !inv.inventory) return '';
+      if (inv.soldOut) return '<span style="background:#ff4444;color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;margin-left:8px;">SOLD OUT</span>';
+      var remaining = inv.remaining;
+      return '<span style="background:rgba(0,200,130,0.15);color:var(--mint);font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;margin-left:8px;">\uD83D\uDCE6 ' + remaining + ' remaining</span>';
+    }
+
+    function renderShippingBadge(p) {
+      var inv = _inventoryMap[p.priceId];
+      if (!inv || !inv.shippingCost) return '';
+      return '<span style="color:var(--text-dim);font-size:11px;margin-left:8px;">+ $' + (inv.shippingCost / 100).toFixed(2) + ' shipping</span>';
+    }
+
+    function renderSourceBadge(p) {
+      var inv = _inventoryMap[p.priceId];
+      if (!inv || inv.source !== 'printify') return '';
+      return '<span style="background:rgba(130,80,255,0.15);color:#a78bfa;font-size:10px;font-weight:600;padding:2px 6px;border-radius:4px;margin-left:6px;">Printify</span>';
+    }
+
     async function loadStore() {
       const token = await window._getClerkToken();
       if (!token) return;
@@ -1522,12 +1673,15 @@
       const el = document.getElementById('store-content');
 
       try {
-        // First check Stripe Connect status
-        const statusRes = await fetch(CONVEX_HTTP_URL + '/api/stripe/connect/status', {
-          method: 'POST',
-          headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
-          body: JSON.stringify({})
-        });
+        // Load Printify status + inventory in parallel with Stripe status
+        var [statusRes, _pStatus] = await Promise.all([
+          fetch(CONVEX_HTTP_URL + '/api/stripe/connect/status', {
+            method: 'POST',
+            headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
+            body: JSON.stringify({})
+          }),
+          loadPrintifyStatus(token)
+        ]);
         const statusData = await statusRes.json();
 
         if (!statusData.onboardingComplete) {
@@ -1566,6 +1720,9 @@
           return;
         }
 
+        // Load inventory data
+        await loadInventoryData();
+
         // Stripe connected — load products
         const prodRes = await fetch(CONVEX_HTTP_URL + '/api/stripe/connect/products', {
           method: 'POST',
@@ -1575,28 +1732,39 @@
         const prodData = await prodRes.json();
         const products = prodData.products || [];
 
+        // Build Printify card
+        var printifyHtml = renderPrintifyCard(token);
+
         if (products.length === 0) {
-          el.innerHTML = '<div class="empty-state" style="padding:40px 20px;">' +
+          el.innerHTML = printifyHtml +
+            '<div class="empty-state" style="padding:40px 20px;">' +
             '<div style="font-size:40px;margin-bottom:12px;">🛒</div>' +
             '<div style="font-size:15px;font-weight:600;color:var(--text);margin-bottom:4px;">Stripe connected ✓</div>' +
             '<div style="font-size:13px;color:var(--text-dim);margin-bottom:20px;">No products yet — add your first one!</div>' +
             '<button onclick="showAddProduct()" style="background:var(--mint);color:#0a1a12;border:none;border-radius:10px;padding:10px 24px;font-weight:700;cursor:pointer;font-size:14px;">+ Add Product</button>' +
             '</div>';
         } else {
-          el.innerHTML = '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">' +
+          el.innerHTML = printifyHtml +
+            '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">' +
             '<span style="color:var(--text-dim);font-size:13px;">' + products.length + ' product' + (products.length !== 1 ? 's' : '') + '</span>' +
             '<button onclick="showAddProduct()" style="background:var(--mint);color:#0a1a12;border:none;border-radius:8px;padding:8px 16px;font-weight:700;cursor:pointer;font-size:13px;">+ Add Product</button>' +
             '</div>' +
             '<div style="display:grid;gap:12px;">' +
-            products.map(function(p) { return '<div style="background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:16px;display:flex;align-items:center;gap:16px;">' +
+            products.map(function(p) {
+              var invBadge = renderInventoryBadge(p);
+              var shipBadge = renderShippingBadge(p);
+              var srcBadge = renderSourceBadge(p);
+              return '<div style="background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:16px;display:flex;align-items:center;gap:16px;">' +
               '<div style="width:60px;height:60px;background:var(--surface3);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:24px;">🛍️</div>' +
               '<div style="flex:1;min-width:0;">' +
-              '<div style="font-weight:600;color:var(--text);margin-bottom:2px;">' + escapeHtml(p.name || '') + '</div>' +
+              '<div style="font-weight:600;color:var(--text);margin-bottom:2px;display:flex;align-items:center;flex-wrap:wrap;">' + escapeHtml(p.name || '') + srcBadge + invBadge + '</div>' +
               (p.description ? '<div style="color:var(--text-dim);font-size:12px;margin-bottom:4px;">' + escapeHtml(p.description) + '</div>' : '') +
-              '<div style="color:var(--mint);font-size:14px;font-weight:700;">$' + ((p.amount || 0)/100).toFixed(2) + (p.recurring ? '/mo' : '') + '</div>' +
+              '<div style="display:flex;align-items:center;"><span style="color:var(--mint);font-size:14px;font-weight:700;">$' + ((p.amount || 0)/100).toFixed(2) + (p.recurring ? '/mo' : '') + '</span>' + shipBadge + '</div>' +
               '</div></div>'; }).join('') +
             '</div>';
         }
+
+        bindPrintifyButtons(token);
       } catch(e) {
         el.innerHTML = '<div class="empty-state">Failed to load store — ' + escapeHtml(e.message || '') + '</div>';
       }
@@ -1617,6 +1785,14 @@
             '<select id="prod-type" style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;color:var(--text);font-size:14px;outline:none;">' +
             '<option value="one_time">One-time</option><option value="recurring">Monthly</option></select></div>' +
           '</div>' +
+          '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">' +
+            '<div><label style="font-size:12px;color:var(--text-dim);display:block;margin-bottom:4px;">Quantity (optional)</label>' +
+            '<input id="prod-inventory" type="number" min="1" step="1" placeholder="Unlimited" style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;color:var(--text);font-size:14px;outline:none;" />' +
+            '<div style="font-size:11px;color:var(--text-dim);margin-top:2px;">Leave blank = unlimited</div></div>' +
+            '<div><label style="font-size:12px;color:var(--text-dim);display:block;margin-bottom:4px;">Shipping Cost (USD)</label>' +
+            '<input id="prod-shipping" type="number" min="0" step="0.01" placeholder="0.00" style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;color:var(--text);font-size:14px;outline:none;" />' +
+            '<div style="font-size:11px;color:var(--text-dim);margin-top:2px;">0 = free shipping</div></div>' +
+          '</div>' +
           '<button id="btn-create-product" style="background:var(--mint);color:#0a1a12;border:none;border-radius:10px;padding:12px;font-weight:700;cursor:pointer;font-size:14px;margin-top:4px;">Create Product</button>' +
         '</div></div>';
 
@@ -1626,16 +1802,23 @@
         var desc = document.getElementById('prod-desc').value.trim();
         var priceVal = parseFloat(document.getElementById('prod-price').value);
         var type = document.getElementById('prod-type').value;
+        var inventoryVal = document.getElementById('prod-inventory').value.trim();
+        var shippingVal = document.getElementById('prod-shipping').value.trim();
         if (!name) { showToast('Product name required', true); return; }
         if (!priceVal || priceVal <= 0) { showToast('Valid price required', true); return; }
+        var inventory = inventoryVal ? parseInt(inventoryVal, 10) : undefined;
+        var shippingCost = shippingVal ? Math.round(parseFloat(shippingVal) * 100) : undefined;
         btn.textContent = 'Creating...';
         btn.disabled = true;
         try {
           var tk = await window._getClerkToken();
+          var bodyObj = { name: name, description: desc || undefined, price: Math.round(priceVal * 100), type: type };
+          if (inventory) bodyObj.inventory = inventory;
+          if (shippingCost) bodyObj.shippingCost = shippingCost;
           var res = await fetch(CONVEX_HTTP_URL + '/api/stripe/connect/create-product', {
             method: 'POST',
             headers: { 'Authorization': 'Bearer ' + tk, 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name: name, description: desc || undefined, price: Math.round(priceVal * 100), type: type })
+            body: JSON.stringify(bodyObj)
           });
           var data = await res.json();
           if (res.ok) {
