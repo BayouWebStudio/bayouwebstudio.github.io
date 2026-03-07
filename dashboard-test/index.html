@@ -726,6 +726,7 @@
     window.__clerkStarted = true;
     let clerkToken = null;
     let threadId = null;
+    let mintFloatThreadId = null;
     let siteSlug = null;
     let siteHtml = null;
     let isStreaming = false;
@@ -1452,17 +1453,70 @@
 
     // ── Store Tab ──
     async function loadStore() {
-      if (!siteSlug || !clerkToken) return;
+      if (!siteSlug) return;
+      const token = await window._getClerkToken();
+      if (!token) return;
       const el = document.getElementById('store-content');
+
       try {
-        const res = await fetch(CONVEX_HTTP_URL + '/api/store/products?slug=' + siteSlug);
-        const data = await res.json();
-        const products = data.products || [];
+        // First check Stripe Connect status
+        const statusRes = await fetch(CONVEX_HTTP_URL + '/api/stripe/connect/status', {
+          method: 'POST',
+          headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
+          body: JSON.stringify({})
+        });
+        const statusData = await statusRes.json();
+
+        if (!statusData.onboardingComplete) {
+          // Show Stripe Connect onboarding prompt
+          el.innerHTML = '<div class="empty-state" style="padding:40px 20px;">' +
+            '<div style="font-size:48px;margin-bottom:16px;">💳</div>' +
+            '<div style="font-size:16px;font-weight:600;color:var(--text);margin-bottom:8px;">Connect Stripe to start selling</div>' +
+            '<div style="font-size:13px;color:var(--text-dim);margin-bottom:24px;max-width:360px;margin-left:auto;margin-right:auto;">Set up Stripe Express to accept payments. You\'ll earn directly — we take a small 5% platform fee.</div>' +
+            '<button id="btn-connect-stripe" style="background:var(--mint);color:#0a1a12;border:none;border-radius:10px;padding:12px 28px;font-weight:700;cursor:pointer;font-size:14px;">Connect Stripe →</button>' +
+            '</div>';
+          document.getElementById('btn-connect-stripe').addEventListener('click', async function() {
+            this.textContent = 'Connecting...';
+            this.disabled = true;
+            try {
+              const tk = await window._getClerkToken();
+              const onbRes = await fetch(CONVEX_HTTP_URL + '/api/stripe/connect/onboard', {
+                method: 'POST',
+                headers: { 'Authorization': 'Bearer ' + tk, 'Content-Type': 'application/json' },
+                body: JSON.stringify({ siteSlug: siteSlug })
+              });
+              const onbData = await onbRes.json();
+              if (onbData.url) {
+                window.open(onbData.url, '_blank');
+                this.textContent = 'Complete setup in new tab...';
+              } else {
+                showToast(onbData.error || 'Failed to start onboarding', true);
+                this.textContent = 'Connect Stripe →';
+                this.disabled = false;
+              }
+            } catch(e) {
+              showToast('Error connecting Stripe', true);
+              this.textContent = 'Connect Stripe →';
+              this.disabled = false;
+            }
+          });
+          return;
+        }
+
+        // Stripe connected — load products
+        const prodRes = await fetch(CONVEX_HTTP_URL + '/api/stripe/connect/products', {
+          method: 'POST',
+          headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
+          body: JSON.stringify({})
+        });
+        const prodData = await prodRes.json();
+        const products = prodData.products || [];
+
         if (products.length === 0) {
           el.innerHTML = '<div class="empty-state" style="padding:40px 20px;">' +
             '<div style="font-size:40px;margin-bottom:12px;">🛒</div>' +
-            '<div style="font-size:15px;font-weight:600;color:var(--text);margin-bottom:8px;">No products yet</div>' +
-            '<div style="font-size:13px;color:var(--text-dim);margin-bottom:20px;">Add products to sell directly from your site</div>' +
+            '<div style="font-size:15px;font-weight:600;color:var(--text);margin-bottom:4px;">Stripe connected ✓</div>' +
+            '<div style="font-size:13px;color:var(--text-dim);margin-bottom:20px;">No products yet — add your first one!</div>' +
             '<button onclick="showAddProduct()" style="background:var(--mint);color:#0a1a12;border:none;border-radius:10px;padding:10px 24px;font-weight:700;cursor:pointer;font-size:14px;">+ Add Product</button>' +
             '</div>';
         } else {
@@ -1471,18 +1525,72 @@
             '<button onclick="showAddProduct()" style="background:var(--mint);color:#0a1a12;border:none;border-radius:8px;padding:8px 16px;font-weight:700;cursor:pointer;font-size:13px;">+ Add Product</button>' +
             '</div>' +
             '<div style="display:grid;gap:12px;">' +
-            products.map(p => '<div style="background:var(--card-bg);border:1px solid var(--card-border);border-radius:12px;padding:16px;display:flex;align-items:center;gap:16px;">' +
-              (p.imageUrl ? '<img src="' + p.imageUrl + '" style="width:60px;height:60px;object-fit:cover;border-radius:8px;" />' : '<div style="width:60px;height:60px;background:var(--card-hover);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:24px;">🛍️</div>') +
+            products.map(function(p) { return '<div style="background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:16px;display:flex;align-items:center;gap:16px;">' +
+              '<div style="width:60px;height:60px;background:var(--surface3);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:24px;">🛍️</div>' +
               '<div style="flex:1;min-width:0;">' +
               '<div style="font-weight:600;color:var(--text);margin-bottom:2px;">' + escapeHtml(p.name || '') + '</div>' +
-              '<div style="color:var(--mint);font-size:14px;font-weight:700;">$' + ((p.price || 0)/100).toFixed(2) + '</div>' +
-              '</div></div>').join('') +
+              (p.description ? '<div style="color:var(--text-dim);font-size:12px;margin-bottom:4px;">' + escapeHtml(p.description) + '</div>' : '') +
+              '<div style="color:var(--mint);font-size:14px;font-weight:700;">$' + ((p.amount || 0)/100).toFixed(2) + (p.recurring ? '/mo' : '') + '</div>' +
+              '</div></div>'; }).join('') +
             '</div>';
         }
       } catch(e) {
-        el.innerHTML = '<div class="empty-state">Failed to load store</div>';
+        el.innerHTML = '<div class="empty-state">Failed to load store — ' + escapeHtml(e.message || '') + '</div>';
       }
     }
+
+    window.showAddProduct = async function() {
+      const overlay = createModalOverlay('add-product-modal');
+      overlay.innerHTML = modalCard('Add Product') +
+        '<div style="display:flex;flex-direction:column;gap:14px;">' +
+          '<div><label style="font-size:12px;color:var(--text-dim);display:block;margin-bottom:4px;">Product Name</label>' +
+          '<input id="prod-name" type="text" placeholder="e.g. Flash Sheet #1" style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;color:var(--text);font-size:14px;outline:none;" /></div>' +
+          '<div><label style="font-size:12px;color:var(--text-dim);display:block;margin-bottom:4px;">Description (optional)</label>' +
+          '<input id="prod-desc" type="text" placeholder="Brief description" style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;color:var(--text);font-size:14px;outline:none;" /></div>' +
+          '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">' +
+            '<div><label style="font-size:12px;color:var(--text-dim);display:block;margin-bottom:4px;">Price (USD)</label>' +
+            '<input id="prod-price" type="number" min="1" step="0.01" placeholder="25.00" style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;color:var(--text);font-size:14px;outline:none;" /></div>' +
+            '<div><label style="font-size:12px;color:var(--text-dim);display:block;margin-bottom:4px;">Type</label>' +
+            '<select id="prod-type" style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;color:var(--text);font-size:14px;outline:none;">' +
+            '<option value="one_time">One-time</option><option value="recurring">Monthly</option></select></div>' +
+          '</div>' +
+          '<button id="btn-create-product" style="background:var(--mint);color:#0a1a12;border:none;border-radius:10px;padding:12px;font-weight:700;cursor:pointer;font-size:14px;margin-top:4px;">Create Product</button>' +
+        '</div></div>';
+
+      document.getElementById('btn-create-product').addEventListener('click', async function() {
+        var btn = this;
+        var name = document.getElementById('prod-name').value.trim();
+        var desc = document.getElementById('prod-desc').value.trim();
+        var priceVal = parseFloat(document.getElementById('prod-price').value);
+        var type = document.getElementById('prod-type').value;
+        if (!name) { showToast('Product name required', true); return; }
+        if (!priceVal || priceVal <= 0) { showToast('Valid price required', true); return; }
+        btn.textContent = 'Creating...';
+        btn.disabled = true;
+        try {
+          var tk = await window._getClerkToken();
+          var res = await fetch(CONVEX_HTTP_URL + '/api/stripe/connect/create-product', {
+            method: 'POST',
+            headers: { 'Authorization': 'Bearer ' + tk, 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name: name, description: desc || undefined, price: Math.round(priceVal * 100), type: type })
+          });
+          var data = await res.json();
+          if (res.ok) {
+            showToast('Product created!');
+            overlay.style.display = 'none';
+            loadStore();
+          } else {
+            showToast(data.error || 'Failed to create product', true);
+            btn.textContent = 'Create Product';
+            btn.disabled = false;
+          }
+        } catch(e) {
+          showToast('Error creating product', true);
+          btn.textContent = 'Create Product';
+          btn.disabled = false;
+        }
+      });
+    };
 
     document.querySelector('[data-tab="store"]').addEventListener('click', loadStore);
 
@@ -1578,7 +1686,17 @@
       }
     }
 
-    document.querySelector('[data-tab="themes"]').addEventListener('click', () => {
+    document.querySelector('[data-tab="themes"]').addEventListener('click', async () => {
+      if (!siteHtml) {
+        // Fetch site HTML before rendering themes
+        try {
+          document.getElementById('themes-grid').innerHTML = '<div class="empty-state">Loading themes...</div>';
+          await loadSiteHtml();
+        } catch(e) {
+          document.getElementById('themes-grid').innerHTML = '<div class="empty-state">Failed to load site data</div>';
+          return;
+        }
+      }
       if (siteHtml) renderThemes(siteHtml);
     });
 
@@ -1624,7 +1742,9 @@
       const input = document.getElementById('mint-float-input');
       const messages = document.getElementById('mint-float-messages');
       const text = (input.value || '').trim();
-      if (!text || !clerkToken) return;
+      if (!text) return;
+      const token = await window._getClerkToken();
+      if (!token) { showToast('Not signed in', true); return; }
       input.value = '';
 
       // Add user message
@@ -1639,32 +1759,37 @@
       try {
         const res = await fetch(CONVEX_HTTP_URL + '/api/dashboard/chat', {
           method: 'POST',
-          headers: { 'Authorization': 'Bearer ' + clerkToken, 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: text, threadId })
+          headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: text, threadId: mintFloatThreadId })
         });
         document.getElementById(typingId)?.remove();
-        if (res.ok) {
-          const reader = res.body.getReader();
-          const decoder = new TextDecoder();
-          let reply = '';
-          const replyEl = document.createElement('div');
-          replyEl.style.cssText = 'background:rgba(0,200,130,0.08);border-radius:12px;padding:10px 12px;font-size:13px;color:#c8e8d8;';
-          messages.appendChild(replyEl);
-          while (true) {
-            const { done, value } = await reader.read();
-            if (done) break;
-            const chunk = decoder.decode(value);
-            const lines = chunk.split('\n');
-            for (const line of lines) {
-              if (line.startsWith('data: ')) {
-                try {
-                  const d = JSON.parse(line.slice(6));
-                  if (d.text) { reply += d.text; replyEl.textContent = reply; messages.scrollTop = messages.scrollHeight; }
-                  if (d.threadId) threadId = d.threadId;
-                } catch(e) {}
-              }
-            }
-          }
+        if (!res.ok) {
+          const err = await res.json().catch(function() { return {}; });
+          messages.innerHTML += '<div style="color:#ff6b6b;font-size:13px;padding:8px;">Error: ' + escapeHtml(err.error || 'Request failed') + '</div>';
+          messages.scrollTop = messages.scrollHeight;
+          return;
+        }
+        // Grab thread ID from header for conversation continuity
+        const newThreadId = res.headers.get('X-Thread-Id');
+        if (newThreadId) mintFloatThreadId = newThreadId;
+
+        // Stream plain text response (AI SDK toTextStreamResponse)
+        const reader = res.body.getReader();
+        const decoder = new TextDecoder();
+        let reply = '';
+        const replyEl = document.createElement('div');
+        replyEl.style.cssText = 'background:rgba(0,200,130,0.08);border-radius:12px;padding:10px 12px;font-size:13px;color:#c8e8d8;white-space:pre-wrap;';
+        messages.appendChild(replyEl);
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          const chunk = decoder.decode(value, { stream: true });
+          reply += chunk;
+          replyEl.textContent = reply;
+          messages.scrollTop = messages.scrollHeight;
+        }
+        if (!reply.trim()) {
+          replyEl.textContent = '(no response)';
         }
       } catch(e) {
         document.getElementById(typingId)?.remove();
