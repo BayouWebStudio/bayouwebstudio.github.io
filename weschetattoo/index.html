@@ -567,6 +567,109 @@
       color: rgba(255,255,255,0.25);
       margin-bottom: 12px;
     }
+
+    /* ── FAQ Accordion ── */
+    .faq-list { max-width: 760px; margin: 0 auto; }
+    .faq-item {
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      text-align: left;
+      padding: 24px 40px 24px 0;
+      cursor: pointer;
+      position: relative;
+      line-height: 1.5;
+      transition: color 0.3s;
+    }
+    .faq-question:hover { color: #c9a84c; }
+    .faq-question::after {
+      content: '+';
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 22px;
+      font-weight: 300;
+      color: #c9a84c;
+      transition: transform 0.3s;
+    }
+    .faq-item.open .faq-question::after {
+      content: '−';
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+      padding: 0 0 0 0;
+    }
+    .faq-item.open .faq-answer {
+      max-height: 200px;
+      padding: 0 0 24px 0;
+    }
+    .faq-answer p {
+      color: rgba(255,255,255,0.6);
+      font-size: 15px;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* ── Booking Form ── */
+    .booking-form { max-width: 600px; margin: 0 auto; text-align: left; }
+    .booking-form label {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+    .booking-form input,
+    .booking-form textarea {
+      width: 100%;
+      padding: 14px 16px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 0;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      margin-bottom: 24px;
+      transition: border-color 0.3s;
+      -webkit-appearance: none;
+    }
+    .booking-form input:focus,
+    .booking-form textarea:focus {
+      outline: none;
+      border-color: #c9a84c;
+    }
+    .booking-form input::placeholder,
+    .booking-form textarea::placeholder {
+      color: rgba(255,255,255,0.25);
+    }
+    .booking-form textarea { resize: vertical; }
+    .booking-form .btn-gold {
+      width: 100%;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+    }
+    .booking-thankyou {
+      text-align: center;
+      padding: 60px 0;
+    }
+    .booking-thankyou h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 28px;
+      font-weight: 400;
+      color: #c9a84c;
+    }
   </style>
 </head>
 
@@ -581,8 +684,9 @@
     <ul class="nav-links">
       <li><a href="#about" onclick="closeNav()">About</a></li>
       <li><a href="#gallery" onclick="closeNav()">Gallery</a></li>
-      <li><a href="#testimonials" onclick="closeNav()">Testimonials</a></li>
+      <li><a href="testimonials.html" onclick="closeNav()">Reviews</a></li>
       <li><a href="#shop" onclick="closeNav()">Shop</a></li>
+      <li><a href="#faq" onclick="closeNav()">FAQ</a></li>
       <li><a href="#book" onclick="closeNav()">Book</a></li>
     </ul>
   </nav>
@@ -662,43 +766,13 @@
     <cite>— Jason, Jacksonville FL</cite>
   </div>
 
-  <!-- Testimonials -->
-  <section class="section" id="testimonials">
+  <!-- Testimonials Teaser -->
+  <section class="section" id="testimonials" style="text-align:center;">
     <div class="container">
       <p class="section-label reveal">Client Reviews</p>
       <h2 class="section-title reveal">What They Say</h2>
-      <div class="testimonials-grid">
-        <div class="testimonial-card reveal">
-          <div class="testimonial-stars">★ ★ ★ ★ ★</div>
-          <p class="testimonial-text">"The most precise geometric work I've ever seen. Raul's attention to detail is unmatched — every line, every angle is perfect. Worth every penny and then some."</p>
-          <p class="testimonial-author">Tu Nguyen</p>
-          <p class="testimonial-location">Tampa, FL</p>
-        </div>
-        <div class="testimonial-card reveal">
-          <div class="testimonial-stars">★ ★ ★ ★ ★</div>
-          <p class="testimonial-text">"Flew in from Pennsylvania for this and I'd do it again in a heartbeat. The sacred geometry piece he did blew everyone away. Raul is the real deal."</p>
-          <p class="testimonial-author">Rob</p>
-          <p class="testimonial-location">Airville, PA</p>
-        </div>
-        <div class="testimonial-card reveal">
-          <div class="testimonial-stars">★ ★ ★ ★ ★</div>
-          <p class="testimonial-text">"Had a full day session and it was the best tattoo experience I've ever had. The work speaks for itself — completely mind-blowing."</p>
-          <p class="testimonial-author">Nick Heppes</p>
-          <p class="testimonial-location">Oregon City, OR</p>
-        </div>
-        <div class="testimonial-card reveal">
-          <div class="testimonial-stars">★ ★ ★ ★ ★</div>
-          <p class="testimonial-text">"If you're serious about geometric tattoos, there's nobody better. Saved up for two years to fly out to Houston and it was absolutely worth it."</p>
-          <p class="testimonial-author">Keon Tucker</p>
-          <p class="testimonial-location">Denver, CO</p>
-        </div>
-        <div class="testimonial-card reveal">
-          <div class="testimonial-stars">★ ★ ★ ★ ★</div>
-          <p class="testimonial-text">"16 sessions over 3 years. Full back piece. There are no words. Raul is a living legend."</p>
-          <p class="testimonial-author">Jason</p>
-          <p class="testimonial-location">Jacksonville, FL</p>
-        </div>
-      </div>
+      <p style="color: rgba(255,255,255,0.6); font-size: 16px; max-width: 500px; margin: 0 auto 40px; font-weight: 300;" class="reveal">Real clients. Real results.</p>
+      <a href="testimonials.html" class="btn-gold reveal">Read Reviews →</a>
     </div>
   </section>
 
@@ -712,6 +786,40 @@
     </div>
   </section>
 
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <div class="container">
+      <p class="section-label reveal">Common Questions</p>
+      <h2 class="section-title reveal">FAQ</h2>
+      <div class="faq-list reveal">
+        <div class="faq-item">
+          <button class="faq-question">How much do you charge?</button>
+          <div class="faq-answer"><p>$2,000/day flat rate. Most large-scale pieces take 1–3 days depending on size and complexity.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">How far in advance should I book?</button>
+          <div class="faq-answer"><p>Availability is limited. I recommend reaching out 2–4 months in advance, especially for large custom pieces.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Do you do small tattoos?</button>
+          <div class="faq-answer"><p>I specialize in large-scale geometric and sacred geometry work. For the best result, pieces should have room to breathe on the skin.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Can I bring my own design?</button>
+          <div class="faq-answer"><p>Absolutely. I can also design something custom for you — just describe your vision in the booking form.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Do you travel for guest spots?</button>
+          <div class="faq-answer"><p>Yes, occasionally. Follow @weschetattoo on Instagram or email to ask about upcoming travel dates.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">How should I prepare for my appointment?</button>
+          <div class="faq-answer"><p>Get good sleep, eat before you come in, stay hydrated, and wear comfortable clothing that allows easy access to the tattoo area.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Booking -->
   <section class="section booking-section" id="book">
     <div class="container">
@@ -722,10 +830,29 @@
         <div class="booking-detail"><strong>Limited</strong> availability</div>
         <div class="booking-detail"><strong>Houston, TX</strong> — Tattoo Temple</div>
       </div>
-      <p style="color: rgba(255,255,255,0.5); font-size: 15px; margin-bottom: 40px; font-weight: 300;" class="reveal">
-        DM <strong style="color:#fff;">@weschetattoo</strong> on Instagram or email to start the conversation.
-      </p>
-      <a href="https://instagram.com/weschetattoo" target="_blank" class="btn-gold reveal">Book on Instagram</a>
+      <div id="booking-form-wrap" class="reveal">
+        <form class="booking-form" action="https://formsubmit.co/WescheTattoo@gmail.com" method="POST">
+          <input type="hidden" name="_subject" value="New Booking Request — Wesche Tattoo">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_next" value="https://getminted.ai/weschetattoo/?booked=1">
+          <label for="name">Your Name *</label>
+          <input type="text" id="name" name="name" placeholder="Full name" required>
+          <label for="email">Email Address *</label>
+          <input type="email" id="email" name="email" placeholder="you@email.com" required>
+          <label for="phone">Phone</label>
+          <input type="tel" id="phone" name="phone" placeholder="(optional)">
+          <label for="placement">Placement *</label>
+          <input type="text" id="placement" name="placement" placeholder="Where on the body?" required>
+          <label for="vision">Describe Your Vision *</label>
+          <textarea id="vision" name="vision" rows="5" placeholder="Tell me about the piece you want…" required></textarea>
+          <label for="references">Reference Image Links</label>
+          <input type="text" id="references" name="references" placeholder="Paste any image URLs or Instagram links (optional)">
+          <button type="submit" class="btn-gold">Send Booking Request</button>
+        </form>
+      </div>
+      <div id="booking-thankyou" class="booking-thankyou" style="display:none;">
+        <h3>Thanks! We'll be in touch soon 🙏</h3>
+      </div>
     </div>
   </section>
 
@@ -794,6 +921,24 @@
       if (e.key === 'ArrowLeft') navLightbox(-1);
       if (e.key === 'ArrowRight') navLightbox(1);
     });
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        const wasOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+        if (!wasOpen) item.classList.add('open');
+      });
+    });
+
+    // Booking thank-you on ?booked=1
+    if (new URLSearchParams(window.location.search).get('booked') === '1') {
+      const fw = document.getElementById('booking-form-wrap');
+      const ty = document.getElementById('booking-thankyou');
+      if (fw) fw.style.display = 'none';
+      if (ty) ty.style.display = 'block';
+    }
   </script>
 
   <!-- Mint Widget -->
