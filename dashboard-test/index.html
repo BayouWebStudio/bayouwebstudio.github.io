@@ -1461,6 +1461,102 @@
 
     document.querySelector('[data-tab="store"]').addEventListener('click', loadStore);
 
+    // ── Themes ──
+    const THEMES = [
+      {
+        id: "midnight-gold", name: "Midnight Gold", description: "Classic dark with gold accents",
+        preview: { bg: "#0a0a0a", accent: "#C9A84C" },
+        vars: { "--accent": "#C9A84C", "--accent-rgb": "201,168,76", "--black": "#0a0a0a", "--dark": "#111111", "--darker": "#0d0d0d", "--nav-bg": "rgba(10,10,10,0.88)" }
+      },
+      {
+        id: "forest", name: "Forest", description: "Deep green with emerald accents",
+        preview: { bg: "#0a1a0f", accent: "#00C882" },
+        vars: { "--accent": "#00C882", "--accent-rgb": "0,200,130", "--black": "#0a1a0f", "--dark": "#0f2016", "--darker": "#0d1c12", "--nav-bg": "rgba(10,26,15,0.88)" }
+      },
+      {
+        id: "steel-blue", name: "Steel Blue", description: "Dark slate with cool blue accents",
+        preview: { bg: "#0a0d14", accent: "#4A90D9" },
+        vars: { "--accent": "#4A90D9", "--accent-rgb": "74,144,217", "--black": "#0a0d14", "--dark": "#0f1420", "--darker": "#0d111c", "--nav-bg": "rgba(10,13,20,0.88)" }
+      },
+      {
+        id: "crimson", name: "Crimson", description: "Deep black with bold red accents",
+        preview: { bg: "#0d0505", accent: "#E63946" },
+        vars: { "--accent": "#E63946", "--accent-rgb": "230,57,70", "--black": "#0d0505", "--dark": "#180808", "--darker": "#120606", "--nav-bg": "rgba(13,5,5,0.88)" }
+      },
+      {
+        id: "violet", name: "Violet", description: "Dark with rich purple accents",
+        preview: { bg: "#0d0a14", accent: "#9B59B6" },
+        vars: { "--accent": "#9B59B6", "--accent-rgb": "155,89,182", "--black": "#0d0a14", "--dark": "#140e1f", "--darker": "#100b19", "--nav-bg": "rgba(13,10,20,0.88)" }
+      }
+    ];
+
+    function detectCurrentTheme(html) {
+      const accentMatch = html.match(/--accent\s*:\s*([^;]+)/);
+      const accent = accentMatch ? accentMatch[1].trim().toLowerCase() : '';
+      return THEMES.find(t => t.vars['--accent'].toLowerCase() === accent) || null;
+    }
+
+    function renderThemes(html) {
+      const current = detectCurrentTheme(html);
+      const container = document.getElementById('themes-grid');
+      container.innerHTML = THEMES.map(theme => {
+        const isActive = current && current.id === theme.id;
+        return '<div class="theme-card ' + (isActive ? 'active' : '') + '">' +
+          '<div class="theme-preview" style="background:' + theme.preview.bg + ';">' +
+            '<div class="theme-accent-dot" style="background:' + theme.preview.accent + ';"><\/div>' +
+            '<div class="theme-preview-lines">' +
+              '<div style="background:' + theme.preview.accent + ';opacity:0.9;height:3px;border-radius:2px;margin-bottom:5px;"><\/div>' +
+              '<div style="background:rgba(255,255,255,0.15);height:2px;border-radius:2px;margin-bottom:4px;"><\/div>' +
+              '<div style="background:rgba(255,255,255,0.1);height:2px;border-radius:2px;width:70%;"><\/div>' +
+            '<\/div>' +
+          '<\/div>' +
+          '<div class="theme-info">' +
+            '<div class="theme-name">' + theme.name + (isActive ? ' <span class="theme-badge">\u2713 Active<\/span>' : '') + '<\/div>' +
+            '<div class="theme-desc">' + theme.description + '<\/div>' +
+            (!isActive ? '<button class="btn-apply-theme" data-theme-id="' + theme.id + '">Apply Theme<\/button>' : '') +
+          '<\/div>' +
+        '<\/div>';
+      }).join('');
+
+      container.querySelectorAll('.btn-apply-theme').forEach(btn => {
+        btn.addEventListener('click', function() { applyTheme(this.dataset.themeId, this); });
+      });
+    }
+
+    async function applyTheme(themeId, btn) {
+      const theme = THEMES.find(t => t.id === themeId);
+      if (!theme) return;
+      const token = await getToken();
+      if (!token) return;
+      btn.textContent = 'Applying...';
+      btn.disabled = true;
+      try {
+        const res = await fetch(CONVEX_HTTP_URL + '/api/dashboard/apply-theme', {
+          method: 'POST',
+          headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ themeVars: theme.vars })
+        });
+        if (res.ok) {
+          showToast('Theme applied! Refreshing...');
+          await loadSiteHtml();
+          renderThemes(siteHtml);
+        } else {
+          const data = await res.json().catch(() => ({}));
+          showToast(data.error || 'Failed to apply theme', true);
+          btn.textContent = 'Apply Theme';
+          btn.disabled = false;
+        }
+      } catch(e) {
+        showToast('Error applying theme', true);
+        btn.textContent = 'Apply Theme';
+        btn.disabled = false;
+      }
+    }
+
+    document.querySelector('[data-tab="themes"]').addEventListener('click', () => {
+      if (siteHtml) renderThemes(siteHtml);
+    });
+
     // ── Mint Floating Widget ──
     const mintPhrases = [
       "I'm here if you need help 🌿",
