@@ -491,6 +491,18 @@
   <!-- Overview Tab -->
   <div class="tab-content active" id="tab-overview">
 
+    <!-- Upgrade CTA Banner (shown for free plan accounts) -->
+    <div id="upgrade-cta-banner" style="display:none;align-items:center;justify-content:space-between;gap:16px;background:linear-gradient(135deg,rgba(0,200,130,0.13),rgba(0,170,110,0.07));border:1px solid rgba(0,200,130,0.35);border-radius:14px;padding:20px 24px;margin:24px 24px 0;flex-wrap:wrap;">
+      <div style="display:flex;align-items:center;gap:14px;">
+        <div style="font-size:28px;">⚡</div>
+        <div>
+          <div style="font-weight:700;font-size:15px;color:#fff;margin-bottom:3px;">Upgrade to Pro — $15/mo</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.6);">Get your own .com domain, SEO, store, and weekly auto-gallery updates from Instagram.</div>
+        </div>
+      </div>
+      <a href="https://buy.stripe.com/8x2aEXb1Q2oB8q40WD3Je04" target="_blank" style="background:#00C882;color:#0a1a12;font-weight:700;font-size:14px;padding:11px 24px;border-radius:10px;text-decoration:none;white-space:nowrap;flex-shrink:0;">Upgrade Now →</a>
+    </div>
+
     <!-- Domain CTA Banner (shown for paid plans without a custom domain) -->
     <div id="domain-cta-banner" style="display:none;align-items:center;justify-content:space-between;gap:16px;background:linear-gradient(135deg,rgba(0,200,130,0.12),rgba(0,200,130,0.06));border:1px solid rgba(0,200,130,0.3);border-radius:14px;padding:20px 24px;margin:24px 24px 0;flex-wrap:wrap;">
       <div style="display:flex;align-items:center;gap:14px;">
@@ -837,8 +849,12 @@
         const previewUrl = data.siteUrl;
         const plan = data.plan || 'free';
 
-        // ── Domain CTA: show prominently if paid plan + no custom domain ──
+        // ── Upgrade CTA: show for free accounts ──
         const hasPaidPlan = plan === 'pro' || plan === 'starter';
+        const upgradeBanner = document.getElementById('upgrade-cta-banner');
+        if (upgradeBanner) upgradeBanner.style.display = hasPaidPlan ? 'none' : 'flex';
+
+        // ── Domain CTA: show prominently if paid plan + no custom domain ──
         const hasCustomDomain = data.domain && !data.domain.includes('getminted.ai');
         const domainCta = document.getElementById('domain-cta-banner');
         if (hasPaidPlan && !hasCustomDomain) {
@@ -968,6 +984,39 @@
 
       container.innerHTML = sections.map(s => {
         const previewText = escapeHtml(s.preview.length > 150 ? s.preview.substring(0, 150) + '...' : s.preview);
+
+        // Special editor for image-type sections (hero_bg)
+        if (s.type === 'image') {
+          const imgSrc = s.value.startsWith('http') ? s.value : s.value;
+          return '<div class="section-card" data-key="' + s.key + '" onclick="toggleSectionEdit(this)">' +
+            '<div class="section-card-header">' +
+              '<div style="display:flex;align-items:center;gap:8px;">' +
+                '<span class="section-card-icon">' + s.icon + '</span>' +
+                '<span class="section-card-title">' + escapeHtml(s.title) + '</span>' +
+              '</div>' +
+            '</div>' +
+            '<div class="section-card-preview">' + previewText + '</div>' +
+            '<div class="section-editor">' +
+              '<div style="display:flex;flex-direction:column;gap:12px;">' +
+                '<img id="hero-bg-preview" src="' + escapeHtml(imgSrc) + '" style="width:100%;max-height:200px;object-fit:cover;border-radius:8px;border:1px solid var(--border);" onerror="this.style.display=\'none\'" />' +
+                '<label style="cursor:pointer;">' +
+                  '<input type="file" id="hero-bg-upload" accept="image/*" style="display:none;" onchange="handleHeroBgFile(this)">' +
+                  '<div id="hero-bg-drop" style="border:2px dashed var(--border);border-radius:10px;padding:24px;text-align:center;cursor:pointer;color:var(--text-dim);font-size:13px;">' +
+                    '📷 Click to upload new background photo<br>' +
+                    '<span style="font-size:11px;opacity:0.6;">JPG or PNG · max 5MB · will replace current hero background</span>' +
+                  '</div>' +
+                '</label>' +
+                '<button id="btn-save-hero-bg" style="background:var(--mint);color:#0a1a12;border:none;border-radius:10px;padding:11px;font-weight:700;cursor:pointer;font-size:14px;opacity:0.5;" disabled onclick="event.stopPropagation();uploadHeroBg()">Upload & Apply</button>' +
+                '<div id="hero-bg-progress" style="display:none;font-size:12px;color:var(--text-dim);text-align:center;"></div>' +
+              '</div>' +
+              '<div class="section-actions" style="margin-top:8px;">' +
+                '<button class="btn-cancel" onclick="event.stopPropagation();cancelSectionEdit(this)">Cancel</button>' +
+              '</div>' +
+              '<div class="save-status" id="status-' + s.key + '"></div>' +
+            '</div>' +
+          '</div>';
+        }
+
         return '<div class="section-card" data-key="' + s.key + '" onclick="toggleSectionEdit(this)">' +
           '<div class="section-card-header">' +
             '<div style="display:flex;align-items:center;gap:8px;">' +
@@ -1050,6 +1099,95 @@
 
       btn.disabled = false;
       btn.textContent = 'Save';
+    };
+
+    // ── Hero Background Upload ──
+    let heroBgFile = null;
+
+    window.handleHeroBgFile = function(input) {
+      const file = input.files[0];
+      if (!file) return;
+      if (file.size > 5 * 1024 * 1024) {
+        showToast('Image too large — max 5MB', true);
+        input.value = '';
+        return;
+      }
+      heroBgFile = file;
+      const btn = document.getElementById('btn-save-hero-bg');
+      btn.disabled = false;
+      btn.style.opacity = '1';
+      // Show filename in drop zone
+      const drop = document.getElementById('hero-bg-drop');
+      drop.innerHTML = '✅ ' + escapeHtml(file.name) + '<br><span style="font-size:11px;opacity:0.6;">Click Upload & Apply to save</span>';
+      // Preview
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const preview = document.getElementById('hero-bg-preview');
+        if (preview) { preview.src = e.target.result; preview.style.display = 'block'; }
+      };
+      reader.readAsDataURL(file);
+    };
+
+    window.uploadHeroBg = async function() {
+      if (!heroBgFile) return;
+      const btn = document.getElementById('btn-save-hero-bg');
+      const progress = document.getElementById('hero-bg-progress');
+      const statusEl = document.getElementById('status-hero_bg');
+
+      btn.disabled = true;
+      btn.textContent = 'Uploading...';
+      progress.style.display = 'block';
+      progress.textContent = 'Reading file...';
+
+      try {
+        const token = await getToken();
+
+        // Read file as base64 (strip data: prefix)
+        const base64 = await new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => {
+            const result = reader.result;
+            const base64Data = result.split(',')[1]; // strip "data:image/...;base64,"
+            resolve(base64Data);
+          };
+          reader.onerror = reject;
+          reader.readAsDataURL(heroBgFile);
+        });
+
+        progress.textContent = 'Uploading to server...';
+
+        const res = await fetch(CONVEX_HTTP_URL + '/api/dashboard/upload-hero-bg', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+          body: JSON.stringify({ imageBase64: base64, fileName: heroBgFile.name }),
+        });
+        const data = await res.json();
+
+        if (res.ok && data.ok) {
+          showToast('Background updated! Changes live in ~30 seconds');
+          progress.textContent = '✅ Done! Changes propagating...';
+          if (statusEl) { statusEl.className = 'save-status success'; statusEl.textContent = '✅ Background updated!'; }
+          // Update preview with new URL
+          if (data.imageUrl) {
+            const preview = document.getElementById('hero-bg-preview');
+            if (preview) preview.src = data.imageUrl + '?t=' + Date.now();
+          }
+          setTimeout(() => {
+            const card = btn.closest('.section-card');
+            if (card) card.classList.remove('editing');
+          }, 3000);
+        } else {
+          showToast(data.error || 'Upload failed', true);
+          progress.textContent = '❌ ' + (data.error || 'Upload failed');
+        }
+      } catch (e) {
+        showToast('Upload error: ' + e.message, true);
+        progress.textContent = '❌ ' + e.message;
+      }
+
+      btn.disabled = false;
+      btn.textContent = 'Upload & Apply';
+      heroBgFile = null;
     };
 
     // ── Parse Gallery ──
