@@ -825,6 +825,12 @@
           return;
         }
 
+        // Check if pro account needs site setup
+        if (data.plan === 'pro' && data.siteBuilt === false) {
+          showOnboardingPrompt();
+          return;
+        }
+
         siteSlug = data.siteSlug;
         const previewUrl = data.siteUrl;
         const plan = data.plan || 'free';
@@ -1386,6 +1392,53 @@
       if (diff < 86400000) return Math.floor(diff / 3600000) + 'h ago';
       return d.toLocaleDateString();
     }
+
+    // ── Onboarding Prompt (paid but no site yet) ──
+    function showOnboardingPrompt() {
+      const overview = document.getElementById('tab-overview');
+      overview.innerHTML = '<div style="max-width:480px;margin:60px auto;padding:0 24px;text-align:center;">' +
+        '<div style="font-size:52px;margin-bottom:16px;">🌿</div>' +
+        '<h2 style="color:#fff;font-weight:800;font-size:24px;margin-bottom:8px;">Your Pro account is ready!</h2>' +
+        '<p style="color:rgba(255,255,255,0.6);font-size:15px;margin-bottom:32px;">Enter your Instagram handle and we\'ll build your site in about 30 seconds.</p>' +
+        '<div style="display:flex;gap:10px;max-width:380px;margin:0 auto 24px;">' +
+        '<div style="position:relative;flex:1;">' +
+        '<span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,0.4);font-size:15px;">@</span>' +
+        '<input id="setup-ig-handle" type="text" placeholder="yourhandle" style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(0,200,130,0.3);border-radius:10px;padding:14px 14px 14px 32px;color:#fff;font-size:15px;outline:none;box-sizing:border-box;" />' +
+        '</div>' +
+        '<button id="setup-build-btn" onclick="triggerSetupBuild()" style="background:#00C882;color:#0a1a12;border:none;border-radius:10px;padding:14px 24px;font-weight:700;font-size:15px;cursor:pointer;white-space:nowrap;">Build My Site \u2192</button>' +
+        '</div>' +
+        '<p style="color:rgba(255,255,255,0.3);font-size:12px;">Once your site is live, you can pick your custom .com domain from the Overview tab.</p>' +
+        '</div>';
+    }
+
+    window.triggerSetupBuild = async function() {
+      var handle = document.getElementById('setup-ig-handle').value.trim().replace(/^@/, '');
+      if (!handle) { showToast('Enter your Instagram handle', true); return; }
+      var btn = document.getElementById('setup-build-btn');
+      btn.textContent = 'Building...';
+      btn.disabled = true;
+      try {
+        var token = await window._getClerkToken();
+        var res = await fetch(CONVEX_HTTP_URL + '/api/dashboard/setup-site', {
+          method: 'POST',
+          headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ igHandle: handle })
+        });
+        var data = await res.json();
+        if (res.ok) {
+          showToast('\uD83C\uDF3F Your site is being built! Refreshing...');
+          setTimeout(function() { location.reload(); }, 3000);
+        } else {
+          showToast(data.error || 'Build failed \u2014 try again', true);
+          btn.textContent = 'Build My Site \u2192';
+          btn.disabled = false;
+        }
+      } catch(e) {
+        showToast('Something went wrong', true);
+        btn.textContent = 'Build My Site \u2192';
+        btn.disabled = false;
+      }
+    };
 
     window.showToast = function(message, isError) {
       const toast = document.createElement('div');
