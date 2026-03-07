@@ -745,9 +745,23 @@
       }
 
       // Booking link
-      const bookMatch = html.match(/class="float-book"[^>]*href="([^"]+)"/i);
+      const bookMatch = html.match(/class="float-book"[^>]*href="([^"]+)"/i) || html.match(/class="[^"]*hero-cta[^"]*"[^>]*href="([^"]+)"/i);
       if (bookMatch) {
         sections.push({ key: 'booking', icon: '📅', title: 'Booking Link', preview: bookMatch[1], value: bookMatch[1] });
+      }
+
+      // Booking section label ("Let's Work")
+      const bookLabelMatch = html.match(/id="book(?:ing)?"[\s\S]{0,300}?class="section-label[^"]*"[^>]*>([\s\S]*?)<\/p>/i);
+      if (bookLabelMatch) {
+        const text = bookLabelMatch[1].replace(/<[^>]+>/g, '').trim();
+        if (text) sections.push({ key: 'booking_label', icon: '🏷️', title: 'Booking Section Label', preview: text, value: text });
+      }
+
+      // Booking section title ("Book a Session")
+      const bookTitleMatch = html.match(/id="book(?:ing)?"[\s\S]{0,400}?class="section-title[^"]*"[^>]*>([\s\S]*?)<\/h2>/i);
+      if (bookTitleMatch) {
+        const text = bookTitleMatch[1].replace(/<[^>]+>/g, '').trim();
+        if (text) sections.push({ key: 'booking_title', icon: '📋', title: 'Booking Section Title', preview: text, value: text });
       }
 
       // Contact email
@@ -861,10 +875,12 @@
     // ── Parse Gallery ──
     function parseGallery(html) {
       const items = [];
-      const itemRegex = /<div\s+class="gallery-item[^"]*"[^>]*>[\s\S]*?<img\s+src="([^"]+)"[^>]*>[\s\S]*?<\/div>\s*<\/div>/gi;
+      // Match gallery-item divs — handles both single-div and nested-div structures
+      const itemRegex = /<div\s+class="gallery-item[^"]*"[^>]*>\s*<img\s+[^>]*src="([^"]+)"[^>]*>/gi;
       let m;
       while ((m = itemRegex.exec(html)) !== null) {
         const src = m[1];
+        if (src.includes('profile') || src.includes('avatar')) continue; // skip profile pic
         const filename = src.split('/').pop();
         items.push({ src, filename });
       }
