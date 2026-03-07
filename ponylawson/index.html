@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pony Lawson | Tattoo Artist</title>
   <meta name="description" content="CHICAGO • NYC • LA Ink Master season 16 Creator of the original @tattoostencilapp V🌱  Booking/YouTube/Merch etc:" />
-  <meta name="keywords" content="Pony Lawson, PonyLawson, tattoo artist" />
+  <meta name="keywords" content="Pony Lawson, ponylawson, tattoo artist" />
   <meta name="theme-color" content="#C9A84C" />
 
   <meta property="og:title" content="Pony Lawson | Tattoo Artist" />
@@ -38,7 +38,7 @@
     "description": "CHICAGO • NYC • LA Ink Master season 16 Creator of the original @tattoostencilapp V🌱  Booking/YouTube/Merch etc:",
     "url": "https://getminted.ai/ponylawson/",
     "image": "img/photo_01.jpg",
-    "sameAs": ["https://www.instagram.com/PonyLawson/"]
+    "sameAs": ["https://www.instagram.com/ponylawson/"]
   }
   </script>
   
@@ -49,34 +49,34 @@
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "I see you travel between Chicago, NYC, and LA. How do I know where you'll be and how do I book a session?",
+        "name": "I saw you're in Chicago, NYC, and LA. How do I know where you'll be and when to book?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "My travel schedule is always updated on my website (linked in my bio) and on my Instagram stories. Booking is done through the link in my bio - you'll find a form there specific to the city I'm in at the time."
+          "text": "I announce my travel schedule and booking openings for each city on my Instagram (@ponylawson) a few weeks in advance. Make sure you're following to get the updates and snag a spot quickly!"
         }
       },
       {
         "@type": "Question",
-        "name": "I'd like a tattoo with a very intricate design. How do you ensure accuracy, especially with the level of detail you often include?",
+        "name": "I'm super inspired by your unique tattoo style. Do you ever take on projects outside of your established aesthetic?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "I use my @tattoostencilapp to create incredibly precise stencils that act as a roadmap during the tattoo process; this helps ensure accuracy and allows for super fine details to be translated perfectly onto the skin."
+          "text": "I generally work within my established style, but I’m always open to hearing your ideas! Send a detailed description and reference images through the booking link in my bio, and I'll consider if it's a good fit."
         }
       },
       {
         "@type": "Question",
-        "name": "I'm vegan and concerned about the tattoo process using animal products. What inks and aftercare products do you use?",
+        "name": "I'm interested in learning more about creating stencils like yours. Are there any resources available besides the @tattoostencilapp?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "I'm completely vegan! I use only vegan-certified inks and offer a vegan aftercare balm for all my clients to ensure a cruelty-free experience from start to finish."
+          "text": "Besides the @tattoostencilapp and its tutorials, I share some stencil tips and techniques in my YouTube videos. Check out my channel (link in bio) for more in-depth explanations."
         }
       },
       {
         "@type": "Question",
-        "name": "I loved watching you on Ink Master! Does your experience on the show influence your current tattooing style or process?",
+        "name": "I want to purchase some Pony Lawson merch. Where can I find it?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Definitely! Ink Master pushed me to evolve my speed and precision; the critiques and pressure-cooker environment helped me refine my tattooing process significantly."
+          "text": "All my available merchandise, including prints and apparel, can be found through the 'Merch' link in my bio. New items are added periodically!"
         }
       }
     ]
@@ -347,6 +347,20 @@
       .mobile-cta-bar { background: rgba(10,10,10,0.98) !important; }
     }
 
+    /* ── ARTISTS (tattoo_shop) ── */
+    .artists-section { padding: 80px 20px; background: var(--dark); }
+    .artists-section .section-title { text-align: center; font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: 50px; color: var(--text); letter-spacing: 0.05em; text-transform: uppercase; font-family: 'Playfair Display', Georgia, serif; }
+    .artists-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; max-width: 1000px; margin: 0 auto; }
+    .artist-card { text-align: center; padding: 30px 20px; background: var(--card-bg); border-radius: 12px; border: 1px solid var(--card-border); -webkit-transition: transform 0.2s, border-color 0.2s; transition: transform 0.2s, border-color 0.2s; }
+    .artist-card:hover { -webkit-transform: translateY(-4px); transform: translateY(-4px); border-color: rgba(255,255,255,0.2); }
+    .artist-photo-placeholder { width: 100px; height: 100px; border-radius: 50%; background: rgba(255,255,255,0.1); margin: 0 auto 16px; display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; -webkit-justify-content: center; justify-content: center; }
+    .artist-photo { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin: 0 auto 16px; display: block; }
+    .artist-initials { font-size: 2rem; color: rgba(255,255,255,0.3); }
+    .artist-name { font-size: 1.1rem; font-weight: 600; color: var(--text); margin: 0 0 8px; }
+    .artist-specialty { font-size: 0.85rem; color: var(--muted); margin: 0 0 16px; line-height: 1.4; }
+    .artist-book-btn { display: inline-block; padding: 8px 20px; background: var(--accent); color: var(--black); border-radius: 6px; text-decoration: none; font-size: 0.85rem; font-weight: 600; -webkit-transition: opacity 0.2s; transition: opacity 0.2s; }
+    .artist-book-btn:hover { opacity: 0.85; }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       .nav-links { display: none; }
@@ -367,7 +381,8 @@
     <a href="#hero" class="nav-logo" aria-label="Pony Lawson — home">Pony Lawson</a>
     <ul class="nav-links" role="list">
       <li><a href="#about">About</a></li>
-      <li><a href="#gallery">Portfolio</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      
       <li><a href="#styles">Styles</a></li>
       <li><a href="#booking">Book</a></li>
     </ul>
@@ -380,10 +395,10 @@
     <div class="hero-content">
       <p class="hero-eyebrow">Tattoo Artist</p>
       <h1 class="hero-title">Pony Lawson<br><span id="hero-typed" style="font-size:clamp(1.6rem,4vw,3rem);font-weight:600;opacity:0.75;border-right:3px solid var(--accent);padding-right:4px;"></span></h1>
-      <p class="hero-subtitle">Creating unique, award-winning tattoos across Chicago, NYC, and LA.</p>
+      <p class="hero-subtitle">Experience award-winning, original art from Ink Master's Pony Lawson.</p>
       <script>
       (function(){
-        const phrases = ["Creating unique, award-winning tattoos a","Tattoo Artist","Book Your Tattoo Now","Book Now"];
+        const phrases = ["Experience award-winning, original art f","Tattoo Artist","Book Your Tattoo Now","Book Now"];
         let wi=0,ci=0,del=false;
         const el=document.getElementById('hero-typed');
         if(!el) return;
@@ -414,11 +429,11 @@
           <div class="about-img-wrap"><img src="img/profile.jpg" alt="Pony Lawson" class="about-portrait" loading="lazy" decoding="async"></div>
           <div class="about-content">
             <div class="about-text">
-              <p>Pony Lawson is a globally recognized tattoo artist with studios in Chicago, New York City, and Los Angeles, and is known for their appearance on Ink Master season 16. As the innovative creator behind the original Tattoo Stencil App, Pony expertly blends technology and artistic skill to deliver truly unique and lasting body art.</p>
+              <p>Pony Lawson is a globally recognized tattoo artist with studios in Chicago, New York City, and Los Angeles, and is known for competing on season 16 of Ink Master. With years of experience and innovation, Pony offers clients a bespoke tattoo experience and is the creator of the original Tattoo Stencil App.</p>
             </div>
             <div class="about-stats">
               <div class="stat-block">
-                <span class="stat-number">Hyper-Realism</span>
+                <span class="stat-number">Hyperrealistic Color</span>
                 <span class="stat-label">Specialty</span>
               </div>
               <div class="stat-block">
@@ -442,20 +457,22 @@
       <h2 class="section-title fade-in">Recent Work</h2>
       <div class="divider fade-in"></div>
       <div class="gallery-grid">
-        <div class="gallery-item fade-in" style="-webkit-transition-delay:0s;transition-delay:0s"><img src="img/photo_01.jpg" alt="Pony Lawson work 1" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Hyper-Realism</span></div></div>
-        <div class="gallery-item fade-in" style="-webkit-transition-delay:0.05s;transition-delay:0.05s"><img src="img/photo_02.jpg" alt="Pony Lawson work 2" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Portrait Realism</span></div></div>
-        <div class="gallery-item fade-in" style="-webkit-transition-delay:0.1s;transition-delay:0.1s"><img src="img/photo_03.jpg" alt="Pony Lawson work 3" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Object Realism</span></div></div>
-        <div class="gallery-item fade-in" style="-webkit-transition-delay:0.15000000000000002s;transition-delay:0.15000000000000002s"><img src="img/photo_04.jpg" alt="Pony Lawson work 4" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Hyper-Realism</span></div></div>
-        <div class="gallery-item fade-in" style="-webkit-transition-delay:0.2s;transition-delay:0.2s"><img src="img/photo_05.jpg" alt="Pony Lawson work 5" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Portrait Realism</span></div></div>
-        <div class="gallery-item fade-in" style="-webkit-transition-delay:0.25s;transition-delay:0.25s"><img src="img/photo_06.jpg" alt="Pony Lawson work 6" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Object Realism</span></div></div>
-        <div class="gallery-item fade-in" style="-webkit-transition-delay:0.30000000000000004s;transition-delay:0.30000000000000004s"><img src="img/photo_07.jpg" alt="Pony Lawson work 7" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Hyper-Realism</span></div></div>
-        <div class="gallery-item fade-in" style="-webkit-transition-delay:0.35000000000000003s;transition-delay:0.35000000000000003s"><img src="img/photo_08.jpg" alt="Pony Lawson work 8" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Portrait Realism</span></div></div>
-        <div class="gallery-item fade-in" style="-webkit-transition-delay:0.4s;transition-delay:0.4s"><img src="img/photo_09.jpg" alt="Pony Lawson work 9" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Object Realism</span></div></div>
-        <div class="gallery-item fade-in" style="-webkit-transition-delay:0.45s;transition-delay:0.45s"><img src="img/photo_10.jpg" alt="Pony Lawson work 10" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Hyper-Realism</span></div></div>
-        <div class="gallery-item fade-in" style="-webkit-transition-delay:0.5s;transition-delay:0.5s"><img src="img/photo_11.jpg" alt="Pony Lawson work 11" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Portrait Realism</span></div></div>
+        <div class="gallery-item fade-in" style="-webkit-transition-delay:0s;transition-delay:0s"><img src="img/photo_01.jpg" alt="Pony Lawson work 1" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Hyperrealistic Color</span></div></div>
+        <div class="gallery-item fade-in" style="-webkit-transition-delay:0.05s;transition-delay:0.05s"><img src="img/photo_02.jpg" alt="Pony Lawson work 2" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Portraiture (Black and Grey)</span></div></div>
+        <div class="gallery-item fade-in" style="-webkit-transition-delay:0.1s;transition-delay:0.1s"><img src="img/photo_03.jpg" alt="Pony Lawson work 3" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Pop Culture</span></div></div>
+        <div class="gallery-item fade-in" style="-webkit-transition-delay:0.15000000000000002s;transition-delay:0.15000000000000002s"><img src="img/photo_04.jpg" alt="Pony Lawson work 4" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Hyperrealistic Color</span></div></div>
+        <div class="gallery-item fade-in" style="-webkit-transition-delay:0.2s;transition-delay:0.2s"><img src="img/photo_05.jpg" alt="Pony Lawson work 5" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Portraiture (Black and Grey)</span></div></div>
+        <div class="gallery-item fade-in" style="-webkit-transition-delay:0.25s;transition-delay:0.25s"><img src="img/photo_06.jpg" alt="Pony Lawson work 6" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Pop Culture</span></div></div>
+        <div class="gallery-item fade-in" style="-webkit-transition-delay:0.30000000000000004s;transition-delay:0.30000000000000004s"><img src="img/photo_07.jpg" alt="Pony Lawson work 7" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Hyperrealistic Color</span></div></div>
+        <div class="gallery-item fade-in" style="-webkit-transition-delay:0.35000000000000003s;transition-delay:0.35000000000000003s"><img src="img/photo_08.jpg" alt="Pony Lawson work 8" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Portraiture (Black and Grey)</span></div></div>
+        <div class="gallery-item fade-in" style="-webkit-transition-delay:0.4s;transition-delay:0.4s"><img src="img/photo_09.jpg" alt="Pony Lawson work 9" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Pop Culture</span></div></div>
+        <div class="gallery-item fade-in" style="-webkit-transition-delay:0.45s;transition-delay:0.45s"><img src="img/photo_10.jpg" alt="Pony Lawson work 10" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Hyperrealistic Color</span></div></div>
+        <div class="gallery-item fade-in" style="-webkit-transition-delay:0.5s;transition-delay:0.5s"><img src="img/photo_11.jpg" alt="Pony Lawson work 11" loading="lazy" decoding="async" onclick="openLightbox(this.src)" /><div class="gallery-item-overlay"><span class="gallery-item-label">Portraiture (Black and Grey)</span></div></div>
       </div>
     </div>
   </section>
+
+  
 
   <section id="styles">
     <div class="container">
@@ -465,18 +482,18 @@
       <div class="styles-grid">
         <div class="style-card fade-in">
           <div class="style-icon">◆</div>
-          <h3>Hyper-Realism</h3>
-          <p>Creates tattoos that mimic the appearance of real-world objects with a high level of detail and lifelike quality.</p>
+          <h3>Hyperrealistic Color</h3>
+          <p>Focuses on creating tattoos that mimic the look of a photograph, using bright, saturated colors and capturing details like texture and shine, as seen in the Oni mask.</p>
         </div>
         <div class="style-card fade-in">
           <div class="style-icon">✦</div>
-          <h3>Portrait Realism</h3>
-          <p>Captures the likeness of individuals in a realistic and detailed style, focusing on shading and texture to convey depth.</p>
+          <h3>Portraiture (Black and Grey)</h3>
+          <p>Creates detailed portraits using only black and grey ink, capturing likeness and expression through shading and linework, with an illustrative style.</p>
         </div>
         <div class="style-card fade-in">
           <div class="style-icon">❧</div>
-          <h3>Object Realism</h3>
-          <p>Creates tattoos that make objects look like they are sitting on top of the skin.</p>
+          <h3>Pop Culture</h3>
+          <p>Draws inspiration from films, television, and popular figures, resulting in pieces that reference iconic images and characters.</p>
         </div>
       </div>
     </div>
@@ -490,22 +507,22 @@
       <div class="services-grid">
             <div class="service-card fade-in" style="-webkit-transition-delay:0s;transition-delay:0s">
               <div class="service-icon">◆</div>
-              <h3>Hyper-Realism</h3>
-              <p>Creates tattoos that mimic the appearance of real-world objects with a high level of detail and lifelike quality.</p>
+              <h3>Hyperrealistic Color</h3>
+              <p>Focuses on creating tattoos that mimic the look of a photograph, using bright, saturated colors and capturing details like texture and shine, as seen in the Oni mask.</p>
               <span class="service-price">Contact for Pricing</span>
             </div>
 
             <div class="service-card fade-in" style="-webkit-transition-delay:0.1s;transition-delay:0.1s">
               <div class="service-icon">✦</div>
-              <h3>Portrait Realism</h3>
-              <p>Captures the likeness of individuals in a realistic and detailed style, focusing on shading and texture to convey depth.</p>
+              <h3>Portraiture (Black and Grey)</h3>
+              <p>Creates detailed portraits using only black and grey ink, capturing likeness and expression through shading and linework, with an illustrative style.</p>
               <span class="service-price">Contact for Pricing</span>
             </div>
 
             <div class="service-card fade-in" style="-webkit-transition-delay:0.2s;transition-delay:0.2s">
               <div class="service-icon">❧</div>
-              <h3>Object Realism</h3>
-              <p>Creates tattoos that make objects look like they are sitting on top of the skin.</p>
+              <h3>Pop Culture</h3>
+              <p>Draws inspiration from films, television, and popular figures, resulting in pieces that reference iconic images and characters.</p>
               <span class="service-price">Contact for Pricing</span>
             </div>
       </div>
@@ -520,41 +537,41 @@
       <div class="faq-list">
             <div class="faq-item fade-in" style="-webkit-transition-delay:0s;transition-delay:0s">
               <button class="faq-question" onclick="this.parentElement.classList.toggle('open')" aria-expanded="false">
-                <span>I see you travel between Chicago, NYC, and LA. How do I know where you'll be and how do I book a session?</span>
+                <span>I saw you're in Chicago, NYC, and LA. How do I know where you'll be and when to book?</span>
                 <span class="faq-icon">+</span>
               </button>
               <div class="faq-answer">
-                <p>My travel schedule is always updated on my website (linked in my bio) and on my Instagram stories. Booking is done through the link in my bio - you'll find a form there specific to the city I'm in at the time.</p>
+                <p>I announce my travel schedule and booking openings for each city on my Instagram (@ponylawson) a few weeks in advance. Make sure you're following to get the updates and snag a spot quickly!</p>
               </div>
             </div>
 
             <div class="faq-item fade-in" style="-webkit-transition-delay:0.08s;transition-delay:0.08s">
               <button class="faq-question" onclick="this.parentElement.classList.toggle('open')" aria-expanded="false">
-                <span>I'd like a tattoo with a very intricate design. How do you ensure accuracy, especially with the level of detail you often include?</span>
+                <span>I'm super inspired by your unique tattoo style. Do you ever take on projects outside of your established aesthetic?</span>
                 <span class="faq-icon">+</span>
               </button>
               <div class="faq-answer">
-                <p>I use my @tattoostencilapp to create incredibly precise stencils that act as a roadmap during the tattoo process; this helps ensure accuracy and allows for super fine details to be translated perfectly onto the skin.</p>
+                <p>I generally work within my established style, but I’m always open to hearing your ideas! Send a detailed description and reference images through the booking link in my bio, and I'll consider if it's a good fit.</p>
               </div>
             </div>
 
             <div class="faq-item fade-in" style="-webkit-transition-delay:0.16s;transition-delay:0.16s">
               <button class="faq-question" onclick="this.parentElement.classList.toggle('open')" aria-expanded="false">
-                <span>I'm vegan and concerned about the tattoo process using animal products. What inks and aftercare products do you use?</span>
+                <span>I'm interested in learning more about creating stencils like yours. Are there any resources available besides the @tattoostencilapp?</span>
                 <span class="faq-icon">+</span>
               </button>
               <div class="faq-answer">
-                <p>I'm completely vegan! I use only vegan-certified inks and offer a vegan aftercare balm for all my clients to ensure a cruelty-free experience from start to finish.</p>
+                <p>Besides the @tattoostencilapp and its tutorials, I share some stencil tips and techniques in my YouTube videos. Check out my channel (link in bio) for more in-depth explanations.</p>
               </div>
             </div>
 
             <div class="faq-item fade-in" style="-webkit-transition-delay:0.24s;transition-delay:0.24s">
               <button class="faq-question" onclick="this.parentElement.classList.toggle('open')" aria-expanded="false">
-                <span>I loved watching you on Ink Master! Does your experience on the show influence your current tattooing style or process?</span>
+                <span>I want to purchase some Pony Lawson merch. Where can I find it?</span>
                 <span class="faq-icon">+</span>
               </button>
               <div class="faq-answer">
-                <p>Definitely! Ink Master pushed me to evolve my speed and precision; the critiques and pressure-cooker environment helped me refine my tattooing process significantly.</p>
+                <p>All my available merchandise, including prints and apparel, can be found through the 'Merch' link in my bio. New items are added periodically!</p>
               </div>
             </div>
       </div>
@@ -594,7 +611,7 @@
                 <div class="contact-icon" aria-hidden="true">◈</div>
                 <div class="contact-detail">
                   <span class="contact-label">Instagram</span>
-                  <span class="contact-value"><a href="https://instagram.com/PonyLawson" target="_blank" rel="noopener">@PonyLawson</a></span>
+                  <span class="contact-value"><a href="https://instagram.com/ponylawson" target="_blank" rel="noopener">@ponylawson</a></span>
                 </div>
               </li>
           </ul>
@@ -603,7 +620,7 @@
           <div id="booking-form-wrap">
             <h3>Start Your Inquiry</h3>
             <p>Tell me about your idea and I'll be in touch soon.</p>
-            <form id="inquiry-form" action="https://instagram.com/PonyLawson" method="POST" enctype="text/plain">
+            <form id="inquiry-form" action="https://instagram.com/ponylawson" method="POST" enctype="text/plain">
               <div class="form-group">
                 <label for="bname">Your Name</label>
                 <input type="text" id="bname" name="Name" placeholder="First & Last" required aria-required="true" />
@@ -615,7 +632,7 @@
               <div class="form-group">
                 <label for="bstyle">Style / Service</label>
                 <select id="bstyle" name="Style" aria-label="Select a service type">
-                  <option>Hyper-Realism</option><option>Portrait Realism</option><option>Object Realism</option>
+                  <option>Hyperrealistic Color</option><option>Portraiture (Black and Grey)</option><option>Pop Culture</option>
                   <option>Other / Not Sure</option>
                 </select>
               </div>
@@ -629,7 +646,7 @@
           <div class="form-success" id="form-success">
             <div class="form-success-icon">✓</div>
             <h3>Thank You!</h3>
-            <p>Your inquiry has been received. We'll be in touch within 24 hours. In the meantime, feel free to browse our work on <a href="https://instagram.com/PonyLawson" target="_blank" rel="noopener" style="color:var(--accent)">Instagram</a>.</p>
+            <p>Your inquiry has been received. We'll be in touch within 24 hours. In the meantime, feel free to browse our work on <a href="https://instagram.com/ponylawson" target="_blank" rel="noopener" style="color:var(--accent)">Instagram</a>.</p>
           </div>
         </div>
       </div>
@@ -657,7 +674,7 @@
       <li><a href="#gallery">Gallery</a></li>
       <li><a href="#styles">Styles</a></li>
       <li><a href="#booking">Book</a></li>
-      <li><a href="https://instagram.com/PonyLawson" target="_blank" rel="noopener">Instagram</a></li>
+      <li><a href="https://instagram.com/ponylawson" target="_blank" rel="noopener">Instagram</a></li>
     </ul>
     <p class="footer-copy">&copy; 2026 Pony Lawson. All rights reserved.</p>
     <p class="mint-credit">Powered by <a href="https://getminted.ai" target="_blank" rel="noopener">GetMinted.ai</a></p>
@@ -758,7 +775,7 @@
         <p style="margin:0;font-size:0.75rem;color:rgba(255,255,255,0.5);">Claim it to edit, upgrade, and make it yours</p>
       </div>
     </div>
-    <a href="https://getminted.ai/dashboard/?claim=ponylawson" style="background:#00C882;color:#0a1a12;font-weight:700;font-size:0.9rem;padding:10px 20px;border-radius:8px;text-decoration:none;white-space:nowrap;transition:opacity .2s;" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">Claim My Site →</a>
+    <a href="https://curious-lemming-262.convex.site/api/claim-checkout?slug=ponylawson" style="background:#00C882;color:#0a1a12;font-weight:700;font-size:0.9rem;padding:10px 20px;border-radius:8px;text-decoration:none;white-space:nowrap;transition:opacity .2s;" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">Claim My Site →</a>
     <button onclick="document.getElementById('claim-banner').style.display='none'" style="background:none;border:none;color:rgba(255,255,255,0.3);font-size:1.2rem;cursor:pointer;padding:4px;">✕</button>
   </div>
   <script>setTimeout(function(){var b=document.getElementById('claim-banner');if(b)b.style.transform='translateY(0)';},5000);</script>
