@@ -1778,13 +1778,8 @@
           '<input id="prod-name" type="text" placeholder="e.g. Flash Sheet #1" style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;color:var(--text);font-size:14px;outline:none;" /></div>' +
           '<div><label style="font-size:12px;color:var(--text-dim);display:block;margin-bottom:4px;">Description (optional)</label>' +
           '<input id="prod-desc" type="text" placeholder="Brief description" style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;color:var(--text);font-size:14px;outline:none;" /></div>' +
-          '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">' +
-            '<div><label style="font-size:12px;color:var(--text-dim);display:block;margin-bottom:4px;">Price (USD)</label>' +
+          '<div><label style="font-size:12px;color:var(--text-dim);display:block;margin-bottom:4px;">Price (USD)</label>' +
             '<input id="prod-price" type="number" min="1" step="0.01" placeholder="25.00" style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;color:var(--text);font-size:14px;outline:none;" /></div>' +
-            '<div><label style="font-size:12px;color:var(--text-dim);display:block;margin-bottom:4px;">Type</label>' +
-            '<select id="prod-type" style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;color:var(--text);font-size:14px;outline:none;">' +
-            '<option value="one_time">One-time</option><option value="recurring">Monthly</option></select></div>' +
-          '</div>' +
           '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">' +
             '<div><label style="font-size:12px;color:var(--text-dim);display:block;margin-bottom:4px;">Quantity (optional)</label>' +
             '<input id="prod-inventory" type="number" min="1" step="1" placeholder="Unlimited" style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;color:var(--text);font-size:14px;outline:none;" />' +
@@ -1801,7 +1796,7 @@
         var name = document.getElementById('prod-name').value.trim();
         var desc = document.getElementById('prod-desc').value.trim();
         var priceVal = parseFloat(document.getElementById('prod-price').value);
-        var type = document.getElementById('prod-type').value;
+        var type = 'one_time';
         var inventoryVal = document.getElementById('prod-inventory').value.trim();
         var shippingVal = document.getElementById('prod-shipping').value.trim();
         if (!name) { showToast('Product name required', true); return; }
