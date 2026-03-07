@@ -557,6 +557,31 @@
           </div>
         </div>
 
+        <!-- SEO Health Card -->
+        <div id="seo-card" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:20px 24px;margin-bottom:20px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span style="font-size:18px;">🔍</span>
+              <span style="font-weight:600;font-size:15px;">SEO Health</span>
+            </div>
+            <button id="btn-seo-check" onclick="runSeoCheck()" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:#fff;padding:7px 16px;border-radius:8px;font-size:13px;cursor:pointer;">Run Check</button>
+          </div>
+          <div id="seo-score-area" style="display:none;">
+            <div style="display:flex;align-items:center;gap:16px;margin-bottom:12px;">
+              <div id="seo-score-circle" style="width:64px;height:64px;border-radius:50%;border:3px solid #00C882;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <span id="seo-score-num" style="font-size:20px;font-weight:700;color:#00C882;">--</span>
+              </div>
+              <div>
+                <div id="seo-score-label" style="font-size:14px;font-weight:600;color:#fff;margin-bottom:4px;">Score</div>
+                <div id="seo-last-checked" style="font-size:12px;color:rgba(255,255,255,0.4);">Last checked just now</div>
+              </div>
+              <button id="btn-seo-fix" onclick="runSeoFix()" style="display:none;margin-left:auto;background:#00C882;color:#0a1a12;font-weight:700;font-size:13px;padding:8px 18px;border-radius:8px;border:none;cursor:pointer;">Fix SEO Now →</button>
+            </div>
+            <div id="seo-issues-list" style="font-size:12px;color:rgba(255,255,255,0.5);"></div>
+          </div>
+          <div id="seo-loading" style="display:none;font-size:13px;color:rgba(255,255,255,0.5);">Analyzing your site...</div>
+        </div>
+
         <div class="section-title">Recent Changes</div>
         <div class="info-card">
           <div class="timeline" id="change-timeline">
@@ -826,6 +851,89 @@
     }
 
     // ── Load Site Info ──
+    // ── SEO Check & Fix ──
+    window.runSeoCheck = async function() {
+      document.getElementById('seo-loading').style.display = 'block';
+      document.getElementById('btn-seo-check').disabled = true;
+      document.getElementById('btn-seo-check').textContent = 'Checking...';
+      try {
+        const token = await getToken();
+        const res = await fetch(CONVEX_HTTP_URL + '/api/seo/check', {
+          method: 'POST', headers: {'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json'}
+        });
+        const data = await res.json();
+        document.getElementById('seo-loading').style.display = 'none';
+        document.getElementById('seo-score-area').style.display = 'block';
+        const score = data.score;
+        const color = score >= 80 ? '#00C882' : score >= 60 ? '#F5A623' : '#E63946';
+        document.getElementById('seo-score-num').textContent = score;
+        document.getElementById('seo-score-num').style.color = color;
+        document.getElementById('seo-score-circle').style.borderColor = color;
+        document.getElementById('seo-score-label').textContent = score >= 80 ? 'Great SEO!' : score >= 60 ? 'Needs Work' : 'Poor SEO';
+        document.getElementById('seo-last-checked').textContent = 'Last checked just now';
+        if (data.issues && data.issues.length > 0) {
+          document.getElementById('seo-issues-list').innerHTML = data.issues.slice(0,3).map(function(i) { return '<div style="margin-top:4px;">• ' + i + '</div>'; }).join('');
+        }
+        if (data.canFix && score < 92) {
+          document.getElementById('btn-seo-fix').style.display = 'block';
+        }
+        if (!data.canRunAgain) {
+          document.getElementById('btn-seo-check').textContent = 'Check again next week';
+          document.getElementById('btn-seo-check').style.opacity = '0.5';
+        } else {
+          document.getElementById('btn-seo-check').textContent = 'Run Check';
+          document.getElementById('btn-seo-check').disabled = false;
+        }
+        if (score >= 90) {
+          var bubble = document.getElementById('mint-bubble-text');
+          var mintBubble = document.getElementById('mint-bubble');
+          if (bubble && mintBubble) {
+            bubble.textContent = "Your SEO is maxed out! 🎉 To go further, connect Google Search Console — I can walk you through it.";
+            mintBubble.style.display = 'flex';
+            setTimeout(function() { mintBubble.style.display = 'none'; }, 6000);
+          }
+        }
+      } catch(e) {
+        document.getElementById('seo-loading').style.display = 'none';
+        document.getElementById('btn-seo-check').textContent = 'Run Check';
+        document.getElementById('btn-seo-check').disabled = false;
+        console.error('SEO check failed:', e);
+      }
+    };
+
+    window.runSeoFix = async function() {
+      document.getElementById('btn-seo-fix').textContent = 'Fixing...';
+      document.getElementById('btn-seo-fix').disabled = true;
+      try {
+        const token = await getToken();
+        const res = await fetch(CONVEX_HTTP_URL + '/api/seo/fix', {
+          method: 'POST', headers: {'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json'}
+        });
+        const data = await res.json();
+        if (data.error) {
+          document.getElementById('btn-seo-fix').textContent = data.error;
+          return;
+        }
+        document.getElementById('seo-score-num').textContent = data.newScore;
+        var color = data.newScore >= 80 ? '#00C882' : data.newScore >= 60 ? '#F5A623' : '#E63946';
+        document.getElementById('seo-score-num').style.color = color;
+        document.getElementById('seo-score-circle').style.borderColor = color;
+        document.getElementById('seo-score-label').textContent = data.newScore >= 80 ? 'Great SEO!' : data.newScore >= 60 ? 'Needs Work' : 'Poor SEO';
+        if (data.fixesApplied && data.fixesApplied.length > 0) {
+          document.getElementById('seo-issues-list').innerHTML =
+            '<div style="color:#00C882;margin-bottom:4px;font-weight:600;">✅ Fixed this week:</div>' +
+            data.fixesApplied.map(function(f) { return '<div style="color:#00C882;margin-top:2px;">• ' + f + '</div>'; }).join('') +
+            (data.remainingIssues && data.remainingIssues.length ? '<div style="margin-top:8px;color:rgba(255,255,255,0.4);">More fixes available next week</div>' : '');
+        }
+        document.getElementById('btn-seo-fix').textContent = 'Fixed! Come back next week';
+        document.getElementById('btn-seo-fix').style.opacity = '0.5';
+      } catch(e) {
+        document.getElementById('btn-seo-fix').textContent = 'Fix SEO Now →';
+        document.getElementById('btn-seo-fix').disabled = false;
+        console.error('SEO fix failed:', e);
+      }
+    };
+
     async function loadSiteInfo() {
       try {
         const token = await getToken();
