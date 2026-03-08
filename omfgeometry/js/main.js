@@ -21,10 +21,13 @@ document.addEventListener('DOMContentLoaded', () => {
   if (countryFilter && styleFilter && artistsContainer) {
     let allArtists = [];
 
-    // Use path relative to the page (works from /omfgeometry/directory.html)
-    fetch('data/artists_v2.json')
+    // Cache-busting timestamp to force fresh data
+    const cacheParam = `?v=${Date.now()}`;
+    
+    // Try relative path first (works from /omfgeometry/directory.html)
+    fetch(`data/artists.json${cacheParam}`)
       .then(r => {
-        if (!r.ok) throw new Error(r.status);
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
         return r.json();
       })
       .then(data => {
@@ -32,14 +35,18 @@ document.addEventListener('DOMContentLoaded', () => {
         populateFilters(data);
         renderArtists(data);
       })
-      .catch(() => {
-        // Fallback: absolute path for /omfgeometry/ subdirectory
-        fetch('/omfgeometry/data/artists_v2.json')
+      .catch(err => {
+        console.log('First fetch failed:', err);
+        // Fallback: raw GitHub URL (always fresh)
+        fetch(`https://raw.githubusercontent.com/bayouwebstudio/bayouwebstudio.github.io/main/omfgeometry/data/artists.json${cacheParam}`)
           .then(r => r.json())
           .then(data => {
             allArtists = data;
             populateFilters(data);
             renderArtists(data);
+          })
+          .catch(err2 => {
+            console.error('All fetches failed:', err2);
           });
       });
 
