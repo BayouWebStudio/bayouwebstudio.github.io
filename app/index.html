@@ -644,8 +644,11 @@ body {
     }
   };
 
-  // Clerk init
-  window.addEventListener('load', async () => {
+  // Clerk init — poll until Clerk is ready (handles async script loading)
+  var _clerkReady = false;
+  async function initClerk() {
+    if (_clerkReady) return;
+    _clerkReady = true;
     try {
       await window.Clerk.load();
       hideBoot();
@@ -657,11 +660,23 @@ body {
           if (user) showApp();
         });
       }
-    } catch (e) {
+    } catch(e) {
       console.error('Clerk init error:', e);
       hideBoot();
       showLanding();
     }
+  }
+
+  // Try immediately, then poll, then hard timeout
+  var _pollCount = 0;
+  var _poll = setInterval(function() {
+    _pollCount++;
+    if (window.Clerk) { clearInterval(_poll); initClerk(); }
+    else if (_pollCount > 40) { clearInterval(_poll); hideBoot(); showLanding(); } // 4s timeout
+  }, 100);
+
+  window.addEventListener('load', function() {
+    if (window.Clerk && !_clerkReady) { clearInterval(_poll); initClerk(); }
   });
 
   function showAuth() { showLanding(); }
