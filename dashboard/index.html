@@ -248,19 +248,22 @@
     .btn-save-order.visible { display: inline-flex; }
 
     .gallery-grid {
-      columns: 3;
-      column-gap: 12px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
       gap: 12px;
     }
+    @media (max-width: 600px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
     .gallery-thumb {
       position: relative; background: var(--surface); border: 1px solid var(--border);
       border-radius: var(--radius-sm); overflow: hidden; cursor: grab;
-      transition: border-color 0.15s; break-inside: avoid; margin-bottom: 12px;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      aspect-ratio: 1 / 1;
     }
+    .gallery-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
     .gallery-thumb:hover { border-color: var(--mint-border); }
     .gallery-thumb.sortable-ghost { opacity: 0.4; border-color: var(--mint); }
     .gallery-thumb.sortable-chosen { border-color: var(--mint); box-shadow: 0 4px 20px rgba(152,232,193,0.2); }
-    .gallery-thumb img { width: 100%; height: auto; display: block; pointer-events: none; }
+
     .gallery-thumb-overlay {
       position: absolute; top: 0; right: 0; padding: 6px;
       display: flex; gap: 4px; opacity: 0; transition: opacity 0.15s;
@@ -1385,10 +1388,9 @@
       // Init SortableJS
       if (window.Sortable) {
         new Sortable(grid, {
-          animation: 200,
+          animation: 150,
           ghostClass: 'sortable-ghost',
           chosenClass: 'sortable-chosen',
-          forceFallback: true,
           onEnd: function() {
             galleryOrderChanged = true;
             document.getElementById('btn-save-order').classList.add('visible');
