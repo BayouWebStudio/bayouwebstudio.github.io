@@ -1099,11 +1099,13 @@
     function parseSections(html) {
       const sections = [];
 
-      // About text
+      // About the Artist (text + photo)
       const aboutMatch = html.match(/<div\s+class="about-text"[^>]*>([\s\S]*?)<\/div>/i);
+      const aboutImgMatch = html.match(/<div\s+class="about-image[^"]*"[^>]*>\s*<img[^>]*src="([^"]+)"/i);
       if (aboutMatch) {
         const text = aboutMatch[1].replace(/<p>/gi, '').replace(/<\/p>/gi, '\n\n').replace(/<br\s*\/?>/gi, '\n').replace(/<[^>]+>/g, '').trim();
-        sections.push({ key: 'about', icon: '📝', title: 'About / Bio', preview: text, value: text });
+        const photoSrc = aboutImgMatch ? aboutImgMatch[1] : '';
+        sections.push({ key: 'about', icon: '🎨', title: 'About the Artist', preview: text, value: text, type: 'about', photoSrc });
       }
 
       // Hero title
@@ -1199,6 +1201,40 @@
 
       container.innerHTML = sections.map(s => {
         const previewText = escapeHtml(s.preview.length > 150 ? s.preview.substring(0, 150) + '...' : s.preview);
+
+        // About the Artist — text + photo upload
+        if (s.type === 'about') {
+          return '<div class="section-card" data-key="' + s.key + '" onclick="toggleSectionEdit(this)">' +
+            '<div class="section-card-header">' +
+              '<div style="display:flex;align-items:center;gap:8px;">' +
+                '<span class="section-card-icon">' + s.icon + '</span>' +
+                '<span class="section-card-title">' + escapeHtml(s.title) + '</span>' +
+              '</div>' +
+            '</div>' +
+            '<div class="section-card-preview">' + previewText + '</div>' +
+            '<div class="section-editor">' +
+              '<label style="font-size:12px;color:var(--text-dim);display:block;margin-bottom:6px;">Bio Text</label>' +
+              '<textarea class="section-textarea" data-key="' + s.key + '" style="margin-bottom:16px;">' + escapeHtml(s.value) + '</textarea>' +
+              '<label style="font-size:12px;color:var(--text-dim);display:block;margin-bottom:8px;">Artist Photo</label>' +
+              '<div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:12px;">' +
+                '<img id="about-photo-preview" src="' + escapeHtml(s.photoSrc || '') + '" style="width:72px;height:90px;object-fit:cover;border-radius:8px;border:1px solid var(--border);flex-shrink:0;" onerror="this.style.display=\'none\'" />' +
+                '<label style="flex:1;cursor:pointer;">' +
+                  '<input type="file" id="about-photo-input" accept="image/*" style="display:none;" onchange="handleAboutPhotoFile(this)">' +
+                  '<div style="border:2px dashed var(--border);border-radius:8px;padding:16px;text-align:center;color:var(--text-dim);font-size:12px;cursor:pointer;" onclick="document.getElementById(\'about-photo-input\').click()">' +
+                    '📷 Click to upload new artist photo<br>' +
+                    '<span style="font-size:11px;opacity:0.6;">Replaces the photo in your About section</span>' +
+                  '</div>' +
+                '</label>' +
+              '</div>' +
+              '<div id="about-photo-status" style="font-size:12px;color:var(--text-dim);margin-bottom:8px;display:none;"></div>' +
+              '<div class="section-actions">' +
+                '<button class="btn-cancel" onclick="event.stopPropagation();cancelSectionEdit(this)">Cancel</button>' +
+                '<button class="btn-save" onclick="event.stopPropagation();saveSection(this)" data-key="' + s.key + '">Save Bio</button>' +
+              '</div>' +
+              '<div class="save-status" id="status-about"></div>' +
+            '</div>' +
+          '</div>';
+        }
 
         // Special editor for image-type sections (hero_bg)
         if (s.type === 'image') {
@@ -1491,6 +1527,44 @@
         });
       }
     }
+
+    window.handleAboutPhotoFile = async function(input) {
+      if (!input.files || !input.files[0]) return;
+      const status = document.getElementById('about-photo-status');
+      const preview = document.getElementById('about-photo-preview');
+      status.style.display = 'block';
+      status.textContent = 'Uploading...';
+      try {
+        const compressed = await compressImage(input.files[0]);
+        const token = await getToken();
+        const formData = new FormData();
+        formData.append('token', token);
+        formData.append('slug', siteSlug);
+        formData.append('targetSection', 'gallery');
+        formData.append('filename', 'profile.jpg');
+        formData.append('files', compressed, 'profile.jpg');
+        const res = await fetch(CONVEX_HTTP_URL + '/api/mint/upload', {
+          method: 'POST',
+          headers: { Authorization: 'Bearer ' + token },
+          body: formData
+        });
+        if (res.ok) {
+          const newSrc = 'img/profile.jpg?r=' + Date.now();
+          if (preview) { preview.src = newSrc; preview.style.display = 'block'; }
+          status.textContent = '✅ Photo uploaded! Allow 3–5 minutes to show on your website.';
+          // Also patch the about-image src in the site HTML via save-section
+          await fetch(CONVEX_HTTP_URL + '/api/dashboard/save-section', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+            body: JSON.stringify({ sectionKey: 'about_photo', newContent: 'img/profile.jpg' })
+          });
+        } else {
+          status.textContent = '❌ Upload failed. Try again.';
+        }
+      } catch(e) {
+        status.textContent = '❌ Error: ' + e.message;
+      }
+    };
 
     window.goToGalleryTab = function(sectionId) {
       // Switch to gallery tab
