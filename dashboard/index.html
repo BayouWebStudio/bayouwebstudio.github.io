@@ -501,7 +501,7 @@
     </div>
 
     <!-- Domain CTA Banner (shown for paid plans without a custom domain) -->
-    <div id="domain-cta-banner" style="display:none;align-items:center;justify-content:space-between;gap:16px;background:linear-gradient(135deg,rgba(0,200,130,0.12),rgba(0,200,130,0.06));border:1px solid rgba(0,200,130,0.3);border-radius:14px;padding:20px 24px;margin:24px 24px 0;flex-wrap:wrap;">
+    <div id="domain-cta-banner" style="display:none;align-items:center;justify-content:space-between;gap:16px;background:linear-gradient(135deg,rgba(0,200,130,0.12),rgba(0,200,130,0.06));border:1px solid rgba(0,200,130,0.3);border-radius:14px;padding:20px 24px;margin:24px 24px 0;flex-wrap:wrap;position:relative;">
       <div style="display:flex;align-items:center;gap:14px;">
         <div style="font-size:28px;">🌐</div>
         <div>
@@ -509,7 +509,10 @@
           <div style="font-size:13px;color:rgba(255,255,255,0.6);">Your plan includes a custom domain. Pick yours and go live on Google.</div>
         </div>
       </div>
-      <button onclick="openDomainModal()" style="background:#00C882;color:#0a1a12;font-weight:700;font-size:14px;padding:12px 24px;border-radius:10px;border:none;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:opacity .2s;" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">Pick my .com →</button>
+      <div style="display:flex;align-items:center;gap:12px;flex-shrink:0;">
+        <button onclick="openDomainModal()" style="background:#00C882;color:#0a1a12;font-weight:700;font-size:14px;padding:12px 24px;border-radius:10px;border:none;cursor:pointer;white-space:nowrap;transition:opacity .2s;" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">Pick my .com →</button>
+        <button onclick="dismissDomainBanner()" title="Dismiss" style="background:rgba(255,255,255,0.08);border:none;color:rgba(255,255,255,0.5);font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'">×</button>
+      </div>
     </div>
 
     <div class="overview-grid">
@@ -962,10 +965,11 @@
         const upgradeBanner = document.getElementById('upgrade-cta-banner');
         if (upgradeBanner) upgradeBanner.style.display = hasPaidPlan ? 'none' : 'flex';
 
-        // ── Domain CTA: show prominently if paid plan + no custom domain ──
+        // ── Domain CTA: show if paid plan + no custom domain + not dismissed this session ──
         const hasCustomDomain = data.domain && !data.domain.includes('getminted.ai');
         const domainCta = document.getElementById('domain-cta-banner');
-        if (hasPaidPlan && !hasCustomDomain) {
+        const bannerDismissed = sessionStorage.getItem('domain-banner-dismissed');
+        if (hasPaidPlan && !hasCustomDomain && !bannerDismissed) {
           domainCta.style.display = 'flex';
         } else {
           domainCta.style.display = 'none';
@@ -2829,6 +2833,11 @@
     } catch(err) {
       document.getElementById('domain-modal-content').innerHTML = '<p style="color:#ff6b6b;text-align:center;padding:20px;">Failed to check domains. Try again.</p>';
     }
+  }
+
+  function dismissDomainBanner() {
+    sessionStorage.setItem('domain-banner-dismissed', '1');
+    document.getElementById('domain-cta-banner').style.display = 'none';
   }
 
   function closeDomainModal() {
