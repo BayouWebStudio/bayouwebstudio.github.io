@@ -1220,7 +1220,7 @@
           const card = btn.closest('.section-card');
           const preview = card.querySelector('.section-card-preview');
           if (preview) preview.textContent = newContent.substring(0, 150) + (newContent.length > 150 ? '...' : '');
-          showToast('Section updated!');
+          showToast('✅ Saved! Allow 3–5 minutes to show on your website.');
           afterSuccessfulChange();
           // Collapse after a moment
           setTimeout(() => {
@@ -1403,7 +1403,7 @@
         const data = await res.json();
 
         if (res.ok && data.ok) {
-          showToast('Gallery order saved!');
+          showToast('✅ Order saved! Please allow 3–5 minutes to show on your website.');
           afterSuccessfulChange();
           galleryOrderChanged = false;
           btn.classList.remove('visible');
@@ -2705,7 +2705,7 @@
         });
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || 'Failed to add section');
-        showToast('Section "' + title + '" added!');
+        showToast('✅ Section added! Allow 3–5 minutes to show on your website.');
         afterSuccessfulChange();
         document.getElementById('modal-add-section').style.display = 'none';
         loadSiteHtml();
@@ -2761,7 +2761,7 @@
         });
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || 'Failed to remove section');
-        showToast('Section removed!');
+        showToast('✅ Section removed! Allow 3–5 minutes to show on your website.');
         afterSuccessfulChange();
         document.getElementById('modal-remove-section').style.display = 'none';
         loadSiteHtml();
@@ -2825,7 +2825,7 @@
         });
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || 'Failed to reorder sections');
-        showToast('Section order saved!');
+        showToast('✅ Order saved! Allow 3–5 minutes to show on your website.');
         document.getElementById('modal-rearrange').style.display = 'none';
         loadSiteHtml();
       } catch (e) {
