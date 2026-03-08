@@ -149,8 +149,10 @@
     .site-preview-link { font-size: 12px; color: var(--mint); text-decoration: none; font-weight: 500; white-space: nowrap; }
     .site-preview-link:hover { text-decoration: underline; }
     .site-preview-iframe-wrapper { position: relative; height: 320px; overflow: hidden; }
-    .site-preview-iframe { width: 100%; height: 320px; border: none; transform-origin: top left; pointer-events: none; }
+    .site-preview-iframe { width: 1280px; height: 960px; border: none; transform-origin: top left; transform: scale(0.25); pointer-events: none; }
     .preview-overlay { position: absolute; inset: 0; background: transparent; cursor: default; }
+    .preview-refresh-btn { position: absolute; top: 8px; right: 8px; background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.15); color: #fff; font-size: 11px; padding: 4px 8px; border-radius: 6px; cursor: pointer; z-index: 10; backdrop-filter: blur(4px); }
+    .preview-refresh-btn:hover { background: rgba(0,200,130,0.2); border-color: var(--mint); }
 
     .info-card {
       background: var(--surface); border: 1px solid var(--border);
@@ -555,6 +557,7 @@
               <iframe class="site-preview-iframe" id="site-preview-iframe" src="about:blank" loading="lazy" scrolling="no"></iframe>
             </a>
             <div class="preview-overlay"></div>
+            <button class="preview-refresh-btn" onclick="refreshPreview()" title="Refresh preview">↺ Refresh</button>
           </div>
         </div>
       </div>
@@ -1454,6 +1457,19 @@
         });
       }
     }
+
+    window.refreshPreview = function() {
+      const iframe = document.getElementById('site-preview-iframe');
+      const img = document.getElementById('site-preview-img');
+      if (iframe && iframe.src && iframe.src !== 'about:blank') {
+        // Force reload by appending a cache-bust param
+        const base = iframe.src.split('?')[0];
+        iframe.src = base + '?r=' + Date.now();
+      } else if (img && img.src && img.src !== '') {
+        img.src = img.src.split('?')[0] + '?r=' + Date.now();
+      }
+      showToast('Preview refreshing... changes take 3–5 min to appear.');
+    };
 
     window.saveGalleryOrder = async function() {
       if (!(await checkChangeLimit())) return;
