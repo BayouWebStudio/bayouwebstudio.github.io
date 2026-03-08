@@ -74,10 +74,12 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="artist-card-body">
             <div class="artist-card-name">${a.name}</div>
             <div class="artist-card-handle">@${a.instagram}</div>
-            <div class="artist-card-location">📍 ${a.location}</div>
             <div class="artist-card-tags">
               ${a.styles.map(s => `<span class="tag">${s}</span>`).join('')}
             </div>
+            <span class="artist-card-ig" title="View on Instagram">
+              <a href="https://instagram.com/${a.instagram}" target="_blank" style="color:#C9A84C;font-size:0.8rem;text-decoration:none;">↗ Instagram</a>
+            </span>
           </div>
         </a>
       `).join('');
