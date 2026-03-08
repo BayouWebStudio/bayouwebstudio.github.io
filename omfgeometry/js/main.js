@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (countryFilter && styleFilter && artistsContainer) {
     let allArtists = [];
 
-    fetch('/data/artists.json')
+    fetch('/data/artists_v2.json')
       .then(r => r.json())
       .then(data => {
         allArtists = data;
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
       })
       .catch(() => {
         // Fallback: try relative path
-        fetch('../data/artists.json')
+        fetch('../data/artists_v2.json')
           .then(r => r.json())
           .then(data => {
             allArtists = data;
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
             renderArtists(data);
           })
           .catch(() => {
-            fetch('./data/artists.json')
+            fetch('./data/artists_v2.json')
               .then(r => r.json())
               .then(data => {
                 allArtists = data;
