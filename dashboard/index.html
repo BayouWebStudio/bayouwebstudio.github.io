@@ -1143,6 +1143,20 @@
         if (text) sections.push({ key: 'booking_title', icon: '📋', title: 'Booking Section Title', preview: text, value: text });
       }
 
+      // Booking details (rate, availability, location)
+      const bookingDetailsMatch = html.match(/class="booking-details[^"]*"[^>]*>([\s\S]*?)<\/div>/i);
+      if (bookingDetailsMatch) {
+        const details = [...bookingDetailsMatch[1].matchAll(/<div class="booking-detail">([\s\S]*?)<\/div>/gi)]
+          .map(m => m[1].replace(/<strong>/gi,'').replace(/<\/strong>/gi,'').replace(/<[^>]+>/g,'').trim());
+        if (details.length) sections.push({ key: 'booking_details', icon: '💰', title: 'Booking Details', preview: details.join(' · '), value: details.join('\n') });
+      }
+
+      // Form email (formsubmit.co action)
+      const formEmailMatch = html.match(/action="https?:\/\/formsubmit\.co\/([^"]+)"/i);
+      if (formEmailMatch) {
+        sections.push({ key: 'booking_email', icon: '📬', title: 'Booking Form Email', preview: formEmailMatch[1], value: formEmailMatch[1] });
+      }
+
       // Contact email
       const emailMatch = html.match(/mailto:([^"]+)"/i);
       if (emailMatch) {
