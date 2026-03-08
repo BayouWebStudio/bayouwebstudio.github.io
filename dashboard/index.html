@@ -190,7 +190,9 @@
 
     .section-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
     .section-card-icon { font-size: 20px; }
-    .section-card-title { font-size: 14px; font-weight: 600; color: var(--text); }
+    .section-card-title { font-size: 14px; font-weight: 600; color: var(--text); cursor: text; }
+    .section-card-title:hover { color: var(--mint); }
+    .section-card-title[contenteditable="true"] { outline: none; border-bottom: 1px solid var(--mint-border); padding-bottom: 1px; }
     .section-card-preview { font-size: 12px; color: var(--text-dim); line-height: 1.5; max-height: 60px; overflow: hidden; text-overflow: ellipsis; }
 
     .section-editor { display: none; margin-top: 12px; }
@@ -1090,25 +1092,6 @@
         sections.push({ key: 'instagram', icon: '📸', title: 'Instagram Handle', preview: '@' + igMatch[1], value: igMatch[1] });
       }
 
-      // All section headings — parse every <section id="..."> and extract its section-title h2
-      const sectionBlocks = [...html.matchAll(/<section[^>]+id="([^"]+)"[^>]*>([\s\S]*?)(?=<section|<\/main|<footer)/gi)];
-      const skipIds = new Set(['hero', 'hero-section']);
-      sectionBlocks.forEach(match => {
-        const secId = match[1];
-        const secHtml = match[2];
-        if (skipIds.has(secId)) return;
-        const h2Match = secHtml.match(/<h2[^>]*class="[^"]*section-title[^"]*"[^>]*>([\s\S]*?)<\/h2>/i);
-        if (h2Match) {
-          const text = h2Match[1].replace(/<[^>]+>/g, '').trim();
-          if (text) sections.push({ key: 'section_title__' + secId, icon: '🔤', title: 'Section Heading — ' + secId.charAt(0).toUpperCase() + secId.slice(1), preview: text, value: text });
-        }
-        const labelMatch = secHtml.match(/<p[^>]*class="[^"]*section-label[^"]*"[^>]*>([\s\S]*?)<\/p>/i);
-        if (labelMatch) {
-          const text = labelMatch[1].replace(/<[^>]+>/g, '').trim();
-          if (text) sections.push({ key: 'section_label__' + secId, icon: '🏷️', title: 'Section Label — ' + secId.charAt(0).toUpperCase() + secId.slice(1), preview: text, value: text });
-        }
-      });
-
       renderSections(sections);
     }
 
@@ -1129,7 +1112,7 @@
             '<div class="section-card-header">' +
               '<div style="display:flex;align-items:center;gap:8px;">' +
                 '<span class="section-card-icon">' + s.icon + '</span>' +
-                '<span class="section-card-title">' + escapeHtml(s.title) + '</span>' +
+                '<span class="section-card-title" title="Click to rename" contenteditable="false" data-key="' + s.key + '" onclick="event.stopPropagation();startRenameSection(this)" onblur="saveRenameSection(this)" onkeydown="if(event.key===\'Enter\'){event.preventDefault();this.blur();}">' + escapeHtml(s.title) + '</span>' +
               '</div>' +
             '</div>' +
             '<div class="section-card-preview">' + previewText + '</div>' +
@@ -1158,7 +1141,7 @@
           '<div class="section-card-header">' +
             '<div style="display:flex;align-items:center;gap:8px;">' +
               '<span class="section-card-icon">' + s.icon + '</span>' +
-              '<span class="section-card-title">' + escapeHtml(s.title) + '</span>' +
+              '<span class="section-card-title" title="Click to rename" contenteditable="false" data-key="' + s.key + '" onclick="event.stopPropagation();startRenameSection(this)" onblur="saveRenameSection(this)" onkeydown="if(event.key===\'Enter\'){event.preventDefault();this.blur();}">' + escapeHtml(s.title) + '</span>' +
             '</div>' +
           '</div>' +
           '<div class="section-card-preview">' + previewText + '</div>' +
@@ -2859,6 +2842,49 @@
       document.getElementById('domain-modal-content').innerHTML = '<p style="color:#ff6b6b;text-align:center;padding:20px;">Failed to check domains. Try again.</p>';
     }
   }
+
+  window.startRenameSection = function(el) {
+    el.contentEditable = 'true';
+    el.dataset.original = el.textContent.trim();
+    // Move cursor to end
+    const range = document.createRange();
+    range.selectNodeContents(el);
+    range.collapse(false);
+    const sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+  };
+
+  window.saveRenameSection = async function(el) {
+    el.contentEditable = 'false';
+    const newTitle = el.textContent.trim();
+    const original = el.dataset.original || '';
+    if (!newTitle || newTitle === original) return;
+
+    const sectionKey = el.dataset.key;
+    // Map section key to the section ID for heading replacement
+    const secId = sectionKey.replace(/^(about|booking|instagram|hero_title|hero_subtitle|contact_email|booking_label|booking_title)$/, '');
+    const headingKey = 'section_title__' + secId;
+
+    try {
+      const token = await getToken();
+      const res = await fetch(CONVEX_HTTP_URL + '/api/dashboard/save-section', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+        body: JSON.stringify({ sectionKey: headingKey, newContent: newTitle }),
+      });
+      const data = await res.json();
+      if (res.ok && data.ok) {
+        showToast('✅ Renamed! Allow 3–5 minutes to show on your website.');
+      } else {
+        el.textContent = original; // revert
+        showToast(data.error || 'Could not rename section', true);
+      }
+    } catch(e) {
+      el.textContent = original;
+      showToast('Error: ' + e.message, true);
+    }
+  };
 
   function dismissDomainBanner() {
     sessionStorage.setItem('domain-banner-dismissed', '1');
