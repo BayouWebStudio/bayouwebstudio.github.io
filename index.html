@@ -200,12 +200,13 @@ section{padding:100px 0}
 .feature-card p{color:var(--text-dim);font-size:.9rem}
 
 /* Showcase */
-.showcase-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin-bottom:40px}
-.showcase-card{background:var(--card);border-radius:12px;padding:40px 28px;text-align:center;border:1px solid #222;transition:border-color .3s}
-.showcase-card:hover{border-color:var(--mint)}
-.showcase-card h3{color:#fff;font-size:1.2rem;font-family:'Inter',sans-serif;font-weight:700;margin-bottom:8px}
-.showcase-card p{color:var(--text-dim);font-size:.9rem}
-.showcase-card .domain{color:var(--mint);font-size:.85rem;margin-bottom:12px;font-family:monospace}
+.showcase-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:24px;margin-bottom:40px}
+.showcase-card{background:var(--card);border-radius:12px;overflow:hidden;border:1px solid #222;transition:border-color .3s,transform .3s;text-decoration:none;display:block}
+.showcase-card:hover{border-color:var(--mint);transform:translateY(-4px)}
+.showcase-card img{width:100%;height:220px;object-fit:cover;display:block}
+.showcase-card .card-info{padding:16px 20px}
+.showcase-card h3{color:#fff;font-size:1.1rem;font-family:'Inter',sans-serif;font-weight:700;margin:0 0 4px}
+.showcase-card .domain{color:var(--mint);font-size:.82rem;font-family:monospace;margin:0}
 .more-link{text-align:center;font-size:1.05rem}
 
 /* Pricing */
@@ -654,46 +655,50 @@ body { padding-top: 60px; }
   <div class="container">
     <h2 class="section-title reveal">Freshly Minted Sites</h2>
     <div class="showcase-grid">
-      <div class="showcase-card reveal">
-        <div class="domain">tattoosbypaketh.com</div>
-        <h3>Paketh</h3>
-        <p>101K followers · Tattoo artist portfolio</p>
-      </div>
-      <div class="showcase-card reveal">
-        <div class="domain">tatsuink.com</div>
-        <h3>Tatsu Ink</h3>
-        <p>Anime tattoo specialist · 100/100 SEO score</p>
-      </div>
-      <div class="showcase-card reveal">
-        <div class="domain">guccierrezz.com</div>
-        <h3>Guccierrezz</h3>
-        <p>Bold color artist · Masonry gallery</p>
-      </div>
-      <div class="showcase-card reveal">
-        <div class="domain">getminted.ai/dapperhousebarber</div>
-        <h3>Dapper House Barber</h3>
-        <p>Royal Oak, MI · Classic barbershop</p>
-      </div>
-      <div class="showcase-card reveal">
-        <div class="domain">getminted.ai/bobbykarate</div>
-        <h3>Bobby Karate</h3>
-        <p>Tattoo artist · Bold style portfolio</p>
-      </div>
-      <div class="showcase-card reveal">
-        <div class="domain">getminted.ai/ceciisbeautybar</div>
-        <h3>Ceci's Beauty Bar</h3>
-        <p>Beauty salon · Booking-ready site</p>
-      </div>
-      <div class="showcase-card reveal">
-        <div class="domain">getminted.ai/clowtattoo</div>
-        <h3>Clow Tattoo</h3>
-        <p>Fine line specialist · Clean gallery</p>
-      </div>
-      <div class="showcase-card reveal">
-        <div class="domain">getminted.ai/dieselbarbershop</div>
-        <h3>Diesel Barbershop</h3>
-        <p>Barbershop · Professional presence</p>
-      </div>
+      <a href="https://tattoosbypaketh.com" target="_blank" class="showcase-card reveal">
+        <img src="img/widget-israelpaketh.jpg" alt="Israel Pascua – tattoosbypaketh.com" loading="lazy">
+        <div class="card-info"><h3>Israel Pascua</h3><p class="domain">tattoosbypaketh.com</p></div>
+      </a>
+      <a href="https://tatsuink.com" target="_blank" class="showcase-card reveal">
+        <img src="img/widget-renevasquez.jpg" alt="Rene Vasquez – tatsuink.com" loading="lazy">
+        <div class="card-info"><h3>Rene Vasquez</h3><p class="domain">tatsuink.com</p></div>
+      </a>
+      <a href="https://guccierrezz.com" target="_blank" class="showcase-card reveal">
+        <img src="img/widget-alansanchez.jpg" alt="Alan Sanchez – guccierrezz.com" loading="lazy">
+        <div class="card-info"><h3>Alan Sanchez</h3><p class="domain">guccierrezz.com</p></div>
+      </a>
+      <a href="https://scalpdynamics.com.au" target="_blank" class="showcase-card reveal">
+        <img src="img/widget-josephkintz.jpg" alt="Joseph Kintz – scalpdynamics.com.au" loading="lazy">
+        <div class="card-info"><h3>Joseph Kintz</h3><p class="domain">scalpdynamics.com.au</p></div>
+      </a>
+      <a href="https://goldensoultattoo.com" target="_blank" class="showcase-card reveal">
+        <img src="img/widget-mauriciozarate.jpg" alt="Mauricio Zarate – goldensoultattoo.com" loading="lazy">
+        <div class="card-info"><h3>Mauricio Zarate</h3><p class="domain">goldensoultattoo.com</p></div>
+      </a>
+      <a href="https://inkversetattoo.com" target="_blank" class="showcase-card reveal">
+        <img src="img/widget-yadiyang.jpg" alt="Yadi Yang – inkversetattoo.com" loading="lazy">
+        <div class="card-info"><h3>Yadi Yang</h3><p class="domain">inkversetattoo.com</p></div>
+      </a>
+      <a href="https://getminted.ai/ericharetattoo" target="_blank" class="showcase-card reveal">
+        <img src="img/widget-ericharetattoo.jpg" alt="Eric Hare – ericharetattoo" loading="lazy">
+        <div class="card-info"><h3>Eric Hare</h3><p class="domain">getminted.ai/ericharetattoo</p></div>
+      </a>
+      <a href="https://getminted.ai/aaronriddletattoos" target="_blank" class="showcase-card reveal">
+        <img src="img/widget-aaronriddletattoos.jpg" alt="Aaron Riddle – aaronriddletattoos" loading="lazy">
+        <div class="card-info"><h3>Aaron Riddle</h3><p class="domain">getminted.ai/aaronriddletattoos</p></div>
+      </a>
+      <a href="https://getminted.ai/dannydiablx" target="_blank" class="showcase-card reveal">
+        <img src="img/widget-dannydiablx.jpg" alt="Daniel Mejia – dannydiablx" loading="lazy">
+        <div class="card-info"><h3>Daniel Mejia</h3><p class="domain">getminted.ai/dannydiablx</p></div>
+      </a>
+      <a href="https://getminted.ai/frankendots" target="_blank" class="showcase-card reveal">
+        <img src="img/widget-frankendots.jpg" alt="Theodore Casados – frankendots" loading="lazy">
+        <div class="card-info"><h3>Theodore Casados</h3><p class="domain">getminted.ai/frankendots</p></div>
+      </a>
+      <a href="https://getminted.ai/krisxmoon" target="_blank" class="showcase-card reveal">
+        <img src="img/widget-krisxmoon.jpg" alt="Chloe Kristensen – krisxmoon" loading="lazy">
+        <div class="card-info"><h3>Chloe Kristensen</h3><p class="domain">getminted.ai/krisxmoon</p></div>
+      </a>
     </div>
     <p class="more-link reveal"><a href="/free-site.html">See all 164+ sites →</a></p>
   </div>
