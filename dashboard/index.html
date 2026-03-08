@@ -1084,6 +1084,25 @@
         sections.push({ key: 'instagram', icon: '📸', title: 'Instagram Handle', preview: '@' + igMatch[1], value: igMatch[1] });
       }
 
+      // All section headings — parse every <section id="..."> and extract its section-title h2
+      const sectionBlocks = [...html.matchAll(/<section[^>]+id="([^"]+)"[^>]*>([\s\S]*?)(?=<section|<\/main|<footer)/gi)];
+      const skipIds = new Set(['hero', 'hero-section']);
+      sectionBlocks.forEach(match => {
+        const secId = match[1];
+        const secHtml = match[2];
+        if (skipIds.has(secId)) return;
+        const h2Match = secHtml.match(/<h2[^>]*class="[^"]*section-title[^"]*"[^>]*>([\s\S]*?)<\/h2>/i);
+        if (h2Match) {
+          const text = h2Match[1].replace(/<[^>]+>/g, '').trim();
+          if (text) sections.push({ key: 'section_title__' + secId, icon: '🔤', title: 'Section Heading — ' + secId.charAt(0).toUpperCase() + secId.slice(1), preview: text, value: text });
+        }
+        const labelMatch = secHtml.match(/<p[^>]*class="[^"]*section-label[^"]*"[^>]*>([\s\S]*?)<\/p>/i);
+        if (labelMatch) {
+          const text = labelMatch[1].replace(/<[^>]+>/g, '').trim();
+          if (text) sections.push({ key: 'section_label__' + secId, icon: '🏷️', title: 'Section Label — ' + secId.charAt(0).toUpperCase() + secId.slice(1), preview: text, value: text });
+        }
+      });
+
       renderSections(sections);
     }
 
