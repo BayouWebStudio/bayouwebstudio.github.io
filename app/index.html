@@ -698,7 +698,7 @@ body {
     // Fetch site info
     try {
       const token = await window.Clerk.session.getToken();
-      const res = await fetch('https://curious-lemming-262.convex.site/api/dashboard/site-info', {
+      const res = await fetch('https://curious-lemming-262.convex.site/api/dashboard/info', {
         headers: { 'Authorization': 'Bearer ' + token }
       });
       if (res.ok) {
