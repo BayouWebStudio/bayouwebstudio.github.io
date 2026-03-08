@@ -1076,8 +1076,9 @@
         if (secId === 'gallery') continue; // already default
         if (!/class="[^"]*gallery-grid[^"]*"/.test(secBody)) continue; // no gallery-grid
 
-        // Extract label from section-title h2, fallback to id
-        const titleMatch = secBody.match(/<div[^>]*class="[^"]*section-title[^"]*"[^>]*>[\s\S]*?<h2[^>]*>([\s\S]*?)<\/h2>/i);
+        // Extract label from h2.section-title or h2, fallback to id
+        const titleMatch = secBody.match(/<h2[^>]*class="[^"]*section-title[^"]*"[^>]*>([\s\S]*?)<\/h2>/i) ||
+                           secBody.match(/<h2[^>]*>([\s\S]*?)<\/h2>/i);
         const label = titleMatch ? titleMatch[1].replace(/<[^>]+>/g, '').trim() : secId.charAt(0).toUpperCase() + secId.slice(1);
 
         const opt = document.createElement('option');
@@ -1159,6 +1160,30 @@
           }).join('\n\n');
           sections.push({ key: 'faq', icon: '❓', title: 'FAQ', preview: `${qMatches.length} questions`, value: pairs });
         }
+      }
+
+      // Custom sections — any <section id="..."> with a section-title h2 not already parsed
+      const knownIds = new Set(['gallery', 'about', 'book', 'booking', 'faq', 'contact', 'hero', 'testimonials', 'shop']);
+      const customSecRe = /<section[^>]+id="([^"]+)"[^>]*>([\s\S]*?)<\/section>/gi;
+      let csm;
+      while ((csm = customSecRe.exec(html)) !== null) {
+        const secId = csm[1];
+        const secBody = csm[2];
+        if (knownIds.has(secId)) continue;
+        const h2Match = secBody.match(/<h2[^>]*class="[^"]*section-title[^"]*"[^>]*>([\s\S]*?)<\/h2>/i) ||
+                        secBody.match(/<h2[^>]*>([\s\S]*?)<\/h2>/i);
+        if (!h2Match) continue;
+        const secTitle = h2Match[1].replace(/<[^>]+>/g, '').trim();
+        const labelMatch = secBody.match(/<p[^>]*class="[^"]*section-label[^"]*"[^>]*>([\s\S]*?)<\/p>/i);
+        const secLabel = labelMatch ? labelMatch[1].replace(/<[^>]+>/g, '').trim() : '';
+        const hasGrid = /class="[^"]*gallery-grid/.test(secBody);
+        sections.push({
+          key: 'section_title__' + secId,
+          icon: hasGrid ? '📷' : '📄',
+          title: secTitle + ' Section',
+          preview: secLabel || (hasGrid ? 'Photo gallery section' : 'Custom section'),
+          value: secTitle
+        });
       }
 
       renderSections(sections);
