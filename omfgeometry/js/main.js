@@ -21,30 +21,25 @@ document.addEventListener('DOMContentLoaded', () => {
   if (countryFilter && styleFilter && artistsContainer) {
     let allArtists = [];
 
-    fetch('/data/artists_v2.json')
-      .then(r => r.json())
+    // Use path relative to the page (works from /omfgeometry/directory.html)
+    fetch('data/artists_v2.json')
+      .then(r => {
+        if (!r.ok) throw new Error(r.status);
+        return r.json();
+      })
       .then(data => {
         allArtists = data;
         populateFilters(data);
         renderArtists(data);
       })
       .catch(() => {
-        // Fallback: try relative path
-        fetch('../data/artists_v2.json')
+        // Fallback: absolute path for /omfgeometry/ subdirectory
+        fetch('/omfgeometry/data/artists_v2.json')
           .then(r => r.json())
           .then(data => {
             allArtists = data;
             populateFilters(data);
             renderArtists(data);
-          })
-          .catch(() => {
-            fetch('./data/artists_v2.json')
-              .then(r => r.json())
-              .then(data => {
-                allArtists = data;
-                populateFilters(data);
-                renderArtists(data);
-              });
           });
       });
 
