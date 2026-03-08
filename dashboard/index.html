@@ -1182,7 +1182,8 @@
           icon: hasGrid ? '📷' : '📄',
           title: secTitle + ' Section',
           preview: secLabel || (hasGrid ? 'Photo gallery section' : 'Custom section'),
-          value: secTitle
+          value: secTitle,
+          photoSectionId: hasGrid ? secId : null
         });
       }
 
@@ -1239,6 +1240,7 @@
             '</div>' +
           '</div>' +
           '<div class="section-card-preview">' + previewText + '</div>' +
+          (s.photoSectionId ? '<button onclick="event.stopPropagation();goToGalleryTab(\'' + s.photoSectionId + '\')" style="margin:0 16px 12px;width:calc(100% - 32px);background:rgba(0,200,130,0.1);border:1px solid var(--mint-border);color:var(--mint);border-radius:8px;padding:8px 12px;font-size:13px;font-weight:600;cursor:pointer;text-align:left;">📷 Add Photos →</button>' : '') +
           '<div class="section-editor">' +
             '<textarea class="section-textarea" data-key="' + s.key + '">' + escapeHtml(s.value) + '</textarea>' +
             '<div class="section-actions">' +
@@ -1489,6 +1491,27 @@
         });
       }
     }
+
+    window.goToGalleryTab = function(sectionId) {
+      // Switch to gallery tab
+      document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      const galleryTab = document.querySelector('[data-tab="gallery"]');
+      const galleryContent = document.getElementById('tab-gallery');
+      if (galleryTab) galleryTab.classList.add('active');
+      if (galleryContent) galleryContent.classList.add('active');
+      // Populate picker and pre-select the section
+      if (typeof siteHtml !== 'undefined' && siteHtml) populateUploadSectionPicker(siteHtml);
+      setTimeout(function() {
+        const picker = document.getElementById('upload-target-section');
+        if (picker) {
+          picker.value = sectionId;
+          // Make sure picker is visible
+          const pickerWrap = document.getElementById('upload-section-picker');
+          if (pickerWrap) pickerWrap.classList.add('visible');
+        }
+      }, 50);
+    };
 
     window.refreshPreview = function() {
       const iframe = document.getElementById('site-preview-iframe');
