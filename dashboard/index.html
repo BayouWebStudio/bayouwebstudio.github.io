@@ -388,6 +388,19 @@
     .upload-status { font-size: 12px; color: var(--mint); margin-top: 6px; display: none; }
     .upload-status.active { display: block; }
 
+    /* Upload section picker */
+    .upload-section-picker {
+      display: none; align-items: center; gap: 8px;
+      margin-bottom: 10px; font-size: 13px; color: var(--text-dim);
+    }
+    .upload-section-picker.visible { display: flex; }
+    .upload-section-picker select {
+      background: var(--surface2); color: var(--text); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 5px 10px; font-size: 13px;
+      font-family: inherit; outline: none; cursor: pointer;
+    }
+    .upload-section-picker select:focus { border-color: var(--mint-border); }
+
     /* Responsive */
     @media (max-width: 768px) {
       .header { padding: 0 12px; height: 44px; }
@@ -637,6 +650,10 @@
     </div>
     <div class="gallery-grid" id="gallery-grid">
       <div class="empty-state" style="grid-column: 1/-1;">Loading gallery...</div>
+    </div>
+    <div class="upload-section-picker" id="upload-section-picker">
+      <span>📂 Upload to:</span>
+      <select id="upload-target-section"><option value="gallery">Gallery</option></select>
     </div>
     <div class="upload-progress-bar" id="upload-progress-bar"><div class="upload-progress-fill" id="upload-progress-fill"></div></div>
     <div class="upload-status" id="upload-status"></div>
@@ -1025,8 +1042,45 @@
         siteHtml = data.html;
         parseSections(siteHtml);
         parseGallery(siteHtml);
+        populateUploadSectionPicker(siteHtml);
       } catch (e) {
         console.warn('loadSiteHtml error:', e);
+      }
+    }
+
+    // ── Populate Upload Section Picker ──
+    function populateUploadSectionPicker(html) {
+      const select = document.getElementById('upload-target-section');
+      const picker = document.getElementById('upload-section-picker');
+      if (!select || !picker) return;
+
+      // Reset to just Gallery
+      select.innerHTML = '<option value="gallery">Gallery</option>';
+
+      // Parse all <section id="..."> that contain a gallery-grid div
+      const sectionRe = /<section[^>]+id="([^"]+)"[^>]*>([\s\S]*?)<\/section>/gi;
+      let m;
+      while ((m = sectionRe.exec(html)) !== null) {
+        const secId = m[1];
+        const secBody = m[2];
+        if (secId === 'gallery') continue; // already default
+        if (!/class="[^"]*gallery-grid[^"]*"/.test(secBody)) continue; // no gallery-grid
+
+        // Extract label from section-title h2, fallback to id
+        const titleMatch = secBody.match(/<div[^>]*class="[^"]*section-title[^"]*"[^>]*>[\s\S]*?<h2[^>]*>([\s\S]*?)<\/h2>/i);
+        const label = titleMatch ? titleMatch[1].replace(/<[^>]+>/g, '').trim() : secId.charAt(0).toUpperCase() + secId.slice(1);
+
+        const opt = document.createElement('option');
+        opt.value = secId;
+        opt.textContent = label;
+        select.appendChild(opt);
+      }
+
+      // Show picker only if there are extra sections
+      if (select.options.length > 1) {
+        picker.classList.add('visible');
+      } else {
+        picker.classList.remove('visible');
       }
     }
 
@@ -1532,7 +1586,8 @@
           const formData = new FormData();
           formData.append('token', token);
           formData.append('slug', siteSlug);
-          formData.append('targetSection', 'gallery');
+          const targetSel = document.getElementById('upload-target-section');
+          formData.append('targetSection', targetSel ? targetSel.value : 'gallery');
           formData.append('files', compressed[i]);
 
           const res = await fetch(CONVEX_HTTP_URL + '/api/mint/upload', {
