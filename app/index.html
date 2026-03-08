@@ -42,29 +42,82 @@ body {
 }
 
 /* Auth screen */
+/* Landing page */
+#landing-page {
+  display: flex; flex-direction: column; align-items: center;
+  height: 100%; padding: 0 28px env(safe-area-inset-bottom,24px);
+  background: #080808; text-align: center; overflow: hidden;
+}
+#landing-page .lp-top {
+  padding-top: max(env(safe-area-inset-top,20px), 20px);
+  padding-bottom: 4px; width: 100%;
+}
+#landing-page .lp-brand {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  font-size: 18px; font-weight: 700; color: #fff;
+}
+#landing-page .lp-middle {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 8px;
+}
+#landing-page h1 {
+  font-size: 32px; font-weight: 800; line-height: 1.2;
+  color: #fff; margin: 0 0 10px; letter-spacing: -0.5px;
+}
+#landing-page .lp-sub {
+  font-size: 15px; color: rgba(255,255,255,0.5);
+  line-height: 1.5; max-width: 280px; margin: 0 auto 28px;
+}
+#landing-page .lp-mascot {
+  width: 160px; height: 160px; margin: 0 auto 8px;
+  filter: drop-shadow(0 0 40px rgba(0,200,130,0.35));
+  animation: float 3s ease-in-out infinite;
+}
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+#landing-page .lp-actions {
+  width: 100%; padding-bottom: 32px; display: flex; flex-direction: column; gap: 12px;
+}
+#landing-page .btn-lp-primary {
+  width: 100%; padding: 16px; border: none; border-radius: 50px;
+  background: var(--mint); color: #080808; font-size: 16px;
+  font-weight: 700; font-family: inherit; cursor: pointer;
+  transition: opacity 0.2s;
+}
+#landing-page .btn-lp-primary:active { opacity: 0.85; }
+#landing-page .btn-lp-secondary {
+  width: 100%; padding: 15px; border: 1.5px solid rgba(255,255,255,0.2);
+  border-radius: 50px; background: transparent; color: #fff;
+  font-size: 16px; font-weight: 600; font-family: inherit; cursor: pointer;
+  transition: border-color 0.2s;
+}
+#landing-page .btn-lp-secondary:active { border-color: var(--mint); }
+
+/* Auth screen (Clerk sign-in/up) */
 #auth-screen {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  padding: 24px;
-  text-align: center;
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: flex-start; height: 100%;
+  padding: max(env(safe-area-inset-top,20px),20px) 24px 24px;
+  overflow-y: auto;
 }
-#auth-screen .logo {
-  width: 72px; height: 72px;
-  background: var(--mint);
-  border-radius: 18px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 36px; margin-bottom: 20px;
+.auth-back {
+  align-self: flex-start; background: none; border: none;
+  color: var(--mint); font-size: 14px; font-family: inherit;
+  cursor: pointer; padding: 0 0 16px; display: flex; align-items: center; gap: 6px;
 }
-#auth-screen h1 { font-size: 28px; font-weight: 700; margin-bottom: 6px; }
-#auth-screen p { color: var(--text-dim); font-size: 14px; margin-bottom: 32px; }
+.auth-title { font-size: 24px; font-weight: 700; margin-bottom: 6px; }
+.auth-sub { color: var(--text-dim); font-size: 14px; margin-bottom: 28px; }
 #clerk-mount { width: 100%; max-width: 400px; }
 
 /* App shell */
 #app-shell { display: none; height: 100%; flex-direction: column; }
 #app-shell.active { display: flex; }
+#boot-loading { position:fixed;inset:0;background:#080808;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;z-index:9999; }
+#boot-loading .boot-logo { font-size:48px; animation: pulse 1.5s ease-in-out infinite; }
+#boot-loading .boot-text { color:rgba(255,255,255,0.45);font-size:14px; }
+@keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
 
 /* Tab content area */
 .tab-content {
@@ -374,10 +427,35 @@ body {
 <body>
 
 <!-- Auth Screen -->
-<div id="auth-screen">
-  <div class="logo">🌿</div>
-  <h1>GetMinted</h1>
-  <p>Your AI-powered website, one tap away</p>
+<div id="boot-loading">
+  <div class="boot-logo">🌿</div>
+  <div class="boot-text">Loading GetMinted…</div>
+</div>
+
+<!-- Landing Page -->
+<div id="landing-page" style="display:none;">
+  <div class="lp-top">
+    <div class="lp-brand">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="28" height="28"><defs><radialGradient id="lg1" cx="35%" cy="30%" r="65%"><stop offset="0%" stop-color="#4DFFC0"/><stop offset="40%" stop-color="#00C882"/><stop offset="100%" stop-color="#008A5A"/></radialGradient></defs><ellipse cx="24" cy="25" rx="22" ry="21" fill="rgba(0,200,130,0.15)"/><path d="M24,4 C34,3 44,11 44,23 C44,37 36,44 24,44 C12,44 4,37 4,23 C4,11 14,5 24,4 Z" fill="url(#lg1)"/><ellipse cx="17" cy="22" rx="5" ry="5.5" fill="white"/><ellipse cx="17" cy="22.5" rx="2.5" ry="2.9" fill="#1A1A2E"/><circle cx="18.5" cy="20.5" r="1.1" fill="rgba(255,255,255,0.9)"/><ellipse cx="31" cy="22" rx="5" ry="5.5" fill="white"/><ellipse cx="31" cy="22.5" rx="2.5" ry="2.9" fill="#1A1A2E"/><circle cx="32.5" cy="20.5" r="1.1" fill="rgba(255,255,255,0.9)"/><path d="M19,31 Q24,37 29,31" stroke="#006040" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+      get<span style="color:#00c882;">minted</span>
+    </div>
+  </div>
+  <div class="lp-middle">
+    <h1>Your Site,<br>Always With You</h1>
+    <p class="lp-sub">Upload photos, edit your site, and chat with Mint — all from your phone.</p>
+    <svg class="lp-mascot" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><defs><radialGradient id="lg2" cx="35%" cy="30%" r="65%"><stop offset="0%" stop-color="#4DFFC0"/><stop offset="40%" stop-color="#00C882"/><stop offset="100%" stop-color="#008A5A"/></radialGradient></defs><ellipse cx="24" cy="25" rx="22" ry="21" fill="rgba(0,200,130,0.15)"/><path d="M24,4 C34,3 44,11 44,23 C44,37 36,44 24,44 C12,44 4,37 4,23 C4,11 14,5 24,4 Z" fill="url(#lg2)" style="filter:drop-shadow(0 3px 12px rgba(0,200,130,0.45))"/><ellipse cx="17" cy="15" rx="6" ry="4.5" fill="rgba(255,255,255,0.22)" transform="rotate(-15 17 15)"/><ellipse cx="17" cy="22" rx="5" ry="5.5" fill="white"/><ellipse cx="17" cy="22.5" rx="2.5" ry="2.9" fill="#1A1A2E"/><circle cx="18.5" cy="20.5" r="1.1" fill="rgba(255,255,255,0.9)"/><ellipse cx="31" cy="22" rx="5" ry="5.5" fill="white"/><ellipse cx="31" cy="22.5" rx="2.5" ry="2.9" fill="#1A1A2E"/><circle cx="32.5" cy="20.5" r="1.1" fill="rgba(255,255,255,0.9)"/><ellipse cx="10" cy="28" rx="3.5" ry="2" fill="rgba(255,130,160,0.25)"/><ellipse cx="38" cy="28" rx="3.5" ry="2" fill="rgba(255,130,160,0.25)"/><path d="M19,31 Q24,37 29,31" stroke="#006040" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+  </div>
+  <div class="lp-actions">
+    <button class="btn-lp-primary" onclick="showAuthScreen('signup')">Get Started</button>
+    <button class="btn-lp-secondary" onclick="showAuthScreen('signin')">I Already Have an Account</button>
+  </div>
+</div>
+
+<!-- Auth Screen (Clerk) -->
+<div id="auth-screen" style="display:none;">
+  <button class="auth-back" onclick="showLanding()">← Back</button>
+  <div class="auth-title" id="auth-title">Sign In</div>
+  <div class="auth-sub">Welcome back to GetMinted</div>
   <div id="clerk-mount"></div>
 </div>
 
@@ -385,7 +463,7 @@ body {
 <div id="app-shell">
   <div class="tab-content">
     <!-- Home -->
-    <div class="tab-pane active" id="tab-home">
+    <div class="tab-pane" id="tab-home">
       <div class="home-scroll">
         <div class="home-header">
           <h2>Home</h2>
@@ -524,52 +602,73 @@ body {
   let siteData = null;
   let iframesLoaded = { edit: false, chat: false };
 
+  function hideBoot() {
+    const el = document.getElementById('boot-loading');
+    if (el) el.style.display = 'none';
+  }
+
+  function showLanding() {
+    document.getElementById('landing-page').style.display = 'flex';
+    document.getElementById('auth-screen').style.display = 'none';
+    document.getElementById('app-shell').classList.remove('active');
+  }
+
+  function showAuthScreen(mode) {
+    document.getElementById('landing-page').style.display = 'none';
+    document.getElementById('auth-screen').style.display = 'flex';
+    const title = document.getElementById('auth-title');
+    if (title) title.textContent = mode === 'signup' ? 'Create Account' : 'Sign In';
+    const sub = document.querySelector('.auth-sub');
+    if (sub) sub.textContent = mode === 'signup' ? 'Get your site built in 60 seconds' : 'Welcome back to GetMinted';
+    const mount = document.getElementById('clerk-mount');
+    mount.innerHTML = '';
+    if (mode === 'signup') {
+      window.Clerk.mountSignUp(mount, { appearance: clerkAppearance });
+    } else {
+      window.Clerk.mountSignIn(mount, { appearance: clerkAppearance });
+    }
+  }
+
+  const clerkAppearance = {
+    variables: {
+      colorPrimary: '#00c882', colorBackground: '#0f0f0f',
+      colorText: '#f0f0f0', colorInputBackground: '#1a1a1a', colorInputText: '#f0f0f0',
+      borderRadius: '12px',
+    },
+    elements: {
+      card: { backgroundColor: '#0f0f0f', border: '1px solid rgba(255,255,255,0.08)', boxShadow: 'none' },
+      headerTitle: { color: '#f0f0f0' }, headerSubtitle: { color: 'rgba(255,255,255,0.45)' },
+      socialButtonsBlockButton: { backgroundColor: '#1a1a1a', border: '1px solid rgba(255,255,255,0.08)', color: '#f0f0f0' },
+      formFieldInput: { backgroundColor: '#1a1a1a', border: '1px solid rgba(255,255,255,0.08)', color: '#f0f0f0' },
+      footerActionLink: { color: '#00c882' },
+    }
+  };
+
   // Clerk init
   window.addEventListener('load', async () => {
     try {
       await window.Clerk.load();
+      hideBoot();
       if (window.Clerk.user) {
         showApp();
       } else {
-        showAuth();
+        showLanding();
         window.Clerk.addListener(({ user }) => {
           if (user) showApp();
         });
       }
     } catch (e) {
       console.error('Clerk init error:', e);
-      document.getElementById('auth-screen').innerHTML =
-        '<div style="padding:40px;text-align:center;color:var(--text-dim)">Unable to load. Please refresh.</div>';
+      hideBoot();
+      showLanding();
     }
   });
 
-  function showAuth() {
-    document.getElementById('auth-screen').style.display = 'flex';
-    document.getElementById('app-shell').classList.remove('active');
-    window.Clerk.mountSignIn(document.getElementById('clerk-mount'), {
-      appearance: {
-        variables: {
-          colorPrimary: '#00c882',
-          colorBackground: '#0f0f0f',
-          colorText: '#f0f0f0',
-          colorInputBackground: '#1a1a1a',
-          colorInputText: '#f0f0f0',
-          borderRadius: '12px',
-        },
-        elements: {
-          card: { backgroundColor: '#0f0f0f', border: '1px solid rgba(255,255,255,0.08)' },
-          headerTitle: { color: '#f0f0f0' },
-          headerSubtitle: { color: 'rgba(255,255,255,0.45)' },
-          socialButtonsBlockButton: { backgroundColor: '#1a1a1a', border: '1px solid rgba(255,255,255,0.08)', color: '#f0f0f0' },
-          formFieldInput: { backgroundColor: '#1a1a1a', border: '1px solid rgba(255,255,255,0.08)', color: '#f0f0f0' },
-          footerActionLink: { color: '#00c882' },
-        }
-      }
-    });
-  }
+  function showAuth() { showLanding(); }
 
   async function showApp() {
     document.getElementById('auth-screen').style.display = 'none';
+    document.getElementById('landing-page').style.display = 'none';
     document.getElementById('app-shell').classList.add('active');
 
     // Set avatar
