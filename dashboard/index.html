@@ -1078,6 +1078,22 @@
         sections.push({ key: 'contact_email', icon: '📧', title: 'Contact Email', preview: emailMatch[1], value: emailMatch[1] });
       }
 
+      // FAQ items
+      const faqSection = html.match(/id="faq"[\s\S]*?<div class="faq-list[^"]*">([\s\S]*?)<\/div>\s*<\/div>\s*<\/div>\s*<\/section>/i);
+      if (faqSection) {
+        const faqHtml = faqSection[1];
+        const qMatches = [...faqHtml.matchAll(/<button class="faq-question">([\s\S]*?)<\/button>/gi)];
+        const aMatches = [...faqHtml.matchAll(/<div class="faq-answer"><p>([\s\S]*?)<\/p><\/div>/gi)];
+        if (qMatches.length > 0) {
+          const pairs = qMatches.map((q, i) => {
+            const question = q[1].replace(/<[^>]+>/g, '').trim();
+            const answer = aMatches[i] ? aMatches[i][1].replace(/<[^>]+>/g, '').trim() : '';
+            return `Q: ${question}\nA: ${answer}`;
+          }).join('\n\n');
+          sections.push({ key: 'faq', icon: '❓', title: 'FAQ', preview: `${qMatches.length} questions`, value: pairs });
+        }
+      }
+
       renderSections(sections);
     }
 
