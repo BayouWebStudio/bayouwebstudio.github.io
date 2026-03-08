@@ -117,7 +117,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--mint:#98E8C1;--mint-dim:rgba(152,232,193,0.08);--mint-bright:#6dd5a0;--gold:#C9A84C;--bg:#0a0a0a;--bg-light:#0f0f0f;--card:#111;--card-hover:#1a1a1a;--text:#e0e0e0;--text-dim:#888;--text-bright:#f5f5f5;--border:rgba(152,232,193,0.1)}
+:root{--mint:#98E8C1;--mint-dim:rgba(152,232,193,0.08);--mint-bright:#6dd5a0;--gold:#C9A84C;--bg:#0a0a0a;--bg-light:#0f0f0f;--card:#111;--card-hover:#1a1a1a;--text:#e0e0e0;--text-dim:#888;--text-bright:#f5f5f5;--border:rgba(152,232,193,0.18)}
 html{scroll-behavior:smooth}
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
 h1,h2,h3{font-family:'Playfair Display',serif;font-weight:800}
@@ -125,12 +125,16 @@ h1,h2,h3{font-family:'Playfair Display',serif;font-weight:800}
 a{color:var(--mint);text-decoration:none}
 
 /* Hero */
-.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;padding:60px 24px 80px;background:linear-gradient(180deg,var(--bg) 0%,var(--bg-light) 100%)}
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;padding:60px 24px 80px;background:linear-gradient(180deg,#080c09 0%,var(--bg) 60%,var(--bg-light) 100%)}
 .hero::before{content:'';position:absolute;inset:0;background-image:
-  linear-gradient(rgba(152,232,193,0.02) 1px,transparent 1px),
-  linear-gradient(90deg,rgba(152,232,193,0.02) 1px,transparent 1px);
-  background-size:80px 80px;pointer-events:none;opacity:0.5}
-.hero::after{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(152,232,193,0.03) 0%,transparent 70%);pointer-events:none}
+  linear-gradient(rgba(152,232,193,0.05) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(152,232,193,0.05) 1px,transparent 1px);
+  background-size:60px 60px;pointer-events:none}
+.hero::after{content:'';position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:900px;height:700px;background:radial-gradient(ellipse at 50% 40%,rgba(152,232,193,0.09) 0%,rgba(152,232,193,0.02) 40%,transparent 70%);pointer-events:none}
+.hero-orb-left{position:absolute;top:20%;left:-10%;width:400px;height:400px;background:radial-gradient(circle,rgba(152,232,193,0.06) 0%,transparent 65%);pointer-events:none;animation:orb-drift 12s ease-in-out infinite alternate}
+.hero-orb-right{position:absolute;bottom:15%;right:-8%;width:500px;height:500px;background:radial-gradient(circle,rgba(109,213,160,0.05) 0%,transparent 65%);pointer-events:none;animation:orb-drift 15s ease-in-out infinite alternate-reverse}
+@keyframes orb-drift{0%{transform:translate(0,0)}100%{transform:translate(30px,-40px)}}
+.hero-noise{position:absolute;inset:0;opacity:0.025;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");background-size:200px 200px}
 .mint-char{width:160px;height:160px;margin-bottom:40px;animation:float 4s ease-in-out infinite;filter:drop-shadow(0 8px 32px rgba(152,232,193,0.1));position:relative;z-index:2}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 .hero h1{font-size:clamp(1.8rem,5vw,3.2rem);background:linear-gradient(135deg,var(--mint),#6dd5a0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:20px;letter-spacing:-1px}
@@ -328,6 +332,9 @@ body { padding-top: 60px; }
 
 <!-- Hero -->
 <section class="hero">
+  <div class="hero-orb-left"></div>
+  <div class="hero-orb-right"></div>
+  <div class="hero-noise"></div>
   <div class="mint-char">
     <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mint AI - Modern hexagonal logo with geometric leaf design">
       <defs>
