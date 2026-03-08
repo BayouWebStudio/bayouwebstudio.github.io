@@ -2845,10 +2845,21 @@
     }
   }
 
+  // Map dashboard section key → HTML section id for heading edits on the live site
+  const SECTION_ID_MAP = {
+    'about': 'about',
+    'booking': 'book',
+    'booking_label': 'book',
+    'booking_title': 'book',
+    'gallery': 'gallery',
+    'testimonials': 'testimonials',
+    'faq': 'faq',
+    'shop': 'shop',
+  };
+
   window.startRenameSection = function(el) {
     el.contentEditable = 'true';
     el.dataset.original = el.textContent.trim();
-    // Move cursor to end
     const range = document.createRange();
     range.selectNodeContents(el);
     range.collapse(false);
@@ -2864,23 +2875,26 @@
     if (!newTitle || newTitle === original) return;
 
     const sectionKey = el.dataset.key;
-    // Map section key to the section ID for heading replacement
-    const secId = sectionKey.replace(/^(about|booking|instagram|hero_title|hero_subtitle|contact_email|booking_label|booking_title)$/, '');
-    const headingKey = 'section_title__' + secId;
+    const secId = SECTION_ID_MAP[sectionKey];
+    if (!secId) {
+      // No site mapping — just a UI label rename, no site push needed
+      showToast('Label updated.');
+      return;
+    }
 
     try {
-      const token = await getToken();
+      const token = await window._getClerkToken();
       const res = await fetch(CONVEX_HTTP_URL + '/api/dashboard/save-section', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
-        body: JSON.stringify({ sectionKey: headingKey, newContent: newTitle }),
+        body: JSON.stringify({ sectionKey: 'section_title__' + secId, newContent: newTitle }),
       });
       const data = await res.json();
       if (res.ok && data.ok) {
         showToast('✅ Renamed! Allow 3–5 minutes to show on your website.');
       } else {
-        el.textContent = original; // revert
-        showToast(data.error || 'Could not rename section', true);
+        el.textContent = original;
+        showToast(data.error || 'Could not rename — try the chat instead', true);
       }
     } catch(e) {
       el.textContent = original;
