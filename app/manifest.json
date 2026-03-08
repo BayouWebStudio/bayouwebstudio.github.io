@@ -1,13 +1,24 @@
 {
-  "name": "Mint — AI Website Builder",
-  "short_name": "Mint",
-  "description": "Build and edit your website by talking to Mint",
+  "name": "GetMinted",
+  "short_name": "GetMinted",
+  "description": "Your AI-powered website dashboard",
   "start_url": "/app/",
   "display": "standalone",
-  "background_color": "#0a0a0a",
-  "theme_color": "#98E8C1",
+  "background_color": "#080808",
+  "theme_color": "#00c882",
+  "orientation": "portrait",
   "icons": [
-    {"src": "icon-192.png", "sizes": "192x192", "type": "image/png"},
-    {"src": "icon-512.png", "sizes": "512x512", "type": "image/png"}
+    {
+      "src": "/mint-preview/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/mint-preview/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
   ]
 }
