@@ -1100,9 +1100,12 @@
     function parseSections(html) {
       const sections = [];
 
-      // About the Artist (text + photo)
-      const aboutMatch = html.match(/<div\s+class="about-text"[^>]*>([\s\S]*?)<\/div>/i);
-      const aboutImgMatch = html.match(/<div\s+class="about-image[^"]*"[^>]*>\s*<img[^>]*src="([^"]+)"/i);
+      // About the Artist (text + photo) — try multiple class names used across templates
+      const aboutMatch = html.match(/<div\s+class="about-text"[^>]*>([\s\S]*?)<\/div>/i)
+        || html.match(/<div\s+class="about-inner"[^>]*>([\s\S]*?)<\/div>/i)
+        || html.match(/<div\s+class="about-content"[^>]*>([\s\S]*?)<\/div>/i);
+      const aboutImgMatch = html.match(/<div\s+class="about-image[^"]*"[^>]*>\s*<img[^>]*src="([^"]+)"/i)
+        || html.match(/<img[^>]*class="about-photo[^"]*"[^>]*src="([^"]+)"/i);
       if (aboutMatch) {
         const text = aboutMatch[1].replace(/<p>/gi, '').replace(/<\/p>/gi, '\n\n').replace(/<br\s*\/?>/gi, '\n').replace(/<[^>]+>/g, '').trim();
         const photoSrc = aboutImgMatch ? aboutImgMatch[1] : '';
