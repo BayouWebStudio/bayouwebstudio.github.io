@@ -2742,6 +2742,7 @@
           '<option value="team">Team</option>' +
           '<option value="custom">Custom Text</option>' +
         '</select>' +
+        '<div id="add-section-custom-hint" style="display:none;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.3);border-radius:8px;padding:10px 12px;margin-bottom:12px;font-size:12px;color:rgba(255,255,255,0.7);">💡 Want to add photos? Use <strong style="color:#00c882;">📷 Photo Gallery</strong> instead — it creates a proper photo grid you can upload to.</div>' +
         '<label style="font-size:13px;color:var(--text-dim);display:block;margin-bottom:6px;">Title</label>' +
         '<input id="add-section-title" type="text" placeholder="e.g. Our Services" style="width:100%;padding:10px 12px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:13px;font-family:inherit;margin-bottom:16px;outline:none;" />' +
         '<label style="font-size:13px;color:var(--text-dim);display:block;margin-bottom:6px;">Content</label>' +
@@ -2754,6 +2755,8 @@
 
       document.getElementById('add-section-type').addEventListener('change', function() {
         document.getElementById('add-section-content').placeholder = addSectionPlaceholders[this.value] || '';
+        const hint = document.getElementById('add-section-custom-hint');
+        if (hint) hint.style.display = this.value === 'custom' ? 'block' : 'none';
       });
     };
 
