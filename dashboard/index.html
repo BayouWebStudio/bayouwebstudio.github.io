@@ -617,7 +617,7 @@
         <span class="gallery-count" id="gallery-count">0 photos</span>
       </div>
       <div class="gallery-toolbar-right">
-        <button class="btn-save-order" id="btn-save-order" onclick="saveGalleryOrder()">💾 Save Order</button>
+        <button class="btn-save-order visible" id="btn-save-order" onclick="saveGalleryOrder()">💾 Save Order</button>
         <button class="btn-secondary" id="btn-auto-gallery" onclick="toggleAutoGallery()" style="background:var(--card-bg);border:1px solid var(--mint-border);color:var(--mint);padding:8px 14px;border-radius:8px;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:6px;">
           <span id="auto-gallery-icon">🔄</span> <span id="auto-gallery-label">Auto Update from IG</span>
         </button>
@@ -824,6 +824,12 @@
     // ── Tab Navigation ──
     document.querySelectorAll('.nav-tab').forEach(tab => {
       tab.addEventListener('click', () => {
+        // Warn if gallery order has unsaved changes
+        if (galleryOrderChanged && tab.dataset.tab !== 'gallery') {
+          if (!confirm('You have unsaved photo changes. Leave without saving?')) return;
+          galleryOrderChanged = false;
+          document.getElementById('btn-save-order').classList.remove('visible');
+        }
         document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
         document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
         tab.classList.add('active');
