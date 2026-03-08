@@ -2146,9 +2146,15 @@
       }
     };
 
-    // Load auto gallery status when gallery tab opens
+    // Load auto gallery status and refresh section picker when gallery tab opens
     document.querySelector('[data-tab="gallery"]').addEventListener('click', function() {
       loadAutoGalleryStatus();
+      // Re-run section picker in case sections were added/changed since last load
+      if (typeof siteHtml !== 'undefined' && siteHtml) {
+        populateUploadSectionPicker(siteHtml);
+      } else {
+        loadSiteHtml();
+      }
     });
 
     // ── Store Tab ──
