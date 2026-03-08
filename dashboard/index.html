@@ -915,11 +915,18 @@
           document.getElementById('btn-seo-fix').style.display = 'block';
         }
         if (!data.canRunAgain) {
-          document.getElementById('btn-seo-check').textContent = 'Check again next week';
+          var daysLeft = 7;
+          if (data.lastChecked) {
+            var msLeft = (data.lastChecked + 7 * 24 * 60 * 60 * 1000) - Date.now();
+            daysLeft = Math.max(1, Math.ceil(msLeft / (24 * 60 * 60 * 1000)));
+          }
+          document.getElementById('btn-seo-check').textContent = 'Check again in ' + daysLeft + ' day' + (daysLeft === 1 ? '' : 's');
           document.getElementById('btn-seo-check').style.opacity = '0.5';
+          document.getElementById('btn-seo-check').disabled = true;
         } else {
           document.getElementById('btn-seo-check').textContent = 'Run Check';
           document.getElementById('btn-seo-check').disabled = false;
+          document.getElementById('btn-seo-check').style.opacity = '1';
         }
         if (score >= 90) {
           var bubble = document.getElementById('mint-bubble-text');
@@ -960,9 +967,9 @@
           document.getElementById('seo-issues-list').innerHTML =
             '<div style="color:#00C882;margin-bottom:4px;font-weight:600;">✅ Fixed this week:</div>' +
             data.fixesApplied.map(function(f) { return '<div style="color:#00C882;margin-top:2px;">• ' + f + '</div>'; }).join('') +
-            (data.remainingIssues && data.remainingIssues.length ? '<div style="margin-top:8px;color:rgba(255,255,255,0.4);">More fixes available next week</div>' : '');
+            (data.remainingIssues && data.remainingIssues.length ? '<div style="margin-top:8px;color:rgba(255,255,255,0.4);">More fixes available in 7 days</div>' : '');
         }
-        document.getElementById('btn-seo-fix').textContent = 'Fixed! Come back next week';
+        document.getElementById('btn-seo-fix').textContent = 'Fixed! Check again in 7 days';
         document.getElementById('btn-seo-fix').style.opacity = '0.5';
       } catch(e) {
         document.getElementById('btn-seo-fix').textContent = 'Fix SEO Now →';
