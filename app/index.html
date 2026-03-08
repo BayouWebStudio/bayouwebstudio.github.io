@@ -374,6 +374,100 @@ body {
   margin-right: 10px;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
+
+/* Onboarding screens */
+.onboarding-screen {
+  position: fixed; inset: 0; background: #080808; z-index: 9997;
+  display: none; flex-direction: column; overflow-y: auto;
+  padding: max(env(safe-area-inset-top,20px),20px) 24px max(env(safe-area-inset-bottom,24px),24px);
+}
+.onboarding-screen.active { display: flex; }
+.ob-title { font-size: 28px; font-weight: 800; color: #f0f0f0; margin-bottom: 6px; letter-spacing: -0.5px; }
+.ob-subtitle { font-size: 15px; color: rgba(255,255,255,0.45); margin-bottom: 32px; }
+.ob-btn-primary {
+  background: #00c882; color: #080808; font-weight: 800; border-radius: 50px;
+  padding: 18px; width: 100%; border: none; font-size: 17px; font-family: inherit;
+  cursor: pointer; margin-top: auto; letter-spacing: -0.2px; flex-shrink: 0;
+}
+.ob-btn-primary:disabled { opacity: 0.35; cursor: default; }
+.ob-btn-primary:active:not(:disabled) { filter: brightness(0.9); }
+
+/* Industry cards */
+.ob-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+.ob-card {
+  border: 2px solid rgba(255,255,255,0.1); background: #1a1a1a;
+  border-radius: 16px; padding: 18px 14px; text-align: center;
+  cursor: pointer; transition: border-color 0.15s, background 0.15s;
+  user-select: none;
+}
+.ob-card:active { transform: scale(0.97); }
+.ob-card.selected { border: 2px solid #00c882; background: rgba(0,200,130,0.08); }
+.ob-card .ob-card-icon { font-size: 32px; margin-bottom: 8px; }
+.ob-card .ob-card-label { font-size: 14px; font-weight: 600; color: #f0f0f0; }
+
+/* Build option cards */
+.ob-option {
+  border: 2px solid rgba(255,255,255,0.1); background: #1a1a1a;
+  border-radius: 16px; padding: 22px 20px; cursor: pointer;
+  transition: border-color 0.15s, background 0.15s; margin-bottom: 12px;
+  position: relative;
+}
+.ob-option:active { transform: scale(0.98); }
+.ob-option.selected { border: 2px solid #00c882; background: rgba(0,200,130,0.08); }
+.ob-option .ob-option-title { font-size: 17px; font-weight: 700; color: #f0f0f0; margin-bottom: 4px; }
+.ob-option .ob-option-sub { font-size: 13px; color: rgba(255,255,255,0.45); }
+.ob-option .ob-rec {
+  position: absolute; top: -10px; right: 16px;
+  background: #00c882; color: #080808; font-size: 11px; font-weight: 700;
+  padding: 3px 10px; border-radius: 20px;
+}
+
+/* Section toggles */
+.ob-toggles { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+.ob-toggle {
+  display: flex; align-items: center; gap: 14px;
+  background: #1a1a1a; border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px; padding: 16px; cursor: pointer; user-select: none;
+}
+.ob-toggle .ob-toggle-check {
+  width: 24px; height: 24px; border-radius: 6px;
+  border: 2px solid rgba(255,255,255,0.2); display: flex;
+  align-items: center; justify-content: center; flex-shrink: 0;
+  transition: background 0.15s, border-color 0.15s; font-size: 14px;
+}
+.ob-toggle.checked .ob-toggle-check {
+  background: #00c882; border-color: #00c882; color: #080808;
+}
+.ob-toggle .ob-toggle-label { font-size: 15px; font-weight: 500; color: #f0f0f0; }
+
+/* IG input */
+.ob-input {
+  width: 100%; padding: 18px 20px; background: #1a1a1a;
+  border: 2px solid rgba(255,255,255,0.1); border-radius: 16px;
+  color: #f0f0f0; font-size: 18px; font-family: inherit;
+  outline: none; margin-bottom: 24px;
+}
+.ob-input:focus { border-color: #00c882; }
+.ob-input::placeholder { color: rgba(255,255,255,0.25); }
+
+/* Build loading */
+.ob-build-spinner {
+  width: 48px; height: 48px; border: 3px solid rgba(255,255,255,0.1);
+  border-top-color: #00c882; border-radius: 50%;
+  animation: spin 0.8s linear infinite; margin-bottom: 20px;
+}
+.ob-build-status { font-size: 14px; color: rgba(255,255,255,0.45); margin-top: 12px; }
+
+/* Onboarding step indicator */
+.ob-steps-indicator {
+  display: flex; gap: 8px; margin-bottom: 28px;
+}
+.ob-step-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+}
+.ob-step-dot.active { background: #00c882; }
+.ob-step-dot.done { background: rgba(0,200,130,0.4); }
 </style>
 </head>
 <body>
@@ -423,6 +517,162 @@ body {
   <div class="auth-title" id="auth-title">Sign In</div>
   <div class="auth-sub">Welcome back to GetMinted</div>
   <div id="clerk-mount"></div>
+</div>
+
+<!-- Onboarding Step 1: Industry -->
+<div id="onboarding-step1" class="onboarding-screen">
+  <div class="ob-steps-indicator">
+    <div class="ob-step-dot active"></div>
+    <div class="ob-step-dot"></div>
+    <div class="ob-step-dot"></div>
+    <div class="ob-step-dot"></div>
+  </div>
+  <div class="ob-title">What do you do?</div>
+  <div class="ob-subtitle">We'll build the perfect site for you.</div>
+  <div class="ob-cards" id="industry-cards">
+    <div class="ob-card" data-industry="tattoo" onclick="selectIndustry(this)">
+      <div class="ob-card-icon">🎨</div>
+      <div class="ob-card-label">Tattoo Artist</div>
+    </div>
+    <div class="ob-card" data-industry="barber" onclick="selectIndustry(this)">
+      <div class="ob-card-icon">✂️</div>
+      <div class="ob-card-label">Barber / Stylist</div>
+    </div>
+    <div class="ob-card" data-industry="photographer" onclick="selectIndustry(this)">
+      <div class="ob-card-icon">📸</div>
+      <div class="ob-card-label">Photographer</div>
+    </div>
+    <div class="ob-card" data-industry="musician" onclick="selectIndustry(this)">
+      <div class="ob-card-icon">🎵</div>
+      <div class="ob-card-label">Musician</div>
+    </div>
+    <div class="ob-card" data-industry="fitness" onclick="selectIndustry(this)">
+      <div class="ob-card-icon">💪</div>
+      <div class="ob-card-label">Fitness / Trainer</div>
+    </div>
+    <div class="ob-card" data-industry="restaurant" onclick="selectIndustry(this)">
+      <div class="ob-card-icon">🍕</div>
+      <div class="ob-card-label">Restaurant / Food</div>
+    </div>
+    <div class="ob-card" data-industry="influencer" onclick="selectIndustry(this)">
+      <div class="ob-card-icon">📱</div>
+      <div class="ob-card-label">Influencer / Creator</div>
+    </div>
+    <div class="ob-card" data-industry="other" onclick="selectIndustry(this)">
+      <div class="ob-card-icon">✨</div>
+      <div class="ob-card-label">Other</div>
+    </div>
+  </div>
+  <button class="ob-btn-primary" id="ob-next1" disabled onclick="nextOnboardingStep(2)">Next →</button>
+</div>
+
+<!-- Onboarding Step 2: Build with Mint? -->
+<div id="onboarding-step2" class="onboarding-screen">
+  <div class="ob-steps-indicator">
+    <div class="ob-step-dot done"></div>
+    <div class="ob-step-dot active"></div>
+    <div class="ob-step-dot"></div>
+    <div class="ob-step-dot"></div>
+  </div>
+  <div class="ob-title">Want me to help you build it?</div>
+  <div class="ob-subtitle">I can set up your site for you in minutes.</div>
+  <div class="ob-option selected" id="ob-build-yes" onclick="selectBuildOption(true)">
+    <div class="ob-rec">Recommended</div>
+    <div class="ob-option-title">🌿 Yes, build it with me</div>
+    <div class="ob-option-sub">Mint will create your site automatically</div>
+  </div>
+  <div class="ob-option" id="ob-build-no" onclick="selectBuildOption(false)">
+    <div class="ob-option-title">🛠️ I'll set it up myself</div>
+    <div class="ob-option-sub">Jump straight to the editor</div>
+  </div>
+  <div style="font-size:12px;color:rgba(255,255,255,0.3);text-align:center;margin-top:16px;margin-bottom:16px;">Mint can make mistakes. Always double-check.</div>
+  <button class="ob-btn-primary" onclick="handleStep2Next()">Next →</button>
+</div>
+
+<!-- Onboarding Step 3: Sections -->
+<div id="onboarding-step3" class="onboarding-screen">
+  <div class="ob-steps-indicator">
+    <div class="ob-step-dot done"></div>
+    <div class="ob-step-dot done"></div>
+    <div class="ob-step-dot active"></div>
+    <div class="ob-step-dot"></div>
+  </div>
+  <div class="ob-title">What should be on your site?</div>
+  <div class="ob-subtitle">Toggle sections on or off. You can always change these later.</div>
+  <div class="ob-toggles" id="section-toggles">
+    <div class="ob-toggle checked" data-section="gallery" onclick="toggleSection(this)">
+      <div class="ob-toggle-check">✓</div>
+      <div class="ob-toggle-label">📷 Photo Gallery</div>
+    </div>
+    <div class="ob-toggle" data-section="booking" onclick="toggleSection(this)">
+      <div class="ob-toggle-check">✓</div>
+      <div class="ob-toggle-label">📅 Booking Form</div>
+    </div>
+    <div class="ob-toggle checked" data-section="about" onclick="toggleSection(this)">
+      <div class="ob-toggle-check">✓</div>
+      <div class="ob-toggle-label">👤 About Me</div>
+    </div>
+    <div class="ob-toggle checked" data-section="contact" onclick="toggleSection(this)">
+      <div class="ob-toggle-check">✓</div>
+      <div class="ob-toggle-label">✉️ Contact</div>
+    </div>
+    <div class="ob-toggle" data-section="services" onclick="toggleSection(this)">
+      <div class="ob-toggle-check">✓</div>
+      <div class="ob-toggle-label">💲 Services / Pricing</div>
+    </div>
+    <div class="ob-toggle" data-section="faq" onclick="toggleSection(this)">
+      <div class="ob-toggle-check">✓</div>
+      <div class="ob-toggle-label">❓ FAQ</div>
+    </div>
+    <div class="ob-toggle" data-section="blog" onclick="toggleSection(this)">
+      <div class="ob-toggle-check">✓</div>
+      <div class="ob-toggle-label">📝 Blog</div>
+    </div>
+    <div class="ob-toggle" data-section="store" onclick="toggleSection(this)">
+      <div class="ob-toggle-check">✓</div>
+      <div class="ob-toggle-label">🛒 Online Store</div>
+    </div>
+  </div>
+  <button class="ob-btn-primary" onclick="nextOnboardingStep(4)">Next →</button>
+</div>
+
+<!-- Onboarding Step 4: Instagram Handle -->
+<div id="onboarding-step4" class="onboarding-screen">
+  <div class="ob-steps-indicator">
+    <div class="ob-step-dot done"></div>
+    <div class="ob-step-dot done"></div>
+    <div class="ob-step-dot done"></div>
+    <div class="ob-step-dot active"></div>
+  </div>
+  <div class="ob-title">What's your Instagram handle?</div>
+  <div class="ob-subtitle">Mint will pull your photos and build your site automatically.</div>
+  <input class="ob-input" id="ig-handle-input" type="text" placeholder="@yourhandle" autocapitalize="none" autocorrect="off" spellcheck="false">
+  <button class="ob-btn-primary" id="ob-build-btn" onclick="triggerBuild()">Build My Site 🚀</button>
+</div>
+
+<!-- Onboarding Build Loading -->
+<div id="onboarding-build-loading" class="onboarding-screen" style="align-items:center;justify-content:center;text-align:center;">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" style="width:100px;height:100px;margin-bottom:16px;animation:float 3s ease-in-out infinite;filter:drop-shadow(0 0 24px rgba(0,200,130,0.35));"><defs><radialGradient id="oblg" cx="35%" cy="30%" r="65%"><stop offset="0%" stop-color="#4DFFC0"/><stop offset="40%" stop-color="#00C882"/><stop offset="100%" stop-color="#008A5A"/></radialGradient></defs><path d="M24,4 C34,3 44,11 44,23 C44,37 36,44 24,44 C12,44 4,37 4,23 C4,11 14,5 24,4 Z" fill="url(#oblg)"/><ellipse cx="17" cy="22" rx="5" ry="5.5" fill="white"/><ellipse cx="17" cy="22.5" rx="2.5" ry="2.9" fill="#1A1A2E"/><circle cx="18.5" cy="20.5" r="1.1" fill="rgba(255,255,255,0.9)"/><ellipse cx="31" cy="22" rx="5" ry="5.5" fill="white"/><ellipse cx="31" cy="22.5" rx="2.5" ry="2.9" fill="#1A1A2E"/><circle cx="32.5" cy="20.5" r="1.1" fill="rgba(255,255,255,0.9)"/><path d="M19,31 Q24,37 29,31" stroke="#006040" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+  <div class="ob-build-spinner"></div>
+  <div class="ob-title" style="font-size:22px;">Building your site...</div>
+  <div class="ob-build-status" id="build-status-text">Setting things up…</div>
+</div>
+
+<!-- Onboarding Build Error/Retry -->
+<div id="onboarding-build-error" class="onboarding-screen" style="align-items:center;justify-content:center;text-align:center;">
+  <div style="font-size:48px;margin-bottom:16px;">😕</div>
+  <div class="ob-title" style="font-size:22px;">Something went wrong</div>
+  <div class="ob-subtitle">Don't worry — you can retry or skip to the editor.</div>
+  <button class="ob-btn-primary" onclick="triggerBuild()" style="margin-bottom:12px;margin-top:24px;">Try Again 🔄</button>
+  <button class="ob-btn-primary" onclick="skipToApp()" style="background:transparent;border:2px solid rgba(255,255,255,0.15);color:#f0f0f0;font-weight:600;">Skip to Editor →</button>
+</div>
+
+<!-- Onboarding Build Success -->
+<div id="onboarding-build-success" class="onboarding-screen" style="align-items:center;justify-content:center;text-align:center;">
+  <div style="font-size:64px;margin-bottom:16px;">🎉</div>
+  <div class="ob-title" style="font-size:24px;">Your site is ready!</div>
+  <div class="ob-subtitle">Let's take a look.</div>
+  <button class="ob-btn-primary" onclick="skipToApp()" style="margin-top:24px;">Go to My Site →</button>
 </div>
 
 <!-- App Shell -->
@@ -503,16 +753,29 @@ body {
   let siteData = null;
   let iframesLoaded = { edit: false, chat: false };
 
+  // Onboarding state
+  let obIndustry = null;
+  let obBuildWithMint = true;
+  let obSections = [];
+  let obIgHandle = '';
+  const CONVEX_URL = 'https://curious-lemming-262.convex.site';
+
   function hideBoot() {
     const el = document.getElementById('boot-loading');
     if (el) el.style.display = 'none';
   }
 
-  function showLanding() {
-    document.getElementById('landing-page').style.display = 'flex';
+  function hideAllScreens() {
+    document.getElementById('landing-page').style.display = 'none';
     document.getElementById('auth-screen').style.display = 'none';
     document.getElementById('guest-chat').style.display = 'none';
     document.getElementById('app-shell').classList.remove('active');
+    document.querySelectorAll('.onboarding-screen').forEach(s => s.classList.remove('active'));
+  }
+
+  function showLanding() {
+    hideAllScreens();
+    document.getElementById('landing-page').style.display = 'flex';
   }
 
   function showGuestChat() {
@@ -588,12 +851,211 @@ body {
 
   function showAuth() { showLanding(); }
 
+  // ═══════════════════════════════════════
+  //  SHOW APP — new/returning user detection
+  // ═══════════════════════════════════════
   async function showApp() {
-    document.getElementById('auth-screen').style.display = 'none';
-    document.getElementById('landing-page').style.display = 'none';
-    document.getElementById('app-shell').classList.add('active');
-    switchTab('chat'); // default to Mint chat
+    hideAllScreens();
+    try {
+      const token = await window.Clerk.session.getToken();
+      const res = await fetch(CONVEX_URL + '/api/dashboard/info', {
+        headers: { 'Authorization': 'Bearer ' + token }
+      });
+      const data = await res.json();
+      if (data && data.found === true) {
+        // Returning user — go straight to app
+        document.getElementById('app-shell').classList.add('active');
+        switchTab('chat');
+      } else {
+        // New user — show onboarding
+        showOnboarding();
+      }
+    } catch(e) {
+      console.warn('Dashboard check failed, showing onboarding:', e);
+      // On error, default to app (don't block returning users)
+      document.getElementById('app-shell').classList.add('active');
+      switchTab('chat');
+    }
   }
+
+  // ═══════════════════════════════════════
+  //  ONBOARDING FLOW
+  // ═══════════════════════════════════════
+  function showOnboarding() {
+    hideAllScreens();
+    document.getElementById('onboarding-step1').classList.add('active');
+  }
+
+  function selectIndustry(el) {
+    document.querySelectorAll('#industry-cards .ob-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    obIndustry = el.dataset.industry;
+    document.getElementById('ob-next1').disabled = false;
+    // Pre-set sections based on industry
+    preselectSections(obIndustry);
+  }
+
+  function preselectSections(industry) {
+    const bookingIndustries = ['tattoo', 'barber', 'fitness'];
+    document.querySelectorAll('#section-toggles .ob-toggle').forEach(t => {
+      const section = t.dataset.section;
+      const shouldCheck = (
+        section === 'gallery' || section === 'about' || section === 'contact' ||
+        (section === 'booking' && bookingIndustries.includes(industry))
+      );
+      if (shouldCheck) { t.classList.add('checked'); }
+      else { t.classList.remove('checked'); }
+    });
+  }
+
+  function selectBuildOption(withMint) {
+    obBuildWithMint = withMint;
+    document.getElementById('ob-build-yes').classList.toggle('selected', withMint);
+    document.getElementById('ob-build-no').classList.toggle('selected', !withMint);
+  }
+
+  function handleStep2Next() {
+    if (obBuildWithMint) {
+      nextOnboardingStep(3);
+    } else {
+      // Skip to app — edit tab
+      hideAllScreens();
+      document.getElementById('app-shell').classList.add('active');
+      switchTab('edit');
+    }
+  }
+
+  function toggleSection(el) {
+    el.classList.toggle('checked');
+  }
+
+  function nextOnboardingStep(step) {
+    hideAllScreens();
+    const stepEl = document.getElementById('onboarding-step' + step);
+    if (stepEl) stepEl.classList.add('active');
+  }
+
+  function getSelectedSections() {
+    const sections = [];
+    document.querySelectorAll('#section-toggles .ob-toggle.checked').forEach(t => {
+      sections.push(t.dataset.section);
+    });
+    return sections;
+  }
+
+  async function triggerBuild() {
+    // Gather data
+    const handleInput = document.getElementById('ig-handle-input');
+    obIgHandle = (handleInput.value || '').replace(/^@/, '').trim();
+    obSections = getSelectedSections();
+
+    if (!obIgHandle) {
+      handleInput.style.borderColor = '#ff4444';
+      handleInput.focus();
+      return;
+    }
+
+    // Show loading
+    hideAllScreens();
+    document.getElementById('onboarding-build-loading').classList.add('active');
+    document.getElementById('build-status-text').textContent = 'Setting things up…';
+
+    try {
+      const token = await window.Clerk.session.getToken();
+      const res = await fetch(CONVEX_URL + '/api/build', {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Bearer ' + token,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          igHandle: obIgHandle,
+          slug: obIgHandle,
+          industry: obIndustry,
+          sections: obSections
+        })
+      });
+      const data = await res.json();
+      if (data && data.buildId) {
+        pollBuildStatus(data.buildId, token);
+      } else {
+        throw new Error('No buildId returned');
+      }
+    } catch(e) {
+      console.error('Build trigger failed:', e);
+      hideAllScreens();
+      document.getElementById('onboarding-build-error').classList.add('active');
+    }
+  }
+
+  function pollBuildStatus(buildId, token) {
+    const startTime = Date.now();
+    const statusText = document.getElementById('build-status-text');
+    const messages = [
+      'Setting things up…',
+      'Pulling your photos…',
+      'Designing your layout…',
+      'Adding your sections…',
+      'Almost there…'
+    ];
+    let msgIndex = 0;
+
+    const interval = setInterval(async () => {
+      const elapsed = Date.now() - startTime;
+
+      // Rotate status messages
+      const newIndex = Math.min(Math.floor(elapsed / 15000), messages.length - 1);
+      if (newIndex !== msgIndex) {
+        msgIndex = newIndex;
+        statusText.textContent = messages[msgIndex];
+      }
+
+      // Timeout after 90s
+      if (elapsed > 90000) {
+        clearInterval(interval);
+        hideAllScreens();
+        document.getElementById('onboarding-build-error').classList.add('active');
+        return;
+      }
+
+      try {
+        const res = await fetch(CONVEX_URL + '/api/build/status?id=' + encodeURIComponent(buildId), {
+          headers: { 'Authorization': 'Bearer ' + token }
+        });
+        const data = await res.json();
+        if (data && data.status === 'complete') {
+          clearInterval(interval);
+          hideAllScreens();
+          document.getElementById('onboarding-build-success').classList.add('active');
+        } else if (data && data.status === 'error') {
+          clearInterval(interval);
+          hideAllScreens();
+          document.getElementById('onboarding-build-error').classList.add('active');
+        }
+      } catch(e) {
+        console.warn('Poll error:', e);
+        // Keep polling, don't fail on network blip
+      }
+    }, 3000);
+  }
+
+  function skipToApp() {
+    hideAllScreens();
+    document.getElementById('app-shell').classList.add('active');
+    switchTab('edit');
+  }
+
+  // Expose to onclick handlers
+  window.showLanding = showLanding;
+  window.showGuestChat = showGuestChat;
+  window.showAuthScreen = showAuthScreen;
+  window.selectIndustry = selectIndustry;
+  window.selectBuildOption = selectBuildOption;
+  window.handleStep2Next = handleStep2Next;
+  window.toggleSection = toggleSection;
+  window.nextOnboardingStep = nextOnboardingStep;
+  window.triggerBuild = triggerBuild;
+  window.skipToApp = skipToApp;
 
   function renderSiteData() {
     if (!siteData) return;
