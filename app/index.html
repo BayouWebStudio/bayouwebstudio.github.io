@@ -398,6 +398,23 @@ body {
   <button onclick="showAuthScreen('signin')" style="width:100%;max-width:320px;padding:18px;background:transparent;color:#fff;border:2px solid rgba(255,255,255,0.2);border-radius:50px;font-size:17px;font-weight:700;font-family:inherit;cursor:pointer;">
     Log In
   </button>
+
+  <div style="margin-top:32px;border-top:1px solid rgba(255,255,255,0.08);padding-top:28px;width:100%;max-width:320px;text-align:center;">
+    <div style="font-size:13px;color:rgba(255,255,255,0.35);margin-bottom:14px;">Have questions? Talk to Mint first</div>
+    <button onclick="showGuestChat()" style="width:100%;padding:15px;background:rgba(0,200,130,0.08);border:1px solid rgba(0,200,130,0.25);border-radius:50px;color:#00c882;font-size:16px;font-weight:600;font-family:inherit;cursor:pointer;">
+      💬 Chat with Mint
+    </button>
+  </div>
+</div>
+
+<!-- Guest Chat (no login) -->
+<div id="guest-chat" style="display:none;position:fixed;inset:0;background:#080808;flex-direction:column;z-index:9998;">
+  <div style="display:flex;align-items:center;gap:12px;padding:max(env(safe-area-inset-top,16px),16px) 16px 12px;background:#080808;border-bottom:1px solid rgba(255,255,255,0.08);flex-shrink:0;">
+    <button onclick="showLanding()" style="background:none;border:none;color:rgba(255,255,255,0.6);font-size:15px;font-family:inherit;cursor:pointer;padding:4px 0;">← Back</button>
+    <span style="font-size:15px;font-weight:600;color:#fff;flex:1;text-align:center;">Chat with Mint</span>
+    <button onclick="showAuthScreen('signup')" style="background:#00c882;border:none;color:#080808;font-size:13px;font-weight:700;font-family:inherit;cursor:pointer;padding:6px 14px;border-radius:20px;">Sign Up</button>
+  </div>
+  <iframe src="https://getminted.ai/mint-preview/" style="flex:1;border:none;width:100%;"></iframe>
 </div>
 
 <!-- Auth Screen (Clerk) -->
@@ -494,7 +511,13 @@ body {
   function showLanding() {
     document.getElementById('landing-page').style.display = 'flex';
     document.getElementById('auth-screen').style.display = 'none';
+    document.getElementById('guest-chat').style.display = 'none';
     document.getElementById('app-shell').classList.remove('active');
+  }
+
+  function showGuestChat() {
+    document.getElementById('landing-page').style.display = 'none';
+    document.getElementById('guest-chat').style.display = 'flex';
   }
 
   function showAuthScreen(mode) {
