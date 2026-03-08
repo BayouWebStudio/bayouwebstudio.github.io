@@ -130,6 +130,7 @@
 
     /* ── Overview Tab ── */
     .overview-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .overview-grid > div { min-width: 0; overflow: hidden; }
     @media (max-width: 768px) { .overview-grid { grid-template-columns: 1fr; } }
 
     .site-preview-card {
