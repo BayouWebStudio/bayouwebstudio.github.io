@@ -1157,6 +1157,33 @@
         sections.push({ key: 'booking_email', icon: '📬', title: 'Booking Form Email', preview: formEmailMatch[1], value: formEmailMatch[1] });
       }
 
+      // Booking form fields
+      const bookingFormMatch = html.match(/<form[^>]*class="booking-form"[^>]*>([\s\S]*?)<\/form>/i);
+      if (bookingFormMatch) {
+        const formHtml = bookingFormMatch[1];
+        const fieldPairs = [];
+        const labelRe = /<label[^>]*for="([^"]+)"[^>]*>([\s\S]*?)<\/label>\s*(?:<(input|textarea)[^>]*id="\1"[^>]*placeholder="([^"]*)"[^>]*(required)?[^>]*>|<(textarea)[^>]*id="\1"[^>]*placeholder="([^"]*)"[^>]*(required)?[^>]*>)/gi;
+        // Simpler: parse label+field pairs
+        const labels = [...formHtml.matchAll(/<label[^>]*for="([^"]+)"[^>]*>([\s\S]*?)<\/label>/gi)];
+        const inputs = [...formHtml.matchAll(/<(?:input|textarea)[^>]*id="([^"]+)"[^>]*>/gi)];
+        const submitMatch = formHtml.match(/<button[^>]*type="submit"[^>]*>([^<]+)<\/button>/i);
+        labels.forEach(lm => {
+          const fid = lm[1];
+          const ltext = lm[2].replace(/<[^>]+>/g,'').trim();
+          const inp = inputs.find(i => i[1] === fid);
+          if (!inp) return;
+          const ph = (inp[0].match(/placeholder="([^"]*)"/) || [])[1] || '';
+          const req = /\brequired\b/.test(inp[0]);
+          const isTextarea = inp[0].startsWith('<textarea');
+          fieldPairs.push({ id: fid, label: ltext, placeholder: ph, required: req, type: isTextarea ? 'textarea' : 'input' });
+        });
+        if (fieldPairs.length) {
+          const submitText = submitMatch ? submitMatch[1].trim() : 'Send Booking Request';
+          const preview = fieldPairs.map(f => f.label).join(', ');
+          sections.push({ key: 'booking_fields', icon: '📝', title: 'Booking Form Fields', preview, value: JSON.stringify({ fields: fieldPairs, submitText }), type: 'booking_fields' });
+        }
+      }
+
       // Contact email
       const emailMatch = html.match(/mailto:([^"]+)"/i);
       if (emailMatch) {
@@ -1216,6 +1243,41 @@
 
       container.innerHTML = sections.map(s => {
         const previewText = escapeHtml(s.preview.length > 150 ? s.preview.substring(0, 150) + '...' : s.preview);
+
+        // Booking Form Fields editor
+        if (s.type === 'booking_fields') {
+          let parsed = { fields: [], submitText: 'Send Booking Request' };
+          try { parsed = JSON.parse(s.value); } catch(e) {}
+          const fieldsHtml = parsed.fields.map((f, i) =>
+            '<div style="display:grid;grid-template-columns:1fr 1fr auto;gap:8px;align-items:center;margin-bottom:8px;">' +
+              '<input type="text" value="' + escapeHtml(f.label) + '" placeholder="Label" style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:7px 10px;color:var(--text);font-size:12px;font-family:inherit;" data-field-idx="' + i + '" data-field-prop="label" oninput="updateBookingField(this)">' +
+              '<input type="text" value="' + escapeHtml(f.placeholder) + '" placeholder="Placeholder" style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:7px 10px;color:var(--text);font-size:12px;font-family:inherit;" data-field-idx="' + i + '" data-field-prop="placeholder" oninput="updateBookingField(this)">' +
+              '<label style="font-size:11px;color:var(--text-dim);display:flex;align-items:center;gap:4px;white-space:nowrap;cursor:pointer;">' +
+                '<input type="checkbox"' + (f.required ? ' checked' : '') + ' data-field-idx="' + i + '" data-field-prop="required" onchange="updateBookingField(this)"> Req</label>' +
+            '</div>'
+          ).join('');
+          return '<div class="section-card" data-key="' + s.key + '" data-booking-fields=\'' + escapeHtml(s.value) + '\' onclick="toggleSectionEdit(this)">' +
+            '<div class="section-card-header"><div style="display:flex;align-items:center;gap:8px;">' +
+              '<span class="section-card-icon">' + s.icon + '</span>' +
+              '<span class="section-card-title">' + escapeHtml(s.title) + '</span>' +
+            '</div></div>' +
+            '<div class="section-card-preview">' + escapeHtml(s.preview) + '</div>' +
+            '<div class="section-editor">' +
+              '<div style="font-size:11px;color:var(--text-dim);margin-bottom:10px;display:grid;grid-template-columns:1fr 1fr auto;gap:8px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;">' +
+                '<span>Label</span><span>Placeholder</span><span>Req</span></div>' +
+              '<div id="booking-fields-list">' + fieldsHtml + '</div>' +
+              '<div style="margin-top:12px;">' +
+                '<label style="font-size:12px;color:var(--text-dim);display:block;margin-bottom:6px;">Submit Button Text</label>' +
+                '<input type="text" id="booking-submit-text" value="' + escapeHtml(parsed.submitText) + '" style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px 12px;color:var(--text);font-size:13px;font-family:inherit;" oninput="updateBookingSubmitText(this)">' +
+              '</div>' +
+              '<div class="section-actions" style="margin-top:14px;">' +
+                '<button class="btn-cancel" onclick="event.stopPropagation();cancelSectionEdit(this)">Cancel</button>' +
+                '<button class="btn-save" onclick="event.stopPropagation();saveBookingFields(this)">Save Form</button>' +
+              '</div>' +
+              '<div class="save-status" id="status-booking_fields"></div>' +
+            '</div>' +
+          '</div>';
+        }
 
         // About the Artist — text + photo upload
         if (s.type === 'about') {
@@ -1518,6 +1580,57 @@
       }
       renderGallery(items);
     }
+
+    // Booking form field helpers
+    var _bookingFieldsData = null;
+    window.updateBookingField = function(input) {
+      const card = input.closest('.section-card');
+      if (!card) return;
+      if (!_bookingFieldsData) {
+        try { _bookingFieldsData = JSON.parse(card.dataset.bookingFields || '{}'); } catch(e) { _bookingFieldsData = { fields: [], submitText: '' }; }
+      }
+      const idx = parseInt(input.dataset.fieldIdx);
+      const prop = input.dataset.fieldProp;
+      if (_bookingFieldsData.fields[idx]) {
+        _bookingFieldsData.fields[idx][prop] = prop === 'required' ? input.checked : input.value;
+      }
+    };
+    window.updateBookingSubmitText = function(input) {
+      if (!_bookingFieldsData) return;
+      _bookingFieldsData.submitText = input.value;
+    };
+    window.saveBookingFields = async function(btn) {
+      if (!(await checkChangeLimit())) return;
+      const card = btn.closest('.section-card');
+      if (!_bookingFieldsData) {
+        try { _bookingFieldsData = JSON.parse(card.dataset.bookingFields || '{}'); } catch(e) {}
+      }
+      // Also grab submit text in case not edited
+      const submitInput = card.querySelector('#booking-submit-text');
+      if (submitInput) _bookingFieldsData.submitText = submitInput.value;
+      const statusEl = document.getElementById('status-booking_fields');
+      btn.disabled = true; btn.textContent = 'Saving…';
+      try {
+        const token = await getToken();
+        const res = await fetch(CONVEX_HTTP_URL + '/api/dashboard/save-section', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+          body: JSON.stringify({ sectionKey: 'booking_fields', newContent: JSON.stringify(_bookingFieldsData) }),
+        });
+        const data = await res.json();
+        if (res.ok && data.ok) {
+          if (statusEl) { statusEl.textContent = '✅ Saved!'; statusEl.style.color = 'var(--mint)'; }
+          showToast('Booking form updated! Allow 3–5 minutes to appear on your site.');
+          afterSuccessfulChange();
+          _bookingFieldsData = null;
+        } else {
+          if (statusEl) { statusEl.textContent = '❌ ' + (data.error || 'Failed'); statusEl.style.color = 'var(--danger)'; }
+        }
+      } catch(e) {
+        if (statusEl) { statusEl.textContent = '❌ Error: ' + e.message; statusEl.style.color = 'var(--danger)'; }
+      }
+      btn.disabled = false; btn.textContent = 'Save Form';
+    };
 
     window.switchGallerySection = function(sectionId) {
       activeGallerySection = sectionId || 'gallery';
