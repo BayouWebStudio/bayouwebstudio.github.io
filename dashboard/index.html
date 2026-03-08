@@ -652,9 +652,6 @@
         <input type="file" id="gallery-file-input" multiple accept="image/*" style="display:none" />
       </div>
     </div>
-    <div class="gallery-grid" id="gallery-grid">
-      <div class="empty-state" style="grid-column: 1/-1;">Loading gallery...</div>
-    </div>
     <div class="upload-section-picker" id="upload-section-picker">
       <span>📂 Upload to:</span>
       <select id="upload-target-section"><option value="gallery">Gallery</option></select>
@@ -665,6 +662,9 @@
       <div class="upload-icon">📸</div>
       <div class="upload-text">Drop photos here or click to upload</div>
       <div class="upload-hint">JPG, PNG, WebP — max 5MB per photo</div>
+    </div>
+    <div class="gallery-grid" id="gallery-grid">
+      <div class="empty-state" style="grid-column: 1/-1;">Loading gallery...</div>
     </div>
   </div>
 
@@ -1595,11 +1595,14 @@
         const picker = document.getElementById('upload-target-section');
         if (picker) {
           picker.value = sectionId;
-          // Make sure picker is visible
           const pickerWrap = document.getElementById('upload-section-picker');
           if (pickerWrap) pickerWrap.classList.add('visible');
         }
-      }, 50);
+        // Scroll to top so picker is visible
+        const galleryContent = document.getElementById('tab-gallery');
+        if (galleryContent) galleryContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 60);
     };
 
     window.refreshPreview = function() {
