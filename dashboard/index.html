@@ -654,7 +654,7 @@
     </div>
     <div class="upload-section-picker" id="upload-section-picker" style="margin-top:12px;">
       <span>📂 Upload to:</span>
-      <select id="upload-target-section"><option value="gallery">Gallery</option></select>
+      <select id="upload-target-section" onchange="switchGallerySection(this.value)"><option value="gallery">Gallery</option></select>
     </div>
     <div class="upload-progress-bar" id="upload-progress-bar"><div class="upload-progress-fill" id="upload-progress-fill"></div></div>
     <div class="upload-status" id="upload-status"></div>
@@ -1489,19 +1489,45 @@
     };
 
     // ── Parse Gallery ──
-    function parseGallery(html) {
+    // Track which section gallery is currently showing
+    var activeGallerySection = 'gallery';
+
+    function parseGallery(html, sectionId) {
+      sectionId = sectionId || activeGallerySection || 'gallery';
       const items = [];
-      // Match gallery-item divs — handles both single-div and nested-div structures
+      let searchHtml = html;
+
+      // Scope to the correct section if not main gallery
+      if (sectionId !== 'gallery') {
+        const secMatch = new RegExp('<section[^>]+id="' + sectionId + '"[^>]*>([\\s\\S]*?)</section>', 'i').exec(html);
+        if (secMatch) searchHtml = secMatch[1];
+        else searchHtml = '';
+      } else {
+        // Main gallery: scope to id="gallery" section only
+        const secMatch = /<section[^>]+id="gallery"[^>]*>([\s\S]*?)<\/section>/i.exec(html);
+        if (secMatch) searchHtml = secMatch[1];
+      }
+
       const itemRegex = /<div\s+class="gallery-item[^"]*"[^>]*>\s*<img\s+[^>]*src="([^"]+)"[^>]*>/gi;
       let m;
-      while ((m = itemRegex.exec(html)) !== null) {
+      while ((m = itemRegex.exec(searchHtml)) !== null) {
         const src = m[1];
-        if (src.includes('profile') || src.includes('avatar')) continue; // skip profile pic
+        if (src.includes('profile') || src.includes('avatar')) continue;
         const filename = src.split('/').pop();
         items.push({ src, filename });
       }
       renderGallery(items);
     }
+
+    window.switchGallerySection = function(sectionId) {
+      activeGallerySection = sectionId || 'gallery';
+      if (siteHtml) parseGallery(siteHtml, activeGallerySection);
+      // Update section title in toolbar
+      const select = document.getElementById('upload-target-section');
+      const label = select ? select.options[select.selectedIndex].text : 'Gallery';
+      const titleEl = document.querySelector('#tab-gallery .section-title');
+      if (titleEl) titleEl.textContent = label;
+    };
 
     function renderGallery(items) {
       const grid = document.getElementById('gallery-grid');
@@ -1632,7 +1658,7 @@
         const res = await fetch(CONVEX_HTTP_URL + '/api/dashboard/save-gallery-order', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
-          body: JSON.stringify({ imageFilenames: filenames }),
+          body: JSON.stringify({ imageFilenames: filenames, sectionId: activeGallerySection }),
         });
         const data = await res.json();
 
@@ -1661,7 +1687,7 @@
         const res = await fetch(CONVEX_HTTP_URL + '/api/dashboard/delete-gallery-image', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
-          body: JSON.stringify({ filename }),
+          body: JSON.stringify({ filename, sectionId: activeGallerySection }),
         });
         const data = await res.json();
 
