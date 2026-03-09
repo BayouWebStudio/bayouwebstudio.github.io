@@ -1332,8 +1332,38 @@
         if (shFields.length) groups.push({ id: 'shop', icon: '🛍️', title: shTitle ? shTitle[1].replace(/<[^>]+>/g,'').trim() : 'Shop', fields: shFields });
       }
 
+      // ── STYLES / SPECIALTY ──
+      const stylesSecMatch = html.match(/<section[^>]+id="(?:styles|specialty)"[^>]*>([\s\S]*?)<\/section>/i);
+      if (stylesSecMatch) {
+        const stylesBody = stylesSecMatch[1];
+        const stylesFields = [];
+        // Section title
+        const stylesTitleMatch = stylesBody.match(/<h2[^>]*class="[^"]*section-title[^"]*"[^>]*>([\s\S]*?)<\/h2>/i);
+        if (stylesTitleMatch) {
+          stylesFields.push({ key: 'styles_title', label: 'Section Title', type: 'textarea', value: stylesTitleMatch[1].replace(/<[^>]+>/g,'').trim() });
+        }
+        // Style cards — split approach (robust against nested divs)
+        const cardSections = stylesBody.split(/<div[^>]*class="[^"]*style-card[^"]*"[^>]*>/i).slice(1);
+        cardSections.forEach((cardHtml, i) => {
+          if (i >= 6) return;
+          // Extract title: prefer data-en attr, fallback to tag content
+          const titleMatch = cardHtml.match(/<h3[^>]*data-en="([^"]*)"/) || cardHtml.match(/<h3[^>]*>([\s\S]*?)<\/h3>/i);
+          const cardTitle = titleMatch ? titleMatch[1].replace(/<[^>]+>/g,'').trim() : '';
+          // Extract desc: prefer data-en attr, fallback to tag content
+          const descMatch = cardHtml.match(/<p[^>]*data-en="([^"]*)"/) || cardHtml.match(/<p[^>]*>([\s\S]*?)<\/p>/i);
+          const cardDesc = descMatch ? descMatch[1].replace(/<[^>]+>/g,'').trim() : '';
+          if (cardTitle) {
+            stylesFields.push({ key: `style_card_title_${i}`, label: `Style ${i+1} Title`, type: 'text', value: cardTitle });
+            stylesFields.push({ key: `style_card_desc_${i}`, label: `Style ${i+1} Description`, type: 'textarea', value: cardDesc });
+          }
+        });
+        if (stylesFields.length > 0) {
+          groups.push({ id: 'styles', icon: '✦', title: 'Styles & Specialties', fields: stylesFields });
+        }
+      }
+
       // ── CUSTOM SECTIONS (catch-all for any section with id not already handled) ──
-      const knownIds = new Set(['gallery', 'about', 'book', 'booking', 'faq', 'contact', 'hero', 'testimonials', 'shop', 'top', 'nosotros']);
+      const knownIds = new Set(['gallery', 'about', 'book', 'booking', 'faq', 'contact', 'hero', 'testimonials', 'shop', 'top', 'nosotros', 'styles', 'specialty']);
       const customSecRe = /<section[^>]+id="([^"]+)"[^>]*>([\s\S]*?)<\/section>/gi;
       let csm;
       while ((csm = customSecRe.exec(html)) !== null) {
