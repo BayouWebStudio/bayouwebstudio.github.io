@@ -1177,6 +1177,25 @@
       }
       const formEmailMatch = html.match(/action="https?:\/\/formsubmit\.co\/([^"]+)"/i);
       if (formEmailMatch) bookingFields.push({ key: 'booking_email', label: 'Form Delivery Email', type: 'text', value: formEmailMatch[1] });
+
+      // Parse booking form fields (placeholders only)
+      const formEl = html.match(/<form[^>]*id="booking-form"[^>]*>([\s\S]*?)<\/form>/i)
+        || html.match(/<form[^>]*class="[^"]*booking[^"]*"[^>]*>([\s\S]*?)<\/form>/i)
+        || html.match(/<form[^>]*action="[^"]*formsubmit[^"]*"[^>]*>([\s\S]*?)<\/form>/i);
+      if (formEl) {
+        const fieldMatches = [...formEl[1].matchAll(/<input[^>]*name="([^"]+)"[^>]*(?:placeholder="([^"]*)")?[^>]*>|<textarea[^>]*name="([^"]+)"[^>]*(?:placeholder="([^"]*)")?[^>]*>/gi)];
+        const parsedFields = fieldMatches
+          .filter(m => !['_next','_subject','_captcha','_template'].includes((m[1]||m[3]||'').toLowerCase()))
+          .map(m => ({
+            name: m[1] || m[3] || '',
+            placeholder: m[2] || m[4] || '',
+            type: m[0].toLowerCase().startsWith('<textarea') ? 'textarea' : 'text'
+          }));
+        if (parsedFields.length) {
+          bookingFields.push({ key: 'booking_form_fields', label: 'Form Fields', type: 'form_fields', value: parsedFields });
+        }
+      }
+
       if (bookingFields.length) groups.push({ id: 'booking', icon: '📅', title: 'Booking', fields: bookingFields });
 
       // ── FAQ ──
@@ -1246,6 +1265,22 @@
           '<input type="file" id="upload-' + f.key + '" style="display:none" accept="image/*" onchange="' + onchangeHandler + '">' +
           (f.key === 'hero_bg' ? '<div id="hero-bg-progress" style="display:none;font-size:12px;color:var(--text-dim);margin-top:6px;"></div>' : '') +
           '</div>';
+      }
+      if (f.type === 'form_fields') {
+        const fields = Array.isArray(f.value) ? f.value : [];
+        return '<div class="field-group">' +
+          '<label>Form Fields</label>' +
+          '<p style="font-size:12px;color:var(--text-dim);margin:0 0 12px;">These are the fields on your booking form. Edit the placeholder text (what clients see).</p>' +
+          fields.map((field, idx) =>
+            '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">' +
+              '<span style="font-size:12px;color:var(--text-dim);width:80px;flex-shrink:0;">' + escapeHtml(field.name) + '</span>' +
+              '<input type="text" class="field-input" style="flex:1;" ' +
+                'data-key="booking_form_field_' + idx + '" ' +
+                'placeholder="Placeholder text..." ' +
+                'value="' + escapeHtml(field.placeholder) + '">' +
+            '</div>'
+          ).join('') +
+        '</div>';
       }
       if (f.type === 'textarea') {
         return '<div class="field-group">' +
@@ -1428,9 +1463,24 @@
       // Standard: save each [data-key] field
       const fields = card.querySelectorAll('[data-key]');
       try {
+        // Handle booking form fields: aggregate into a JSON array
+        if (sectionId === 'booking') {
+          const formFieldInputs = card.querySelectorAll('[data-key^="booking_form_field_"]');
+          if (formFieldInputs.length > 0) {
+            const formFields = Array.from(formFieldInputs).map(input => {
+              const span = input.previousElementSibling;
+              const name = span ? span.textContent.trim() : '';
+              return { name, placeholder: input.value, type: 'text' };
+            });
+            await saveFieldByKey('booking_fields', JSON.stringify(formFields));
+          }
+        }
+
         for (const field of fields) {
           const key = field.dataset.key;
           if (!key) continue;
+          // Skip booking_form_field_N keys — already handled above as an aggregate
+          if (key.startsWith('booking_form_field_')) continue;
           await saveFieldByKey(key, field.value);
         }
         if (statusEl) { statusEl.textContent = '✅ Saved'; setTimeout(() => { if (statusEl) statusEl.textContent = ''; }, 2000); }
