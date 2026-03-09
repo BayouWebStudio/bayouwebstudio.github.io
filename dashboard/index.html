@@ -3463,14 +3463,25 @@
 
     try {
       const token = await window._getClerkToken();
+      if (!token) {
+        document.getElementById('domain-modal-content').innerHTML = '<div style="text-align:center;padding:20px;"><p style="color:#ff6b6b;margin-bottom:12px;">Session expired. Please reload the page and try again.</p><button onclick="location.reload()" style="background:#00C882;color:#0a1a12;font-weight:700;padding:10px 20px;border:none;border-radius:8px;cursor:pointer;">Reload</button></div>';
+        return;
+      }
       const r = await fetch(CONVEX_HTTP_URL + '/api/domain/check-availability', {
         headers: { 'Authorization': 'Bearer ' + token }
       });
       const data = await r.json();
-      if (data.error) { document.getElementById('domain-modal-content').innerHTML = '<p style="color:#ff6b6b;text-align:center;padding:20px;">' + data.error + '</p>'; return; }
+      if (data.error) {
+        document.getElementById('domain-modal-content').innerHTML = '<div style="text-align:center;padding:20px;"><p style="color:#ff6b6b;margin-bottom:12px;">⚠️ ' + data.error + '</p><button onclick="closeDomainModal();location.reload()" style="background:rgba(255,255,255,0.1);color:#fff;padding:10px 20px;border:1px solid rgba(255,255,255,0.2);border-radius:8px;cursor:pointer;">Reload & Try Again</button></div>';
+        return;
+      }
+      if (!data.domains || data.domains.length === 0) {
+        document.getElementById('domain-modal-content').innerHTML = '<p style="color:#ff6b6b;text-align:center;padding:20px;">No domains found. Please try again.</p>';
+        return;
+      }
       renderDomainCards(data.domains || []);
     } catch(err) {
-      document.getElementById('domain-modal-content').innerHTML = '<p style="color:#ff6b6b;text-align:center;padding:20px;">Failed to check domains. Try again.</p>';
+      document.getElementById('domain-modal-content').innerHTML = '<div style="text-align:center;padding:20px;"><p style="color:#ff6b6b;margin-bottom:12px;">Failed to check domains: ' + (err.message || 'Network error') + '</p><button onclick="openDomainModal()" style="background:rgba(255,255,255,0.1);color:#fff;padding:10px 20px;border:1px solid rgba(255,255,255,0.2);border-radius:8px;cursor:pointer;">Try Again</button></div>';
     }
   }
 
