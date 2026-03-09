@@ -1112,6 +1112,12 @@
         sections.push({ key: 'about', icon: '🎨', title: 'About the Artist', preview: text, value: text, type: 'about', photoSrc });
       }
 
+      // Hero background image
+      const heroBgMatch = html.match(/background-image:\s*url\(['"]?(img\/[^'")]+)['"]?\)/i);
+      if (heroBgMatch) {
+        sections.push({ key: 'hero_bg', icon: '🖼️', title: 'Hero Background Photo', preview: heroBgMatch[1], value: heroBgMatch[1], type: 'hero_bg' });
+      }
+
       // Hero title — try class="hero-title" first, then any h1 in hero, then first h1
       const heroMatch = html.match(/<h1[^>]*class="hero-title"[^>]*>([\s\S]*?)<\/h1>/i)
         || html.match(/<h1[^>]*data-en="[^"]*"[^>]*>([\s\S]*?)<\/h1>/i)
@@ -1326,7 +1332,7 @@
         }
 
         // Special editor for image-type sections (hero_bg)
-        if (s.type === 'image') {
+        if (s.type === 'image' || s.type === 'hero_bg') {
           const imgSrc = s.value.startsWith('http') ? s.value : s.value;
           return '<div class="section-card" data-key="' + s.key + '" onclick="toggleSectionEdit(this)">' +
             '<div class="section-card-header">' +
