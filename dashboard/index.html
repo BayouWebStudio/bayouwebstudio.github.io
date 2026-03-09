@@ -1037,13 +1037,13 @@
           headers: { Authorization: 'Bearer ' + token },
         });
         const data = await res.json();
-        if (!data.found) {
-          showToast('No site linked to your account', true);
+        if (!data.found || (data.plan && !data.siteSlug)) {
+          showOnboardingPrompt();
           return;
         }
 
-        // Check if pro account needs site setup
-        if (data.plan === 'pro' && data.siteBuilt === false) {
+        // Check if any paid account needs site setup
+        if (!data.siteSlug || data.siteBuilt === false) {
           showOnboardingPrompt();
           return;
         }
@@ -2404,8 +2404,8 @@
       const overview = document.getElementById('tab-overview');
       overview.innerHTML = '<div style="max-width:480px;margin:60px auto;padding:0 24px;text-align:center;">' +
         '<div style="font-size:52px;margin-bottom:16px;">🌿</div>' +
-        '<h2 style="color:#fff;font-weight:800;font-size:24px;margin-bottom:8px;">Your Pro account is ready!</h2>' +
-        '<p style="color:rgba(255,255,255,0.6);font-size:15px;margin-bottom:32px;">Enter your Instagram handle and we\'ll build your site in about 30 seconds.</p>' +
+        '<h2 style="color:#fff;font-weight:800;font-size:24px;margin-bottom:8px;">Welcome to GetMinted 🌿</h2>' +
+        '<p style="color:rgba(255,255,255,0.6);font-size:15px;margin-bottom:32px;">Enter your Instagram handle and we\'ll build your free website in about 30 seconds.</p>' +
         '<div style="display:flex;gap:10px;max-width:380px;margin:0 auto 24px;">' +
         '<div style="position:relative;flex:1;">' +
         '<span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,0.4);font-size:15px;">@</span>' +
