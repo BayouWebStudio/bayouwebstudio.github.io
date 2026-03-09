@@ -181,34 +181,59 @@
     .empty-state { text-align: center; padding: 20px; color: var(--text-muted); font-size: 13px; }
 
     /* ── Section Editor Tab ── */
-    .section-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    @media (max-width: 768px) { .section-cards { grid-template-columns: 1fr; } }
+    .section-cards { display: grid; grid-template-columns: 1fr; gap: 16px; max-width: 800px; }
 
     .section-card {
       background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
-      padding: 20px; cursor: pointer; transition: all 0.15s;
+      overflow: hidden; transition: border-color 0.15s;
     }
     .section-card:hover { border-color: var(--mint-border); }
-    .section-card.editing { border-color: var(--mint); cursor: default; }
 
-    .section-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
-    .section-card-icon { font-size: 20px; }
-    .section-card-title { font-size: 14px; font-weight: 600; color: var(--text); cursor: text; }
-    .section-card-title:hover { color: var(--mint); }
-    .section-card-title[contenteditable="true"] { outline: none; border-bottom: 1px solid var(--mint-border); padding-bottom: 1px; }
-    .section-card-preview { font-size: 12px; color: var(--text-dim); line-height: 1.5; max-height: 60px; overflow: hidden; text-overflow: ellipsis; }
-
-    .section-editor { display: none; margin-top: 12px; }
-    .section-card.editing .section-editor { display: block; }
-    .section-card.editing .section-card-preview { display: none; }
-
-    .section-textarea {
-      width: 100%; min-height: 120px; background: var(--surface2); border: 1px solid var(--border);
-      border-radius: var(--radius-sm); color: var(--text); font-size: 13px; font-family: inherit;
-      padding: 12px; resize: vertical; outline: none; transition: border-color 0.15s; line-height: 1.5;
+    .section-card-header {
+      display: flex; align-items: center; gap: 10px;
+      padding: 16px 20px; border-bottom: 1px solid var(--border);
+      background: var(--surface2);
     }
-    .section-textarea:focus { border-color: var(--mint-border); }
+    .section-card-icon { font-size: 20px; flex-shrink: 0; }
+    .section-card-title { font-size: 15px; font-weight: 600; color: var(--text); }
 
+    .section-editor { display: block; padding: 20px; }
+
+    /* Field group styles */
+    .field-group { margin-bottom: 16px; }
+    .field-group label {
+      display: block; font-size: 11px; color: var(--text-dim); margin-bottom: 6px;
+      font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .field-input, .field-textarea {
+      width: 100%; background: var(--bg); border: 1px solid var(--border);
+      border-radius: 8px; padding: 10px 12px; color: var(--text); font-size: 14px;
+      font-family: inherit; box-sizing: border-box; outline: none; transition: border-color 0.15s;
+    }
+    .field-input:focus, .field-textarea:focus { border-color: var(--mint-border); }
+    .field-textarea { min-height: 80px; resize: vertical; line-height: 1.5; }
+    .field-photo-preview {
+      width: 100%; max-height: 160px; object-fit: cover; border-radius: 8px;
+      margin-bottom: 8px; border: 1px solid var(--border); display: block;
+    }
+    .field-photo-btn {
+      background: var(--surface2); border: 1px solid var(--border); color: var(--text);
+      padding: 8px 14px; border-radius: 8px; cursor: pointer; font-size: 13px;
+      font-family: inherit; transition: border-color 0.15s;
+    }
+    .field-photo-btn:hover { border-color: var(--mint-border); color: var(--mint); }
+    .btn-save-section {
+      width: 100%; background: var(--mint); color: #0a1a12; border: none;
+      border-radius: 10px; padding: 12px; font-weight: 700; cursor: pointer;
+      font-size: 14px; margin-top: 4px; transition: opacity 0.15s; font-family: inherit;
+    }
+    .btn-save-section:hover { opacity: 0.85; }
+    .btn-save-section:disabled { opacity: 0.4; cursor: not-allowed; }
+    .save-status {
+      font-size: 12px; margin-top: 8px; min-height: 18px; color: var(--mint);
+    }
+
+    /* Keep backward-compat styles */
     .section-actions { display: flex; gap: 8px; margin-top: 10px; justify-content: flex-end; }
     .btn-save {
       padding: 8px 20px; background: var(--mint); color: #0a0d0f; border: none;
@@ -221,12 +246,12 @@
       border-radius: var(--radius-sm); font-size: 13px; cursor: pointer; transition: all 0.15s;
     }
     .btn-cancel:hover { border-color: var(--text-dim); color: var(--text); }
-
-    .save-status {
-      font-size: 12px; padding: 6px 12px; border-radius: var(--radius-sm); margin-top: 8px; display: none;
+    .section-textarea {
+      width: 100%; min-height: 120px; background: var(--surface2); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); color: var(--text); font-size: 13px; font-family: inherit;
+      padding: 12px; resize: vertical; outline: none; transition: border-color 0.15s; line-height: 1.5;
     }
-    .save-status.success { display: block; background: var(--mint-dim); color: var(--mint); }
-    .save-status.error { display: block; background: var(--danger-dim); color: var(--danger); }
+    .section-textarea:focus { border-color: var(--mint-border); }
 
     /* ── Gallery Tab ── */
     .gallery-toolbar {
@@ -623,7 +648,7 @@
   <!-- Edit Sections Tab -->
   <div class="tab-content" id="tab-sections">
     <div class="section-title">Edit Your Site Sections</div>
-    <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 20px;">Click any card to edit. Changes go live on your site instantly.</p>
+    <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 20px;">Edit all fields for each section, then click Save. Changes go live in ~3–5 minutes.</p>
     <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;">
       <button onclick="openAddSectionModal()" style="display:flex;align-items:center;gap:6px;padding:8px 16px;background:var(--mint-dim);color:var(--mint);border:1px solid var(--mint-border);border-radius:var(--radius-sm);font-size:13px;font-weight:500;cursor:pointer;transition:all 0.15s;">＋ Add Section</button>
       <button onclick="openRemoveSectionModal()" style="display:flex;align-items:center;gap:6px;padding:8px 16px;background:var(--danger-dim);color:var(--danger);border:1px solid rgba(255,95,87,0.3);border-radius:var(--radius-sm);font-size:13px;font-weight:500;cursor:pointer;transition:all 0.15s;">− Remove Section</button>
@@ -1096,128 +1121,88 @@
       }
     }
 
-    // ── Parse Sections ──
+    // ── Parse Sections (grouped: one object per website section) ──
     function parseSections(html) {
-      const sections = [];
+      const groups = [];
 
-      // About the Artist (text + photo) — try multiple class names used across templates
+      // ── HERO ──
+      const heroFields = [];
+      const heroBgMatch = html.match(/background-image:\s*url\(['"]?(img\/[^'")]+)['"]?\)/i);
+      heroFields.push({
+        key: 'hero_bg', label: 'Background Photo', type: 'photo',
+        value: heroBgMatch ? heroBgMatch[1] : ''
+      });
+      const heroTitleMatch = html.match(/<h1[^>]*class="hero-title"[^>]*>([\s\S]*?)<\/h1>/i)
+        || html.match(/<h1[^>]*data-en="[^"]*"[^>]*>([\s\S]*?)<\/h1>/i)
+        || html.match(/<h1(?:[^>]*)>([\s\S]*?)<\/h1>/i);
+      heroFields.push({
+        key: 'hero_title', label: 'Artist Name', type: 'text',
+        value: heroTitleMatch ? heroTitleMatch[1].replace(/<[^>]+>/g,'').trim() : ''
+      });
+      const heroSubMatch = html.match(/<[^>]*class="hero-subtitle"[^>]*>([\s\S]*?)<\/[^>]+>/i);
+      heroFields.push({
+        key: 'hero_subtitle', label: 'Tagline', type: 'text',
+        value: heroSubMatch ? heroSubMatch[1].replace(/<[^>]+>/g,'').trim() : ''
+      });
+      groups.push({ id: 'hero', icon: '🦸', title: 'Hero', fields: heroFields });
+
+      // ── ABOUT ──
       const aboutMatch = html.match(/<div\s+class="about-text"[^>]*>([\s\S]*?)<\/div>/i)
         || html.match(/<div\s+class="about-inner"[^>]*>([\s\S]*?)<\/div>/i)
         || html.match(/<div\s+class="about-content"[^>]*>([\s\S]*?)<\/div>/i);
-      const aboutImgMatch = html.match(/<div\s+class="about-image[^"]*"[^>]*>\s*<img[^>]*src="([^"]+)"/i)
-        || html.match(/<img[^>]*class="about-photo[^"]*"[^>]*src="([^"]+)"/i);
       if (aboutMatch) {
-        const text = aboutMatch[1].replace(/<p>/gi, '').replace(/<\/p>/gi, '\n\n').replace(/<br\s*\/?>/gi, '\n').replace(/<[^>]+>/g, '').trim();
-        const photoSrc = aboutImgMatch ? aboutImgMatch[1] : '';
-        sections.push({ key: 'about', icon: '🎨', title: 'About the Artist', preview: text, value: text, type: 'about', photoSrc });
+        const aboutImgMatch = html.match(/<div\s+class="about-image[^"]*"[^>]*>\s*<img[^>]*src="([^"]+)"/i)
+          || html.match(/<img[^>]*class="about-photo[^"]*"[^>]*src="([^"]+)"/i);
+        const bioText = aboutMatch[1].replace(/<p>/gi,'').replace(/<\/p>/gi,'\n\n').replace(/<br\s*\/?>/gi,'\n').replace(/<[^>]+>/g,'').trim();
+        groups.push({
+          id: 'about', icon: '🎨', title: 'About', fields: [
+            { key: 'about_photo', label: 'Artist Photo', type: 'photo', value: aboutImgMatch ? aboutImgMatch[1] : '' },
+            { key: 'about', label: 'Bio', type: 'textarea', value: bioText }
+          ]
+        });
       }
 
-      // Hero background image
-      const heroBgMatch = html.match(/background-image:\s*url\(['"]?(img\/[^'")]+)['"]?\)/i);
-      if (heroBgMatch) {
-        sections.push({ key: 'hero_bg', icon: '🖼️', title: 'Hero Background Photo', preview: heroBgMatch[1], value: heroBgMatch[1], type: 'hero_bg' });
-      }
-
-      // Hero title — try class="hero-title" first, then any h1 in hero, then first h1
-      const heroMatch = html.match(/<h1[^>]*class="hero-title"[^>]*>([\s\S]*?)<\/h1>/i)
-        || html.match(/<h1[^>]*data-en="[^"]*"[^>]*>([\s\S]*?)<\/h1>/i)
-        || html.match(/<h1(?:[^>]*)>([\s\S]*?)<\/h1>/i);
-      if (heroMatch) {
-        const text = heroMatch[1].replace(/<[^>]+>/g, '').trim();
-        if (text) sections.push({ key: 'hero_title', icon: '🎯', title: 'Hero Title', preview: text, value: text });
-      }
-
-      // Hero subtitle
-      const subMatch = html.match(/<[^>]*class="hero-subtitle"[^>]*>([\s\S]*?)<\/[^>]+>/i);
-      if (subMatch) {
-        const text = subMatch[1].replace(/<[^>]+>/g, '').trim();
-        sections.push({ key: 'hero_subtitle', icon: '✨', title: 'Hero Subtitle', preview: text, value: text });
-      }
-
-      // Booking link
-      const bookMatch = html.match(/class="float-book"[^>]*href="([^"]+)"/i) || html.match(/class="[^"]*hero-cta[^"]*"[^>]*href="([^"]+)"/i);
-      if (bookMatch) {
-        sections.push({ key: 'booking', icon: '📅', title: 'Booking Link', preview: bookMatch[1], value: bookMatch[1] });
-      }
-
-      // Booking section label ("Let's Work")
-      const bookLabelMatch = html.match(/id="book(?:ing)?"[\s\S]{0,300}?class="section-label[^"]*"[^>]*>([\s\S]*?)<\/p>/i);
-      if (bookLabelMatch) {
-        const text = bookLabelMatch[1].replace(/<[^>]+>/g, '').trim();
-        if (text) sections.push({ key: 'booking_label', icon: '🏷️', title: 'Booking Section Label', preview: text, value: text });
-      }
-
-      // Booking section title ("Book a Session")
+      // ── BOOKING ──
+      const bookingFields = [];
+      const bookMatch = html.match(/class="float-book"[^>]*href="([^"]+)"/i)
+        || html.match(/class="[^"]*hero-cta[^"]*"[^>]*href="([^"]+)"/i);
+      if (bookMatch) bookingFields.push({ key: 'booking', label: 'Booking Button URL', type: 'text', value: bookMatch[1] });
       const bookTitleMatch = html.match(/id="book(?:ing)?"[\s\S]{0,400}?class="section-title[^"]*"[^>]*>([\s\S]*?)<\/h2>/i);
-      if (bookTitleMatch) {
-        const text = bookTitleMatch[1].replace(/<[^>]+>/g, '').trim();
-        if (text) sections.push({ key: 'booking_title', icon: '📋', title: 'Booking Section Title', preview: text, value: text });
-      }
-
-      // Booking details (rate, availability, location)
+      if (bookTitleMatch) bookingFields.push({ key: 'booking_title', label: 'Section Title', type: 'text', value: bookTitleMatch[1].replace(/<[^>]+>/g,'').trim() });
       const bookingDetailsMatch = html.match(/class="booking-details[^"]*"[^>]*>([\s\S]*?)<\/div>/i);
       if (bookingDetailsMatch) {
         const details = [...bookingDetailsMatch[1].matchAll(/<div class="booking-detail">([\s\S]*?)<\/div>/gi)]
           .map(m => m[1].replace(/<strong>/gi,'').replace(/<\/strong>/gi,'').replace(/<[^>]+>/g,'').trim());
-        if (details.length) sections.push({ key: 'booking_details', icon: '💰', title: 'Booking Details', preview: details.join(' · '), value: details.join('\n') });
+        if (details.length) bookingFields.push({ key: 'booking_details', label: 'Rate / Availability Details (one per line)', type: 'textarea', value: details.join('\n') });
       }
-
-      // Form email (formsubmit.co action)
       const formEmailMatch = html.match(/action="https?:\/\/formsubmit\.co\/([^"]+)"/i);
-      if (formEmailMatch) {
-        sections.push({ key: 'booking_email', icon: '📬', title: 'Booking Form Email', preview: formEmailMatch[1], value: formEmailMatch[1] });
-      }
+      if (formEmailMatch) bookingFields.push({ key: 'booking_email', label: 'Form Delivery Email', type: 'text', value: formEmailMatch[1] });
+      if (bookingFields.length) groups.push({ id: 'booking', icon: '📅', title: 'Booking', fields: bookingFields });
 
-      // Booking form fields
-      const bookingFormMatch = html.match(/<form[^>]*class="booking-form"[^>]*>([\s\S]*?)<\/form>/i);
-      if (bookingFormMatch) {
-        const formHtml = bookingFormMatch[1];
-        const fieldPairs = [];
-        const labelRe = /<label[^>]*for="([^"]+)"[^>]*>([\s\S]*?)<\/label>\s*(?:<(input|textarea)[^>]*id="\1"[^>]*placeholder="([^"]*)"[^>]*(required)?[^>]*>|<(textarea)[^>]*id="\1"[^>]*placeholder="([^"]*)"[^>]*(required)?[^>]*>)/gi;
-        // Simpler: parse label+field pairs
-        const labels = [...formHtml.matchAll(/<label[^>]*for="([^"]+)"[^>]*>([\s\S]*?)<\/label>/gi)];
-        const inputs = [...formHtml.matchAll(/<(?:input|textarea)[^>]*id="([^"]+)"[^>]*>/gi)];
-        const submitMatch = formHtml.match(/<button[^>]*type="submit"[^>]*>([^<]+)<\/button>/i);
-        labels.forEach(lm => {
-          const fid = lm[1];
-          const ltext = lm[2].replace(/<[^>]+>/g,'').trim();
-          const inp = inputs.find(i => i[1] === fid);
-          if (!inp) return;
-          const ph = (inp[0].match(/placeholder="([^"]*)"/) || [])[1] || '';
-          const req = /\brequired\b/.test(inp[0]);
-          const isTextarea = inp[0].startsWith('<textarea');
-          fieldPairs.push({ id: fid, label: ltext, placeholder: ph, required: req, type: isTextarea ? 'textarea' : 'input' });
-        });
-        if (fieldPairs.length) {
-          const submitText = submitMatch ? submitMatch[1].trim() : 'Send Booking Request';
-          const preview = fieldPairs.map(f => f.label).join(', ');
-          sections.push({ key: 'booking_fields', icon: '📝', title: 'Booking Form Fields', preview, value: JSON.stringify({ fields: fieldPairs, submitText }), type: 'booking_fields' });
-        }
-      }
-
-      // Contact email — match only href="mailto:email@domain.com" patterns, not JS strings
-      const emailMatch = html.match(/href=["']mailto:([a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,})["']/i);
-      if (emailMatch) {
-        sections.push({ key: 'contact_email', icon: '📧', title: 'Contact Email', preview: emailMatch[1], value: emailMatch[1] });
-      }
-
-      // FAQ items
+      // ── FAQ ──
       const faqSection = html.match(/id="faq"[\s\S]*?<div class="faq-list[^"]*">([\s\S]*?)<\/div>\s*<\/div>\s*<\/div>\s*<\/section>/i);
       if (faqSection) {
         const faqHtml = faqSection[1];
         const qMatches = [...faqHtml.matchAll(/<button class="faq-question">([\s\S]*?)<\/button>/gi)];
         const aMatches = [...faqHtml.matchAll(/<div class="faq-answer"><p>([\s\S]*?)<\/p><\/div>/gi)];
         if (qMatches.length > 0) {
-          const pairs = qMatches.map((q, i) => {
-            const question = q[1].replace(/<[^>]+>/g, '').trim();
-            const answer = aMatches[i] ? aMatches[i][1].replace(/<[^>]+>/g, '').trim() : '';
-            return `Q: ${question}\nA: ${answer}`;
-          }).join('\n\n');
-          sections.push({ key: 'faq', icon: '❓', title: 'FAQ', preview: `${qMatches.length} questions`, value: pairs });
+          const faqPairs = qMatches.map((q, i) => ({
+            question: q[1].replace(/<[^>]+>/g,'').trim(),
+            answer: aMatches[i] ? aMatches[i][1].replace(/<[^>]+>/g,'').trim() : ''
+          }));
+          groups.push({ id: 'faq', icon: '❓', title: 'FAQ', fields: [], faqPairs });
         }
       }
 
-      // Custom sections — any <section id="..."> with a section-title h2 not already parsed
+      // ── CONTACT ──
+      const emailMatch = html.match(/href=["']mailto:([a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,})["']/i);
+      if (emailMatch) {
+        groups.push({ id: 'contact', icon: '📞', title: 'Contact', fields: [
+          { key: 'contact_email', label: 'Contact Email', type: 'text', value: emailMatch[1] }
+        ]});
+      }
+
+      // ── CUSTOM SECTIONS ──
       const knownIds = new Set(['gallery', 'about', 'book', 'booking', 'faq', 'contact', 'hero', 'testimonials', 'shop']);
       const customSecRe = /<section[^>]+id="([^"]+)"[^>]*>([\s\S]*?)<\/section>/gi;
       let csm;
@@ -1225,190 +1210,240 @@
         const secId = csm[1];
         const secBody = csm[2];
         if (knownIds.has(secId)) continue;
-        const h2Match = secBody.match(/<h2[^>]*class="[^"]*section-title[^"]*"[^>]*>([\s\S]*?)<\/h2>/i) ||
-                        secBody.match(/<h2[^>]*>([\s\S]*?)<\/h2>/i);
+        const h2Match = secBody.match(/<h2[^>]*class="[^"]*section-title[^"]*"[^>]*>([\s\S]*?)<\/h2>/i)
+          || secBody.match(/<h2[^>]*>([\s\S]*?)<\/h2>/i);
         if (!h2Match) continue;
-        const secTitle = h2Match[1].replace(/<[^>]+>/g, '').trim();
-        const labelMatch = secBody.match(/<p[^>]*class="[^"]*section-label[^"]*"[^>]*>([\s\S]*?)<\/p>/i);
-        const secLabel = labelMatch ? labelMatch[1].replace(/<[^>]+>/g, '').trim() : '';
+        const secTitle = h2Match[1].replace(/<[^>]+>/g,'').trim();
         const hasGrid = /class="[^"]*gallery-grid/.test(secBody);
-        sections.push({
-          key: 'section_title__' + secId,
-          icon: hasGrid ? '📷' : '📄',
-          title: secTitle + ' Section',
-          preview: secLabel || (hasGrid ? 'Photo gallery section' : 'Custom section'),
-          value: secTitle,
-          photoSectionId: hasGrid ? secId : null
-        });
+        const pMatch = secBody.match(/<p[^>]*>([\s\S]*?)<\/p>/i);
+        const bodyText = pMatch ? pMatch[1].replace(/<[^>]+>/g,'').trim() : '';
+        const customFields = [{ key: 'section_title__' + secId, label: 'Section Title', type: 'text', value: secTitle }];
+        if (!hasGrid && bodyText) customFields.push({ key: 'section_body__' + secId, label: 'Body Text', type: 'textarea', value: bodyText });
+        groups.push({ id: secId, icon: hasGrid ? '📷' : '📄', title: secTitle, fields: customFields, isGallery: hasGrid });
       }
 
-      renderSections(sections);
+      renderSections(groups);
     }
 
-    function renderSections(sections) {
+    // ── Render a single field as HTML ──
+    function renderFieldHtml(f) {
+      if (f.type === 'photo') {
+        const previewId = 'preview-' + f.key;
+        let onchangeHandler = '';
+        if (f.key === 'hero_bg') {
+          onchangeHandler = 'handleHeroBgFile(this)';
+        } else if (f.key === 'about_photo') {
+          onchangeHandler = 'handleAboutPhotoFile(this)';
+        } else {
+          onchangeHandler = 'handleFieldPhoto(this,\'' + f.key + '\')';
+        }
+        return '<div class="field-group">' +
+          '<label>' + escapeHtml(f.label) + '</label>' +
+          (f.value
+            ? '<img id="' + previewId + '" src="' + escapeHtml(f.value) + '" class="field-photo-preview" onerror="this.style.display=\'none\'">'
+            : '<div id="' + previewId + '" style="height:80px;background:var(--surface2);border-radius:8px;margin-bottom:8px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:12px;">No photo</div>') +
+          '<button class="field-photo-btn" onclick="triggerPhotoUpload(\'' + f.key + '\')">📷 ' + (f.value ? 'Change Photo' : 'Upload Photo') + '</button>' +
+          '<input type="file" id="upload-' + f.key + '" style="display:none" accept="image/*" onchange="' + onchangeHandler + '">' +
+          (f.key === 'hero_bg' ? '<div id="hero-bg-progress" style="display:none;font-size:12px;color:var(--text-dim);margin-top:6px;"></div>' : '') +
+          '</div>';
+      }
+      if (f.type === 'textarea') {
+        return '<div class="field-group">' +
+          '<label>' + escapeHtml(f.label) + '</label>' +
+          '<textarea class="field-textarea" data-key="' + f.key + '">' + escapeHtml(f.value) + '</textarea>' +
+          '</div>';
+      }
+      // text (default)
+      return '<div class="field-group">' +
+        '<label>' + escapeHtml(f.label) + '</label>' +
+        '<input type="text" class="field-input" data-key="' + f.key + '" value="' + escapeHtml(f.value) + '">' +
+        '</div>';
+    }
+
+    // ── Render grouped section cards ──
+    function renderSections(groups) {
       const container = document.getElementById('section-cards');
-      if (sections.length === 0) {
-        container.innerHTML = '<div class="empty-state" style="grid-column:1/-1;">No editable sections found</div>';
+      if (groups.length === 0) {
+        container.innerHTML = '<div class="empty-state">No editable sections found</div>';
         return;
       }
 
-      container.innerHTML = sections.map(s => {
-        const previewText = escapeHtml(s.preview.length > 150 ? s.preview.substring(0, 150) + '...' : s.preview);
+      container.innerHTML = groups.map(group => {
+        let bodyHtml = '';
 
-        // Booking Form Fields editor
-        if (s.type === 'booking_fields') {
-          let parsed = { fields: [], submitText: 'Send Booking Request' };
-          try { parsed = JSON.parse(s.value); } catch(e) {}
-          const fieldsHtml = parsed.fields.map((f, i) =>
-            '<div style="display:grid;grid-template-columns:1fr 1fr auto;gap:8px;align-items:center;margin-bottom:8px;">' +
-              '<input type="text" value="' + escapeHtml(f.label) + '" placeholder="Label" style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:7px 10px;color:var(--text);font-size:12px;font-family:inherit;" data-field-idx="' + i + '" data-field-prop="label" oninput="updateBookingField(this)">' +
-              '<input type="text" value="' + escapeHtml(f.placeholder) + '" placeholder="Placeholder" style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:7px 10px;color:var(--text);font-size:12px;font-family:inherit;" data-field-idx="' + i + '" data-field-prop="placeholder" oninput="updateBookingField(this)">' +
-              '<label style="font-size:11px;color:var(--text-dim);display:flex;align-items:center;gap:4px;white-space:nowrap;cursor:pointer;">' +
-                '<input type="checkbox"' + (f.required ? ' checked' : '') + ' data-field-idx="' + i + '" data-field-prop="required" onchange="updateBookingField(this)"> Req</label>' +
+        // FAQ: Q/A pairs side by side
+        if (group.faqPairs) {
+          bodyHtml = group.faqPairs.map((pair, i) =>
+            '<div class="field-row" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">' +
+              '<div class="field-group" style="margin-bottom:0;">' +
+                '<label>Question ' + (i + 1) + '</label>' +
+                '<textarea class="field-textarea" data-key="faq_q_' + i + '" style="min-height:60px;">' + escapeHtml(pair.question) + '</textarea>' +
+              '</div>' +
+              '<div class="field-group" style="margin-bottom:0;">' +
+                '<label>Answer ' + (i + 1) + '</label>' +
+                '<textarea class="field-textarea" data-key="faq_a_' + i + '" style="min-height:60px;">' + escapeHtml(pair.answer) + '</textarea>' +
+              '</div>' +
             '</div>'
           ).join('');
-          return '<div class="section-card" data-key="' + s.key + '" data-booking-fields=\'' + escapeHtml(s.value) + '\' onclick="toggleSectionEdit(this)">' +
-            '<div class="section-card-header"><div style="display:flex;align-items:center;gap:8px;">' +
-              '<span class="section-card-icon">' + s.icon + '</span>' +
-              '<span class="section-card-title">' + escapeHtml(s.title) + '</span>' +
-            '</div></div>' +
-            '<div class="section-card-preview">' + escapeHtml(s.preview) + '</div>' +
-            '<div class="section-editor">' +
-              '<div style="font-size:11px;color:var(--text-dim);margin-bottom:10px;display:grid;grid-template-columns:1fr 1fr auto;gap:8px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;">' +
-                '<span>Label</span><span>Placeholder</span><span>Req</span></div>' +
-              '<div id="booking-fields-list">' + fieldsHtml + '</div>' +
-              '<div style="margin-top:12px;">' +
-                '<label style="font-size:12px;color:var(--text-dim);display:block;margin-bottom:6px;">Submit Button Text</label>' +
-                '<input type="text" id="booking-submit-text" value="' + escapeHtml(parsed.submitText) + '" style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px 12px;color:var(--text);font-size:13px;font-family:inherit;" oninput="updateBookingSubmitText(this)">' +
-              '</div>' +
-              '<div style="margin-top:16px;background:rgba(255,180,0,0.08);border:1px solid rgba(255,180,0,0.25);border-radius:10px;padding:12px 14px;display:flex;gap:10px;align-items:flex-start;">' +
-                '<span style="font-size:18px;flex-shrink:0;">⚠️</span>' +
-                '<div style="font-size:12px;color:rgba(255,220,100,0.9);line-height:1.6;">' +
-                  '<strong style="display:block;margin-bottom:2px;">Activate your booking form</strong>' +
-                  'Your form won\'t deliver emails until it\'s activated. To activate: have someone (or yourself) submit a test booking request from your site. You\'ll get a confirmation email from formsubmit.co — click the link inside, and all future bookings will land in your inbox automatically.' +
-                '</div>' +
-              '</div>' +
-              '<div class="section-actions" style="margin-top:14px;">' +
-                '<button class="btn-cancel" onclick="event.stopPropagation();cancelSectionEdit(this)">Cancel</button>' +
-                '<button class="btn-save" onclick="event.stopPropagation();saveBookingFields(this)">Save Form</button>' +
-              '</div>' +
-              '<div class="save-status" id="status-booking_fields"></div>' +
-            '</div>' +
-          '</div>';
-        }
-
-        // About the Artist — text + photo upload
-        if (s.type === 'about') {
-          return '<div class="section-card" data-key="' + s.key + '" onclick="toggleSectionEdit(this)">' +
+          return '<div class="section-card" data-section-id="faq">' +
             '<div class="section-card-header">' +
-              '<div style="display:flex;align-items:center;gap:8px;">' +
-                '<span class="section-card-icon">' + s.icon + '</span>' +
-                '<span class="section-card-title">' + escapeHtml(s.title) + '</span>' +
-              '</div>' +
+              '<span class="section-card-icon">❓</span>' +
+              '<span class="section-card-title">FAQ</span>' +
             '</div>' +
-            '<div class="section-card-preview">' + previewText + '</div>' +
             '<div class="section-editor">' +
-              '<label style="font-size:12px;color:var(--text-dim);display:block;margin-bottom:6px;">Bio Text</label>' +
-              '<textarea class="section-textarea" data-key="' + s.key + '" style="margin-bottom:16px;">' + escapeHtml(s.value) + '</textarea>' +
-              '<label style="font-size:12px;color:var(--text-dim);display:block;margin-bottom:8px;">Artist Photo</label>' +
-              '<div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:12px;">' +
-                '<img id="about-photo-preview" src="' + escapeHtml(s.photoSrc || '') + '" style="width:72px;height:90px;object-fit:cover;border-radius:8px;border:1px solid var(--border);flex-shrink:0;" onerror="this.style.display=\'none\'" />' +
-                '<label style="flex:1;cursor:pointer;">' +
-                  '<input type="file" id="about-photo-input" accept="image/*" style="display:none;" onchange="handleAboutPhotoFile(this)">' +
-                  '<div style="border:2px dashed var(--border);border-radius:8px;padding:16px;text-align:center;color:var(--text-dim);font-size:12px;cursor:pointer;" onclick="document.getElementById(\'about-photo-input\').click()">' +
-                    '📷 Click to upload new artist photo<br>' +
-                    '<span style="font-size:11px;opacity:0.6;">Replaces the photo in your About section</span>' +
-                  '</div>' +
-                '</label>' +
-              '</div>' +
-              '<div id="about-photo-status" style="font-size:12px;color:var(--text-dim);margin-bottom:8px;display:none;"></div>' +
-              '<div class="section-actions">' +
-                '<button class="btn-cancel" onclick="event.stopPropagation();cancelSectionEdit(this)">Cancel</button>' +
-                '<button class="btn-save" onclick="event.stopPropagation();saveSection(this)" data-key="' + s.key + '">Save Bio</button>' +
-              '</div>' +
-              '<div class="save-status" id="status-about"></div>' +
+              bodyHtml +
+              '<button class="btn-save-section" onclick="saveSectionGroup(\'faq\')">Save FAQ</button>' +
+              '<div class="save-status" id="status-faq"></div>' +
             '</div>' +
           '</div>';
         }
 
-        // Special editor for image-type sections (hero_bg)
-        if (s.type === 'image' || s.type === 'hero_bg') {
-          const imgSrc = s.value.startsWith('http') ? s.value : s.value;
-          return '<div class="section-card" data-key="' + s.key + '" onclick="toggleSectionEdit(this)">' +
+        // Gallery sections: show fields + link to Gallery tab
+        if (group.isGallery) {
+          bodyHtml = group.fields.map(f => renderFieldHtml(f)).join('');
+          return '<div class="section-card" data-section-id="' + group.id + '">' +
             '<div class="section-card-header">' +
-              '<div style="display:flex;align-items:center;gap:8px;">' +
-                '<span class="section-card-icon">' + s.icon + '</span>' +
-                '<span class="section-card-title" title="Click to rename" contenteditable="false" data-key="' + s.key + '" onclick="event.stopPropagation();startRenameSection(this)" onblur="saveRenameSection(this)" onkeydown="if(event.key===\'Enter\'){event.preventDefault();this.blur();}">' + escapeHtml(s.title) + '</span>' +
-              '</div>' +
+              '<span class="section-card-icon">' + group.icon + '</span>' +
+              '<span class="section-card-title">' + escapeHtml(group.title) + '</span>' +
             '</div>' +
-            '<div class="section-card-preview">' + previewText + '</div>' +
             '<div class="section-editor">' +
-              '<div style="display:flex;flex-direction:column;gap:12px;">' +
-                '<img id="hero-bg-preview" src="' + escapeHtml(imgSrc) + '" style="width:100%;max-height:200px;object-fit:cover;border-radius:8px;border:1px solid var(--border);" onerror="this.style.display=\'none\'" />' +
-                '<label style="cursor:pointer;">' +
-                  '<input type="file" id="hero-bg-upload" accept="image/*" style="display:none;" onchange="handleHeroBgFile(this)">' +
-                  '<div id="hero-bg-drop" style="border:2px dashed var(--border);border-radius:10px;padding:24px;text-align:center;cursor:pointer;color:var(--text-dim);font-size:13px;">' +
-                    '📷 Click to upload new background photo<br>' +
-                    '<span style="font-size:11px;opacity:0.6;">JPG or PNG · max 5MB · will replace current hero background</span>' +
-                  '</div>' +
-                '</label>' +
-                '<button id="btn-save-hero-bg" style="background:var(--mint);color:#0a1a12;border:none;border-radius:10px;padding:11px;font-weight:700;cursor:pointer;font-size:14px;opacity:0.5;" disabled onclick="event.stopPropagation();uploadHeroBg()">Upload & Apply</button>' +
-                '<div id="hero-bg-progress" style="display:none;font-size:12px;color:var(--text-dim);text-align:center;"></div>' +
-              '</div>' +
-              '<div class="section-actions" style="margin-top:8px;">' +
-                '<button class="btn-cancel" onclick="event.stopPropagation();cancelSectionEdit(this)">Cancel</button>' +
-              '</div>' +
-              '<div class="save-status" id="status-' + s.key + '"></div>' +
+              bodyHtml +
+              '<button onclick="goToGalleryTab(\'' + group.id + '\')" style="width:100%;background:rgba(0,200,130,0.1);border:1px solid var(--mint-border);color:var(--mint);border-radius:10px;padding:12px;font-weight:700;cursor:pointer;font-size:14px;margin-bottom:8px;font-family:inherit;">📷 Manage Photos →</button>' +
+              (group.fields.length ? '<button class="btn-save-section" onclick="saveSectionGroup(\'' + group.id + '\')">Save ' + escapeHtml(group.title) + '</button>' : '') +
+              '<div class="save-status" id="status-' + group.id + '"></div>' +
             '</div>' +
           '</div>';
         }
 
-        return '<div class="section-card" data-key="' + s.key + '" onclick="toggleSectionEdit(this)">' +
+        // Standard grouped section
+        bodyHtml = group.fields.map(f => renderFieldHtml(f)).join('');
+
+        // Booking warning note
+        if (group.id === 'booking') {
+          bodyHtml += '<div style="margin-bottom:16px;background:rgba(255,180,0,0.08);border:1px solid rgba(255,180,0,0.25);border-radius:10px;padding:12px 14px;display:flex;gap:10px;align-items:flex-start;">' +
+            '<span style="font-size:16px;flex-shrink:0;">⚠️</span>' +
+            '<div style="font-size:12px;color:rgba(255,220,100,0.9);line-height:1.6;">' +
+              '<strong style="display:block;margin-bottom:2px;">Activate your booking form first</strong>' +
+              'Booking emails won\'t arrive until activated. Submit a test booking from your site — formsubmit.co will email you a confirmation link. Click it to activate.' +
+            '</div></div>';
+        }
+
+        return '<div class="section-card" data-section-id="' + group.id + '">' +
           '<div class="section-card-header">' +
-            '<div style="display:flex;align-items:center;gap:8px;">' +
-              '<span class="section-card-icon">' + s.icon + '</span>' +
-              '<span class="section-card-title" title="Click to rename" contenteditable="false" data-key="' + s.key + '" onclick="event.stopPropagation();startRenameSection(this)" onblur="saveRenameSection(this)" onkeydown="if(event.key===\'Enter\'){event.preventDefault();this.blur();}">' + escapeHtml(s.title) + '</span>' +
-            '</div>' +
+            '<span class="section-card-icon">' + group.icon + '</span>' +
+            '<span class="section-card-title">' + escapeHtml(group.title) + '</span>' +
           '</div>' +
-          '<div class="section-card-preview">' + previewText + '</div>' +
-          (s.photoSectionId ? '<button onclick="event.stopPropagation();goToGalleryTab(\'' + s.photoSectionId + '\')" style="margin:0 16px 12px;width:calc(100% - 32px);background:rgba(0,200,130,0.1);border:1px solid var(--mint-border);color:var(--mint);border-radius:8px;padding:8px 12px;font-size:13px;font-weight:600;cursor:pointer;text-align:left;">📷 Add Photos →</button>' : '') +
           '<div class="section-editor">' +
-            '<textarea class="section-textarea" data-key="' + s.key + '">' + escapeHtml(s.value) + '</textarea>' +
-            (['booking_email','booking_details','booking_label','booking_title'].includes(s.key) ?
-              '<div style="margin-top:12px;background:rgba(255,180,0,0.08);border:1px solid rgba(255,180,0,0.25);border-radius:10px;padding:12px 14px;display:flex;gap:10px;align-items:flex-start;">' +
-                '<span style="font-size:16px;flex-shrink:0;">⚠️</span>' +
-                '<div style="font-size:12px;color:rgba(255,220,100,0.9);line-height:1.6;">' +
-                  '<strong style="display:block;margin-bottom:2px;">Activate your booking form first</strong>' +
-                  'Booking submissions won\'t reach your email until activated. Submit a test booking from your site — you\'ll get a confirmation email from formsubmit.co. Click the link inside and all future bookings go straight to your inbox.' +
-                '</div>' +
-              '</div>'
-            : '') +
-            '<div class="section-actions">' +
-              '<button class="btn-cancel" onclick="event.stopPropagation();cancelSectionEdit(this)">Cancel</button>' +
-              '<button class="btn-save" onclick="event.stopPropagation();saveSection(this)" data-key="' + s.key + '">Save</button>' +
-            '</div>' +
-            '<div class="save-status" id="status-' + s.key + '"></div>' +
+            bodyHtml +
+            '<button class="btn-save-section" onclick="saveSectionGroup(\'' + group.id + '\')">Save ' + escapeHtml(group.title) + '</button>' +
+            '<div class="save-status" id="status-' + group.id + '"></div>' +
           '</div>' +
         '</div>';
       }).join('');
     }
 
-    window.toggleSectionEdit = function(card) {
-      if (card.classList.contains('editing')) return;
-      // Close any other open editors
-      document.querySelectorAll('.section-card.editing').forEach(c => c.classList.remove('editing'));
-      card.classList.add('editing');
-      const textarea = card.querySelector('.section-textarea');
-      if (textarea) textarea.focus();
+    // ── Trigger photo upload for a field key ──
+    window.triggerPhotoUpload = function(key) {
+      const input = document.getElementById('upload-' + key);
+      if (input) input.click();
     };
 
-    window.cancelSectionEdit = function(btn) {
-      const card = btn.closest('.section-card');
-      card.classList.remove('editing');
-      // Reset status
-      const statusEl = card.querySelector('.save-status');
-      if (statusEl) { statusEl.className = 'save-status'; statusEl.textContent = ''; }
+    // ── Generic field photo handler (non-hero, non-about) ──
+    window.handleFieldPhoto = async function(input, key) {
+      if (!input.files || !input.files[0]) return;
+      const file = input.files[0];
+      if (file.size > 5 * 1024 * 1024) { showToast('Image too large — max 5MB', true); return; }
+      const previewEl = document.getElementById('preview-' + key);
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        if (previewEl) { previewEl.tagName === 'IMG' ? (previewEl.src = e.target.result) : (previewEl.innerHTML = '<img src="' + e.target.result + '" class="field-photo-preview">'); }
+      };
+      reader.readAsDataURL(file);
+      try {
+        const base64 = await new Promise((res, rej) => {
+          const r2 = new FileReader();
+          r2.onload = () => res(r2.result.split(',')[1]);
+          r2.onerror = rej;
+          r2.readAsDataURL(file);
+        });
+        const token = await getToken();
+        const uploadRes = await fetch(CONVEX_HTTP_URL + '/api/dashboard/upload-hero-bg', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+          body: JSON.stringify({ imageBase64: base64, fileName: file.name, sectionKey: key }),
+        });
+        const data = await uploadRes.json();
+        if (uploadRes.ok && data.ok) {
+          showToast('Photo uploaded! Changes live in ~30 seconds');
+          afterSuccessfulChange();
+        } else {
+          showToast(data.error || 'Upload failed', true);
+        }
+      } catch(e) {
+        showToast('Upload error: ' + e.message, true);
+      }
     };
+
+    // ── Save individual field by key ──
+    async function saveFieldByKey(key, value) {
+      const token = await getToken();
+      const res = await fetch(CONVEX_HTTP_URL + '/api/dashboard/save-section', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+        body: JSON.stringify({ sectionKey: key, newContent: value }),
+      });
+      return res.json();
+    }
+
+    // ── Save all fields in a grouped section card ──
+    window.saveSectionGroup = async function(sectionId) {
+      if (!(await checkChangeLimit())) return;
+      const card = document.querySelector('[data-section-id="' + sectionId + '"]');
+      if (!card) return;
+      const statusEl = document.getElementById('status-' + sectionId);
+      if (statusEl) statusEl.textContent = 'Saving...';
+
+      // FAQ: save as Q/A pairs joined into legacy format
+      if (sectionId === 'faq') {
+        try {
+          const pairs = [];
+          let i = 0;
+          while (true) {
+            const q = card.querySelector('[data-key="faq_q_' + i + '"]');
+            const a = card.querySelector('[data-key="faq_a_' + i + '"]');
+            if (!q) break;
+            pairs.push('Q: ' + q.value + '\nA: ' + (a ? a.value : ''));
+            i++;
+          }
+          await saveFieldByKey('faq', pairs.join('\n\n'));
+          if (statusEl) { statusEl.textContent = '✅ Saved'; setTimeout(() => { if (statusEl) statusEl.textContent = ''; }, 2000); }
+          showToast('✅ Saved! Allow 3–5 minutes to show on your website.');
+          afterSuccessfulChange();
+        } catch(e) {
+          if (statusEl) statusEl.textContent = '❌ ' + e.message;
+        }
+        return;
+      }
+
+      // Standard: save each [data-key] field
+      const fields = card.querySelectorAll('[data-key]');
+      try {
+        for (const field of fields) {
+          const key = field.dataset.key;
+          if (!key) continue;
+          await saveFieldByKey(key, field.value);
+        }
+        if (statusEl) { statusEl.textContent = '✅ Saved'; setTimeout(() => { if (statusEl) statusEl.textContent = ''; }, 2000); }
+        showToast('✅ Saved! Allow 3–5 minutes to show on your website.');
+        afterSuccessfulChange();
+      } catch(e) {
+        if (statusEl) statusEl.textContent = '❌ ' + e.message;
+      }
+    };
+
+    // ── Backward-compat: legacy toggleSectionEdit / cancelSectionEdit stubs ──
+    window.toggleSectionEdit = function(card) { /* no-op in grouped layout */ };
+    window.cancelSectionEdit = function(btn) { /* no-op in grouped layout */ };
 
     window.saveSection = async function(btn) {
       if (!(await checkChangeLimit())) return;
@@ -1471,19 +1506,21 @@
         return;
       }
       heroBgFile = file;
+      // Enable separate upload button if it exists (legacy layout)
       const btn = document.getElementById('btn-save-hero-bg');
-      btn.disabled = false;
-      btn.style.opacity = '1';
-      // Show filename in drop zone
+      if (btn) { btn.disabled = false; btn.style.opacity = '1'; }
+      // Update drop zone if it exists (legacy layout)
       const drop = document.getElementById('hero-bg-drop');
-      drop.innerHTML = '✅ ' + escapeHtml(file.name) + '<br><span style="font-size:11px;opacity:0.6;">Click Upload & Apply to save</span>';
-      // Preview
+      if (drop) drop.innerHTML = '✅ ' + escapeHtml(file.name) + '<br><span style="font-size:11px;opacity:0.6;">Click Upload & Apply to save</span>';
+      // Show preview — try new layout ID first, then legacy
       const reader = new FileReader();
       reader.onload = function(e) {
-        const preview = document.getElementById('hero-bg-preview');
-        if (preview) { preview.src = e.target.result; preview.style.display = 'block'; }
+        const preview = document.getElementById('preview-hero_bg') || document.getElementById('hero-bg-preview');
+        if (preview && preview.tagName === 'IMG') { preview.src = e.target.result; preview.style.display = 'block'; }
       };
       reader.readAsDataURL(file);
+      // In new grouped layout (no separate upload button), auto-upload immediately
+      if (!btn) { setTimeout(() => uploadHeroBg(), 100); }
     };
 
     window.uploadHeroBg = async function() {
@@ -1491,12 +1528,11 @@
       if (!(await checkChangeLimit())) return;
       const btn = document.getElementById('btn-save-hero-bg');
       const progress = document.getElementById('hero-bg-progress');
-      const statusEl = document.getElementById('status-hero_bg');
+      const statusEl = document.getElementById('status-hero') || document.getElementById('status-hero_bg');
 
-      btn.disabled = true;
-      btn.textContent = 'Uploading...';
-      progress.style.display = 'block';
-      progress.textContent = 'Reading file...';
+      if (btn) { btn.disabled = true; btn.textContent = 'Uploading...'; }
+      if (progress) { progress.style.display = 'block'; progress.textContent = 'Reading file...'; }
+      if (statusEl) statusEl.textContent = 'Uploading...';
 
       try {
         const token = await getToken();
@@ -1513,7 +1549,7 @@
           reader.readAsDataURL(heroBgFile);
         });
 
-        progress.textContent = 'Uploading to server...';
+        if (progress) progress.textContent = 'Uploading to server...';
 
         const res = await fetch(CONVEX_HTTP_URL + '/api/dashboard/upload-hero-bg', {
           method: 'POST',
@@ -1525,28 +1561,25 @@
         if (res.ok && data.ok) {
           showToast('Background updated! Changes live in ~30 seconds');
           afterSuccessfulChange();
-          progress.textContent = '✅ Done! Changes propagating...';
-          if (statusEl) { statusEl.className = 'save-status success'; statusEl.textContent = '✅ Background updated!'; }
-          // Update preview with new URL
+          if (progress) progress.textContent = '✅ Done! Changes propagating...';
+          if (statusEl) { statusEl.textContent = '✅ Background updated!'; setTimeout(() => { if (statusEl) statusEl.textContent = ''; }, 3000); }
+          // Update preview with new URL — try new layout ID first, then legacy
           if (data.imageUrl) {
-            const preview = document.getElementById('hero-bg-preview');
-            if (preview) preview.src = data.imageUrl + '?t=' + Date.now();
+            const preview = document.getElementById('preview-hero_bg') || document.getElementById('hero-bg-preview');
+            if (preview && preview.tagName === 'IMG') preview.src = data.imageUrl + '?t=' + Date.now();
           }
-          setTimeout(() => {
-            const card = btn.closest('.section-card');
-            if (card) card.classList.remove('editing');
-          }, 3000);
         } else {
           showToast(data.error || 'Upload failed', true);
-          progress.textContent = '❌ ' + (data.error || 'Upload failed');
+          if (progress) progress.textContent = '❌ ' + (data.error || 'Upload failed');
+          if (statusEl) statusEl.textContent = '❌ ' + (data.error || 'Upload failed');
         }
       } catch (e) {
         showToast('Upload error: ' + e.message, true);
-        progress.textContent = '❌ ' + e.message;
+        if (progress) progress.textContent = '❌ ' + e.message;
+        if (statusEl) statusEl.textContent = '❌ ' + e.message;
       }
 
-      btn.disabled = false;
-      btn.textContent = 'Upload & Apply';
+      if (btn) { btn.disabled = false; btn.textContent = 'Upload & Apply'; }
       heroBgFile = null;
     };
 
@@ -1712,9 +1745,9 @@
     window.handleAboutPhotoFile = async function(input) {
       if (!input.files || !input.files[0]) return;
       const status = document.getElementById('about-photo-status');
-      const preview = document.getElementById('about-photo-preview');
-      status.style.display = 'block';
-      status.textContent = 'Uploading...';
+      const preview = document.getElementById('about-photo-preview') || document.getElementById('preview-about_photo');
+      if (status) { status.style.display = 'block'; status.textContent = 'Uploading...'; }
+      else showToast('Uploading artist photo...');
       try {
         const compressed = await compressImage(input.files[0]);
         const token = await getToken();
@@ -1731,8 +1764,9 @@
         });
         if (res.ok) {
           const newSrc = 'img/profile.jpg?r=' + Date.now();
-          if (preview) { preview.src = newSrc; preview.style.display = 'block'; }
-          status.textContent = '✅ Photo uploaded! Allow 3–5 minutes to show on your website.';
+          if (preview && preview.tagName === 'IMG') { preview.src = newSrc; preview.style.display = 'block'; }
+          if (status) status.textContent = '✅ Photo uploaded! Allow 3–5 minutes to show on your website.';
+          else showToast('✅ Artist photo uploaded! Allow 3–5 minutes to show on your website.');
           // Also patch the about-image src in the site HTML via save-section
           await fetch(CONVEX_HTTP_URL + '/api/dashboard/save-section', {
             method: 'POST',
@@ -1740,10 +1774,12 @@
             body: JSON.stringify({ sectionKey: 'about_photo', newContent: 'img/profile.jpg' })
           });
         } else {
-          status.textContent = '❌ Upload failed. Try again.';
+          if (status) status.textContent = '❌ Upload failed. Try again.';
+          else showToast('❌ Upload failed. Try again.', true);
         }
       } catch(e) {
-        status.textContent = '❌ Error: ' + e.message;
+        if (status) status.textContent = '❌ Error: ' + e.message;
+        else showToast('❌ Error: ' + e.message, true);
       }
     };
 
