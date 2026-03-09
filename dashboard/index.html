@@ -1362,31 +1362,82 @@
         }
       }
 
-      // ── CUSTOM SECTIONS (catch-all for any section with id not already handled) ──
-      const knownIds = new Set(['gallery', 'about', 'book', 'booking', 'faq', 'contact', 'hero', 'testimonials', 'shop', 'top', 'nosotros', 'styles', 'specialty']);
-      const customSecRe = /<section[^>]+id="([^"]+)"[^>]*>([\s\S]*?)<\/section>/gi;
+      // ── GENERIC CATCH-ALL: auto-parse ANY section not already in groups ──
+      // Builds from: hero, about, booking, faq, contact, testimonials, shop, styles
+      // Everything else gets smart auto-detection: cards, paragraphs, links, galleries
+      const handledIds = new Set(groups.map(g => g.id));
+      // Also skip gallery-type sections already handled by parseGallery
+      handledIds.add('gallery');
+      const allSecRe = /<section[^>]+id="([^"]+)"[^>]*>([\s\S]*?)<\/section>/gi;
       let csm;
-      while ((csm = customSecRe.exec(html)) !== null) {
+      while ((csm = allSecRe.exec(html)) !== null) {
         const secId = csm[1];
+        if (handledIds.has(secId)) continue;
+        handledIds.add(secId); // prevent dupes
         const secBody = csm[2];
-        if (knownIds.has(secId)) continue;
-        const h2Match = secBody.match(/<h2[^>]*class="[^"]*section-title[^"]*"[^>]*>([\s\S]*?)<\/h2>/i)
+        const fields = [];
+
+        // 1. Section title (h2)
+        const h2M = secBody.match(/<h2[^>]*class="[^"]*section-title[^"]*"[^>]*>([\s\S]*?)<\/h2>/i)
           || secBody.match(/<h2[^>]*>([\s\S]*?)<\/h2>/i);
-        if (!h2Match) continue;
-        const secTitle = h2Match[1].replace(/<[^>]+>/g,'').trim();
-        const hasGrid = /class="[^"]*gallery-grid/.test(secBody);
-        // Extract ALL <p> tags (not just the first), skipping section-labels
-        const allPTags = [...secBody.matchAll(/<p[^>]*>([\s\S]*?)<\/p>/gi)];
-        const bodyParts = allPTags
-          .map(m => m[1].replace(/<[^>]+>/g,'').trim())
-          .filter(t => t && t.length > 5 && !t.match(/^[A-Z\s]{3,30}$/));
-        const bodyText = bodyParts.join('\n\n');
-        const customFields = [{ key: 'section_title__' + secId, label: 'Section Title', type: 'text', value: secTitle }];
-        if (!hasGrid && bodyText) customFields.push({ key: 'section_body__' + secId, label: 'Body Text', type: 'textarea', value: bodyText });
-        // Check for external links in this section
+        const secTitle = h2M ? h2M[1].replace(/<[^>]+>/g,'').trim() : secId;
+        fields.push({ key: 'section_title__' + secId, label: 'Section Title', type: 'text', value: secTitle });
+
+        // 2. Section label (small label above title)
+        const labelM = secBody.match(/<p[^>]*class="[^"]*section-label[^"]*"[^>]*>([\s\S]*?)<\/p>/i);
+        if (labelM) {
+          fields.push({ key: 'section_label__' + secId, label: 'Section Label', type: 'text', value: labelM[1].replace(/<[^>]+>/g,'').trim() });
+        }
+
+        // 3. Detect card-based layouts: any repeated div whose class contains
+        //    card, item, entry, feature, detail, step (but not gallery-item, nav, footer)
+        const isGallery = /class="[^"]*gallery-grid/.test(secBody);
+        const cardPattern = /<div[^>]*class="[^"]*(?:service|style|feature|step|testimonial|contact|pricing|team|artist|info|location|faq|hour|stat|booking|about)-(?:card|item|entry|detail|block)[^"]*"[^>]*>/gi;
+        const cardOpenings = [...secBody.matchAll(cardPattern)];
+        
+        if (cardOpenings.length >= 2 && !isGallery) {
+          // Card-based section — split by the card pattern and parse each
+          const cardClassName = cardOpenings[0][0].match(/class="([^"]+)"/i)[1].split(/\s+/).find(c => /card|item|entry|detail|step|block/i.test(c)) || 'card';
+          // Build a split regex from the first card's opening tag pattern
+          const splitRe = new RegExp('<div[^>]*class="[^"]*' + cardClassName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '[^"]*"[^>]*>', 'i');
+          const cardParts = secBody.split(splitRe).slice(1);
+          
+          cardParts.forEach((card, i) => {
+            if (i >= 10) return;
+            // Card title: h3 (prefer data-en attr)
+            const tM = card.match(/<h3[^>]*data-en="([^"]*)"/) || card.match(/<h3[^>]*>([\s\S]*?)<\/h3>/i);
+            const cardT = tM ? (tM[1] || '').replace(/<[^>]+>/g,'').trim() : '';
+            // Card description: first <p> (prefer data-en attr)
+            const dM = card.match(/<p[^>]*data-en="([^"]*)"/) || card.match(/<p[^>]*>([\s\S]*?)<\/p>/i);
+            const cardD = dM ? (dM[1] || '').replace(/<[^>]+>/g,'').trim() : '';
+            if (cardT) {
+              fields.push({ key: `${secId}__card_title_${i}`, label: `Item ${i+1} Title`, type: 'text', value: cardT });
+              if (cardD) fields.push({ key: `${secId}__card_desc_${i}`, label: `Item ${i+1} Description`, type: 'textarea', value: cardD });
+            } else if (cardD) {
+              fields.push({ key: `${secId}__card_desc_${i}`, label: `Item ${i+1}`, type: 'textarea', value: cardD });
+            }
+          });
+        } else if (!isGallery) {
+          // 4. Non-card section: extract paragraphs as editable content
+          const allP = [...secBody.matchAll(/<p[^>]*>([\s\S]*?)<\/p>/gi)];
+          const bodyParts = allP
+            .map(m => m[1].replace(/<[^>]+>/g,'').trim())
+            .filter(t => t && t.length > 5 && !t.match(/^[A-Z\s]{3,30}$/));
+          const bodyText = bodyParts.join('\n\n');
+          if (bodyText) fields.push({ key: `${secId}__content`, label: 'Content', type: 'textarea', value: bodyText });
+        }
+
+        // 5. External links in section
         const extLink = secBody.match(/href="(https?:\/\/[^"]+)"/i);
-        if (extLink) customFields.push({ key: 'section_link__' + secId, label: 'Link URL', type: 'text', value: extLink[1] });
-        groups.push({ id: secId, icon: hasGrid ? '📷' : '📄', title: secTitle, fields: customFields, isGallery: hasGrid });
+        if (extLink) fields.push({ key: `${secId}__link`, label: 'Link URL', type: 'text', value: extLink[1] });
+
+        // 6. Map embed
+        const mapM = secBody.match(/<iframe[^>]*src="([^"]*(?:google|maps)[^"]*)"[^>]*>/i);
+        if (mapM) fields.push({ key: `${secId}__map`, label: 'Map Embed URL', type: 'text', value: mapM[1] });
+
+        if (fields.length > 1 || isGallery) { // >1 because title is always there
+          groups.push({ id: secId, icon: isGallery ? '📷' : '📄', title: secTitle, fields: fields, isGallery });
+        }
       }
 
       renderSections(groups);
