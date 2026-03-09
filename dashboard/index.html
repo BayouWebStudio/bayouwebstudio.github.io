@@ -2432,8 +2432,41 @@
         });
         var data = await res.json();
         if (res.ok) {
-          showToast('\uD83C\uDF3F Your site is being built! Refreshing...');
-          setTimeout(function() { location.reload(); }, 3000);
+          // Show live progress — build takes ~60s, poll until ready
+          var overview = document.getElementById('tab-overview');
+          var steps = ['Scraping Instagram...', 'Classifying your photos...', 'Building your site...', 'Deploying...', 'Almost there...'];
+          var si = 0;
+          overview.innerHTML = '<div style="max-width:480px;margin:80px auto;padding:0 24px;text-align:center;">' +
+            '<div style="width:48px;height:48px;border:3px solid rgba(0,200,130,0.3);border-top-color:#00C882;border-radius:50%;animation:spin 0.9s linear infinite;margin:0 auto 28px;"></div>' +
+            '<p id="build-progress-step" style="color:#fff;font-size:18px;font-weight:700;margin-bottom:8px;">' + steps[0] + '</p>' +
+            '<p style="color:rgba(255,255,255,0.45);font-size:13px;">This takes about 60 seconds</p>' +
+            '</div>';
+          var stepTimer = setInterval(function() {
+            si = Math.min(si + 1, steps.length - 1);
+            var el = document.getElementById('build-progress-step');
+            if (el) el.textContent = steps[si];
+          }, 12000);
+          // Poll for completion
+          var pollCount = 0;
+          var pollTimer = setInterval(async function() {
+            pollCount++;
+            if (pollCount > 24) { clearInterval(pollTimer); clearInterval(stepTimer); location.reload(); return; }
+            try {
+              var token2 = await window._getClerkToken();
+              var chk = await fetch(CONVEX_HTTP_URL + '/api/dashboard/info', {
+                method: 'POST',
+                headers: { 'Authorization': 'Bearer ' + token2, 'Content-Type': 'application/json' },
+                body: '{}'
+              });
+              var info = await chk.json();
+              if (info.found && info.siteSlug) {
+                clearInterval(pollTimer); clearInterval(stepTimer);
+                var el = document.getElementById('build-progress-step');
+                if (el) el.textContent = '🌿 Site is live!';
+                setTimeout(function() { location.reload(); }, 1500);
+              }
+            } catch(e) {}
+          }, 5000);
         } else {
           showToast(data.error || 'Build failed \u2014 try again', true);
           btn.textContent = 'Build My Site \u2192';
