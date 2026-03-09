@@ -1391,7 +1391,7 @@
 
         // 3. Detect card-based layouts: any repeated div whose class contains
         //    card, item, entry, feature, detail, step (but not gallery-item, nav, footer)
-        const isGallery = /class="[^"]*gallery[_-](?:grid|list|container|wrap)/.test(secBody);
+        const isGallery = /class="[^"]*gallery[_-]{1,2}(?:grid|list|container|wrap)/.test(secBody);
         const cardPattern = /<div[^>]*class="[^"]*(?:(?:service|style|feature|step|testimonial|contact|pricing|team|artist|info|location|faq|hour|stat|booking|about|price|plan)[_-](?:card|item|entry|detail|block)|(?:price-card|plan-card))[^"]*"[^>]*>/gi;
         const cardOpenings = [...secBody.matchAll(cardPattern)];
         
