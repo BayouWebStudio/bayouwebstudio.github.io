@@ -1164,19 +1164,12 @@
         key: 'hero_title', label: 'Artist Name', type: 'text',
         value: heroTitleMatch ? heroTitleMatch[1].replace(/<[^>]+>/g,'').trim() : ''
       });
-      const heroSubMatch = html.match(/<[^>]*class="[^"]*hero-subtitle[^"]*"[^>]*>([\s\S]*?)<\/[^>]+>/i);
+      // Match hero-subtitle OR hero-tagline (different templates use different class names)
+      const heroSubMatch = html.match(/<[^>]*class="[^"]*hero-(?:subtitle|tagline)[^"]*"[^>]*>([\s\S]*?)<\/[^>]+>/i);
       heroFields.push({
         key: 'hero_subtitle', label: 'Tagline', type: 'text',
         value: heroSubMatch ? heroSubMatch[1].replace(/<[^>]+>/g,'').trim() : ''
       });
-      // Hero tagline (separate from subtitle on some sites)
-      const heroTagMatch = html.match(/<[^>]*class="[^"]*hero-tagline[^"]*"[^>]*>([\s\S]*?)<\/[^>]+>/i);
-      if (heroTagMatch) {
-        heroFields.push({
-          key: 'hero_tagline', label: 'Hero Tagline', type: 'text',
-          value: heroTagMatch[1].replace(/<[^>]+>/g,'').trim()
-        });
-      }
       groups.push({ id: 'hero', icon: '🦸', title: 'Hero', fields: heroFields });
 
       // ── ABOUT ──
