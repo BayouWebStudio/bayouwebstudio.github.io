@@ -748,6 +748,219 @@ body {
 
 <script>
 (function() {
+  // ── i18n ──
+  const lang = new URLSearchParams(location.search).get('lang') || localStorage.getItem('lang') || 'en';
+  if (lang === 'es') localStorage.setItem('lang', 'es');
+
+  const _appI18n = {
+    es: {
+      boot_text: 'Cargando GetMinted…',
+      landing_tagline: 'Sitios web con IA para creativos',
+      get_started_btn: '🌿 Crear Mi Sitio',
+      login_btn: 'Iniciar Sesión',
+      have_questions: '¿Tienes preguntas? Habla con Mint primero',
+      chat_with_mint: '💬 Chatear con Mint',
+      tab_edit: 'Editar',
+      tab_chat: 'Mint',
+      tab_settings: 'Ajustes',
+      settings_title: 'Ajustes',
+      settings_plan: 'Plan',
+      settings_domain: 'Dominio',
+      settings_slug: 'Slug del Sitio',
+      manage_billing: 'Administrar Facturación',
+      open_dashboard: 'Abrir Dashboard Completo',
+      sign_out: 'Cerrar Sesión',
+      install_text: 'Agrega GetMinted a tu pantalla de inicio para la experiencia completa',
+      install_btn: 'Instalar',
+      // Auth
+      auth_title_signup: 'Crear Cuenta',
+      auth_title_signin: 'Iniciar Sesión',
+      auth_sub_signup: 'Crea tu sitio en 60 segundos',
+      auth_sub_signin: 'Bienvenido de vuelta a GetMinted',
+      // Onboarding
+      ob_step1_title: '¿A qué te dedicas?',
+      ob_step1_sub: 'Crearemos el sitio perfecto para ti.',
+      ob_step2_title: '¿Quieres que te ayude a crearlo?',
+      ob_step2_sub: 'Puedo configurar tu sitio en minutos.',
+      ob_build_yes_title: '🌿 Sí, créalo conmigo',
+      ob_build_yes_sub: 'Mint crea tu sitio automáticamente',
+      ob_build_no_title: '🛠️ Lo configuro yo',
+      ob_build_no_sub: 'Ir directo al editor',
+      ob_build_disclaimer: 'Mint puede cometer errores. Siempre verifica.',
+      ob_step3_title: '¿Qué debe incluir tu sitio?',
+      ob_step3_sub: 'Activa o desactiva secciones. Puedes cambiarlas después.',
+      ob_step4_title: '¿Cuál es tu usuario de Instagram?',
+      ob_step4_sub: 'Mint tomará tus fotos y creará tu sitio automáticamente.',
+      ob_build_btn: 'Crear Mi Sitio 🚀',
+      ob_ig_placeholder: '@tuusuario',
+      ob_building_title: 'Creando tu sitio...',
+      ob_building_status_0: 'Configurando todo…',
+      ob_building_status_1: 'Obteniendo tus fotos…',
+      ob_building_status_2: 'Diseñando tu maquetación…',
+      ob_building_status_3: 'Agregando tus secciones…',
+      ob_building_status_4: 'Ya casi…',
+      ob_error_title: 'Algo salió mal',
+      ob_error_sub: 'No te preocupes — puedes intentarlo de nuevo o ir al editor.',
+      ob_try_again: 'Intentar de Nuevo 🔄',
+      ob_skip_editor: 'Ir al Editor →',
+      ob_success_title: '¡Tu sitio está listo!',
+      ob_success_sub: 'Vamos a verlo.',
+      ob_go_site: 'Ir a Mi Sitio →',
+      // Industries
+      industry_tattoo: 'Tatuador',
+      industry_barber: 'Barbero / Estilista',
+      industry_photographer: 'Fotógrafo',
+      industry_musician: 'Músico',
+      industry_fitness: 'Fitness / Entrenador',
+      industry_restaurant: 'Restaurante / Comida',
+      industry_influencer: 'Influencer / Creador',
+      industry_other: 'Otro',
+      // Sections
+      section_gallery: '📷 Galería de Fotos',
+      section_booking: '📅 Formulario de Citas',
+      section_about: '👤 Sobre Mí',
+      section_contact: '✉️ Contacto',
+      section_services: '💲 Servicios / Precios',
+      section_faq: '❓ FAQ',
+      section_blog: '📝 Blog',
+      section_store: '🛒 Tienda en Línea',
+      // Misc
+      next_btn: 'Siguiente →',
+      recommended: 'Recomendado',
+      // Install banner
+      install_banner: ' — Agrega a tu pantalla de inicio para la experiencia completa',
+    }
+  };
+
+  function tApp(key, defaultVal) {
+    if (lang === 'es' && _appI18n.es[key] !== undefined) return _appI18n.es[key];
+    return defaultVal !== undefined ? defaultVal : key;
+  }
+
+  // Apply translations to static HTML
+  function applyAppTranslations() {
+    if (lang !== 'es') return;
+    // Boot text
+    var bootText = document.querySelector('#boot-loading .boot-text');
+    if (bootText) bootText.textContent = tApp('boot_text');
+    // Landing tagline
+    var landingTagline = document.querySelector('#landing-page div[style*="rgba(255,255,255,0.4)"]');
+    if (landingTagline) landingTagline.textContent = tApp('landing_tagline');
+    // Get started button
+    var getStartedBtn = document.querySelector('#landing-page button[onclick*="signup"]');
+    if (getStartedBtn) getStartedBtn.textContent = tApp('get_started_btn');
+    // Log in button
+    var loginBtn = document.querySelector('#landing-page button[onclick*="signin"]');
+    if (loginBtn) loginBtn.textContent = tApp('login_btn');
+    // Chat with mint text
+    var chatQuestionsText = document.querySelector('#landing-page div[style*="0.35"]');
+    if (chatQuestionsText) chatQuestionsText.textContent = tApp('have_questions');
+    var chatWithMintBtn = document.querySelector('#landing-page button[onclick*="showGuestChat"]');
+    if (chatWithMintBtn) chatWithMintBtn.textContent = tApp('chat_with_mint');
+    // Nav items
+    document.querySelectorAll('.nav-item').forEach(function(item) {
+      var span = item.querySelector('span');
+      var tab = item.dataset.tab;
+      if (!span) return;
+      if (tab === 'edit') span.textContent = tApp('tab_edit');
+      else if (tab === 'chat') span.textContent = tApp('tab_chat');
+      else if (tab === 'settings') span.textContent = tApp('tab_settings');
+    });
+    // Settings
+    var settingsH2 = document.querySelector('.settings-scroll h2');
+    if (settingsH2) settingsH2.textContent = tApp('settings_title');
+    document.querySelectorAll('.settings-card .label').forEach(function(el) {
+      var txt = el.textContent.trim();
+      if (txt === 'Plan') el.textContent = tApp('settings_plan');
+      else if (txt === 'Domain') el.textContent = tApp('settings_domain');
+      else if (txt === 'Site Slug') el.textContent = tApp('settings_slug');
+    });
+    document.querySelectorAll('.settings-link span:first-child').forEach(function(el) {
+      if (el.textContent.trim() === 'Manage Billing') el.textContent = tApp('manage_billing');
+      else if (el.textContent.trim() === 'Open Full Dashboard') el.textContent = tApp('open_dashboard');
+    });
+    // Open Full Dashboard link → add lang param
+    document.querySelectorAll('.settings-link[href="/dashboard/"]').forEach(function(a) {
+      a.href = '/dashboard/?lang=es';
+    });
+    var logoutBtn = document.getElementById('logout-btn');
+    if (logoutBtn) logoutBtn.textContent = tApp('sign_out');
+    // Onboarding steps
+    var ob1Title = document.querySelector('#onboarding-step1 .ob-title');
+    if (ob1Title) ob1Title.textContent = tApp('ob_step1_title');
+    var ob1Sub = document.querySelector('#onboarding-step1 .ob-subtitle');
+    if (ob1Sub) ob1Sub.textContent = tApp('ob_step1_sub');
+    var ob2Title = document.querySelector('#onboarding-step2 .ob-title');
+    if (ob2Title) ob2Title.textContent = tApp('ob_step2_title');
+    var ob2Sub = document.querySelector('#onboarding-step2 .ob-subtitle');
+    if (ob2Sub) ob2Sub.textContent = tApp('ob_step2_sub');
+    var ob3Title = document.querySelector('#onboarding-step3 .ob-title');
+    if (ob3Title) ob3Title.textContent = tApp('ob_step3_title');
+    var ob3Sub = document.querySelector('#onboarding-step3 .ob-subtitle');
+    if (ob3Sub) ob3Sub.textContent = tApp('ob_step3_sub');
+    var ob4Title = document.querySelector('#onboarding-step4 .ob-title');
+    if (ob4Title) ob4Title.textContent = tApp('ob_step4_title');
+    var ob4Sub = document.querySelector('#onboarding-step4 .ob-subtitle');
+    if (ob4Sub) ob4Sub.textContent = tApp('ob_step4_sub');
+    var igInput = document.getElementById('ig-handle-input');
+    if (igInput) igInput.placeholder = tApp('ob_ig_placeholder');
+    var buildBtn = document.getElementById('ob-build-btn');
+    if (buildBtn) buildBtn.textContent = tApp('ob_build_btn');
+    // Build options
+    var buildYesTitle = document.querySelector('#ob-build-yes .ob-option-title');
+    if (buildYesTitle) buildYesTitle.textContent = tApp('ob_build_yes_title');
+    var buildYesSub = document.querySelector('#ob-build-yes .ob-option-sub');
+    if (buildYesSub) buildYesSub.textContent = tApp('ob_build_yes_sub');
+    var buildNoTitle = document.querySelector('#ob-build-no .ob-option-title');
+    if (buildNoTitle) buildNoTitle.textContent = tApp('ob_build_no_title');
+    var buildNoSub = document.querySelector('#ob-build-no .ob-option-sub');
+    if (buildNoSub) buildNoSub.textContent = tApp('ob_build_no_sub');
+    var rec = document.querySelector('#ob-build-yes .ob-rec');
+    if (rec) rec.textContent = tApp('recommended');
+    var disclaimer = document.querySelector('#onboarding-step2 div[style*="0.3"]');
+    if (disclaimer) disclaimer.textContent = tApp('ob_build_disclaimer');
+    // Industry cards
+    var industryMap = { tattoo: 'industry_tattoo', barber: 'industry_barber', photographer: 'industry_photographer', musician: 'industry_musician', fitness: 'industry_fitness', restaurant: 'industry_restaurant', influencer: 'industry_influencer', other: 'industry_other' };
+    document.querySelectorAll('#industry-cards .ob-card').forEach(function(card) {
+      var k = industryMap[card.dataset.industry];
+      if (k) { var lbl = card.querySelector('.ob-card-label'); if (lbl) lbl.textContent = tApp(k); }
+    });
+    // Section toggles
+    var sectionMap = { gallery: 'section_gallery', booking: 'section_booking', about: 'section_about', contact: 'section_contact', services: 'section_services', faq: 'section_faq', blog: 'section_blog', store: 'section_store' };
+    document.querySelectorAll('#section-toggles .ob-toggle').forEach(function(toggle) {
+      var k = sectionMap[toggle.dataset.section];
+      if (k) { var lbl = toggle.querySelector('.ob-toggle-label'); if (lbl) lbl.textContent = tApp(k); }
+    });
+    // Build loading/error/success screens
+    var buildLoadingTitle = document.querySelector('#onboarding-build-loading .ob-title');
+    if (buildLoadingTitle) buildLoadingTitle.textContent = tApp('ob_building_title');
+    var buildStatusText = document.getElementById('build-status-text');
+    if (buildStatusText) buildStatusText.textContent = tApp('ob_building_status_0');
+    var errorTitle = document.querySelector('#onboarding-build-error .ob-title');
+    if (errorTitle) errorTitle.textContent = tApp('ob_error_title');
+    var errorSub = document.querySelector('#onboarding-build-error .ob-subtitle');
+    if (errorSub) errorSub.textContent = tApp('ob_error_sub');
+    document.querySelectorAll('#onboarding-build-error .ob-btn-primary').forEach(function(btn, i) {
+      if (i === 0) btn.textContent = tApp('ob_try_again');
+      else if (i === 1) btn.textContent = tApp('ob_skip_editor');
+    });
+    var successTitle = document.querySelector('#onboarding-build-success .ob-title');
+    if (successTitle) successTitle.textContent = tApp('ob_success_title');
+    var successSub = document.querySelector('#onboarding-build-success .ob-subtitle');
+    if (successSub) successSub.textContent = tApp('ob_success_sub');
+    var successBtn = document.querySelector('#onboarding-build-success .ob-btn-primary');
+    if (successBtn) successBtn.textContent = tApp('ob_go_site');
+    // Next buttons
+    document.querySelectorAll('.ob-btn-primary').forEach(function(btn) {
+      if (btn.textContent.trim() === 'Next →') btn.textContent = tApp('next_btn');
+    });
+    // Install banner
+    var installText = document.querySelector('#install-banner .install-text');
+    if (installText) installText.innerHTML = '<strong>GetMinted</strong>' + tApp('install_banner');
+    var installBtn = document.getElementById('install-btn');
+    if (installBtn) installBtn.textContent = tApp('install_btn');
+  }
+
   // State
   let currentTab = 'chat';
   let siteData = null;
@@ -759,6 +972,9 @@ body {
   let obSections = [];
   let obIgHandle = '';
   const CONVEX_URL = 'https://curious-lemming-262.convex.site';
+
+  // Apply translations immediately (before Clerk loads)
+  applyAppTranslations();
 
   function hideBoot() {
     const el = document.getElementById('boot-loading');
@@ -787,9 +1003,9 @@ body {
     document.getElementById('landing-page').style.display = 'none';
     document.getElementById('auth-screen').style.display = 'flex';
     const title = document.getElementById('auth-title');
-    if (title) title.textContent = mode === 'signup' ? 'Create Account' : 'Sign In';
+    if (title) title.textContent = mode === 'signup' ? tApp('auth_title_signup', 'Create Account') : tApp('auth_title_signin', 'Sign In');
     const sub = document.querySelector('.auth-sub');
-    if (sub) sub.textContent = mode === 'signup' ? 'Get your site built in 60 seconds' : 'Welcome back to GetMinted';
+    if (sub) sub.textContent = mode === 'signup' ? tApp('auth_sub_signup', 'Get your site built in 60 seconds') : tApp('auth_sub_signin', 'Welcome back to GetMinted');
     const mount = document.getElementById('clerk-mount');
     mount.innerHTML = '';
     if (mode === 'signup') {
@@ -992,11 +1208,11 @@ body {
     const startTime = Date.now();
     const statusText = document.getElementById('build-status-text');
     const messages = [
-      'Setting things up…',
-      'Pulling your photos…',
-      'Designing your layout…',
-      'Adding your sections…',
-      'Almost there…'
+      tApp('ob_building_status_0', 'Setting things up…'),
+      tApp('ob_building_status_1', 'Pulling your photos…'),
+      tApp('ob_building_status_2', 'Designing your layout…'),
+      tApp('ob_building_status_3', 'Adding your sections…'),
+      tApp('ob_building_status_4', 'Almost there…')
     ];
     let msgIndex = 0;
 
@@ -1107,8 +1323,9 @@ body {
     // Lazy-load iframes
     if (tab === 'edit' && !iframesLoaded.edit) {
       iframesLoaded.edit = true;
+      const dashUrl = lang === 'es' ? '/dashboard/?lang=es' : '/dashboard/';
       document.getElementById('tab-edit').innerHTML =
-        '<iframe src="/dashboard/" title="Dashboard" allow="clipboard-write"></iframe>';
+        '<iframe src="' + dashUrl + '" title="Dashboard" allow="clipboard-write"></iframe>';
     }
     if (tab === 'chat' && !iframesLoaded.chat) {
       iframesLoaded.chat = true;

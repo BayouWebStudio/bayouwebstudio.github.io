@@ -655,7 +655,7 @@
       <button onclick="openRearrangeModal()" style="display:flex;align-items:center;gap:6px;padding:8px 16px;background:var(--surface2);color:var(--text);border:1px solid var(--border);border-radius:var(--radius-sm);font-size:13px;font-weight:500;cursor:pointer;transition:all 0.15s;">↕ Rearrange</button>
     </div>
     <div class="section-cards" id="section-cards">
-      <div class="empty-state" style="grid-column: 1/-1;">Loading site content...</div>
+      <div class="empty-state" id="sections-loading-state" style="grid-column: 1/-1;">Loading site content...</div>
     </div>
   </div>
 
@@ -808,6 +808,236 @@
   type="text/javascript"
 ></script>
 <script>
+  // ── i18n: Language detection ──
+  const lang = new URLSearchParams(location.search).get('lang') || localStorage.getItem('lang') || 'en';
+  if (lang === 'es') localStorage.setItem('lang', 'es');
+
+  const _i18n = {
+    es: {
+      // Nav tabs
+      tab_overview: 'Resumen',
+      tab_sections: 'Editar Secciones',
+      tab_gallery: 'Galería',
+      tab_store: 'Tienda',
+      tab_themes: 'Temas',
+      // Header
+      sign_out: 'Cerrar sesión',
+      loading_text: 'Cargando...',
+      // Signin
+      signin_tagline: 'Tu dashboard de sitio web con IA',
+      // Overview
+      your_site: 'Tu Sitio',
+      site_info: 'Información del Sitio',
+      recent_changes: 'Cambios Recientes',
+      // Info labels
+      domain_label: 'Dominio',
+      plan_label: 'Plan',
+      slug_label: 'Slug del Sitio',
+      status_label: 'Estado',
+      status_live: '● En línea',
+      visit_link: '↗ Visitar',
+      refresh_btn: '↺ Actualizar',
+      no_changes: 'Sin cambios aún',
+      // SEO
+      seo_health: 'Salud SEO',
+      run_check: 'Ejecutar Análisis',
+      checking: 'Verificando...',
+      fix_seo: 'Arreglar SEO Ahora →',
+      analyzing: 'Analizando tu sitio...',
+      great_seo: '¡Excelente SEO!',
+      needs_work: 'Necesita Mejoras',
+      poor_seo: 'SEO Deficiente',
+      last_checked: 'Revisado hace un momento',
+      // Edit sections tab
+      edit_sections_title: 'Editar Secciones de Tu Sitio',
+      edit_sections_sub: 'Edita todos los campos de cada sección y haz clic en Guardar. Los cambios se reflejan en ~3–5 minutos.',
+      add_section: '＋ Agregar Sección',
+      remove_section: '− Eliminar Sección',
+      rearrange: '↕ Reorganizar',
+      loading_content: 'Cargando contenido del sitio...',
+      no_sections: 'No se encontraron secciones editables',
+      save_btn: 'Guardar',
+      saving: 'Guardando...',
+      saved_ok: '✅ Guardado',
+      save_section_prefix: 'Guardar ',
+      save_faq: 'Guardar FAQ',
+      manage_photos: '📷 Administrar Fotos →',
+      // Gallery tab
+      gallery_title: 'Galería',
+      upload_photos: '📸 Subir Fotos',
+      save_order_btn: '💾 Guardar Orden',
+      saving_order: '💾 Guardando...',
+      auto_update_ig: 'Actualización Automática desde IG',
+      auto_update_on: 'Actualización Automática: ACTIVADA',
+      drop_photos: 'Suelta tus fotos aquí o haz clic para subir',
+      photo_hint: 'JPG, PNG, WebP — máx 5MB por foto',
+      loading_gallery: 'Cargando galería...',
+      no_photos: 'Sin fotos en la galería. ¡Sube algunas!',
+      upload_to: '📂 Subir a:',
+      // Store tab
+      store_title: 'Tienda',
+      store_desc: 'Vende productos directamente desde tu sitio GetMinted. Artículos físicos, descargas digitales o depósitos de reserva.',
+      // Themes tab
+      themes_title: 'Temas',
+      themes_desc: 'Elige un estilo para tu sitio. Los cambios se reflejan al instante.',
+      // Upgrade banner
+      upgrade_text: 'Actualiza a Pro para tu propio .com, SEO, tienda y sincronización automática de Instagram.',
+      upgrade_btn: 'Actualizar — $15/mes →',
+      // Domain banner
+      domain_cta_title: 'Obtén tu dominio .com',
+      domain_cta_desc: 'Tu plan incluye un dominio personalizado. Elige el tuyo y aparece en Google.',
+      pick_com: 'Elegir mi .com →',
+      // Toast messages
+      toast_order_saved: '✅ ¡Orden guardado! Permite 3–5 minutos para que se muestre en tu sitio.',
+      toast_section_saved: '✅ ¡Guardado! Permite 3–5 minutos para que aparezca en tu sitio web.',
+      toast_photo_removed: '¡Foto eliminada!',
+      toast_bg_updated: 'Fondo actualizado. Los cambios se reflejan en ~30 segundos.',
+      toast_hero_bg: 'Fondo del hero actualizado. Los cambios se reflejan en ~30 segundos.',
+      toast_upload_done: 'foto(s) subida(s). Permite 3–5 minutos para que aparezca en tu sitio.',
+      toast_site_loading: '¡Vista previa actualizándose... los cambios tardan 3–5 minutos en aparecer.',
+      toast_order_failed: 'Error al guardar el orden',
+      toast_delete_failed: 'Error al eliminar',
+      toast_site_not_loaded: 'Sitio aún no cargado',
+      // Onboarding
+      welcome_title: 'Bienvenido a GetMinted 🌿',
+      welcome_sub: 'Ingresa tu usuario de Instagram y crearemos tu sitio gratuito en aproximadamente 30 segundos.',
+      ig_placeholder: 'tuusuario',
+      build_btn: 'Crear Mi Sitio →',
+      welcome_note: 'Una vez que tu sitio esté en línea, podrás elegir tu dominio .com personalizado desde la pestaña Resumen.',
+      // Mint chat tab
+      chat_title: 'Mint',
+      chat_subtitle: 'Editor IA',
+      chat_intro_title: 'Chatea con Mint',
+      chat_intro_sub: 'Pide cambios personalizados, nuevas secciones, diseños diferentes — solo pregunta.',
+      chat_placeholder: 'Pregúntale a Mint…',
+      chat_bubble: 'Estoy aquí si necesitas ayuda 🌿',
+      // Tab bubble messages
+      bubble_overview: 'Tu sitio está en línea. 🌿 Dime si necesitas algo.',
+      bubble_sections: '¡Reorganiza, ajusta textos, hazlo tuyo! ✏️',
+      bubble_gallery: '¿Quieres agregar fotos? ¡Súbelas aquí! 📸',
+      bubble_store: '¿Listo para vender? Configura tu tienda abajo 🛍️',
+      bubble_themes: '¿Hora de un nuevo look? Elige tu estilo 🎨',
+      // Upgrade modal
+      upgrade_modal_title: 'Hey, usaste tus 2 ediciones gratis 👋',
+      upgrade_modal_sub: 'Actualiza a Pro para seguir editando — más tu propio .com, SEO, tienda y sincronización automática de Instagram.',
+      upgrade_modal_btn: 'Actualizar a Pro — $15/mes',
+      upgrade_modal_dismiss: 'Ahora no',
+      // Free change limit
+      free_limit_reached: 'Límite de ediciones alcanzado',
+      // SEO fix
+      fix_in_days: 'Revisar de nuevo en',
+      day_singular: 'día',
+      day_plural: 'días',
+      // Change labels
+      change_text_edit: '✏️ Texto Actualizado',
+      change_photo_swap: '📸 Foto Cambiada',
+      change_booking_update: '📅 Reserva Actualizada',
+      change_site_build: '🏗️ Sitio Construido',
+      change_domain_setup: '🌐 Dominio Configurado',
+    }
+  };
+
+  function t(key, defaultVal) {
+    if (lang === 'es' && _i18n.es[key] !== undefined) return _i18n.es[key];
+    return defaultVal !== undefined ? defaultVal : key;
+  }
+
+  // Apply translations to static HTML elements after DOM ready
+  function applyDashboardTranslations() {
+    if (lang !== 'es') return;
+    // Nav tabs
+    const tabMap = { overview: t('tab_overview'), sections: t('tab_sections'), gallery: t('tab_gallery'), store: t('tab_store'), themes: t('tab_themes') };
+    document.querySelectorAll('.nav-tab').forEach(function(tab) {
+      if (tabMap[tab.dataset.tab]) tab.textContent = tabMap[tab.dataset.tab];
+    });
+    // Header sign out
+    var logoutBtn = document.getElementById('btn-logout');
+    if (logoutBtn) logoutBtn.textContent = t('sign_out');
+    // Sign-in tagline
+    var signinTagline = document.querySelector('.signin-tagline');
+    if (signinTagline) signinTagline.textContent = t('signin_tagline');
+    // Section titles
+    var sectionTitles = document.querySelectorAll('.section-title');
+    sectionTitles.forEach(function(el) {
+      var txt = el.textContent.trim();
+      if (txt === 'Your Site') el.textContent = t('your_site');
+      else if (txt === 'Site Info') el.textContent = t('site_info');
+      else if (txt === 'Recent Changes') el.textContent = t('recent_changes');
+      else if (txt === 'Edit Your Site Sections') el.textContent = t('edit_sections_title');
+      else if (txt === 'Gallery') el.textContent = t('gallery_title');
+      else if (txt === 'Store') el.textContent = t('store_title');
+      else if (txt === 'Themes') el.textContent = t('themes_title');
+    });
+    // Info labels
+    document.querySelectorAll('.info-label').forEach(function(el) {
+      var txt = el.textContent.trim();
+      if (txt === 'Domain') el.textContent = t('domain_label');
+      else if (txt === 'Plan') el.textContent = t('plan_label');
+      else if (txt === 'Site Slug') el.textContent = t('slug_label');
+      else if (txt === 'Status') el.textContent = t('status_label');
+    });
+    // Status live
+    var statusVal = document.querySelector('.info-value[style*="28ca41"]');
+    if (statusVal && statusVal.textContent.includes('Live')) statusVal.textContent = t('status_live');
+    // Visit link
+    var visitLink = document.getElementById('visit-site-link');
+    if (visitLink) visitLink.textContent = t('visit_link');
+    // Refresh button
+    var refreshBtn = document.querySelector('.preview-refresh-btn');
+    if (refreshBtn) refreshBtn.textContent = t('refresh_btn');
+    // Edit sections subtitle
+    var editSub = document.querySelector('#tab-sections > p');
+    if (editSub) editSub.textContent = t('edit_sections_sub');
+    // Add/Remove/Rearrange buttons in edit tab
+    document.querySelectorAll('#tab-sections button').forEach(function(btn) {
+      if (btn.textContent.includes('Add Section')) btn.textContent = t('add_section');
+      else if (btn.textContent.includes('Remove Section')) btn.textContent = t('remove_section');
+      else if (btn.textContent.includes('Rearrange')) btn.textContent = t('rearrange');
+    });
+    // Gallery toolbar
+    var uploadBtn = document.querySelector('.btn-upload');
+    if (uploadBtn) uploadBtn.innerHTML = t('upload_photos');
+    var uploadZoneText = document.querySelector('.upload-text');
+    if (uploadZoneText) uploadZoneText.textContent = t('drop_photos');
+    var uploadHint = document.querySelector('.upload-hint');
+    if (uploadHint) uploadHint.textContent = t('photo_hint');
+    // Gallery section upload-to label
+    var uploadToSpan = document.querySelector('#upload-section-picker > span');
+    if (uploadToSpan) uploadToSpan.textContent = t('upload_to');
+    // Store description
+    var storeDesc = document.querySelector('#tab-store p');
+    if (storeDesc && storeDesc.textContent.includes('Sell products')) storeDesc.textContent = t('store_desc');
+    // Themes description
+    var themesDesc = document.querySelector('#tab-themes p');
+    if (themesDesc && themesDesc.textContent.includes('Choose a look')) themesDesc.textContent = t('themes_desc');
+    // SEO card
+    var seoTitle = document.querySelector('#seo-card span[style*="font-weight:600"]');
+    if (seoTitle && seoTitle.textContent.trim() === 'SEO Health') seoTitle.textContent = t('seo_health');
+    var seoCheckBtn = document.getElementById('btn-seo-check');
+    if (seoCheckBtn && seoCheckBtn.textContent.trim() === 'Run Check') seoCheckBtn.textContent = t('run_check');
+    // Upgrade banner
+    var upgradeBannerText = document.querySelector('#upgrade-cta-banner div[style*="font-size:12px"]');
+    if (upgradeBannerText) upgradeBannerText.textContent = t('upgrade_text');
+    var upgradeBannerBtn = document.querySelector('#upgrade-cta-banner a');
+    if (upgradeBannerBtn) upgradeBannerBtn.textContent = t('upgrade_btn');
+    // Domain banner
+    var domainTitle = document.querySelector('#domain-cta-banner div[style*="font-weight:700"]');
+    if (domainTitle && domainTitle.textContent.includes('Get your .com')) domainTitle.textContent = t('domain_cta_title');
+    var domainDesc = document.querySelector('#domain-cta-banner div[style*="font-size:13px"]');
+    if (domainDesc && domainDesc.textContent.includes('Your plan includes')) domainDesc.textContent = t('domain_cta_desc');
+    var domainBtn = document.querySelector('#domain-cta-banner button[onclick="openDomainModal()"]');
+    if (domainBtn) domainBtn.textContent = t('pick_com');
+    // Mint bubble
+    var mintBubbleText = document.getElementById('mint-bubble-text');
+    if (mintBubbleText) mintBubbleText.textContent = t('chat_bubble');
+    // Mint chat panel subtitle
+    var mintChatSub = document.querySelector('#mint-chat-panel div[style*="0.72rem"]');
+    if (mintChatSub) mintChatSub.textContent = t('chat_subtitle');
+    // Mint float input placeholder
+    var mintFloatInput = document.getElementById('mint-float-input');
+    if (mintFloatInput) mintFloatInput.placeholder = t('chat_placeholder');
+  }
+
   window.addEventListener('load', async function () { await startApp(); });
   const CONVEX_HTTP_URL = 'https://curious-lemming-262.convex.site';
   window._getClerkToken = async function() { return null; }; // overridden in startApp
@@ -911,6 +1141,7 @@
       loadFreeChangeCount();
       loadSiteHtml();
       loadChanges();
+      applyDashboardTranslations();
     }
 
     // ── Load Site Info ──
@@ -918,7 +1149,7 @@
     window.runSeoCheck = async function() {
       document.getElementById('seo-loading').style.display = 'block';
       document.getElementById('btn-seo-check').disabled = true;
-      document.getElementById('btn-seo-check').textContent = 'Checking...';
+      document.getElementById('btn-seo-check').textContent = t('checking','Checking...');
       try {
         const token = await getToken();
         const res = await fetch(CONVEX_HTTP_URL + '/api/seo/check', {
@@ -932,8 +1163,8 @@
         document.getElementById('seo-score-num').textContent = score;
         document.getElementById('seo-score-num').style.color = color;
         document.getElementById('seo-score-circle').style.borderColor = color;
-        document.getElementById('seo-score-label').textContent = score >= 80 ? 'Great SEO!' : score >= 60 ? 'Needs Work' : 'Poor SEO';
-        document.getElementById('seo-last-checked').textContent = 'Last checked just now';
+        document.getElementById('seo-score-label').textContent = score >= 80 ? t('great_seo','Great SEO!') : score >= 60 ? t('needs_work','Needs Work') : t('poor_seo','Poor SEO');
+        document.getElementById('seo-last-checked').textContent = t('last_checked','Last checked just now');
         // PSI Lighthouse scores
         if (data.psi) {
           var psi = data.psi;
@@ -976,7 +1207,7 @@
           document.getElementById('btn-seo-check').style.opacity = '0.5';
           document.getElementById('btn-seo-check').disabled = true;
         } else {
-          document.getElementById('btn-seo-check').textContent = 'Run Check';
+          document.getElementById('btn-seo-check').textContent = t('run_check','Run Check');
           document.getElementById('btn-seo-check').disabled = false;
           document.getElementById('btn-seo-check').style.opacity = '1';
         }
@@ -991,7 +1222,7 @@
         }
       } catch(e) {
         document.getElementById('seo-loading').style.display = 'none';
-        document.getElementById('btn-seo-check').textContent = 'Run Check';
+        document.getElementById('btn-seo-check').textContent = t('run_check','Run Check');
         document.getElementById('btn-seo-check').disabled = false;
         console.error('SEO check failed:', e);
       }
@@ -1674,7 +1905,7 @@
           }
           await saveFieldByKey('faq', pairs.join('\n\n'));
           if (statusEl) { statusEl.textContent = '✅ Saved'; setTimeout(() => { if (statusEl) statusEl.textContent = ''; }, 2000); }
-          showToast('✅ Saved! Allow 3–5 minutes to show on your website.');
+          showToast(t('toast_section_saved', '✅ Saved! Allow 3–5 minutes to show on your website.'));
           afterSuccessfulChange();
         } catch(e) {
           if (statusEl) statusEl.textContent = '❌ ' + e.message;
@@ -1706,7 +1937,7 @@
           await saveFieldByKey(key, field.value);
         }
         if (statusEl) { statusEl.textContent = '✅ Saved'; setTimeout(() => { if (statusEl) statusEl.textContent = ''; }, 2000); }
-        showToast('✅ Saved! Allow 3–5 minutes to show on your website.');
+        showToast(t('toast_section_saved', '✅ Saved! Allow 3–5 minutes to show on your website.'));
         afterSuccessfulChange();
       } catch(e) {
         if (statusEl) statusEl.textContent = '❌ ' + e.message;
@@ -1746,7 +1977,7 @@
           const card = btn.closest('.section-card');
           const preview = card.querySelector('.section-card-preview');
           if (preview) preview.textContent = newContent.substring(0, 150) + (newContent.length > 150 ? '...' : '');
-          showToast('✅ Saved! Allow 3–5 minutes to show on your website.');
+          showToast(t('toast_section_saved', '✅ Saved! Allow 3–5 minutes to show on your website.'));
           afterSuccessfulChange();
           // Collapse after a moment
           setTimeout(() => {
@@ -1976,10 +2207,10 @@
 
     function renderGallery(items) {
       const grid = document.getElementById('gallery-grid');
-      document.getElementById('gallery-count').textContent = items.length + ' photo' + (items.length !== 1 ? 's' : '');
+      document.getElementById('gallery-count').textContent = lang === 'es' ? items.length + ' foto' + (items.length !== 1 ? 's' : '') : items.length + ' photo' + (items.length !== 1 ? 's' : '');
 
       if (items.length === 0) {
-        grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;">No gallery photos found. Upload some!</div>';
+        grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;">' + t('no_photos', 'No gallery photos found. Upload some!') + '</div>';
         return;
       }
 
@@ -2111,7 +2342,7 @@
         const data = await res.json();
 
         if (res.ok && data.ok) {
-          showToast('✅ Order saved! Please allow 3–5 minutes to show on your website.');
+          showToast(t('toast_order_saved', '✅ Order saved! Please allow 3–5 minutes to show on your website.'));
           afterSuccessfulChange();
           galleryOrderChanged = false;
           btn.classList.remove('visible');
@@ -2237,7 +2468,7 @@
 
         progressFill.style.width = '100%';
         statusEl.textContent = success + ' of ' + compressed.length + ' uploaded!';
-        showToast('✅ ' + success + ' photo(s) uploaded! Allow 3–5 minutes to show on your website.');
+        showToast('✅ ' + success + ' ' + t('toast_upload_done', 'photo(s) uploaded! Allow 3–5 minutes to show on your website.'));
 
         // Reload gallery after a brief delay
         setTimeout(async () => {
@@ -2266,12 +2497,14 @@
 
     function renderChanges(changes) {
       const timeline = document.getElementById('change-timeline');
-      if (!changes.length) { timeline.innerHTML = '<div class="empty-state">No changes yet</div>'; return; }
+      if (!changes.length) { timeline.innerHTML = '<div class="empty-state">' + t('no_changes', 'No changes yet') + '</div>'; return; }
 
       const labels = {
-        text_edit: '✏️ Text Updated', photo_swap: '📸 Photo Changed',
-        booking_update: '📅 Booking Updated', site_build: '🏗️ Site Built',
-        domain_setup: '🌐 Domain Configured',
+        text_edit: t('change_text_edit', '✏️ Text Updated'),
+        photo_swap: t('change_photo_swap', '📸 Photo Changed'),
+        booking_update: t('change_booking_update', '📅 Booking Updated'),
+        site_build: t('change_site_build', '🏗️ Site Built'),
+        domain_setup: t('change_domain_setup', '🌐 Domain Configured'),
       };
 
       timeline.innerHTML = changes.slice(0, 10).map(ch => {
@@ -2404,16 +2637,16 @@
       const overview = document.getElementById('tab-overview');
       overview.innerHTML = '<div style="max-width:480px;margin:60px auto;padding:0 24px;text-align:center;">' +
         '<div style="font-size:52px;margin-bottom:16px;">🌿</div>' +
-        '<h2 style="color:#fff;font-weight:800;font-size:24px;margin-bottom:8px;">Welcome to GetMinted 🌿</h2>' +
-        '<p style="color:rgba(255,255,255,0.6);font-size:15px;margin-bottom:32px;">Enter your Instagram handle and we\'ll build your free website in about 30 seconds.</p>' +
+        '<h2 style="color:#fff;font-weight:800;font-size:24px;margin-bottom:8px;">' + t('welcome_title', 'Welcome to GetMinted 🌿') + '</h2>' +
+        '<p style="color:rgba(255,255,255,0.6);font-size:15px;margin-bottom:32px;">' + t('welcome_sub', "Enter your Instagram handle and we'll build your free website in about 30 seconds.") + '</p>' +
         '<div style="display:flex;gap:10px;max-width:380px;margin:0 auto 24px;">' +
         '<div style="position:relative;flex:1;">' +
         '<span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,0.4);font-size:15px;">@</span>' +
         '<input id="setup-ig-handle" type="text" placeholder="yourhandle" style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(0,200,130,0.3);border-radius:10px;padding:14px 14px 14px 32px;color:#fff;font-size:15px;outline:none;box-sizing:border-box;" />' +
         '</div>' +
-        '<button id="setup-build-btn" onclick="triggerSetupBuild()" style="background:#00C882;color:#0a1a12;border:none;border-radius:10px;padding:14px 24px;font-weight:700;font-size:15px;cursor:pointer;white-space:nowrap;">Build My Site \u2192</button>' +
+        '<button id="setup-build-btn" onclick="triggerSetupBuild()" style="background:#00C882;color:#0a1a12;border:none;border-radius:10px;padding:14px 24px;font-weight:700;font-size:15px;cursor:pointer;white-space:nowrap;">' + t('build_btn', 'Build My Site →') + '</button>' +
         '</div>' +
-        '<p style="color:rgba(255,255,255,0.3);font-size:12px;">Once your site is live, you can pick your custom .com domain from the Overview tab.</p>' +
+        '<p style="color:rgba(255,255,255,0.3);font-size:12px;">' + t('welcome_note', 'Once your site is live, you can pick your custom .com domain from the Overview tab.') + '</p>' +
         '</div>';
     }
 
@@ -2576,11 +2809,11 @@
           '<\/div>' +
           // Card
           '<div style="position:relative;z-index:1;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:56px 28px 28px;text-align:center;width:100%;">' +
-            '<h3 style="font-size:18px;font-weight:700;color:var(--text);margin-bottom:10px;">Hey! You\u2019ve used your 2 free edits \uD83D\uDC4B<\/h3>' +
-            '<p style="font-size:14px;color:var(--text-dim);line-height:1.6;margin-bottom:24px;">Upgrade to Pro to keep editing \u2014 plus get<br>your own .com, SEO, store, and auto IG sync.<\/p>' +
+            '<h3 style="font-size:18px;font-weight:700;color:var(--text);margin-bottom:10px;">' + t('upgrade_modal_title', 'Hey! You\u2019ve used your 2 free edits \uD83D\uDC4B') + '<\/h3>' +
+            '<p style="font-size:14px;color:var(--text-dim);line-height:1.6;margin-bottom:24px;">' + t('upgrade_modal_sub', 'Upgrade to Pro to keep editing \u2014 plus get<br>your own .com, SEO, store, and auto IG sync.') + '<\/p>' +
             '<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">' +
-              '<a href="https://buy.stripe.com/8x2aEXb1Q2oB8q40WD3Je04" target="_blank" style="background:#00C882;color:#0a1a12;font-weight:700;font-size:14px;padding:12px 24px;border-radius:10px;text-decoration:none;white-space:nowrap;">Upgrade to Pro \u2014 $15/mo<\/a>' +
-              '<button id="btn-upgrade-dismiss" style="background:none;color:var(--text-dim);border:1px solid var(--border);font-size:13px;font-weight:500;padding:12px 20px;border-radius:10px;cursor:pointer;transition:all 0.15s;">Not right now<\/button>' +
+              '<a href="https://buy.stripe.com/8x2aEXb1Q2oB8q40WD3Je04" target="_blank" style="background:#00C882;color:#0a1a12;font-weight:700;font-size:14px;padding:12px 24px;border-radius:10px;text-decoration:none;white-space:nowrap;">' + t('upgrade_modal_btn', 'Upgrade to Pro \u2014 $15/mo') + '<\/a>' +
+              '<button id="btn-upgrade-dismiss" style="background:none;color:var(--text-dim);border:1px solid var(--border);font-size:13px;font-weight:500;padding:12px 20px;border-radius:10px;cursor:pointer;transition:all 0.15s;">' + t('upgrade_modal_dismiss', 'Not right now') + '<\/button>' +
             '<\/div>' +
           '<\/div>' +
         '<\/div>';
@@ -2637,11 +2870,11 @@
     // ── Mint Tab Messages ──
     var _tabBubbleTimer = null;
     var _tabMessages = {
-      overview: "Your site is live! \uD83C\uDF3F Let me know if you need anything.",
-      sections: "Move things around, tweak your text, make it yours! \u270F\uFE0F",
-      gallery: "Want to add new photos? Upload them here! \uD83D\uDCF8",
-      store: "Ready to start selling? Set up your store below \uD83D\uDECD\uFE0F",
-      themes: "Time for a new look? Pick your vibe \uD83C\uDFA8"
+      overview: t('bubble_overview', "Your site is live! \uD83C\uDF3F Let me know if you need anything."),
+      sections: t('bubble_sections', "Move things around, tweak your text, make it yours! \u270F\uFE0F"),
+      gallery: t('bubble_gallery', "Want to add new photos? Upload them here! \uD83D\uDCF8"),
+      store: t('bubble_store', "Ready to start selling? Set up your store below \uD83D\uDECD\uFE0F"),
+      themes: t('bubble_themes', "Time for a new look? Pick your vibe \uD83C\uDFA8")
     };
 
     function showTabBubble(tabName) {
