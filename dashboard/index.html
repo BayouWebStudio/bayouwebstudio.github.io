@@ -1195,8 +1195,8 @@
         }
       }
 
-      // Contact email
-      const emailMatch = html.match(/mailto:([^"]+)"/i);
+      // Contact email — match only href="mailto:email@domain.com" patterns, not JS strings
+      const emailMatch = html.match(/href=["']mailto:([a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,})["']/i);
       if (emailMatch) {
         sections.push({ key: 'contact_email', icon: '📧', title: 'Contact Email', preview: emailMatch[1], value: emailMatch[1] });
       }
