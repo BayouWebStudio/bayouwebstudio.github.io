@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Crew — Agent Dashboard</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --border: #1e1e2e;
+    --text: #e2e2f0;
+    --muted: #6b6b8a;
+    --hex: #8b5cf6;
+    --mint: #10b981;
+    --scout: #f59e0b;
+    --haus: #ec4899;
+    --online: #22c55e;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    min-height: 100vh;
+    padding: 40px 20px;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--text);
+  }
+
+  .header p {
+    color: var(--muted);
+    margin-top: 8px;
+    font-size: 0.95rem;
+  }
+
+  .status-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 12px;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--online);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto 48px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    border-radius: 16px 16px 0 0;
+  }
+
+  .card.hex::before { background: var(--hex); }
+  .card.mint::before { background: var(--mint); }
+  .card.scout::before { background: var(--scout); }
+  .card.haus::before { background: var(--haus); }
+
+  .card.hex:hover { border-color: var(--hex); }
+  .card.mint:hover { border-color: var(--mint); }
+  .card.scout:hover { border-color: var(--scout); }
+  .card.haus:hover { border-color: var(--haus); }
+
+  .agent-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    flex-shrink: 0;
+  }
+
+  .hex .avatar { background: rgba(139, 92, 246, 0.15); }
+  .mint .avatar { background: rgba(16, 185, 129, 0.15); }
+  .scout .avatar { background: rgba(245, 158, 11, 0.15); }
+  .haus .avatar { background: rgba(236, 72, 153, 0.15); }
+
+  .agent-info h2 {
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  .agent-info .handle {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 20px;
+    margin-top: 4px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .badge.online {
+    background: rgba(34, 197, 94, 0.1);
+    color: var(--online);
+  }
+
+  .badge .dot-sm {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: currentColor;
+    animation: pulse 2s infinite;
+  }
+
+  .role {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.5;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  .tasks {
+    list-style: none;
+    margin-bottom: 20px;
+  }
+
+  .tasks li {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 0.83rem;
+    color: var(--text);
+    padding: 5px 0;
+    line-height: 1.4;
+  }
+
+  .tasks li::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+
+  .hex .tasks li::before { background: var(--hex); }
+  .mint .tasks li::before { background: var(--mint); }
+  .scout .tasks li::before { background: var(--scout); }
+  .haus .tasks li::before { background: var(--haus); }
+
+  .crons {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px;
+  }
+
+  .cron-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.78rem;
+    padding: 4px 0;
+    color: var(--muted);
+  }
+
+  .cron-item:not(:last-child) {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 6px;
+    margin-bottom: 2px;
+  }
+
+  .cron-time {
+    font-family: 'SF Mono', 'Monaco', monospace;
+    font-size: 0.72rem;
+  }
+
+  /* Channels section */
+  .channels {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+
+  .channel-tag {
+    font-size: 0.72rem;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    color: var(--muted);
+  }
+
+  /* MRR bar at bottom */
+  .mrr-section {
+    max-width: 1200px;
+    margin: 0 auto 32px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+  }
+
+  .mrr-section h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+  }
+
+  .stat {
+    text-align: center;
+    padding: 16px;
+    background: rgba(255,255,255,0.02);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+  }
+
+  .stat-value {
+    font-size: 1.6rem;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  .stat.green .stat-value { color: var(--mint); }
+  .stat.purple .stat-value { color: var(--hex); }
+  .stat.yellow .stat-value { color: var(--scout); }
+  .stat.pink .stat-value { color: var(--haus); }
+
+  .footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.78rem;
+    margin-top: 24px;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🤖 The Crew</h1>
+  <p>Raul's AI agent team — who does what</p>
+  <div class="status-bar">
+    <div class="dot"></div>
+    <span>4 agents online · Mac mini Houston TX</span>
+  </div>
+</div>
+
+<!-- Stats Bar -->
+<div class="mrr-section">
+  <h3>📊 Business Overview</h3>
+  <div class="stats-row">
+    <div class="stat green">
+      <div class="stat-value">$160</div>
+      <div class="stat-label">Monthly Recurring Revenue</div>
+    </div>
+    <div class="stat green">
+      <div class="stat-value">10</div>
+      <div class="stat-label">Active GetMinted Subscribers</div>
+    </div>
+    <div class="stat yellow">
+      <div class="stat-value">297K</div>
+      <div class="stat-label">@weschetattoo Followers</div>
+    </div>
+    <div class="stat purple">
+      <div class="stat-value">~976K</div>
+      <div class="stat-label">Total Raul Reach</div>
+    </div>
+    <div class="stat pink">
+      <div class="stat-value">$2K</div>
+      <div class="stat-label">Daily Tattoo Rate</div>
+    </div>
+  </div>
+</div>
+
+<!-- Agent Cards -->
+<div class="grid">
+
+  <!-- HEX -->
+  <div class="card hex">
+    <div class="agent-header">
+      <div class="avatar">🔮</div>
+      <div class="agent-info">
+        <h2>Hex</h2>
+        <div class="handle">Personal Assistant</div>
+        <div class="badge online"><div class="dot-sm"></div> Online</div>
+      </div>
+    </div>
+    <div class="role">
+      Raul's main assistant. Handles personal tasks, research, memory, big-picture strategy, and anything that doesn't belong to a specialist agent.
+    </div>
+
+    <div class="section-label">Responsibilities</div>
+    <ul class="tasks">
+      <li>Personal Q&amp;A, research, decisions</li>
+      <li>Income tracking &amp; daily check-ins</li>
+      <li>Good morning briefing (M–F)</li>
+      <li>Nightly summary &amp; memory logging</li>
+      <li>Security audits &amp; system health</li>
+      <li>One-off tasks &amp; strategy advice</li>
+    </ul>
+
+    <div class="section-label" style="margin-top:16px">Scheduled Crons</div>
+    <div class="crons">
+      <div class="cron-item">
+        <span>☀️ Good Morning</span>
+        <span class="cron-time">6:30am CT · M–F</span>
+      </div>
+      <div class="cron-item">
+        <span>🌙 Nightly Summary</span>
+        <span class="cron-time">10:00pm CT · daily</span>
+      </div>
+      <div class="cron-item">
+        <span>💰 Income Check</span>
+        <span class="cron-time">8:00pm CT · M–F</span>
+      </div>
+    </div>
+
+    <div class="channels">
+      <span class="channel-tag">📱 Telegram (main)</span>
+      <span class="channel-tag">💬 Discord</span>
+    </div>
+  </div>
+
+  <!-- MINT -->
+  <div class="card mint">
+    <div class="agent-header">
+      <div class="avatar">🌿</div>
+      <div class="agent-info">
+        <h2>Mint</h2>
+        <div class="handle">GetMinted.ai · Bayou Web Studio</div>
+        <div class="badge online"><div class="dot-sm"></div> Online</div>
+      </div>
+    </div>
+    <div class="role">
+      Runs the GetMinted.ai platform end-to-end. Builds client websites, manages outreach, handles Stripe/Convex backend, and grows MRR.
+    </div>
+
+    <div class="section-label">Responsibilities</div>
+    <ul class="tasks">
+      <li>Build AI websites from Instagram (60 sec)</li>
+      <li>Cold email outreach — 10/day (5 tattoo + 5 barber)</li>
+      <li>Postcard pipeline via Lob</li>
+      <li>Stripe payment &amp; subscriber tracking</li>
+      <li>Convex backend deploys &amp; fixes</li>
+      <li>Client dashboard &amp; domain management</li>
+      <li>YouTube lead pipeline (233 emails)</li>
+      <li>Video content strategy (30 scripts ready)</li>
+    </ul>
+
+    <div class="section-label" style="margin-top:16px">Active Clients</div>
+    <div class="crons">
+      <div class="cron-item"><span>Israel Paketh</span><span class="cron-time">$15/mo · tattoosbypaketh.com</span></div>
+      <div class="cron-item"><span>Joseph Kintz</span><span class="cron-time">$15/mo · ScalpDynamics</span></div>
+      <div class="cron-item"><span>Eric Hare</span><span class="cron-time">$15/mo · ericharetattoo.com</span></div>
+      <div class="cron-item"><span>Aaron Riddle</span><span class="cron-time">$15/mo</span></div>
+      <div class="cron-item"><span>Yadi Yang</span><span class="cron-time">$10/mo · Luis client</span></div>
+    </div>
+
+    <div class="channels">
+      <span class="channel-tag">📱 Telegram (@getmintedweschebot)</span>
+    </div>
+  </div>
+
+  <!-- SCOUT -->
+  <div class="card scout">
+    <div class="agent-header">
+      <div class="avatar">👁️</div>
+      <div class="agent-info">
+        <h2>Scout</h2>
+        <div class="handle">@omfgeometry · OMF Daily Posts</div>
+        <div class="badge online"><div class="dot-sm"></div> Online</div>
+      </div>
+    </div>
+    <div class="role">
+      Manages the @omfgeometry Instagram page. Finds, curates, and schedules daily posts of geometric tattoo artists. Handles engagement and analytics.
+    </div>
+
+    <div class="section-label">Responsibilities</div>
+    <ul class="tasks">
+      <li>Daily post from geometric tattoo artists</li>
+      <li>Artist discovery &amp; approval queue</li>
+      <li>IG engagement (likes, comments)</li>
+      <li>Stories posting</li>
+      <li>Weekly analytics reporting</li>
+      <li>Auto-skip if no approval by 10am</li>
+    </ul>
+
+    <div class="section-label" style="margin-top:16px">Scheduled Crons</div>
+    <div class="crons">
+      <div class="cron-item"><span>📊 Engagement</span><span class="cron-time">9:00am CT · daily</span></div>
+      <div class="cron-item"><span>📸 Daily Preview</span><span class="cron-time">9:30am CT · daily</span></div>
+      <div class="cron-item"><span>⏩ Auto-Skip</span><span class="cron-time">10:00am CT · daily</span></div>
+      <div class="cron-item"><span>📖 Stories</span><span class="cron-time">11:00am CT · daily</span></div>
+      <div class="cron-item"><span>🔍 Scout Preview</span><span class="cron-time">2:30pm CT · daily</span></div>
+      <div class="cron-item"><span>⏩ Scout Auto-Skip</span><span class="cron-time">3:00pm CT · daily</span></div>
+      <div class="cron-item"><span>📈 Weekly Analytics</span><span class="cron-time">Mon 9am CT</span></div>
+    </div>
+
+    <div class="channels">
+      <span class="channel-tag">📱 Telegram (Scout bot)</span>
+    </div>
+  </div>
+
+  <!-- HAUS -->
+  <div class="card haus">
+    <div class="agent-header">
+      <div class="avatar">🏠</div>
+      <div class="agent-info">
+        <h2>Haus</h2>
+        <div class="handle">InkedHaus · Brand &amp; SEO</div>
+        <div class="badge online"><div class="dot-sm"></div> Online</div>
+      </div>
+    </div>
+    <div class="role">
+      Runs InkedHaus marketing. Posts daily educational content to IG + Facebook, manages SEO, and works toward Meta Ads strategy. Cris-approved changes only.
+    </div>
+
+    <div class="section-label">Responsibilities</div>
+    <ul class="tasks">
+      <li>Daily Instagram + Facebook info posts</li>
+      <li>Tattoo aftercare educational content</li>
+      <li>Shopify SEO optimization</li>
+      <li>OG/meta tag management</li>
+      <li>Weekly performance analytics</li>
+      <li>No layout/visual changes without Cris approval</li>
+    </ul>
+
+    <div class="section-label" style="margin-top:16px">Scheduled Crons</div>
+    <div class="crons">
+      <div class="cron-item"><span>📸 Daily Post</span><span class="cron-time">9:00am CT · daily</span></div>
+      <div class="cron-item"><span>📈 Weekly Analytics</span><span class="cron-time">Mon 9am CT</span></div>
+    </div>
+
+    <div class="section-label" style="margin-top:12px">Topics Posted</div>
+    <div class="crons">
+      <div class="cron-item"><span>✅ Healing Stages</span><span class="cron-time">done</span></div>
+      <div class="cron-item"><span>✅ Fragrance Free</span><span class="cron-time">done</span></div>
+      <div class="cron-item"><span>✅ Peeling Phase</span><span class="cron-time">done</span></div>
+      <div class="cron-item"><span>✅ No Vaseline</span><span class="cron-time">done</span></div>
+      <div class="cron-item"><span>✅ Four Stages</span><span class="cron-time">done</span></div>
+    </div>
+
+    <div class="channels">
+      <span class="channel-tag">📱 Telegram (Haus bot)</span>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  Built by Hex · Raul Wesche's AI crew · Houston TX · Updated 2026-03-08
+</div>
+
+</body>
+</html>
