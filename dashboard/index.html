@@ -1125,53 +1125,115 @@
     function parseSections(html) {
       const groups = [];
 
+      // Helper: extract text content of an about-like section robustly
+      // Handles nested divs by finding the section#about and extracting all <p> tags from it
+      function extractAboutFromSection(html) {
+        // Try to find section with id="about" or id containing "about" (e.g. "nosotros")
+        const aboutSecMatch = html.match(/<section[^>]+id="about"[^>]*>([\s\S]*?)<\/section>/i)
+          || html.match(/<section[^>]+id="nosotros"[^>]*>([\s\S]*?)<\/section>/i);
+        if (!aboutSecMatch) return null;
+        const secHtml = aboutSecMatch[1];
+        // Extract all <p> tags (skip section-label)
+        const pTags = [...secHtml.matchAll(/<p[^>]*>([\s\S]*?)<\/p>/gi)];
+        const bioParas = pTags
+          .map(m => m[1].replace(/<[^>]+>/g,'').trim())
+          .filter(t => t && !t.match(/^[A-Z\s]{3,30}$/) && t.length > 5); // skip tiny labels
+        // Extract h2
+        const h2Match = secHtml.match(/<h2[^>]*>([\s\S]*?)<\/h2>/i);
+        const aboutTitle = h2Match ? h2Match[1].replace(/<[^>]+>/g,'').trim() : '';
+        // Extract image
+        const imgMatch = secHtml.match(/<img[^>]*src="([^"]+)"[^>]*>/i);
+        const aboutImg = imgMatch ? imgMatch[1] : '';
+        return { bioParas, aboutTitle, aboutImg };
+      }
+
       // ── HERO ──
       const heroFields = [];
-      const heroBgMatch = html.match(/background-image:\s*url\(['"]?(img\/[^'")]+)['"]?\)/i);
+      // Match hero bg: inline style url() OR .hero-bg class with background url()
+      const heroBgMatch = html.match(/background-image:\s*url\(['"]?(img\/[^'")]+)['"]?\)/i)
+        || html.match(/background:\s*url\(['"]?(img\/[^'")]+)['"]?\)/i);
       heroFields.push({
         key: 'hero_bg', label: 'Background Photo', type: 'photo',
         value: heroBgMatch ? heroBgMatch[1] : ''
       });
-      const heroTitleMatch = html.match(/<h1[^>]*class="hero-title"[^>]*>([\s\S]*?)<\/h1>/i)
+      const heroTitleMatch = html.match(/<h1[^>]*class="[^"]*hero-title[^"]*"[^>]*>([\s\S]*?)<\/h1>/i)
+        || html.match(/<h1[^>]*class="[^"]*hero-name[^"]*"[^>]*>([\s\S]*?)<\/h1>/i)
         || html.match(/<h1[^>]*data-en="[^"]*"[^>]*>([\s\S]*?)<\/h1>/i)
         || html.match(/<h1(?:[^>]*)>([\s\S]*?)<\/h1>/i);
       heroFields.push({
         key: 'hero_title', label: 'Artist Name', type: 'text',
         value: heroTitleMatch ? heroTitleMatch[1].replace(/<[^>]+>/g,'').trim() : ''
       });
-      const heroSubMatch = html.match(/<[^>]*class="hero-subtitle"[^>]*>([\s\S]*?)<\/[^>]+>/i);
+      const heroSubMatch = html.match(/<[^>]*class="[^"]*hero-subtitle[^"]*"[^>]*>([\s\S]*?)<\/[^>]+>/i);
       heroFields.push({
         key: 'hero_subtitle', label: 'Tagline', type: 'text',
         value: heroSubMatch ? heroSubMatch[1].replace(/<[^>]+>/g,'').trim() : ''
       });
+      // Hero tagline (separate from subtitle on some sites)
+      const heroTagMatch = html.match(/<[^>]*class="[^"]*hero-tagline[^"]*"[^>]*>([\s\S]*?)<\/[^>]+>/i);
+      if (heroTagMatch) {
+        heroFields.push({
+          key: 'hero_tagline', label: 'Hero Tagline', type: 'text',
+          value: heroTagMatch[1].replace(/<[^>]+>/g,'').trim()
+        });
+      }
       groups.push({ id: 'hero', icon: '🦸', title: 'Hero', fields: heroFields });
 
       // ── ABOUT ──
-      const aboutMatch = html.match(/<div\s+class="about-text"[^>]*>([\s\S]*?)<\/div>/i)
-        || html.match(/<div\s+class="about-inner"[^>]*>([\s\S]*?)<\/div>/i)
-        || html.match(/<div\s+class="about-content"[^>]*>([\s\S]*?)<\/div>/i);
-      if (aboutMatch) {
-        const aboutImgMatch = html.match(/<div\s+class="about-image[^"]*"[^>]*>\s*<img[^>]*src="([^"]+)"/i)
-          || html.match(/<img[^>]*class="about-photo[^"]*"[^>]*src="([^"]+)"/i);
-        const bioText = aboutMatch[1].replace(/<p>/gi,'').replace(/<\/p>/gi,'\n\n').replace(/<br\s*\/?>/gi,'\n').replace(/<[^>]+>/g,'').trim();
-        groups.push({
-          id: 'about', icon: '🎨', title: 'About', fields: [
-            { key: 'about_photo', label: 'Artist Photo', type: 'photo', value: aboutImgMatch ? aboutImgMatch[1] : '' },
-            { key: 'about', label: 'Bio', type: 'textarea', value: bioText }
-          ]
-        });
+      // Strategy: first try robust section-level extraction, then fall back to class-based div matching
+      let aboutData = extractAboutFromSection(html);
+      if (!aboutData) {
+        // Fallback: try matching about-text/about-inner/about-content divs (with flexible class matching)
+        const aboutMatch = html.match(/<div\s+class="[^"]*about-text[^"]*"[^>]*>([\s\S]*?)<\/div>/i)
+          || html.match(/<div\s+class="[^"]*about-inner[^"]*"[^>]*>([\s\S]*?)<\/div>/i)
+          || html.match(/<div\s+class="[^"]*about-content[^"]*"[^>]*>([\s\S]*?)<\/div>/i)
+          || html.match(/<div\s+class="[^"]*artist-bio[^"]*"[^>]*>([\s\S]*?)<\/div>/i)
+          || html.match(/<div\s+class="[^"]*bio[^"]*"[^>]*>([\s\S]*?)<\/div>/i);
+        if (aboutMatch) {
+          const rawHtml = aboutMatch[1];
+          const pTags = [...rawHtml.matchAll(/<p[^>]*>([\s\S]*?)<\/p>/gi)];
+          const bioParas = pTags.map(m => m[1].replace(/<[^>]+>/g,'').trim()).filter(t => t && t.length > 5);
+          // If no <p> tags, treat entire content as bio
+          if (bioParas.length === 0) {
+            const plainText = rawHtml.replace(/<[^>]+>/g,'').trim();
+            if (plainText) bioParas.push(plainText);
+          }
+          const h2Match = rawHtml.match(/<h2[^>]*>([\s\S]*?)<\/h2>/i);
+          aboutData = {
+            bioParas,
+            aboutTitle: h2Match ? h2Match[1].replace(/<[^>]+>/g,'').trim() : '',
+            aboutImg: ''
+          };
+        }
+      }
+      if (aboutData && (aboutData.bioParas.length > 0 || aboutData.aboutTitle)) {
+        const aboutFields = [];
+        // Image: try multiple patterns
+        const aboutImgMatch = html.match(/<div\s+class="[^"]*about-image[^"]*"[^>]*>\s*<img[^>]*src="([^"]+)"/i)
+          || html.match(/<img[^>]*class="[^"]*about-photo[^"]*"[^>]*src="([^"]+)"/i)
+          || html.match(/<img[^>]*class="[^"]*about-portrait[^"]*"[^>]*src="([^"]+)"/i);
+        const imgSrc = aboutData.aboutImg || (aboutImgMatch ? aboutImgMatch[1] : '');
+        aboutFields.push({ key: 'about_photo', label: 'Artist Photo', type: 'photo', value: imgSrc });
+        if (aboutData.aboutTitle) {
+          aboutFields.push({ key: 'about_title', label: 'Section Title', type: 'text', value: aboutData.aboutTitle });
+        }
+        aboutFields.push({ key: 'about', label: 'Bio', type: 'textarea', value: aboutData.bioParas.join('\n\n') });
+        groups.push({ id: 'about', icon: '🎨', title: 'About', fields: aboutFields });
       }
 
       // ── BOOKING ──
       const bookingFields = [];
-      const bookMatch = html.match(/class="float-book"[^>]*href="([^"]+)"/i)
-        || html.match(/class="[^"]*hero-cta[^"]*"[^>]*href="([^"]+)"/i);
+      // Booking URL: check href on float-book or hero-cta (order-independent attribute matching)
+      const bookMatch = html.match(/class="[^"]*float-book[^"]*"[^>]*href="([^"]+)"/i)
+        || html.match(/href="([^"]+)"[^>]*class="[^"]*float-book[^"]*"/i)
+        || html.match(/class="[^"]*hero-cta[^"]*"[^>]*href="([^"]+)"/i)
+        || html.match(/href="([^"]+)"[^>]*class="[^"]*hero-cta[^"]*"/i);
       if (bookMatch) bookingFields.push({ key: 'booking', label: 'Booking Button URL', type: 'text', value: bookMatch[1] });
-      const bookTitleMatch = html.match(/id="book(?:ing)?"[\s\S]{0,400}?class="section-title[^"]*"[^>]*>([\s\S]*?)<\/h2>/i);
+      const bookTitleMatch = html.match(/id="book(?:ing)?"[\s\S]{0,400}?class="[^"]*section-title[^"]*"[^>]*>([\s\S]*?)<\/h2>/i);
       if (bookTitleMatch) bookingFields.push({ key: 'booking_title', label: 'Section Title', type: 'text', value: bookTitleMatch[1].replace(/<[^>]+>/g,'').trim() });
-      const bookingDetailsMatch = html.match(/class="booking-details[^"]*"[^>]*>([\s\S]*?)<\/div>/i);
+      const bookingDetailsMatch = html.match(/class="[^"]*booking-details[^"]*"[^>]*>([\s\S]*?)<\/div>/i);
       if (bookingDetailsMatch) {
-        const details = [...bookingDetailsMatch[1].matchAll(/<div class="booking-detail">([\s\S]*?)<\/div>/gi)]
+        const details = [...bookingDetailsMatch[1].matchAll(/<div[^>]*class="[^"]*booking-detail[^"]*"[^>]*>([\s\S]*?)<\/div>/gi)]
           .map(m => m[1].replace(/<strong>/gi,'').replace(/<\/strong>/gi,'').replace(/<[^>]+>/g,'').trim());
         if (details.length) bookingFields.push({ key: 'booking_details', label: 'Rate / Availability Details (one per line)', type: 'textarea', value: details.join('\n') });
       }
@@ -1199,11 +1261,14 @@
       if (bookingFields.length) groups.push({ id: 'booking', icon: '📅', title: 'Booking', fields: bookingFields });
 
       // ── FAQ ──
-      const faqSection = html.match(/id="faq"[\s\S]*?<div class="faq-list[^"]*">([\s\S]*?)<\/div>\s*<\/div>\s*<\/div>\s*<\/section>/i);
-      if (faqSection) {
-        const faqHtml = faqSection[1];
-        const qMatches = [...faqHtml.matchAll(/<button class="faq-question">([\s\S]*?)<\/button>/gi)];
-        const aMatches = [...faqHtml.matchAll(/<div class="faq-answer"><p>([\s\S]*?)<\/p><\/div>/gi)];
+      // Extract FAQ section more robustly — scope to section#faq, then find all faq-items
+      const faqSecMatch = html.match(/<section[^>]+id="faq"[^>]*>([\s\S]*?)<\/section>/i);
+      if (faqSecMatch) {
+        const faqHtml = faqSecMatch[1];
+        // Match faq-question buttons with any attributes (onclick, aria-expanded, etc.)
+        const qMatches = [...faqHtml.matchAll(/<button[^>]*class="[^"]*faq-question[^"]*"[^>]*>([\s\S]*?)<\/button>/gi)];
+        // Match faq-answer divs with whitespace before <p>
+        const aMatches = [...faqHtml.matchAll(/<div[^>]*class="[^"]*faq-answer[^"]*"[^>]*>\s*<p[^>]*>([\s\S]*?)<\/p>/gi)];
         if (qMatches.length > 0) {
           const faqPairs = qMatches.map((q, i) => ({
             question: q[1].replace(/<[^>]+>/g,'').trim(),
@@ -1221,8 +1286,35 @@
         ]});
       }
 
-      // ── CUSTOM SECTIONS ──
-      const knownIds = new Set(['gallery', 'about', 'book', 'booking', 'faq', 'contact', 'hero', 'testimonials', 'shop']);
+      // ── TESTIMONIALS ──
+      const testimSecMatch = html.match(/<section[^>]+id="testimonials"[^>]*>([\s\S]*?)<\/section>/i);
+      if (testimSecMatch) {
+        const tsBody = testimSecMatch[1];
+        const tsTitle = tsBody.match(/<h2[^>]*>([\s\S]*?)<\/h2>/i);
+        const tsDesc = tsBody.match(/<p[^>]*(?:class="[^"]*reveal[^"]*")?[^>]*>([^<]{10,})<\/p>/i);
+        const tsFields = [];
+        if (tsTitle) tsFields.push({ key: 'section_title__testimonials', label: 'Section Title', type: 'text', value: tsTitle[1].replace(/<[^>]+>/g,'').trim() });
+        if (tsDesc) tsFields.push({ key: 'section_body__testimonials', label: 'Description', type: 'textarea', value: tsDesc[1].replace(/<[^>]+>/g,'').trim() });
+        if (tsFields.length) groups.push({ id: 'testimonials', icon: '⭐', title: tsTitle ? tsTitle[1].replace(/<[^>]+>/g,'').trim() : 'Testimonials', fields: tsFields });
+      }
+
+      // ── SHOP ──
+      const shopSecMatch = html.match(/<section[^>]+id="shop"[^>]*>([\s\S]*?)<\/section>/i);
+      if (shopSecMatch) {
+        const shBody = shopSecMatch[1];
+        const shTitle = shBody.match(/<h2[^>]*>([\s\S]*?)<\/h2>/i);
+        const shDesc = shBody.match(/<p[^>]*class="[^"]*reveal[^"]*"[^>]*>([\s\S]*?)<\/p>/i)
+          || shBody.match(/<p[^>]*>([\s\S]*?)<\/p>/i);
+        const shLink = shBody.match(/href="(https?:\/\/[^"]+)"/i);
+        const shFields = [];
+        if (shTitle) shFields.push({ key: 'section_title__shop', label: 'Section Title', type: 'text', value: shTitle[1].replace(/<[^>]+>/g,'').trim() });
+        if (shDesc) shFields.push({ key: 'section_body__shop', label: 'Description', type: 'textarea', value: shDesc[1].replace(/<[^>]+>/g,'').trim() });
+        if (shLink) shFields.push({ key: 'shop_link', label: 'Shop URL', type: 'text', value: shLink[1] });
+        if (shFields.length) groups.push({ id: 'shop', icon: '🛍️', title: shTitle ? shTitle[1].replace(/<[^>]+>/g,'').trim() : 'Shop', fields: shFields });
+      }
+
+      // ── CUSTOM SECTIONS (catch-all for any section with id not already handled) ──
+      const knownIds = new Set(['gallery', 'about', 'book', 'booking', 'faq', 'contact', 'hero', 'testimonials', 'shop', 'top', 'nosotros']);
       const customSecRe = /<section[^>]+id="([^"]+)"[^>]*>([\s\S]*?)<\/section>/gi;
       let csm;
       while ((csm = customSecRe.exec(html)) !== null) {
@@ -1234,10 +1326,17 @@
         if (!h2Match) continue;
         const secTitle = h2Match[1].replace(/<[^>]+>/g,'').trim();
         const hasGrid = /class="[^"]*gallery-grid/.test(secBody);
-        const pMatch = secBody.match(/<p[^>]*>([\s\S]*?)<\/p>/i);
-        const bodyText = pMatch ? pMatch[1].replace(/<[^>]+>/g,'').trim() : '';
+        // Extract ALL <p> tags (not just the first), skipping section-labels
+        const allPTags = [...secBody.matchAll(/<p[^>]*>([\s\S]*?)<\/p>/gi)];
+        const bodyParts = allPTags
+          .map(m => m[1].replace(/<[^>]+>/g,'').trim())
+          .filter(t => t && t.length > 5 && !t.match(/^[A-Z\s]{3,30}$/));
+        const bodyText = bodyParts.join('\n\n');
         const customFields = [{ key: 'section_title__' + secId, label: 'Section Title', type: 'text', value: secTitle }];
         if (!hasGrid && bodyText) customFields.push({ key: 'section_body__' + secId, label: 'Body Text', type: 'textarea', value: bodyText });
+        // Check for external links in this section
+        const extLink = secBody.match(/href="(https?:\/\/[^"]+)"/i);
+        if (extLink) customFields.push({ key: 'section_link__' + secId, label: 'Link URL', type: 'text', value: extLink[1] });
         groups.push({ id: secId, icon: hasGrid ? '📷' : '📄', title: secTitle, fields: customFields, isGallery: hasGrid });
       }
 
