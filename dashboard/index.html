@@ -1391,8 +1391,8 @@
 
         // 3. Detect card-based layouts: any repeated div whose class contains
         //    card, item, entry, feature, detail, step (but not gallery-item, nav, footer)
-        const isGallery = /class="[^"]*gallery-grid/.test(secBody);
-        const cardPattern = /<div[^>]*class="[^"]*(?:service|style|feature|step|testimonial|contact|pricing|team|artist|info|location|faq|hour|stat|booking|about)-(?:card|item|entry|detail|block)[^"]*"[^>]*>/gi;
+        const isGallery = /class="[^"]*gallery[_-](?:grid|list|container|wrap)/.test(secBody);
+        const cardPattern = /<div[^>]*class="[^"]*(?:(?:service|style|feature|step|testimonial|contact|pricing|team|artist|info|location|faq|hour|stat|booking|about|price|plan)[_-](?:card|item|entry|detail|block)|(?:price-card|plan-card))[^"]*"[^>]*>/gi;
         const cardOpenings = [...secBody.matchAll(cardPattern)];
         
         if (cardOpenings.length >= 2 && !isGallery) {
@@ -1404,12 +1404,17 @@
           
           cardParts.forEach((card, i) => {
             if (i >= 10) return;
-            // Card title: h3 (prefer data-en attr)
-            const tM = card.match(/<h3[^>]*data-en="([^"]*)"/) || card.match(/<h3[^>]*>([\s\S]*?)<\/h3>/i);
+            // Card title: h3, h4, or div with label/title/name/amount class
+            const tM = card.match(/<h3[^>]*data-en="([^"]*)"/)
+              || card.match(/<h3[^>]*>([\s\S]*?)<\/h3>/i)
+              || card.match(/<h4[^>]*>([\s\S]*?)<\/h4>/i)
+              || card.match(/<div[^>]*class="[^"]*(?:label|title|name|amount|heading)[^"]*"[^>]*>([\s\S]*?)<\/div>/i);
             const cardT = tM ? (tM[1] || '').replace(/<[^>]+>/g,'').trim() : '';
-            // Card description: first <p> (prefer data-en attr)
-            const dM = card.match(/<p[^>]*data-en="([^"]*)"/) || card.match(/<p[^>]*>([\s\S]*?)<\/p>/i);
-            const cardD = dM ? (dM[1] || '').replace(/<[^>]+>/g,'').trim() : '';
+            // Card description: p, or div with desc/note/text/info class
+            const dM = card.match(/<p[^>]*data-en="([^"]*)"/)
+              || card.match(/<p[^>]*>([\s\S]*?)<\/p>/i)
+              || card.match(/<div[^>]*class="[^"]*(?:desc|note|text|info|detail|body)[^"]*"[^>]*>([\s\S]*?)<\/div>/i);
+            const cardD = dM ? (dM[1] || dM[2] || '').replace(/<[^>]+>/g,'').trim() : '';
             if (cardT) {
               fields.push({ key: `${secId}__card_title_${i}`, label: `Item ${i+1} Title`, type: 'text', value: cardT });
               if (cardD) fields.push({ key: `${secId}__card_desc_${i}`, label: `Item ${i+1} Description`, type: 'textarea', value: cardD });
