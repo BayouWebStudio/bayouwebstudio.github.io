@@ -1418,6 +1418,24 @@
             }
           });
         } else if (!isGallery) {
+          // Fallback: detect list-row layouts (inline-styled divs with repeated span pairs, no classes)
+          // Common pattern: <div style="display:flex..."><span>Title</span><span>Desc</span></div>
+          const rowPattern = /<div[^>]*style="[^"]*display:\s*flex[^"]*"[^>]*>\s*<span[^>]*>([\s\S]*?)<\/span>\s*<span[^>]*>([\s\S]*?)<\/span>/gi;
+          const rows = [...secBody.matchAll(rowPattern)];
+          if (rows.length >= 2) {
+            rows.forEach((row, i) => {
+              if (i >= 10) return;
+              const rowTitle = row[1].replace(/<[^>]+>/g,'').trim();
+              const rowDesc = row[2].replace(/<[^>]+>/g,'').trim();
+              if (rowTitle) {
+                fields.push({ key: `${secId}__card_title_${i}`, label: `Item ${i+1} Title`, type: 'text', value: rowTitle });
+                if (rowDesc) fields.push({ key: `${secId}__card_desc_${i}`, label: `Item ${i+1} Description`, type: 'text', value: rowDesc });
+              }
+            });
+          }
+        }
+        
+        if (fields.length <= 2 && !isGallery) { // title + maybe label only — add paragraph content
           // 4. Non-card section: extract paragraphs as editable content
           const allP = [...secBody.matchAll(/<p[^>]*>([\s\S]*?)<\/p>/gi)];
           const bodyParts = allP
