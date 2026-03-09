@@ -11,7 +11,16 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>if(location.search.includes('__clerk_'))location.href='/dashboard/';</script>
+<script>
+  if(location.search.includes('__clerk_')) { location.href='/dashboard/'; }
+  // Auto-redirect Mexico visitors to Spanish landing (only on first visit, no redirect loop)
+  else if (!localStorage.getItem('lang') && !location.pathname.startsWith('/es')) {
+    fetch('https://ipapi.co/json/')
+      .then(r=>r.json())
+      .then(d=>{ if(d.country_code==='MX'){ localStorage.setItem('lang','es'); location.href='/es/'; }})
+      .catch(()=>{});
+  }
+</script>
 <title>Get Minted — Free AI Website Builder for Small Business</title>
 <meta name="description" content="Get a free website in 30 seconds. AI pulls your Instagram photos and builds a professional site — gallery, booking, bio. Free forever. Upgrade to Pro for a custom .com and SEO.">
 <meta name="keywords" content="AI website builder, small business website, tattoo artist website, barber website, salon website, AI website design, custom website builder, website for tattoo artist, website for barber, automatic website builder, AI web design, small business web design">
