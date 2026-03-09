@@ -3762,20 +3762,12 @@
     btn.style.opacity = '0.5';
 
     var content = document.getElementById('domain-modal-content');
-    var steps = ['Purchasing domain...', 'Configuring DNS...', 'Linking to your site...'];
-    var stepIdx = 0;
-
     content.innerHTML = '<div style="text-align:center;padding:30px 0;">'
       + '<div style="width:32px;height:32px;border:3px solid rgba(0,200,130,0.3);border-top-color:#00C882;border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 16px;"></div>'
-      + '<p id="domain-progress-text" style="color:rgba(255,255,255,0.8);font-size:15px;font-weight:600;">' + steps[0] + '</p>'
+      + '<p style="color:rgba(255,255,255,0.8);font-size:15px;font-weight:600;">Submitting your request...</p>'
       + '</div>';
 
-    var progressTimer = setInterval(function() {
-      stepIdx++;
-      if (stepIdx < steps.length) {
-        document.getElementById('domain-progress-text').textContent = steps[stepIdx];
-      }
-    }, 2500);
+    var progressTimer = null;
 
     try {
     var token = await window._getClerkToken();
@@ -3789,10 +3781,11 @@
       clearInterval(progressTimer);
       if (data.ok) {
         content.innerHTML = '<div style="text-align:center;padding:30px 0;">'
-          + '<div style="font-size:48px;margin-bottom:16px;">✅</div>'
-          + '<p style="color:#fff;font-size:17px;font-weight:700;margin-bottom:8px;">Domain is being connected!</p>'
-          + '<p style="color:rgba(255,255,255,0.6);font-size:14px;margin-bottom:24px;">Usually live within 1 hour. We\'ll update your dashboard when it\'s ready.</p>'
-          + '<button onclick="closeDomainModal();document.getElementById(\'domain-cta-banner\').style.display=\'none\';" style="background:#00C882;color:#0a1a12;font-weight:700;font-size:14px;padding:12px 24px;border:none;border-radius:10px;cursor:pointer;">Done</button>'
+          + '<div style="font-size:48px;margin-bottom:16px;">🌿</div>'
+          + '<p style="color:#fff;font-size:17px;font-weight:700;margin-bottom:8px;">Request received!</p>'
+          + '<p style="color:rgba(255,255,255,0.6);font-size:14px;margin-bottom:8px;">We\'re registering <strong style="color:#00C882">' + _domainSelected + '</strong> for you.</p>'
+          + '<p style="color:rgba(255,255,255,0.5);font-size:13px;margin-bottom:24px;">You\'ll get a confirmation email within 5 minutes once it\'s live.</p>'
+          + '<button onclick="closeDomainModal();document.getElementById(\'domain-cta-banner\').style.display=\'none\';" style="background:#00C882;color:#0a1a12;font-weight:700;font-size:14px;padding:12px 24px;border:none;border-radius:10px;cursor:pointer;">Got it</button>'
           + '</div>';
       } else {
         content.innerHTML = '<div style="text-align:center;padding:30px 0;">'
