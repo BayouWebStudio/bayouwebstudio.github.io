@@ -824,8 +824,11 @@ fbq('track', 'PageView');
 ></script>
 <script>
   // ── i18n: Language detection ──
-  const lang = new URLSearchParams(location.search).get('lang') || localStorage.getItem('lang') || 'en';
+  const _browserLang = navigator.language || navigator.userLanguage || 'en';
+  const _defaultLang = _browserLang.startsWith('pt') ? 'pt' : _browserLang.startsWith('es') ? 'es' : 'en';
+  const lang = new URLSearchParams(location.search).get('lang') || localStorage.getItem('lang') || _defaultLang;
   if (lang === 'es') localStorage.setItem('lang', 'es');
+  if (lang === 'pt') localStorage.setItem('lang', 'pt');
 
   const _i18n = {
     es: {
@@ -949,17 +952,135 @@ fbq('track', 'PageView');
       change_booking_update: '📅 Reserva Actualizada',
       change_site_build: '🏗️ Sitio Construido',
       change_domain_setup: '🌐 Dominio Configurado',
+    },
+    pt: {
+      // Nav tabs
+      tab_overview: 'Resumo',
+      tab_sections: 'Editar Seções',
+      tab_gallery: 'Galeria',
+      tab_store: 'Loja',
+      tab_themes: 'Temas',
+      // Header
+      sign_out: 'Sair',
+      loading_text: 'Carregando...',
+      signin_tagline: 'Seu dashboard de site com IA',
+      // Overview
+      your_site: 'Seu Site',
+      site_info: 'Informações do Site',
+      recent_changes: 'Alterações Recentes',
+      domain_label: 'Domínio',
+      plan_label: 'Plano',
+      slug_label: 'Slug do Site',
+      status_label: 'Status',
+      status_live: '● Online',
+      visit_link: '↗ Visitar',
+      refresh_btn: '↺ Atualizar',
+      no_changes: 'Sem alterações ainda',
+      // SEO
+      seo_health: 'Saúde do SEO',
+      run_check: 'Executar Análise',
+      checking: 'Verificando...',
+      fix_seo: 'Corrigir SEO Agora →',
+      analyzing: 'Analisando seu site...',
+      great_seo: 'SEO Excelente!',
+      needs_work: 'Precisa Melhorar',
+      poor_seo: 'SEO Ruim',
+      last_checked: 'Verificado agora',
+      // Sections
+      edit_sections_title: 'Editar Seções do Seu Site',
+      edit_sections_sub: 'Edite todos os campos de cada seção e clique em Salvar. As alterações aparecem em ~3–5 minutos.',
+      add_section: '＋ Adicionar Seção',
+      remove_section: '− Remover Seção',
+      rearrange: '↕ Reorganizar',
+      loading_content: 'Carregando conteúdo do site...',
+      no_sections: 'Nenhuma seção editável encontrada',
+      save_btn: 'Salvar',
+      saving: 'Salvando...',
+      saved_ok: '✅ Salvo',
+      save_section_prefix: 'Salvar ',
+      save_faq: 'Salvar FAQ',
+      manage_photos: '📷 Gerenciar Fotos →',
+      // Gallery
+      gallery_title: 'Galeria',
+      upload_photos: '📸 Enviar Fotos',
+      save_order_btn: '💾 Salvar Ordem',
+      saving_order: '💾 Salvando...',
+      auto_update_ig: 'Atualização Automática do IG',
+      auto_update_on: 'Atualização Automática: ATIVADA',
+      drop_photos: 'Solte suas fotos aqui ou clique para enviar',
+      photo_hint: 'JPG, PNG, WebP — máx 5MB por foto',
+      loading_gallery: 'Carregando galeria...',
+      no_photos: 'Sem fotos na galeria. Envie algumas!',
+      upload_to: '📂 Enviar para:',
+      // Store
+      store_title: 'Loja',
+      store_desc: 'Venda produtos diretamente do seu site GetMinted. Itens físicos, downloads digitais ou depósitos de reserva.',
+      // Themes
+      themes_title: 'Temas',
+      themes_desc: 'Escolha um estilo para seu site. As alterações aparecem instantaneamente.',
+      // Upgrade
+      upgrade_text: 'Atualize para Pro para ter seu próprio .com, SEO, loja e sincronização automática do Instagram.',
+      upgrade_btn: 'Atualizar — $15/mês →',
+      domain_cta_title: 'Obtenha seu domínio .com',
+      domain_cta_desc: 'Seu plano inclui um domínio personalizado. Escolha o seu e apareça no Google.',
+      pick_com: 'Escolher meu .com →',
+      // Toasts
+      toast_order_saved: '✅ Ordem salva! Aguarde 3–5 minutos para aparecer no seu site.',
+      toast_section_saved: '✅ Salvo! Aguarde 3–5 minutos para aparecer no seu site.',
+      toast_photo_removed: 'Foto removida!',
+      toast_bg_updated: 'Fundo atualizado. As alterações aparecem em ~30 segundos.',
+      toast_hero_bg: 'Fundo do hero atualizado. As alterações aparecem em ~30 segundos.',
+      toast_upload_done: 'foto(s) enviada(s). Aguarde 3–5 minutos para aparecer no seu site.',
+      toast_site_loading: 'Prévia atualizando... as alterações levam 3–5 minutos para aparecer.',
+      toast_order_failed: 'Erro ao salvar a ordem',
+      toast_delete_failed: 'Erro ao excluir',
+      toast_site_not_loaded: 'Site ainda não carregado',
+      // Welcome
+      welcome_title: 'Bem-vindo ao GetMinted 🌿',
+      welcome_sub: 'Digite seu usuário do Instagram e criaremos seu site gratuito em aproximadamente 30 segundos.',
+      ig_placeholder: 'seuusuario',
+      build_btn: 'Criar Meu Site →',
+      welcome_note: 'Assim que seu site estiver online, você poderá escolher seu domínio .com personalizado na aba Resumo.',
+      // Chat
+      chat_title: 'Mint',
+      chat_subtitle: 'Editor IA',
+      chat_intro_title: 'Converse com a Mint',
+      chat_intro_sub: 'Peça alterações personalizadas, novas seções, designs diferentes — só perguntar.',
+      chat_placeholder: 'Pergunte à Mint…',
+      chat_bubble: 'Estou aqui se precisar de ajuda 🌿',
+      bubble_overview: 'Seu site está online. 🌿 Me avise se precisar de algo.',
+      bubble_sections: 'Reorganize, ajuste textos, faça seu! ✏️',
+      bubble_gallery: 'Quer adicionar fotos? Envie aqui! 📸',
+      bubble_store: 'Pronto para vender? Configure sua loja abaixo 🛍️',
+      bubble_themes: 'Hora de um novo visual? Escolha seu estilo 🎨',
+      // Upgrade modal
+      upgrade_modal_title: 'Você usou suas 2 edições gratuitas 👋',
+      upgrade_modal_sub: 'Atualize para Pro para continuar editando — mais seu próprio .com, SEO, loja e sincronização automática do Instagram.',
+      upgrade_modal_btn: 'Atualizar para Pro — $15/mês',
+      upgrade_modal_dismiss: 'Agora não',
+      // Free change limit
+      free_limit_reached: 'Limite de edições atingido',
+      // SEO fix
+      fix_in_days: 'Verificar novamente em',
+      day_singular: 'dia',
+      day_plural: 'dias',
+      // Change labels
+      change_text_edit: '✏️ Texto Atualizado',
+      change_photo_swap: '📸 Foto Alterada',
+      change_booking_update: '📅 Reserva Atualizada',
+      change_site_build: '🏗️ Site Construído',
     }
   };
 
   function t(key, defaultVal) {
     if (lang === 'es' && _i18n.es[key] !== undefined) return _i18n.es[key];
+    if (lang === 'pt' && _i18n.pt[key] !== undefined) return _i18n.pt[key];
     return defaultVal !== undefined ? defaultVal : key;
   }
 
   // Apply translations to static HTML elements after DOM ready
   function applyDashboardTranslations() {
-    if (lang !== 'es') return;
+    if (lang !== 'es' && lang !== 'pt') return;
     // Nav tabs
     const tabMap = { overview: t('tab_overview'), sections: t('tab_sections'), gallery: t('tab_gallery'), store: t('tab_store'), themes: t('tab_themes') };
     document.querySelectorAll('.nav-tab').forEach(function(tab) {
@@ -2222,7 +2343,7 @@ fbq('track', 'PageView');
 
     function renderGallery(items) {
       const grid = document.getElementById('gallery-grid');
-      document.getElementById('gallery-count').textContent = lang === 'es' ? items.length + ' foto' + (items.length !== 1 ? 's' : '') : items.length + ' photo' + (items.length !== 1 ? 's' : '');
+      document.getElementById('gallery-count').textContent = (lang === 'es' || lang === 'pt') ? items.length + ' foto' + (items.length !== 1 ? 's' : '') : items.length + ' photo' + (items.length !== 1 ? 's' : '');
 
       if (items.length === 0) {
         grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;">' + t('no_photos', 'No gallery photos found. Upload some!') + '</div>';
