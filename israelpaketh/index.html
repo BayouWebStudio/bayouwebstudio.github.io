@@ -656,7 +656,7 @@ Small/medium/large scale projects are welcome</h2>
     <img id="lightbox-img" src="" alt="Full size view" />
   </div>
 
-  <div class="minted-banner"><a href="https://getminted.ai?ref=site" target="_blank" rel="noopener">🌿 Want a free website like this? <span data-en="Get yours at getminted.ai" data-es="Consigue el tuyo en getminted.ai">Get yours at getminted.ai</span></a></div>
+  <div class="minted-banner"><a href="https://getminted.ai?ref=site" target="_blank" rel="noopener">🌿 Want a free website like this? <span data-en="Get yours at getminted.ai" data-es="Consigue el tuyo en getminted.ai" data-pt="Obtenha o seu em getminted.ai">Get yours at getminted.ai</span></a></div>
 
   
   <!-- What I Create Section -->
@@ -902,15 +902,18 @@ See you soon for the next sessions</p>
   <script>setTimeout(function(){var b=document.getElementById('claim-banner');if(b)b.style.transform='translateY(0)';},5000);</script>
 <script>
 (function(){
-  var lang = localStorage.getItem("mint-lang") || "en";
+  var browserLang = (navigator.language || navigator.userLanguage || "en").toLowerCase();
+  var defaultLang = browserLang.startsWith("pt") ? "pt" : (browserLang.startsWith("es") ? "es" : "en");
+  var lang = localStorage.getItem("mint-lang") || defaultLang;
   function applyLang(l){
     lang = l;
     localStorage.setItem("mint-lang", l);
     document.querySelectorAll("[data-en]").forEach(function(el){
-      el.textContent = l === "es" ? el.getAttribute("data-es") : el.getAttribute("data-en");
+      var val = l === "es" ? el.getAttribute("data-es") : (l === "pt" ? el.getAttribute("data-pt") : null);
+      el.textContent = val || el.getAttribute("data-en");
     });
     var btn = document.getElementById("lang-toggle");
-    if(btn) btn.textContent = l === "es" ? "🇺🇸 EN" : "🇲🇽 ES";
+    if(btn) btn.textContent = l === "es" ? "🇺🇸 EN" : (l === "pt" ? "🇺🇸 EN" : "🇲🇽 ES");
   }
   window.toggleLang = function(){ applyLang(lang === "en" ? "es" : "en"); };
   document.addEventListener("DOMContentLoaded", function(){ applyLang(lang); });
