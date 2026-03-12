@@ -21,8 +21,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
   <!-- Google Ads -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17990052802"></script>
-  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','AW-17990052802');</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17989903265"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','AW-17989903265');</script>
 
   <!-- Meta Pixel -->
   <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1446410187106776');fbq('track','PageView');</script>
@@ -699,7 +699,7 @@
     <div class="logo-dot"></div>
     GetMinted
   </div>
-  <p>© 2025 GetMinted. All rights reserved.</p>
+  <p>© 2026 GetMinted. All rights reserved.</p>
 </div>
 
 <script>
@@ -708,7 +708,8 @@
 
     const inputId  = formId === 'hero' ? 'heroHandle'  : 'bottomHandle';
     const statusId = formId === 'hero' ? 'heroStatus'  : 'bottomStatus';
-    const btn      = e.target.querySelector('.cta-btn');
+    const form     = e.target;
+    const btn      = form.querySelector('.cta-btn');
     const status   = document.getElementById(statusId);
 
     // Sanitize handle
@@ -724,38 +725,53 @@
     status.style.display = 'none';
 
     // Fire Google Ads conversion
-    try { gtag('event', 'conversion', { 'send_to': 'AW-17990052802' }); } catch(_) {}
+    try { gtag('event', 'conversion', { 'send_to': 'AW-17989903265' }); } catch(_) {}
 
     // Fire Meta Pixel lead event
     try { fbq('track', 'Lead'); } catch(_) {}
 
     // POST to Convex
-    let success = false;
     try {
       const res = await fetch('https://curious-lemming-262.convex.site/api/waitlist/join', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ igHandle: raw, source: 'google-ads' }),
       });
-      if (res.ok) {
-        success = true;
-      }
-    } catch (_) {
-      // network error — fall through to redirect
-    }
 
-    if (success) {
-      status.className = 'form-status success';
-      status.textContent = '🎉 You\'re in! We\'re building your site now — check back shortly.';
+      if (res.ok) {
+        // Success: hide form, show inline success message
+        form.style.display = 'none';
+
+        // Show success block (create if needed, or use status div)
+        let successEl = document.getElementById('success-msg-' + formId);
+        if (!successEl) {
+          successEl = document.createElement('div');
+          successEl.id = 'success-msg-' + formId;
+          successEl.style.cssText = 'text-align:center;padding:40px 20px;';
+          form.parentNode.insertBefore(successEl, form.nextSibling);
+        }
+        successEl.innerHTML =
+          '<div style="font-size:48px;margin-bottom:16px;">🌿</div>' +
+          '<h2 style="color:#00c882;font-size:32px;margin-bottom:12px;">We\'re building your site!</h2>' +
+          '<p style="color:#999;font-size:18px;">Check back at <strong style="color:white">getminted.ai/' + raw + '</strong> in a few minutes.</p>' +
+          '<p style="margin-top:20px;"><a href="https://getminted.ai/build/?ig=' + encodeURIComponent(raw) + '" style="color:#00c882;font-size:15px;">Track your build →</a></p>';
+        successEl.style.display = 'block';
+      } else {
+        // API error — show error message, do NOT redirect
+        const errData = await res.json().catch(() => ({}));
+        status.className = 'form-status error';
+        status.textContent = errData.error || 'Something went wrong. Please try again.';
+        status.style.display = 'block';
+        btn.textContent = 'Build My Free Site →';
+        btn.disabled = false;
+      }
+    } catch (err) {
+      // Network error — show error message, do NOT silently redirect
+      status.className = 'form-status error';
+      status.textContent = 'Connection error. Please check your internet and try again.';
       status.style.display = 'block';
-      btn.textContent = '✓ Submitted!';
-      // Redirect after short delay
-      setTimeout(() => {
-        window.location.href = 'https://getminted.ai/?ig=' + encodeURIComponent(raw);
-      }, 2000);
-    } else {
-      // Fallback redirect
-      window.location.href = 'https://getminted.ai/?ig=' + encodeURIComponent(raw);
+      btn.textContent = 'Build My Free Site →';
+      btn.disabled = false;
     }
   }
 </script>
