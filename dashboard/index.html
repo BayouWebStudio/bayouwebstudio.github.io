@@ -11,7 +11,7 @@
 </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mint Dashboard — Visual Editor (Test)</title>
+  <title>GetMinted — My Dashboard</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -1234,8 +1234,7 @@ fbq('track', 'PageView');
       signInScreen.style.display = 'block';
       clerk.mountSignIn(document.getElementById('clerk-sign-in'), {
         forceRedirectUrl: window.location.href,
-        afterSignUpUrl: window.location.href,
-        afterSignInUrl: window.location.href,
+        fallbackRedirectUrl: window.location.href,
       });
       clerk.addListener(({ user }) => { if (user) initDashboard(); });
     } else {
@@ -2831,9 +2830,8 @@ fbq('track', 'PageView');
             try {
               var token2 = await window._getClerkToken();
               var chk = await fetch(CONVEX_HTTP_URL + '/api/dashboard/info', {
-                method: 'POST',
-                headers: { 'Authorization': 'Bearer ' + token2, 'Content-Type': 'application/json' },
-                body: '{}'
+                method: 'GET',
+                headers: { 'Authorization': 'Bearer ' + token2 }
               });
               var info = await chk.json();
               if (info.found && info.siteSlug) {
@@ -2884,6 +2882,7 @@ fbq('track', 'PageView');
         window._freeChangeCount = data.count || 0;
         window._freeLimitReached = !!data.limitReached;
         if (window._freeLimitReached) addLockIcons();
+        updateFreeEditCounter();
       } catch (e) { console.warn('loadFreeChangeCount error:', e); }
     }
 
@@ -2904,6 +2903,28 @@ fbq('track', 'PageView');
       document.querySelectorAll('.lock-icon').forEach(function(el) { el.remove(); });
     }
 
+    function updateFreeEditCounter() {
+      var el = document.getElementById('free-edit-counter');
+      if (window._currentPlan !== 'free') {
+        if (el) el.style.display = 'none';
+        return;
+      }
+      if (!el) {
+        el = document.createElement('div');
+        el.id = 'free-edit-counter';
+        el.style.cssText = 'display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;background:rgba(255,200,50,0.12);color:#ffc832;margin-left:10px;';
+        var badge = document.getElementById('plan-badge');
+        if (badge && badge.parentNode) badge.parentNode.insertBefore(el, badge.nextSibling);
+      }
+      var count = Math.min(window._freeChangeCount, 2);
+      el.textContent = '✏️ ' + count + ' of 2 free edits used';
+      el.style.display = 'inline-flex';
+      if (count >= 2) {
+        el.style.background = 'rgba(255,80,80,0.15)';
+        el.style.color = '#ff6b6b';
+      }
+    }
+
     async function checkChangeLimit() {
       if (window._currentPlan !== 'free') return true;
       if (window._freeLimitReached) {
@@ -2920,6 +2941,7 @@ fbq('track', 'PageView');
         window._freeLimitReached = true;
         addLockIcons();
       }
+      updateFreeEditCounter();
     }
 
     function showUpgradeModal() {
