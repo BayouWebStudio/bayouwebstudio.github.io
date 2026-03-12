@@ -1411,13 +1411,7 @@ fbq('track', 'PageView');
           headers: { Authorization: 'Bearer ' + token },
         });
         const data = await res.json();
-        if (!data.found || (data.plan && !data.siteSlug)) {
-          showOnboardingPrompt();
-          return;
-        }
-
-        // Check if any paid account needs site setup
-        if (!data.siteSlug || data.siteBuilt === false) {
+        if (!data.found || !data.siteSlug || !data.siteBuilt || data.siteSlug.endsWith('_pending')) {
           showOnboardingPrompt();
           return;
         }
