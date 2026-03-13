@@ -1551,13 +1551,12 @@ fbq('track', 'PageView');
         value: heroBgMatch ? heroBgMatch[1] : ''
       });
       // Hero eyebrow (label above the name, e.g. "Tattoo Artist" or "Artista")
+      // Hero eyebrow — always show; inject into site if missing
       const heroEyebrowMatch = html.match(/<[^>]*class="[^"]*hero-eyebrow[^"]*"[^>]*>([\s\S]*?)<\/[^>]+>/i);
-      if (heroEyebrowMatch) {
-        heroFields.push({
-          key: 'hero_eyebrow', label: 'Title / Role (above name)', type: 'text',
-          value: heroEyebrowMatch[1].replace(/<[^>]+>/g,'').trim()
-        });
-      }
+      heroFields.push({
+        key: 'hero_eyebrow', label: 'Title / Role (above name)', type: 'text',
+        value: heroEyebrowMatch ? heroEyebrowMatch[1].replace(/<[^>]+>/g,'').trim() : ''
+      });
       const heroTitleMatch = html.match(/<h1[^>]*class="[^"]*hero-title[^"]*"[^>]*>([\s\S]*?)<\/h1>/i)
         || html.match(/<h1[^>]*class="[^"]*hero-name[^"]*"[^>]*>([\s\S]*?)<\/h1>/i)
         || html.match(/<h1[^>]*data-en="[^"]*"[^>]*>([\s\S]*?)<\/h1>/i)
