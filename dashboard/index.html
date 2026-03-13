@@ -1875,13 +1875,13 @@ fbq('track', 'PageView');
       if (f.type === 'textarea') {
         return '<div class="field-group">' +
           '<label>' + escapeHtml(f.label) + '</label>' +
-          '<textarea class="field-textarea" data-key="' + f.key + '">' + escapeHtml(f.value) + '</textarea>' +
+          '<textarea class="field-textarea" data-key="' + f.key + '">' + escapeHtml(decodeHtmlEntities(f.value)) + '</textarea>' +
           '</div>';
       }
       // text (default)
       return '<div class="field-group">' +
         '<label>' + escapeHtml(f.label) + '</label>' +
-        '<input type="text" class="field-input" data-key="' + f.key + '" value="' + escapeHtml(f.value) + '">' +
+        '<input type="text" class="field-input" data-key="' + f.key + '" value="' + escapeHtml(decodeHtmlEntities(f.value)) + '">' +
         '</div>';
     }
 
@@ -2759,6 +2759,12 @@ fbq('track', 'PageView');
     // ── Helpers ──
     function escapeHtml(str) {
       return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function decodeHtmlEntities(str) {
+      // Decode &#xNNNN; and &#NNNN; entities so editor shows real characters
+      return String(str).replace(/&#x([0-9a-fA-F]+);/g, (_, hex) => String.fromCodePoint(parseInt(hex, 16)))
+                        .replace(/&#([0-9]+);/g, (_, dec) => String.fromCodePoint(parseInt(dec, 10)));
     }
 
     function formatTime(timestamp) {
