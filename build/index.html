@@ -325,6 +325,40 @@ fbq('track', 'PageView');
 
   <a href="/" class="logo">GetMinted</a>
 
+  <!-- ── Email modal (required before build starts) ── -->
+  <div id="emailModal" style="
+    position:fixed; inset:0; z-index:999;
+    background:rgba(0,0,0,0.75); backdrop-filter:blur(6px);
+    display:flex; align-items:center; justify-content:center; padding:24px;
+  ">
+    <div style="
+      background:#0d2018; border:1px solid #2a4a38; border-radius:24px;
+      padding:40px 28px; max-width:420px; width:100%; text-align:center;
+    ">
+      <div style="font-size:48px;margin-bottom:16px;">📬</div>
+      <h2 style="font-size:22px;font-weight:800;color:#fff;margin-bottom:10px;letter-spacing:-0.5px;">
+        Where should we send your site?
+      </h2>
+      <p style="font-size:15px;color:#8ab89a;margin-bottom:24px;line-height:1.6;">
+        We'll email you the link the moment it's live — usually 2–5 minutes.
+      </p>
+      <input id="modalEmailInput" type="email" placeholder="your@email.com" style="
+        width:100%; padding:16px 20px; border-radius:50px;
+        background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.15);
+        color:#fff; font-size:16px; outline:none; font-family:inherit;
+        margin-bottom:14px; box-sizing:border-box; text-align:center;
+      " />
+      <button onclick="startWithEmail()" style="
+        width:100%; padding:16px; border-radius:50px;
+        background:#00C882; color:#0a1a12;
+        font-size:16px; font-weight:800; border:none; cursor:pointer;
+      ">Build My Site →</button>
+      <p style="margin-top:14px;font-size:13px;color:rgba(255,255,255,0.35);">
+        No spam. Just your site link.
+      </p>
+    </div>
+  </div>
+
   <div class="card" id="mainCard">
 
     <!-- Phase 1 & 2: Building -->
@@ -462,7 +496,7 @@ fbq('track', 'PageView');
     let pollInterval = null;
     let isLive = false;
 
-    async function startBuild() {
+    async function startBuild(email) {
       if (!handle || handle === 'yourhandle') return;
       try {
         const res = await fetch(`${CONVEX}/api/build`, {
@@ -473,6 +507,14 @@ fbq('track', 'PageView');
         if (res.ok) {
           const data = await res.json();
           buildId = data.buildId;
+          // Register email immediately
+          if (email) {
+            fetch(`${CONVEX}/api/build/email`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ email, slug, igHandle: handle }),
+            }).catch(() => {});
+          }
           // Start polling immediately every 3s
           pollInterval = setInterval(pollStatus, 3000);
           pollStatus();
@@ -521,7 +563,7 @@ fbq('track', 'PageView');
       } catch (e) { /* keep polling */ }
     }
 
-    startBuild();
+    // Build starts only after email modal is submitted (startWithEmail → startBuild)
 
     // ── Go Live ──
     function goLive() {
@@ -557,31 +599,27 @@ fbq('track', 'PageView');
       }, 300);
     }
 
-    // ── Email capture — show after 15s ──
-    setTimeout(() => {
-      const el = document.getElementById('emailCapture');
-      el.style.display = 'block';
-      requestAnimationFrame(() => { el.style.opacity = '1'; });
-    }, 5000);
+    // ── Modal email submit → start build ──
+    let capturedEmail = '';
 
-    async function submitEmail() {
-      const email = document.getElementById('emailInput').value.trim();
+    async function startWithEmail() {
+      const emailInput = document.getElementById('modalEmailInput');
+      const email = emailInput.value.trim();
       if (!email || !email.includes('@')) {
-        document.getElementById('emailInput').style.borderColor = '#ff6b6b';
+        emailInput.style.borderColor = '#ff6b6b';
         return;
       }
-      document.getElementById('emailForm').style.display = 'none';
-      document.getElementById('emailConfirm').textContent = email;
-      document.getElementById('emailSuccess').style.display = 'block';
-      // Save to Convex
-      try {
-        await fetch(`${CONVEX}/api/build/email`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, slug, igHandle: handle }),
-        });
-      } catch(e) { /* silent — email saved client-side at minimum */ }
+      capturedEmail = email;
+      // Hide modal
+      document.getElementById('emailModal').style.display = 'none';
+      // Start build
+      startBuild(email);
     }
+
+    // Allow pressing Enter in email input
+    document.getElementById('modalEmailInput').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') startWithEmail();
+    });
 
     // ── Dev shortcut: ?test=live ──
     if (params.get('test') === 'live') setTimeout(goLive, 1500);
