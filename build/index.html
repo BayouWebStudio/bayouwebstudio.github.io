@@ -419,39 +419,43 @@ fbq('track', 'PageView');
     document.getElementById('seeMysite').href = siteUrl;
     document.getElementById('claimLink').href = `/dashboard/?claim=${encodeURIComponent(slug)}`;
 
-    // ── Steps rotation ──
-    const steps = [
-      '📸 Importing your Instagram photos...',
-      '🎨 Designing your layout...',
-      '✍️ Writing your bio...',
-      '⚡ Setting up your booking form...',
-      '🚀 Going live...',
-    ];
-    let stepIdx = 0;
-    const stepEl = document.getElementById('stepText');
-    function nextStep() {
-      stepEl.style.opacity = '0';
-      setTimeout(() => {
-        stepEl.textContent = steps[stepIdx % steps.length];
-        stepEl.style.opacity = '1';
-        stepIdx++;
-      }, 300);
-    }
-    nextStep();
-    const stepInterval = setInterval(nextStep, 4000);
-
-    // ── Progress bar (maps to real build stages) ──
-    const progressEl = document.getElementById('progressBar');
+    // ── Real stage labels + progress ──
     const stageProgress = {
-      pending: 5, scraping: 15, generating: 40,
-      uploading: 65, deploying: 80, complete: 100,
+      started:     5,
+      scraping:    15,
+      classifying: 35,
+      uploading:   55,
+      building:    72,
+      deploying:   88,
+      complete:    100,
     };
+    const stageLabels = {
+      started:     '📸 Importing your Instagram photos...',
+      scraping:    '📸 Scanning your Instagram...',
+      classifying: '🎨 Selecting your best photos...',
+      uploading:   '⚡ Uploading your gallery...',
+      building:    '✍️ Building your site...',
+      deploying:   '🚀 Going live...',
+      complete:    '✅ Your site is live!',
+    };
+
+    const progressEl = document.getElementById('progressBar');
+    const stepEl = document.getElementById('stepText');
+
     function setProgress(pct) {
       if (pct > parseFloat(progressEl.style.width || '0')) {
         progressEl.style.width = pct + '%';
       }
     }
+    function setStepLabel(status) {
+      const label = stageLabels[status];
+      if (label && stepEl.textContent !== label) {
+        stepEl.style.opacity = '0';
+        setTimeout(() => { stepEl.textContent = label; stepEl.style.opacity = '1'; }, 300);
+      }
+    }
     setProgress(5);
+    setStepLabel('started');
 
     // ── Kick off build, then poll status ──
     let buildId = null;
@@ -469,8 +473,8 @@ fbq('track', 'PageView');
         if (res.ok) {
           const data = await res.json();
           buildId = data.buildId;
-          // Start polling immediately
-          pollInterval = setInterval(pollStatus, 8000);
+          // Start polling immediately every 3s
+          pollInterval = setInterval(pollStatus, 3000);
           pollStatus();
         } else {
           // Build API failed — fall back to polling GitHub Pages directly
@@ -492,6 +496,7 @@ fbq('track', 'PageView');
         const data = await res.json();
         const pct = stageProgress[data.status] || 5;
         setProgress(pct);
+        setStepLabel(data.status);
         if (data.siteUrl) {
           siteUrl = data.siteUrl;
           document.getElementById('seeMysite').href = siteUrl;
