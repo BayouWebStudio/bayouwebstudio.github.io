@@ -549,6 +549,26 @@ fbq('track', 'PageView');
         stepEl.style.opacity = '0';
         setTimeout(() => { stepEl.textContent = label; stepEl.style.opacity = '1'; }, 300);
       }
+      // When complete — inject a direct button right here, no div-swap needed
+      if (status === 'complete') {
+        setTimeout(() => {
+          const existing = document.getElementById('inline-live-btn');
+          if (existing) return;
+          const finalUrl = siteUrl || ('https://getminted.ai/' + slug + '/');
+          const btnWrap = document.createElement('div');
+          btnWrap.id = 'inline-live-btn';
+          btnWrap.style.cssText = 'margin-top:24px;text-align:center;';
+          btnWrap.innerHTML =
+            '<a href="' + finalUrl + '" target="_blank" rel="noopener" ' +
+            'style="display:inline-block;background:#00c882;color:#0a1a12;font-weight:800;' +
+            'font-size:17px;padding:16px 32px;border-radius:50px;text-decoration:none;' +
+            'box-shadow:0 4px 20px rgba(0,200,130,0.35);">See My Site →</a>' +
+            '<br><a href="/dashboard/?claim=' + encodeURIComponent(slug) + '" ' +
+            'style="display:inline-block;margin-top:12px;color:rgba(255,255,255,0.5);' +
+            'font-size:14px;text-decoration:underline;">Claim &amp; edit your site — it\'s free</a>';
+          stepEl.parentNode.insertBefore(btnWrap, stepEl.nextSibling);
+        }, 400);
+      }
     }
     setProgress(5);
     setStepLabel('started');
