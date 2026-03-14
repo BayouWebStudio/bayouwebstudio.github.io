@@ -13,38 +13,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Julien Depeyre | Tattoo Artist</title>
   <meta name="description" content="Géométrie Ornementale & Blackwork · Montauban 🇫🇷 · São Paulo 🇧🇷 · Book open" />
-  <meta name="keywords" content="Julien Depeyre, julien13, tattoo artist, geometric tattoo, ornamental blackwork, Montauban, São Paulo" />
-
+  <meta name="keywords" content="Julien Depeyre, julien13, tattoo artist, geometric tattoo, ornamental blackwork, Montauban" />
   <meta property="og:title" content="Julien Depeyre | Tattoo Artist" />
   <meta property="og:description" content="Géométrie Ornementale & Blackwork · Montauban 🇫🇷 · São Paulo 🇧🇷" />
-  <meta property="og:image" content="img/" />
+  <meta property="og:image" content="img/photo_01.jpg" />
   <meta property="og:url" content="https://getminted.ai/julien13/" />
   <meta property="og:type" content="website" />
-
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Julien Depeyre | Tattoo Artist" />
-  <meta name="twitter:image" content="img/" />
+  <meta name="twitter:image" content="img/photo_01.jpg" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="format-detection" content="telephone=no" />
-
   <script>document.documentElement.classList.add('js-loaded')</script>
-
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "Julien Depeyre — Tattoo Artist",
-    "description": "Géométrie Ornementale & Blackwork · Montauban 🇫🇷 · São Paulo 🇧🇷",
+    "description": "Géométrie Ornementale & Blackwork",
     "url": "https://getminted.ai/julien13/",
-    "image": "img/",
+    "image": "img/photo_01.jpg",
     "sameAs": ["https://www.instagram.com/julien13/"]
   }
   </script>
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -56,81 +50,74 @@
       --muted: #888;
     }
     html { scroll-behavior: smooth; }
-    body { background: var(--black); color: var(--text); font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif; font-weight: 300; line-height: 1.6; overflow-x: hidden; }
+    body { background: var(--black); color: var(--text); font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; font-weight: 300; line-height: 1.6; overflow-x: hidden; }
 
-    /* NAV */
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 2.5rem; background: rgba(10,10,10,0.88); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.06); }
     .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: var(--accent); letter-spacing: 0.05em; text-decoration: none; }
     .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.3s; }
     .nav-links a:hover { color: var(--accent); }
 
-    /* HERO */
     #hero { position: relative; height: 100vh; min-height: 600px; display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden; }
-    .hero-bg { position: absolute; top:0;right:0;bottom:0;left:0; background-image: url('img/'); background-size: cover; background-position: center 20%; filter: brightness(0.42); -webkit-transform: scale(1.05); transform: scale(1.05); -webkit-transition: -webkit-transform 8s ease; transition: transform 8s ease; }
-    @media (max-width: 768px) { .hero-bg { background-position: center top !important; background-attachment: scroll !important; } }
-    #hero:hover .hero-bg { -webkit-transform: scale(1.0); transform: scale(1.0); }
-    .hero-overlay { position: absolute; top:0;right:0;bottom:0;left:0; background: linear-gradient(to bottom, rgba(10,10,10,0.2) 0%, rgba(10,10,10,0.75) 100%); }
+    .hero-bg { position: absolute; inset: 0; background-image: url('img/photo_01.jpg'); background-size: cover; background-position: center 20%; filter: brightness(0.42); transform: scale(1.05); transition: transform 8s ease; }
+    @media (max-width: 768px) { .hero-bg { background-position: center top !important; } }
+    #hero:hover .hero-bg { transform: scale(1.0); }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(10,10,10,0.2) 0%, rgba(10,10,10,0.75) 100%); }
     .hero-content { position: relative; z-index: 2; max-width: 800px; padding: 0 1.5rem; }
     .hero-eyebrow { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.32em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.2rem; }
     .hero-title { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(3rem, 8vw, 6.5rem); font-weight: 900; line-height: 1.0; color: #fff; margin-bottom: 1.2rem; }
-    .hero-subtitle { font-size: clamp(0.9rem, 2vw, 1.1rem); color: rgba(255,255,255,0.6); font-weight: 300; letter-spacing: 0.06em; margin-bottom: 0.6rem; }
-    .hero-location { font-size: 0.85rem; color: rgba(255,255,255,0.45); font-weight: 300; letter-spacing: 0.04em; margin-bottom: 2.5rem; }
+    .hero-subtitle { font-size: clamp(0.9rem, 2vw, 1.1rem); color: rgba(255,255,255,0.6); font-weight: 300; letter-spacing: 0.06em; margin-bottom: 0.5rem; }
+    .hero-location { font-size: 0.85rem; color: rgba(255,255,255,0.4); margin-bottom: 2.5rem; }
     .hero-cta { display: inline-block; padding: 0.9rem 2.8rem; background: var(--accent); color: var(--black); text-decoration: none; font-weight: 600; font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; border: 2px solid var(--accent); transition: all 0.3s; }
     .hero-cta:hover { background: transparent; color: var(--accent); }
-    .hero-scroll { position: absolute; bottom: 2rem; left: 50%; -webkit-transform: translateX(-50%); transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; color: rgba(255,255,255,0.35); font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; -webkit-animation: bounce 2.2s infinite; animation: bounce 2.2s infinite; }
+    .hero-scroll { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; color: rgba(255,255,255,0.35); font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; animation: bounce 2.2s infinite; }
     .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--accent), transparent); }
-    @-webkit-keyframes bounce { 0%, 100% { -webkit-transform: translateX(-50%) translateY(0); } 50% { -webkit-transform: translateX(-50%) translateY(7px); } }
     @keyframes bounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(7px); } }
 
-    /* SECTIONS */
     section { padding: 7rem 1.5rem; }
     .container { max-width: 1100px; margin: 0 auto; }
     .section-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.35em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem; }
     .section-title { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; line-height: 1.15; margin-bottom: 1.5rem; }
     .divider { width: 48px; height: 1px; background: var(--accent); margin: 1.5rem 0 2rem; }
 
-    /* ABOUT */
     #about { background: var(--dark); }
     .about-grid { display: grid; grid-template-columns: 1fr; gap: 3rem; align-items: center; }
     @media(min-width: 768px) { .about-grid { grid-template-columns: 1fr 1fr; gap: 5rem; } }
-    .about-img-wrap { position: relative; display: inline-block; }
+    .about-img-wrap { position: relative; }
     .about-img-wrap::before { content: ''; position: absolute; top: -12px; left: -12px; right: 12px; bottom: 12px; border: 1px solid rgba(201,168,76,0.35); pointer-events: none; }
-    .about-portrait { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; filter: grayscale(20%); -webkit-transition: filter 0.4s; transition: filter 0.4s; }
+    .about-portrait { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; filter: grayscale(20%); transition: filter 0.4s; }
     .about-portrait:hover { filter: grayscale(0%); }
     .about-content { display: flex; flex-direction: column; justify-content: center; }
     .about-text p { color: rgba(232,232,232,0.72); font-size: 1rem; line-height: 1.85; margin-bottom: 1.4rem; }
-    .pull-quote { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-style: italic; color: var(--accent); border-left: 3px solid var(--accent); padding-left: 1.5rem; margin: 1.5rem 0; line-height: 1.5; }
-    .about-stats { display: flex; gap: 2.5rem; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.07); }
+    .pull-quote { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-style: italic; color: var(--accent); border-left: 3px solid var(--accent); padding-left: 1.5rem; margin: 1.5rem 0; line-height: 1.5; }
+    .about-stats { display: flex; gap: 2.5rem; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.07); flex-wrap: wrap; }
     .stat-block { display: flex; flex-direction: column; }
     .stat-number { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--accent); }
     .stat-label { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-top: 0.2rem; }
 
-    /* GALLERY */
     #gallery { background: var(--black); }
     .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
     @media(min-width: 768px) { .gallery-grid { grid-template-columns: repeat(3, 1fr); } }
     .gallery-item { position: relative; overflow: hidden; cursor: pointer; }
-    .gallery-item img { width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block; -webkit-transition: -webkit-transform 0.6s ease, filter 0.4s ease; transition: transform 0.6s ease, filter 0.4s ease; filter: grayscale(10%); }
-    .gallery-item:hover img { -webkit-transform: scale(1.06); transform: scale(1.06); filter: grayscale(0%); }
-    .gallery-item-overlay { position: absolute; top:0;right:0;bottom:0;left:0; background: linear-gradient(to top, rgba(10,10,10,0.8) 0%, transparent 55%); opacity: 0; -webkit-transition: opacity 0.4s; transition: opacity 0.4s; display: flex; align-items: flex-end; padding: 1.2rem; }
+    .gallery-item img { width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block; transition: transform 0.6s ease, filter 0.4s ease; filter: grayscale(10%); }
+    .gallery-item:hover img { transform: scale(1.06); filter: grayscale(0%); }
+    .gallery-item-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,10,10,0.8) 0%, transparent 55%); opacity: 0; transition: opacity 0.4s; display: flex; align-items: flex-end; padding: 1.2rem; }
     .gallery-item:hover .gallery-item-overlay { opacity: 1; }
     .gallery-item-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); }
 
-    /* SPECIALTIES */
     #styles { background: var(--darker); }
     .styles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
-    .style-card { border: 1px solid rgba(201,168,76,0.18); padding: 2rem 1.5rem; -webkit-transition: border-color 0.3s, background 0.3s; transition: border-color 0.3s, background 0.3s; }
+    @media(max-width: 900px) { .styles-grid { grid-template-columns: 1fr 1fr; } }
+    @media(max-width: 600px) { .styles-grid { grid-template-columns: 1fr; } }
+    .style-card { border: 1px solid rgba(201,168,76,0.18); padding: 2rem 1.5rem; transition: border-color 0.3s, background 0.3s; }
     .style-card:hover { border-color: var(--accent); background: rgba(201,168,76,0.04); }
     .style-icon { font-size: 1.8rem; margin-bottom: 1rem; }
     .style-card h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; margin-bottom: 0.7rem; }
     .style-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
-    @media (max-width: 900px) { .styles-grid { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 600px) { .styles-grid { grid-template-columns: 1fr; } }
 
-    /* BOOKING */
     #booking { background: var(--dark); }
     .booking-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    @media(max-width: 900px) { .booking-grid { grid-template-columns: 1fr; gap: 3rem; } }
     .booking-info p { color: rgba(232,232,232,0.7); font-size: 0.95rem; line-height: 1.9; margin-bottom: 1.2rem; }
     .booking-contact-list { list-style: none; margin-top: 2rem; }
     .booking-contact-list li { padding: 1rem 0; border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; gap: 1rem; }
@@ -145,23 +132,20 @@
     .booking-form-box > p { font-size: 0.88rem; color: var(--muted); margin-bottom: 2rem; }
     .form-group { margin-bottom: 1.2rem; }
     .form-group label { display: block; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
-    .form-group input, .form-group textarea, .form-group select { width: 100%; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); color: var(--text); padding: 0.75rem 1rem; font-family: 'Inter', sans-serif; font-size: 0.9rem; outline: none; -webkit-transition: border-color 0.3s; transition: border-color 0.3s; -webkit-appearance: none; }
+    .form-group input, .form-group textarea, .form-group select { width: 100%; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); color: var(--text); padding: 0.75rem 1rem; font-family: 'Inter', sans-serif; font-size: 0.9rem; outline: none; transition: border-color 0.3s; appearance: none; }
     .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--accent); }
     .form-group textarea { resize: vertical; min-height: 110px; }
-    .form-submit { width: 100%; background: var(--accent); color: var(--black); border: 2px solid var(--accent); padding: 0.9rem 2rem; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; cursor: pointer; -webkit-transition: all 0.3s; transition: all 0.3s; }
+    .form-submit { width: 100%; background: var(--accent); color: var(--black); border: 2px solid var(--accent); padding: 0.9rem 2rem; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; cursor: pointer; transition: all 0.3s; }
     .form-submit:hover { background: transparent; color: var(--accent); }
-    @media (max-width: 900px) { .booking-grid { grid-template-columns: 1fr; gap: 3rem; } }
 
-    /* FLOAT BOOK */
-    .float-book { position: fixed; bottom: 2rem; right: 2rem; z-index: 200; background: var(--accent); color: var(--black); padding: 0.85rem 1.8rem; text-decoration: none; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; box-shadow: 0 8px 32px rgba(201,168,76,0.35); -webkit-transition: all 0.3s; transition: all 0.3s; border: 2px solid var(--accent); }
+    .float-book { position: fixed; bottom: 2rem; right: 2rem; z-index: 200; background: var(--accent); color: var(--black); padding: 0.85rem 1.8rem; text-decoration: none; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; box-shadow: 0 8px 32px rgba(201,168,76,0.35); transition: all 0.3s; border: 2px solid var(--accent); }
     .float-book:hover { background: transparent; color: var(--accent); }
+    @media(max-width: 600px) { .float-book { bottom: 1.2rem; right: 1.2rem; padding: 0.75rem 1.4rem; } }
 
-    /* LIGHTBOX */
-    .lightbox { visibility: hidden; opacity: 0; pointer-events: none; position: fixed; top:0;right:0;bottom:0;left:0; background: rgba(0,0,0,0.95); z-index: 300; display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; -webkit-justify-content: center; justify-content: center; cursor: pointer; -webkit-transition: opacity 0.3s; transition: opacity 0.3s; }
+    .lightbox { visibility: hidden; opacity: 0; pointer-events: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 300; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: opacity 0.3s; }
     .lightbox.open { visibility: visible; opacity: 1; pointer-events: auto; }
-    .lightbox img { max-width: 90vw; max-height: 90vh; }
+    .lightbox img { max-width: 90vw; max-height: 90vh; object-fit: contain; }
 
-    /* FOOTER */
     footer { background: var(--darker); border-top: 1px solid rgba(255,255,255,0.05); padding: 3rem 1.5rem; text-align: center; }
     .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--accent); margin-bottom: 1rem; display: block; }
     .footer-links { display: flex; justify-content: center; gap: 2rem; margin: 1.5rem 0; list-style: none; flex-wrap: wrap; }
@@ -172,20 +156,12 @@
     .mint-credit a { color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.3s; }
     .mint-credit a:hover { color: var(--accent); }
 
-    /* FADE IN */
-    .fade-in { opacity: 1; -webkit-transform: none; transform: none; }
-    .js-loaded .fade-in { opacity: 0; -webkit-transform: translateY(28px); transform: translateY(28px); -webkit-transition: opacity 0.7s ease, -webkit-transform 0.7s ease; transition: opacity 0.7s ease, transform 0.7s ease; }
-    .js-loaded .fade-in.visible { opacity: 1; -webkit-transform: none; transform: none; }
+    .fade-in { opacity: 1; transform: none; }
+    .js-loaded .fade-in { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .js-loaded .fade-in.visible { opacity: 1; transform: none; }
 
-    @supports not (backdrop-filter: blur(1px)) {
-      nav { background: rgba(10,10,10,0.95) !important; }
-    }
-
-    @media (max-width: 600px) {
-      .nav-links { display: none; }
-      .float-book { bottom: 1.2rem; right: 1.2rem; padding: 0.75rem 1.4rem; }
-      .about-img-wrap::before { display: none; }
-    }
+    @supports not (backdrop-filter: blur(1px)) { nav { background: rgba(10,10,10,0.95) !important; } }
+    @media(max-width: 600px) { .nav-links { display: none; } .about-img-wrap::before { display: none; } }
   </style>
 <!-- Meta Pixel Code -->
 <script>
@@ -201,7 +177,6 @@ fbq('init', '1446410187106776');
 fbq('track', 'PageView');
 </script>
 <noscript><img height="1" width="1" src="https://www.facebook.com/tr?id=1446410187106776&ev=PageView&noscript=1"/></noscript>
-<!-- End Meta Pixel Code -->
 </head>
 <body>
 
@@ -241,9 +216,9 @@ fbq('track', 'PageView');
           <div class="about-img-wrap"><img src="img/profile.jpg" alt="Julien Depeyre" class="about-portrait" loading="lazy"></div>
           <div class="about-content">
             <div class="about-text">
-              <p>Julien Depeyre is a French tattoo artist with over a decade of mastery in geometric ornamentation and blackwork. Based between Montauban, France and São Paulo, Brazil, Julien is known for his intricate, sacred geometry-inspired sleeve work and bold ornamental patterns.</p>
+              <p>Julien Depeyre is a French tattoo artist specializing in geometric ornamentation and blackwork. Known for his intricate, large-scale sleeve compositions and sacred geometry designs, he brings mathematical precision and artistic vision to every piece.</p>
               <blockquote class="pull-quote">"Géométrie Ornementale Blackwork and more…"</blockquote>
-              <p>With 1,573 posts documenting his artistic journey and a growing international clientele, Julien brings mathematical precision and artistic vision to every piece. Book open for new clients.</p>
+              <p>Based between Montauban, France and São Paulo, Brazil, Julien travels internationally and is currently accepting new clients. With over 1,500 posts documenting 10+ years of artistry, his portfolio speaks for itself.</p>
             </div>
             <div class="about-stats">
               <div class="stat-block">
@@ -272,6 +247,54 @@ fbq('track', 'PageView');
       <div class="divider fade-in"></div>
       <div class="gallery-grid">
         
+        <div class="gallery-item fade-in" style="transition-delay:0.0s">
+          <img src="img/photo_01.jpg" alt="Julien Depeyre tattoo 1" loading="lazy" onclick="openLightbox(this.src)">
+          <div class="gallery-item-overlay"><span class="gallery-item-label">Geometric sleeve tattoo</span></div>
+        </div>
+        <div class="gallery-item fade-in" style="transition-delay:0.07s">
+          <img src="img/photo_02.jpg" alt="Julien Depeyre tattoo 2" loading="lazy" onclick="openLightbox(this.src)">
+          <div class="gallery-item-overlay"><span class="gallery-item-label">Geometric sleeve tattoo</span></div>
+        </div>
+        <div class="gallery-item fade-in" style="transition-delay:0.14s">
+          <img src="img/photo_03.jpg" alt="Julien Depeyre tattoo 3" loading="lazy" onclick="openLightbox(this.src)">
+          <div class="gallery-item-overlay"><span class="gallery-item-label">Geometric sleeve tattoo</span></div>
+        </div>
+        <div class="gallery-item fade-in" style="transition-delay:0.21000000000000002s">
+          <img src="img/photo_04.jpg" alt="Julien Depeyre tattoo 4" loading="lazy" onclick="openLightbox(this.src)">
+          <div class="gallery-item-overlay"><span class="gallery-item-label">Geometric sleeve tattoo</span></div>
+        </div>
+        <div class="gallery-item fade-in" style="transition-delay:0.28s">
+          <img src="img/photo_05.jpg" alt="Julien Depeyre tattoo 5" loading="lazy" onclick="openLightbox(this.src)">
+          <div class="gallery-item-overlay"><span class="gallery-item-label">Geometric pattern tattoo</span></div>
+        </div>
+        <div class="gallery-item fade-in" style="transition-delay:0.35000000000000003s">
+          <img src="img/photo_06.jpg" alt="Julien Depeyre tattoo 6" loading="lazy" onclick="openLightbox(this.src)">
+          <div class="gallery-item-overlay"><span class="gallery-item-label">Geometric sleeve tattoo</span></div>
+        </div>
+        <div class="gallery-item fade-in" style="transition-delay:0.42000000000000004s">
+          <img src="img/photo_07.jpg" alt="Julien Depeyre tattoo 7" loading="lazy" onclick="openLightbox(this.src)">
+          <div class="gallery-item-overlay"><span class="gallery-item-label">Geometric sleeve tattoo</span></div>
+        </div>
+        <div class="gallery-item fade-in" style="transition-delay:0.49000000000000005s">
+          <img src="img/photo_08.jpg" alt="Julien Depeyre tattoo 8" loading="lazy" onclick="openLightbox(this.src)">
+          <div class="gallery-item-overlay"><span class="gallery-item-label">Geometric knee tattoo</span></div>
+        </div>
+        <div class="gallery-item fade-in" style="transition-delay:0.56s">
+          <img src="img/photo_09.jpg" alt="Julien Depeyre tattoo 9" loading="lazy" onclick="openLightbox(this.src)">
+          <div class="gallery-item-overlay"><span class="gallery-item-label">Geometric tattoo collection</span></div>
+        </div>
+        <div class="gallery-item fade-in" style="transition-delay:0.6300000000000001s">
+          <img src="img/photo_10.jpg" alt="Julien Depeyre tattoo 10" loading="lazy" onclick="openLightbox(this.src)">
+          <div class="gallery-item-overlay"><span class="gallery-item-label">Geometric sleeve tattoo</span></div>
+        </div>
+        <div class="gallery-item fade-in" style="transition-delay:0.7000000000000001s">
+          <img src="img/photo_11.jpg" alt="Julien Depeyre tattoo 11" loading="lazy" onclick="openLightbox(this.src)">
+          <div class="gallery-item-overlay"><span class="gallery-item-label">Geometric sleeve tattoo</span></div>
+        </div>
+        <div class="gallery-item fade-in" style="transition-delay:0.77s">
+          <img src="img/photo_12.jpg" alt="Julien Depeyre tattoo 12" loading="lazy" onclick="openLightbox(this.src)">
+          <div class="gallery-item-overlay"><span class="gallery-item-label">Geometric tattoo design</span></div>
+        </div>
       </div>
     </div>
   </section>
@@ -285,17 +308,17 @@ fbq('track', 'PageView');
         <div class="style-card fade-in">
           <div class="style-icon">◆</div>
           <h3>Geometric Ornamentation</h3>
-          <p>Intricate geometric patterns and sacred geometry-inspired designs, often wrapping entire limbs in mathematically precise, flowing compositions.</p>
+          <p>Intricate geometric patterns and ornamental designs flowing across the body — precise, symmetrical, and deeply intentional.</p>
         </div>
         <div class="style-card fade-in">
           <div class="style-icon">✦</div>
           <h3>Blackwork Sleeves</h3>
-          <p>Full-arm and half-sleeve blackwork executed with bold linework and precise dotwork shading. Known for his detailed, long-term sleeve projects.</p>
+          <p>Full and half-sleeve blackwork compositions built session by session into unified, breathtaking body art. His specialty.</p>
         </div>
         <div class="style-card fade-in">
           <div class="style-icon">⬡</div>
           <h3>Sacred Geometry</h3>
-          <p>Metatron's Cube, Flower of Life, and other sacred geometric forms rendered with precision and intention, creating meaningful, timeless pieces.</p>
+          <p>Metatron's Cube, Flower of Life, mandala forms — sacred geometric symbols rendered with technical mastery and spiritual depth.</p>
         </div>
       </div>
     </div>
@@ -308,7 +331,7 @@ fbq('track', 'PageView');
       <div class="divider fade-in"></div>
       <div class="booking-grid fade-in">
         <div class="booking-info">
-          <p>Julien is currently booking clients in Montauban, France and São Paulo, Brazil. Whether you're looking for a full sleeve, a statement piece, or a custom geometric design, reach out to discuss your vision.</p>
+          <p>Julien is booking clients in both Montauban, France and São Paulo, Brazil. Whether you want a full sleeve, sacred geometry piece, or custom design, reach out to start the conversation.</p>
           <ul class="booking-contact-list">
             <li>
               <div class="contact-icon">✉️</div>
@@ -335,19 +358,19 @@ fbq('track', 'PageView');
         </div>
         <div class="booking-form-box">
           <h3>Send a Message</h3>
-          <p>Tell Julien about your tattoo idea</p>
+          <p>Tell Julien about your tattoo vision</p>
           <form action="https://formspree.io/f/xpwzgvkp" method="POST">
             <div class="form-group">
               <label for="name">Your Name</label>
               <input type="text" id="name" name="name" placeholder="First Last" required>
             </div>
             <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" placeholder="you@example.com" required>
+              <label for="email_field">Email</label>
+              <input type="email" id="email_field" name="email" placeholder="you@example.com" required>
             </div>
             <div class="form-group">
-              <label for="location">Preferred Location</label>
-              <select id="location" name="location">
+              <label for="location_pref">Preferred Location</label>
+              <select id="location_pref" name="location">
                 <option value="Montauban, France">Montauban, France 🇫🇷</option>
                 <option value="São Paulo, Brazil">São Paulo, Brazil 🇧🇷</option>
                 <option value="Flexible">Flexible</option>
@@ -355,7 +378,7 @@ fbq('track', 'PageView');
             </div>
             <div class="form-group">
               <label for="message">Tattoo Idea</label>
-              <textarea id="message" name="message" placeholder="Describe your vision — placement, size, style, reference images..." required></textarea>
+              <textarea id="message" name="message" placeholder="Placement, size, style, references…" required></textarea>
             </div>
             <button type="submit" class="form-submit">Send Inquiry</button>
           </form>
@@ -384,17 +407,14 @@ fbq('track', 'PageView');
   </div>
 
   <script>
-    // Fade-in observer
     if (typeof IntersectionObserver !== 'undefined') {
-      const obs = new IntersectionObserver((entries) => {
-        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+      var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
       }, { threshold: 0.12 });
-      document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+      document.querySelectorAll('.fade-in').forEach(function(el) { obs.observe(el); });
     } else {
-      document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
+      document.querySelectorAll('.fade-in').forEach(function(el) { el.classList.add('visible'); });
     }
-
-    // Lightbox
     function openLightbox(src) {
       document.getElementById('lightbox-img').src = src;
       document.getElementById('lightbox').classList.add('open');
@@ -404,7 +424,7 @@ fbq('track', 'PageView');
       document.getElementById('lightbox').classList.remove('open');
       document.body.style.overflow = '';
     }
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeLightbox(); });
   </script>
 </body>
 </html>
