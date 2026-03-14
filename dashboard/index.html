@@ -3514,36 +3514,67 @@ fbq('track', 'PageView');
 
     document.querySelector('[data-tab="store"]').addEventListener('click', loadStore);
 
-    // ── Themes ──
+    // ── Themes (7-theme system) ──
     const THEMES = [
       {
-        id: "midnight-gold", name: "Midnight Gold", description: "Classic dark with gold accents",
-        preview: { bg: "#0a0a0a", accent: "#C9A84C" },
-        vars: { "--accent": "#C9A84C", "--accent-rgb": "201,168,76", "--black": "#0a0a0a", "--dark": "#111111", "--darker": "#0d0d0d", "--nav-bg": "rgba(10,10,10,0.88)" }
+        id: "darkwork", name: "Dark / Blackwork", description: "Green accent on deep black — geometric, dotwork, sacred geometry",
+        preview: { bg: "#080808", accent: "#00c882" },
+        fonts: { heading: "'Playfair Display', Georgia, serif", body: "Helvetica, Arial, sans-serif" },
+        googleFonts: "Playfair+Display:wght@700;900",
+        vars: { "--accent": "#00c882", "--accent-rgb": "0,200,130", "--black": "#080808", "--dark": "#0f0f0f", "--darker": "#080808", "--text": "#f0f0f0", "--muted": "rgba(255,255,255,0.5)", "--hero-text": "#ffffff", "--hero-sub": "rgba(255,255,255,0.65)", "--card-bg": "rgba(17,17,17,1)", "--card-border": "rgba(255,255,255,0.07)", "--nav-bg": "rgba(8,8,8,0.88)", "--nav-border": "rgba(255,255,255,0.06)" }
       },
       {
-        id: "forest", name: "Forest", description: "Deep green with emerald accents",
-        preview: { bg: "#0a1a0f", accent: "#00C882" },
-        vars: { "--accent": "#00C882", "--accent-rgb": "0,200,130", "--black": "#0a1a0f", "--dark": "#0f2016", "--darker": "#0d1c12", "--nav-bg": "rgba(10,26,15,0.88)" }
+        id: "blackgrey", name: "Black & Grey", description: "Cool blue on dark grey — realism, portraits, photorealism",
+        preview: { bg: "#141414", accent: "#8ab4d4" },
+        fonts: { heading: "'EB Garamond', Georgia, serif", body: "'Inter', Arial, sans-serif" },
+        googleFonts: "EB+Garamond:wght@600;800",
+        vars: { "--accent": "#8ab4d4", "--accent-rgb": "138,180,212", "--black": "#141414", "--dark": "#1c1c1c", "--darker": "#141414", "--text": "#e8e8e8", "--muted": "rgba(232,232,232,0.5)", "--hero-text": "#f2f2f2", "--hero-sub": "rgba(242,242,242,0.6)", "--card-bg": "rgba(31,31,31,1)", "--card-border": "rgba(255,255,255,0.06)", "--nav-bg": "rgba(20,20,20,0.88)", "--nav-border": "rgba(255,255,255,0.06)" }
       },
       {
-        id: "steel-blue", name: "Steel Blue", description: "Dark slate with cool blue accents",
-        preview: { bg: "#0a0d14", accent: "#4A90D9" },
-        vars: { "--accent": "#4A90D9", "--accent-rgb": "74,144,217", "--black": "#0a0d14", "--dark": "#0f1420", "--darker": "#0d111c", "--nav-bg": "rgba(10,13,20,0.88)" }
+        id: "anime", name: "Anime / Illustrative", description: "Magenta on midnight blue — manga, pop culture, gaming",
+        preview: { bg: "#0d0d1f", accent: "#e040fb" },
+        fonts: { heading: "'Exo 2', sans-serif", body: "'Nunito', sans-serif" },
+        googleFonts: "Exo+2:wght@700;900&family=Nunito:wght@400;600",
+        vars: { "--accent": "#e040fb", "--accent-rgb": "224,64,251", "--black": "#0d0d1f", "--dark": "#131326", "--darker": "#0d0d1f", "--text": "#f0f0ff", "--muted": "rgba(240,240,255,0.5)", "--hero-text": "#ffffff", "--hero-sub": "rgba(255,255,255,0.65)", "--card-bg": "rgba(22,22,46,1)", "--card-border": "rgba(224,64,251,0.1)", "--nav-bg": "rgba(13,13,31,0.88)", "--nav-border": "rgba(224,64,251,0.12)" }
       },
       {
-        id: "crimson", name: "Crimson", description: "Deep black with bold red accents",
-        preview: { bg: "#0d0505", accent: "#E63946" },
-        vars: { "--accent": "#E63946", "--accent-rgb": "230,57,70", "--black": "#0d0505", "--dark": "#180808", "--darker": "#120606", "--nav-bg": "rgba(13,5,5,0.88)" }
+        id: "traditional", name: "Warm / Traditional", description: "Gold on deep brown — American traditional, neo-traditional, Irezumi",
+        preview: { bg: "#120e06", accent: "#d4a017" },
+        fonts: { heading: "'Cinzel', serif", body: "'Lato', sans-serif" },
+        googleFonts: "Cinzel:wght@700;900&family=Lato:wght@300;400;700",
+        vars: { "--accent": "#d4a017", "--accent-rgb": "212,160,23", "--black": "#120e06", "--dark": "#1a1408", "--darker": "#120e06", "--text": "#f5ead4", "--muted": "rgba(245,234,212,0.5)", "--hero-text": "#fdf0d5", "--hero-sub": "rgba(253,240,213,0.65)", "--card-bg": "rgba(31,24,10,1)", "--card-border": "rgba(212,160,23,0.08)", "--nav-bg": "rgba(18,14,6,0.88)", "--nav-border": "rgba(212,160,23,0.1)" }
       },
       {
-        id: "violet", name: "Violet", description: "Dark with rich purple accents",
-        preview: { bg: "#0d0a14", accent: "#9B59B6" },
-        vars: { "--accent": "#9B59B6", "--accent-rgb": "155,89,182", "--black": "#0d0a14", "--dark": "#140e1f", "--darker": "#100b19", "--nav-bg": "rgba(13,10,20,0.88)" }
+        id: "fineline", name: "Fine Line / Minimal", description: "Dusty rose on warm white — fine line, minimal, botanical",
+        preview: { bg: "#f8f6f2", accent: "#b87a8a" },
+        fonts: { heading: "'Cormorant Garamond', serif", body: "'Montserrat', sans-serif" },
+        googleFonts: "Cormorant+Garamond:wght@600;700&family=Montserrat:wght@300;400;500",
+        vars: { "--accent": "#b87a8a", "--accent-rgb": "184,122,138", "--black": "#f8f6f2", "--dark": "#f0ede8", "--darker": "#f8f6f2", "--text": "#1a1a1a", "--muted": "rgba(26,26,26,0.45)", "--hero-text": "#1a1a1a", "--hero-sub": "rgba(26,26,26,0.55)", "--card-bg": "rgba(255,255,255,1)", "--card-border": "rgba(0,0,0,0.06)", "--nav-bg": "rgba(248,246,242,0.92)", "--nav-border": "rgba(0,0,0,0.08)" }
+      },
+      {
+        id: "colorful", name: "Vibrant / Colorful", description: "Purple on deep navy — watercolor, illustrative, new school",
+        preview: { bg: "#0a0a18", accent: "#7c3aed" },
+        fonts: { heading: "'Bebas Neue', cursive", body: "'Nunito', sans-serif" },
+        googleFonts: "Bebas+Neue&family=Nunito:wght@400;600;700",
+        vars: { "--accent": "#7c3aed", "--accent-rgb": "124,58,237", "--black": "#0a0a18", "--dark": "#10102a", "--darker": "#0a0a18", "--text": "#f5f5ff", "--muted": "rgba(245,245,255,0.5)", "--hero-text": "#ffffff", "--hero-sub": "rgba(255,255,255,0.65)", "--card-bg": "rgba(20,20,58,1)", "--card-border": "rgba(124,58,237,0.1)", "--nav-bg": "rgba(10,10,24,0.88)", "--nav-border": "rgba(124,58,237,0.12)" }
+      },
+      {
+        id: "industrial", name: "Industrial / Bold", description: "Red on true black — bold, heavy metal, biker, old school",
+        preview: { bg: "#0a0a0a", accent: "#e53e3e" },
+        fonts: { heading: "'Anton', sans-serif", body: "'Inter', sans-serif" },
+        googleFonts: "Anton",
+        vars: { "--accent": "#e53e3e", "--accent-rgb": "229,62,62", "--black": "#0a0a0a", "--dark": "#111111", "--darker": "#0a0a0a", "--text": "#eeeeee", "--muted": "rgba(238,238,238,0.45)", "--hero-text": "#ffffff", "--hero-sub": "rgba(255,255,255,0.6)", "--card-bg": "rgba(22,22,22,1)", "--card-border": "rgba(229,62,62,0.08)", "--nav-bg": "rgba(10,10,10,0.88)", "--nav-border": "rgba(229,62,62,0.1)" }
       }
     ];
 
     function detectCurrentTheme(html) {
+      // Try data-theme attribute first
+      const themeAttrMatch = html.match(/data-theme="([^"]+)"/);
+      if (themeAttrMatch) {
+        const found = THEMES.find(t => t.id === themeAttrMatch[1]);
+        if (found) return found;
+      }
+      // Fallback to accent color matching
       const accentMatch = html.match(/--accent\s*:\s*([^;]+)/);
       const accent = accentMatch ? accentMatch[1].trim().toLowerCase() : '';
       return THEMES.find(t => t.vars['--accent'].toLowerCase() === accent) || null;
@@ -3552,15 +3583,33 @@ fbq('track', 'PageView');
     function renderThemes(html) {
       const current = detectCurrentTheme(html);
       const container = document.getElementById('themes-grid');
+      // Load all Google Fonts for preview
+      var allFontFamilies = THEMES.map(function(t) { return t.googleFonts; }).join('&family=');
+      var fontLink = document.getElementById('theme-preview-fonts');
+      if (!fontLink) {
+        fontLink = document.createElement('link');
+        fontLink.id = 'theme-preview-fonts';
+        fontLink.rel = 'stylesheet';
+        document.head.appendChild(fontLink);
+      }
+      fontLink.href = 'https://fonts.googleapis.com/css2?family=' + allFontFamilies + '&display=swap';
+      
       container.innerHTML = THEMES.map(theme => {
         const isActive = current && current.id === theme.id;
+        const isLight = theme.id === 'fineline';
+        const textColor = isLight ? '#1a1a1a' : 'rgba(255,255,255,0.7)';
+        const headingFont = theme.fonts.heading.split(',')[0].replace(/'/g, '');
         return '<div class="theme-card ' + (isActive ? 'active' : '') + '">' +
           '<div class="theme-preview" style="background:' + theme.preview.bg + ';">' +
-            '<div class="theme-accent-dot" style="background:' + theme.preview.accent + ';"><\/div>' +
+            '<div class="theme-swatches" style="display:flex;gap:8px;align-items:center;margin-bottom:10px;">' +
+              '<span style="width:24px;height:24px;border-radius:50%;background:' + theme.preview.bg + ';border:1px solid rgba(255,255,255,0.15);"><\/span>' +
+              '<span style="width:24px;height:24px;border-radius:50%;background:' + theme.preview.accent + ';"><\/span>' +
+            '<\/div>' +
+            '<div style="font-family:' + theme.fonts.heading + ';font-size:16px;font-weight:700;color:' + textColor + ';margin-bottom:6px;">' + headingFont + '<\/div>' +
             '<div class="theme-preview-lines">' +
               '<div style="background:' + theme.preview.accent + ';opacity:0.9;height:3px;border-radius:2px;margin-bottom:5px;"><\/div>' +
-              '<div style="background:rgba(255,255,255,0.15);height:2px;border-radius:2px;margin-bottom:4px;"><\/div>' +
-              '<div style="background:rgba(255,255,255,0.1);height:2px;border-radius:2px;width:70%;"><\/div>' +
+              '<div style="background:' + textColor + ';opacity:0.15;height:2px;border-radius:2px;margin-bottom:4px;"><\/div>' +
+              '<div style="background:' + textColor + ';opacity:0.1;height:2px;border-radius:2px;width:70%;"><\/div>' +
             '<\/div>' +
           '<\/div>' +
           '<div class="theme-info">' +
@@ -3588,7 +3637,7 @@ fbq('track', 'PageView');
         const res = await fetch(CONVEX_HTTP_URL + '/api/dashboard/apply-theme', {
           method: 'POST',
           headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
-          body: JSON.stringify({ themeVars: theme.vars })
+          body: JSON.stringify({ themeVars: theme.vars, themeKey: theme.id, googleFonts: theme.googleFonts, fonts: theme.fonts })
         });
         if (res.ok) {
           afterSuccessfulChange();
