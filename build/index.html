@@ -264,6 +264,24 @@
     }
 
     /* ── Dots loader ── */
+    /* Feature slideshow */
+    .feat-slide {
+      display: none;
+      text-align: center;
+      padding: 22px 24px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(0,200,130,0.12);
+      border-radius: 16px;
+      animation: fadeSlide 0.5s ease;
+    }
+    .feat-slide.active { display: block; }
+    .feat-icon { font-size: 36px; margin-bottom: 10px; }
+    .feat-title { font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+    .feat-desc { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.5; }
+    .sdot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.2); display: inline-block; transition: background 0.3s; }
+    .sdot.active { background: #00c882; }
+    @keyframes fadeSlide { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
     .dots {
       display: inline-flex;
       gap: 5px;
@@ -387,6 +405,45 @@ fbq('track', 'PageView');
         <div class="dot-loader"></div>
         <div class="dot-loader"></div>
         <div class="dot-loader"></div>
+      </div>
+
+      <!-- Feature slideshow — plays while building -->
+      <div id="featureSlideshow" style="margin-top:40px;min-height:130px;position:relative;">
+        <div class="feat-slide active" data-index="0">
+          <div class="feat-icon">🖼️</div>
+          <div class="feat-title">Your gallery, auto-organized</div>
+          <div class="feat-desc">Best photos pulled from your Instagram and arranged automatically</div>
+        </div>
+        <div class="feat-slide" data-index="1">
+          <div class="feat-icon">📅</div>
+          <div class="feat-title">Booking form, ready to go</div>
+          <div class="feat-desc">Clients can request appointments directly from your site</div>
+        </div>
+        <div class="feat-slide" data-index="2">
+          <div class="feat-icon">🔍</div>
+          <div class="feat-title">Shows up on Google</div>
+          <div class="feat-desc">Built-in SEO so new clients can find you when they search</div>
+        </div>
+        <div class="feat-slide" data-index="3">
+          <div class="feat-icon">✏️</div>
+          <div class="feat-title">Edit anything from your phone</div>
+          <div class="feat-desc">Change colors, text, photos, and more — no code needed</div>
+        </div>
+        <div class="feat-slide" data-index="4">
+          <div class="feat-icon">🎨</div>
+          <div class="feat-title">7 styles to choose from</div>
+          <div class="feat-desc">Dark, fine line, anime, traditional, bold — pick your vibe</div>
+        </div>
+        <div class="feat-slide" data-index="5">
+          <div class="feat-icon">🌐</div>
+          <div class="feat-title">Get your own .com</div>
+          <div class="feat-desc">Add a custom domain in one click. We handle everything.</div>
+        </div>
+        <!-- Dot indicators -->
+        <div style="display:flex;justify-content:center;gap:6px;margin-top:18px;" id="slideDots">
+          <span class="sdot active"></span><span class="sdot"></span><span class="sdot"></span>
+          <span class="sdot"></span><span class="sdot"></span><span class="sdot"></span>
+        </div>
       </div>
 
       <!-- Email capture — shows after 15s -->
@@ -636,6 +693,21 @@ fbq('track', 'PageView');
     document.getElementById('modalEmailInput').addEventListener('keydown', (e) => {
       if (e.key === 'Enter') startWithEmail();
     });
+
+    // ── Feature slideshow ──
+    (function() {
+      var slides = document.querySelectorAll('.feat-slide');
+      var dots = document.querySelectorAll('.sdot');
+      var cur = 0;
+      function showSlide(n) {
+        slides[cur].classList.remove('active');
+        dots[cur].classList.remove('active');
+        cur = n % slides.length;
+        slides[cur].classList.add('active');
+        dots[cur].classList.add('active');
+      }
+      setInterval(function() { showSlide(cur + 1); }, 4000);
+    })();
 
     // ── Dev shortcut: ?test=live ──
     if (params.get('test') === 'live') setTimeout(goLive, 1500);
