@@ -655,12 +655,13 @@ fbq('track', 'PageView');
       } catch (e) { /* keep polling */ }
     }
 
-    // If buildId passed in URL (from /start), skip email modal and poll immediately
+    // If buildId passed in URL (from /start), still show email modal to capture email
+    // but start polling in background immediately so progress tracks while they type
     if (preloadedBuildId) {
-      document.getElementById('emailModal').style.display = 'none';
       buildId = preloadedBuildId;
       pollInterval = setInterval(pollStatus, 3000);
       pollStatus();
+      // modal stays visible — startWithEmail() will save email to build then continue
     }
 
     // Build starts only after email modal is submitted (startWithEmail → startBuild)
@@ -710,7 +711,16 @@ fbq('track', 'PageView');
       capturedEmail = email;
       // Hide modal
       document.getElementById('emailModal').style.display = 'none';
-      // Start build
+      // If build already started (preloaded), just save email to existing build
+      if (buildId) {
+        fetch(`${CONVEX}/api/build/email`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ buildId, email, slug }),
+        }).catch(() => {});
+        return; // polling already running
+      }
+      // Otherwise start fresh build
       startBuild(email);
     }
 
