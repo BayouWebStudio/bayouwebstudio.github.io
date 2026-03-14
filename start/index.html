@@ -739,6 +739,8 @@
       });
 
       if (res.ok) {
+        const resData = await res.json().catch(() => ({}));
+        const buildId = resData.buildId || '';
         // Success: hide form, show inline success message
         form.style.display = 'none';
 
@@ -750,11 +752,12 @@
           successEl.style.cssText = 'text-align:center;padding:40px 20px;';
           form.parentNode.insertBefore(successEl, form.nextSibling);
         }
+        const trackUrl = 'https://getminted.ai/build/?ig=' + encodeURIComponent(raw) + (buildId ? '&buildId=' + encodeURIComponent(buildId) : '');
         successEl.innerHTML =
           '<div style="font-size:48px;margin-bottom:16px;">🌿</div>' +
           '<h2 style="color:#00c882;font-size:32px;margin-bottom:12px;">We\'re building your site!</h2>' +
           '<p style="color:#999;font-size:18px;">Check back at <strong style="color:white">getminted.ai/' + raw + '</strong> in a few minutes.</p>' +
-          '<p style="margin-top:20px;"><a href="https://getminted.ai/build/?ig=' + encodeURIComponent(raw) + '" style="color:#00c882;font-size:15px;">Track your build →</a></p>';
+          '<p style="margin-top:20px;"><a href="' + trackUrl + '" style="color:#00c882;font-size:15px;">Track your build →</a></p>';
         successEl.style.display = 'block';
       } else {
         // API error — show error message, do NOT redirect

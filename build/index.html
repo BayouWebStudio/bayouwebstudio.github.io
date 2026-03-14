@@ -444,6 +444,7 @@ fbq('track', 'PageView');
     const handle = rawHandle || 'yourhandle';
     const slug = handle.toLowerCase().replace(/[^a-z0-9]/g, '');
     let siteUrl = `https://getminted.ai/${slug}/`;
+    const preloadedBuildId = params.get('buildId') || null;
 
     // ── Populate UI ──
     document.getElementById('handleDisplay').textContent = '@' + handle;
@@ -519,15 +520,21 @@ fbq('track', 'PageView');
           pollInterval = setInterval(pollStatus, 3000);
           pollStatus();
         } else {
-          // Build API failed — fall back to polling GitHub Pages directly
-          pollInterval = setInterval(pollGitHub, 15000);
-          setTimeout(pollGitHub, 5000);
+          // Build API failed — show error
+          showBuildError('We had trouble finding that Instagram account. Make sure it\'s public and try again.');
         }
       } catch (e) {
-        // Fall back to GitHub Pages polling
-        pollInterval = setInterval(pollGitHub, 15000);
-        setTimeout(pollGitHub, 5000);
+        showBuildError('Connection error. Please refresh and try again.');
       }
+    }
+
+    function showBuildError(msg) {
+      clearInterval(pollInterval);
+      clearInterval(stepInterval);
+      const stepEl2 = document.getElementById('stepText');
+      if (stepEl2) { stepEl2.textContent = '❌ ' + (msg || 'Something went wrong. Try a different handle.'); stepEl2.style.color = '#ff6b6b'; }
+      const progressEl2 = document.getElementById('progressBar');
+      if (progressEl2) progressEl2.style.background = '#ff6b6b';
     }
 
     async function pollStatus() {
@@ -550,7 +557,7 @@ fbq('track', 'PageView');
           pollInterval = setInterval(pollGitHub, 5000);
           pollGitHub();
         } else if (data.status === 'error') {
-          stepEl.textContent = '⚠️ Something went wrong — try again';
+          showBuildError(data.error || 'Build failed — the account may be private or have no photos. Try a different handle.');
         }
       } catch (e) { /* keep polling */ }
     }
@@ -561,6 +568,14 @@ fbq('track', 'PageView');
         const res = await fetch(siteUrl, { method: 'GET', cache: 'no-store' });
         if (res.ok) goLive();
       } catch (e) { /* keep polling */ }
+    }
+
+    // If buildId passed in URL (from /start), skip email modal and poll immediately
+    if (preloadedBuildId) {
+      document.getElementById('emailModal').style.display = 'none';
+      buildId = preloadedBuildId;
+      pollInterval = setInterval(pollStatus, 3000);
+      pollStatus();
     }
 
     // Build starts only after email modal is submitted (startWithEmail → startBuild)
