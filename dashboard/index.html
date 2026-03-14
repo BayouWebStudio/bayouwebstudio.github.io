@@ -2006,7 +2006,7 @@ fbq('track', 'PageView');
         });
         const data = await uploadRes.json();
         if (uploadRes.ok && data.ok) {
-          showToast('Photo uploaded! Changes live in ~30 seconds');
+          showToast('Photo uploaded! Changes live in under 5 minutes');
           afterSuccessfulChange();
         } else {
           showToast(data.error || 'Upload failed', true);
@@ -2206,7 +2206,7 @@ fbq('track', 'PageView');
         const data = await res.json();
 
         if (res.ok && data.ok) {
-          showToast('Background updated! Changes live in ~30 seconds');
+          showToast('Background updated! Changes live in under 5 minutes');
           afterSuccessfulChange();
           if (progress) progress.textContent = '✅ Done! Changes propagating...';
           if (statusEl) { statusEl.textContent = '✅ Background updated!'; setTimeout(() => { if (statusEl) statusEl.textContent = ''; }, 3000); }
@@ -2247,7 +2247,7 @@ fbq('track', 'PageView');
         const data = await res.json();
 
         if (res.ok && data.ok) {
-          showToast('✅ Hero background updated! Changes live in ~30 seconds.');
+          showToast('✅ Hero background updated! Changes live in under 5 minutes.');
           afterSuccessfulChange();
         } else {
           showToast(data.error || 'Failed to set hero background', true);
@@ -2788,7 +2788,7 @@ fbq('track', 'PageView');
       overview.innerHTML = '<div style="max-width:480px;margin:60px auto;padding:0 24px;text-align:center;">' +
         '<div style="font-size:52px;margin-bottom:16px;">🌿</div>' +
         '<h2 style="color:#fff;font-weight:800;font-size:24px;margin-bottom:8px;">' + t('welcome_title', 'Welcome to GetMinted 🌿') + '</h2>' +
-        '<p style="color:rgba(255,255,255,0.6);font-size:15px;margin-bottom:32px;">' + t('welcome_sub', "Enter your Instagram handle and we'll build your free website in about 30 seconds.") + '</p>' +
+        '<p style="color:rgba(255,255,255,0.6);font-size:15px;margin-bottom:32px;">' + t('welcome_sub', "Enter your Instagram handle and we'll build your free website in under 5 minutes.") + '</p>' +
         '<div style="display:flex;gap:10px;max-width:380px;margin:0 auto 24px;">' +
         '<div style="position:relative;flex:1;">' +
         '<span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,0.4);font-size:15px;">@</span>' +
@@ -2822,7 +2822,7 @@ fbq('track', 'PageView');
           overview.innerHTML = '<div style="max-width:480px;margin:80px auto;padding:0 24px;text-align:center;">' +
             '<div style="width:48px;height:48px;border:3px solid rgba(0,200,130,0.3);border-top-color:#00C882;border-radius:50%;animation:spin 0.9s linear infinite;margin:0 auto 28px;"></div>' +
             '<p id="build-progress-step" style="color:#fff;font-size:18px;font-weight:700;margin-bottom:8px;">' + steps[0] + '</p>' +
-            '<p style="color:rgba(255,255,255,0.45);font-size:13px;">This takes about 60 seconds</p>' +
+            '<p style="color:rgba(255,255,255,0.45);font-size:13px;">This takes about under 5 minutes</p>' +
             '</div>';
           var stepTimer = setInterval(function() {
             si = Math.min(si + 1, steps.length - 1);

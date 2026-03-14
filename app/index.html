@@ -1021,7 +1021,7 @@ fbq('track', 'PageView');
     const title = document.getElementById('auth-title');
     if (title) title.textContent = mode === 'signup' ? tApp('auth_title_signup', 'Create Account') : tApp('auth_title_signin', 'Sign In');
     const sub = document.querySelector('.auth-sub');
-    if (sub) sub.textContent = mode === 'signup' ? tApp('auth_sub_signup', 'Get your site built in 60 seconds') : tApp('auth_sub_signin', 'Welcome back to GetMinted');
+    if (sub) sub.textContent = mode === 'signup' ? tApp('auth_sub_signup', 'Get your site built in under 5 minutes') : tApp('auth_sub_signin', 'Welcome back to GetMinted');
     const spamTip = document.getElementById('spam-tip');
     if (spamTip) spamTip.style.display = mode === 'signup' ? 'block' : 'none';
     const mount = document.getElementById('clerk-mount');
