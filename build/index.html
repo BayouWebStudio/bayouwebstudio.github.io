@@ -646,19 +646,17 @@ fbq('track', 'PageView');
       setProgress(100);
 
       const pill = document.getElementById('urlPill');
-      pill.classList.add('live');
+      if (pill) pill.classList.add('live');
 
-      setTimeout(() => {
-        const building = document.getElementById('phaseBuilding');
-        building.classList.add('fade-out');
-        setTimeout(() => {
-          building.style.display = 'none';
-          const ready = document.getElementById('phaseReady');
-          ready.style.display = 'block';
-          ready.classList.add('fade-in');
-          launchConfetti();
-        }, 500);
-      }, 600);
+      // Show ready screen immediately — no nested timeouts that can silently fail
+      const building = document.getElementById('phaseBuilding');
+      const ready = document.getElementById('phaseReady');
+      if (building) building.style.display = 'none';
+      if (ready) {
+        ready.style.display = 'block';
+        ready.style.opacity = '1';
+      }
+      try { launchConfetti(); } catch(e) {}
     }
 
     // ── Confetti ──
