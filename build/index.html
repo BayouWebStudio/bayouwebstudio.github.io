@@ -500,27 +500,28 @@ fbq('track', 'PageView');
     async function startBuild(email) {
       if (!handle || handle === 'yourhandle') return;
       try {
-        const res = await fetch(`${CONVEX}/api/build`, {
+        // Use public waitlist/join endpoint (no auth required)
+        const res = await fetch(`${CONVEX}/api/waitlist/join`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ igHandle: handle, slug, industry: 'auto' }),
+          body: JSON.stringify({ igHandle: handle, email: email || undefined, source: 'build-page' }),
         });
         if (res.ok) {
           const data = await res.json();
-          buildId = data.buildId;
-          // Register email immediately
-          if (email) {
-            fetch(`${CONVEX}/api/build/email`, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ email, slug, igHandle: handle }),
-            }).catch(() => {});
+          buildId = data.buildId || null;
+          if (buildId) {
+            // Got a buildId — poll Convex status
+            pollInterval = setInterval(pollStatus, 3000);
+            pollStatus();
+          } else if (data.status === 'existing') {
+            // Site already built — go live immediately
+            goLive();
+          } else {
+            // Queued but no buildId — fall back to GitHub polling
+            pollInterval = setInterval(pollGitHub, 8000);
+            setTimeout(pollGitHub, 5000);
           }
-          // Start polling immediately every 3s
-          pollInterval = setInterval(pollStatus, 3000);
-          pollStatus();
         } else {
-          // Build API failed — show error
           showBuildError('We had trouble finding that Instagram account. Make sure it\'s public and try again.');
         }
       } catch (e) {
