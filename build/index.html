@@ -609,11 +609,10 @@ fbq('track', 'PageView');
           document.getElementById('seeMysite').href = siteUrl;
         }
         if (data.status === 'complete') {
-          // Convex is done but GitHub Pages may take 1–3 min to propagate.
-          // Switch to polling the actual URL before declaring live.
+          // Convex says done — show the ready screen immediately.
+          // GitHub Pages may take a minute to propagate but the URL is correct.
           clearInterval(pollInterval);
-          pollInterval = setInterval(pollGitHub, 5000);
-          pollGitHub();
+          goLive();
         } else if (data.status === 'error') {
           showBuildError(data.error || 'Build failed — the account may be private or have no photos. Try a different handle.');
         }
