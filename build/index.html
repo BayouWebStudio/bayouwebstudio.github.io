@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Building Your Site — GetMinted</title>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <link rel="icon" href="/favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -609,9 +612,15 @@ fbq('track', 'PageView');
           document.getElementById('seeMysite').href = siteUrl;
         }
         if (data.status === 'complete') {
-          // Convex says done — show the ready screen immediately.
-          // GitHub Pages may take a minute to propagate but the URL is correct.
           clearInterval(pollInterval);
+          // Belt-and-suspenders: update href before calling goLive
+          const finalUrl = data.siteUrl || siteUrl;
+          document.getElementById('seeMysite').href = finalUrl;
+          document.getElementById('claimLink').href = `/dashboard/?claim=${encodeURIComponent(slug)}`;
+          const slugReady = document.getElementById('slugReady');
+          const foreverSlug = document.getElementById('foreverSlug');
+          if (slugReady) slugReady.textContent = slug;
+          if (foreverSlug) foreverSlug.textContent = slug;
           goLive();
         } else if (data.status === 'error') {
           showBuildError(data.error || 'Build failed — the account may be private or have no photos. Try a different handle.');
