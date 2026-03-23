@@ -6,7 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#0a0a0a">
-<title>Sacred Geometry Builder v1.3</title>
+<title>Mandala Studio v1.4</title>
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-192.png">
 <style>
@@ -24,7 +24,8 @@ select{background:var(--surface2);color:var(--text);border:1px solid var(--borde
 .canvas-area{flex:1;display:flex;align-items:center;justify-content:center;background:var(--bg);position:relative;min-width:0}
 .canvas-wrap{position:relative;aspect-ratio:1;max-width:100%;max-height:100%;background:#050505;border:1px solid var(--border);border-radius:4px;overflow:hidden}
 #mainCanvas{display:block;width:100%;height:100%}
-.mode-label{position:absolute;top:10px;left:10px;background:rgba(10,10,10,.85);color:var(--gold);font-size:11px;padding:4px 10px;border-radius:12px;letter-spacing:1px;text-transform:uppercase;pointer-events:none}
+#drawCanvas{position:absolute;top:0;left:0;width:100%;height:100%;cursor:crosshair;touch-action:none;display:none}
+.mode-label{position:absolute;top:10px;left:10px;background:rgba(10,10,10,.85);color:var(--gold);font-size:11px;padding:4px 10px;border-radius:12px;letter-spacing:1px;text-transform:uppercase;pointer-events:none;z-index:5}
 .panel{width:340px;background:var(--surface);border-left:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden}
 .panel-scroll{flex:1;overflow-y:auto;padding:12px;scrollbar-width:thin;scrollbar-color:var(--border) transparent}
 .panel-scroll::-webkit-scrollbar{width:6px}
@@ -70,7 +71,7 @@ select{background:var(--surface2);color:var(--text);border:1px solid var(--borde
 /* Mode switcher */
 .mode-switcher{display:flex;gap:0;flex-shrink:0;border-bottom:1px solid var(--border)}
 .mode-switcher button{flex:1;padding:14px 8px;font-size:15px;font-weight:600;background:var(--surface2);color:var(--text2);border-bottom:3px solid transparent;transition:all .2s;letter-spacing:.5px}
-.mode-switcher button:first-child{border-right:1px solid var(--border)}
+.mode-switcher button+button{border-left:1px solid var(--border)}
 .mode-switcher button:hover{color:var(--text);background:#1a1a1a}
 .mode-switcher button.active{color:var(--gold);border-bottom-color:var(--gold);background:var(--surface)}
 
@@ -99,6 +100,23 @@ select{background:var(--surface2);color:var(--text);border:1px solid var(--borde
 /* PNG export bg toggle */
 .export-option{display:flex;align-items:center;gap:8px;margin-bottom:10px;font-size:12px;color:var(--text2)}
 
+/* Draw tool buttons */
+.draw-tool-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:12px}
+.draw-tool-btn{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 4px;border-radius:var(--radius);background:var(--surface2);border:2px solid transparent;font-size:10px;color:var(--text2);transition:all .15s}
+.draw-tool-btn:hover{border-color:var(--border);color:var(--text)}
+.draw-tool-btn.active{border-color:var(--gold);color:var(--gold);background:#1a1708}
+.draw-tool-btn .tool-icon{font-size:20px;line-height:1}
+
+/* Symmetry selector chips */
+.sym-chips{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:12px}
+.sym-chip{padding:6px 10px;border-radius:14px;background:var(--surface2);border:1px solid var(--border);font-size:11px;color:var(--text2);cursor:pointer;transition:all .15s;font-weight:500}
+.sym-chip:hover{border-color:var(--gold);color:var(--text)}
+.sym-chip.active{background:var(--gold);color:#0a0a0a;border-color:var(--gold);font-weight:700}
+
+/* Undo/redo bar */
+.undo-bar{display:flex;gap:6px;margin-bottom:8px}
+.undo-bar .btn{padding:8px 12px;font-size:18px}
+
 @media(max-width:768px){
   .app{flex-direction:column}
   .canvas-area{flex:none;height:45vh;height:45dvh}
@@ -126,6 +144,7 @@ select{background:var(--surface2);color:var(--text);border:1px solid var(--borde
           <g id="svgGenLayer"></g>
         </g>
       </svg>
+      <canvas id="drawCanvas" width="800" height="800"></canvas>
       <div class="mode-label" id="modeLabel">🔮 Mandala</div>
     </div>
   </div>
@@ -134,6 +153,7 @@ select{background:var(--surface2);color:var(--text);border:1px solid var(--borde
     <div class="mode-switcher">
       <button class="active" data-appmode="mandala">🔮 Mandala</button>
       <button data-appmode="pattern">▦ Pattern</button>
+      <button data-appmode="draw">✏️ Draw</button>
     </div>
     <div class="tabs" id="tabBar">
       <button class="tab active" data-tab="controls">Controls</button>
@@ -277,6 +297,60 @@ select{background:var(--surface2);color:var(--text);border:1px solid var(--borde
             <div class="ctrl-row"><label>BG Color</label><input type="color" id="patBgColor" value="#050505"></div>
           </div>
         </div>
+
+        <!-- Draw-specific controls -->
+        <div id="drawControls" style="display:none">
+          <div class="section">
+            <div class="section-title">Tool</div>
+            <div class="draw-tool-grid" id="drawToolGrid">
+              <button class="draw-tool-btn active" data-drawtool="brush"><span class="tool-icon">🖌️</span>Brush</button>
+              <button class="draw-tool-btn" data-drawtool="line"><span class="tool-icon">📏</span>Line</button>
+              <button class="draw-tool-btn" data-drawtool="circle"><span class="tool-icon">⭕</span>Circle</button>
+              <button class="draw-tool-btn" data-drawtool="eraser"><span class="tool-icon">🧹</span>Eraser</button>
+            </div>
+          </div>
+          <div class="section">
+            <div class="section-title">Symmetry Folds</div>
+            <div class="sym-chips" id="symChips">
+              <button class="sym-chip" data-folds="1">1</button>
+              <button class="sym-chip" data-folds="2">2</button>
+              <button class="sym-chip" data-folds="4">4</button>
+              <button class="sym-chip active" data-folds="6">6</button>
+              <button class="sym-chip" data-folds="8">8</button>
+              <button class="sym-chip" data-folds="12">12</button>
+              <button class="sym-chip" data-folds="16">16</button>
+              <button class="sym-chip" data-folds="24">24</button>
+            </div>
+          </div>
+          <div class="section">
+            <div class="section-title">Brush</div>
+            <div class="ctrl-row"><label>Size</label><input type="range" id="drawSize" min="1" max="40" value="3"><span class="val" id="drawSizeVal">3</span></div>
+            <div class="ctrl-row"><label>Opacity</label><input type="range" id="drawOpacity" min="0.05" max="1" value="1" step="0.05"><span class="val" id="drawOpacityVal">100%</span></div>
+            <div class="ctrl-row"><label>Color</label><input type="color" id="drawColor" value="#C9A84C"></div>
+            <div class="color-presets" id="drawColorPresets">
+              <div class="color-swatch" style="background:#000000" data-color="#000000"></div>
+              <div class="color-swatch" style="background:#ffffff" data-color="#ffffff"></div>
+              <div class="color-swatch active" style="background:#C9A84C" data-color="#C9A84C"></div>
+              <div class="color-swatch" style="background:#7B2FBE" data-color="#7B2FBE"></div>
+            </div>
+          </div>
+          <div class="section">
+            <div class="toggle-row"><div class="toggle on" id="drawSmoothToggle"></div><span style="font-size:12px;color:var(--text2)">Smooth strokes</span></div>
+          </div>
+          <div class="section">
+            <div class="toggle-row"><div class="toggle" id="drawGuideToggle"></div><span style="font-size:12px;color:var(--text2)">Show geometry guide</span></div>
+          </div>
+          <div class="section">
+            <div class="section-title">History</div>
+            <div class="undo-bar">
+              <button class="btn btn-outline" id="drawUndo" title="Undo (Ctrl+Z)">↩️</button>
+              <button class="btn btn-outline" id="drawRedo" title="Redo (Ctrl+Shift+Z)">↪️</button>
+            </div>
+            <div class="btn-row">
+              <button class="btn btn-danger" id="drawClear">🗑 Clear Canvas</button>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- GENERATE TAB -->
@@ -322,7 +396,7 @@ select{background:var(--surface2);color:var(--text);border:1px solid var(--borde
         </div>
       </div>
 
-      <!-- LAYERS TAB (mandala only) -->
+      <!-- LAYERS TAB -->
       <div class="tab-content" id="tab-layers">
         <div class="section">
           <div class="section-title">Layers</div>
@@ -381,8 +455,8 @@ select{background:var(--surface2);color:var(--text);border:1px solid var(--borde
 
 <script>
 // ═══════════════════════════════════════════════
-// Sacred Geometry Builder v1.3
-// Two modes: Mandala + Seamless Pattern
+// Mandala Studio v1.4
+// Modes: Mandala + Seamless Pattern + Draw
 // ═══════════════════════════════════════════════
 
 const PHI = (1 + Math.sqrt(5)) / 2;
@@ -390,7 +464,7 @@ const CX = 400, CY = 400;
 
 // ─── App State ───
 const app = {
-  mode: 'mandala', // 'mandala' | 'pattern'
+  mode: 'mandala', // 'mandala' | 'pattern' | 'draw'
   activeTab: 'controls',
   generateActive: false
 };
@@ -425,12 +499,27 @@ const patternState = {
   bgColor: '#050505'
 };
 
+// ─── Draw State ───
+const drawState = {
+  tool: 'brush', // brush | line | circle | eraser
+  folds: 6,
+  size: 3,
+  color: '#C9A84C',
+  opacity: 1,
+  smooth: true,
+  showGuide: false,
+  drawing: false,
+  points: [], // current stroke points
+  startPt: null, // for line/circle tool
+  undoStack: [], // array of ImageData snapshots
+  redoStack: [],
+  maxUndo: 40
+};
+
 // ─── Generate State ───
 const genState = {
   complexity: 3, tension: 0, density: 50, spiral: 0, chaos: 0,
-  // mandala-specific
   symmetry: 6, rings: 3, radius: 280, rotation: 0,
-  // pattern-specific
   patSpacing: 80, patSize: 20, patRotation: 0,
   strokeColor: '#C9A84C', strokeWeight: 1,
   locks: {}
@@ -442,6 +531,8 @@ const svgRoot = document.getElementById('svgRoot');
 const svgLayers = document.getElementById('svgLayers');
 const svgGenLayer = document.getElementById('svgGenLayer');
 const modeLabel = document.getElementById('modeLabel');
+const drawCanvas = document.getElementById('drawCanvas');
+const drawCtx = drawCanvas.getContext('2d');
 
 function makeEl(tag, attrs) {
   const el = document.createElementNS('http://www.w3.org/2000/svg', tag);
@@ -461,29 +552,38 @@ document.querySelectorAll('.mode-switcher button').forEach(btn => {
 
 function switchMode() {
   const isMandala = app.mode === 'mandala';
-  document.getElementById('mandalaControls').style.display = isMandala ? '' : 'none';
-  document.getElementById('patternControls').style.display = isMandala ? 'none' : '';
+  const isPattern = app.mode === 'pattern';
+  const isDraw = app.mode === 'draw';
 
-  // Show/hide layers tab for mandala only
+  document.getElementById('mandalaControls').style.display = isMandala ? '' : 'none';
+  document.getElementById('patternControls').style.display = isPattern ? '' : 'none';
+  document.getElementById('drawControls').style.display = isDraw ? '' : 'none';
+
+  // Show/hide tabs
   const layersTab = document.querySelector('[data-tab="layers"]');
-  layersTab.style.display = isMandala ? '' : 'none';
+  const generateTab = document.querySelector('[data-tab="generate"]');
+  const presetsTab = document.querySelector('[data-tab="presets"]');
+  layersTab.style.display = isDraw ? 'none' : '';
+  generateTab.style.display = isDraw ? 'none' : '';
+  presetsTab.style.display = isDraw ? 'none' : '';
+
+  if (isDraw && (app.activeTab === 'layers' || app.activeTab === 'generate' || app.activeTab === 'presets')) {
+    setTab('controls');
+  }
   if (!isMandala && app.activeTab === 'layers') {
     setTab('controls');
   }
 
   // Generate sections
   document.getElementById('genMandalaSection').style.display = isMandala ? '' : 'none';
-  document.getElementById('genPatternSection').style.display = isMandala ? 'none' : '';
+  document.getElementById('genPatternSection').style.display = isPattern ? '' : 'none';
   document.getElementById('genToLayersRow').style.display = isMandala ? '' : 'none';
 
-  // Export tile info
-  document.getElementById('exportTileInfo').style.display = isMandala ? 'none' : '';
-
-  // Presets title
+  document.getElementById('exportTileInfo').style.display = isPattern ? '' : 'none';
   document.getElementById('presetsTitle').textContent = isMandala ? 'Mandala Presets' : 'Pattern Presets';
 
   // Update label
-  modeLabel.textContent = isMandala ? '🔮 Mandala' : '▦ Pattern';
+  modeLabel.textContent = isDraw ? '✏️ Draw' : (isMandala ? '🔮 Mandala' : '▦ Pattern');
 
   // Canvas clipping
   if (isMandala) {
@@ -492,7 +592,19 @@ function switchMode() {
     svgRoot.removeAttribute('clip-path');
   }
 
-  loadPresetButtons();
+  // Show/hide draw canvas
+  drawCanvas.style.display = isDraw ? 'block' : 'none';
+
+  // SVG opacity for guide mode
+  if (isDraw) {
+    updateDrawGuide();
+  } else {
+    svgEl.style.opacity = '';
+  }
+
+  if (!isDraw) {
+    loadPresetButtons();
+  }
   renderAll();
 }
 
@@ -508,7 +620,7 @@ function setTab(tabName) {
     modeLabel.textContent = '⚡ Generate';
     renderGenerate();
   } else {
-    modeLabel.textContent = app.mode === 'mandala' ? '🔮 Mandala' : '▦ Pattern';
+    if (app.mode !== 'draw') modeLabel.textContent = app.mode === 'mandala' ? '🔮 Mandala' : '▦ Pattern';
     svgGenLayer.innerHTML = '';
     renderAll();
   }
@@ -630,6 +742,383 @@ document.getElementById('patFillToggle').addEventListener('click', function() {
   renderAll();
 });
 
+// ═══════════════════════════════════════════════
+// ─── DRAW MODE ───
+// ═══════════════════════════════════════════════
+
+// Draw tool selection
+document.querySelectorAll('#drawToolGrid .draw-tool-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    drawState.tool = btn.dataset.drawtool;
+    document.querySelectorAll('#drawToolGrid .draw-tool-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    drawCanvas.style.cursor = drawState.tool === 'eraser' ? 'cell' : 'crosshair';
+  });
+});
+
+// Symmetry chips
+document.querySelectorAll('#symChips .sym-chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    drawState.folds = parseInt(chip.dataset.folds);
+    document.querySelectorAll('#symChips .sym-chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+  });
+});
+
+// Draw sliders
+document.getElementById('drawSize').addEventListener('input', function() {
+  drawState.size = parseInt(this.value);
+  document.getElementById('drawSizeVal').textContent = this.value;
+});
+document.getElementById('drawOpacity').addEventListener('input', function() {
+  drawState.opacity = parseFloat(this.value);
+  document.getElementById('drawOpacityVal').textContent = Math.round(this.value * 100) + '%';
+});
+document.getElementById('drawColor').addEventListener('input', function() {
+  drawState.color = this.value;
+  document.querySelectorAll('#drawColorPresets .color-swatch').forEach(s => s.classList.remove('active'));
+});
+
+document.querySelectorAll('#drawColorPresets .color-swatch').forEach(sw => {
+  sw.addEventListener('click', () => {
+    drawState.color = sw.dataset.color;
+    document.getElementById('drawColor').value = sw.dataset.color;
+    document.querySelectorAll('#drawColorPresets .color-swatch').forEach(s => s.classList.remove('active'));
+    sw.classList.add('active');
+  });
+});
+
+document.getElementById('drawSmoothToggle').addEventListener('click', function() {
+  drawState.smooth = !drawState.smooth;
+  this.classList.toggle('on', drawState.smooth);
+});
+
+document.getElementById('drawGuideToggle').addEventListener('click', function() {
+  drawState.showGuide = !drawState.showGuide;
+  this.classList.toggle('on', drawState.showGuide);
+  updateDrawGuide();
+});
+
+function updateDrawGuide() {
+  if (app.mode === 'draw' && drawState.showGuide) {
+    svgEl.style.opacity = '0.2';
+    svgEl.style.pointerEvents = 'none';
+  } else if (app.mode === 'draw') {
+    svgEl.style.opacity = '0';
+    svgEl.style.pointerEvents = 'none';
+  } else {
+    svgEl.style.opacity = '';
+    svgEl.style.pointerEvents = '';
+  }
+}
+
+// Undo/Redo
+function pushUndo() {
+  const data = drawCtx.getImageData(0, 0, drawCanvas.width, drawCanvas.height);
+  drawState.undoStack.push(data);
+  if (drawState.undoStack.length > drawState.maxUndo) drawState.undoStack.shift();
+  drawState.redoStack = [];
+}
+
+document.getElementById('drawUndo').addEventListener('click', doUndo);
+document.getElementById('drawRedo').addEventListener('click', doRedo);
+
+function doUndo() {
+  if (drawState.undoStack.length === 0) return;
+  const current = drawCtx.getImageData(0, 0, drawCanvas.width, drawCanvas.height);
+  drawState.redoStack.push(current);
+  const prev = drawState.undoStack.pop();
+  drawCtx.putImageData(prev, 0, 0);
+}
+
+function doRedo() {
+  if (drawState.redoStack.length === 0) return;
+  const current = drawCtx.getImageData(0, 0, drawCanvas.width, drawCanvas.height);
+  drawState.undoStack.push(current);
+  const next = drawState.redoStack.pop();
+  drawCtx.putImageData(next, 0, 0);
+}
+
+// Keyboard shortcuts
+document.addEventListener('keydown', e => {
+  if (app.mode !== 'draw') return;
+  const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+  const mod = isMac ? e.metaKey : e.ctrlKey;
+  if (mod && e.key === 'z' && !e.shiftKey) { e.preventDefault(); doUndo(); }
+  if (mod && e.key === 'z' && e.shiftKey) { e.preventDefault(); doRedo(); }
+  if (mod && e.key === 'y') { e.preventDefault(); doRedo(); }
+});
+
+// Clear canvas
+document.getElementById('drawClear').addEventListener('click', () => {
+  if (!confirm('Clear the drawing canvas?')) return;
+  pushUndo();
+  drawCtx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
+});
+
+// ─── Drawing Engine ───
+function getCanvasPoint(e) {
+  const rect = drawCanvas.getBoundingClientRect();
+  const scaleX = drawCanvas.width / rect.width;
+  const scaleY = drawCanvas.height / rect.height;
+  let clientX, clientY;
+  if (e.touches && e.touches.length > 0) {
+    clientX = e.touches[0].clientX;
+    clientY = e.touches[0].clientY;
+  } else {
+    clientX = e.clientX;
+    clientY = e.clientY;
+  }
+  return {
+    x: (clientX - rect.left) * scaleX,
+    y: (clientY - rect.top) * scaleY
+  };
+}
+
+function getMirroredPoints(x, y) {
+  const folds = drawState.folds;
+  const cx = drawCanvas.width / 2;
+  const cy = drawCanvas.height / 2;
+  const dx = x - cx, dy = y - cy;
+  const r = Math.sqrt(dx * dx + dy * dy);
+  const baseAngle = Math.atan2(dy, dx);
+  const pts = [];
+  for (let i = 0; i < folds; i++) {
+    const angle = baseAngle + (Math.PI * 2 * i / folds);
+    pts.push({ x: cx + r * Math.cos(angle), y: cy + r * Math.sin(angle) });
+    // Also mirror (reflect) for each fold
+    const mAngle = (Math.PI * 2 * i / folds) - baseAngle;
+    pts.push({ x: cx + r * Math.cos(mAngle), y: cy + r * Math.sin(mAngle) });
+  }
+  // Deduplicate very close points
+  const unique = [pts[0]];
+  for (let i = 1; i < pts.length; i++) {
+    let dup = false;
+    for (const u of unique) {
+      if (Math.abs(u.x - pts[i].x) < 0.5 && Math.abs(u.y - pts[i].y) < 0.5) { dup = true; break; }
+    }
+    if (!dup) unique.push(pts[i]);
+  }
+  return unique;
+}
+
+function setupDrawCtx(isEraser) {
+  drawCtx.lineCap = 'round';
+  drawCtx.lineJoin = 'round';
+  if (isEraser) {
+    drawCtx.globalCompositeOperation = 'destination-out';
+    drawCtx.globalAlpha = 1;
+    drawCtx.strokeStyle = 'rgba(0,0,0,1)';
+  } else {
+    drawCtx.globalCompositeOperation = 'source-over';
+    drawCtx.globalAlpha = drawState.opacity;
+    drawCtx.strokeStyle = drawState.color;
+    drawCtx.fillStyle = drawState.color;
+  }
+  drawCtx.lineWidth = drawState.size;
+}
+
+// Smooth stroke helper - Catmull-Rom
+function drawSmoothStroke(points) {
+  if (points.length < 2) return;
+  drawCtx.beginPath();
+  drawCtx.moveTo(points[0].x, points[0].y);
+  if (points.length === 2) {
+    drawCtx.lineTo(points[1].x, points[1].y);
+  } else {
+    for (let i = 0; i < points.length - 1; i++) {
+      const p0 = points[Math.max(0, i - 1)];
+      const p1 = points[i];
+      const p2 = points[Math.min(points.length - 1, i + 1)];
+      const p3 = points[Math.min(points.length - 1, i + 2)];
+      const cp1x = p1.x + (p2.x - p0.x) / 6;
+      const cp1y = p1.y + (p2.y - p0.y) / 6;
+      const cp2x = p2.x - (p3.x - p1.x) / 6;
+      const cp2y = p2.y - (p3.y - p1.y) / 6;
+      drawCtx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, p2.x, p2.y);
+    }
+  }
+  drawCtx.stroke();
+}
+
+function drawBrushSegment(fromPts, toPts) {
+  setupDrawCtx(drawState.tool === 'eraser');
+  for (let i = 0; i < fromPts.length; i++) {
+    drawCtx.beginPath();
+    drawCtx.moveTo(fromPts[i].x, fromPts[i].y);
+    drawCtx.lineTo(toPts[i].x, toPts[i].y);
+    drawCtx.stroke();
+  }
+  drawCtx.globalCompositeOperation = 'source-over';
+  drawCtx.globalAlpha = 1;
+}
+
+// Preview overlay for line/circle
+let previewData = null;
+
+function drawPreview() {
+  if (!previewData) return;
+  // Restore the snapshot before preview
+  drawCtx.putImageData(previewData, 0, 0);
+  const s = drawState;
+  setupDrawCtx(false);
+  const mirroredStart = getMirroredPoints(s.startPt.x, s.startPt.y);
+  const mirroredEnd = getMirroredPoints(s.points[s.points.length - 1].x, s.points[s.points.length - 1].y);
+
+  if (s.tool === 'line') {
+    for (let i = 0; i < mirroredStart.length; i++) {
+      drawCtx.beginPath();
+      drawCtx.moveTo(mirroredStart[i].x, mirroredStart[i].y);
+      drawCtx.lineTo(mirroredEnd[i].x, mirroredEnd[i].y);
+      drawCtx.stroke();
+    }
+  } else if (s.tool === 'circle') {
+    const dx = s.points[s.points.length - 1].x - s.startPt.x;
+    const dy = s.points[s.points.length - 1].y - s.startPt.y;
+    const rad = Math.sqrt(dx * dx + dy * dy);
+    for (const mp of mirroredStart) {
+      drawCtx.beginPath();
+      drawCtx.arc(mp.x, mp.y, rad, 0, Math.PI * 2);
+      drawCtx.stroke();
+    }
+  }
+  drawCtx.globalCompositeOperation = 'source-over';
+  drawCtx.globalAlpha = 1;
+}
+
+// Collect mirrored stroke points for smooth drawing
+let mirroredStrokes = [];
+
+function onDrawStart(e) {
+  if (app.mode !== 'draw') return;
+  e.preventDefault();
+  const pt = getCanvasPoint(e);
+  drawState.drawing = true;
+  drawState.points = [pt];
+  drawState.startPt = pt;
+
+  pushUndo();
+
+  if (drawState.tool === 'brush' || drawState.tool === 'eraser') {
+    // Initialize mirrored stroke arrays
+    const mirPts = getMirroredPoints(pt.x, pt.y);
+    mirroredStrokes = mirPts.map(mp => [mp]);
+    // Draw dot at start
+    setupDrawCtx(drawState.tool === 'eraser');
+    for (const mp of mirPts) {
+      drawCtx.beginPath();
+      drawCtx.arc(mp.x, mp.y, drawState.size / 2, 0, Math.PI * 2);
+      drawCtx.fill();
+    }
+    drawCtx.globalCompositeOperation = 'source-over';
+    drawCtx.globalAlpha = 1;
+  } else {
+    // line / circle — snapshot for preview
+    previewData = drawCtx.getImageData(0, 0, drawCanvas.width, drawCanvas.height);
+  }
+}
+
+function onDrawMove(e) {
+  if (!drawState.drawing || app.mode !== 'draw') return;
+  e.preventDefault();
+  const pt = getCanvasPoint(e);
+  drawState.points.push(pt);
+
+  if (drawState.tool === 'brush' || drawState.tool === 'eraser') {
+    const prevPt = drawState.points[drawState.points.length - 2];
+    const mirPrev = getMirroredPoints(prevPt.x, prevPt.y);
+    const mirCurr = getMirroredPoints(pt.x, pt.y);
+
+    // Track mirrored points for smooth redraw
+    for (let i = 0; i < mirCurr.length; i++) {
+      if (mirroredStrokes[i]) mirroredStrokes[i].push(mirCurr[i]);
+    }
+
+    if (drawState.smooth && drawState.tool !== 'eraser') {
+      // Redraw recent segment with smoothing every few points
+      // For performance, draw line segments in real time and smooth will happen on finalize
+      drawBrushSegment(mirPrev, mirCurr);
+    } else {
+      drawBrushSegment(mirPrev, mirCurr);
+    }
+  } else {
+    // Preview
+    drawPreview();
+  }
+}
+
+function onDrawEnd(e) {
+  if (!drawState.drawing || app.mode !== 'draw') return;
+  e.preventDefault();
+  drawState.drawing = false;
+
+  if (drawState.tool === 'brush' && drawState.smooth && drawState.points.length > 3) {
+    // Re-render with smooth curves
+    // Restore undo state (before this stroke)
+    const undoData = drawState.undoStack[drawState.undoStack.length - 1];
+    if (undoData) {
+      drawCtx.putImageData(undoData, 0, 0);
+      setupDrawCtx(false);
+      for (const stroke of mirroredStrokes) {
+        drawSmoothStroke(stroke);
+      }
+      drawCtx.globalCompositeOperation = 'source-over';
+      drawCtx.globalAlpha = 1;
+    }
+  } else if (drawState.tool === 'line' || drawState.tool === 'circle') {
+    // Finalize shape - already drawn via preview, just ensure final state
+    if (previewData) {
+      drawCtx.putImageData(previewData, 0, 0);
+      const s = drawState;
+      setupDrawCtx(false);
+      const mirroredStart = getMirroredPoints(s.startPt.x, s.startPt.y);
+      const endPt = s.points[s.points.length - 1];
+      const mirroredEnd = getMirroredPoints(endPt.x, endPt.y);
+
+      if (s.tool === 'line') {
+        for (let i = 0; i < mirroredStart.length; i++) {
+          drawCtx.beginPath();
+          drawCtx.moveTo(mirroredStart[i].x, mirroredStart[i].y);
+          drawCtx.lineTo(mirroredEnd[i].x, mirroredEnd[i].y);
+          drawCtx.stroke();
+        }
+      } else if (s.tool === 'circle') {
+        const dx = endPt.x - s.startPt.x;
+        const dy = endPt.y - s.startPt.y;
+        const rad = Math.sqrt(dx * dx + dy * dy);
+        for (const mp of mirroredStart) {
+          drawCtx.beginPath();
+          drawCtx.arc(mp.x, mp.y, rad, 0, Math.PI * 2);
+          drawCtx.stroke();
+        }
+      }
+      drawCtx.globalCompositeOperation = 'source-over';
+      drawCtx.globalAlpha = 1;
+    }
+  }
+
+  previewData = null;
+  mirroredStrokes = [];
+  drawState.points = [];
+  drawState.startPt = null;
+}
+
+// Attach events
+drawCanvas.addEventListener('pointerdown', onDrawStart);
+drawCanvas.addEventListener('pointermove', onDrawMove);
+drawCanvas.addEventListener('pointerup', onDrawEnd);
+drawCanvas.addEventListener('pointerleave', onDrawEnd);
+drawCanvas.addEventListener('pointercancel', onDrawEnd);
+
+// Resize draw canvas to match wrap
+function resizeDrawCanvas() {
+  const wrap = document.getElementById('canvasWrap');
+  const rect = wrap.getBoundingClientRect();
+  // Keep internal resolution at 800x800 for quality
+  // CSS sizing handled by width/height 100%
+}
+window.addEventListener('resize', resizeDrawCanvas);
+
 // ─── Layer Management ───
 function selectLayer(id) {
   mandalaState.selectedId = id;
@@ -733,10 +1222,10 @@ function createMandalaShape(layer, cx, cy) {
 function renderMandala() {
   svgLayers.innerHTML='';
   svgEl.setAttribute('viewBox','0 0 800 800');
-  // BG
   svgEl.querySelector('rect').setAttribute('fill','#050505');
+  svgEl.querySelector('rect').setAttribute('width','800');
+  svgEl.querySelector('rect').setAttribute('height','800');
 
-  // Draw circle boundary
   const boundaryCircle = makeEl('circle',{cx:CX,cy:CY,r:396,fill:'none',stroke:'#1a1a1a','stroke-width':1});
   svgLayers.appendChild(boundaryCircle);
 
@@ -760,7 +1249,6 @@ function renderMandala() {
           const symG=document.createElementNS('http://www.w3.org/2000/svg','g');
           symG.setAttribute('transform',`rotate(${baseAngle + elemAngle} ${CX} ${CY})`);
           if(ring > 0 || rings === 1) {
-            // offset from center for multi-ring
             const offsetG = document.createElementNS('http://www.w3.org/2000/svg','g');
             offsetG.setAttribute('transform',`translate(0, ${-ringR + layer.radius})`);
             offsetG.appendChild(createMandalaShape(subLayer, CX, CY));
@@ -773,13 +1261,11 @@ function renderMandala() {
       }
     }
 
-    // Center element
     const ce = layer.centerElem || 'dot';
     if(ce==='dot') layerG.appendChild(makeEl('circle',{cx:CX,cy:CY,r:layer.strokeWeight*2.5,fill:layer.strokeColor,stroke:'none'}));
     else if(ce==='circle') layerG.appendChild(makeEl('circle',{cx:CX,cy:CY,r:layer.radius*0.08,fill:'none',stroke:layer.strokeColor,'stroke-width':layer.strokeWeight}));
     else if(ce==='star'){const pts=starPoints(CX,CY,layer.radius*0.1,5,layer.rotation);layerG.appendChild(makeEl('polygon',{points:pts.map(p=>p.join(',')).join(' '),fill:'none',stroke:layer.strokeColor,'stroke-width':layer.strokeWeight}));}
 
-    // Outer boundary
     const ob = layer.outerBound || 'none';
     if(ob==='circle') layerG.appendChild(makeEl('circle',{cx:CX,cy:CY,r:layer.radius*1.05,fill:'none',stroke:layer.strokeColor,'stroke-width':layer.strokeWeight*0.8,opacity:0.6}));
     else if(ob==='square'){const hr=layer.radius*1.05;layerG.appendChild(makeEl('rect',{x:CX-hr,y:CY-hr,width:hr*2,height:hr*2,fill:'none',stroke:layer.strokeColor,'stroke-width':layer.strokeWeight*0.8,opacity:0.6}));}
@@ -807,19 +1293,12 @@ function createPatternElement(cx, cy, p) {
   return g;
 }
 
-function getTileSize() {
-  return patternState.spacing;
-}
-
 function renderPatternTile(ox, oy, tileW, tileH, parent) {
   const p = patternState;
   const sp = p.spacing;
-
-  // Generate positions within one tile based on pattern type
   const positions = [];
 
   if(p.tileShape==='hex') {
-    // Hex tile layout
     const rowH = sp * Math.sqrt(3)/2;
     const cols = Math.ceil(tileW/sp)+2;
     const rows = Math.ceil(tileH/rowH)+2;
@@ -848,7 +1327,6 @@ function renderPatternTile(ox, oy, tileW, tileH, parent) {
       positions.push([ox+c*sp+(r%2?sp/2:0), oy+r*rowH]);
     }
   } else {
-    // grid
     const cols=Math.ceil(tileW/sp)+2, rows=Math.ceil(tileH/sp)+2;
     for(let r=-1;r<rows;r++)for(let c=-1;c<cols;c++){
       positions.push([ox+c*sp, oy+r*sp]);
@@ -857,7 +1335,6 @@ function renderPatternTile(ox, oy, tileW, tileH, parent) {
 
   positions.forEach(([x,y]) => {
     if(p.tileShape==='diamond') {
-      // Rotate 45 degrees for diamond feel
       parent.appendChild(createPatternElement(x, y, {...p, rotation: p.rotation + 45}));
     } else {
       parent.appendChild(createPatternElement(x, y, p));
@@ -868,10 +1345,8 @@ function renderPatternTile(ox, oy, tileW, tileH, parent) {
 function renderPattern() {
   svgLayers.innerHTML='';
   const p = patternState;
-  const tileW = p.spacing * 3; // tile repeats based on spacing
+  const tileW = p.spacing * 3;
   const tileH = p.tileShape==='hex' ? p.spacing * Math.sqrt(3) * 1.5 : tileW;
-
-  // Show 3x3 preview
   const totalW = tileW * 3;
   const totalH = tileH * 3;
   svgEl.setAttribute('viewBox', `0 0 ${totalW} ${totalH}`);
@@ -879,7 +1354,6 @@ function renderPattern() {
   svgEl.querySelector('rect').setAttribute('width', totalW);
   svgEl.querySelector('rect').setAttribute('height', totalH);
 
-  // Draw tile boundaries (subtle)
   for(let tx=0;tx<3;tx++)for(let ty=0;ty<3;ty++){
     svgLayers.appendChild(makeEl('rect',{x:tx*tileW,y:ty*tileH,width:tileW,height:tileH,fill:'none',stroke:'#1a1a1a','stroke-width':0.5,'stroke-dasharray':'4 4'}));
     renderPatternTile(tx*tileW, ty*tileH, tileW, tileH, svgLayers);
@@ -890,7 +1364,7 @@ function renderPattern() {
 function renderAll() {
   if(app.generateActive) return;
   svgGenLayer.innerHTML='';
-  if(app.mode==='mandala') renderMandala();
+  if(app.mode==='mandala' || app.mode==='draw') renderMandala();
   else renderPattern();
 }
 
@@ -903,9 +1377,8 @@ function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a
 function renderGenerate() {
   svgLayers.innerHTML='';
   svgGenLayer.innerHTML='';
-
   if(app.mode==='mandala') renderGenMandala();
-  else renderGenPattern();
+  else if(app.mode==='pattern') renderGenPattern();
 }
 
 function renderGenMandala() {
@@ -914,11 +1387,10 @@ function renderGenMandala() {
   svgEl.querySelector('rect').setAttribute('width',800);
   svgEl.querySelector('rect').setAttribute('height',800);
 
-  // Circle boundary
   svgGenLayer.appendChild(makeEl('circle',{cx:CX,cy:CY,r:396,fill:'none',stroke:'#1a1a1a','stroke-width':1}));
 
   const g=genState, cx=CX, cy=CY;
-  const sym=g.symmetry, comp=g.complexity, rad=g.radius, rot=g.rotation*Math.PI/180;
+  const sym=g.symmetry, comp=g.complexity, rad=g.radius;
   const tension=g.tension/100, density=g.density/100, spiral=g.spiral/100, chaos=g.chaos/100;
   const stroke=g.strokeColor, sw=g.strokeWeight;
   const numRings = g.rings;
@@ -988,12 +1460,10 @@ function renderGenPattern() {
   svgEl.querySelector('rect').setAttribute('width',totalW);
   svgEl.querySelector('rect').setAttribute('height',totalH);
 
-  // Tile boundaries
   for(let tx=0;tx<3;tx++)for(let ty=0;ty<3;ty++){
     svgGenLayer.appendChild(makeEl('rect',{x:tx*tileW,y:ty*tileH,width:tileW,height:tileH,fill:'none',stroke:'#1a1a1a','stroke-width':0.5,'stroke-dasharray':'4 4'}));
   }
 
-  // Elements array based on complexity
   const shapes=['circle','polygon','star','dot','line','cross'];
   const activeShapes=shapes.slice(0,Math.min(comp+1,shapes.length));
 
@@ -1004,11 +1474,8 @@ function renderGenPattern() {
       for(let r=0;r<rows;r++){
         for(let c=0;c<cols;c++){
           let x=ox+c*spacing, y=oy+r*spacing;
-          // Offset rows
           if(density>0.3 && r%2) x+=spacing/2;
-          // Spiral offset
           if(spiral>0){const dist=Math.sqrt((c-cols/2)**2+(r-rows/2)**2);const ang=dist*spiral*0.1;x+=Math.cos(ang)*spiral*5;y+=Math.sin(ang)*spiral*5;}
-          // Chaos jitter
           if(chaos>0){x+=(rng()-.5)*chaos*spacing*.3;y+=(rng()-.5)*chaos*spacing*.3;}
 
           const shapeIdx=(r*cols+c)%activeShapes.length;
@@ -1055,7 +1522,6 @@ document.getElementById('genStrokeWeight').addEventListener('input',function(){g
 
 document.querySelectorAll('.lock-btn').forEach(btn=>{btn.addEventListener('click',()=>{const dial=btn.dataset.dial;genState.locks[dial]=!genState.locks[dial];btn.classList.toggle('locked',genState.locks[dial]);btn.textContent=genState.locks[dial]?'🔒':'🔓';});});
 
-// Randomize All
 document.getElementById('genRandomize').addEventListener('click',()=>{
   const ranges={
     genComplexity:[1,8],genTension:[0,100],genDensity:[10,100],genSpiral:[0,100],genChaos:[0,60],
@@ -1078,7 +1544,6 @@ document.getElementById('genRandomize').addEventListener('click',()=>{
   if(app.generateActive)renderGenerate();
 });
 
-// Send to Layers (mandala only)
 document.getElementById('genToLayers').addEventListener('click',()=>{
   if(app.mode!=='mandala')return;
   const layer=defaultMandalaLayer('circle');
@@ -1171,7 +1636,6 @@ function loadMandalaPreset(preset) {
 
 function loadPatternPreset(preset) {
   Object.assign(patternState, preset.p);
-  // Update UI
   document.getElementById('patTileShape').value=patternState.tileShape;
   document.getElementById('patType').value=patternState.patternType;
   document.getElementById('patSpacing').value=patternState.spacing;document.getElementById('patSpacingVal').textContent=patternState.spacing;
@@ -1232,20 +1696,19 @@ document.getElementById('clearPresetsBtn').addEventListener('click',()=>{
 function getSVGForExport() {
   const clone=svgEl.cloneNode(true);
   clone.setAttribute('xmlns','http://www.w3.org/2000/svg');
+  // Ensure SVG is fully visible for export
+  clone.style.opacity = '';
 
   if(app.mode==='pattern') {
-    // Export just the tile
     const p=patternState;
     const tileW=p.spacing*3;
     const tileH=p.tileShape==='hex'?p.spacing*Math.sqrt(3)*1.5:tileW;
     clone.setAttribute('viewBox',`0 0 ${tileW} ${tileH}`);
-    // Rebuild with just 1 tile
     const root=clone.querySelector('#svgRoot');
     root.innerHTML='';
     const bg=document.createElementNS('http://www.w3.org/2000/svg','rect');
     bg.setAttribute('width',tileW);bg.setAttribute('height',tileH);bg.setAttribute('fill',p.bgColor);
     root.appendChild(bg);
-    // Render single tile into root
     const tempSvg=document.createElementNS('http://www.w3.org/2000/svg','g');
     renderPatternTile(0,0,tileW,tileH,tempSvg);
     root.appendChild(tempSvg);
@@ -1258,19 +1721,73 @@ function getSVGForExport() {
 function getFullSVGString() {
   const clone=svgEl.cloneNode(true);
   clone.setAttribute('xmlns','http://www.w3.org/2000/svg');
+  clone.style.opacity = '';
   return new XMLSerializer().serializeToString(clone);
+}
+
+// Composite export: SVG + Canvas drawing
+function exportComposite(transparent) {
+  const w = 800, h = 800;
+  const exportCanvas = document.createElement('canvas');
+  exportCanvas.width = w; exportCanvas.height = h;
+  const ectx = exportCanvas.getContext('2d');
+
+  return new Promise(resolve => {
+    // Step 1: Draw SVG as base
+    const svgClone = svgEl.cloneNode(true);
+    svgClone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+    svgClone.setAttribute('viewBox', '0 0 800 800');
+    svgClone.style.opacity = '';
+    const svgStr = new XMLSerializer().serializeToString(svgClone);
+    const svgBlob = new Blob([svgStr], {type: 'image/svg+xml'});
+    const svgUrl = URL.createObjectURL(svgBlob);
+    const svgImg = new Image();
+    svgImg.onload = () => {
+      if (!transparent) {
+        ectx.fillStyle = '#050505';
+        ectx.fillRect(0, 0, w, h);
+      }
+      ectx.drawImage(svgImg, 0, 0, w, h);
+      URL.revokeObjectURL(svgUrl);
+
+      // Step 2: Overlay canvas drawing
+      if (hasDrawContent()) {
+        ectx.drawImage(drawCanvas, 0, 0, w, h);
+      }
+
+      resolve(exportCanvas);
+    };
+    svgImg.src = svgUrl;
+  });
+}
+
+function hasDrawContent() {
+  const data = drawCtx.getImageData(0, 0, drawCanvas.width, drawCanvas.height).data;
+  for (let i = 3; i < data.length; i += 4) {
+    if (data[i] > 0) return true;
+  }
+  return false;
 }
 
 document.getElementById('exportSVG').addEventListener('click',()=>{
   const svg=getSVGForExport();
   const blob=new Blob([svg],{type:'image/svg+xml'});
   const a=document.createElement('a');a.href=URL.createObjectURL(blob);
-  a.download=app.mode==='mandala'?'mandala.svg':'pattern-tile.svg';
+  a.download=app.mode==='mandala'||app.mode==='draw'?'mandala.svg':'pattern-tile.svg';
   a.click();URL.revokeObjectURL(a.href);
 });
 
-document.getElementById('exportPNG').addEventListener('click',()=>{
+document.getElementById('exportPNG').addEventListener('click',async ()=>{
   const transparent=document.getElementById('exportTransparent').checked;
+
+  if (app.mode === 'draw' || hasDrawContent()) {
+    // Composite export with canvas overlay
+    const canvas = await exportComposite(transparent);
+    const a=document.createElement('a');a.href=canvas.toDataURL('image/png');
+    a.download='mandala-drawing.png';a.click();
+    return;
+  }
+
   const svg=app.mode==='pattern'?getFullSVGString():getSVGForExport();
   const canvas=document.createElement('canvas');
   let w=800,h=800;
@@ -1308,9 +1825,10 @@ document.getElementById('exportCSS').addEventListener('click',()=>{
 document.getElementById('exportJSON').addEventListener('click',()=>{
   const data=JSON.stringify({
     mode:app.mode,
-    mandala:app.mode==='mandala'?{layers:mandalaState.layers.map(l=>{const{id,visible,...r}=l;return r;})}:null,
+    mandala:app.mode==='mandala'||app.mode==='draw'?{layers:mandalaState.layers.map(l=>{const{id,visible,...r}=l;return r;})}:null,
     pattern:app.mode==='pattern'?patternState:null,
-    generate:app.generateActive?genState:null
+    generate:app.generateActive?genState:null,
+    draw:app.mode==='draw'?{folds:drawState.folds,hasDrawing:hasDrawContent()}:null
   },null,2);
   const blob=new Blob([data],{type:'application/json'});
   const a=document.createElement('a');a.href=URL.createObjectURL(blob);
