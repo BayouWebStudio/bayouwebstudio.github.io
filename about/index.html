@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17989903265"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-17989903265');
+</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Eterno Web Studio — Website Generator for Tattoo Artists</title>
+  <meta name="description" content="Eterno Web Studio builds real, professional websites for tattoo artists in minutes — from your Instagram. No designer, no code. Just a site that gets you booked." />
+  <meta property="og:title" content="About Eterno Web Studio — Website Generator for Tattoo Artists" />
+  <meta property="og:description" content="Eterno Web Studio builds real, professional websites for tattoo artists in minutes — from your Instagram." />
+  <meta property="og:image" content="/assets/ads/pmax/ad5-square.jpg" />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #080808;
+      --bg2: #0f0f0f;
+      --bg3: #151515;
+      --accent: #00c882;
+      --accent-hover: #00b374;
+      --white: #ffffff;
+      --secondary: #999999;
+      --border: rgba(255,255,255,0.08);
+      --radius-card: 12px;
+      --radius-btn: 8px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 32px;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: rgba(8,8,8,0.92);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+
+    .nav-logo {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: -0.3px;
+    }
+
+    .nav-logo span { color: var(--accent); }
+
+    .nav-cta {
+      padding: 10px 20px;
+      background: var(--accent);
+      color: #000;
+      border: none;
+      border-radius: var(--radius-btn);
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .nav-cta:hover { background: var(--accent-hover); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(0,200,130,0.10) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+      background: rgba(0,200,130,0.1);
+      padding: 6px 16px;
+      border-radius: 20px;
+      border: 1px solid rgba(0,200,130,0.2);
+    }
+
+    h1 {
+      font-size: clamp(36px, 7vw, 64px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -2px;
+      max-width: 760px;
+      margin-bottom: 24px;
+    }
+
+    h1 span { color: var(--accent); }
+
+    .hero-sub {
+      font-size: clamp(16px, 2.5vw, 20px);
+      color: var(--secondary);
+      max-width: 500px;
+      margin-bottom: 0;
+      line-height: 1.6;
+    }
+
+    /* ── SECTIONS ── */
+    .section {
+      padding: 80px 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    h2 {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800;
+      letter-spacing: -1.2px;
+      margin-bottom: 24px;
+      line-height: 1.15;
+    }
+
+    h2 span { color: var(--accent); }
+
+    /* ── ORIGIN ── */
+    .origin-section {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .origin-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 80px 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .origin-text .section-label { display: block; }
+
+    .origin-text p {
+      font-size: 18px;
+      line-height: 1.8;
+      color: #ccc;
+    }
+
+    .origin-text p strong {
+      color: var(--white);
+      font-weight: 700;
+    }
+
+    .origin-visual {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .origin-quote {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: var(--radius-card);
+      padding: 24px 28px;
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--white);
+      font-style: italic;
+      line-height: 1.6;
+    }
+
+    /* ── BELIEFS ── */
+    .beliefs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .belief-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: 36px 28px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .belief-card:hover {
+      border-color: rgba(0,200,130,0.3);
+      transform: translateY(-4px);
+    }
+
+    .belief-icon {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    .belief-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--white);
+    }
+
+    .belief-card h3 span { color: var(--accent); }
+
+    .belief-card p {
+      font-size: 15px;
+      color: var(--secondary);
+      line-height: 1.6;
+    }
+
+    /* ── STATS ── */
+    .stats-bar {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 60px 20px;
+    }
+
+    .stats-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-size: clamp(40px, 6vw, 64px);
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: -2px;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 15px;
+      color: var(--secondary);
+      font-weight: 500;
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+      text-align: center;
+      padding: 100px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      bottom: -50px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(0,200,130,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-section h2 {
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .cta-section p {
+      color: var(--secondary);
+      font-size: 18px;
+      margin-bottom: 40px;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      padding: 16px 32px;
+      background: var(--accent);
+      color: #000;
+      border: none;
+      border-radius: var(--radius-btn);
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.1s;
+      display: inline-block;
+    }
+
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-primary:active { transform: scale(0.98); }
+
+    .btn-secondary {
+      padding: 16px 32px;
+      background: transparent;
+      color: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-btn);
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.2s;
+      display: inline-block;
+    }
+
+    .btn-secondary:hover { border-color: rgba(255,255,255,0.25); }
+
+    /* ── FOOTER ── */
+    .footer {
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+
+      .origin-inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .beliefs-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-inner {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="/" class="nav-logo">✦ GET MINTED</a>
+  <a href="/start" class="nav-cta">Start Building →</a>
+</nav>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <span class="eyebrow">About Us</span>
+  <h1>We Build Websites<br />for <span>Tattoo Artists.</span></h1>
+  <p class="hero-sub">One handle. Five minutes. A site that gets you booked.</p>
+</div>
+
+<!-- ── ORIGIN ── -->
+<div class="origin-section">
+  <div class="origin-inner">
+    <div class="origin-text">
+      <span class="section-label">Our Story</span>
+      <h2>Why we <span>built this.</span></h2>
+      <p>
+        Eterno Web Studio started with a simple question: <strong>why do the best tattoo artists in the world still send clients to a Linktree?</strong>
+      </p>
+      <br />
+      <p>
+        Your work is world-class. Your online presence should be too. So we built a generator that takes your Instagram and turns it into a real, professional website — in minutes.
+      </p>
+    </div>
+    <div class="origin-visual">
+      <div class="origin-quote">
+        "Your work is world-class. Your online presence should be too."
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── BELIEFS ── -->
+<div class="section">
+  <p class="section-label">What We Believe</p>
+  <h2>Three things we refuse<br />to <span>compromise on.</span></h2>
+
+  <div class="beliefs-grid">
+    <div class="belief-card">
+      <div class="belief-icon">🎨</div>
+      <h3><span>"Your work</span> speaks for itself."</h3>
+      <p>You shouldn't need a designer or a tech degree to have a great website. We take what you've already created and make it look world-class online.</p>
+    </div>
+    <div class="belief-card">
+      <div class="belief-icon">🔍</div>
+      <h3><span>"Clients should</span> find you on Google."</h3>
+      <p>Not just through Instagram. Built-in SEO means you show up when people search for tattoo artists near them — and that turns into real bookings.</p>
+    </div>
+    <div class="belief-card">
+      <div class="belief-icon">📅</div>
+      <h3><span>"Booking should</span> be effortless."</h3>
+      <p>Your clients go from discovery to booked without ever leaving your site. No DMs, no link in bio hopping, no friction. Just a clean path to yes.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── STATS ── -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div>
+      <div class="stat-num">100+</div>
+      <div class="stat-label">Artists on Eterno Web Studio</div>
+    </div>
+    <div>
+      <div class="stat-num">10</div>
+      <div class="stat-label">Industries served</div>
+    </div>
+    <div>
+      <div class="stat-num">5 min</div>
+      <div class="stat-label">Average build time</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── CTA ── -->
+<div class="cta-section">
+  <p class="section-label" style="text-align:center;display:block;margin-bottom:16px;">Ready?</p>
+  <h2>See what we built.</h2>
+  <p>Browse real sites, then start yours — free.</p>
+  <div class="btn-group">
+    <a href="/gallery/" class="btn-secondary">See what we built →</a>
+    <a href="/start" class="btn-primary">Start yours →</a>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<div class="footer">
+  <p style="text-align:center;color:#444;font-size:13px;padding:20px 0;">✦ <a href="/" style="color:#00c882;text-decoration:none;">Eterno Web Studio</a> — Website generator for tattoo artists &amp; barbers</p>
+</div>
+
+</body>
+</html>

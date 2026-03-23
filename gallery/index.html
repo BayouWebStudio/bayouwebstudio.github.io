@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17989903265"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-17989903265');
+</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Site Gallery — Real Websites Built with Eterno Web Studio</title>
+  <meta name="description" content="Browse real tattoo artist websites built with Eterno Web Studio. Every site was created from an Instagram handle — in under 5 minutes." />
+  <meta property="og:title" content="Site Gallery — Real Websites Built with Eterno Web Studio" />
+  <meta property="og:description" content="Every site you see here was built from an Instagram handle. Browse real tattoo artist websites." />
+  <meta property="og:image" content="/assets/ads/pmax/ad5-square.jpg" />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #080808;
+      --bg2: #0f0f0f;
+      --bg3: #151515;
+      --accent: #00c882;
+      --accent-hover: #00b374;
+      --white: #ffffff;
+      --secondary: #999999;
+      --border: rgba(255,255,255,0.08);
+      --radius-card: 12px;
+      --radius-btn: 8px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 32px;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: rgba(8,8,8,0.92);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+
+    .nav-logo {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: -0.3px;
+    }
+
+    .nav-cta {
+      padding: 10px 20px;
+      background: var(--accent);
+      color: #000;
+      border: none;
+      border-radius: var(--radius-btn);
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .nav-cta:hover { background: var(--accent-hover); }
+
+    /* ── HERO ── */
+    .hero {
+      text-align: center;
+      padding: 80px 20px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -150px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(0,200,130,0.09) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+      background: rgba(0,200,130,0.1);
+      padding: 6px 16px;
+      border-radius: 20px;
+      border: 1px solid rgba(0,200,130,0.2);
+    }
+
+    h1 {
+      font-size: clamp(36px, 7vw, 60px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -2px;
+      max-width: 700px;
+      margin: 0 auto 20px;
+    }
+
+    h1 span { color: var(--accent); }
+
+    .hero-sub {
+      font-size: clamp(16px, 2.5vw, 20px);
+      color: var(--secondary);
+      max-width: 500px;
+      margin: 0 auto 48px;
+      line-height: 1.6;
+    }
+
+    /* ── FILTER TABS ── */
+    .filter-tabs {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 56px;
+      flex-wrap: wrap;
+    }
+
+    .tab {
+      padding: 10px 22px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1.5px solid var(--border);
+      color: var(--secondary);
+      background: transparent;
+      transition: all 0.2s;
+    }
+
+    .tab.active,
+    .tab:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(0,200,130,0.08);
+    }
+
+    /* ── GALLERY GRID ── */
+    .gallery-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px 80px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .gallery-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .gallery-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(0,200,130,0.3);
+    }
+
+    .card-thumb {
+      width: 100%;
+      aspect-ratio: 390 / 600;
+      overflow: hidden;
+      position: relative;
+      background: var(--bg3);
+    }
+
+    .card-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-card:hover .card-thumb img {
+      transform: scale(1.03);
+    }
+
+    .card-info {
+      padding: 18px 20px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .card-meta {}
+
+    .card-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--white);
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .card-handle {
+      font-size: 13px;
+      color: var(--secondary);
+    }
+
+    .card-link {
+      flex-shrink: 0;
+      padding: 8px 16px;
+      background: rgba(0,200,130,0.12);
+      color: var(--accent);
+      border: 1px solid rgba(0,200,130,0.25);
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+
+    .card-link:hover {
+      background: rgba(0,200,130,0.22);
+    }
+
+    /* ── BOTTOM CTA ── */
+    .cta-section {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+      padding: 80px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 300px;
+      background: radial-gradient(ellipse, rgba(0,200,130,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    h2 {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800;
+      letter-spacing: -1.2px;
+      margin-bottom: 16px;
+    }
+
+    h2 span { color: var(--accent); }
+
+    .cta-section p {
+      color: var(--secondary);
+      font-size: 18px;
+      margin-bottom: 36px;
+    }
+
+    .btn-primary {
+      padding: 18px 40px;
+      background: var(--accent);
+      color: #000;
+      border: none;
+      border-radius: var(--radius-btn);
+      font-family: inherit;
+      font-size: 17px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.1s;
+      display: inline-block;
+    }
+
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-primary:active { transform: scale(0.98); }
+
+    /* ── FOOTER ── */
+    .footer { border-top: 1px solid var(--border); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 560px) {
+      nav { padding: 16px 20px; }
+      .gallery-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="/" class="nav-logo">✦ GET MINTED</a>
+  <a href="/start" class="nav-cta">Start Building →</a>
+</nav>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <span class="eyebrow">Gallery</span>
+  <h1>Real Sites.<br /><span>Real Artists.</span></h1>
+  <p class="hero-sub">Every site you see here was built from an Instagram handle.</p>
+
+  <div class="filter-tabs">
+    <button class="tab active">All</button>
+    <button class="tab">Tattoo</button>
+    <button class="tab">Barber</button>
+  </div>
+</div>
+
+<!-- ── GALLERY ── -->
+<div class="gallery-section">
+  <div class="gallery-grid">
+
+    <div class="gallery-card">
+      <div class="card-thumb">
+        <img src="/assets/gallery/weschetattoo.jpg" alt="Raul Wesche — Geometric Tattoo Artist" loading="lazy" />
+      </div>
+      <div class="card-info">
+        <div class="card-meta">
+          <span class="card-name">Raul Wesche</span>
+          <span class="card-handle">Geometric Tattoo Artist</span>
+        </div>
+        <a href="https://eternowebstudio.com/weschetattoo/" target="_blank" rel="noopener" class="card-link">View Site →</a>
+      </div>
+    </div>
+
+    <div class="gallery-card">
+      <div class="card-thumb">
+        <img src="/assets/gallery/tatsutattoos.jpg" alt="Rene Vasquez — Tattoo Artist" loading="lazy" />
+      </div>
+      <div class="card-info">
+        <div class="card-meta">
+          <span class="card-name">Rene Vasquez</span>
+          <span class="card-handle">Tattoo Artist</span>
+        </div>
+        <a href="https://eternowebstudio.com/tatsutattoos/" target="_blank" rel="noopener" class="card-link">View Site →</a>
+      </div>
+    </div>
+
+    <div class="gallery-card">
+      <div class="card-thumb">
+        <img src="/assets/gallery/alangutierrez.jpg" alt="Alan Sanchez — Tattoo Artist" loading="lazy" />
+      </div>
+      <div class="card-info">
+        <div class="card-meta">
+          <span class="card-name">Alan Sanchez</span>
+          <span class="card-handle">Tattoo Artist</span>
+        </div>
+        <a href="https://eternowebstudio.com/alangutierrez/" target="_blank" rel="noopener" class="card-link">View Site →</a>
+      </div>
+    </div>
+
+    <div class="gallery-card">
+      <div class="card-thumb">
+        <img src="/assets/gallery/israelpaketh.jpg" alt="Israel Pascua — Tattoo Artist" loading="lazy" />
+      </div>
+      <div class="card-info">
+        <div class="card-meta">
+          <span class="card-name">Israel Pascua</span>
+          <span class="card-handle">Tattoo Artist</span>
+        </div>
+        <a href="https://eternowebstudio.com/israelpaketh/" target="_blank" rel="noopener" class="card-link">View Site →</a>
+      </div>
+    </div>
+
+    <div class="gallery-card">
+      <div class="card-thumb">
+        <img src="/assets/gallery/scalpdynamics.jpg" alt="Joseph Kintz — Scalp Micropigmentation" loading="lazy" />
+      </div>
+      <div class="card-info">
+        <div class="card-meta">
+          <span class="card-name">Joseph Kintz</span>
+          <span class="card-handle">Scalp Micropigmentation</span>
+        </div>
+        <a href="https://eternowebstudio.com/scalpdynamics/" target="_blank" rel="noopener" class="card-link">View Site →</a>
+      </div>
+    </div>
+
+    <div class="gallery-card">
+      <div class="card-thumb">
+        <img src="/assets/gallery/ericharetattoo.jpg" alt="Eric Hare — Tattoo Artist" loading="lazy" />
+      </div>
+      <div class="card-info">
+        <div class="card-meta">
+          <span class="card-name">Eric Hare</span>
+          <span class="card-handle">Tattoo Artist</span>
+        </div>
+        <a href="https://eternowebstudio.com/ericharetattoo/" target="_blank" rel="noopener" class="card-link">View Site →</a>
+      </div>
+    </div>
+
+    <div class="gallery-card">
+      <div class="card-thumb">
+        <img src="/assets/gallery/aaronriddletattoos.jpg" alt="Aaron Riddle — Tattoo Artist" loading="lazy" />
+      </div>
+      <div class="card-info">
+        <div class="card-meta">
+          <span class="card-name">Aaron Riddle</span>
+          <span class="card-handle">Tattoo Artist</span>
+        </div>
+        <a href="https://eternowebstudio.com/aaronriddletattoos/" target="_blank" rel="noopener" class="card-link">View Site →</a>
+      </div>
+    </div>
+
+    <div class="gallery-card">
+      <div class="card-thumb">
+        <img src="/assets/gallery/krisxmoon.jpg" alt="Chloe Kristensen — Tattoo Artist" loading="lazy" />
+      </div>
+      <div class="card-info">
+        <div class="card-meta">
+          <span class="card-name">Chloe Kristensen</span>
+          <span class="card-handle">Tattoo Artist</span>
+        </div>
+        <a href="https://eternowebstudio.com/krisxmoon/" target="_blank" rel="noopener" class="card-link">View Site →</a>
+      </div>
+    </div>
+
+    <div class="gallery-card">
+      <div class="card-thumb">
+        <img src="/assets/gallery/goldensoultattoo.jpg" alt="Mauricio Zarate — Tattoo Artist" loading="lazy" />
+      </div>
+      <div class="card-info">
+        <div class="card-meta">
+          <span class="card-name">Mauricio Zarate</span>
+          <span class="card-handle">Tattoo Artist</span>
+        </div>
+        <a href="https://eternowebstudio.com/goldensoultattoo/" target="_blank" rel="noopener" class="card-link">View Site →</a>
+      </div>
+    </div>
+
+    <div class="gallery-card">
+      <div class="card-thumb">
+        <img src="/assets/gallery/dannydiablx.jpg" alt="Daniel Mejia — Tattoo Artist" loading="lazy" />
+      </div>
+      <div class="card-info">
+        <div class="card-meta">
+          <span class="card-name">Daniel Mejia</span>
+          <span class="card-handle">Tattoo Artist</span>
+        </div>
+        <a href="https://eternowebstudio.com/dannydiablx/" target="_blank" rel="noopener" class="card-link">View Site →</a>
+      </div>
+    </div>
+
+    <div class="gallery-card">
+      <div class="card-thumb">
+        <img src="/assets/gallery/frankendots.jpg" alt="Theodore Casados — Tattoo Artist" loading="lazy" />
+      </div>
+      <div class="card-info">
+        <div class="card-meta">
+          <span class="card-name">Theodore Casados</span>
+          <span class="card-handle">Tattoo Artist</span>
+        </div>
+        <a href="https://eternowebstudio.com/frankendots/" target="_blank" rel="noopener" class="card-link">View Site →</a>
+      </div>
+    </div>
+
+    <div class="gallery-card">
+      <div class="card-thumb">
+        <img src="/assets/gallery/nexoraiz.jpg" alt="Luis Arriaga — Tattoo Artist" loading="lazy" />
+      </div>
+      <div class="card-info">
+        <div class="card-meta">
+          <span class="card-name">Luis Arriaga</span>
+          <span class="card-handle">Tattoo Artist</span>
+        </div>
+        <a href="https://eternowebstudio.com/nexoraiz/" target="_blank" rel="noopener" class="card-link">View Site →</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── BOTTOM CTA ── -->
+<div class="cta-section">
+  <span class="section-label">Your turn</span>
+  <h2>Want yours?</h2>
+  <p>Takes 5 minutes. Just bring your Instagram handle.</p>
+  <a href="/start" class="btn-primary">Build My Free Site →</a>
+</div>
+
+<!-- ── FOOTER ── -->
+<div class="footer">
+  <p style="text-align:center;color:#444;font-size:13px;padding:20px 0;">✦ <a href="/" style="color:#00c882;text-decoration:none;">Eterno Web Studio</a> — Website generator for tattoo artists &amp; barbers</p>
+</div>
+
+</body>
+</html>

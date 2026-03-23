@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17989903265"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-17989903265');
+</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Features — Everything Your Site Includes | Eterno Web Studio</title>
+  <meta name="description" content="Portfolio gallery, booking form, built-in SEO, 7 themes, custom domain, fast load times — everything included in every Eterno Web Studio site. No plugins. No upgrades." />
+  <meta property="og:title" content="Features — Everything Your Site Includes | Eterno Web Studio" />
+  <meta property="og:description" content="No plugins. No upgrades. No monthly nickel-and-diming. Everything included in your Eterno Web Studio site." />
+  <meta property="og:image" content="/assets/ads/pmax/ad5-square.jpg" />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #080808;
+      --bg2: #0f0f0f;
+      --bg3: #151515;
+      --accent: #00c882;
+      --accent-hover: #00b374;
+      --white: #ffffff;
+      --secondary: #999999;
+      --border: rgba(255,255,255,0.08);
+      --radius-card: 12px;
+      --radius-btn: 8px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 32px;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: rgba(8,8,8,0.92);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+
+    .nav-logo {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: -0.3px;
+    }
+
+    .nav-cta {
+      padding: 10px 20px;
+      background: var(--accent);
+      color: #000;
+      border: none;
+      border-radius: var(--radius-btn);
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .nav-cta:hover { background: var(--accent-hover); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 60vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(0,200,130,0.10) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+      background: rgba(0,200,130,0.1);
+      padding: 6px 16px;
+      border-radius: 20px;
+      border: 1px solid rgba(0,200,130,0.2);
+    }
+
+    h1 {
+      font-size: clamp(36px, 7vw, 64px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -2px;
+      max-width: 760px;
+      margin-bottom: 24px;
+    }
+
+    h1 span { color: var(--accent); }
+
+    .hero-sub {
+      font-size: clamp(16px, 2.5vw, 20px);
+      color: var(--secondary);
+      max-width: 580px;
+      line-height: 1.6;
+    }
+
+    /* ── FEATURES GRID ── */
+    .features-section {
+      padding: 80px 20px;
+      max-width: 1060px;
+      margin: 0 auto;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .feature-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: 36px 32px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .feature-card:hover {
+      border-color: rgba(0,200,130,0.25);
+      transform: translateY(-3px);
+    }
+
+    .feature-icon {
+      font-size: 36px;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .feature-card h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--white);
+    }
+
+    .feature-card p {
+      font-size: 15px;
+      color: var(--secondary);
+      line-height: 1.7;
+    }
+
+    /* ── FULL-WIDTH FEATURE ── */
+    .feature-full {
+      grid-column: 1 / -1;
+    }
+
+    /* ── DIVIDER ── */
+    .section-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0;
+    }
+
+    /* ── PRICING ── */
+    .pricing-section {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 80px 20px;
+    }
+
+    .pricing-inner {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+      text-align: center;
+      display: block;
+    }
+
+    h2 {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800;
+      letter-spacing: -1.2px;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    h2 span { color: var(--accent); }
+
+    .section-sub {
+      text-align: center;
+      color: var(--secondary);
+      font-size: 17px;
+      margin-bottom: 48px;
+    }
+
+    .pricing-table {
+      width: 100%;
+      border-collapse: collapse;
+      border-radius: var(--radius-card);
+      overflow: hidden;
+    }
+
+    .pricing-table th {
+      padding: 16px 24px;
+      text-align: left;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--secondary);
+      background: var(--bg3);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pricing-table th:nth-child(2),
+    .pricing-table th:nth-child(3) {
+      text-align: center;
+    }
+
+    .pricing-table th:nth-child(3) {
+      color: var(--accent);
+    }
+
+    .pricing-table td {
+      padding: 14px 24px;
+      font-size: 15px;
+      color: #ccc;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pricing-table td:nth-child(2),
+    .pricing-table td:nth-child(3) {
+      text-align: center;
+      font-size: 18px;
+    }
+
+    .pricing-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .pricing-table tr:hover td {
+      background: rgba(255,255,255,0.02);
+    }
+
+    .plan-header {
+      background: var(--bg3);
+    }
+
+    .plan-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--white);
+      display: block;
+    }
+
+    .plan-price {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -1px;
+    }
+
+    .plan-price.accent { color: var(--accent); }
+
+    .plan-sub {
+      font-size: 13px;
+      color: var(--secondary);
+    }
+
+    .check { color: var(--accent); }
+    .dash { color: #444; }
+
+    /* ── CTA SECTION ── */
+    .cta-section {
+      text-align: center;
+      padding: 100px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      bottom: -50px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(0,200,130,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-section h2 { margin-bottom: 16px; }
+    .cta-section p {
+      color: var(--secondary);
+      font-size: 18px;
+      margin-bottom: 40px;
+    }
+
+    .btn-primary {
+      padding: 18px 40px;
+      background: var(--accent);
+      color: #000;
+      border: none;
+      border-radius: var(--radius-btn);
+      font-family: inherit;
+      font-size: 17px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.1s;
+      display: inline-block;
+    }
+
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-primary:active { transform: scale(0.98); }
+
+    /* ── FOOTER ── */
+    .footer { border-top: 1px solid var(--border); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .feature-full { grid-column: 1; }
+
+      .pricing-table th:nth-child(2),
+      .pricing-table th:nth-child(3),
+      .pricing-table td:nth-child(2),
+      .pricing-table td:nth-child(3) {
+        padding: 14px 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="/" class="nav-logo">✦ GET MINTED</a>
+  <a href="/start" class="nav-cta">Start Building →</a>
+</nav>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <span class="eyebrow">Features</span>
+  <h1>One generator.<br /><span>Everything included.</span></h1>
+  <p class="hero-sub">No plugins. No upgrades. No monthly nickel-and-diming. Everything below is included in your Eterno Web Studio site.</p>
+</div>
+
+<!-- ── FEATURES GRID ── -->
+<div class="features-section">
+  <div class="features-grid">
+
+    <div class="feature-card">
+      <span class="feature-icon">🖼</span>
+      <h3>Portfolio Gallery</h3>
+      <p>Your work, front and center. Automatically pulls your best photos from Instagram and displays them in a clean, mobile-first gallery. Clients see your style before they even reach out.</p>
+    </div>
+
+    <div class="feature-card">
+      <span class="feature-icon">📅</span>
+      <h3>Booking Form</h3>
+      <p>Built-in contact and booking form. Clients fill out name, service they want, and a message — you get notified directly. No third-party tools required.</p>
+    </div>
+
+    <div class="feature-card">
+      <span class="feature-icon">🔍</span>
+      <h3>Built-in SEO</h3>
+      <p>Your site is optimized to rank on Google from day one. Schema markup, meta tags, Open Graph — all generated automatically. Show up when someone searches "tattoo artist near me."</p>
+    </div>
+
+    <div class="feature-card">
+      <span class="feature-icon">🎨</span>
+      <h3>7 Themes</h3>
+      <p>Choose from 7 hand-crafted themes — darkwork, fineline, anime, geometric, traditional, neo-trad, and color. Your site adapts to your style, not the other way around.</p>
+    </div>
+
+    <div class="feature-card">
+      <span class="feature-icon">🌐</span>
+      <h3>Custom Domain</h3>
+      <p>Connect your own .com. We handle all the DNS setup — you just pick a name. Available on Starter plan and above. Your brand, your URL.</p>
+    </div>
+
+    <div class="feature-card">
+      <span class="feature-icon">✏️</span>
+      <h3>Easy Editing</h3>
+      <p>Change your bio, photos, colors, and booking form fields anytime. No code, no designer, no waiting. Log in and edit in seconds.</p>
+    </div>
+
+    <div class="feature-card">
+      <span class="feature-icon">📱</span>
+      <h3>Mobile-First</h3>
+      <p>Most of your clients will find you on their phone. Your Eterno Web Studio site looks perfect on every device, every screen size — no compromises.</p>
+    </div>
+
+    <div class="feature-card">
+      <span class="feature-icon">⚡</span>
+      <h3>Fast Load Times</h3>
+      <p>Static HTML. No database, no bloat. Your site loads in under a second. Google rewards fast sites with better rankings — and so do impatient clients.</p>
+    </div>
+
+    <div class="feature-card">
+      <span class="feature-icon">🔗</span>
+      <h3>Social Links</h3>
+      <p>Link to your Instagram, TikTok, Facebook — all in one place. Your site becomes the hub everything points back to.</p>
+    </div>
+
+    <div class="feature-card">
+      <span class="feature-icon">📊</span>
+      <h3>Google Indexing</h3>
+      <p>We automatically submit your site to Google Search Console after it's built. You start getting indexed within 24 hours — no manual setup required.</p>
+    </div>
+
+  </div>
+</div>
+
+<hr class="section-divider" />
+
+<!-- ── PRICING ── -->
+<div class="pricing-section">
+  <div class="pricing-inner">
+    <span class="section-label">Simple Pricing</span>
+    <h2>Start free. <span>Upgrade when ready.</span></h2>
+    <p class="section-sub">Every plan includes every feature. No feature gates. No gotchas.</p>
+
+    <table class="pricing-table">
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>Free</th>
+          <th>Starter — $15/mo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="plan-header">
+          <td></td>
+          <td>
+            <span class="plan-name">Free</span>
+            <span class="plan-price">$0</span>
+            <span class="plan-sub">forever</span>
+          </td>
+          <td>
+            <span class="plan-name">Starter</span>
+            <span class="plan-price accent">$15</span>
+            <span class="plan-sub">/month</span>
+          </td>
+        </tr>
+        <tr>
+          <td>Portfolio gallery</td>
+          <td><span class="check">✓</span></td>
+          <td><span class="check">✓</span></td>
+        </tr>
+        <tr>
+          <td>Booking form</td>
+          <td><span class="check">✓</span></td>
+          <td><span class="check">✓</span></td>
+        </tr>
+        <tr>
+          <td>Built-in SEO</td>
+          <td><span class="check">✓</span></td>
+          <td><span class="check">✓</span></td>
+        </tr>
+        <tr>
+          <td>7 Themes</td>
+          <td><span class="check">✓</span></td>
+          <td><span class="check">✓</span></td>
+        </tr>
+        <tr>
+          <td>Mobile-first design</td>
+          <td><span class="check">✓</span></td>
+          <td><span class="check">✓</span></td>
+        </tr>
+        <tr>
+          <td>Google indexing</td>
+          <td><span class="check">✓</span></td>
+          <td><span class="check">✓</span></td>
+        </tr>
+        <tr>
+          <td>getminted.ai/yourname subdomain</td>
+          <td><span class="check">✓</span></td>
+          <td><span class="check">✓</span></td>
+        </tr>
+        <tr>
+          <td>Custom domain (.com)</td>
+          <td><span class="dash">—</span></td>
+          <td><span class="check">✓</span></td>
+        </tr>
+        <tr>
+          <td>DNS setup handled for you</td>
+          <td><span class="dash">—</span></td>
+          <td><span class="check">✓</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ── CTA ── -->
+<div class="cta-section">
+  <span class="section-label" style="display:block;margin-bottom:16px;">Get Started</span>
+  <h2>Your site is ready to build.</h2>
+  <p>Takes 5 minutes. Free to start. No card needed.</p>
+  <a href="/start" class="btn-primary">Build My Free Site →</a>
+</div>
+
+<!-- ── FOOTER ── -->
+<div class="footer">
+  <p style="text-align:center;color:#444;font-size:13px;padding:20px 0;">✦ <a href="/" style="color:#00c882;text-decoration:none;">Eterno Web Studio</a> — Website generator for tattoo artists &amp; barbers</p>
+</div>
+
+</body>
+</html>

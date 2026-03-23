@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17989903265"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-17989903265');
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17990052802"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-17990052802');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+  if(location.search.includes('__clerk_')) { location.href='/dashboard/'; }
+  // Auto-redirect Mexico visitors to Spanish landing (only on first visit, no redirect loop)
+  else if (!localStorage.getItem('lang') && !location.pathname.startsWith('/es')) {
+    fetch('https://ipapi.co/json/')
+      .then(r=>r.json())
+      .then(d=>{ if(d.country_code==='MX'){ localStorage.setItem('lang','es'); location.href='/es/'; }})
+      .catch(()=>{});
+  }
+</script>
+<title>Get Minted — Free Website Builder for Creatives</title>
+<meta name="description" content="Get a free website in under 5 minutes. We pull your Instagram photos and build a professional site — gallery, booking, bio. Free forever. Upgrade to Pro for a custom .com and SEO.">
+<meta name="keywords" content="website builder for creatives, small business website, tattoo artist website, barber website, salon website, custom website builder, website for tattoo artist, website for barber, automatic website builder, small business web design">
+<meta property="og:title" content="Get Minted — Website Builder for Creatives">
+<meta property="og:description" content="Free website in under 5 minutes. Drop your IG handle — we build your site. Free forever, custom .com from $15/mo, full toolkit from $25/mo.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://getminted.ai">
+<meta property="og:image" content="https://getminted.ai/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Get Minted — Website Builder for Creatives">
+<meta name="twitter:description" content="We build your website. Smart automation runs it. You just show up.">
+<link rel="canonical" href="https://getminted.ai">
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Get Minted",
+  "applicationCategory": "WebApplication",
+  "operatingSystem": "Any",
+  "description": "Website builder for creatives that builds custom sites in under 5 minutes from your Instagram. Features smart automation, instant editing, and professional design.",
+  "url": "https://getminted.ai",
+  "creator": {
+    "@type": "Organization",
+    "name": "Eterno Web Studio",
+    "url": "https://getminted.ai"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "25",
+    "priceCurrency": "USD",
+    "priceSpecification": {
+      "@type": "RecurringCharge",
+      "frequency": "P1M"
+    },
+    "description": "Monthly subscription including custom domain, website builder for creatives, smart concierge, and unlimited edits"
+  },
+  "featureList": [
+    "Custom-built websites for creatives",
+    "Custom domain included",
+    "Smart concierge integration", 
+    "Voice-controlled editing",
+    "SEO optimization",
+    "Mobile responsive design",
+    "fast deployment"
+  ]
+}
+</script>
+
+<!-- FAQ Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How fast do I get my website?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "under 5 minutes. We build your custom website automatically from your Instagram profile in under 5 minutes."
+      }
+    },
+    {
+      "@type": "Question", 
+      "name": "Do I need to know code to use Get Minted?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No coding required. You simply talk to Mint and it handles all the technical aspects."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use my own domain name?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. You can bring your existing domain or we'll help you get a new .com domain."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I make changes to my website?", 
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Simply open Mint and tell it what you want to change. Changes are made in seconds without any coding."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a contract or commitment?",
+      "acceptedAnswer": {
+        "@type": "Answer", 
+        "text": "No contract required. You can cancel your subscription anytime."
+      }
+    }
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--mint:#98E8C1;--mint-dim:rgba(152,232,193,0.08);--mint-bright:#6dd5a0;--gold:#C9A84C;--bg:#0a0a0a;--bg-light:#0f0f0f;--card:#111;--card-hover:#1a1a1a;--text:#e0e0e0;--text-dim:#888;--text-bright:#f5f5f5;--border:rgba(152,232,193,0.18)}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+h1,h2,h3{font-family:'Playfair Display',serif;font-weight:800}
+.container{max-width:1100px;margin:0 auto;padding:0 24px}
+a{color:var(--mint);text-decoration:none}
+
+/* Hero */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;padding:60px 24px 80px;background:linear-gradient(180deg,#080c09 0%,var(--bg) 60%,var(--bg-light) 100%)}
+.hero::before{content:'';position:absolute;inset:0;background-image:
+  linear-gradient(rgba(152,232,193,0.05) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(152,232,193,0.05) 1px,transparent 1px);
+  background-size:60px 60px;pointer-events:none}
+.hero::after{content:'';position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:900px;height:700px;background:radial-gradient(ellipse at 50% 40%,rgba(152,232,193,0.09) 0%,rgba(152,232,193,0.02) 40%,transparent 70%);pointer-events:none}
+.hero-orb-left{position:absolute;top:20%;left:-10%;width:400px;height:400px;background:radial-gradient(circle,rgba(152,232,193,0.06) 0%,transparent 65%);pointer-events:none;animation:orb-drift 12s ease-in-out infinite alternate}
+.hero-orb-right{position:absolute;bottom:15%;right:-8%;width:500px;height:500px;background:radial-gradient(circle,rgba(109,213,160,0.05) 0%,transparent 65%);pointer-events:none;animation:orb-drift 15s ease-in-out infinite alternate-reverse}
+@keyframes orb-drift{0%{transform:translate(0,0)}100%{transform:translate(30px,-40px)}}
+.hero-noise{position:absolute;inset:0;opacity:0.025;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");background-size:200px 200px}
+.mint-char{width:160px;height:160px;margin-bottom:40px;animation:float 4s ease-in-out infinite;filter:drop-shadow(0 8px 32px rgba(152,232,193,0.1));position:relative;z-index:2}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.hero h1{font-size:clamp(1.8rem,5vw,3.2rem);background:linear-gradient(135deg,var(--mint),#6dd5a0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:20px;letter-spacing:-1px}
+.hero p{font-size:clamp(1.1rem,2.5vw,1.35rem);color:var(--text-dim);max-width:550px;margin-bottom:36px}
+.hero-subtext{font-size:1rem;color:var(--mint);margin-bottom:20px!important;font-weight:500}
+.btn{display:inline-block;padding:16px 32px;border-radius:12px;font-weight:600;font-size:1rem;transition:all .3s cubic-bezier(0.4,0,0.2,1);cursor:pointer;border:none;text-decoration:none;position:relative;overflow:hidden}
+.btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent);transition:left .6s;z-index:1}
+.btn:hover::before{left:100%}
+.btn:hover{transform:translateY(-1px);box-shadow:0 12px 40px rgba(152,232,193,0.25)}
+.btn-mint{background:linear-gradient(135deg,var(--mint),var(--mint-bright));color:#0a0a0a}
+.btn-gold{background:linear-gradient(135deg,var(--gold),#d4b55e);color:#0a0a0a}
+
+/* Sections */
+section{padding:100px 0}
+.section-title{text-align:center;font-size:clamp(2rem,4vw,2.8rem);color:#fff;margin-bottom:60px}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .6s,transform .6s}
+.reveal.visible{opacity:1;transform:none}
+
+/* Get Started */
+.get-started-content{display:grid;grid-template-columns:1fr 1fr;gap:60px;max-width:1000px;margin:0 auto}
+.numbered-list{counter-reset:step-counter;padding:0;list-style:none}
+.numbered-list li{counter-increment:step-counter;margin-bottom:20px;padding-left:40px;position:relative}
+.numbered-list li::before{content:counter(step-counter);position:absolute;left:0;top:0;background:var(--mint);color:var(--bg);width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}
+.mint-form{display:flex;flex-direction:column;gap:16px;max-width:400px}
+.mint-form input,.mint-form select{padding:14px 16px;border:1px solid var(--text-dim);border-radius:8px;background:var(--card);color:var(--text);font-size:16px}
+.mint-form input:focus,.mint-form select:focus{outline:none;border-color:var(--mint)}
+.form-note{font-size:14px;color:var(--text-dim);margin-top:10px;text-align:center}
+
+/* Why Mint */
+.comparison-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px;margin-bottom:50px}
+.comparison-item{background:var(--card);padding:30px;border-radius:16px;border:1px solid var(--border);transition:all .3s ease;backdrop-filter:blur(10px)}
+.comparison-item:hover{background:var(--card-hover);border-color:rgba(152,232,193,0.2);transform:translateY(-2px)}
+.comparison-item.mint-advantage{border:2px solid var(--mint);background:linear-gradient(135deg,var(--mint-dim),rgba(152,232,193,0.04));position:relative}
+.comparison-item.mint-advantage::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,rgba(152,232,193,0.1),transparent);border-radius:16px;pointer-events:none}
+.comparison-item h3{margin-bottom:20px;font-size:18px}
+.comparison-item ul{list-style:none;padding:0}
+.comparison-item li{margin-bottom:10px;padding-left:20px;position:relative}
+.comparison-item li::before{content:'';position:absolute;left:0;top:8px;width:8px;height:8px;border-radius:50%}
+.comparison-item:not(.mint-advantage) li::before{background:#666}
+.mint-advantage li::before{background:var(--mint)}
+.why-content{max-width:800px;margin:0 auto}
+.why-content h3{color:var(--mint);margin:40px 0 20px;font-size:24px}
+.why-content p{margin-bottom:20px;line-height:1.7;font-size:17px}
+
+/* Testimonials */
+
+.author{color:var(--mint);font-weight:600;font-size:14px}
+
+@media (max-width: 768px) {
+  .get-started-content{grid-template-columns:1fr;gap:40px}
+  .comparison-grid{grid-template-columns:1fr;gap:20px}
+  #pricing .container > div{grid-template-columns:1fr !important;gap:24px !important;}
+}
+
+/* How It Works */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:40px}
+.step{text-align:center;padding:40px 24px}
+.step-icon{font-size:3rem;margin-bottom:20px}
+.step h3{font-size:1.3rem;color:#fff;margin-bottom:12px;font-family:'Inter',sans-serif;font-weight:700}
+.step p{color:var(--text-dim);font-size:.95rem}
+
+/* Features */
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.feature-card{background:var(--card);border:1px solid transparent;border-radius:12px;padding:32px 24px;transition:border-color .3s,transform .3s}
+.feature-card:hover{border-color:var(--mint);transform:translateY(-4px)}
+.feature-card h3{font-size:1.1rem;color:#fff;margin-bottom:8px;font-family:'Inter',sans-serif;font-weight:700}
+.feature-card p{color:var(--text-dim);font-size:.9rem}
+
+/* Showcase */
+.showcase-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:24px;margin-bottom:40px}
+.showcase-card{background:var(--card);border-radius:12px;overflow:hidden;border:1px solid #222;transition:border-color .3s,transform .3s;text-decoration:none;display:block}
+.showcase-card:hover{border-color:var(--mint);transform:translateY(-4px)}
+.showcase-card img{width:100%;height:220px;object-fit:cover;display:block}
+.showcase-card .card-info{padding:16px 20px}
+.showcase-card h3{color:#fff;font-size:1.1rem;font-family:'Inter',sans-serif;font-weight:700;margin:0 0 4px}
+.showcase-card .domain{color:var(--mint);font-size:.82rem;font-family:monospace;margin:0}
+.more-link{text-align:center;font-size:1.05rem}
+
+/* Pricing */
+.pricing-box{max-width:480px;margin:0 auto;background:var(--card);border:2px solid var(--mint);border-radius:16px;padding:48px 36px;text-align:center}
+.pricing-box .price{font-size:3.5rem;font-weight:800;color:#fff;font-family:'Playfair Display',serif}
+.pricing-box .price span{font-size:1.2rem;color:var(--text-dim);font-weight:400}
+.pricing-box .subtitle{color:var(--text-dim);margin-bottom:28px;font-size:1.05rem}
+.pricing-list{list-style:none;text-align:left;margin-bottom:36px}
+.pricing-list li{padding:8px 0;color:var(--text);font-size:.95rem;border-bottom:1px solid #1a1a1a}
+.pricing-list li::before{content:'✓ ';color:var(--mint);font-weight:700}
+
+/* FAQ */
+.faq-list{max-width:700px;margin:0 auto}
+.faq-item{border-bottom:1px solid #1a1a1a;padding:24px 0;cursor:pointer}
+.faq-q{font-weight:600;color:#fff;font-size:1.05rem;display:flex;justify-content:space-between;align-items:center}
+.faq-q::after{content:'+';font-size:1.4rem;color:var(--mint);transition:transform .3s}
+.faq-item.open .faq-q::after{transform:rotate(45deg)}
+.faq-a{color:var(--text-dim);font-size:.95rem;max-height:0;overflow:hidden;transition:max-height .3s,padding .3s}
+.faq-item.open .faq-a{max-height:100px;padding-top:12px}
+
+/* Footer */
+footer{text-align:center;padding:60px 24px;border-top:1px solid #1a1a1a;color:var(--text-dim);font-size:.85rem}
+footer .tagline{font-size:1.1rem;margin-bottom:16px;color:var(--text)}
+footer .links{margin-bottom:12px}
+footer .links a{margin:0 12px;color:var(--text-dim);transition:color .2s}
+footer .links a:hover{color:var(--mint)}
+
+/* ── Top Nav ── */
+.top-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 28px;
+  background: rgba(10,10,10,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(152,232,193,0.08);
+}
+.top-nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+.top-nav-right { display: flex; align-items: center; gap: 16px; }
+.nav-signin {
+  color: #b0b0b0;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-signin:hover { color: #98E8C1; }
+.nav-getstarted {
+  background: linear-gradient(135deg,#98E8C1,#6dd5a0);
+  color: #0a0a0a;
+  padding: 9px 20px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.875rem;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.nav-getstarted:hover { opacity: 0.85; }
+body { padding-top: 60px; }
+</style>
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#00C882" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Eterno Web Studio" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js');
+      });
+    }
+  </script>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1446410187106776');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" src="https://www.facebook.com/tr?id=1446410187106776&ev=PageView&noscript=1"/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+<body>
+<nav class="top-nav">
+  <a href="/" class="top-nav-logo">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="32" height="32" style="flex-shrink:0;">
+      <defs>
+        <radialGradient id="logo-grad" cx="35%" cy="30%" r="65%">
+          <stop offset="0%" stop-color="#4DFFC0"/>
+          <stop offset="40%" stop-color="#00C882"/>
+          <stop offset="100%" stop-color="#008A5A"/>
+        </radialGradient>
+      </defs>
+      <ellipse cx="24" cy="25" rx="22" ry="21" fill="rgba(0,200,130,0.15)"/>
+      <path d="M24,4 C34,3 44,11 44,23 C44,37 36,44 24,44 C12,44 4,37 4,23 C4,11 14,5 24,4 Z" fill="url(#logo-grad)" style="filter:drop-shadow(0 3px 12px rgba(0,200,130,0.45))"/>
+      <ellipse cx="17" cy="15" rx="6" ry="4.5" fill="rgba(255,255,255,0.22)" transform="rotate(-15 17 15)"/>
+      <ellipse cx="17" cy="22" rx="5" ry="5.5" fill="white"/>
+      <ellipse cx="17" cy="22.5" rx="2.5" ry="2.9" fill="#1A1A2E"/>
+      <circle cx="18.5" cy="20.5" r="1.1" fill="rgba(255,255,255,0.9)"/>
+      <ellipse cx="31" cy="22" rx="5" ry="5.5" fill="white"/>
+      <ellipse cx="31" cy="22.5" rx="2.5" ry="2.9" fill="#1A1A2E"/>
+      <circle cx="32.5" cy="20.5" r="1.1" fill="rgba(255,255,255,0.9)"/>
+      <ellipse cx="10" cy="28" rx="3.5" ry="2" fill="rgba(255,130,160,0.25)"/>
+      <ellipse cx="38" cy="28" rx="3.5" ry="2" fill="rgba(255,130,160,0.25)"/>
+      <path d="M19,31 Q24,37 29,31" stroke="#006040" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+    </svg>
+    <span style="font-family:'Inter',system-ui,sans-serif;font-size:17px;font-weight:700;color:white;letter-spacing:-0.5px;">get<span style="color:#00C882;">minted</span></span>
+  </a>
+  <div class="top-nav-right">
+    <a href="/dashboard/" class="nav-signin">Sign In</a>
+    <a href="#hero-ig-form" class="nav-getstarted">Get Started →</a>
+  </div>
+</nav>
+
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-orb-left"></div>
+  <div class="hero-orb-right"></div>
+  <div class="hero-noise"></div>
+  <!-- Pain-first headline — no typing delay, no mascot eating mobile space -->
+  <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(152,232,193,0.08);border:1px solid rgba(152,232,193,0.25);border-radius:100px;padding:8px 20px;margin-bottom:20px;font-size:0.85rem;font-weight:700;color:#98E8C1;letter-spacing:0.5px;">
+    <span>⚡</span> 920+ sites live · No credit card · Free forever
+  </div>
+  <h1 style="font-size:clamp(2rem,5.5vw,3.6rem);max-width:700px;">Your clients Google you.<br>Are you showing up?</h1>
+  <p style="font-size:clamp(1.05rem,2.5vw,1.3rem);color:var(--text-dim);max-width:520px;margin-bottom:8px;">Instagram doesn't rank on Google. Your website does.<br>We build yours from your Instagram — <strong style="color:var(--mint);">free in 60 seconds.</strong></p>
+  <p style="font-size:0.9rem;color:var(--text-dim);margin-bottom:28px;">Custom .com from $15/mo &nbsp;·&nbsp; No signup needed</p>
+  <!-- Hero IG input -->
+  <div id="hero-ig-form" style="display:flex;gap:10px;max-width:440px;width:100%;margin:0 auto;flex-wrap:wrap;justify-content:center;">
+    <div style="display:flex;flex:1;min-width:220px;align-items:center;background:rgba(255,255,255,0.06);border:1px solid rgba(152,232,193,0.3);border-radius:10px;padding:0 16px;gap:8px;">
+      <span style="color:var(--mint);font-weight:700;font-size:1.1rem;">@</span>
+      <input id="hero-ig-input" type="text" placeholder="yourhandle" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+        style="background:transparent;border:none;outline:none;color:var(--text);font-size:1rem;padding:14px 0;width:100%;" />
+    </div>
+    <button onclick="heroSubmit()" class="btn btn-gold" style="padding:14px 24px;white-space:nowrap;font-size:1rem;">See Mine in 60 Seconds →</button>
+  </div>
+  <!-- Micro social proof directly under CTA -->
+  <div style="margin-top:18px;display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap;">
+    <div style="display:flex;">
+      <img src="img/widget-israelpaketh.jpg" alt="Israel" style="width:28px;height:28px;border-radius:50%;border:2px solid #0a0a0a;object-fit:cover;margin-left:-6px;">
+      <img src="img/widget-renevasquez.jpg" alt="Rene" style="width:28px;height:28px;border-radius:50%;border:2px solid #0a0a0a;object-fit:cover;margin-left:-6px;">
+      <img src="img/widget-dannydiablx.jpg" alt="Danny" style="width:28px;height:28px;border-radius:50%;border:2px solid #0a0a0a;object-fit:cover;margin-left:-6px;">
+      <img src="img/widget-frankendots.jpg" alt="Frank" style="width:28px;height:28px;border-radius:50%;border:2px solid #0a0a0a;object-fit:cover;margin-left:-6px;">
+    </div>
+    <span style="font-size:0.85rem;color:var(--text-dim);">Israel, Rene, Danny + <strong style="color:var(--mint);">916 others</strong> got theirs free</span>
+  </div>
+  <script>
+    function heroSubmit() {
+      const val = document.getElementById('hero-ig-input').value.trim().replace(/^@/, '');
+      if (!val) { document.getElementById('hero-ig-input').focus(); return; }
+      window.location.href = '/build/?ig=' + encodeURIComponent(val);
+    }
+    document.getElementById('hero-ig-input').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') heroSubmit();
+    });
+  </script>
+</section>
+
+<!-- Mint popup widget — Flubber-style blob -->
+<div id="mint-widget" style="position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:10px;">
+  <!-- Full chat window -->
+  <div id="mint-chat-window" style="display:none;width:360px;height:480px;background:#0a0e0b;border:1px solid rgba(0,200,130,0.2);border-radius:20px;box-shadow:0 12px 48px rgba(0,0,0,0.6);overflow:hidden;flex-direction:column;animation:bubblePop .25s ease;">
+    <div style="background:linear-gradient(135deg,#0d1f14,#0a1a10);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(0,200,130,0.15);">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div style="width:32px;height:32px;background:radial-gradient(ellipse at 35% 30%,#4DFFC0,#00C882 50%,#008A5A);border-radius:50% 40% 45% 50%/45% 50% 40% 50%;"></div>
+        <div><div style="color:#fff;font-weight:700;font-size:0.9rem;">Mint</div><div style="color:#00C882;font-size:0.72rem;">Website Builder for Creatives</div></div>
+      </div>
+      <button onclick="toggleMintChat()" style="background:none;border:none;color:rgba(255,255,255,0.4);font-size:1.3rem;cursor:pointer;line-height:1;">✕</button>
+    </div>
+    <div id="mint-chat-messages" style="flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;font-family:-apple-system,sans-serif;"></div>
+    <div style="padding:12px;border-top:1px solid rgba(0,200,130,0.1);display:flex;gap:8px;">
+      <input id="mint-chat-input" type="text" placeholder="Message Mint…" style="flex:1;background:rgba(255,255,255,0.05);border:1px solid rgba(0,200,130,0.2);border-radius:50px;padding:10px 16px;color:#fff;font-size:0.9rem;outline:none;"
+        onkeydown="if(event.key==='Enter')sendMintMessage()"/>
+      <button onclick="sendMintMessage()" style="background:#00C882;color:#0a1a12;border:none;border-radius:50px;padding:10px 16px;font-weight:700;cursor:pointer;font-size:0.9rem;">↑</button>
+    </div>
+  </div>
+  <!-- Mint blob FAB -->
+  <div id="mint-fab" onclick="toggleMintChat()" style="width:56px;height:56px;cursor:pointer;position:relative;animation:mintFloat 3s ease-in-out infinite;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+    <div id="mint-fab-blob" style="width:56px;height:56px;background:radial-gradient(ellipse at 35% 30%,#4DFFC0,#00C882 50%,#008A5A);box-shadow:inset 0 -3px 8px rgba(0,80,50,0.3),inset 0 3px 8px rgba(77,255,192,0.2),0 4px 20px rgba(0,200,130,0.35),0 2px 6px rgba(0,0,0,0.3);animation:fabBlobMorph 6s ease-in-out infinite,mintPulse 1.5s ease-in-out 3;position:relative;overflow:hidden;">
+      <!-- Highlight -->
+      <div style="position:absolute;top:10%;left:15%;width:35%;height:25%;border-radius:50%;background:radial-gradient(ellipse,rgba(255,255,255,0.25),transparent 70%);transform:rotate(-15deg);pointer-events:none;"></div>
+      <!-- Mini face SVG -->
+      <svg viewBox="0 0 56 56" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;" xmlns="http://www.w3.org/2000/svg">
+        <!-- Eyes -->
+        <ellipse id="fab-eye-l-w" cx="20" cy="24" rx="5.5" ry="6" fill="white"/>
+        <ellipse id="fab-eye-l-p" cx="20" cy="24" rx="3" ry="3.5" fill="#1A1A2E"/>
+        <circle cx="21.5" cy="22" r="1.2" fill="rgba(255,255,255,0.8)"/>
+        <ellipse id="fab-eye-r-w" cx="36" cy="24" rx="5.5" ry="6" fill="white"/>
+        <ellipse id="fab-eye-r-p" cx="36" cy="24" rx="3" ry="3.5" fill="#1A1A2E"/>
+        <circle cx="37.5" cy="22" r="1.2" fill="rgba(255,255,255,0.8)"/>
+        <!-- Blink lids -->
+        <ellipse id="fab-lid-l" cx="20" cy="24" rx="6" ry="0" fill="#00C882" opacity="0"/>
+        <ellipse id="fab-lid-r" cx="36" cy="24" rx="6" ry="0" fill="#00C882" opacity="0"/>
+        <!-- Mouth -->
+        <path d="M22,34 Q28,40 34,34" stroke="#006040" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </div>
+</div>
+<style>
+@keyframes bubblePop { from { opacity:0; transform:scale(0.85) translateY(8px); } to { opacity:1; transform:scale(1) translateY(0); } }
+@keyframes mintFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
+@keyframes mintPulse { 0%,100%{box-shadow:inset 0 -3px 8px rgba(0,80,50,0.3),inset 0 3px 8px rgba(77,255,192,0.2),0 4px 20px rgba(0,200,130,0.35)} 50%{box-shadow:inset 0 -3px 8px rgba(0,80,50,0.3),inset 0 3px 8px rgba(77,255,192,0.2),0 4px 32px rgba(0,200,130,0.65)} }
+@keyframes fabBlobMorph {
+  0%   { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  25%  { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+  50%  { border-radius: 50% 60% 30% 60% / 40% 70% 60% 30%; }
+  75%  { border-radius: 40% 30% 60% 50% / 60% 40% 50% 70%; }
+  100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+}
+</style>
+<script>
+(function(){
+  // FAB mini-Mint eye wander + blink
+  const fabEyeLP = document.getElementById('fab-eye-l-p');
+  const fabEyeRP = document.getElementById('fab-eye-r-p');
+  const fabLidL = document.getElementById('fab-lid-l');
+  const fabLidR = document.getElementById('fab-lid-r');
+  const fabLC = {cx:20,cy:24}, fabRC = {cx:36,cy:24};
+  const FAB_MAX = 2.5;
+
+  function fabSetPupil(ox,oy){
+    fabEyeLP.setAttribute('cx', fabLC.cx+ox);
+    fabEyeLP.setAttribute('cy', fabLC.cy+oy);
+    fabEyeRP.setAttribute('cx', fabRC.cx+ox);
+    fabEyeRP.setAttribute('cy', fabRC.cy+oy);
+  }
+
+  // Wander eyes
+  const dirs=[{x:-2,y:-1},{x:2,y:-1},{x:-2,y:1},{x:2,y:1},{x:0,y:-2},{x:0,y:0},{x:-2.5,y:0},{x:2.5,y:0}];
+  setInterval(function(){
+    const d=dirs[Math.floor(Math.random()*dirs.length)];
+    fabSetPupil(d.x,d.y);
+  }, 2200);
+
+  // Track mouse
+  document.addEventListener('mousemove',function(e){
+    const fab=document.getElementById('mint-fab');
+    if(!fab)return;
+    const r=fab.getBoundingClientRect();
+    const cx=r.left+r.width/2, cy=r.top+r.height/2;
+    const dx=e.clientX-cx, dy=e.clientY-cy;
+    const dist=Math.sqrt(dx*dx+dy*dy)||1;
+    // Only track when mouse is within 300px
+    if(dist<300){
+      const f=Math.min(dist/300,1);
+      fabSetPupil((dx/dist)*FAB_MAX*f,(dy/dist)*FAB_MAX*f);
+    }
+  });
+
+  // Blink
+  function fabBlink(){
+    fabLidL.setAttribute('ry','7'); fabLidL.setAttribute('opacity','1');
+    fabLidR.setAttribute('ry','7'); fabLidR.setAttribute('opacity','1');
+    setTimeout(function(){
+      fabLidL.setAttribute('ry','0'); fabLidL.setAttribute('opacity','0');
+      fabLidR.setAttribute('ry','0'); fabLidR.setAttribute('opacity','0');
+    },150);
+  }
+  function schedFabBlink(){
+    setTimeout(function(){ fabBlink(); schedFabBlink(); }, 2000+Math.random()*3000);
+  }
+  schedFabBlink();
+})();
+
+  // ── Landing page Mint chat ──
+  const mintChatWindow = document.getElementById('mint-chat-window');
+  const mintMessages = document.getElementById('mint-chat-messages');
+  const mintInput = document.getElementById('mint-chat-input');
+  let mintThreadId = null;
+  let mintOpen = false;
+
+  function toggleMintChat() {
+    mintOpen = !mintOpen;
+    mintChatWindow.style.display = mintOpen ? 'flex' : 'none';
+    if (mintOpen && mintMessages.children.length === 0) {
+      addMintMsg('bot', "Hey! 👋 Drop your Instagram handle and I'll build your site in under 5 minutes. It's free.");
+      mintInput.focus();
+    }
+  }
+
+  function addMintMsg(role, text) {
+    const div = document.createElement('div');
+    div.style.cssText = role === 'user'
+      ? 'align-self:flex-end;background:#00C882;color:#0a1a12;padding:9px 14px;border-radius:16px 16px 4px 16px;max-width:75%;font-size:0.875rem;line-height:1.4;font-weight:500;'
+      : 'align-self:flex-start;background:rgba(255,255,255,0.05);color:#e8f5ee;padding:9px 14px;border-radius:16px 16px 16px 4px;max-width:80%;font-size:0.875rem;line-height:1.5;border:1px solid rgba(0,200,130,0.1);';
+    div.textContent = text;
+    mintMessages.appendChild(div);
+    mintMessages.scrollTop = mintMessages.scrollHeight;
+    return div;
+  }
+
+  async function sendMintMessage() {
+    const text = mintInput.value.trim();
+    if (!text) return;
+    mintInput.value = '';
+    addMintMsg('user', text);
+
+    const thinking = addMintMsg('bot', '…');
+    thinking.style.opacity = '0.5';
+
+    try {
+      const res = await fetch('https://curious-lemming-262.convex.site/api/mint/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: text, threadId: mintThreadId, context: 'getminted' }),
+      });
+
+      mintThreadId = res.headers.get('X-Thread-Id') || mintThreadId;
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let result = '';
+      thinking.textContent = '';
+      thinking.style.opacity = '1';
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        result += decoder.decode(value, { stream: true });
+        thinking.textContent = result;
+        mintMessages.scrollTop = mintMessages.scrollHeight;
+      }
+    } catch (e) {
+      thinking.textContent = "Hmm, something went wrong. Try again!";
+      thinking.style.opacity = '1';
+    }
+  }
+</script>
+
+<!-- How It Works -->
+<section id="how-it-works">
+  <div class="container">
+    <h2 class="section-title reveal">How It Works</h2>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-icon">📱</div>
+        <h3>Tell us your Instagram</h3>
+        <p>We pull your photos and style automatically. No uploading, no hassle.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-icon">🌿</div>
+        <h3>Mint builds your site</h3>
+        <p>Gallery, booking, bio, SEO — your site is ready in under 5 minutes.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-icon">💬</div>
+        <h3>Talk to Mint anytime</h3>
+        <p>Change photos, update bio, edit anything — just ask Mint.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Social Proof Strip -->
+<section style="padding:40px 0;background:rgba(152,232,193,0.03);border-top:1px solid rgba(152,232,193,0.08);border-bottom:1px solid rgba(152,232,193,0.08);">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;">
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <img src="img/widget-israelpaketh.jpg" style="width:48px;height:48px;border-radius:50%;object-fit:cover;flex-shrink:0;" alt="Israel">
+        <div>
+          <p style="color:var(--text);font-size:0.9rem;line-height:1.5;margin-bottom:6px;">"Got my site and people started finding me on Google within the first week."</p>
+          <span class="author">Israel Pascua · <a href="https://tattoosbypaketh.com" target="_blank" style="color:var(--mint);font-size:0.8rem;">tattoosbypaketh.com</a></span>
+        </div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <img src="img/widget-renevasquez.jpg" style="width:48px;height:48px;border-radius:50%;object-fit:cover;flex-shrink:0;" alt="Rene">
+        <div>
+          <p style="color:var(--text);font-size:0.9rem;line-height:1.5;margin-bottom:6px;">"Built from my Instagram in minutes. Looks better than sites I've paid thousands for."</p>
+          <span class="author">Rene Vasquez · <a href="https://tatsuink.com" target="_blank" style="color:var(--mint);font-size:0.8rem;">tatsuink.com</a></span>
+        </div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <img src="img/widget-josephkintz.jpg" style="width:48px;height:48px;border-radius:50%;object-fit:cover;flex-shrink:0;" alt="Joseph">
+        <div>
+          <p style="color:var(--text);font-size:0.9rem;line-height:1.5;margin-bottom:6px;">"My clients can finally find me online. Worth every penny."</p>
+          <span class="author">Joseph Kintz · <a href="https://scalpdynamics.com.au" target="_blank" style="color:var(--mint);font-size:0.8rem;">scalpdynamics.com.au</a></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section id="features">
+  <div class="container">
+    <h2 class="section-title reveal">Everything You Need</h2>
+    <div class="features-grid">
+      <div class="feature-card reveal"><h3>Custom-Built Websites</h3><p>Not templates. Every site is custom-designed for your brand — built from your Instagram in seconds.</p></div>
+      <div class="feature-card reveal"><h3>Your Own .com</h3><p>Pick your domain, we handle everything.</p></div>
+      <div class="feature-card reveal"><h3>Mint Concierge</h3><p>Mint lives on your site 24/7 — answers visitor questions, pushes bookings, and never sleeps.</p></div>
+      <div class="feature-card reveal"><h3>Chat to Edit</h3><p>Tell Mint what to change. New photos, updated hours, different colors — done in seconds. No code, no dashboards.</p></div>
+      <div class="feature-card reveal"><h3>Smart Gallery</h3><p>We curate your best work. Masonry layout, lightbox, mobile-perfect.</p></div>
+      <div class="feature-card reveal"><h3>SEO Built In</h3><p>Google-optimized from day one. Schema, meta tags, speed.</p></div>
+      <div class="feature-card reveal"><h3>🔍 Google-Indexed in Minutes</h3><p>Your site is automatically submitted to Google the moment it goes live. No waiting weeks to show up in search.</p></div>
+      <div class="feature-card reveal"><h3>Booking Integration</h3><p>Connect your booking link, DMs, or email.</p></div>
+      <div class="feature-card reveal"><h3>Mobile-First Design</h3><p>80% of your clients browse on their phone. Every site is built mobile-first and loads lightning fast.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Showcase -->
+<section id="showcase">
+  <div class="container">
+    <h2 class="section-title reveal">Freshly Minted Sites</h2>
+    <div class="showcase-grid">
+      <a href="https://tattoosbypaketh.com" target="_blank" class="showcase-card reveal">
+        <img src="img/widget-israelpaketh.jpg" alt="Israel Pascua – tattoosbypaketh.com" loading="lazy">
+        <div class="card-info"><h3>Israel Pascua</h3><p class="domain">tattoosbypaketh.com</p></div>
+      </a>
+      <a href="https://tatsuink.com" target="_blank" class="showcase-card reveal">
+        <img src="img/widget-renevasquez.jpg" alt="Rene Vasquez – tatsuink.com" loading="lazy">
+        <div class="card-info"><h3>Rene Vasquez</h3><p class="domain">tatsuink.com</p></div>
+      </a>
+      <a href="https://guccierrezz.com" target="_blank" class="showcase-card reveal">
+        <img src="img/widget-alansanchez.jpg" alt="Alan Sanchez – guccierrezz.com" loading="lazy">
+        <div class="card-info"><h3>Alan Sanchez</h3><p class="domain">guccierrezz.com</p></div>
+      </a>
+      <a href="https://scalpdynamics.com.au" target="_blank" class="showcase-card reveal">
+        <img src="img/widget-josephkintz.jpg" alt="Joseph Kintz – scalpdynamics.com.au" loading="lazy">
+        <div class="card-info"><h3>Joseph Kintz</h3><p class="domain">scalpdynamics.com.au</p></div>
+      </a>
+      <a href="https://goldensoultattoo.com" target="_blank" class="showcase-card reveal">
+        <img src="img/widget-mauriciozarate.jpg" alt="Mauricio Zarate – goldensoultattoo.com" loading="lazy">
+        <div class="card-info"><h3>Mauricio Zarate</h3><p class="domain">goldensoultattoo.com</p></div>
+      </a>
+
+      <a href="https://getminted.ai/ericharetattoo" target="_blank" class="showcase-card reveal">
+        <img src="img/widget-ericharetattoo.jpg" alt="Eric Hare – ericharetattoo" loading="lazy">
+        <div class="card-info"><h3>Eric Hare</h3><p class="domain">getminted.ai/ericharetattoo</p></div>
+      </a>
+      <a href="https://getminted.ai/aaronriddletattoos" target="_blank" class="showcase-card reveal">
+        <img src="img/widget-aaronriddletattoos.jpg" alt="Aaron Riddle – aaronriddletattoos" loading="lazy">
+        <div class="card-info"><h3>Aaron Riddle</h3><p class="domain">getminted.ai/aaronriddletattoos</p></div>
+      </a>
+      <a href="https://getminted.ai/dannydiablx" target="_blank" class="showcase-card reveal">
+        <img src="img/widget-dannydiablx.jpg" alt="Daniel Mejia – dannydiablx" loading="lazy">
+        <div class="card-info"><h3>Daniel Mejia</h3><p class="domain">getminted.ai/dannydiablx</p></div>
+      </a>
+      <a href="https://getminted.ai/frankendots" target="_blank" class="showcase-card reveal">
+        <img src="img/widget-frankendots.jpg" alt="Theodore Casados – frankendots" loading="lazy">
+        <div class="card-info"><h3>Theodore Casados</h3><p class="domain">getminted.ai/frankendots</p></div>
+      </a>
+      <a href="https://getminted.ai/krisxmoon" target="_blank" class="showcase-card reveal">
+        <img src="img/widget-krisxmoon.jpg" alt="Chloe Kristensen – krisxmoon" loading="lazy">
+        <div class="card-info"><h3>Chloe Kristensen</h3><p class="domain">getminted.ai/krisxmoon</p></div>
+      </a>
+    </div>
+    <p class="more-link reveal"><a href="/free-site.html">See all 920+ sites →</a></p>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section id="pricing">
+  <div class="container">
+    <h2 class="section-title reveal">Start Free. Grow When You're Ready.</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;max-width:1000px;margin:0 auto;" class="reveal">
+      <!-- Free Tier -->
+      <div style="background:var(--card);border:1px solid #222;border-radius:16px;padding:36px 28px;text-align:center;">
+        <div style="font-size:0.85rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--mint);margin-bottom:12px;">Free</div>
+        <div class="price" style="font-size:2.8rem;">$0</div>
+        <p class="subtitle">No credit card. No catch.</p>
+        <ul class="pricing-list">
+          <li>Website built from Instagram in under 5 minutes</li>
+          <li>Photo gallery from your IG</li>
+          <li>Bio, booking & contact section</li>
+          <li>2 free site edits</li>
+          <li>Hosted on getminted.ai</li>
+          <li>SSL / HTTPS secured</li>
+        </ul>
+        <a href="#hero-ig-form" class="btn btn-gold" style="background:transparent;border:2px solid var(--mint);color:var(--mint);">Get My Free Site</a>
+      </div>
+      <!-- Starter Tier -->
+      <div style="background:var(--card);border:2px solid var(--mint);border-radius:16px;padding:36px 28px;text-align:center;position:relative;">
+        <div style="position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--mint);color:#0a0a0a;font-size:0.75rem;font-weight:800;padding:5px 18px;border-radius:100px;letter-spacing:0.1em;text-transform:uppercase;">Most Popular</div>
+        <div style="font-size:0.85rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--mint);margin-bottom:12px;">Starter</div>
+        <div class="price">$15<span>/mo</span></div>
+        <p class="subtitle">Your own corner of the internet.</p>
+        <ul class="pricing-list">
+          <li>Everything in Free</li>
+          <li>Custom .com domain</li>
+          <li>Monthly site edits included</li>
+          <li>Remove Eterno Web Studio branding</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="#hero-ig-form" class="btn btn-gold">Go Starter</a>
+      </div>
+      <!-- Pro Tier -->
+      <div style="background:var(--card);border:1px solid var(--mint);border-radius:16px;padding:36px 28px;text-align:center;position:relative;">
+        <div style="position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--mint),#00d4aa);color:#0a0a0a;font-size:0.75rem;font-weight:800;padding:5px 18px;border-radius:100px;letter-spacing:0.1em;text-transform:uppercase;">Best Value</div>
+        <div style="font-size:0.85rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--mint);margin-bottom:12px;">Pro</div>
+        <div class="price">$25<span>/mo</span></div>
+        <p class="subtitle">The full toolkit to grow your brand.</p>
+        <ul class="pricing-list">
+          <li>Everything in Starter</li>
+          <li>Unlimited site edits</li>
+          <li>Google SEO optimization</li>
+          <li>Built-in online store</li>
+          <li>Mint concierge on your site</li>
+          <li>Analytics dashboard</li>
+        </ul>
+        <a href="#hero-ig-form" class="btn btn-gold" style="background:linear-gradient(135deg,var(--mint),#00d4aa);">Go Pro</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Get Started -->
+
+
+<!-- Why Choose Mint -->
+<section id="why-mint">
+  <div class="container">
+    <h2 class="section-title reveal">Why Get Minted vs Other Website Builders?</h2>
+    <div class="comparison-grid">
+      <div class="comparison-item reveal">
+        <h3>🚫 Traditional Web Designers</h3>
+        <ul>
+          <li>$2,000-$5,000 upfront</li>
+          <li>2-6 weeks to build</li>
+          <li>No ongoing updates</li>
+          <li>Need to call them for changes</li>
+        </ul>
+      </div>
+      
+      <div class="comparison-item reveal mint-advantage">
+        <h3>✅ Get Minted</h3>
+        <ul>
+          <li>Free forever — upgrade from $15/mo when ready</li>
+          <li>Ready in under 5 minutes</li>
+          <li>Unlimited updates included</li>
+          <li>Talk to Mint for instant changes</li>
+        </ul>
+      </div>
+      
+      <div class="comparison-item reveal">
+        <h3>⚠️ DIY Builders (Wix, Squarespace)</h3>
+        <ul>
+          <li>You do all the work</li>
+          <li>Templates look generic</li>
+          <li>Hours of learning required</li>
+          <li>No smart concierge</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="why-content reveal">
+      <h3>Built for Hands Too Busy to Type</h3>
+      <p>Get Minted was built by a tattoo artist for creative professionals — barbers, tattoo artists, stylists, photographers, and makers. Mint understands your industry. It knows how to showcase your work, organize your portfolio, and turn browsers into bookings. No templates. No generic layouts. Every site is custom-built for your brand.</p>
+      
+      <p>Unlike Wix or Squarespace, you don't have to find us, sign up, or figure anything out. <strong style="color:var(--text-bright);">Mint finds you, builds your site, and delivers it.</strong> All you do is claim it. That's the Eterno Web Studio difference — we come to you with a finished product, not a blank canvas.</p>
+      
+      <h3>Your Instagram Deserves a Website</h3>
+      <p>Your IG already shows your best work — but it's not indexed by Google, clients can't book from it at 2am, and Stories disappear in 24 hours. Mint eats your Instagram and spits out a professional website with SEO, booking, gallery, and a smart concierge that works 24/7 so you don't have to. Stop sending people to "DM for pricing." Get Minted.</p>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- FAQ -->
+  <div class="container">
+    <h2 class="section-title reveal">FAQ</h2>
+    <div class="faq-list">
+      <div class="faq-item reveal"><div class="faq-q">How fast do I get my site?</div><div class="faq-a">under 5 minutes. Drop your Instagram handle and Mint builds it while you watch.</div></div>
+      <div class="faq-item reveal"><div class="faq-q">Do I need to know code?</div><div class="faq-a">No. You talk to Mint. Mint does the rest.</div></div>
+      <div class="faq-item reveal"><div class="faq-q">Can I use my own domain?</div><div class="faq-a">Yes. Bring yours or we'll get you a new .com.</div></div>
+      <div class="faq-item reveal"><div class="faq-q">What if I want to change something?</div><div class="faq-a">Open Mint, tell it what you want. Done in seconds.</div></div>
+      <div class="faq-item reveal"><div class="faq-q">Is there a contract?</div><div class="faq-a">No. Cancel anytime.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="tagline">Get found. Get booked. Get Minted. 🌿</div>
+  <div class="links">
+    <a href="https://getminted.ai">getminted.ai</a>
+    <a href="https://instagram.com/getminted.ai">Instagram</a>
+    <a href="mailto:hello@getminted.ai">Email</a>
+  </div>
+  <p>© 2026 Eterno Web Studio</p>
+</footer>
+
+<!-- Organization Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Get Minted",
+  "url": "https://getminted.ai",
+  "logo": "https://getminted.ai/og-image.png",
+  "description": "Website builder for creatives. We build your website from your Instagram — free forever.",
+  "founder": {
+    "@type": "Person",
+    "name": "Raul Wesche"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "email": "hello@getminted.ai",
+    "contactType": "customer service"
+  },
+  "sameAs": [
+    "https://instagram.com/getminted.ai"
+  ]
+}
+</script>
+
+<!-- WebSite Schema with SearchAction -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Get Minted",
+  "url": "https://getminted.ai",
+  "description": "Free website builder for tattoo artists, barbers, salons, and creative businesses."
+}
+</script>
+
+<script>
+// Scroll reveal
+const obs=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// FAQ toggle
+document.querySelectorAll('.faq-item').forEach(item=>{
+  item.addEventListener('click',()=>item.classList.toggle('open'));
+});
+</script>
+
+</body>
+</html>
