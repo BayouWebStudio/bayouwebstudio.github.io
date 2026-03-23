@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SVG Pattern Gallery — Bayou Web Studio</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0a;color:#e0e0e0;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;min-height:100vh}
+header{text-align:center;padding:3rem 1rem 2rem}
+header h1{font-size:2.4rem;color:#C9A84C;font-weight:300;letter-spacing:.15em;text-transform:uppercase}
+header p{color:#888;margin-top:.5rem;font-size:.95rem}
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;max-width:1400px;margin:0 auto;padding:0 1.5rem 4rem}
+@media(max-width:1024px){.gallery{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:540px){.gallery{grid-template-columns:1fr;max-width:360px}}
+.card{background:#111;border:1px solid #1a1a1a;border-radius:8px;overflow:hidden;transition:border-color .25s}
+.card:hover{border-color:#C9A84C55}
+.preview{width:100%;aspect-ratio:1;background-color:#0a0a0a;background-repeat:repeat;background-position:center}
+.info{padding:.75rem 1rem;display:flex;align-items:center;justify-content:space-between;gap:.5rem}
+.info .name{font-size:.85rem;color:#ccc;font-weight:500}
+.info .num{color:#C9A84C;font-size:.75rem;font-weight:600;min-width:1.8em}
+.copy-btn{background:none;border:1px solid #C9A84C44;color:#C9A84C;font-size:.7rem;padding:.3rem .6rem;border-radius:4px;cursor:pointer;white-space:nowrap;transition:all .2s;text-transform:uppercase;letter-spacing:.05em}
+.copy-btn:hover{background:#C9A84C;color:#0a0a0a}
+.copy-btn.copied{border-color:#4CAF50;color:#4CAF50}
+footer{text-align:center;padding:2rem;color:#333;font-size:.75rem}
+footer a{color:#C9A84C;text-decoration:none}
+</style>
+</head>
+<body>
+<header>
+<h1>SVG Pattern Gallery</h1>
+<p>20 seamless tileable patterns — simple to complex · click "Copy CSS" to grab the background-image</p>
+</header>
+<div class="gallery" id="gallery"></div>
+<footer>
+  <p>Crafted by <a href="https://bayouwebstudio.com">Bayou Web Studio</a></p>
+</footer>
+<script>
+const G='#C9A84C',V='#8B5CF6',W='#ffffff';
+function svg(w,h,content,extra=''){return `url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='${w}' height='${h}'${extra}>${content}</svg>`)}")`}
+function sz(s){return `background-size:${s}px ${s}px`}
+
+const patterns=[
+// 1. Dot grid
+{name:"Dot Grid",css:function(){
+  const s=svg(20,20,`<circle cx='10' cy='10' r='1.5' fill='${G}' opacity='.6'/>`);
+  return `background-image:${s};${sz(20)}`}},
+
+// 2. Fine line grid
+{name:"Fine Line Grid",css:function(){
+  const s=svg(30,30,`<path d='M30 0H0V30' fill='none' stroke='${G}' stroke-width='.4' opacity='.5'/>`);
+  return `background-image:${s};${sz(30)}`}},
+
+// 3. Diagonal stripes
+{name:"Diagonal Stripes",css:function(){
+  const s=svg(10,10,`<path d='M-1,1 l2,-2 M0,10 l10,-10 M9,11 l2,-2' stroke='${V}' stroke-width='.7' opacity='.6'/>`);
+  return `background-image:${s};${sz(10)}`}},
+
+// 4. Diamond lattice
+{name:"Diamond Lattice",css:function(){
+  const s=svg(24,24,`<path d='M12 0L24 12L12 24L0 12Z' fill='none' stroke='${G}' stroke-width='.6' opacity='.55'/>`);
+  return `background-image:${s};${sz(24)}`}},
+
+// 5. Hexagonal grid
+{name:"Hexagonal Grid",css:function(){
+  const w=28,h=48.5;
+  const s=svg(w,h,`<path d='M14,0 L28,8.08 L28,24.25 L14,32.33 L0,24.25 L0,8.08Z M14,16.17 L28,24.25 L28,40.42 L14,48.5 L0,40.42 L0,24.25Z' fill='none' stroke='${G}' stroke-width='.5' opacity='.5' transform='translate(0,0)'/>`,` viewBox='0 0 ${w} ${h}'`);
+  return `background-image:${s};background-size:${w}px ${h}px`}},
+
+// 6. Triangle grid
+{name:"Triangle Grid",css:function(){
+  const s=svg(40,34.64,`<path d='M0,34.64 L20,0 L40,34.64Z M20,0 L40,34.64 L60,0Z M-20,0 L0,34.64 L20,0Z' fill='none' stroke='${V}' stroke-width='.5' opacity='.5'/>`);
+  return `background-image:${s};background-size:40px 34.64px`}},
+
+// 7. Chevron
+{name:"Chevron",css:function(){
+  const s=svg(40,24,`<path d='M0,18 L20,6 L40,18' fill='none' stroke='${G}' stroke-width='.8' opacity='.55'/><path d='M0,24 L20,12 L40,24' fill='none' stroke='${V}' stroke-width='.4' opacity='.35'/>`);
+  return `background-image:${s};background-size:40px 24px`}},
+
+// 8. Islamic 8-point star
+{name:"Islamic 8-Point Star",css:function(){
+  const c=30,r=12,r2=r*Math.cos(Math.PI/8);
+  let pts=[],inner=[];
+  for(let i=0;i<8;i++){
+    const a=Math.PI*2*i/8-Math.PI/2;
+    pts.push([c+r*Math.cos(a),c+r*Math.sin(a)]);
+    const a2=a+Math.PI/8;
+    inner.push([c+r2*.55*Math.cos(a2),c+r2*.55*Math.sin(a2)]);
+  }
+  let d='';
+  for(let i=0;i<8;i++){
+    const n=(i+3)%8;
+    d+=`M${pts[i][0].toFixed(2)},${pts[i][1].toFixed(2)} L${pts[n][0].toFixed(2)},${pts[n][1].toFixed(2)} `;
+  }
+  const s=svg(60,60,`<path d='${d}' fill='none' stroke='${G}' stroke-width='.7' opacity='.6'/><circle cx='30' cy='30' r='${r}' fill='none' stroke='${V}' stroke-width='.3' opacity='.3'/>`);
+  return `background-image:${s};background-size:60px 60px`}},
+
+// 9. Celtic weave
+{name:"Celtic Weave",css:function(){
+  const s=svg(40,40,`
+    <path d='M0,10 Q10,10 10,0' fill='none' stroke='${G}' stroke-width='2.5' opacity='.6'/>
+    <path d='M0,10 Q10,10 10,20' fill='none' stroke='${G}' stroke-width='2.5' opacity='.6'/>
+    <path d='M20,10 Q10,10 10,0' fill='none' stroke='${V}' stroke-width='1.5' opacity='.45'/>
+    <path d='M20,10 Q10,10 10,20' fill='none' stroke='${V}' stroke-width='1.5' opacity='.45'/>
+    <path d='M20,30 Q30,30 30,20' fill='none' stroke='${G}' stroke-width='2.5' opacity='.6'/>
+    <path d='M20,30 Q30,30 30,40' fill='none' stroke='${G}' stroke-width='2.5' opacity='.6'/>
+    <path d='M40,30 Q30,30 30,20' fill='none' stroke='${V}' stroke-width='1.5' opacity='.45'/>
+    <path d='M40,30 Q30,30 30,40' fill='none' stroke='${V}' stroke-width='1.5' opacity='.45'/>
+  `);
+  return `background-image:${s};background-size:40px 40px`}},
+
+// 10. Seed of Life
+{name:"Seed of Life",css:function(){
+  const c=30,r=10;
+  let circles=`<circle cx='${c}' cy='${c}' r='${r}' fill='none' stroke='${G}' stroke-width='.6' opacity='.5'/>`;
+  for(let i=0;i<6;i++){
+    const a=Math.PI*2*i/6;
+    circles+=`<circle cx='${(c+r*Math.cos(a)).toFixed(2)}' cy='${(c+r*Math.sin(a)).toFixed(2)}' r='${r}' fill='none' stroke='${G}' stroke-width='.6' opacity='.5'/>`;
+  }
+  const s=svg(60,60,circles);
+  return `background-image:${s};background-size:60px 60px`}},
+
+// 11. Flower of Life
+{name:"Flower of Life",css:function(){
+  const c=50,r=10;
+  let circles=`<circle cx='${c}' cy='${c}' r='${r}' fill='none' stroke='${G}' stroke-width='.45' opacity='.45'/>`;
+  // Ring 1
+  for(let i=0;i<6;i++){
+    const a=Math.PI*2*i/6;
+    circles+=`<circle cx='${(c+r*Math.cos(a)).toFixed(2)}' cy='${(c+r*Math.sin(a)).toFixed(2)}' r='${r}' fill='none' stroke='${G}' stroke-width='.45' opacity='.45'/>`;
+  }
+  // Ring 2
+  for(let i=0;i<6;i++){
+    const a=Math.PI*2*i/6;
+    circles+=`<circle cx='${(c+2*r*Math.cos(a)).toFixed(2)}' cy='${(c+2*r*Math.sin(a)).toFixed(2)}' r='${r}' fill='none' stroke='${V}' stroke-width='.35' opacity='.3'/>`;
+  }
+  for(let i=0;i<6;i++){
+    const a=Math.PI*2*i/6+Math.PI/6;
+    circles+=`<circle cx='${(c+r*Math.sqrt(3)*Math.cos(a)).toFixed(2)}' cy='${(c+r*Math.sqrt(3)*Math.sin(a)).toFixed(2)}' r='${r}' fill='none' stroke='${V}' stroke-width='.35' opacity='.3'/>`;
+  }
+  const s=svg(100,100,circles);
+  return `background-image:${s};background-size:80px 80px`}},
+
+// 12. Metatron's Cube
+{name:"Metatron's Cube",css:function(){
+  const c=50,r=12;
+  let content='';
+  const pts=[[c,c]];
+  for(let i=0;i<6;i++){
+    const a=Math.PI*2*i/6;
+    pts.push([c+r*Math.cos(a),c+r*Math.sin(a)]);
+  }
+  for(let i=0;i<6;i++){
+    const a=Math.PI*2*i/6;
+    pts.push([c+2*r*Math.cos(a),c+2*r*Math.sin(a)]);
+  }
+  // All connecting lines
+  for(let i=0;i<pts.length;i++){
+    for(let j=i+1;j<pts.length;j++){
+      content+=`<line x1='${pts[i][0].toFixed(1)}' y1='${pts[i][1].toFixed(1)}' x2='${pts[j][0].toFixed(1)}' y2='${pts[j][1].toFixed(1)}' stroke='${G}' stroke-width='.25' opacity='.2'/>`;
+    }
+  }
+  // Circles
+  pts.forEach(p=>{
+    content+=`<circle cx='${p[0].toFixed(1)}' cy='${p[1].toFixed(1)}' r='${r}' fill='none' stroke='${V}' stroke-width='.4' opacity='.35'/>`;
+  });
+  const s=svg(100,100,content);
+  return `background-image:${s};background-size:80px 80px`}},
+
+// 13. Penrose-inspired tiling
+{name:"Penrose Tiling",css:function(){
+  // Fat and thin rhombuses approximation
+  const s=svg(60,60,`
+    <path d='M30,2 L50,15 L30,28 L10,15Z' fill='none' stroke='${G}' stroke-width='.6' opacity='.5'/>
+    <path d='M10,15 L30,28 L10,41 L-10,28Z' fill='none' stroke='${V}' stroke-width='.5' opacity='.4'/>
+    <path d='M50,15 L70,28 L50,41 L30,28Z' fill='none' stroke='${V}' stroke-width='.5' opacity='.4'/>
+    <path d='M30,28 L50,41 L30,54 L10,41Z' fill='none' stroke='${G}' stroke-width='.6' opacity='.5'/>
+    <path d='M30,2 L42,10 L30,18 L18,10Z' fill='none' stroke='${W}' stroke-width='.3' opacity='.15'/>
+    <path d='M30,28 L42,36 L30,44 L18,36Z' fill='none' stroke='${W}' stroke-width='.3' opacity='.15'/>
+  `);
+  return `background-image:${s};background-size:60px 56px`}},
+
+// 14. Islamic 12-point star
+{name:"Islamic 12-Point Star",css:function(){
+  const c=40,r=16;
+  let d='';
+  const pts=[];
+  for(let i=0;i<12;i++){
+    const a=Math.PI*2*i/12-Math.PI/2;
+    pts.push([c+r*Math.cos(a),c+r*Math.sin(a)]);
+  }
+  for(let i=0;i<12;i++){
+    const n=(i+5)%12;
+    d+=`M${pts[i][0].toFixed(2)},${pts[i][1].toFixed(2)} L${pts[n][0].toFixed(2)},${pts[n][1].toFixed(2)} `;
+  }
+  for(let i=0;i<12;i++){
+    const n=(i+4)%12;
+    d+=`M${pts[i][0].toFixed(2)},${pts[i][1].toFixed(2)} L${pts[n][0].toFixed(2)},${pts[n][1].toFixed(2)} `;
+  }
+  const s=svg(80,80,`<path d='${d}' fill='none' stroke='${G}' stroke-width='.5' opacity='.5'/><circle cx='40' cy='40' r='${r}' fill='none' stroke='${V}' stroke-width='.3' opacity='.25'/>`);
+  return `background-image:${s};background-size:80px 80px`}},
+
+// 15. Fibonacci spiral grid
+{name:"Fibonacci Spiral Grid",css:function(){
+  const phi=(1+Math.sqrt(5))/2;
+  let arcs='';
+  const sizes=[3,5,8,13,21];
+  let x=40,y=40;
+  sizes.forEach((s,i)=>{
+    const a=i*Math.PI/2;
+    arcs+=`<circle cx='${x}' cy='${y}' r='${s}' fill='none' stroke='${G}' stroke-width='.4' opacity='${.3+i*.08}' stroke-dasharray='${s*Math.PI/2} ${s*Math.PI*1.5}'/>`;
+  });
+  // Golden rectangles
+  arcs+=`<rect x='15' y='15' width='50' height='50' fill='none' stroke='${V}' stroke-width='.3' opacity='.2' rx='1'/>`;
+  arcs+=`<rect x='15' y='15' width='30.9' height='50' fill='none' stroke='${V}' stroke-width='.2' opacity='.15' rx='1'/>`;
+  arcs+=`<path d='M25,25 Q35,15 45,25 Q55,35 45,45 Q35,55 25,45 Q15,35 25,25' fill='none' stroke='${G}' stroke-width='.6' opacity='.45'/>`;
+  const s=svg(80,80,arcs);
+  return `background-image:${s};background-size:80px 80px`}},
+
+// 16. Sri Yantra-inspired
+{name:"Sri Yantra",css:function(){
+  const c=50;
+  let content='';
+  // Nested triangles pointing up and down
+  const sizes=[38,30,22,16,10];
+  sizes.forEach((sz,i)=>{
+    const up=i%2===0;
+    if(up){
+      content+=`<path d='M${c},${c-sz*.6} L${c+sz/2},${c+sz*.35} L${c-sz/2},${c+sz*.35}Z' fill='none' stroke='${G}' stroke-width='.5' opacity='${.55-i*.06}'/>`;
+    }else{
+      content+=`<path d='M${c},${c+sz*.6} L${c+sz/2},${c-sz*.35} L${c-sz/2},${c-sz*.35}Z' fill='none' stroke='${V}' stroke-width='.5' opacity='${.5-i*.06}'/>`;
+    }
+  });
+  // Outer circle
+  content+=`<circle cx='${c}' cy='${c}' r='42' fill='none' stroke='${G}' stroke-width='.3' opacity='.25'/>`;
+  content+=`<circle cx='${c}' cy='${c}' r='38' fill='none' stroke='${V}' stroke-width='.2' opacity='.2'/>`;
+  // Bindu
+  content+=`<circle cx='${c}' cy='${c}' r='1.5' fill='${G}' opacity='.5'/>`;
+  const s=svg(100,100,content);
+  return `background-image:${s};background-size:90px 90px`}},
+
+// 17. Mandala tile
+{name:"Mandala Tile",css:function(){
+  const c=50,content=[];
+  // Outer rings
+  [40,32,24,16].forEach((r,i)=>{
+    content.push(`<circle cx='${c}' cy='${c}' r='${r}' fill='none' stroke='${i%2?V:G}' stroke-width='.4' opacity='${.4-i*.05}'/>`);
+  });
+  // 8-fold petals
+  for(let i=0;i<8;i++){
+    const a=Math.PI*2*i/8;
+    const x1=c+18*Math.cos(a),y1=c+18*Math.sin(a);
+    const x2=c+34*Math.cos(a),y2=c+34*Math.sin(a);
+    const al=a-0.25,ar=a+0.25;
+    content.push(`<path d='M${c+12*Math.cos(a)},${c+12*Math.sin(a)} Q${c+25*Math.cos(al)},${c+25*Math.sin(al)} ${x2},${y2} Q${c+25*Math.cos(ar)},${c+25*Math.sin(ar)} ${c+12*Math.cos(a)},${c+12*Math.sin(a)}' fill='none' stroke='${G}' stroke-width='.5' opacity='.45'/>`);
+  }
+  // Inner 8-point details
+  for(let i=0;i<8;i++){
+    const a=Math.PI*2*i/8+Math.PI/8;
+    content.push(`<line x1='${c}' y1='${c}' x2='${(c+20*Math.cos(a)).toFixed(1)}' y2='${(c+20*Math.sin(a)).toFixed(1)}' stroke='${V}' stroke-width='.3' opacity='.3'/>`);
+  }
+  content.push(`<circle cx='${c}' cy='${c}' r='3' fill='none' stroke='${G}' stroke-width='.8' opacity='.5'/>`);
+  const s=svg(100,100,content.join(''));
+  return `background-image:${s};background-size:90px 90px`}},
+
+// 18. Islamic 16-point star
+{name:"Islamic 16-Point Star",css:function(){
+  const c=50,r=22;
+  let d='';
+  const pts=[];
+  for(let i=0;i<16;i++){
+    const a=Math.PI*2*i/16-Math.PI/2;
+    pts.push([c+r*Math.cos(a),c+r*Math.sin(a)]);
+  }
+  // Star connections
+  [5,7].forEach(skip=>{
+    for(let i=0;i<16;i++){
+      const n=(i+skip)%16;
+      d+=`M${pts[i][0].toFixed(2)},${pts[i][1].toFixed(2)} L${pts[n][0].toFixed(2)},${pts[n][1].toFixed(2)} `;
+    }
+  });
+  let content=`<path d='${d}' fill='none' stroke='${G}' stroke-width='.4' opacity='.45'/>`;
+  content+=`<circle cx='${c}' cy='${c}' r='${r}' fill='none' stroke='${V}' stroke-width='.25' opacity='.2'/>`;
+  content+=`<circle cx='${c}' cy='${c}' r='${r*.6}' fill='none' stroke='${G}' stroke-width='.2' opacity='.15'/>`;
+  // Inner 8-point
+  const r2=r*.45;
+  let d2='';
+  for(let i=0;i<8;i++){
+    const a=Math.PI*2*i/8-Math.PI/2;
+    const n=(i+3)%8;
+    const a2=Math.PI*2*n/8-Math.PI/2;
+    d2+=`M${(c+r2*Math.cos(a)).toFixed(1)},${(c+r2*Math.sin(a)).toFixed(1)} L${(c+r2*Math.cos(a2)).toFixed(1)},${(c+r2*Math.sin(a2)).toFixed(1)} `;
+  }
+  content+=`<path d='${d2}' fill='none' stroke='${V}' stroke-width='.35' opacity='.3'/>`;
+  const s=svg(100,100,content);
+  return `background-image:${s};background-size:85px 85px`}},
+
+// 19. Fractal triangle (Sierpinski)
+{name:"Fractal Triangle",css:function(){
+  const c=50;
+  let content='';
+  function sierpinski(x,y,size,depth){
+    if(depth===0){
+      const h=size*Math.sqrt(3)/2;
+      content+=`<path d='M${x},${y-h*2/3} L${x+size/2},${y+h/3} L${x-size/2},${y+h/3}Z' fill='none' stroke='${depth%2?V:G}' stroke-width='.4' opacity='.45'/>`;
+      return;
+    }
+    const h=size*Math.sqrt(3)/2;
+    const half=size/2;
+    sierpinski(x,y-h/3,half,depth-1);
+    sierpinski(x-half/2,y+h/6,half,depth-1);
+    sierpinski(x+half/2,y+h/6,half,depth-1);
+    // Draw the outer triangle
+    content+=`<path d='M${x},${y-h*2/3} L${x+size/2},${y+h/3} L${x-size/2},${y+h/3}Z' fill='none' stroke='${G}' stroke-width='${.2+depth*.15}' opacity='${.2+depth*.08}'/>`;
+  }
+  sierpinski(c,c,70,4);
+  const s=svg(100,100,content);
+  return `background-image:${s};background-size:90px 90px`}},
+
+// 20. Full sacred geometry composite
+{name:"Sacred Geometry Composite",css:function(){
+  const c=60,r=12;
+  let content='';
+  
+  // Flower of Life circles
+  const flowerPts=[[c,c]];
+  for(let i=0;i<6;i++){
+    const a=Math.PI*2*i/6;
+    flowerPts.push([c+r*Math.cos(a),c+r*Math.sin(a)]);
+  }
+  for(let i=0;i<6;i++){
+    const a=Math.PI*2*i/6;
+    flowerPts.push([c+2*r*Math.cos(a),c+2*r*Math.sin(a)]);
+  }
+  for(let i=0;i<6;i++){
+    const a=Math.PI*2*i/6+Math.PI/6;
+    flowerPts.push([c+r*Math.sqrt(3)*Math.cos(a),c+r*Math.sqrt(3)*Math.sin(a)]);
+  }
+  
+  // All circles
+  flowerPts.forEach(p=>{
+    content+=`<circle cx='${p[0].toFixed(1)}' cy='${p[1].toFixed(1)}' r='${r}' fill='none' stroke='${G}' stroke-width='.3' opacity='.2'/>`;
+  });
+  
+  // Metatron's lines (first 13 points)
+  const metaPts=flowerPts.slice(0,13);
+  for(let i=0;i<metaPts.length;i++){
+    for(let j=i+1;j<metaPts.length;j++){
+      content+=`<line x1='${metaPts[i][0].toFixed(1)}' y1='${metaPts[i][1].toFixed(1)}' x2='${metaPts[j][0].toFixed(1)}' y2='${metaPts[j][1].toFixed(1)}' stroke='${V}' stroke-width='.15' opacity='.12'/>`;
+    }
+  }
+  
+  // 12-point star overlay
+  const sr=28;
+  let starD='';
+  const starPts=[];
+  for(let i=0;i<12;i++){
+    const a=Math.PI*2*i/12-Math.PI/2;
+    starPts.push([c+sr*Math.cos(a),c+sr*Math.sin(a)]);
+  }
+  for(let i=0;i<12;i++){
+    const n=(i+5)%12;
+    starD+=`M${starPts[i][0].toFixed(1)},${starPts[i][1].toFixed(1)} L${starPts[n][0].toFixed(1)},${starPts[n][1].toFixed(1)} `;
+  }
+  content+=`<path d='${starD}' fill='none' stroke='${G}' stroke-width='.4' opacity='.35'/>`;
+  
+  // Outer binding circle
+  content+=`<circle cx='${c}' cy='${c}' r='38' fill='none' stroke='${G}' stroke-width='.5' opacity='.25'/>`;
+  content+=`<circle cx='${c}' cy='${c}' r='35' fill='none' stroke='${V}' stroke-width='.3' opacity='.15'/>`;
+  
+  // Central bindu
+  content+=`<circle cx='${c}' cy='${c}' r='1.5' fill='${G}' opacity='.4'/>`;
+  
+  const s=svg(120,120,content);
+  return `background-image:${s};background-size:100px 100px`}}
+];
+
+const gallery=document.getElementById('gallery');
+patterns.forEach((p,i)=>{
+  const css=p.css();
+  const card=document.createElement('div');
+  card.className='card';
+  card.innerHTML=`
+    <div class="preview" style="${css}"></div>
+    <div class="info">
+      <span class="num">${String(i+1).padStart(2,'0')}</span>
+      <span class="name">${p.name}</span>
+      <button class="copy-btn" onclick="copyCSS(this,${i})">Copy CSS</button>
+    </div>`;
+  gallery.appendChild(card);
+});
+
+function copyCSS(btn,i){
+  const css=patterns[i].css();
+  navigator.clipboard.writeText(css).then(()=>{
+    btn.textContent='Copied!';
+    btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent='Copy CSS';btn.classList.remove('copied')},1500);
+  });
+}
+</script>
+</body>
+</html>
