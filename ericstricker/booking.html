@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking — Eric Stricker | Sacred Geometry Tattoo</title>
+  <meta name="description" content="Book a consultation with Eric Stricker for sacred geometry, dotwork, and fractal blackwork tattoos in Valencia, Spain.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav__inner">
+      <div class="nav__logo"><a href="index.html">Eric Stricker</a></div>
+      <button class="nav__toggle" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav__links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="tattoos.html">Tattoos</a></li>
+        <li><a href="booking.html" class="active">Booking</a></li>
+        <li><a href="testimonials.html">Testimonials</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="container">
+      <p class="section-label fade-up">Inquiries</p>
+      <h1 class="section-title fade-up" style="transition-delay:.15s">Book a Consultation</h1>
+    </div>
+  </div>
+
+  <!-- Booking Content -->
+  <section class="section">
+    <div class="container">
+      <div class="booking-layout">
+        <!-- Form -->
+        <div class="fade-up">
+          <form action="https://formspree.io/f/placeholder" method="POST">
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="instagram">Instagram Handle</label>
+              <input type="text" id="instagram" name="instagram" placeholder="@">
+            </div>
+            <div class="form-group">
+              <label for="placement">Placement &amp; Size</label>
+              <select id="placement" name="placement">
+                <option value="">Select...</option>
+                <option value="full-bodysuit">Full Bodysuit</option>
+                <option value="full-sleeve">Full Sleeve</option>
+                <option value="half-sleeve">Half Sleeve</option>
+                <option value="back-piece">Back Piece</option>
+                <option value="chest-piece">Chest Piece</option>
+                <option value="leg-sleeve">Leg Sleeve</option>
+                <option value="other-large">Other Large-Scale</option>
+                <option value="medium">Medium Piece</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="description">Describe Your Vision</label>
+              <textarea id="description" name="description" rows="5" placeholder="Tell me about your concept, references, and any ideas you have..."></textarea>
+            </div>
+            <div class="form-group">
+              <label for="timeline">Preferred Timeline</label>
+              <input type="text" id="timeline" name="timeline" placeholder="e.g., Starting summer 2025">
+            </div>
+            <button type="submit" class="btn" style="width:100%; text-align:center;">Submit Inquiry</button>
+          </form>
+        </div>
+
+        <!-- Info Side -->
+        <div class="fade-up" style="transition-delay:.2s">
+          <div class="booking-info">
+            <p class="section-label">Contact</p>
+            <h3>Get in Touch</h3>
+            <p>For booking inquiries, large-scale project discussions, or general questions, reach out directly via email or submit the form.</p>
+            <a href="mailto:ERICSTRICKERTATTOO@GMAIL.COM" class="booking-info__email">ERICSTRICKERTATTOO@GMAIL.COM</a>
+
+            <div class="divider" style="margin:2.5rem 0;"></div>
+
+            <p class="section-label">Location</p>
+            <h3>Valencia, Spain</h3>
+            <p>Private studio. Address provided upon booking confirmation. International clients are welcome — many travel from abroad for multi-session projects.</p>
+
+            <div class="booking-note">
+              <p class="section-label" style="margin-bottom:.5rem">Please Note</p>
+              <p>Due to high demand, current wait times may be several months. Large-scale projects (bodysuits, full sleeves) are planned well in advance. Please reach out early to secure your spot.</p>
+              <p style="margin-top:.75rem;">A deposit is required to confirm your appointment. Reference photos and detailed descriptions help me understand your vision more quickly.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <p class="footer__copy">&copy; 2025 Eric Stricker. All rights reserved.</p>
+        <div class="footer__social">
+          <a href="https://instagram.com/ericstricker" target="_blank" rel="noopener">Instagram</a>
+        </div>
+        <p class="footer__powered">Powered by <a href="https://eternowebstudio.com" target="_blank" rel="noopener">Eterno Web Studio</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
