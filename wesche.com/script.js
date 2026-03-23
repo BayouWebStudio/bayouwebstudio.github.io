@@ -546,3 +546,65 @@ const additionalStyles = `
 `;
 
 document.head.insertAdjacentHTML('beforeend', additionalStyles);
+// ── LIGHTBOX ──────────────────────────────────────────────────────────────────
+(function() {
+  // Build lightbox DOM
+  const lb = document.createElement('div');
+  lb.id = 'lb';
+  lb.style.cssText = 'display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.92);cursor:zoom-out;align-items:center;justify-content:center;';
+  lb.innerHTML = `
+    <button id="lb-prev" style="position:fixed;left:20px;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,0.7);font-size:2.5rem;cursor:pointer;z-index:10000;padding:12px;line-height:1;">&#8249;</button>
+    <img id="lb-img" style="max-width:92vw;max-height:92vh;object-fit:contain;border-radius:2px;box-shadow:0 0 60px rgba(0,0,0,0.8);" />
+    <button id="lb-next" style="position:fixed;right:20px;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,0.7);font-size:2.5rem;cursor:pointer;z-index:10000;padding:12px;line-height:1;">&#8250;</button>
+    <button id="lb-close" style="position:fixed;top:20px;right:24px;background:none;border:none;color:rgba(255,255,255,0.7);font-size:2rem;cursor:pointer;z-index:10000;line-height:1;">&#10005;</button>
+  `;
+  document.body.appendChild(lb);
+
+  let imgs = [], cur = 0;
+
+  function open(index) {
+    cur = index;
+    lb.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    document.getElementById('lb-img').src = imgs[cur].src;
+  }
+  function close() {
+    lb.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+  function prev() { cur = (cur - 1 + imgs.length) % imgs.length; document.getElementById('lb-img').src = imgs[cur].src; }
+  function next() { cur = (cur + 1) % imgs.length; document.getElementById('lb-img').src = imgs[cur].src; }
+
+  lb.addEventListener('click', function(e) { if (e.target === lb) close(); });
+  document.getElementById('lb-close').addEventListener('click', close);
+  document.getElementById('lb-prev').addEventListener('click', function(e) { e.stopPropagation(); prev(); });
+  document.getElementById('lb-next').addEventListener('click', function(e) { e.stopPropagation(); next(); });
+  document.addEventListener('keydown', function(e) {
+    if (lb.style.display === 'none') return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') prev();
+    if (e.key === 'ArrowRight') next();
+  });
+
+  // Wire up all gallery images on page load
+  document.addEventListener('DOMContentLoaded', function() {
+    // Select all gallery/tattoo images — exclude nav logos, about portraits, store items
+    const selectors = [
+      '.gallery-grid img', '.gallery-item img',
+      'img[src^="t1"],img[src^="t2"],img[src^="t3"],img[src^="t4"],img[src^="t5"],img[src^="t6"],img[src^="t7"],img[src^="t8"],img[src^="t9"]',
+      'img[src^="tt"]', 'img[src^="w1"],img[src^="w2"],img[src^="w3"],img[src^="w4"],img[src^="w5"],img[src^="w6"],img[src^="w7"]',
+      'img[src^="new_"]', 'img[src^="p2"],img[src^="p3"],img[src^="p4"],img[src^="p5"],img[src^="p6"],img[src^="painting"]'
+    ];
+    const found = [];
+    selectors.forEach(function(sel) {
+      document.querySelectorAll(sel).forEach(function(img) {
+        if (!found.includes(img)) found.push(img);
+      });
+    });
+    imgs = found;
+    imgs.forEach(function(img, i) {
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', function(e) { e.stopPropagation(); open(i); });
+    });
+  });
+})();
