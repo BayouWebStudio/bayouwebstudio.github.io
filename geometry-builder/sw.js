@@ -1,4 +1,4 @@
-const CACHE = 'geometry-v1';
+const CACHE = 'geometry-v1.2';
 const ASSETS = [
   '/geometry-builder/',
   '/geometry-builder/index.html',
