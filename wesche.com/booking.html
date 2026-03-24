@@ -23,12 +23,13 @@
 <meta name="description" content="Submit a tattoo inquiry to Raúl Wesche. Geometric and sacred geometry tattoos. Full-day sessions. Houston, TX. Books currently closed inquiries welcome.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root { --black:#0a0a0a; --charcoal:#1a1a1a; --gold:#C9A84C; --white:#f5f5f0; --dim:#888; --border:rgba(255,255,255,0.07); }
   html { scroll-behavior: smooth; }
   body { font-family: 'Inter', sans-serif; background: var(--black); color: var(--white); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  h1, h2, h3 { font-family: 'Cormorant Garamond', serif; }
 
   nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; background: rgba(10,10,10,0.95); border-bottom: 1px solid var(--border); backdrop-filter: blur(12px); }
   .nav-name { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; color: var(--white); text-decoration: none; }
@@ -119,14 +120,14 @@
 <nav>
   <a href="/" class="nav-name">Raúl Wesche</a>
   <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
-  <ul class="nav-links">
-    <li><a href="/">Home</a></li>
-    <li><a href="/about.html">About</a></li>
-    <li><a href="/paintings.html">Paintings</a></li>
-    <li><a href="/tattoos.html">Tattoos</a></li>
-    <li><a href="/store.html">Store</a></li>
-    <li><a href="/booking.html" class="active">Booking</a></li>
-  </ul>
+      <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/tattoos.html">Tattoos</a></li>
+      <li><a href="/paintings.html">Paintings</a></li>
+      <li><a href="/store.html">Store</a></li>
+      <li><a href="/booking.html" class="active">Booking</a></li>
+    </ul>
 </nav>
 
 <div class="page-hero">
@@ -141,7 +142,7 @@
 
     <div class="info-item">
       <div class="info-label">Email</div>
-      <div class="info-value"><a href="mailto:WescheTattoo@gmail.com">WescheTattoo@gmail.com</a></div>
+      <div class="info-value"><a href="mailto:booking@weschetattoo.com">booking@weschetattoo.com</a></div>
     </div>
 
     <div class="info-item">
@@ -161,6 +162,10 @@
 
     <div class="availability-note">
       <strong>Books are currently closed</strong> but you're welcome to reach out for more information or to get on the waiting list.
+    </div>
+
+    <div class="availability-note" style="margin-top:12px;border-color:#8B0000;color:#ffaaaa;font-size:0.85rem;">
+      ⚠️ <strong>Beware of fake accounts.</strong> The only legitimate email for bookings is <strong>booking@weschetattoo.com</strong>. Any other account claiming to be Raúl Wesche is not official.
     </div>
   </div>
 
@@ -206,6 +211,49 @@
     </div>
   </form>
 </div>
+
+<!-- NEWSLETTER -->
+<section id="newsletter" style="background:#0a0a0a; padding: 80px 24px; text-align: center; border-top: 1px solid rgba(255,255,255,0.06);">
+  <h2 style="font-family:'Cormorant Garamond', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 300; letter-spacing: 0.1em; color: #f5f5f0; margin: 0 0 12px;">While you wait</h2>
+  <p style="font-size: 0.82rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(245,245,240,0.45); margin: 0 0 36px;">Get notified when bookings open. One email a month, no spam.</p>
+  <form id="nl-form-booking" style="display:flex; gap: 0; justify-content: center; max-width: 440px; margin: 0 auto;">
+    <input type="email" id="nl-email-booking" placeholder="your@email.com" required
+      style="flex: 1; padding: 14px 20px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-right: none; color: #f5f5f0; font-size: 0.82rem; letter-spacing: 0.08em; outline: none; font-family: inherit; border-radius: 0;">
+    <button type="submit"
+      style="padding: 14px 28px; background: #C9A84C; border: none; color: #0a0a0a; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; cursor: pointer; font-family: inherit; border-radius: 0; transition: background 0.2s;">Subscribe</button>
+  </form>
+  <p id="nl-msg-booking" style="margin: 18px 0 0; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; min-height: 1.2em; color: #C9A84C; opacity: 0; transition: opacity 0.3s;"></p>
+</section>
+
+<script>
+(function() {
+  var form = document.getElementById('nl-form-booking');
+  var msg = document.getElementById('nl-msg-booking');
+  if (!form) return;
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var email = document.getElementById('nl-email-booking').value;
+    msg.textContent = 'Subscribing...';
+    msg.style.opacity = '1';
+    fetch('https://fn.bayouwebstudio.com/newsletter', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email })
+    })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        msg.textContent = data.ok ? "You're in." : (data.error || 'Something went wrong. Try again.');
+        msg.style.opacity = '1';
+        if (data.ok) form.reset();
+      })
+      .catch(function() {
+        msg.textContent = 'Something went wrong. Try again.';
+        msg.style.opacity = '1';
+      });
+  });
+})();
+</script>
+
 
 <footer>
   <div class="footer-name">Raúl Wesche</div>
@@ -253,3 +301,4 @@ async function submitForm(e) {
 
 </body>
 </html>
+

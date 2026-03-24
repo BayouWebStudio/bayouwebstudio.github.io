@@ -28,7 +28,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -53,6 +53,7 @@
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
   }
+  h1, h2, h3 { font-family: 'Cormorant Garamond', serif; }
 
   /* ── NAV ── */
   nav {
@@ -546,6 +547,26 @@
     opacity: 1;
     transform: none;
   }
+
+  /* ── FLOWER OF LIFE BACKGROUND ── */
+  .flower-bg {
+    position: relative;
+  }
+  .flower-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22120%22%20height%3D%2269.28%22%20viewBox%3D%220%200%20120%2069.28%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23C9A84C%22%2F%3E%3Cstop%20offset%3D%2260%25%22%20stop-color%3D%22%23A8893D%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%237B2FBE%22%2F%3E%3C%2FlinearGradient%3E%3Cfilter%20id%3D%22s%22%3E%3CfeGaussianBlur%20stdDeviation%3D%221.2%22%20result%3D%22b%22%2F%3E%3CfeMerge%3E%3CfeMergeNode%20in%3D%22b%22%2F%3E%3CfeMergeNode%20in%3D%22SourceGraphic%22%2F%3E%3C%2FfeMerge%3E%3C%2Ffilter%3E%3C%2Fdefs%3E%3Cg%20filter%3D%22url%28%23s%29%22%3E%3Ccircle%20cx%3D%22-20.0%22%20cy%3D%22-34.64%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%2220.0%22%20cy%3D%22-34.64%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%2260.0%22%20cy%3D%22-34.64%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%22100.0%22%20cy%3D%22-34.64%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%22140.0%22%20cy%3D%22-34.64%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%22-40.0%22%20cy%3D%220.0%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%220.0%22%20cy%3D%220.0%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%2240.0%22%20cy%3D%220.0%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%2280.0%22%20cy%3D%220.0%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%22120.0%22%20cy%3D%220.0%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%22160.0%22%20cy%3D%220.0%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%22-20.0%22%20cy%3D%2234.64%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%2220.0%22%20cy%3D%2234.64%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%2260.0%22%20cy%3D%2234.64%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%22100.0%22%20cy%3D%2234.64%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%22140.0%22%20cy%3D%2234.64%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%22-40.0%22%20cy%3D%2269.28%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%220.0%22%20cy%3D%2269.28%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%2240.0%22%20cy%3D%2269.28%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%2280.0%22%20cy%3D%2269.28%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%22120.0%22%20cy%3D%2269.28%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%22160.0%22%20cy%3D%2269.28%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%22-20.0%22%20cy%3D%22103.92%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%2220.0%22%20cy%3D%22103.92%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%2260.0%22%20cy%3D%22103.92%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%22100.0%22%20cy%3D%22103.92%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%22140.0%22%20cy%3D%22103.92%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+    background-repeat: repeat;
+    background-size: 240px auto;
+    opacity: 0.6;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .flower-bg > section {
+    position: relative;
+    z-index: 1;
+  }
 </style>
 <link rel="canonical" href="https://wesche.com/">
 <meta property="og:type" content="website">
@@ -559,14 +580,14 @@
 <nav>
   <a href="/" class="nav-name">Raúl Wesche</a>
   <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" style="display:none;background:none;border:none;color:var(--white);font-size:1.4rem;cursor:pointer;">☰</button>
-  <ul class="nav-links">
-    <li><a href="/">Home</a></li>
-    <li><a href="/about.html">About</a></li>
-    <li><a href="/paintings.html">Paintings</a></li>
-    <li><a href="/tattoos.html">Tattoos</a></li>
-    <li><a href="/store.html">Store</a></li>
-    <li><a href="/booking.html">Booking</a></li>
-  </ul>
+      <ul class="nav-links">
+      <li><a href="/" class="active">Home</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/tattoos.html">Tattoos</a></li>
+      <li><a href="/paintings.html">Paintings</a></li>
+      <li><a href="/store.html">Store</a></li>
+      <li><a href="/booking.html">Booking</a></li>
+    </ul>
 </nav>
 
 <!-- HERO -->
@@ -593,6 +614,9 @@
     </div>
   </div>
 </div>
+
+<!-- CONTENT WITH FLOWER OF LIFE BG -->
+<div class="flower-bg">
 
 <!-- ABOUT -->
 <section id="about">
@@ -890,6 +914,51 @@
   </div>
 </section>
 
+</div><!-- /flower-bg -->
+
+<!-- NEWSLETTER -->
+<section id="newsletter" style="background:#0a0a0a; padding: 80px 24px; text-align: center; border-top: 1px solid rgba(255,255,255,0.06);">
+  <h2 style="font-family:'Cormorant Garamond', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 300; letter-spacing: 0.1em; color: #f5f5f0; margin: 0 0 12px;">Stay in the loop</h2>
+  <p style="font-size: 0.82rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(245,245,240,0.45); margin: 0 0 36px;">New work, new drops, once a month.</p>
+  <form id="nl-form-index" style="display:flex; gap: 0; justify-content: center; max-width: 440px; margin: 0 auto;">
+    <input type="email" id="nl-email-index" placeholder="your@email.com" required
+      style="flex: 1; padding: 14px 20px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-right: none; color: #f5f5f0; font-size: 0.82rem; letter-spacing: 0.08em; outline: none; font-family: inherit; border-radius: 0;">
+    <button type="submit"
+      style="padding: 14px 28px; background: #C9A84C; border: none; color: #0a0a0a; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; cursor: pointer; font-family: inherit; border-radius: 0; transition: background 0.2s;">Subscribe</button>
+  </form>
+  <p id="nl-msg-index" style="margin: 18px 0 0; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; min-height: 1.2em; color: #C9A84C; opacity: 0; transition: opacity 0.3s;"></p>
+</section>
+
+<script>
+(function() {
+  var form = document.getElementById('nl-form-index');
+  var msg = document.getElementById('nl-msg-index');
+  if (!form) return;
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var email = document.getElementById('nl-email-index').value;
+    msg.textContent = 'Subscribing...';
+    msg.style.opacity = '1';
+    fetch('https://fn.bayouwebstudio.com/newsletter', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email })
+    })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        msg.textContent = data.ok ? "You're in." : (data.error || 'Something went wrong. Try again.');
+        msg.style.opacity = '1';
+        if (data.ok) form.reset();
+      })
+      .catch(function() {
+        msg.textContent = 'Something went wrong. Try again.';
+        msg.style.opacity = '1';
+      });
+  });
+})();
+</script>
+
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-name">Raúl Wesche</div>
@@ -937,3 +1006,5 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
 </body>
 </html>
+
+
