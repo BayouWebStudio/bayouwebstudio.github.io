@@ -251,24 +251,6 @@ select{background:var(--surface2);color:var(--text);border:1px solid var(--borde
         <!-- Pattern-specific controls -->
         <div id="patternControls" style="display:none">
           <div class="section">
-            <div class="section-title">Tile</div>
-            <div class="ctrl-row"><label>Tile Shape</label>
-              <select id="patTileShape">
-                <option value="square" selected>Square</option>
-                <option value="hex">Hexagonal</option>
-                <option value="diamond">Diamond</option>
-              </select>
-            </div>
-            <div class="ctrl-row"><label>Pattern Type</label>
-              <select id="patType">
-                <option value="grid" selected>Grid</option>
-                <option value="offset">Offset</option>
-                <option value="brick">Brick</option>
-                <option value="hex">Hex</option>
-              </select>
-            </div>
-          </div>
-          <div class="section">
             <div class="section-title">Element</div>
             <div class="shape-grid" id="patShapeGrid">
               <button class="shape-btn active" data-patshape="dot"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="5"/></svg>Dot</button>
@@ -541,7 +523,6 @@ mandalaState.selectedId = mandalaState.layers[0].id;
 
 // ─── Pattern State ───
 const patternState = {
-  tileShape: 'square', patternType: 'grid',
   element: 'dot', sides: 6,
   spacing: 80, size: 20, rotation: 0,
   strokeWeight: 1.5, strokeColor: '#C9A84C',
@@ -1052,8 +1033,6 @@ document.querySelectorAll('#patShapeGrid .shape-btn').forEach(btn => {
   });
 });
 
-document.getElementById('patTileShape').addEventListener('change', e => { patternState.tileShape=e.target.value; if(patDrawState.active) resizePatDrawCanvas(); renderAll(); });
-document.getElementById('patType').addEventListener('change', e => { patternState.patternType=e.target.value; renderAll(); });
 
 function bindPSlider(id, prop, fmt) {
   const input = document.getElementById(id);
@@ -1474,7 +1453,7 @@ drawCanvas.addEventListener('pointercancel', onDrawEnd);
 function getPatTileSize() {
   const p = patternState;
   const tileW = p.spacing * 3;
-  const tileH = p.tileShape === 'hex' ? p.spacing * Math.sqrt(3) * 1.5 : tileW;
+  const tileH = tileW;
   return { tileW, tileH };
 }
 
@@ -2067,48 +2046,12 @@ function renderPatternTile(ox, oy, tileW, tileH, parent) {
   const p = patternState;
   const sp = p.spacing;
   const positions = [];
-
-  if(p.tileShape==='hex') {
-    const rowH = sp * Math.sqrt(3)/2;
-    const cols = Math.ceil(tileW/sp)+2;
-    const rows = Math.ceil(tileH/rowH)+2;
-    for(let r=-1;r<rows;r++){
-      for(let c=-1;c<cols;c++){
-        const x = c*sp + (r%2?sp/2:0);
-        const y = r*rowH;
-        if(x>=-sp && x<=tileW+sp && y>=-rowH && y<=tileH+rowH)
-          positions.push([ox+x, oy+y]);
-      }
-    }
-  } else if(p.patternType==='offset') {
-    const cols=Math.ceil(tileW/sp)+2, rows=Math.ceil(tileH/sp)+2;
-    for(let r=-1;r<rows;r++)for(let c=-1;c<cols;c++){
-      positions.push([ox+c*sp+(r%2?sp/2:0), oy+r*sp]);
-    }
-  } else if(p.patternType==='brick') {
-    const cols=Math.ceil(tileW/sp)+2, rows=Math.ceil(tileH/(sp/2))+2;
-    for(let r=-1;r<rows;r++)for(let c=-1;c<cols;c++){
-      positions.push([ox+c*sp+(r%2?sp/2:0), oy+r*sp*0.6]);
-    }
-  } else if(p.patternType==='hex') {
-    const rowH=sp*Math.sqrt(3)/2;
-    const cols=Math.ceil(tileW/sp)+2, rows=Math.ceil(tileH/rowH)+2;
-    for(let r=-1;r<rows;r++)for(let c=-1;c<cols;c++){
-      positions.push([ox+c*sp+(r%2?sp/2:0), oy+r*rowH]);
-    }
-  } else {
-    const cols=Math.ceil(tileW/sp)+2, rows=Math.ceil(tileH/sp)+2;
-    for(let r=-1;r<rows;r++)for(let c=-1;c<cols;c++){
-      positions.push([ox+c*sp, oy+r*sp]);
-    }
+  const cols = Math.ceil(tileW/sp)+2, rows = Math.ceil(tileH/sp)+2;
+  for(let r=-1;r<rows;r++) for(let c=-1;c<cols;c++) {
+    positions.push([ox+c*sp, oy+r*sp]);
   }
-
   positions.forEach(([x,y]) => {
-    if(p.tileShape==='diamond') {
-      parent.appendChild(createPatternElement(x, y, {...p, rotation: p.rotation + 45}));
-    } else {
-      parent.appendChild(createPatternElement(x, y, p));
-    }
+    parent.appendChild(createPatternElement(x, y, p));
   });
 }
 
@@ -2116,7 +2059,7 @@ function renderPattern() {
   svgLayers.innerHTML='';
   const p = patternState;
   const tileW = p.spacing * 3;
-  const tileH = p.tileShape==='hex' ? p.spacing * Math.sqrt(3) * 1.5 : tileW;
+  const tileH = tileW;
   const totalW = tileW * 3;
   const totalH = tileH * 3;
   svgEl.setAttribute('viewBox', `0 0 ${totalW} ${totalH}`);
@@ -2400,18 +2343,18 @@ const MANDALA_PRESETS=[
 ];
 
 const PATTERN_PRESETS=[
-  {name:'Dot Grid',p:{tileShape:'square',patternType:'grid',element:'dot',sides:6,spacing:60,size:8,rotation:0,strokeWeight:1,strokeColor:'#C9A84C',fill:false,fillColor:'#C9A84C',bgColor:'#050505'}},
-  {name:'Hex Dots',p:{tileShape:'hex',patternType:'hex',element:'dot',sides:6,spacing:50,size:10,rotation:0,strokeWeight:1,strokeColor:'#7B2FBE',fill:false,fillColor:'#7B2FBE',bgColor:'#050505'}},
-  {name:'Circle Grid',p:{tileShape:'square',patternType:'grid',element:'circle',sides:6,spacing:80,size:30,rotation:0,strokeWeight:1,strokeColor:'#C9A84C',fill:false,fillColor:'#C9A84C',bgColor:'#050505'}},
-  {name:'Triangle Brick',p:{tileShape:'square',patternType:'brick',element:'polygon',sides:3,spacing:60,size:20,rotation:0,strokeWeight:1,strokeColor:'#2FBEC9',fill:false,fillColor:'#2FBEC9',bgColor:'#050505'}},
-  {name:'Star Field',p:{tileShape:'square',patternType:'offset',element:'star',sides:5,spacing:80,size:16,rotation:0,strokeWeight:1,strokeColor:'#C9A84C',fill:false,fillColor:'#C9A84C',bgColor:'#050505'}},
-  {name:'Cross Hatch',p:{tileShape:'square',patternType:'grid',element:'cross',sides:4,spacing:40,size:18,rotation:45,strokeWeight:1,strokeColor:'#ffffff',fill:false,fillColor:'#ffffff',bgColor:'#050505'}},
-  {name:'Diamond Lines',p:{tileShape:'diamond',patternType:'grid',element:'line',sides:4,spacing:50,size:30,rotation:0,strokeWeight:1.5,strokeColor:'#C9A84C',fill:false,fillColor:'#C9A84C',bgColor:'#050505'}},
-  {name:'Hex Stars',p:{tileShape:'hex',patternType:'hex',element:'star',sides:6,spacing:70,size:20,rotation:0,strokeWeight:1,strokeColor:'#e05555',fill:false,fillColor:'#e05555',bgColor:'#050505'}},
-  {name:'Dense Circles',p:{tileShape:'square',patternType:'offset',element:'circle',sides:6,spacing:30,size:12,rotation:0,strokeWeight:0.5,strokeColor:'#2FBEC9',fill:false,fillColor:'#2FBEC9',bgColor:'#050505'}},
-  {name:'Gold Polygons',p:{tileShape:'square',patternType:'grid',element:'polygon',sides:6,spacing:80,size:30,rotation:0,strokeWeight:1.5,strokeColor:'#C9A84C',fill:false,fillColor:'#C9A84C',bgColor:'#0a0a0a'}},
-  {name:'Minimal Dots',p:{tileShape:'square',patternType:'grid',element:'dot',sides:6,spacing:100,size:4,rotation:0,strokeWeight:1,strokeColor:'#ffffff',fill:false,fillColor:'#ffffff',bgColor:'#0a0a0a'}},
-  {name:'Teal Weave',p:{tileShape:'square',patternType:'brick',element:'line',sides:4,spacing:40,size:30,rotation:0,strokeWeight:1,strokeColor:'#2FBEC9',fill:false,fillColor:'#2FBEC9',bgColor:'#050505'}}
+  {name:'Dot Grid',p:{element:'dot',sides:6,spacing:60,size:8,rotation:0,strokeWeight:1,strokeColor:'#C9A84C',fill:false,fillColor:'#C9A84C',bgColor:'#050505'}},
+  {name:'Hex Dots',p:{element:'dot',sides:6,spacing:50,size:10,rotation:0,strokeWeight:1,strokeColor:'#7B2FBE',fill:false,fillColor:'#7B2FBE',bgColor:'#050505'}},
+  {name:'Circle Grid',p:{element:'circle',sides:6,spacing:80,size:30,rotation:0,strokeWeight:1,strokeColor:'#C9A84C',fill:false,fillColor:'#C9A84C',bgColor:'#050505'}},
+  {name:'Triangle Field',p:{element:'polygon',sides:3,spacing:60,size:20,rotation:0,strokeWeight:1,strokeColor:'#2FBEC9',fill:false,fillColor:'#2FBEC9',bgColor:'#050505'}},
+  {name:'Star Field',p:{element:'star',sides:5,spacing:80,size:16,rotation:0,strokeWeight:1,strokeColor:'#C9A84C',fill:false,fillColor:'#C9A84C',bgColor:'#050505'}},
+  {name:'Cross Hatch',p:{element:'cross',sides:4,spacing:40,size:18,rotation:45,strokeWeight:1,strokeColor:'#ffffff',fill:false,fillColor:'#ffffff',bgColor:'#050505'}},
+  {name:'Diamond Lines',p:{element:'line',sides:4,spacing:50,size:30,rotation:45,strokeWeight:1.5,strokeColor:'#C9A84C',fill:false,fillColor:'#C9A84C',bgColor:'#050505'}},
+  {name:'Hex Stars',p:{element:'star',sides:6,spacing:70,size:20,rotation:0,strokeWeight:1,strokeColor:'#e05555',fill:false,fillColor:'#e05555',bgColor:'#050505'}},
+  {name:'Dense Circles',p:{element:'circle',sides:6,spacing:30,size:12,rotation:0,strokeWeight:0.5,strokeColor:'#2FBEC9',fill:false,fillColor:'#2FBEC9',bgColor:'#050505'}},
+  {name:'Gold Polygons',p:{element:'polygon',sides:6,spacing:80,size:30,rotation:0,strokeWeight:1.5,strokeColor:'#C9A84C',fill:false,fillColor:'#C9A84C',bgColor:'#0a0a0a'}},
+  {name:'Minimal Dots',p:{element:'dot',sides:6,spacing:100,size:4,rotation:0,strokeWeight:1,strokeColor:'#ffffff',fill:false,fillColor:'#ffffff',bgColor:'#0a0a0a'}},
+  {name:'Teal Weave',p:{element:'line',sides:4,spacing:40,size:30,rotation:0,strokeWeight:1,strokeColor:'#2FBEC9',fill:false,fillColor:'#2FBEC9',bgColor:'#050505'}}
 ];
 
 function loadMandalaPreset(preset) {
@@ -2425,8 +2368,6 @@ function loadMandalaPreset(preset) {
 
 function loadPatternPreset(preset) {
   Object.assign(patternState, preset.p);
-  document.getElementById('patTileShape').value=patternState.tileShape;
-  document.getElementById('patType').value=patternState.patternType;
   document.getElementById('patSpacing').value=patternState.spacing;document.getElementById('patSpacingVal').textContent=patternState.spacing;
   document.getElementById('patSize').value=patternState.size;document.getElementById('patSizeVal').textContent=patternState.size;
   document.getElementById('patRotation').value=patternState.rotation;document.getElementById('patRotationVal').textContent=patternState.rotation+'°';
@@ -2492,7 +2433,7 @@ function getSVGForExport() {
   if(app.mode==='pattern') {
     const p=patternState;
     const tileW=p.spacing*3;
-    const tileH=p.tileShape==='hex'?p.spacing*Math.sqrt(3)*1.5:tileW;
+    const tileH=tileW;
     clone.setAttribute('viewBox',`0 0 ${tileW} ${tileH}`);
     const root=clone.querySelector('#svgRoot');
     root.innerHTML='';
@@ -2595,7 +2536,7 @@ document.getElementById('exportPNG').addEventListener('click',async ()=>{
   const canvas=document.createElement('canvas');
   let w=800,h=800;
   if(app.mode==='pattern'){
-    const p=patternState;const tileW=p.spacing*3;const tileH=p.tileShape==='hex'?p.spacing*Math.sqrt(3)*1.5:tileW;
+    const p=patternState;const tileW=p.spacing*3;const tileH=tileW;
     w=tileW*3;h=tileH*3;
   }
   canvas.width=w;canvas.height=h;
@@ -2618,7 +2559,7 @@ document.getElementById('exportCSS').addEventListener('click',()=>{
   const encoded=btoa(unescape(encodeURIComponent(svg)));
   let size='200px 200px';
   if(app.mode==='pattern'){
-    const p=patternState;const tileW=p.spacing*3;const tileH=p.tileShape==='hex'?p.spacing*Math.sqrt(3)*1.5:tileW;
+    const p=patternState;const tileW=p.spacing*3;const tileH=tileW;
     size=`${tileW}px ${tileH}px`;
   }
   const css=`background-image: url("data:image/svg+xml;base64,${encoded}");\nbackground-repeat: repeat;\nbackground-size: ${size};`;
