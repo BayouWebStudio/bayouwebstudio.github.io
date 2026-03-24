@@ -15,7 +15,8 @@
 html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,'SF Pro','Segoe UI',sans-serif;background:var(--bg);color:var(--text);touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 button{font-family:inherit;cursor:pointer;border:none;background:none;color:var(--text)}
 input[type=range]{-webkit-appearance:none;background:var(--surface2);height:6px;border-radius:3px;outline:none}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--gold);cursor:pointer;border:2px solid var(--bg)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;border-radius:50%;background:var(--gold);cursor:pointer;border:2px solid var(--bg)}
+@media(pointer:coarse){input[type=range]::-webkit-slider-thumb{width:44px;height:44px}}
 input[type=color]{-webkit-appearance:none;border:2px solid var(--border);border-radius:var(--radius);width:36px;height:36px;padding:2px;background:var(--surface);cursor:pointer}
 input[type=color]::-webkit-color-swatch-wrapper{padding:0}
 input[type=color]::-webkit-color-swatch{border:none;border-radius:4px}
@@ -128,6 +129,11 @@ select{background:var(--surface2);color:var(--text);border:1px solid var(--borde
 .undo-bar{display:flex;gap:6px;margin-bottom:8px}
 .undo-bar .btn{padding:8px 12px;font-size:18px}
 
+@media(pointer:coarse){
+  .shape-btn,.draw-tool-btn,.wpg-btn,.preset-btn,.sym-chip,.color-swatch,.btn,.tab,.mode-switcher button{min-height:44px}
+  .lock-btn{min-width:36px;min-height:36px}
+  .color-swatch{width:36px;height:36px}
+}
 @media(max-width:768px){
   .app{flex-direction:column}
   .canvas-area{flex:none;height:50vh;height:50dvh;padding:4px}
@@ -487,7 +493,7 @@ select{background:var(--surface2);color:var(--text);border:1px solid var(--borde
 
 <script>
 // ═══════════════════════════════════════════════
-// Mandala Studio v1.6
+// Mandala Studio v1.7
 // Modes: Mandala + Seamless Pattern (with tile drawing) + Draw
 // ═══════════════════════════════════════════════
 
@@ -889,7 +895,7 @@ function switchMode() {
   const layersTab = document.querySelector('[data-tab="layers"]');
   const generateTab = document.querySelector('[data-tab="generate"]');
   const presetsTab = document.querySelector('[data-tab="presets"]');
-  layersTab.style.display = isDraw ? 'none' : '';
+  layersTab.style.display = isMandala ? '' : 'none';
   generateTab.style.display = isDraw ? 'none' : '';
   presetsTab.style.display = isDraw ? 'none' : '';
 
@@ -1050,7 +1056,7 @@ bindPSlider('patStrokeWeight','strokeWeight');
 bindPSlider('patSides','sides');
 
 // Re-resize pat draw canvas when spacing changes (affects tile size)
-document.getElementById('patSpacing').addEventListener('change', () => { if(patDrawState.active) resizePatDrawCanvas(); });
+document.getElementById('patSpacing').addEventListener('change', () => { if(patDrawState.active) { resizePatDrawCanvas(); renderAll(); } });
 
 document.getElementById('patStrokeColor').addEventListener('input', e => { patternState.strokeColor=e.target.value; renderAll(); });
 document.getElementById('patBgColor').addEventListener('input', e => { patternState.bgColor=e.target.value; renderAll(); });
@@ -1154,12 +1160,18 @@ function pushUndo() {
 document.getElementById('drawUndo').addEventListener('click', doUndo);
 document.getElementById('drawRedo').addEventListener('click', doRedo);
 
+function _checkDrawContent() {
+  const data = drawCtx.getImageData(0, 0, drawCanvas.width, drawCanvas.height).data;
+  for (let i = 3; i < data.length; i += 4) { if (data[i] > 0) { _drawHasContent = true; return; } }
+  _drawHasContent = false;
+}
 function doUndo() {
   if (drawState.undoStack.length === 0) return;
   const current = drawCtx.getImageData(0, 0, drawCanvas.width, drawCanvas.height);
   drawState.redoStack.push(current);
   const prev = drawState.undoStack.pop();
   drawCtx.putImageData(prev, 0, 0);
+  _checkDrawContent();
 }
 
 function doRedo() {
@@ -1168,6 +1180,7 @@ function doRedo() {
   drawState.undoStack.push(current);
   const next = drawState.redoStack.pop();
   drawCtx.putImageData(next, 0, 0);
+  _checkDrawContent();
 }
 
 // Keyboard shortcuts
@@ -1190,6 +1203,7 @@ document.getElementById('drawClear').addEventListener('click', () => {
   if (!confirm('Clear the drawing canvas?')) return;
   pushUndo();
   drawCtx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
+  markDrawDirty(false);
 });
 
 // ─── Drawing Engine ───
@@ -1334,6 +1348,7 @@ function onDrawStart(e) {
   drawState.startPt = pt;
 
   pushUndo();
+  markDrawDirty(true);
 
   if (drawState.tool === 'brush' || drawState.tool === 'eraser') {
     // Initialize mirrored stroke arrays
@@ -1534,12 +1549,18 @@ function pushPatDrawUndo() {
   patDrawState.redoStack = [];
 }
 
+function _checkPatDrawContent() {
+  const data = patDrawCtx.getImageData(0, 0, patDrawCanvas.width, patDrawCanvas.height).data;
+  for (let i = 3; i < data.length; i += 4) { if (data[i] > 0) { _patDrawHasContent = true; return; } }
+  _patDrawHasContent = false;
+}
 function doPatDrawUndo() {
   if (patDrawState.undoStack.length === 0) return;
   const current = patDrawCtx.getImageData(0, 0, patDrawCanvas.width, patDrawCanvas.height);
   patDrawState.redoStack.push(current);
   const prev = patDrawState.undoStack.pop();
   patDrawCtx.putImageData(prev, 0, 0);
+  _checkPatDrawContent();
   renderPatternWithDrawing();
 }
 
@@ -1549,6 +1570,7 @@ function doPatDrawRedo() {
   patDrawState.undoStack.push(current);
   const next = patDrawState.redoStack.pop();
   patDrawCtx.putImageData(next, 0, 0);
+  _checkPatDrawContent();
   renderPatternWithDrawing();
 }
 
@@ -1559,6 +1581,7 @@ document.getElementById('patDrawClear').addEventListener('click', () => {
   if (!confirm('Clear the tile drawing?')) return;
   pushPatDrawUndo();
   patDrawCtx.clearRect(0, 0, patDrawCanvas.width, patDrawCanvas.height);
+  markPatDrawDirty(false);
   renderPatternWithDrawing();
 });
 
@@ -1678,6 +1701,7 @@ function onPatDrawStart(e) {
   patDrawState.startPt = pt;
 
   pushPatDrawUndo();
+  markPatDrawDirty(true);
 
   if (patDrawState.tool === 'brush' || patDrawState.tool === 'eraser') {
     setupPatDrawCtx(patDrawState.tool === 'eraser');
@@ -1824,39 +1848,34 @@ patDrawCanvas.addEventListener('pointerup', onPatDrawEnd);
 patDrawCanvas.addEventListener('pointerleave', onPatDrawEnd);
 patDrawCanvas.addEventListener('pointercancel', onPatDrawEnd);
 
-// Check if pattern draw canvas has content
-function hasPatDrawContent() {
-  const data = patDrawCtx.getImageData(0, 0, patDrawCanvas.width, patDrawCanvas.height).data;
-  for (let i = 3; i < data.length; i += 4) {
-    if (data[i] > 0) return true;
-  }
-  return false;
-}
+// Check if pattern draw canvas has content (cached for performance)
+let _patDrawHasContent = false;
+function markPatDrawDirty(hasContent) { _patDrawHasContent = hasContent !== undefined ? hasContent : true; }
+function hasPatDrawContent() { return _patDrawHasContent; }
 
 // Render pattern with tile drawing overlaid as tiled 3x3
+// Throttled to avoid excessive SVG rebuilds during drawing on iPad
+let _patDrawRenderPending = false;
 function renderPatternWithDrawing() {
   if (app.mode !== 'pattern' || !patDrawState.active || !hasPatDrawContent()) return;
-  // The SVG pattern is rendered normally; we overlay the tile drawing onto the SVG via
-  // an embedded image in the SVG for each of the 9 tiles
-  renderPattern(); // re-render base pattern
-  if (!hasPatDrawContent()) return;
-
-  const { tileW, tileH } = getPatTileSize();
-  const dataUrl = patDrawCanvas.toDataURL('image/png');
-
-  for (let tx = 0; tx < 3; tx++) {
-    for (let ty = 0; ty < 3; ty++) {
-      const img = makeEl('image', {
-        href: dataUrl,
-        x: tx * tileW,
-        y: ty * tileH,
-        width: tileW,
-        height: tileH,
-        'preserveAspectRatio': 'none'
-      });
-      svgLayers.appendChild(img);
+  if (_patDrawRenderPending) return;
+  _patDrawRenderPending = true;
+  requestAnimationFrame(() => {
+    _patDrawRenderPending = false;
+    if (app.mode !== 'pattern' || !patDrawState.active) return;
+    renderPattern();
+    if (!hasPatDrawContent()) return;
+    const { tileW, tileH } = getPatTileSize();
+    const dataUrl = patDrawCanvas.toDataURL('image/png');
+    for (let tx = 0; tx < 3; tx++) {
+      for (let ty = 0; ty < 3; ty++) {
+        svgLayers.appendChild(makeEl('image', {
+          href: dataUrl, x: tx * tileW, y: ty * tileH,
+          width: tileW, height: tileH, 'preserveAspectRatio': 'none'
+        }));
+      }
     }
-  }
+  });
 }
 
 // Resize draw canvas to match wrap
@@ -2504,13 +2523,9 @@ function exportComposite(transparent) {
   });
 }
 
-function hasDrawContent() {
-  const data = drawCtx.getImageData(0, 0, drawCanvas.width, drawCanvas.height).data;
-  for (let i = 3; i < data.length; i += 4) {
-    if (data[i] > 0) return true;
-  }
-  return false;
-}
+let _drawHasContent = false;
+function markDrawDirty(hasContent) { _drawHasContent = hasContent !== undefined ? hasContent : true; }
+function hasDrawContent() { return _drawHasContent; }
 
 document.getElementById('exportSVG').addEventListener('click',()=>{
   const svg=getSVGForExport();

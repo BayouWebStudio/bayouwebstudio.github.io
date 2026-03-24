@@ -1,7 +1,7 @@
 {
-  "name": "Sacred Geometry Builder",
-  "short_name": "Geometry",
-  "description": "Create sacred geometry and generative patterns in real time",
+  "name": "Mandala Studio",
+  "short_name": "Mandala Studio",
+  "description": "Create mandalas, seamless patterns, and generative sacred geometry",
   "start_url": "/geometry-builder/",
   "display": "standalone",
   "orientation": "any",
