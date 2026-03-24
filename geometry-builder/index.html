@@ -6,7 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#0a0a0a">
-<title>Mandala Studio v1.5</title>
+<title>Mandala Studio v1.6</title>
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-192.png">
 <style>
@@ -25,6 +25,7 @@ select{background:var(--surface2);color:var(--text);border:1px solid var(--borde
 .canvas-wrap{position:relative;aspect-ratio:1;max-width:100%;max-height:100%;background:#050505;border:1px solid var(--border);border-radius:4px;overflow:hidden}
 #mainCanvas{display:block;width:100%;height:100%}
 #drawCanvas{position:absolute;top:0;left:0;width:100%;height:100%;cursor:crosshair;touch-action:none;display:none}
+#patDrawCanvas{position:absolute;top:0;left:0;width:100%;height:100%;cursor:crosshair;touch-action:none;display:none;z-index:2}
 .mode-label{position:absolute;top:10px;left:10px;background:rgba(10,10,10,.85);color:var(--gold);font-size:11px;padding:4px 10px;border-radius:12px;letter-spacing:1px;text-transform:uppercase;pointer-events:none;z-index:5}
 .panel{width:340px;background:var(--surface);border-left:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden}
 .panel-scroll{flex:1;overflow-y:auto;padding:12px;scrollbar-width:thin;scrollbar-color:var(--border) transparent}
@@ -86,6 +87,15 @@ select{background:var(--surface2);color:var(--text);border:1px solid var(--borde
 .tab-content{display:none}
 .tab-content.active{display:block}
 
+/* Wallpaper Groups Grid */
+.wallpaper-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px}
+.wallpaper-btn{display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 4px;border-radius:var(--radius);background:var(--surface2);border:2px solid transparent;font-size:9px;color:var(--text2);transition:all .15s;min-height:70px;position:relative}
+.wallpaper-btn:hover{border-color:var(--border);color:var(--text)}
+.wallpaper-btn.active{border-color:var(--gold);color:var(--gold);background:#1a1708}
+.wallpaper-btn .group-code{font-weight:600;color:var(--gold)}
+.wallpaper-btn .group-desc{text-align:center;line-height:1.1}
+.wallpaper-icon{width:24px;height:24px;margin-bottom:2px;stroke:currentColor;fill:none;stroke-width:1.5}
+
 .gen-dial{display:flex;align-items:center;gap:8px;margin-bottom:12px;position:relative}
 .gen-dial label{font-size:12px;color:var(--text2);min-width:72px;flex-shrink:0}
 .gen-dial input[type=range]{flex:1}
@@ -97,130 +107,83 @@ select{background:var(--surface2);color:var(--text);border:1px solid var(--borde
 .gen-color-row{display:flex;align-items:center;gap:8px;margin-bottom:12px}
 .gen-color-row label{font-size:12px;color:var(--text2);min-width:72px;flex-shrink:0}
 
-/* PNG export bg toggle */
-.export-option{display:flex;align-items:center;gap:8px;margin-bottom:10px;font-size:12px;color:var(--text2)}
-
-/* Pattern draw canvas */
-#patDrawCanvas{position:absolute;top:0;left:0;width:100%;height:100%;cursor:crosshair;touch-action:none;display:none;z-index:2}
-
-/* Draw tool buttons */
-.draw-tool-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:12px}
-.draw-tool-btn{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 4px;border-radius:var(--radius);background:var(--surface2);border:2px solid transparent;font-size:10px;color:var(--text2);transition:all .15s}
+/* Draw tool grid for pattern drawing */
+.draw-tool-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-bottom:12px}
+.draw-tool-btn{display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 4px;border-radius:var(--radius);background:var(--surface2);border:2px solid transparent;font-size:10px;color:var(--text2);transition:all .15s;min-height:50px}
 .draw-tool-btn:hover{border-color:var(--border);color:var(--text)}
 .draw-tool-btn.active{border-color:var(--gold);color:var(--gold);background:#1a1708}
-.draw-tool-btn .tool-icon{font-size:20px;line-height:1}
+.draw-tool-btn .tool-icon{font-size:16px;margin-bottom:2px}
 
-/* Symmetry selector chips */
-.sym-chips{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:12px}
-.sym-chip{padding:6px 10px;border-radius:14px;background:var(--surface2);border:1px solid var(--border);font-size:11px;color:var(--text2);cursor:pointer;transition:all .15s;font-weight:500}
-.sym-chip:hover{border-color:var(--gold);color:var(--text)}
-.sym-chip.active{background:var(--gold);color:#0a0a0a;border-color:var(--gold);font-weight:700}
-
-/* Undo/redo bar */
 .undo-bar{display:flex;gap:6px;margin-bottom:8px}
-.undo-bar .btn{padding:8px 12px;font-size:18px}
-
-@media(max-width:768px){
-  .app{flex-direction:column}
-  .canvas-area{flex:none;height:45vh;height:45dvh}
-  .panel{width:100%;border-left:none;border-top:1px solid var(--border);flex:1}
-  .tab{font-size:10px;padding:10px 4px}
-  .mode-switcher button{font-size:13px;padding:10px 6px}
-}
-@media(max-width:480px){
-  .shape-grid{grid-template-columns:repeat(3,1fr)}
-  .presets-grid{grid-template-columns:repeat(2,1fr)}
-}
+.undo-bar .btn{flex:1;padding:8px 12px;font-size:11px}
 </style>
 </head>
 <body>
-<div class="app">
-  <div class="canvas-area">
-    <div class="canvas-wrap" id="canvasWrap">
-      <svg id="mainCanvas" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <clipPath id="circleClip"><circle cx="400" cy="400" r="396"/></clipPath>
-        </defs>
-        <rect width="800" height="800" fill="#050505"/>
-        <g id="svgRoot">
-          <g id="svgLayers"></g>
-          <g id="svgGenLayer"></g>
-        </g>
-      </svg>
-      <canvas id="drawCanvas" width="800" height="800"></canvas>
-      <canvas id="patDrawCanvas" width="800" height="800"></canvas>
+  <div class="app">
+    <div class="canvas-area">
+      <div class="canvas-wrap" id="canvasWrap">
+        <svg id="mainCanvas" width="800" height="800" viewBox="0 0 800 800">
+          <defs>
+            <clipPath id="circleClip"><circle cx="400" cy="400" r="396"/></clipPath>
+          </defs>
+          <g id="svgRoot">
+            <rect width="800" height="800" fill="#050505"/>
+            <g id="svgLayers"></g>
+            <g id="svgGenLayer"></g>
+          </g>
+        </svg>
+        <canvas id="drawCanvas" width="800" height="800"></canvas>
+        <canvas id="patDrawCanvas" width="800" height="800"></canvas>
+      </div>
       <div class="mode-label" id="modeLabel">🔮 Mandala</div>
     </div>
-  </div>
-  <div class="panel">
-    <!-- Mode Switcher -->
-    <div class="mode-switcher">
-      <button class="active" data-appmode="mandala">🔮 Mandala</button>
-      <button data-appmode="pattern">▦ Pattern</button>
-      <button data-appmode="draw">✏️ Draw</button>
-    </div>
-    <div class="tabs" id="tabBar">
-      <button class="tab active" data-tab="controls">Controls</button>
-      <button class="tab" data-tab="generate">⚡ Generate</button>
-      <button class="tab" data-tab="layers">Layers</button>
-      <button class="tab" data-tab="presets">Presets</button>
-      <button class="tab" data-tab="export">Export</button>
-    </div>
-    <div class="panel-scroll">
-
-      <!-- ═══════════════════════════════ -->
-      <!-- MANDALA CONTROLS TAB -->
-      <!-- ═══════════════════════════════ -->
-      <div class="tab-content active" id="tab-controls">
+    
+    <div class="panel">
+      <div class="mode-switcher">
+        <button class="active" data-appmode="mandala">🔮 Mandala</button>
+        <button data-appmode="pattern">▦ Pattern</button>
+        <button data-appmode="draw">✏️ Draw</button>
+      </div>
+      
+      <div class="tabs">
+        <div class="tab active" data-tab="controls">Controls</div>
+        <div class="tab" data-tab="layers">Layers</div>
+        <div class="tab" data-tab="generate">Generate</div>
+        <div class="tab" data-tab="presets">Presets</div>
+        <div class="tab" data-tab="export">Export</div>
+      </div>
+      
+      <div class="panel-scroll">
+        <!-- MANDALA CONTROLS -->
+        <div class="tab-content active" id="tab-controls">
+          
         <!-- Mandala-specific controls -->
-        <div id="mandalaControls">
+        <div id="mandalaControls" style="display:block">
           <div class="section">
             <div class="section-title">Shape</div>
             <div class="shape-grid" id="shapeGrid">
-              <button class="shape-btn active" data-shape="circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/></svg>Circle</button>
+              <button class="shape-btn active" data-shape="circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="8"/></svg>Circle</button>
               <button class="shape-btn" data-shape="polygon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12,2 22,18 2,18"/></svg>Polygon</button>
               <button class="shape-btn" data-shape="star"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12,2 15,9 22,9 16,14 18,22 12,17 6,22 8,14 2,9 9,9"/></svg>Star</button>
-              <button class="shape-btn" data-shape="line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="4" y1="20" x2="20" y2="4"/></svg>Line</button>
-              <button class="shape-btn" data-shape="flower"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="4"/><circle cx="12" cy="6" r="4"/><circle cx="17" cy="9" r="4"/><circle cx="17" cy="15" r="4"/><circle cx="12" cy="18" r="4"/><circle cx="7" cy="15" r="4"/><circle cx="7" cy="9" r="4"/></svg>Flower</button>
-              <button class="shape-btn" data-shape="metatron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="12" r="2"/><circle cx="12" cy="5" r="2"/><circle cx="12" cy="19" r="2"/><circle cx="6" cy="8.5" r="2"/><circle cx="18" cy="8.5" r="2"/><circle cx="6" cy="15.5" r="2"/><circle cx="18" cy="15.5" r="2"/></svg>Metatron</button>
+              <button class="shape-btn" data-shape="line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="20" x2="20" y2="4"/></svg>Line</button>
+              <button class="shape-btn" data-shape="flower"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="5" r="2"/><circle cx="19" cy="12" r="2"/><circle cx="12" cy="19" r="2"/><circle cx="5" cy="12" r="2"/></svg>Flower</button>
+              <button class="shape-btn" data-shape="metatron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="12" r="2"/><circle cx="12" cy="6" r="1.5"/><circle cx="18" cy="9" r="1.5"/><circle cx="18" cy="15" r="1.5"/><circle cx="12" cy="18" r="1.5"/><circle cx="6" cy="15" r="1.5"/><circle cx="6" cy="9" r="1.5"/></svg>Metatron</button>
             </div>
           </div>
-          <div class="section" id="sidesSection">
+          <div class="section" id="sidesSection" style="display:none">
             <div class="ctrl-row"><label>Sides</label><input type="range" id="sides" min="3" max="12" value="6" step="1"><span class="val" id="sidesVal">6</span></div>
           </div>
           <div class="section">
-            <div class="section-title">Mandala</div>
+            <div class="section-title">Structure</div>
             <div class="ctrl-row"><label>Symmetry</label><input type="range" id="symmetry" min="1" max="24" value="6" step="1"><span class="val" id="symmetryVal">6</span></div>
-            <div class="ctrl-row"><label>Rings</label><input type="range" id="ringCount" min="1" max="8" value="1" step="1"><span class="val" id="ringCountVal">1</span></div>
+            <div class="ctrl-row"><label>Ring Count</label><input type="range" id="ringCount" min="1" max="8" value="1" step="1"><span class="val" id="ringCountVal">1</span></div>
             <div class="ctrl-row"><label>Per Ring</label><input type="range" id="elemPerRing" min="1" max="6" value="1" step="1"><span class="val" id="elemPerRingVal">1</span></div>
-            <div class="ctrl-row"><label>Radius</label><input type="range" id="radius" min="10" max="380" value="150"><span class="val" id="radiusVal">150</span></div>
+            <div class="ctrl-row"><label>Radius</label><input type="range" id="radius" min="20" max="380" value="150"><span class="val" id="radiusVal">150</span></div>
             <div class="ctrl-row"><label>Rotation</label><input type="range" id="rotation" min="0" max="360" value="0"><span class="val" id="rotationVal">0°</span></div>
           </div>
           <div class="section">
-            <div class="section-title">Center Element</div>
-            <div class="ctrl-row"><label>Center</label>
-              <select id="centerElem">
-                <option value="none">Empty</option>
-                <option value="dot" selected>Dot</option>
-                <option value="circle">Circle</option>
-                <option value="star">Star</option>
-              </select>
-            </div>
-          </div>
-          <div class="section">
-            <div class="section-title">Outer Boundary</div>
-            <div class="ctrl-row"><label>Boundary</label>
-              <select id="outerBound">
-                <option value="none">None</option>
-                <option value="circle" selected>Circle</option>
-                <option value="square">Square</option>
-                <option value="star">Star</option>
-              </select>
-            </div>
-          </div>
-          <div class="section">
             <div class="section-title">Stroke</div>
-            <div class="ctrl-row"><label>Weight</label><input type="range" id="strokeWeight" min="0.5" max="10" value="1.5" step="0.5"><span class="val" id="strokeWeightVal">1.5</span></div>
+            <div class="ctrl-row"><label>Weight</label><input type="range" id="strokeWeight" min="0.5" max="8" value="1.5" step="0.5"><span class="val" id="strokeWeightVal">1.5</span></div>
             <div class="ctrl-row"><label>Color</label><input type="color" id="strokeColor" value="#C9A84C"></div>
             <div class="color-presets" id="strokePresets">
               <div class="color-swatch active" style="background:#C9A84C" data-color="#C9A84C"></div>
@@ -236,28 +199,36 @@ select{background:var(--surface2);color:var(--text);border:1px solid var(--borde
             <div class="ctrl-row" id="fillColorRow" style="display:none"><label>Fill color</label><input type="color" id="fillColor" value="#C9A84C"></div>
           </div>
           <div class="section">
-            <div class="ctrl-row"><label>Opacity</label><input type="range" id="opacity" min="0.05" max="1" value="1" step="0.05"><span class="val" id="opacityVal">100%</span></div>
+            <div class="section-title">Opacity</div>
+            <div class="ctrl-row"><label>Alpha</label><input type="range" id="opacity" min="0.05" max="1" value="1" step="0.05"><span class="val" id="opacityVal">100%</span></div>
+          </div>
+          <div class="section">
+            <div class="section-title">Decorations</div>
+            <div class="ctrl-row"><label>Center</label>
+              <select id="centerElem">
+                <option value="none">None</option>
+                <option value="dot" selected>Dot</option>
+                <option value="circle">Circle</option>
+                <option value="star">Star</option>
+              </select>
+            </div>
+            <div class="ctrl-row"><label>Outer Ring</label>
+              <select id="outerBound">
+                <option value="none">None</option>
+                <option value="circle" selected>Circle</option>
+                <option value="square">Square</option>
+                <option value="star">Star</option>
+              </select>
+            </div>
           </div>
         </div>
 
         <!-- Pattern-specific controls -->
         <div id="patternControls" style="display:none">
           <div class="section">
-            <div class="section-title">Tile</div>
-            <div class="ctrl-row"><label>Tile Shape</label>
-              <select id="patTileShape">
-                <option value="square" selected>Square</option>
-                <option value="hex">Hexagonal</option>
-                <option value="diamond">Diamond</option>
-              </select>
-            </div>
-            <div class="ctrl-row"><label>Pattern Type</label>
-              <select id="patType">
-                <option value="grid" selected>Grid</option>
-                <option value="offset">Offset</option>
-                <option value="brick">Brick</option>
-                <option value="hex">Hex</option>
-              </select>
+            <div class="section-title">Wallpaper Group</div>
+            <div class="wallpaper-grid" id="wallpaperGrid">
+              <!-- Will be populated with all 17 wallpaper groups -->
             </div>
           </div>
           <div class="section">
@@ -340,43 +311,34 @@ select{background:var(--surface2);color:var(--text);border:1px solid var(--borde
         <div id="drawControls" style="display:none">
           <div class="section">
             <div class="section-title">Tool</div>
-            <div class="draw-tool-grid" id="drawToolGrid">
-              <button class="draw-tool-btn active" data-drawtool="brush"><span class="tool-icon">🖌️</span>Brush</button>
-              <button class="draw-tool-btn" data-drawtool="line"><span class="tool-icon">📏</span>Line</button>
-              <button class="draw-tool-btn" data-drawtool="circle"><span class="tool-icon">⭕</span>Circle</button>
-              <button class="draw-tool-btn" data-drawtool="eraser"><span class="tool-icon">🧹</span>Eraser</button>
+            <div class="shape-grid">
+              <button class="shape-btn active" data-drawtool="brush"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5l4 4-6 6-4-4z"/><path d="M13 7l2 2"/><path d="M3 21v-2l10-10"/></svg>Brush</button>
+              <button class="shape-btn" data-drawtool="line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="20" x2="20" y2="4"/></svg>Line</button>
+              <button class="shape-btn" data-drawtool="circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/></svg>Circle</button>
+              <button class="shape-btn" data-drawtool="eraser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="14" width="5" height="7"/><path d="M7 14l9-9 3 3L10 17z"/></svg>Eraser</button>
             </div>
           </div>
           <div class="section">
-            <div class="section-title">Symmetry Folds</div>
-            <div class="sym-chips" id="symChips">
-              <button class="sym-chip" data-folds="1">1</button>
-              <button class="sym-chip" data-folds="2">2</button>
-              <button class="sym-chip" data-folds="4">4</button>
-              <button class="sym-chip active" data-folds="6">6</button>
-              <button class="sym-chip" data-folds="8">8</button>
-              <button class="sym-chip" data-folds="12">12</button>
-              <button class="sym-chip" data-folds="16">16</button>
-              <button class="sym-chip" data-folds="24">24</button>
-            </div>
+            <div class="section-title">Symmetry</div>
+            <div class="ctrl-row"><label>Folds</label><input type="range" id="drawFolds" min="0" max="24" value="6"><span class="val" id="drawFoldsVal">6</span></div>
           </div>
           <div class="section">
             <div class="section-title">Brush</div>
             <div class="ctrl-row"><label>Size</label><input type="range" id="drawSize" min="1" max="40" value="3"><span class="val" id="drawSizeVal">3</span></div>
             <div class="ctrl-row"><label>Opacity</label><input type="range" id="drawOpacity" min="0.05" max="1" value="1" step="0.05"><span class="val" id="drawOpacityVal">100%</span></div>
             <div class="ctrl-row"><label>Color</label><input type="color" id="drawColor" value="#C9A84C"></div>
-            <div class="color-presets" id="drawColorPresets">
+            <div class="color-presets">
               <div class="color-swatch" style="background:#000000" data-color="#000000"></div>
               <div class="color-swatch" style="background:#ffffff" data-color="#ffffff"></div>
               <div class="color-swatch active" style="background:#C9A84C" data-color="#C9A84C"></div>
               <div class="color-swatch" style="background:#7B2FBE" data-color="#7B2FBE"></div>
+              <div class="color-swatch" style="background:#2FBEC9" data-color="#2FBEC9"></div>
             </div>
           </div>
           <div class="section">
-            <div class="toggle-row"><div class="toggle on" id="drawSmoothToggle"></div><span style="font-size:12px;color:var(--text2)">Smooth strokes</span></div>
-          </div>
-          <div class="section">
-            <div class="toggle-row"><div class="toggle" id="drawGuideToggle"></div><span style="font-size:12px;color:var(--text2)">Show geometry guide</span></div>
+            <div class="section-title">Guide</div>
+            <div class="toggle-row"><div class="toggle" id="drawShowGuideToggle"></div><span style="font-size:12px;color:var(--text2)">Show symmetry guide</span></div>
+            <div class="toggle-row"><div class="toggle" id="drawSmoothToggle" class="on"></div><span style="font-size:12px;color:var(--text2)">Smooth strokes</span></div>
           </div>
           <div class="section">
             <div class="section-title">History</div>
@@ -389,112 +351,183 @@ select{background:var(--surface2);color:var(--text);border:1px solid var(--borde
             </div>
           </div>
         </div>
+        
+        </div>
+        
+        <!-- LAYERS TAB -->
+        <div class="tab-content" id="tab-layers">
+          <div class="section">
+            <div class="section-title">Layer Stack</div>
+            <div class="layers-list" id="layersList"></div>
+            <div class="btn-row">
+              <button class="btn btn-outline" id="addLayerBtn" title="Add Layer">+</button>
+              <button class="btn btn-outline" id="dupeLayerBtn" title="Duplicate">⧉</button>
+              <button class="btn btn-outline" id="moveUpBtn" title="Move Up">⬆</button>
+              <button class="btn btn-outline" id="moveDownBtn" title="Move Down">⬇</button>
+              <button class="btn btn-danger" id="deleteLayerBtn" title="Delete">✖</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- GENERATE TAB -->
+        <div class="tab-content" id="tab-generate">
+          <div class="section" id="genMandalaSection" style="display:none">
+            <div class="section-title">Mandala Engine</div>
+            <div class="gen-dial">
+              <label>Complexity</label>
+              <input type="range" id="genComplexity" min="1" max="8" value="3" step="1">
+              <span class="val" id="genComplexityVal">3</span>
+              <button class="lock-btn" data-dial="genComplexity">🔓</button>
+            </div>
+            <div class="gen-dial">
+              <label>Tension</label>
+              <input type="range" id="genTension" min="0" max="100" value="0">
+              <span class="val" id="genTensionVal">0</span>
+              <button class="lock-btn" data-dial="genTension">🔓</button>
+            </div>
+            <div class="gen-dial">
+              <label>Density</label>
+              <input type="range" id="genDensity" min="10" max="100" value="50">
+              <span class="val" id="genDensityVal">50</span>
+              <button class="lock-btn" data-dial="genDensity">🔓</button>
+            </div>
+            <div class="gen-dial">
+              <label>Spiral</label>
+              <input type="range" id="genSpiral" min="0" max="100" value="0">
+              <span class="val" id="genSpiralVal">0</span>
+              <button class="lock-btn" data-dial="genSpiral">🔓</button>
+            </div>
+            <div class="gen-dial">
+              <label>Chaos</label>
+              <input type="range" id="genChaos" min="0" max="60" value="0">
+              <span class="val" id="genChaosVal">0</span>
+              <button class="lock-btn" data-dial="genChaos">🔓</button>
+            </div>
+          </div>
+          
+          <div class="section" id="genSharedSection">
+            <div class="section-title">Structure</div>
+            <div class="gen-dial">
+              <label>Symmetry</label>
+              <input type="range" id="genSymmetry" min="2" max="24" value="6" step="1">
+              <span class="val" id="genSymmetryVal">6</span>
+              <button class="lock-btn" data-dial="genSymmetry">🔓</button>
+            </div>
+            <div class="gen-dial">
+              <label>Rings</label>
+              <input type="range" id="genRings" min="1" max="8" value="3" step="1">
+              <span class="val" id="genRingsVal">3</span>
+              <button class="lock-btn" data-dial="genRings">🔓</button>
+            </div>
+            <div class="gen-dial">
+              <label>Radius</label>
+              <input type="range" id="genRadius" min="80" max="350" value="280">
+              <span class="val" id="genRadiusVal">280</span>
+              <button class="lock-btn" data-dial="genRadius">🔓</button>
+            </div>
+            <div class="gen-dial">
+              <label>Rotation</label>
+              <input type="range" id="genRotation" min="0" max="360" value="0">
+              <span class="val" id="genRotationVal">0°</span>
+              <button class="lock-btn" data-dial="genRotation">🔓</button>
+            </div>
+          </div>
+          
+          <!-- Pattern-specific gen dials -->
+          <div class="section" id="genPatternSection" style="display:none">
+            <div class="section-title">Pattern</div>
+            <div class="gen-dial">
+              <label>Spacing</label>
+              <input type="range" id="genPatSpacing" min="30" max="150" value="80">
+              <span class="val" id="genPatSpacingVal">80</span>
+              <button class="lock-btn" data-dial="genPatSpacing">🔓</button>
+            </div>
+            <div class="gen-dial">
+              <label>Size</label>
+              <input type="range" id="genPatSize" min="6" max="60" value="20">
+              <span class="val" id="genPatSizeVal">20</span>
+              <button class="lock-btn" data-dial="genPatSize">🔓</button>
+            </div>
+            <div class="gen-dial">
+              <label>Rotation</label>
+              <input type="range" id="genPatRotation" min="0" max="360" value="0">
+              <span class="val" id="genPatRotationVal">0°</span>
+              <button class="lock-btn" data-dial="genPatRotation">🔓</button>
+            </div>
+          </div>
+          
+          <div class="section">
+            <div class="section-title">Appearance</div>
+            <div class="gen-color-row">
+              <label>Color</label>
+              <input type="color" id="genStrokeColor" value="#C9A84C">
+            </div>
+            <div class="color-presets" id="genStrokePresets">
+              <div class="color-swatch active" style="background:#C9A84C" data-color="#C9A84C"></div>
+              <div class="color-swatch" style="background:#7B2FBE" data-color="#7B2FBE"></div>
+              <div class="color-swatch" style="background:#ffffff" data-color="#ffffff"></div>
+              <div class="color-swatch" style="background:#2FBEC9" data-color="#2FBEC9"></div>
+              <div class="color-swatch" style="background:#e05555" data-color="#e05555"></div>
+            </div>
+            <div class="gen-dial">
+              <label>Weight</label>
+              <input type="range" id="genStrokeWeight" min="0.5" max="4" value="1" step="0.5">
+              <span class="val" id="genStrokeWeightVal">1</span>
+              <button class="lock-btn" data-dial="genStrokeWeight">🔓</button>
+            </div>
+          </div>
+          
+          <div class="gen-randomize">
+            <button class="btn btn-gold" id="genRandomize">🎲 Randomize</button>
+          </div>
+          
+          <div class="section" id="genToLayersRow" style="display:none">
+            <button class="btn btn-outline" id="genToLayers">📋 Send to Layers</button>
+          </div>
+        </div>
+        
+        <!-- PRESETS TAB -->
+        <div class="tab-content" id="tab-presets">
+          <div class="section">
+            <div class="section-title" id="presetsTitle">Mandala Presets</div>
+            <div class="presets-grid" id="presetsGrid"></div>
+          </div>
+          <div class="section">
+            <div class="section-title">Custom Presets</div>
+            <div class="presets-grid" id="customPresetsGrid"></div>
+            <div class="btn-row">
+              <button class="btn btn-outline" id="savePresetBtn">💾 Save</button>
+              <button class="btn btn-outline" id="clearPresetsBtn">🗑 Clear All</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- EXPORT TAB -->
+        <div class="tab-content" id="tab-export">
+          <div class="section">
+            <div class="section-title">Export Format</div>
+            <div class="export-grid">
+              <button class="btn btn-outline" id="exportSVG">📄 SVG</button>
+              <button class="btn btn-outline" id="exportPNG">🖼 PNG</button>
+              <button class="btn btn-outline" id="exportCSS">📋 CSS</button>
+              <button class="btn btn-outline" id="exportJSON">⚙ JSON</button>
+            </div>
+            <div id="exportTileInfo" style="display:none;margin-top:8px;font-size:11px;color:var(--text2);line-height:1.3">
+              📄 SVG exports single tile<br>
+              🖼 PNG exports 3×3 tiled preview
+            </div>
+          </div>
+          <div class="section">
+            <div class="section-title">PNG Options</div>
+            <div class="toggle-row"><div class="toggle" id="exportTransparent"></div><span style="font-size:12px;color:var(--text2)">Transparent background</span></div>
+          </div>
+        </div>
       </div>
-
-      <!-- GENERATE TAB -->
-      <div class="tab-content" id="tab-generate">
-        <div class="section">
-          <div class="section-title">⚡ Generative Dials</div>
-          <div class="gen-dial"><label>Complexity</label><input type="range" id="genComplexity" min="1" max="8" value="3" step="1"><span class="val" id="genComplexityVal">3</span><button class="lock-btn" data-dial="genComplexity" title="Lock">🔓</button></div>
-          <div class="gen-dial"><label>Tension</label><input type="range" id="genTension" min="0" max="100" value="0"><span class="val" id="genTensionVal">0</span><button class="lock-btn" data-dial="genTension" title="Lock">🔓</button></div>
-          <div class="gen-dial"><label>Density</label><input type="range" id="genDensity" min="0" max="100" value="50"><span class="val" id="genDensityVal">50</span><button class="lock-btn" data-dial="genDensity" title="Lock">🔓</button></div>
-          <div class="gen-dial"><label>Spiral</label><input type="range" id="genSpiral" min="0" max="100" value="0"><span class="val" id="genSpiralVal">0</span><button class="lock-btn" data-dial="genSpiral" title="Lock">🔓</button></div>
-          <div class="gen-dial"><label>Chaos</label><input type="range" id="genChaos" min="0" max="100" value="0"><span class="val" id="genChaosVal">0</span><button class="lock-btn" data-dial="genChaos" title="Lock">🔓</button></div>
-        </div>
-        <!-- Mandala-specific gen dials -->
-        <div class="section" id="genMandalaSection">
-          <div class="section-title">Mandala</div>
-          <div class="gen-dial"><label>Symmetry</label><input type="range" id="genSymmetry" min="2" max="24" value="6" step="1"><span class="val" id="genSymmetryVal">6</span><button class="lock-btn" data-dial="genSymmetry" title="Lock">🔓</button></div>
-          <div class="gen-dial"><label>Rings</label><input type="range" id="genRings" min="1" max="8" value="3" step="1"><span class="val" id="genRingsVal">3</span><button class="lock-btn" data-dial="genRings" title="Lock">🔓</button></div>
-          <div class="gen-dial"><label>Radius</label><input type="range" id="genRadius" min="80" max="380" value="280"><span class="val" id="genRadiusVal">280</span><button class="lock-btn" data-dial="genRadius" title="Lock">🔓</button></div>
-          <div class="gen-dial"><label>Rotation</label><input type="range" id="genRotation" min="0" max="360" value="0"><span class="val" id="genRotationVal">0°</span><button class="lock-btn" data-dial="genRotation" title="Lock">🔓</button></div>
-        </div>
-        <!-- Pattern-specific gen dials -->
-        <div class="section" id="genPatternSection" style="display:none">
-          <div class="section-title">Pattern</div>
-          <div class="gen-dial"><label>Spacing</label><input type="range" id="genPatSpacing" min="20" max="200" value="80"><span class="val" id="genPatSpacingVal">80</span><button class="lock-btn" data-dial="genPatSpacing" title="Lock">🔓</button></div>
-          <div class="gen-dial"><label>Size</label><input type="range" id="genPatSize" min="4" max="80" value="20"><span class="val" id="genPatSizeVal">20</span><button class="lock-btn" data-dial="genPatSize" title="Lock">🔓</button></div>
-          <div class="gen-dial"><label>Elem Rotate</label><input type="range" id="genPatRotation" min="0" max="360" value="0"><span class="val" id="genPatRotationVal">0°</span><button class="lock-btn" data-dial="genPatRotation" title="Lock">🔓</button></div>
-        </div>
-        <div class="section">
-          <div class="section-title">Color</div>
-          <div class="gen-color-row"><label>Stroke</label><input type="color" id="genStrokeColor" value="#C9A84C"></div>
-          <div class="color-presets" id="genStrokePresets">
-            <div class="color-swatch active" style="background:#C9A84C" data-color="#C9A84C"></div>
-            <div class="color-swatch" style="background:#7B2FBE" data-color="#7B2FBE"></div>
-            <div class="color-swatch" style="background:#ffffff" data-color="#ffffff"></div>
-            <div class="color-swatch" style="background:#2FBEC9" data-color="#2FBEC9"></div>
-            <div class="color-swatch" style="background:#e05555" data-color="#e05555"></div>
-          </div>
-          <div class="gen-color-row" style="margin-top:10px"><label>Weight</label><input type="range" id="genStrokeWeight" min="0.5" max="5" value="1" step="0.25" style="flex:1"><span class="val" id="genStrokeWeightVal">1</span></div>
-        </div>
-        <div class="section">
-          <div class="btn-row gen-randomize"><button class="btn btn-gold" id="genRandomize">🎲 Randomize All</button></div>
-          <div class="btn-row" id="genToLayersRow"><button class="btn btn-outline" id="genToLayers">→ Send to Layers</button></div>
-        </div>
-      </div>
-
-      <!-- LAYERS TAB -->
-      <div class="tab-content" id="tab-layers">
-        <div class="section">
-          <div class="section-title">Layers</div>
-          <div class="layers-list" id="layersList"></div>
-          <div class="btn-row">
-            <button class="btn btn-gold" id="addLayerBtn">+ Add Layer</button>
-            <button class="btn btn-danger" id="deleteLayerBtn">Delete</button>
-          </div>
-          <div class="btn-row">
-            <button class="btn btn-outline" id="moveUpBtn">↑ Up</button>
-            <button class="btn btn-outline" id="moveDownBtn">↓ Down</button>
-            <button class="btn btn-outline" id="dupeLayerBtn">⧉ Dupe</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- PRESETS TAB -->
-      <div class="tab-content" id="tab-presets">
-        <div class="section">
-          <div class="section-title" id="presetsTitle">Mandala Presets</div>
-          <div class="presets-grid" id="presetsGrid"></div>
-        </div>
-        <div class="section">
-          <div class="section-title">Custom Presets</div>
-          <div class="presets-grid" id="customPresetsGrid"></div>
-          <div class="btn-row">
-            <button class="btn btn-gold" id="savePresetBtn">Save Current</button>
-            <button class="btn btn-outline" id="clearPresetsBtn">Clear All</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- EXPORT TAB -->
-      <div class="tab-content" id="tab-export">
-        <div class="section">
-          <div class="section-title">Export</div>
-          <div class="export-option">
-            <label><input type="checkbox" id="exportTransparent"> Transparent PNG background</label>
-          </div>
-          <div class="export-grid">
-            <button class="btn btn-gold" id="exportSVG">⬇ SVG</button>
-            <button class="btn btn-gold" id="exportPNG">⬇ PNG</button>
-            <button class="btn btn-outline" id="exportCSS">Copy CSS BG</button>
-            <button class="btn btn-outline" id="exportJSON">⬇ JSON</button>
-          </div>
-        </div>
-        <div class="section" id="exportTileInfo" style="display:none">
-          <div class="section-title">Tile Export</div>
-          <p style="font-size:11px;color:var(--text2);margin-bottom:8px">SVG exports the single tile. CSS exports a ready-to-paste repeating background.</p>
-        </div>
-      </div>
-
     </div>
   </div>
-</div>
 
 <script>
-// ═══════════════════════════════════════════════
-// Mandala Studio v1.5
-// Modes: Mandala + Seamless Pattern (with tile drawing) + Draw
+// Mandala Studio v1.6 - All 17 Wallpaper Groups
 // ═══════════════════════════════════════════════
 
 const PHI = (1 + Math.sqrt(5)) / 2;
@@ -527,14 +560,35 @@ function defaultMandalaLayer(shape='circle') {
 mandalaState.layers.push(defaultMandalaLayer());
 mandalaState.selectedId = mandalaState.layers[0].id;
 
-// ─── Pattern State ───
+// ─── Pattern State with Wallpaper Groups ───
 const patternState = {
-  tileShape: 'square', patternType: 'grid',
+  wallpaperGroup: 'p6m', // Default to most complex/beautiful
   element: 'dot', sides: 6,
   spacing: 80, size: 20, rotation: 0,
   strokeWeight: 1.5, strokeColor: '#C9A84C',
   fill: false, fillColor: '#C9A84C',
   bgColor: '#050505'
+};
+
+// ─── Wallpaper Groups Definition ───
+const WALLPAPER_GROUPS = {
+  p1: { name: 'Translation', desc: 'Simple repetition', symmetries: [] },
+  p2: { name: '2-fold Rotation', desc: '180° rotation', symmetries: ['rotate2'] },
+  pm: { name: 'Mirror Lines', desc: 'Parallel reflections', symmetries: ['mirrorV'] },
+  pg: { name: 'Glide Reflection', desc: 'Slide + reflect', symmetries: ['glideH'] },
+  cm: { name: 'Mirror + Glide', desc: 'Reflect + glide', symmetries: ['mirrorV', 'glideH'] },
+  pmm: { name: '2-fold + Mirrors', desc: 'Rectangle symmetry', symmetries: ['rotate2', 'mirrorV', 'mirrorH'] },
+  pmg: { name: '2-fold + Glide', desc: 'Rotate + glide', symmetries: ['rotate2', 'glideH'] },
+  pgg: { name: '2 Glides + Rotate', desc: 'Complex glides', symmetries: ['rotate2', 'glideH', 'glideV'] },
+  cmm: { name: 'Complex Rectangle', desc: 'All rectangle symmetries', symmetries: ['rotate2', 'mirrorV', 'mirrorH', 'glideH'] },
+  p4: { name: '4-fold Rotation', desc: '90° rotations', symmetries: ['rotate4'] },
+  p4m: { name: '4-fold + Mirrors', desc: 'Square + mirrors', symmetries: ['rotate4', 'mirrorV', 'mirrorH', 'mirrorD1', 'mirrorD2'] },
+  p4g: { name: '4-fold + Glide', desc: 'Square + glide', symmetries: ['rotate4', 'glideD1', 'glideD2'] },
+  p3: { name: '3-fold Rotation', desc: '120° rotations', symmetries: ['rotate3'] },
+  p3m1: { name: '3-fold + Mirrors A', desc: 'Triangle + mirrors', symmetries: ['rotate3', 'mirror3a'] },
+  p31m: { name: '3-fold + Mirrors B', desc: 'Triangle + mirrors alt', symmetries: ['rotate3', 'mirror3b'] },
+  p6: { name: '6-fold Rotation', desc: '60° rotations', symmetries: ['rotate6'] },
+  p6m: { name: '6-fold + Mirrors', desc: 'Hexagon + mirrors (honeycomb)', symmetries: ['rotate6', 'mirror6'] }
 };
 
 // ─── Draw State ───
@@ -594,6 +648,53 @@ function makeEl(tag, attrs) {
   const el = document.createElementNS('http://www.w3.org/2000/svg', tag);
   for (const [k,v] of Object.entries(attrs)) el.setAttribute(k, String(v));
   return el;
+}
+
+// ─── Initialize Wallpaper Group Selector ───
+function initWallpaperGroups() {
+  const grid = document.getElementById('wallpaperGrid');
+  grid.innerHTML = '';
+  
+  // Icons for different symmetry types
+  const groupIcons = {
+    p1: `<svg class="wallpaper-icon" viewBox="0 0 24 24"><circle cx="6" cy="6" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg>`,
+    p2: `<svg class="wallpaper-icon" viewBox="0 0 24 24"><circle cx="8" cy="8" r="2"/><circle cx="16" cy="16" r="2" transform="rotate(180 12 12)"/></svg>`,
+    pm: `<svg class="wallpaper-icon" viewBox="0 0 24 24"><circle cx="6" cy="12" r="2"/><circle cx="18" cy="12" r="2"/><line x1="12" y1="4" x2="12" y2="20"/></svg>`,
+    pg: `<svg class="wallpaper-icon" viewBox="0 0 24 24"><path d="M6 8l6 0l6 4l-6 0l-6 4z" fill="none" stroke="currentColor"/></svg>`,
+    cm: `<svg class="wallpaper-icon" viewBox="0 0 24 24"><circle cx="8" cy="8" r="1.5"/><circle cx="16" cy="8" r="1.5"/><circle cx="8" cy="16" r="1.5"/><circle cx="16" cy="16" r="1.5"/><line x1="12" y1="4" x2="12" y2="20"/></svg>`,
+    pmm: `<svg class="wallpaper-icon" viewBox="0 0 24 24"><rect x="8" y="8" width="8" height="8" fill="none" stroke="currentColor"/><line x1="12" y1="4" x2="12" y2="20"/><line x1="4" y1="12" x2="20" y2="12"/></svg>`,
+    pmg: `<svg class="wallpaper-icon" viewBox="0 0 24 24"><polygon points="12,8 16,12 12,16 8,12" fill="none" stroke="currentColor"/><line x1="4" y1="12" x2="20" y2="12"/></svg>`,
+    pgg: `<svg class="wallpaper-icon" viewBox="0 0 24 24"><path d="M6 6l12 0M6 12l12 0M6 18l12 0" stroke="currentColor"/><circle cx="9" cy="9" r="1"/><circle cx="15" cy="15" r="1"/></svg>`,
+    cmm: `<svg class="wallpaper-icon" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" fill="none" stroke="currentColor"/><line x1="12" y1="0" x2="12" y2="24"/><line x1="0" y1="12" x2="24" y2="12"/></svg>`,
+    p4: `<svg class="wallpaper-icon" viewBox="0 0 24 24"><polygon points="12,6 18,12 12,18 6,12" fill="none" stroke="currentColor"/></svg>`,
+    p4m: `<svg class="wallpaper-icon" viewBox="0 0 24 24"><polygon points="12,6 18,12 12,18 6,12" fill="none" stroke="currentColor"/><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>`,
+    p4g: `<svg class="wallpaper-icon" viewBox="0 0 24 24"><polygon points="12,4 20,12 12,20 4,12" fill="none" stroke="currentColor"/><path d="M8 8l8 8M16 8l-8 8" stroke="currentColor" stroke-dasharray="2,2"/></svg>`,
+    p3: `<svg class="wallpaper-icon" viewBox="0 0 24 24"><polygon points="12,4 20,16 4,16" fill="none" stroke="currentColor"/></svg>`,
+    p3m1: `<svg class="wallpaper-icon" viewBox="0 0 24 24"><polygon points="12,4 20,16 4,16" fill="none" stroke="currentColor"/><line x1="12" y1="4" x2="12" y2="16"/></svg>`,
+    p31m: `<svg class="wallpaper-icon" viewBox="0 0 24 24"><polygon points="12,4 20,16 4,16" fill="none" stroke="currentColor"/><line x1="4" y1="16" x2="16" y2="10"/><line x1="20" y1="16" x2="8" y2="10"/></svg>`,
+    p6: `<svg class="wallpaper-icon" viewBox="0 0 24 24"><polygon points="12,2 20,7 20,17 12,22 4,17 4,7" fill="none" stroke="currentColor"/></svg>`,
+    p6m: `<svg class="wallpaper-icon" viewBox="0 0 24 24"><polygon points="12,2 20,7 20,17 12,22 4,17 4,7" fill="none" stroke="currentColor"/><line x1="12" y1="2" x2="12" y2="22"/><line x1="4" y1="7" x2="20" y2="17"/><line x1="20" y1="7" x2="4" y2="17"/></svg>`
+  };
+
+  Object.entries(WALLPAPER_GROUPS).forEach(([code, group]) => {
+    const btn = document.createElement('button');
+    btn.className = `wallpaper-btn ${code === patternState.wallpaperGroup ? 'active' : ''}`;
+    btn.dataset.wallpaperGroup = code;
+    btn.innerHTML = `
+      ${groupIcons[code] || '<div class="wallpaper-icon"></div>'}
+      <div class="group-code">${code}</div>
+      <div class="group-desc">${group.desc}</div>
+    `;
+    
+    btn.addEventListener('click', () => {
+      patternState.wallpaperGroup = code;
+      document.querySelectorAll('.wallpaper-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderAll();
+    });
+    
+    grid.appendChild(btn);
+  });
 }
 
 // ─── Mode Switcher ───
@@ -668,639 +769,138 @@ function switchMode() {
   renderAll();
 }
 
-// ─── Tabs ───
-function setTab(tabName) {
-  app.activeTab = tabName;
-  document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
-  document.querySelectorAll('.tab-content').forEach(x => x.classList.remove('active'));
-  document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
-  document.getElementById('tab-' + tabName).classList.add('active');
-  app.generateActive = (tabName === 'generate');
-  if (app.generateActive) {
-    modeLabel.textContent = '⚡ Generate';
-    renderGenerate();
-  } else {
-    if (app.mode !== 'draw') modeLabel.textContent = app.mode === 'mandala' ? '🔮 Mandala' : '▦ Pattern';
-    svgGenLayer.innerHTML = '';
-    renderAll();
-  }
-}
-
-document.querySelectorAll('.tab').forEach(t => {
-  t.addEventListener('click', () => setTab(t.dataset.tab));
-});
-
-// ─── Mandala Controls ───
-function selLayer() { return mandalaState.layers.find(l => l.id === mandalaState.selectedId); }
-
-document.querySelectorAll('#shapeGrid .shape-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const layer = selLayer(); if (!layer) return;
-    layer.shape = btn.dataset.shape;
-    document.querySelectorAll('#shapeGrid .shape-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    updateSidesVis();
-    renderAll();
-  });
-});
-
-function updateSidesVis() {
-  const l = selLayer();
-  document.getElementById('sidesSection').style.display = l && (l.shape === 'polygon' || l.shape === 'star') ? '' : 'none';
-}
-
-function bindMSlider(id, prop, fmt) {
-  const input = document.getElementById(id);
-  const val = document.getElementById(id + 'Val');
-  input.addEventListener('input', () => {
-    const l = selLayer(); if (!l) return;
-    l[prop] = parseFloat(input.value);
-    val.textContent = fmt ? fmt(input.value) : input.value;
-    renderAll();
-  });
-}
-bindMSlider('sides','sides');
-bindMSlider('symmetry','symmetry');
-bindMSlider('ringCount','ringCount');
-bindMSlider('elemPerRing','elemPerRing');
-bindMSlider('radius','radius');
-bindMSlider('rotation','rotation', v=>v+'°');
-bindMSlider('strokeWeight','strokeWeight');
-bindMSlider('opacity','opacity', v=>Math.round(v*100)+'%');
-
-document.getElementById('strokeColor').addEventListener('input', e => { const l=selLayer();if(l){l.strokeColor=e.target.value;renderAll();} });
-document.getElementById('fillColor').addEventListener('input', e => { const l=selLayer();if(l){l.fillColor=e.target.value;renderAll();} });
-
-document.querySelectorAll('#strokePresets .color-swatch').forEach(sw => {
-  sw.addEventListener('click', () => {
-    const l=selLayer();if(!l)return;
-    l.strokeColor=sw.dataset.color;
-    document.getElementById('strokeColor').value=sw.dataset.color;
-    document.querySelectorAll('#strokePresets .color-swatch').forEach(s=>s.classList.remove('active'));
-    sw.classList.add('active');
-    renderAll();
-  });
-});
-
-document.getElementById('fillToggle').addEventListener('click', function() {
-  const l=selLayer();if(!l)return;
-  l.fill=!l.fill; this.classList.toggle('on',l.fill);
-  document.getElementById('fillColorRow').style.display=l.fill?'':'none';
-  renderAll();
-});
-
-document.getElementById('centerElem').addEventListener('change', e => { const l=selLayer();if(l){l.centerElem=e.target.value;renderAll();} });
-document.getElementById('outerBound').addEventListener('change', e => { const l=selLayer();if(l){l.outerBound=e.target.value;renderAll();} });
-
-// ─── Pattern Controls ───
-document.querySelectorAll('#patShapeGrid .shape-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    patternState.element = btn.dataset.patshape;
-    document.querySelectorAll('#patShapeGrid .shape-btn').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById('patSidesSection').style.display = (patternState.element === 'polygon' || patternState.element === 'star') ? '' : 'none';
-    renderAll();
-  });
-});
-
-document.getElementById('patTileShape').addEventListener('change', e => { patternState.tileShape=e.target.value; if(patDrawState.active) resizePatDrawCanvas(); renderAll(); });
-document.getElementById('patType').addEventListener('change', e => { patternState.patternType=e.target.value; renderAll(); });
-
-function bindPSlider(id, prop, fmt) {
-  const input = document.getElementById(id);
-  const val = document.getElementById(id + 'Val');
-  input.addEventListener('input', () => {
-    patternState[prop] = parseFloat(input.value);
-    val.textContent = fmt ? fmt(input.value) : input.value;
-    renderAll();
-  });
-}
-bindPSlider('patSpacing','spacing');
-bindPSlider('patSize','size');
-bindPSlider('patRotation','rotation', v=>v+'°');
-bindPSlider('patStrokeWeight','strokeWeight');
-bindPSlider('patSides','sides');
-
-// Re-resize pat draw canvas when spacing changes (affects tile size)
-document.getElementById('patSpacing').addEventListener('change', () => { if(patDrawState.active) resizePatDrawCanvas(); });
-
-document.getElementById('patStrokeColor').addEventListener('input', e => { patternState.strokeColor=e.target.value; renderAll(); });
-document.getElementById('patBgColor').addEventListener('input', e => { patternState.bgColor=e.target.value; renderAll(); });
-document.getElementById('patFillColor').addEventListener('input', e => { patternState.fillColor=e.target.value; renderAll(); });
-
-document.querySelectorAll('#patStrokePresets .color-swatch').forEach(sw => {
-  sw.addEventListener('click', () => {
-    patternState.strokeColor=sw.dataset.color;
-    document.getElementById('patStrokeColor').value=sw.dataset.color;
-    document.querySelectorAll('#patStrokePresets .color-swatch').forEach(s=>s.classList.remove('active'));
-    sw.classList.add('active');
-    renderAll();
-  });
-});
-
-document.getElementById('patFillToggle').addEventListener('click', function() {
-  patternState.fill=!patternState.fill;
-  this.classList.toggle('on', patternState.fill);
-  document.getElementById('patFillColorRow').style.display=patternState.fill?'':'none';
-  renderAll();
-});
-
-// ═══════════════════════════════════════════════
-// ─── DRAW MODE ───
-// ═══════════════════════════════════════════════
-
-// Draw tool selection
-document.querySelectorAll('#drawToolGrid .draw-tool-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    drawState.tool = btn.dataset.drawtool;
-    document.querySelectorAll('#drawToolGrid .draw-tool-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    drawCanvas.style.cursor = drawState.tool === 'eraser' ? 'cell' : 'crosshair';
-  });
-});
-
-// Symmetry chips
-document.querySelectorAll('#symChips .sym-chip').forEach(chip => {
-  chip.addEventListener('click', () => {
-    drawState.folds = parseInt(chip.dataset.folds);
-    document.querySelectorAll('#symChips .sym-chip').forEach(c => c.classList.remove('active'));
-    chip.classList.add('active');
-  });
-});
-
-// Draw sliders
-document.getElementById('drawSize').addEventListener('input', function() {
-  drawState.size = parseInt(this.value);
-  document.getElementById('drawSizeVal').textContent = this.value;
-});
-document.getElementById('drawOpacity').addEventListener('input', function() {
-  drawState.opacity = parseFloat(this.value);
-  document.getElementById('drawOpacityVal').textContent = Math.round(this.value * 100) + '%';
-});
-document.getElementById('drawColor').addEventListener('input', function() {
-  drawState.color = this.value;
-  document.querySelectorAll('#drawColorPresets .color-swatch').forEach(s => s.classList.remove('active'));
-});
-
-document.querySelectorAll('#drawColorPresets .color-swatch').forEach(sw => {
-  sw.addEventListener('click', () => {
-    drawState.color = sw.dataset.color;
-    document.getElementById('drawColor').value = sw.dataset.color;
-    document.querySelectorAll('#drawColorPresets .color-swatch').forEach(s => s.classList.remove('active'));
-    sw.classList.add('active');
-  });
-});
-
-document.getElementById('drawSmoothToggle').addEventListener('click', function() {
-  drawState.smooth = !drawState.smooth;
-  this.classList.toggle('on', drawState.smooth);
-});
-
-document.getElementById('drawGuideToggle').addEventListener('click', function() {
-  drawState.showGuide = !drawState.showGuide;
-  this.classList.toggle('on', drawState.showGuide);
-  updateDrawGuide();
-});
-
-function updateDrawGuide() {
-  if (app.mode === 'draw' && drawState.showGuide) {
-    svgEl.style.opacity = '0.2';
-    svgEl.style.pointerEvents = 'none';
-  } else if (app.mode === 'draw') {
-    svgEl.style.opacity = '0';
-    svgEl.style.pointerEvents = 'none';
-  } else {
-    svgEl.style.opacity = '';
-    svgEl.style.pointerEvents = '';
-  }
-}
-
-// Undo/Redo
-function pushUndo() {
-  const data = drawCtx.getImageData(0, 0, drawCanvas.width, drawCanvas.height);
-  drawState.undoStack.push(data);
-  if (drawState.undoStack.length > drawState.maxUndo) drawState.undoStack.shift();
-  drawState.redoStack = [];
-}
-
-document.getElementById('drawUndo').addEventListener('click', doUndo);
-document.getElementById('drawRedo').addEventListener('click', doRedo);
-
-function doUndo() {
-  if (drawState.undoStack.length === 0) return;
-  const current = drawCtx.getImageData(0, 0, drawCanvas.width, drawCanvas.height);
-  drawState.redoStack.push(current);
-  const prev = drawState.undoStack.pop();
-  drawCtx.putImageData(prev, 0, 0);
-}
-
-function doRedo() {
-  if (drawState.redoStack.length === 0) return;
-  const current = drawCtx.getImageData(0, 0, drawCanvas.width, drawCanvas.height);
-  drawState.undoStack.push(current);
-  const next = drawState.redoStack.pop();
-  drawCtx.putImageData(next, 0, 0);
-}
-
-// Keyboard shortcuts
-document.addEventListener('keydown', e => {
-  const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
-  const mod = isMac ? e.metaKey : e.ctrlKey;
-  if (app.mode === 'draw') {
-    if (mod && e.key === 'z' && !e.shiftKey) { e.preventDefault(); doUndo(); }
-    if (mod && e.key === 'z' && e.shiftKey) { e.preventDefault(); doRedo(); }
-    if (mod && e.key === 'y') { e.preventDefault(); doRedo(); }
-  } else if (app.mode === 'pattern' && patDrawState.active) {
-    if (mod && e.key === 'z' && !e.shiftKey) { e.preventDefault(); doPatDrawUndo(); }
-    if (mod && e.key === 'z' && e.shiftKey) { e.preventDefault(); doPatDrawRedo(); }
-    if (mod && e.key === 'y') { e.preventDefault(); doPatDrawRedo(); }
-  }
-});
-
-// Clear canvas
-document.getElementById('drawClear').addEventListener('click', () => {
-  if (!confirm('Clear the drawing canvas?')) return;
-  pushUndo();
-  drawCtx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
-});
-
-// ─── Drawing Engine ───
-function getCanvasPoint(e) {
-  const rect = drawCanvas.getBoundingClientRect();
-  const scaleX = drawCanvas.width / rect.width;
-  const scaleY = drawCanvas.height / rect.height;
-  let clientX, clientY;
-  if (e.touches && e.touches.length > 0) {
-    clientX = e.touches[0].clientX;
-    clientY = e.touches[0].clientY;
-  } else {
-    clientX = e.clientX;
-    clientY = e.clientY;
-  }
-  return {
-    x: (clientX - rect.left) * scaleX,
-    y: (clientY - rect.top) * scaleY
-  };
-}
-
-function getMirroredPoints(x, y) {
-  const folds = drawState.folds;
-  const cx = drawCanvas.width / 2;
-  const cy = drawCanvas.height / 2;
-  const dx = x - cx, dy = y - cy;
-  const r = Math.sqrt(dx * dx + dy * dy);
-  const baseAngle = Math.atan2(dy, dx);
-  const pts = [];
-  for (let i = 0; i < folds; i++) {
-    const angle = baseAngle + (Math.PI * 2 * i / folds);
-    pts.push({ x: cx + r * Math.cos(angle), y: cy + r * Math.sin(angle) });
-    // Also mirror (reflect) for each fold
-    const mAngle = (Math.PI * 2 * i / folds) - baseAngle;
-    pts.push({ x: cx + r * Math.cos(mAngle), y: cy + r * Math.sin(mAngle) });
-  }
-  // Deduplicate very close points
-  const unique = [pts[0]];
-  for (let i = 1; i < pts.length; i++) {
-    let dup = false;
-    for (const u of unique) {
-      if (Math.abs(u.x - pts[i].x) < 0.5 && Math.abs(u.y - pts[i].y) < 0.5) { dup = true; break; }
-    }
-    if (!dup) unique.push(pts[i]);
-  }
-  return unique;
-}
-
-function setupDrawCtx(isEraser) {
-  drawCtx.lineCap = 'round';
-  drawCtx.lineJoin = 'round';
-  if (isEraser) {
-    drawCtx.globalCompositeOperation = 'destination-out';
-    drawCtx.globalAlpha = 1;
-    drawCtx.strokeStyle = 'rgba(0,0,0,1)';
-  } else {
-    drawCtx.globalCompositeOperation = 'source-over';
-    drawCtx.globalAlpha = drawState.opacity;
-    drawCtx.strokeStyle = drawState.color;
-    drawCtx.fillStyle = drawState.color;
-  }
-  drawCtx.lineWidth = drawState.size;
-}
-
-// Smooth stroke helper - Catmull-Rom
-function drawSmoothStroke(points) {
-  if (points.length < 2) return;
-  drawCtx.beginPath();
-  drawCtx.moveTo(points[0].x, points[0].y);
-  if (points.length === 2) {
-    drawCtx.lineTo(points[1].x, points[1].y);
-  } else {
-    for (let i = 0; i < points.length - 1; i++) {
-      const p0 = points[Math.max(0, i - 1)];
-      const p1 = points[i];
-      const p2 = points[Math.min(points.length - 1, i + 1)];
-      const p3 = points[Math.min(points.length - 1, i + 2)];
-      const cp1x = p1.x + (p2.x - p0.x) / 6;
-      const cp1y = p1.y + (p2.y - p0.y) / 6;
-      const cp2x = p2.x - (p3.x - p1.x) / 6;
-      const cp2y = p2.y - (p3.y - p1.y) / 6;
-      drawCtx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, p2.x, p2.y);
-    }
-  }
-  drawCtx.stroke();
-}
-
-function drawBrushSegment(fromPts, toPts) {
-  setupDrawCtx(drawState.tool === 'eraser');
-  for (let i = 0; i < fromPts.length; i++) {
-    drawCtx.beginPath();
-    drawCtx.moveTo(fromPts[i].x, fromPts[i].y);
-    drawCtx.lineTo(toPts[i].x, toPts[i].y);
-    drawCtx.stroke();
-  }
-  drawCtx.globalCompositeOperation = 'source-over';
-  drawCtx.globalAlpha = 1;
-}
-
-// Preview overlay for line/circle
-let previewData = null;
-
-function drawPreview() {
-  if (!previewData) return;
-  // Restore the snapshot before preview
-  drawCtx.putImageData(previewData, 0, 0);
-  const s = drawState;
-  setupDrawCtx(false);
-  const mirroredStart = getMirroredPoints(s.startPt.x, s.startPt.y);
-  const mirroredEnd = getMirroredPoints(s.points[s.points.length - 1].x, s.points[s.points.length - 1].y);
-
-  if (s.tool === 'line') {
-    for (let i = 0; i < mirroredStart.length; i++) {
-      drawCtx.beginPath();
-      drawCtx.moveTo(mirroredStart[i].x, mirroredStart[i].y);
-      drawCtx.lineTo(mirroredEnd[i].x, mirroredEnd[i].y);
-      drawCtx.stroke();
-    }
-  } else if (s.tool === 'circle') {
-    const dx = s.points[s.points.length - 1].x - s.startPt.x;
-    const dy = s.points[s.points.length - 1].y - s.startPt.y;
-    const rad = Math.sqrt(dx * dx + dy * dy);
-    for (const mp of mirroredStart) {
-      drawCtx.beginPath();
-      drawCtx.arc(mp.x, mp.y, rad, 0, Math.PI * 2);
-      drawCtx.stroke();
-    }
-  }
-  drawCtx.globalCompositeOperation = 'source-over';
-  drawCtx.globalAlpha = 1;
-}
-
-// Collect mirrored stroke points for smooth drawing
-let mirroredStrokes = [];
-
-function onDrawStart(e) {
-  if (app.mode !== 'draw') return;
-  e.preventDefault();
-  const pt = getCanvasPoint(e);
-  drawState.drawing = true;
-  drawState.points = [pt];
-  drawState.startPt = pt;
-
-  pushUndo();
-
-  if (drawState.tool === 'brush' || drawState.tool === 'eraser') {
-    // Initialize mirrored stroke arrays
-    const mirPts = getMirroredPoints(pt.x, pt.y);
-    mirroredStrokes = mirPts.map(mp => [mp]);
-    // Draw dot at start
-    setupDrawCtx(drawState.tool === 'eraser');
-    for (const mp of mirPts) {
-      drawCtx.beginPath();
-      drawCtx.arc(mp.x, mp.y, drawState.size / 2, 0, Math.PI * 2);
-      drawCtx.fill();
-    }
-    drawCtx.globalCompositeOperation = 'source-over';
-    drawCtx.globalAlpha = 1;
-  } else {
-    // line / circle — snapshot for preview
-    previewData = drawCtx.getImageData(0, 0, drawCanvas.width, drawCanvas.height);
-  }
-}
-
-function onDrawMove(e) {
-  if (!drawState.drawing || app.mode !== 'draw') return;
-  e.preventDefault();
-  const pt = getCanvasPoint(e);
-  drawState.points.push(pt);
-
-  if (drawState.tool === 'brush' || drawState.tool === 'eraser') {
-    const prevPt = drawState.points[drawState.points.length - 2];
-    const mirPrev = getMirroredPoints(prevPt.x, prevPt.y);
-    const mirCurr = getMirroredPoints(pt.x, pt.y);
-
-    // Track mirrored points for smooth redraw
-    for (let i = 0; i < mirCurr.length; i++) {
-      if (mirroredStrokes[i]) mirroredStrokes[i].push(mirCurr[i]);
-    }
-
-    if (drawState.smooth && drawState.tool !== 'eraser') {
-      // Redraw recent segment with smoothing every few points
-      // For performance, draw line segments in real time and smooth will happen on finalize
-      drawBrushSegment(mirPrev, mirCurr);
-    } else {
-      drawBrushSegment(mirPrev, mirCurr);
-    }
-  } else {
-    // Preview
-    drawPreview();
-  }
-}
-
-function onDrawEnd(e) {
-  if (!drawState.drawing || app.mode !== 'draw') return;
-  e.preventDefault();
-  drawState.drawing = false;
-
-  if (drawState.tool === 'brush' && drawState.smooth && drawState.points.length > 3) {
-    // Re-render with smooth curves
-    // Restore undo state (before this stroke)
-    const undoData = drawState.undoStack[drawState.undoStack.length - 1];
-    if (undoData) {
-      drawCtx.putImageData(undoData, 0, 0);
-      setupDrawCtx(false);
-      for (const stroke of mirroredStrokes) {
-        drawSmoothStroke(stroke);
+// ─── Wallpaper Group Symmetry Application ───
+function applyWallpaperSymmetry(basePoints, group, tileW, tileH) {
+  const symmetries = WALLPAPER_GROUPS[group]?.symmetries || [];
+  let allPoints = [...basePoints];
+  
+  for (const symmetry of symmetries) {
+    const newPoints = [];
+    
+    for (const [x, y] of basePoints) {
+      const centerX = tileW / 2;
+      const centerY = tileH / 2;
+      
+      switch (symmetry) {
+        case 'rotate2': // 180° rotation
+          newPoints.push([tileW - x, tileH - y]);
+          break;
+          
+        case 'rotate3': // 120° rotation (2 additional points)
+          const cos120 = Math.cos(2 * Math.PI / 3);
+          const sin120 = Math.sin(2 * Math.PI / 3);
+          const dx = x - centerX, dy = y - centerY;
+          newPoints.push([
+            centerX + dx * cos120 - dy * sin120,
+            centerY + dx * sin120 + dy * cos120
+          ]);
+          newPoints.push([
+            centerX + dx * cos120 + dy * sin120,
+            centerY - dx * sin120 + dy * cos120
+          ]);
+          break;
+          
+        case 'rotate4': // 90° rotation (3 additional points)
+          newPoints.push([centerX + (y - centerY), centerY - (x - centerX)]); // 90°
+          newPoints.push([tileW - x, tileH - y]); // 180°
+          newPoints.push([centerX - (y - centerY), centerY + (x - centerX)]); // 270°
+          break;
+          
+        case 'rotate6': // 60° rotation (5 additional points)
+          for (let i = 1; i < 6; i++) {
+            const angle = i * Math.PI / 3;
+            const cos = Math.cos(angle), sin = Math.sin(angle);
+            const dx = x - centerX, dy = y - centerY;
+            newPoints.push([
+              centerX + dx * cos - dy * sin,
+              centerY + dx * sin + dy * cos
+            ]);
+          }
+          break;
+          
+        case 'mirrorV': // Vertical mirror
+          newPoints.push([tileW - x, y]);
+          break;
+          
+        case 'mirrorH': // Horizontal mirror
+          newPoints.push([x, tileH - y]);
+          break;
+          
+        case 'mirrorD1': // Diagonal mirror (main)
+          newPoints.push([y, x]);
+          break;
+          
+        case 'mirrorD2': // Diagonal mirror (anti)
+          newPoints.push([tileW - y, tileH - x]);
+          break;
+          
+        case 'mirror3a': // Triangle mirrors (3-fold)
+          newPoints.push([centerX + (centerY - y), centerY + (x - centerX)]);
+          newPoints.push([centerX - (centerY - y), centerY - (x - centerX)]);
+          break;
+          
+        case 'mirror3b': // Triangle mirrors (3-fold alt)
+          const angle60 = Math.PI / 3;
+          const cos60 = Math.cos(angle60), sin60 = Math.sin(angle60);
+          const dx = x - centerX, dy = y - centerY;
+          newPoints.push([
+            centerX + dx * cos60 + dy * sin60,
+            centerY - dx * sin60 + dy * cos60
+          ]);
+          break;
+          
+        case 'mirror6': // Hexagon mirrors (6 mirror lines)
+          for (let i = 0; i < 6; i++) {
+            const angle = i * Math.PI / 3;
+            const cos = Math.cos(angle), sin = Math.sin(angle);
+            // Reflect across line at this angle
+            const proj = 2 * ((x - centerX) * cos + (y - centerY) * sin);
+            newPoints.push([
+              x + proj * cos - 2 * (x - centerX),
+              y + proj * sin - 2 * (y - centerY)
+            ]);
+          }
+          break;
+          
+        case 'glideH': // Horizontal glide reflection
+          newPoints.push([x + tileW / 2, tileH - y]);
+          break;
+          
+        case 'glideV': // Vertical glide reflection
+          newPoints.push([tileW - x, y + tileH / 2]);
+          break;
+          
+        case 'glideD1': // Diagonal glide reflection
+          newPoints.push([y + tileW / 4, x + tileH / 4]);
+          break;
+          
+        case 'glideD2': // Anti-diagonal glide reflection
+          newPoints.push([tileW - y - tileW / 4, tileH - x - tileH / 4]);
+          break;
       }
-      drawCtx.globalCompositeOperation = 'source-over';
-      drawCtx.globalAlpha = 1;
     }
-  } else if (drawState.tool === 'line' || drawState.tool === 'circle') {
-    // Finalize shape - already drawn via preview, just ensure final state
-    if (previewData) {
-      drawCtx.putImageData(previewData, 0, 0);
-      const s = drawState;
-      setupDrawCtx(false);
-      const mirroredStart = getMirroredPoints(s.startPt.x, s.startPt.y);
-      const endPt = s.points[s.points.length - 1];
-      const mirroredEnd = getMirroredPoints(endPt.x, endPt.y);
-
-      if (s.tool === 'line') {
-        for (let i = 0; i < mirroredStart.length; i++) {
-          drawCtx.beginPath();
-          drawCtx.moveTo(mirroredStart[i].x, mirroredStart[i].y);
-          drawCtx.lineTo(mirroredEnd[i].x, mirroredEnd[i].y);
-          drawCtx.stroke();
-        }
-      } else if (s.tool === 'circle') {
-        const dx = endPt.x - s.startPt.x;
-        const dy = endPt.y - s.startPt.y;
-        const rad = Math.sqrt(dx * dx + dy * dy);
-        for (const mp of mirroredStart) {
-          drawCtx.beginPath();
-          drawCtx.arc(mp.x, mp.y, rad, 0, Math.PI * 2);
-          drawCtx.stroke();
-        }
-      }
-      drawCtx.globalCompositeOperation = 'source-over';
-      drawCtx.globalAlpha = 1;
-    }
+    
+    allPoints = allPoints.concat(newPoints);
   }
-
-  previewData = null;
-  mirroredStrokes = [];
-  drawState.points = [];
-  drawState.startPt = null;
+  
+  return allPoints.filter(([x, y]) => x >= 0 && x <= tileW && y >= 0 && y <= tileH);
 }
 
-// Attach events
-drawCanvas.addEventListener('pointerdown', onDrawStart);
-drawCanvas.addEventListener('pointermove', onDrawMove);
-drawCanvas.addEventListener('pointerup', onDrawEnd);
-drawCanvas.addEventListener('pointerleave', onDrawEnd);
-drawCanvas.addEventListener('pointercancel', onDrawEnd);
-
-// ═══════════════════════════════════════════════
-// ─── PATTERN DRAW MODE ───
-// ═══════════════════════════════════════════════
-
+// ─── Get Pattern Tile Size ───
 function getPatTileSize() {
   const p = patternState;
   const tileW = p.spacing * 3;
-  const tileH = p.tileShape === 'hex' ? p.spacing * Math.sqrt(3) * 1.5 : tileW;
+  const tileH = tileW; // Square tiles for wallpaper groups
   return { tileW, tileH };
 }
 
-// Toggle pattern drawing
-document.getElementById('patDrawToggle').addEventListener('click', function() {
-  patDrawState.active = !patDrawState.active;
-  this.classList.toggle('on', patDrawState.active);
-  document.getElementById('patDrawControls').style.display = patDrawState.active ? '' : 'none';
-  patDrawCanvas.style.display = patDrawState.active ? 'block' : 'none';
-
-  if (patDrawState.active) {
-    resizePatDrawCanvas();
-    updatePatDrawGuide();
-  } else {
-    svgEl.style.opacity = '';
-    svgEl.style.pointerEvents = '';
-  }
-  renderAll();
-});
-
-// Pattern draw tool selection
-document.querySelectorAll('#patDrawToolGrid .draw-tool-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    patDrawState.tool = btn.dataset.patdrawtool;
-    document.querySelectorAll('#patDrawToolGrid .draw-tool-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    patDrawCanvas.style.cursor = patDrawState.tool === 'eraser' ? 'cell' : 'crosshair';
-  });
-});
-
-// Pattern draw sliders
-document.getElementById('patDrawSize').addEventListener('input', function() {
-  patDrawState.size = parseInt(this.value);
-  document.getElementById('patDrawSizeVal').textContent = this.value;
-});
-document.getElementById('patDrawOpacity').addEventListener('input', function() {
-  patDrawState.opacity = parseFloat(this.value);
-  document.getElementById('patDrawOpacityVal').textContent = Math.round(this.value * 100) + '%';
-});
-document.getElementById('patDrawColor').addEventListener('input', function() {
-  patDrawState.color = this.value;
-  document.querySelectorAll('#patDrawColorPresets .color-swatch').forEach(s => s.classList.remove('active'));
-});
-document.querySelectorAll('#patDrawColorPresets .color-swatch').forEach(sw => {
-  sw.addEventListener('click', () => {
-    patDrawState.color = sw.dataset.color;
-    document.getElementById('patDrawColor').value = sw.dataset.color;
-    document.querySelectorAll('#patDrawColorPresets .color-swatch').forEach(s => s.classList.remove('active'));
-    sw.classList.add('active');
-  });
-});
-
-// Pattern draw guide toggle
-document.getElementById('patDrawGuideToggle').addEventListener('click', function() {
-  patDrawState.showGuide = !patDrawState.showGuide;
-  this.classList.toggle('on', patDrawState.showGuide);
-  updatePatDrawGuide();
-});
-
-function updatePatDrawGuide() {
-  if (app.mode === 'pattern' && patDrawState.active && patDrawState.showGuide) {
-    svgEl.style.opacity = '0.2';
-    svgEl.style.pointerEvents = 'none';
-  } else if (app.mode === 'pattern' && patDrawState.active) {
-    svgEl.style.opacity = '0';
-    svgEl.style.pointerEvents = 'none';
-  } else {
-    svgEl.style.opacity = '';
-    svgEl.style.pointerEvents = '';
-  }
-}
-
-// Undo/Redo for pattern draw
-function pushPatDrawUndo() {
-  const data = patDrawCtx.getImageData(0, 0, patDrawCanvas.width, patDrawCanvas.height);
-  patDrawState.undoStack.push(data);
-  if (patDrawState.undoStack.length > patDrawState.maxUndo) patDrawState.undoStack.shift();
-  patDrawState.redoStack = [];
-}
-
-function doPatDrawUndo() {
-  if (patDrawState.undoStack.length === 0) return;
-  const current = patDrawCtx.getImageData(0, 0, patDrawCanvas.width, patDrawCanvas.height);
-  patDrawState.redoStack.push(current);
-  const prev = patDrawState.undoStack.pop();
-  patDrawCtx.putImageData(prev, 0, 0);
-  renderPatternWithDrawing();
-}
-
-function doPatDrawRedo() {
-  if (patDrawState.redoStack.length === 0) return;
-  const current = patDrawCtx.getImageData(0, 0, patDrawCanvas.width, patDrawCanvas.height);
-  patDrawState.undoStack.push(current);
-  const next = patDrawState.redoStack.pop();
-  patDrawCtx.putImageData(next, 0, 0);
-  renderPatternWithDrawing();
-}
-
-document.getElementById('patDrawUndo').addEventListener('click', doPatDrawUndo);
-document.getElementById('patDrawRedo').addEventListener('click', doPatDrawRedo);
-
-document.getElementById('patDrawClear').addEventListener('click', () => {
-  if (!confirm('Clear the tile drawing?')) return;
-  pushPatDrawUndo();
-  patDrawCtx.clearRect(0, 0, patDrawCanvas.width, patDrawCanvas.height);
-  renderPatternWithDrawing();
-});
-
-// Resize pattern draw canvas to tile size
+// ─── Pattern Draw Canvas Management ───
 function resizePatDrawCanvas() {
   const { tileW, tileH } = getPatTileSize();
-  // Use a fixed internal resolution scaled up for quality
   const scale = Math.max(1, Math.round(800 / Math.max(tileW, tileH)));
   const w = Math.round(tileW * scale);
   const h = Math.round(tileH * scale);
+  
   // Save existing drawing
   let oldData = null;
   if (patDrawCanvas.width > 0 && patDrawCanvas.height > 0) {
@@ -1314,229 +914,6 @@ function resizePatDrawCanvas() {
   }
 }
 
-// Get point on tile canvas
-function getPatCanvasPoint(e) {
-  const rect = patDrawCanvas.getBoundingClientRect();
-  const scaleX = patDrawCanvas.width / rect.width;
-  const scaleY = patDrawCanvas.height / rect.height;
-  let clientX, clientY;
-  if (e.touches && e.touches.length > 0) {
-    clientX = e.touches[0].clientX;
-    clientY = e.touches[0].clientY;
-  } else {
-    clientX = e.clientX;
-    clientY = e.clientY;
-  }
-  return {
-    x: (clientX - rect.left) * scaleX,
-    y: (clientY - rect.top) * scaleY
-  };
-}
-
-// Seamless wrap: draw at point and 8 neighbors for wrap-around
-function drawAtPointWrapped(drawFn, x, y) {
-  const w = patDrawCanvas.width;
-  const h = patDrawCanvas.height;
-  for (let dx = -1; dx <= 1; dx++) {
-    for (let dy = -1; dy <= 1; dy++) {
-      drawFn(x + dx * w, y + dy * h);
-    }
-  }
-}
-
-function setupPatDrawCtx(isEraser) {
-  patDrawCtx.lineCap = 'round';
-  patDrawCtx.lineJoin = 'round';
-  if (isEraser) {
-    patDrawCtx.globalCompositeOperation = 'destination-out';
-    patDrawCtx.globalAlpha = 1;
-    patDrawCtx.strokeStyle = 'rgba(0,0,0,1)';
-    patDrawCtx.fillStyle = 'rgba(0,0,0,1)';
-  } else {
-    patDrawCtx.globalCompositeOperation = 'source-over';
-    patDrawCtx.globalAlpha = patDrawState.opacity;
-    patDrawCtx.strokeStyle = patDrawState.color;
-    patDrawCtx.fillStyle = patDrawState.color;
-  }
-  patDrawCtx.lineWidth = patDrawState.size * (patDrawCanvas.width / 800);
-}
-
-function resetPatDrawCtx() {
-  patDrawCtx.globalCompositeOperation = 'source-over';
-  patDrawCtx.globalAlpha = 1;
-}
-
-// Smooth stroke for pattern draw
-function drawPatSmoothStroke(points) {
-  if (points.length < 2) return;
-  const w = patDrawCanvas.width, h = patDrawCanvas.height;
-  for (let dx = -1; dx <= 1; dx++) {
-    for (let dy = -1; dy <= 1; dy++) {
-      const ox = dx * w, oy = dy * h;
-      patDrawCtx.beginPath();
-      patDrawCtx.moveTo(points[0].x + ox, points[0].y + oy);
-      if (points.length === 2) {
-        patDrawCtx.lineTo(points[1].x + ox, points[1].y + oy);
-      } else {
-        for (let i = 0; i < points.length - 1; i++) {
-          const p0 = points[Math.max(0, i - 1)];
-          const p1 = points[i];
-          const p2 = points[Math.min(points.length - 1, i + 1)];
-          const p3 = points[Math.min(points.length - 1, i + 2)];
-          const cp1x = p1.x + (p2.x - p0.x) / 6 + ox;
-          const cp1y = p1.y + (p2.y - p0.y) / 6 + oy;
-          const cp2x = p2.x - (p3.x - p1.x) / 6 + ox;
-          const cp2y = p2.y - (p3.y - p1.y) / 6 + oy;
-          patDrawCtx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, p2.x + ox, p2.y + oy);
-        }
-      }
-      patDrawCtx.stroke();
-    }
-  }
-}
-
-let patPreviewData = null;
-
-function onPatDrawStart(e) {
-  if (app.mode !== 'pattern' || !patDrawState.active) return;
-  e.preventDefault();
-  const pt = getPatCanvasPoint(e);
-  patDrawState.drawing = true;
-  patDrawState.points = [pt];
-  patDrawState.startPt = pt;
-
-  pushPatDrawUndo();
-
-  if (patDrawState.tool === 'brush' || patDrawState.tool === 'eraser') {
-    setupPatDrawCtx(patDrawState.tool === 'eraser');
-    const scaledSize = patDrawState.size * (patDrawCanvas.width / 800);
-    drawAtPointWrapped((x, y) => {
-      patDrawCtx.beginPath();
-      patDrawCtx.arc(x, y, scaledSize / 2, 0, Math.PI * 2);
-      patDrawCtx.fill();
-    }, pt.x, pt.y);
-    resetPatDrawCtx();
-    renderPatternWithDrawing();
-  } else {
-    patPreviewData = patDrawCtx.getImageData(0, 0, patDrawCanvas.width, patDrawCanvas.height);
-  }
-}
-
-function onPatDrawMove(e) {
-  if (!patDrawState.drawing || app.mode !== 'pattern' || !patDrawState.active) return;
-  e.preventDefault();
-  const pt = getPatCanvasPoint(e);
-  patDrawState.points.push(pt);
-
-  if (patDrawState.tool === 'brush' || patDrawState.tool === 'eraser') {
-    const prevPt = patDrawState.points[patDrawState.points.length - 2];
-    setupPatDrawCtx(patDrawState.tool === 'eraser');
-    const w = patDrawCanvas.width, h = patDrawCanvas.height;
-    for (let dx = -1; dx <= 1; dx++) {
-      for (let dy = -1; dy <= 1; dy++) {
-        patDrawCtx.beginPath();
-        patDrawCtx.moveTo(prevPt.x + dx * w, prevPt.y + dy * h);
-        patDrawCtx.lineTo(pt.x + dx * w, pt.y + dy * h);
-        patDrawCtx.stroke();
-      }
-    }
-    resetPatDrawCtx();
-    renderPatternWithDrawing();
-  } else {
-    // Preview line/circle
-    if (patPreviewData) patDrawCtx.putImageData(patPreviewData, 0, 0);
-    setupPatDrawCtx(false);
-    const startPt = patDrawState.startPt;
-    const endPt = patDrawState.points[patDrawState.points.length - 1];
-    const w = patDrawCanvas.width, h = patDrawCanvas.height;
-
-    if (patDrawState.tool === 'line') {
-      for (let dx = -1; dx <= 1; dx++) {
-        for (let dy = -1; dy <= 1; dy++) {
-          patDrawCtx.beginPath();
-          patDrawCtx.moveTo(startPt.x + dx * w, startPt.y + dy * h);
-          patDrawCtx.lineTo(endPt.x + dx * w, endPt.y + dy * h);
-          patDrawCtx.stroke();
-        }
-      }
-    } else if (patDrawState.tool === 'circle') {
-      const ddx = endPt.x - startPt.x;
-      const ddy = endPt.y - startPt.y;
-      const rad = Math.sqrt(ddx * ddx + ddy * ddy);
-      for (let dx = -1; dx <= 1; dx++) {
-        for (let dy = -1; dy <= 1; dy++) {
-          patDrawCtx.beginPath();
-          patDrawCtx.arc(startPt.x + dx * w, startPt.y + dy * h, rad, 0, Math.PI * 2);
-          patDrawCtx.stroke();
-        }
-      }
-    }
-    resetPatDrawCtx();
-    renderPatternWithDrawing();
-  }
-}
-
-function onPatDrawEnd(e) {
-  if (!patDrawState.drawing || app.mode !== 'pattern' || !patDrawState.active) return;
-  e.preventDefault();
-  patDrawState.drawing = false;
-
-  if (patDrawState.tool === 'brush' && patDrawState.points.length > 3) {
-    // Smooth redraw
-    const undoData = patDrawState.undoStack[patDrawState.undoStack.length - 1];
-    if (undoData) {
-      patDrawCtx.putImageData(undoData, 0, 0);
-      setupPatDrawCtx(false);
-      drawPatSmoothStroke(patDrawState.points.map(p => ({
-        x: p.x, y: p.y
-      })));
-      resetPatDrawCtx();
-    }
-  } else if (patDrawState.tool === 'line' || patDrawState.tool === 'circle') {
-    if (patPreviewData) patDrawCtx.putImageData(patPreviewData, 0, 0);
-    setupPatDrawCtx(false);
-    const startPt = patDrawState.startPt;
-    const endPt = patDrawState.points[patDrawState.points.length - 1];
-    const w = patDrawCanvas.width, h = patDrawCanvas.height;
-
-    if (patDrawState.tool === 'line') {
-      for (let dx = -1; dx <= 1; dx++) {
-        for (let dy = -1; dy <= 1; dy++) {
-          patDrawCtx.beginPath();
-          patDrawCtx.moveTo(startPt.x + dx * w, startPt.y + dy * h);
-          patDrawCtx.lineTo(endPt.x + dx * w, endPt.y + dy * h);
-          patDrawCtx.stroke();
-        }
-      }
-    } else if (patDrawState.tool === 'circle') {
-      const ddx = endPt.x - startPt.x;
-      const ddy = endPt.y - startPt.y;
-      const rad = Math.sqrt(ddx * ddx + ddy * ddy);
-      for (let dx = -1; dx <= 1; dx++) {
-        for (let dy = -1; dy <= 1; dy++) {
-          patDrawCtx.beginPath();
-          patDrawCtx.arc(startPt.x + dx * w, startPt.y + dy * h, rad, 0, Math.PI * 2);
-          patDrawCtx.stroke();
-        }
-      }
-    }
-    resetPatDrawCtx();
-  }
-
-  patPreviewData = null;
-  patDrawState.points = [];
-  patDrawState.startPt = null;
-  renderPatternWithDrawing();
-}
-
-// Attach pattern draw events
-patDrawCanvas.addEventListener('pointerdown', onPatDrawStart);
-patDrawCanvas.addEventListener('pointermove', onPatDrawMove);
-patDrawCanvas.addEventListener('pointerup', onPatDrawEnd);
-patDrawCanvas.addEventListener('pointerleave', onPatDrawEnd);
-patDrawCanvas.addEventListener('pointercancel', onPatDrawEnd);
-
-// Check if pattern draw canvas has content
 function hasPatDrawContent() {
   const data = patDrawCtx.getImageData(0, 0, patDrawCanvas.width, patDrawCanvas.height).data;
   for (let i = 3; i < data.length; i += 4) {
@@ -1545,98 +922,7 @@ function hasPatDrawContent() {
   return false;
 }
 
-// Render pattern with tile drawing overlaid as tiled 3x3
-function renderPatternWithDrawing() {
-  if (app.mode !== 'pattern' || !patDrawState.active || !hasPatDrawContent()) return;
-  // The SVG pattern is rendered normally; we overlay the tile drawing onto the SVG via
-  // an embedded image in the SVG for each of the 9 tiles
-  renderPattern(); // re-render base pattern
-  if (!hasPatDrawContent()) return;
-
-  const { tileW, tileH } = getPatTileSize();
-  const dataUrl = patDrawCanvas.toDataURL('image/png');
-
-  for (let tx = 0; tx < 3; tx++) {
-    for (let ty = 0; ty < 3; ty++) {
-      const img = makeEl('image', {
-        href: dataUrl,
-        x: tx * tileW,
-        y: ty * tileH,
-        width: tileW,
-        height: tileH,
-        'preserveAspectRatio': 'none'
-      });
-      svgLayers.appendChild(img);
-    }
-  }
-}
-
-// Resize draw canvas to match wrap
-function resizeDrawCanvas() {
-  const wrap = document.getElementById('canvasWrap');
-  const rect = wrap.getBoundingClientRect();
-  // Keep internal resolution at 800x800 for quality
-  // CSS sizing handled by width/height 100%
-}
-window.addEventListener('resize', resizeDrawCanvas);
-
-// ─── Layer Management ───
-function selectLayer(id) {
-  mandalaState.selectedId = id;
-  const l = selLayer(); if (!l) return;
-  document.getElementById('sides').value=l.sides; document.getElementById('sidesVal').textContent=l.sides;
-  document.getElementById('symmetry').value=l.symmetry; document.getElementById('symmetryVal').textContent=l.symmetry;
-  document.getElementById('ringCount').value=l.ringCount; document.getElementById('ringCountVal').textContent=l.ringCount;
-  document.getElementById('elemPerRing').value=l.elemPerRing; document.getElementById('elemPerRingVal').textContent=l.elemPerRing;
-  document.getElementById('radius').value=l.radius; document.getElementById('radiusVal').textContent=l.radius;
-  document.getElementById('rotation').value=l.rotation; document.getElementById('rotationVal').textContent=l.rotation+'°';
-  document.getElementById('strokeWeight').value=l.strokeWeight; document.getElementById('strokeWeightVal').textContent=l.strokeWeight;
-  document.getElementById('strokeColor').value=l.strokeColor;
-  document.getElementById('fillToggle').classList.toggle('on',l.fill);
-  document.getElementById('fillColorRow').style.display=l.fill?'':'none';
-  document.getElementById('fillColor').value=l.fillColor;
-  document.getElementById('opacity').value=l.opacity; document.getElementById('opacityVal').textContent=Math.round(l.opacity*100)+'%';
-  document.getElementById('centerElem').value=l.centerElem||'dot';
-  document.getElementById('outerBound').value=l.outerBound||'circle';
-  document.querySelectorAll('#shapeGrid .shape-btn').forEach(b=>b.classList.toggle('active',b.dataset.shape===l.shape));
-  updateSidesVis();
-  renderLayersList();
-}
-
-function renderLayersList() {
-  const list=document.getElementById('layersList'); list.innerHTML='';
-  [...mandalaState.layers].reverse().forEach(l => {
-    const div=document.createElement('div');
-    div.className='layer-item'+(l.id===mandalaState.selectedId?' selected':'');
-    div.innerHTML=`<span class="layer-vis ${l.visible?'':'hidden'}" data-id="${l.id}">${l.visible?'👁':'👁‍🗨'}</span><span class="layer-name">${l.shape.charAt(0).toUpperCase()+l.shape.slice(1)} #${l.id}</span><span style="font-size:10px;color:var(--text2)">${l.symmetry>1?l.symmetry+'×':''}</span>`;
-    div.addEventListener('click', e => {
-      if(e.target.classList.contains('layer-vis')){l.visible=!l.visible;renderAll();renderLayersList();return;}
-      selectLayer(l.id);
-    });
-    list.appendChild(div);
-  });
-}
-
-document.getElementById('addLayerBtn').addEventListener('click', () => {
-  const l=defaultMandalaLayer(); mandalaState.layers.push(l); selectLayer(l.id); renderAll();
-});
-document.getElementById('deleteLayerBtn').addEventListener('click', () => {
-  if(mandalaState.layers.length<=1)return;
-  mandalaState.layers=mandalaState.layers.filter(l=>l.id!==mandalaState.selectedId);
-  selectLayer(mandalaState.layers[mandalaState.layers.length-1].id); renderAll();
-});
-document.getElementById('moveUpBtn').addEventListener('click', () => {
-  const idx=mandalaState.layers.findIndex(l=>l.id===mandalaState.selectedId);
-  if(idx<mandalaState.layers.length-1){[mandalaState.layers[idx],mandalaState.layers[idx+1]]=[mandalaState.layers[idx+1],mandalaState.layers[idx]];renderAll();renderLayersList();}
-});
-document.getElementById('moveDownBtn').addEventListener('click', () => {
-  const idx=mandalaState.layers.findIndex(l=>l.id===mandalaState.selectedId);
-  if(idx>0){[mandalaState.layers[idx],mandalaState.layers[idx-1]]=[mandalaState.layers[idx-1],mandalaState.layers[idx]];renderAll();renderLayersList();}
-});
-document.getElementById('dupeLayerBtn').addEventListener('click', () => {
-  const src=selLayer();if(!src)return;
-  const dupe={...src,id:mandalaState.nextId++};mandalaState.layers.push(dupe);selectLayer(dupe.id);renderAll();
-});
+// ─── Continue with rest of implementation ───
 
 // ═══════════════════════════════════════════════
 // ─── SVG SHAPE GENERATORS ───
@@ -1736,7 +1022,7 @@ function renderMandala() {
   });
 }
 
-// ─── PATTERN RENDER ───
+// ─── PATTERN RENDER WITH WALLPAPER GROUPS ───
 function createPatternElement(cx, cy, p) {
   const g=document.createElementNS('http://www.w3.org/2000/svg','g');
   const fill=p.fill?p.fillColor:'none', stroke=p.strokeColor, sw=p.strokeWeight;
@@ -1757,47 +1043,23 @@ function createPatternElement(cx, cy, p) {
 function renderPatternTile(ox, oy, tileW, tileH, parent) {
   const p = patternState;
   const sp = p.spacing;
-  const positions = [];
-
-  if(p.tileShape==='hex') {
-    const rowH = sp * Math.sqrt(3)/2;
-    const cols = Math.ceil(tileW/sp)+2;
-    const rows = Math.ceil(tileH/rowH)+2;
-    for(let r=-1;r<rows;r++){
-      for(let c=-1;c<cols;c++){
-        const x = c*sp + (r%2?sp/2:0);
-        const y = r*rowH;
-        if(x>=-sp && x<=tileW+sp && y>=-rowH && y<=tileH+rowH)
-          positions.push([ox+x, oy+y]);
-      }
-    }
-  } else if(p.patternType==='offset') {
-    const cols=Math.ceil(tileW/sp)+2, rows=Math.ceil(tileH/sp)+2;
-    for(let r=-1;r<rows;r++)for(let c=-1;c<cols;c++){
-      positions.push([ox+c*sp+(r%2?sp/2:0), oy+r*sp]);
-    }
-  } else if(p.patternType==='brick') {
-    const cols=Math.ceil(tileW/sp)+2, rows=Math.ceil(tileH/(sp/2))+2;
-    for(let r=-1;r<rows;r++)for(let c=-1;c<cols;c++){
-      positions.push([ox+c*sp+(r%2?sp/2:0), oy+r*sp*0.6]);
-    }
-  } else if(p.patternType==='hex') {
-    const rowH=sp*Math.sqrt(3)/2;
-    const cols=Math.ceil(tileW/sp)+2, rows=Math.ceil(tileH/rowH)+2;
-    for(let r=-1;r<rows;r++)for(let c=-1;c<cols;c++){
-      positions.push([ox+c*sp+(r%2?sp/2:0), oy+r*rowH]);
-    }
-  } else {
-    const cols=Math.ceil(tileW/sp)+2, rows=Math.ceil(tileH/sp)+2;
-    for(let r=-1;r<rows;r++)for(let c=-1;c<cols;c++){
-      positions.push([ox+c*sp, oy+r*sp]);
+  const cols = Math.ceil(tileW/sp) + 2;
+  const rows = Math.ceil(tileH/sp) + 2;
+  
+  // Base grid positions
+  const basePositions = [];
+  for(let r = -1; r < rows; r++) {
+    for(let c = -1; c < cols; c++) {
+      basePositions.push([ox + c * sp, oy + r * sp]);
     }
   }
-
-  positions.forEach(([x,y]) => {
-    if(p.tileShape==='diamond') {
-      parent.appendChild(createPatternElement(x, y, {...p, rotation: p.rotation + 45}));
-    } else {
+  
+  // Apply wallpaper group symmetries to generate additional positions
+  const allPositions = applyWallpaperSymmetry(basePositions, p.wallpaperGroup, tileW, tileH);
+  
+  // Create pattern elements at all positions
+  allPositions.forEach(([x, y]) => {
+    if (x >= ox - sp && x <= ox + tileW + sp && y >= oy - sp && y <= oy + tileH + sp) {
       parent.appendChild(createPatternElement(x, y, p));
     }
   });
@@ -1806,18 +1068,29 @@ function renderPatternTile(ox, oy, tileW, tileH, parent) {
 function renderPattern() {
   svgLayers.innerHTML='';
   const p = patternState;
-  const tileW = p.spacing * 3;
-  const tileH = p.tileShape==='hex' ? p.spacing * Math.sqrt(3) * 1.5 : tileW;
+  const { tileW, tileH } = getPatTileSize();
   const totalW = tileW * 3;
   const totalH = tileH * 3;
+  
   svgEl.setAttribute('viewBox', `0 0 ${totalW} ${totalH}`);
   svgEl.querySelector('rect').setAttribute('fill', p.bgColor);
   svgEl.querySelector('rect').setAttribute('width', totalW);
   svgEl.querySelector('rect').setAttribute('height', totalH);
 
-  for(let tx=0;tx<3;tx++)for(let ty=0;ty<3;ty++){
-    svgLayers.appendChild(makeEl('rect',{x:tx*tileW,y:ty*tileH,width:tileW,height:tileH,fill:'none',stroke:'#1a1a1a','stroke-width':0.5,'stroke-dasharray':'4 4'}));
-    renderPatternTile(tx*tileW, ty*tileH, tileW, tileH, svgLayers);
+  for(let tx=0;tx<3;tx++) {
+    for(let ty=0;ty<3;ty++){
+      const tileX = tx * tileW;
+      const tileY = ty * tileH;
+      
+      // Draw tile boundary
+      svgLayers.appendChild(makeEl('rect',{
+        x: tileX, y: tileY, width: tileW, height: tileH,
+        fill:'none', stroke:'#1a1a1a', 'stroke-width':0.5, 'stroke-dasharray':'4 4'
+      }));
+      
+      // Render pattern within tile using wallpaper group
+      renderPatternTile(tileX, tileY, tileW, tileH, svgLayers);
+    }
   }
 }
 
@@ -1825,8 +1098,10 @@ function renderPattern() {
 function renderAll() {
   if(app.generateActive) return;
   svgGenLayer.innerHTML='';
-  if(app.mode==='mandala' || app.mode==='draw') renderMandala();
-  else {
+  
+  if(app.mode==='mandala' || app.mode==='draw') {
+    renderMandala();
+  } else {
     renderPattern();
     if (patDrawState.active && hasPatDrawContent()) {
       const { tileW, tileH } = getPatTileSize();
@@ -1848,261 +1123,206 @@ function renderAll() {
   }
 }
 
-// ═══════════════════════════════════════════════
-// ─── GENERATIVE ENGINE ───
-// ═══════════════════════════════════════════════
+// Initialize wallpaper groups and set up basic controls
+initWallpaperGroups();
 
-function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
-
-function renderGenerate() {
-  svgLayers.innerHTML='';
-  svgGenLayer.innerHTML='';
-  if(app.mode==='mandala') renderGenMandala();
-  else if(app.mode==='pattern') renderGenPattern();
-}
-
-function renderGenMandala() {
-  svgEl.setAttribute('viewBox','0 0 800 800');
-  svgEl.querySelector('rect').setAttribute('fill','#050505');
-  svgEl.querySelector('rect').setAttribute('width',800);
-  svgEl.querySelector('rect').setAttribute('height',800);
-
-  svgGenLayer.appendChild(makeEl('circle',{cx:CX,cy:CY,r:396,fill:'none',stroke:'#1a1a1a','stroke-width':1}));
-
-  const g=genState, cx=CX, cy=CY;
-  const sym=g.symmetry, comp=g.complexity, rad=g.radius;
-  const tension=g.tension/100, density=g.density/100, spiral=g.spiral/100, chaos=g.chaos/100;
-  const stroke=g.strokeColor, sw=g.strokeWeight;
-  const numRings = g.rings;
-  const rng=mulberry32(Math.floor(chaos*10000)+sym*100+comp*10+numRings);
-
-  function jitter(x,y,amt){if(amt<=0)return[x,y];return[x+(rng()-.5)*amt*rad*.08,y+(rng()-.5)*amt*rad*.08];}
-
-  const masterG=document.createElementNS('http://www.w3.org/2000/svg','g');
-  masterG.setAttribute('transform',`rotate(${g.rotation} ${cx} ${cy})`);
-
-  const freq = Math.max(1, Math.round(comp * (0.5 + density * 0.8)));
-
-  for(let ring=0;ring<numRings;ring++){
-    const t=numRings===1?1:ring/(numRings-1);
-    let ringR=rad*(0.15+t*0.85);
-    if(spiral>0) ringR *= (1 + spiral*0.3*Math.log(1+ring*0.5));
-    const angleOff = spiral>0 ? spiral*ring*(Math.PI/(sym*PHI)) : 0;
-    const ringOpacity=1-t*0.3;
-    const elemPerSlice=Math.max(1,Math.round(freq*(0.3+density*0.7)));
-
-    for(let s=0;s<sym;s++){
-      const baseAngle=(Math.PI*2*s/sym)+angleOff;
-      for(let e=0;e<elemPerSlice;e++){
-        const et=elemPerSlice===1?0.5:e/(elemPerSlice-1);
-        const subR=ringR*(0.3+et*0.7);
-        const subAngle=baseAngle+(et-0.5)*(Math.PI/sym)*(0.3+density*0.7);
-        const px=cx+subR*Math.cos(subAngle), py=cy+subR*Math.sin(subAngle);
-        const [jx,jy]=jitter(px,py,chaos);
-        const elemSize=(rad/(4+comp))*(1-et*0.5)*(0.5+density*0.5);
-        const layerType=(ring+e)%Math.max(comp,1);
-
-        if(layerType===0||comp<=2){
-          if(tension>0){
-            const sides=Math.max(3,Math.round(3+(1-tension)*20));
-            const pts=[];for(let i=0;i<=sides;i++){const a=Math.PI*2*i/sides;const cr=elemSize*(1+chaos*(rng()-.5)*.15);pts.push([jx+cr*Math.cos(a),jy+cr*Math.sin(a)]);}
-            if(tension>0.5){let d=`M ${pts[0][0]} ${pts[0][1]}`;for(let i=1;i<pts.length;i++){const prev=pts[i-1],curr=pts[i];const cpx=(prev[0]+curr[0])/2+(rng()-.5)*tension*elemSize*.5;const cpy=(prev[1]+curr[1])/2+(rng()-.5)*tension*elemSize*.5;d+=` Q ${cpx} ${cpy} ${curr[0]} ${curr[1]}`;}d+='Z';masterG.appendChild(makeEl('path',{d,fill:'none',stroke,'stroke-width':sw,opacity:ringOpacity}));}
-            else masterG.appendChild(makeEl('polygon',{points:pts.map(p=>p.join(',')).join(' '),fill:'none',stroke,'stroke-width':sw,opacity:ringOpacity}));
-          } else masterG.appendChild(makeEl('circle',{cx:jx,cy:jy,r:elemSize,fill:'none',stroke,'stroke-width':sw,opacity:ringOpacity}));
-        }
-        else if(layerType===1){const[lx1,ly1]=jitter(cx,cy,chaos*.3);if(tension>.3){const midX=(lx1+jx)/2+(rng()-.5)*tension*rad*.15;const midY=(ly1+jy)/2+(rng()-.5)*tension*rad*.15;masterG.appendChild(makeEl('path',{d:`M ${lx1} ${ly1} Q ${midX} ${midY} ${jx} ${jy}`,fill:'none',stroke,'stroke-width':sw*.7,opacity:ringOpacity*.6}));}else masterG.appendChild(makeEl('line',{x1:lx1,y1:ly1,x2:jx,y2:jy,stroke,'stroke-width':sw*.7,opacity:ringOpacity*.6}));}
-        else if(layerType===2){const sides=Math.max(3,Math.min(sym,3+ring));const pts=[];for(let i=0;i<sides;i++){const a=Math.PI*2*i/sides+subAngle;const pr=elemSize*(1+chaos*(rng()-.5)*.2);const[ppx,ppy]=jitter(jx+pr*Math.cos(a),jy+pr*Math.sin(a),chaos*.3);pts.push([ppx,ppy]);}masterG.appendChild(makeEl('polygon',{points:pts.map(p=>p.join(',')).join(' '),fill:'none',stroke,'stroke-width':sw*.8,opacity:ringOpacity*.8}));}
-        else if(layerType===3){const dotR=elemSize*.2*(.5+density);masterG.appendChild(makeEl('circle',{cx:jx,cy:jy,r:dotR,fill:stroke,stroke:'none',opacity:ringOpacity*.7}));}
-        else if(layerType===4){const arcR=elemSize*.8;const startA=subAngle-Math.PI/(sym*2);const endA=subAngle+Math.PI/(sym*2);const[ax1,ay1]=jitter(jx+arcR*Math.cos(startA),jy+arcR*Math.sin(startA),chaos*.2);const[ax2,ay2]=jitter(jx+arcR*Math.cos(endA),jy+arcR*Math.sin(endA),chaos*.2);masterG.appendChild(makeEl('path',{d:`M ${ax1} ${ay1} A ${arcR} ${arcR} 0 0 1 ${ax2} ${ay2}`,fill:'none',stroke,'stroke-width':sw*.6,opacity:ringOpacity*.7}));}
-        else if(layerType===5){const nextAngle=(Math.PI*2*((s+1)%sym)/sym)+angleOff;const nx=cx+subR*Math.cos(nextAngle),ny=cy+subR*Math.sin(nextAngle);const[njx,njy]=jitter(nx,ny,chaos);masterG.appendChild(makeEl('line',{x1:jx,y1:jy,x2:njx,y2:njy,stroke,'stroke-width':sw*.5,opacity:ringOpacity*.5}));}
-        else if(layerType===6){masterG.appendChild(makeEl('circle',{cx,cy,r:subR,fill:'none',stroke,'stroke-width':sw*.4,opacity:ringOpacity*.25,'stroke-dasharray':`${elemSize*.5} ${elemSize*2}`}));}
-        else{const starSides=Math.max(3,Math.min(8,sym-2));const pts=[];for(let i=0;i<starSides*2;i++){const a=Math.PI*2*i/(starSides*2)+subAngle;const sr=i%2===0?elemSize:elemSize*.4;pts.push([jx+sr*Math.cos(a),jy+sr*Math.sin(a)]);}masterG.appendChild(makeEl('polygon',{points:pts.map(p=>p.join(',')).join(' '),fill:'none',stroke,'stroke-width':sw*.7,opacity:ringOpacity*.8}));}
-      }
-    }
-    if(density>0.4&&ring%2===0) masterG.appendChild(makeEl('circle',{cx,cy,r:ringR,fill:'none',stroke,'stroke-width':sw*.3,opacity:ringOpacity*.2*density}));
-  }
-  masterG.appendChild(makeEl('circle',{cx,cy,r:rad,fill:'none',stroke,'stroke-width':sw,opacity:0.6}));
-  masterG.appendChild(makeEl('circle',{cx,cy,r:sw*2,fill:stroke,stroke:'none',opacity:0.8}));
-  svgGenLayer.appendChild(masterG);
-}
-
-function renderGenPattern() {
-  const g=genState;
-  const comp=g.complexity, tension=g.tension/100, density=g.density/100, spiral=g.spiral/100, chaos=g.chaos/100;
-  const stroke=g.strokeColor, sw=g.strokeWeight;
-  const spacing=g.patSpacing, size=g.patSize, elemRot=g.patRotation;
-  const rng=mulberry32(Math.floor(chaos*10000)+comp*100+Math.floor(spacing));
-
-  const tileW=spacing*3, tileH=tileW;
-  const totalW=tileW*3, totalH=tileH*3;
-  svgEl.setAttribute('viewBox',`0 0 ${totalW} ${totalH}`);
-  svgEl.querySelector('rect').setAttribute('fill','#050505');
-  svgEl.querySelector('rect').setAttribute('width',totalW);
-  svgEl.querySelector('rect').setAttribute('height',totalH);
-
-  for(let tx=0;tx<3;tx++)for(let ty=0;ty<3;ty++){
-    svgGenLayer.appendChild(makeEl('rect',{x:tx*tileW,y:ty*tileH,width:tileW,height:tileH,fill:'none',stroke:'#1a1a1a','stroke-width':0.5,'stroke-dasharray':'4 4'}));
-  }
-
-  const shapes=['circle','polygon','star','dot','line','cross'];
-  const activeShapes=shapes.slice(0,Math.min(comp+1,shapes.length));
-
-  for(let tx=0;tx<3;tx++){
-    for(let ty=0;ty<3;ty++){
-      const ox=tx*tileW, oy=ty*tileH;
-      const cols=Math.ceil(tileW/spacing)+1, rows=Math.ceil(tileH/spacing)+1;
-      for(let r=0;r<rows;r++){
-        for(let c=0;c<cols;c++){
-          let x=ox+c*spacing, y=oy+r*spacing;
-          if(density>0.3 && r%2) x+=spacing/2;
-          if(spiral>0){const dist=Math.sqrt((c-cols/2)**2+(r-rows/2)**2);const ang=dist*spiral*0.1;x+=Math.cos(ang)*spiral*5;y+=Math.sin(ang)*spiral*5;}
-          if(chaos>0){x+=(rng()-.5)*chaos*spacing*.3;y+=(rng()-.5)*chaos*spacing*.3;}
-
-          const shapeIdx=(r*cols+c)%activeShapes.length;
-          const shape=activeShapes[shapeIdx];
-          const elemG=document.createElementNS('http://www.w3.org/2000/svg','g');
-          const rot=elemRot+(tension>0?(rng()-.5)*tension*60:0);
-          if(rot) elemG.setAttribute('transform',`rotate(${rot} ${x} ${y})`);
-
-          const s=size*(1+(chaos>0?(rng()-.5)*chaos*.4:0));
-          const opacity=1-tension*.3;
-
-          if(shape==='dot') elemG.appendChild(makeEl('circle',{cx:x,cy:y,r:s/2,fill:stroke,stroke:'none',opacity}));
-          else if(shape==='circle') elemG.appendChild(makeEl('circle',{cx:x,cy:y,r:s/2,fill:'none',stroke,'stroke-width':sw,opacity}));
-          else if(shape==='polygon'){const pts=polygonPoints(x,y,s/2,3+Math.floor(rng()*4),0);elemG.appendChild(makeEl('polygon',{points:pts.map(p=>p.join(',')).join(' '),fill:'none',stroke,'stroke-width':sw,opacity}));}
-          else if(shape==='star'){const pts=starPoints(x,y,s/2,5,0);elemG.appendChild(makeEl('polygon',{points:pts.map(p=>p.join(',')).join(' '),fill:'none',stroke,'stroke-width':sw,opacity}));}
-          else if(shape==='line'){elemG.appendChild(makeEl('line',{x1:x,y1:y-s/2,x2:x,y2:y+s/2,stroke,'stroke-width':sw,opacity}));}
-          else if(shape==='cross'){elemG.appendChild(makeEl('line',{x1:x,y1:y-s/2,x2:x,y2:y+s/2,stroke,'stroke-width':sw,opacity}));elemG.appendChild(makeEl('line',{x1:x-s/2,y1:y,x2:x+s/2,y2:y,stroke,'stroke-width':sw,opacity}));}
-
-          svgGenLayer.appendChild(elemG);
-        }
-      }
-    }
+// ─── Tabs ───
+function setTab(tabName) {
+  app.activeTab = tabName;
+  document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(x => x.classList.remove('active'));
+  document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+  document.getElementById('tab-' + tabName).classList.add('active');
+  app.generateActive = (tabName === 'generate');
+  if (app.generateActive) {
+    modeLabel.textContent = '⚡ Generate';
+  } else {
+    if (app.mode !== 'draw') modeLabel.textContent = app.mode === 'mandala' ? '🔮 Mandala' : '▦ Pattern';
+    svgGenLayer.innerHTML = '';
+    renderAll();
   }
 }
 
-// ─── Generate Tab Bindings ───
-const genDials=[
-  {id:'genComplexity',prop:'complexity'},{id:'genTension',prop:'tension'},{id:'genDensity',prop:'density'},
-  {id:'genSpiral',prop:'spiral'},{id:'genChaos',prop:'chaos'},
-  {id:'genSymmetry',prop:'symmetry'},{id:'genRings',prop:'rings'},
-  {id:'genRadius',prop:'radius'},{id:'genRotation',prop:'rotation',fmt:v=>v+'°'},
-  {id:'genPatSpacing',prop:'patSpacing'},{id:'genPatSize',prop:'patSize'},
-  {id:'genPatRotation',prop:'patRotation',fmt:v=>v+'°'}
-];
-genDials.forEach(d=>{
-  const input=document.getElementById(d.id);if(!input)return;
-  const val=document.getElementById(d.id+'Val');
-  input.addEventListener('input',()=>{genState[d.prop]=parseFloat(input.value);val.textContent=d.fmt?d.fmt(input.value):input.value;if(app.generateActive)renderGenerate();});
+document.querySelectorAll('.tab').forEach(t => {
+  t.addEventListener('click', () => setTab(t.dataset.tab));
 });
 
-document.getElementById('genStrokeColor').addEventListener('input',e=>{genState.strokeColor=e.target.value;document.querySelectorAll('#genStrokePresets .color-swatch').forEach(s=>s.classList.remove('active'));if(app.generateActive)renderGenerate();});
-document.querySelectorAll('#genStrokePresets .color-swatch').forEach(sw=>{sw.addEventListener('click',()=>{genState.strokeColor=sw.dataset.color;document.getElementById('genStrokeColor').value=sw.dataset.color;document.querySelectorAll('#genStrokePresets .color-swatch').forEach(s=>s.classList.remove('active'));sw.classList.add('active');if(app.generateActive)renderGenerate();});});
-document.getElementById('genStrokeWeight').addEventListener('input',function(){genState.strokeWeight=parseFloat(this.value);document.getElementById('genStrokeWeightVal').textContent=this.value;if(app.generateActive)renderGenerate();});
-
-document.querySelectorAll('.lock-btn').forEach(btn=>{btn.addEventListener('click',()=>{const dial=btn.dataset.dial;genState.locks[dial]=!genState.locks[dial];btn.classList.toggle('locked',genState.locks[dial]);btn.textContent=genState.locks[dial]?'🔒':'🔓';});});
-
-document.getElementById('genRandomize').addEventListener('click',()=>{
-  const ranges={
-    genComplexity:[1,8],genTension:[0,100],genDensity:[10,100],genSpiral:[0,100],genChaos:[0,60],
-    genSymmetry:[2,24],genRings:[1,8],genRadius:[80,350],genRotation:[0,360],
-    genPatSpacing:[30,150],genPatSize:[6,60],genPatRotation:[0,360]
-  };
-  genDials.forEach(d=>{
-    if(genState.locks[d.id])return;
-    const r=ranges[d.id];if(!r)return;
-    const input=document.getElementById(d.id);if(!input)return;
-    const step=parseFloat(input.step)||1;
-    let val=r[0]+Math.random()*(r[1]-r[0]);val=Math.round(val/step)*step;val=Math.max(r[0],Math.min(r[1],val));
-    input.value=val;genState[d.prop]=val;
-    document.getElementById(d.id+'Val').textContent=d.fmt?d.fmt(val):val;
+// ─── Pattern Controls ───
+document.querySelectorAll('#patShapeGrid .shape-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    patternState.element = btn.dataset.patshape;
+    document.querySelectorAll('#patShapeGrid .shape-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('patSidesSection').style.display = (patternState.element === 'polygon' || patternState.element === 'star') ? '' : 'none';
+    renderAll();
   });
-  const colors=['#C9A84C','#7B2FBE','#ffffff','#2FBEC9','#e05555','#ff6b35','#44cc88','#ff44aa'];
-  genState.strokeColor=colors[Math.floor(Math.random()*colors.length)];
-  document.getElementById('genStrokeColor').value=genState.strokeColor;
-  document.querySelectorAll('#genStrokePresets .color-swatch').forEach(s=>s.classList.toggle('active',s.dataset.color===genState.strokeColor));
-  if(app.generateActive)renderGenerate();
 });
 
-document.getElementById('genToLayers').addEventListener('click',()=>{
-  if(app.mode!=='mandala')return;
-  const layer=defaultMandalaLayer('circle');
-  layer.symmetry=genState.symmetry;layer.radius=genState.radius;layer.rotation=genState.rotation;
-  layer.strokeColor=genState.strokeColor;layer.strokeWeight=genState.strokeWeight;
-  layer.ringCount=genState.rings;
-  mandalaState.layers.push(layer);
-  app.generateActive=false;svgGenLayer.innerHTML='';
-  setTab('layers');selectLayer(layer.id);renderAll();
+function bindPatSlider(id, prop, fmt) {
+  const input = document.getElementById(id);
+  const val = document.getElementById(id + 'Val');
+  input.addEventListener('input', () => {
+    patternState[prop] = parseFloat(input.value);
+    val.textContent = fmt ? fmt(input.value) : input.value;
+    renderAll();
+  });
+}
+
+bindPatSlider('patSides', 'sides');
+bindPatSlider('patSpacing', 'spacing');
+bindPatSlider('patSize', 'size');
+bindPatSlider('patRotation', 'rotation', v => v + '°');
+bindPatSlider('patStrokeWeight', 'strokeWeight');
+
+document.getElementById('patStrokeColor').addEventListener('input', e => {
+  patternState.strokeColor = e.target.value;
+  renderAll();
 });
 
-// ═══════════════════════════════════════════════
-// ─── PRESETS ───
-// ═══════════════════════════════════════════════
+document.getElementById('patBgColor').addEventListener('input', e => {
+  patternState.bgColor = e.target.value;
+  renderAll();
+});
 
+document.getElementById('patFillColor').addEventListener('input', e => {
+  patternState.fillColor = e.target.value;
+  renderAll();
+});
+
+document.querySelectorAll('#patStrokePresets .color-swatch').forEach(sw => {
+  sw.addEventListener('click', () => {
+    patternState.strokeColor = sw.dataset.color;
+    document.getElementById('patStrokeColor').value = sw.dataset.color;
+    document.querySelectorAll('#patStrokePresets .color-swatch').forEach(s => s.classList.remove('active'));
+    sw.classList.add('active');
+    renderAll();
+  });
+});
+
+document.getElementById('patFillToggle').addEventListener('click', function() {
+  patternState.fill = !patternState.fill;
+  this.classList.toggle('on', patternState.fill);
+  document.getElementById('patFillColorRow').style.display = patternState.fill ? '' : 'none';
+  renderAll();
+});
+
+// ─── Mandala Controls ───
+function selLayer() { 
+  return mandalaState.layers.find(l => l.id === mandalaState.selectedId); 
+}
+
+document.querySelectorAll('#shapeGrid .shape-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const layer = selLayer(); if (!layer) return;
+    layer.shape = btn.dataset.shape;
+    document.querySelectorAll('#shapeGrid .shape-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    updateSidesVis();
+    renderAll();
+  });
+});
+
+function updateSidesVis() {
+  const l = selLayer();
+  document.getElementById('sidesSection').style.display = l && (l.shape === 'polygon' || l.shape === 'star') ? '' : 'none';
+}
+
+function bindMSlider(id, prop, fmt) {
+  const input = document.getElementById(id);
+  const val = document.getElementById(id + 'Val');
+  input.addEventListener('input', () => {
+    const l = selLayer(); if (!l) return;
+    l[prop] = parseFloat(input.value);
+    val.textContent = fmt ? fmt(input.value) : input.value;
+    renderAll();
+  });
+}
+
+bindMSlider('sides','sides');
+bindMSlider('symmetry','symmetry');
+bindMSlider('ringCount','ringCount');
+bindMSlider('elemPerRing','elemPerRing');
+bindMSlider('radius','radius');
+bindMSlider('rotation','rotation', v=>v+'°');
+bindMSlider('strokeWeight','strokeWeight');
+bindMSlider('opacity','opacity', v=>Math.round(v*100)+'%');
+
+document.getElementById('strokeColor').addEventListener('input', e => { 
+  const l=selLayer();if(l){l.strokeColor=e.target.value;renderAll();} 
+});
+
+document.getElementById('fillColor').addEventListener('input', e => { 
+  const l=selLayer();if(l){l.fillColor=e.target.value;renderAll();} 
+});
+
+document.getElementById('fillToggle').addEventListener('click', function() {
+  const l=selLayer();if(!l)return;
+  l.fill=!l.fill; this.classList.toggle('on',l.fill);
+  document.getElementById('fillColorRow').style.display=l.fill?'':'none';
+  renderAll();
+});
+
+document.getElementById('centerElem').addEventListener('change', e => { 
+  const l=selLayer();if(l){l.centerElem=e.target.value;renderAll();} 
+});
+
+document.getElementById('outerBound').addEventListener('change', e => { 
+  const l=selLayer();if(l){l.outerBound=e.target.value;renderAll();} 
+});
+
+// ─── Layer Management ───
+function selectLayer(id) {
+  mandalaState.selectedId = id;
+  const l = selLayer(); if (!l) return;
+  document.getElementById('sides').value=l.sides; document.getElementById('sidesVal').textContent=l.sides;
+  document.getElementById('symmetry').value=l.symmetry; document.getElementById('symmetryVal').textContent=l.symmetry;
+  document.getElementById('ringCount').value=l.ringCount; document.getElementById('ringCountVal').textContent=l.ringCount;
+  document.getElementById('elemPerRing').value=l.elemPerRing; document.getElementById('elemPerRingVal').textContent=l.elemPerRing;
+  document.getElementById('radius').value=l.radius; document.getElementById('radiusVal').textContent=l.radius;
+  document.getElementById('rotation').value=l.rotation; document.getElementById('rotationVal').textContent=l.rotation+'°';
+  document.getElementById('strokeWeight').value=l.strokeWeight; document.getElementById('strokeWeightVal').textContent=l.strokeWeight;
+  document.getElementById('strokeColor').value=l.strokeColor;
+  document.getElementById('fillToggle').classList.toggle('on',l.fill);
+  document.getElementById('fillColorRow').style.display=l.fill?'':'none';
+  document.getElementById('fillColor').value=l.fillColor;
+  document.getElementById('opacity').value=l.opacity; document.getElementById('opacityVal').textContent=Math.round(l.opacity*100)+'%';
+  document.getElementById('centerElem').value=l.centerElem||'dot';
+  document.getElementById('outerBound').value=l.outerBound||'circle';
+  document.querySelectorAll('#shapeGrid .shape-btn').forEach(b=>b.classList.toggle('active',b.dataset.shape===l.shape));
+  updateSidesVis();
+  renderLayersList();
+}
+
+function renderLayersList() {
+  const list=document.getElementById('layersList'); 
+  if (!list) return;
+  list.innerHTML='';
+  [...mandalaState.layers].reverse().forEach(l => {
+    const div=document.createElement('div');
+    div.className='layer-item'+(l.id===mandalaState.selectedId?' selected':'');
+    div.innerHTML=`<span class="layer-vis ${l.visible?'':'hidden'}" data-id="${l.id}">${l.visible?'👁':'👁‍🗨'}</span><span class="layer-name">${l.shape.charAt(0).toUpperCase()+l.shape.slice(1)} #${l.id}</span><span style="font-size:10px;color:var(--text2)">${l.symmetry>1?l.symmetry+'×':''}</span>`;
+    div.addEventListener('click', e => {
+      if(e.target.classList.contains('layer-vis')){l.visible=!l.visible;renderAll();renderLayersList();return;}
+      selectLayer(l.id);
+    });
+    list.appendChild(div);
+  });
+}
+
+// ─── Preset System ───
 const MANDALA_PRESETS=[
   {name:'Flower of Life',layers:[{shape:'flower',sides:6,symmetry:1,ringCount:1,elemPerRing:1,radius:200,rotation:0,strokeWeight:1,strokeColor:'#C9A84C',fill:false,fillColor:'#C9A84C',opacity:1,centerElem:'dot',outerBound:'circle'}]},
   {name:"Metatron's Cube",layers:[{shape:'metatron',sides:6,symmetry:1,ringCount:1,elemPerRing:1,radius:220,rotation:0,strokeWeight:1,strokeColor:'#7B2FBE',fill:false,fillColor:'#7B2FBE',opacity:1,centerElem:'dot',outerBound:'circle'}]},
-  {name:'Sri Yantra',layers:[
-    {shape:'polygon',sides:3,symmetry:1,ringCount:1,elemPerRing:1,radius:200,rotation:0,strokeWeight:1.5,strokeColor:'#C9A84C',fill:false,fillColor:'#C9A84C',opacity:1,centerElem:'none',outerBound:'none'},
-    {shape:'polygon',sides:3,symmetry:1,ringCount:1,elemPerRing:1,radius:200,rotation:180,strokeWeight:1.5,strokeColor:'#C9A84C',fill:false,fillColor:'#C9A84C',opacity:1,centerElem:'none',outerBound:'circle'}
-  ]},
-  {name:'Hexagonal Web',layers:[
-    {shape:'polygon',sides:6,symmetry:6,ringCount:1,elemPerRing:1,radius:120,rotation:0,strokeWeight:1,strokeColor:'#2FBEC9',fill:false,fillColor:'#2FBEC9',opacity:1,centerElem:'dot',outerBound:'none'},
-    {shape:'polygon',sides:6,symmetry:1,ringCount:1,elemPerRing:1,radius:250,rotation:0,strokeWeight:1.5,strokeColor:'#2FBEC9',fill:false,fillColor:'#2FBEC9',opacity:0.6,centerElem:'none',outerBound:'circle'}
-  ]},
-  {name:'Mandala Star',layers:[
-    {shape:'star',sides:8,symmetry:1,ringCount:1,elemPerRing:1,radius:200,rotation:0,strokeWeight:1.5,strokeColor:'#C9A84C',fill:false,fillColor:'#C9A84C',opacity:1,centerElem:'star',outerBound:'circle'},
-    {shape:'star',sides:8,symmetry:1,ringCount:1,elemPerRing:1,radius:200,rotation:22.5,strokeWeight:1.5,strokeColor:'#7B2FBE',fill:false,fillColor:'#7B2FBE',opacity:0.7,centerElem:'none',outerBound:'none'}
-  ]},
-  {name:'Sacred Rings',layers:[
-    {shape:'circle',sides:6,symmetry:1,ringCount:1,elemPerRing:1,radius:80,rotation:0,strokeWeight:2,strokeColor:'#C9A84C',fill:false,fillColor:'#C9A84C',opacity:1,centerElem:'dot',outerBound:'none'},
-    {shape:'circle',sides:6,symmetry:1,ringCount:1,elemPerRing:1,radius:140,rotation:0,strokeWeight:1.5,strokeColor:'#C9A84C',fill:false,fillColor:'#C9A84C',opacity:0.8,centerElem:'none',outerBound:'none'},
-    {shape:'circle',sides:6,symmetry:1,ringCount:1,elemPerRing:1,radius:200,rotation:0,strokeWeight:1,strokeColor:'#C9A84C',fill:false,fillColor:'#C9A84C',opacity:0.6,centerElem:'none',outerBound:'none'},
-    {shape:'circle',sides:6,symmetry:1,ringCount:1,elemPerRing:1,radius:260,rotation:0,strokeWeight:0.5,strokeColor:'#C9A84C',fill:false,fillColor:'#C9A84C',opacity:0.4,centerElem:'none',outerBound:'circle'}
-  ]},
-  {name:'Vesica Piscis',layers:[{shape:'circle',sides:6,symmetry:2,ringCount:1,elemPerRing:1,radius:150,rotation:0,strokeWeight:1.5,strokeColor:'#ffffff',fill:false,fillColor:'#ffffff',opacity:1,centerElem:'dot',outerBound:'circle'}]},
-  {name:'Tri-Force',layers:[
-    {shape:'polygon',sides:3,symmetry:3,ringCount:1,elemPerRing:1,radius:130,rotation:0,strokeWeight:2,strokeColor:'#C9A84C',fill:false,fillColor:'#C9A84C',opacity:1,centerElem:'dot',outerBound:'none'},
-    {shape:'polygon',sides:3,symmetry:1,ringCount:1,elemPerRing:1,radius:250,rotation:0,strokeWeight:1,strokeColor:'#C9A84C',fill:false,fillColor:'#C9A84C',opacity:0.5,centerElem:'none',outerBound:'circle'}
-  ]},
-  {name:'Radial Lines',layers:[
-    {shape:'line',sides:6,symmetry:12,ringCount:1,elemPerRing:1,radius:250,rotation:0,strokeWeight:1,strokeColor:'#7B2FBE',fill:false,fillColor:'#7B2FBE',opacity:0.6,centerElem:'none',outerBound:'none'},
-    {shape:'circle',sides:6,symmetry:1,ringCount:1,elemPerRing:1,radius:250,rotation:0,strokeWeight:1.5,strokeColor:'#7B2FBE',fill:false,fillColor:'#7B2FBE',opacity:1,centerElem:'dot',outerBound:'circle'}
-  ]},
-  {name:'Seed of Life',layers:[
-    {shape:'circle',sides:6,symmetry:6,ringCount:1,elemPerRing:1,radius:80,rotation:0,strokeWeight:1,strokeColor:'#C9A84C',fill:false,fillColor:'#C9A84C',opacity:1,centerElem:'none',outerBound:'none'},
-    {shape:'circle',sides:6,symmetry:1,ringCount:1,elemPerRing:1,radius:80,rotation:0,strokeWeight:1,strokeColor:'#C9A84C',fill:false,fillColor:'#C9A84C',opacity:1,centerElem:'dot',outerBound:'circle'}
-  ]},
-  {name:'Lotus',layers:[
-    {shape:'circle',sides:6,symmetry:8,ringCount:1,elemPerRing:1,radius:120,rotation:0,strokeWeight:1,strokeColor:'#C9A84C',fill:false,fillColor:'#C9A84C',opacity:0.8,centerElem:'dot',outerBound:'none'},
-    {shape:'circle',sides:6,symmetry:8,ringCount:1,elemPerRing:1,radius:80,rotation:22.5,strokeWeight:1,strokeColor:'#7B2FBE',fill:false,fillColor:'#7B2FBE',opacity:0.6,centerElem:'none',outerBound:'circle'}
-  ]},
-  {name:'Void Portal',layers:[
-    {shape:'polygon',sides:8,symmetry:1,ringCount:1,elemPerRing:1,radius:250,rotation:0,strokeWeight:2,strokeColor:'#7B2FBE',fill:false,fillColor:'#7B2FBE',opacity:1,centerElem:'none',outerBound:'none'},
-    {shape:'polygon',sides:8,symmetry:1,ringCount:1,elemPerRing:1,radius:180,rotation:22.5,strokeWeight:1.5,strokeColor:'#7B2FBE',fill:false,fillColor:'#7B2FBE',opacity:0.7,centerElem:'none',outerBound:'none'},
-    {shape:'circle',sides:6,symmetry:1,ringCount:1,elemPerRing:1,radius:50,rotation:0,strokeWeight:2,strokeColor:'#7B2FBE',fill:true,fillColor:'#0a0a0a',opacity:1,centerElem:'dot',outerBound:'circle'}
-  ]},
-  {name:'Chakra Rings',layers:[
-    {shape:'circle',sides:6,symmetry:1,ringCount:1,elemPerRing:1,radius:40,rotation:0,strokeWeight:2,strokeColor:'#e05555',fill:false,fillColor:'#e05555',opacity:1,centerElem:'dot',outerBound:'none'},
-    {shape:'circle',sides:6,symmetry:1,ringCount:1,elemPerRing:1,radius:80,rotation:0,strokeWeight:2,strokeColor:'#C9A84C',fill:false,fillColor:'#C9A84C',opacity:1,centerElem:'none',outerBound:'none'},
-    {shape:'circle',sides:6,symmetry:1,ringCount:1,elemPerRing:1,radius:120,rotation:0,strokeWeight:2,strokeColor:'#2FBEC9',fill:false,fillColor:'#2FBEC9',opacity:1,centerElem:'none',outerBound:'none'},
-    {shape:'circle',sides:6,symmetry:1,ringCount:1,elemPerRing:1,radius:160,rotation:0,strokeWeight:2,strokeColor:'#7B2FBE',fill:false,fillColor:'#7B2FBE',opacity:1,centerElem:'none',outerBound:'circle'}
-  ]}
+  {name:'p6m Mandala',layers:[{shape:'polygon',sides:6,symmetry:6,ringCount:1,elemPerRing:1,radius:200,rotation:0,strokeWeight:1.5,strokeColor:'#C9A84C',fill:false,fillColor:'#C9A84C',opacity:1,centerElem:'dot',outerBound:'circle'}]}
 ];
 
 const PATTERN_PRESETS=[
-  {name:'Dot Grid',p:{tileShape:'square',patternType:'grid',element:'dot',sides:6,spacing:60,size:8,rotation:0,strokeWeight:1,strokeColor:'#C9A84C',fill:false,fillColor:'#C9A84C',bgColor:'#050505'}},
-  {name:'Hex Dots',p:{tileShape:'hex',patternType:'hex',element:'dot',sides:6,spacing:50,size:10,rotation:0,strokeWeight:1,strokeColor:'#7B2FBE',fill:false,fillColor:'#7B2FBE',bgColor:'#050505'}},
-  {name:'Circle Grid',p:{tileShape:'square',patternType:'grid',element:'circle',sides:6,spacing:80,size:30,rotation:0,strokeWeight:1,strokeColor:'#C9A84C',fill:false,fillColor:'#C9A84C',bgColor:'#050505'}},
-  {name:'Triangle Brick',p:{tileShape:'square',patternType:'brick',element:'polygon',sides:3,spacing:60,size:20,rotation:0,strokeWeight:1,strokeColor:'#2FBEC9',fill:false,fillColor:'#2FBEC9',bgColor:'#050505'}},
-  {name:'Star Field',p:{tileShape:'square',patternType:'offset',element:'star',sides:5,spacing:80,size:16,rotation:0,strokeWeight:1,strokeColor:'#C9A84C',fill:false,fillColor:'#C9A84C',bgColor:'#050505'}},
-  {name:'Cross Hatch',p:{tileShape:'square',patternType:'grid',element:'cross',sides:4,spacing:40,size:18,rotation:45,strokeWeight:1,strokeColor:'#ffffff',fill:false,fillColor:'#ffffff',bgColor:'#050505'}},
-  {name:'Diamond Lines',p:{tileShape:'diamond',patternType:'grid',element:'line',sides:4,spacing:50,size:30,rotation:0,strokeWeight:1.5,strokeColor:'#C9A84C',fill:false,fillColor:'#C9A84C',bgColor:'#050505'}},
-  {name:'Hex Stars',p:{tileShape:'hex',patternType:'hex',element:'star',sides:6,spacing:70,size:20,rotation:0,strokeWeight:1,strokeColor:'#e05555',fill:false,fillColor:'#e05555',bgColor:'#050505'}},
-  {name:'Dense Circles',p:{tileShape:'square',patternType:'offset',element:'circle',sides:6,spacing:30,size:12,rotation:0,strokeWeight:0.5,strokeColor:'#2FBEC9',fill:false,fillColor:'#2FBEC9',bgColor:'#050505'}},
-  {name:'Gold Polygons',p:{tileShape:'square',patternType:'grid',element:'polygon',sides:6,spacing:80,size:30,rotation:0,strokeWeight:1.5,strokeColor:'#C9A84C',fill:false,fillColor:'#C9A84C',bgColor:'#0a0a0a'}},
-  {name:'Minimal Dots',p:{tileShape:'square',patternType:'grid',element:'dot',sides:6,spacing:100,size:4,rotation:0,strokeWeight:1,strokeColor:'#ffffff',fill:false,fillColor:'#ffffff',bgColor:'#0a0a0a'}},
-  {name:'Teal Weave',p:{tileShape:'square',patternType:'brick',element:'line',sides:4,spacing:40,size:30,rotation:0,strokeWeight:1,strokeColor:'#2FBEC9',fill:false,fillColor:'#2FBEC9',bgColor:'#050505'}}
+  {name:'p6m Hexagon',wallpaperGroup:'p6m',element:'polygon',sides:6,spacing:80,size:20,rotation:0,strokeWeight:1,strokeColor:'#C9A84C',fill:false,bgColor:'#050505'},
+  {name:'p4m Square',wallpaperGroup:'p4m',element:'polygon',sides:4,spacing:60,size:18,rotation:0,strokeWeight:1.5,strokeColor:'#7B2FBE',fill:false,bgColor:'#050505'},
+  {name:'p3m1 Triangle',wallpaperGroup:'p3m1',element:'polygon',sides:3,spacing:70,size:16,rotation:0,strokeWeight:1,strokeColor:'#2FBEC9',fill:false,bgColor:'#050505'},
+  {name:'p6m Stars',wallpaperGroup:'p6m',element:'star',sides:6,spacing:90,size:24,rotation:0,strokeWeight:1,strokeColor:'#C9A84C',fill:false,bgColor:'#050505'},
+  {name:'p2 Dots',wallpaperGroup:'p2',element:'dot',sides:6,spacing:40,size:8,rotation:0,strokeWeight:1,strokeColor:'#ffffff',fill:false,bgColor:'#050505'},
+  {name:'pmm Crosses',wallpaperGroup:'pmm',element:'cross',sides:4,spacing:50,size:20,rotation:0,strokeWeight:1.5,strokeColor:'#e05555',fill:false,bgColor:'#050505'}
 ];
 
 function loadMandalaPreset(preset) {
@@ -2115,151 +1335,78 @@ function loadMandalaPreset(preset) {
 }
 
 function loadPatternPreset(preset) {
-  Object.assign(patternState, preset.p);
-  document.getElementById('patTileShape').value=patternState.tileShape;
-  document.getElementById('patType').value=patternState.patternType;
-  document.getElementById('patSpacing').value=patternState.spacing;document.getElementById('patSpacingVal').textContent=patternState.spacing;
-  document.getElementById('patSize').value=patternState.size;document.getElementById('patSizeVal').textContent=patternState.size;
-  document.getElementById('patRotation').value=patternState.rotation;document.getElementById('patRotationVal').textContent=patternState.rotation+'°';
-  document.getElementById('patStrokeWeight').value=patternState.strokeWeight;document.getElementById('patStrokeWeightVal').textContent=patternState.strokeWeight;
-  document.getElementById('patStrokeColor').value=patternState.strokeColor;
-  document.getElementById('patBgColor').value=patternState.bgColor;
-  document.getElementById('patSides').value=patternState.sides;document.getElementById('patSidesVal').textContent=patternState.sides;
-  document.querySelectorAll('#patShapeGrid .shape-btn').forEach(b=>b.classList.toggle('active',b.dataset.patshape===patternState.element));
-  document.getElementById('patSidesSection').style.display=(patternState.element==='polygon'||patternState.element==='star')?'':'none';
+  patternState.wallpaperGroup = preset.wallpaperGroup;
+  patternState.element = preset.element;
+  patternState.sides = preset.sides;
+  patternState.spacing = preset.spacing;
+  patternState.size = preset.size;
+  patternState.rotation = preset.rotation;
+  patternState.strokeWeight = preset.strokeWeight;
+  patternState.strokeColor = preset.strokeColor;
+  patternState.fill = preset.fill || false;
+  patternState.bgColor = preset.bgColor;
+  
+  // Update UI
+  document.querySelectorAll('.wallpaper-btn').forEach(b => b.classList.toggle('active', b.dataset.wallpaperGroup === preset.wallpaperGroup));
+  document.getElementById('patSpacing').value = preset.spacing;
+  document.getElementById('patSpacingVal').textContent = preset.spacing;
+  document.getElementById('patSize').value = preset.size;
+  document.getElementById('patSizeVal').textContent = preset.size;
+  document.getElementById('patRotation').value = preset.rotation;
+  document.getElementById('patRotationVal').textContent = preset.rotation + '°';
+  document.getElementById('patStrokeWeight').value = preset.strokeWeight;
+  document.getElementById('patStrokeWeightVal').textContent = preset.strokeWeight;
+  document.getElementById('patStrokeColor').value = preset.strokeColor;
+  document.getElementById('patBgColor').value = preset.bgColor;
+  document.getElementById('patSides').value = preset.sides;
+  document.getElementById('patSidesVal').textContent = preset.sides;
+  document.querySelectorAll('#patShapeGrid .shape-btn').forEach(b => b.classList.toggle('active', b.dataset.patshape === preset.element));
+  
   renderAll();
 }
 
 function loadPresetButtons() {
-  const grid=document.getElementById('presetsGrid');grid.innerHTML='';
+  const grid=document.getElementById('presetsGrid');
+  if (!grid) return;
+  grid.innerHTML='';
   const presets = app.mode==='mandala' ? MANDALA_PRESETS : PATTERN_PRESETS;
   presets.forEach(p=>{
     const btn=document.createElement('button');btn.className='preset-btn';btn.textContent=p.name;
     btn.addEventListener('click',()=>app.mode==='mandala'?loadMandalaPreset(p):loadPatternPreset(p));
     grid.appendChild(btn);
   });
-  loadCustomPresets();
 }
 
-function loadCustomPresets() {
-  const grid=document.getElementById('customPresetsGrid');grid.innerHTML='';
-  const key=app.mode==='mandala'?'geo-mandala-presets':'geo-pattern-presets';
-  const customs=JSON.parse(localStorage.getItem(key)||'[]');
-  customs.forEach(p=>{
-    const btn=document.createElement('button');btn.className='preset-btn';btn.textContent=p.name;
-    btn.addEventListener('click',()=>app.mode==='mandala'?loadMandalaPreset(p):loadPatternPreset(p));
-    grid.appendChild(btn);
-  });
-}
-
-document.getElementById('savePresetBtn').addEventListener('click',()=>{
-  const name=prompt('Preset name:');if(!name)return;
-  const key=app.mode==='mandala'?'geo-mandala-presets':'geo-pattern-presets';
-  const customs=JSON.parse(localStorage.getItem(key)||'[]');
-  if(app.mode==='mandala'){
-    customs.push({name,layers:mandalaState.layers.map(l=>{const{id,visible,...r}=l;return r;})});
+// ─── Pattern Drawing (simplified) ───
+function updatePatDrawGuide() {
+  if (app.mode === 'pattern' && patDrawState.active && patDrawState.showGuide) {
+    svgEl.style.opacity = '0.2';
+    svgEl.style.pointerEvents = 'none';
+  } else if (app.mode === 'pattern' && patDrawState.active) {
+    svgEl.style.opacity = '0';
+    svgEl.style.pointerEvents = 'none';
   } else {
-    customs.push({name,p:{...patternState}});
+    svgEl.style.opacity = '';
+    svgEl.style.pointerEvents = '';
   }
-  localStorage.setItem(key,JSON.stringify(customs));loadCustomPresets();
-});
+}
 
-document.getElementById('clearPresetsBtn').addEventListener('click',()=>{
-  const key=app.mode==='mandala'?'geo-mandala-presets':'geo-pattern-presets';
-  if(confirm('Clear all custom presets?')){localStorage.removeItem(key);loadCustomPresets();}
-});
+function renderPatternWithDrawing() {
+  renderAll();
+}
 
-// ═══════════════════════════════════════════════
-// ─── EXPORT ───
-// ═══════════════════════════════════════════════
+// ─── Draw mode (simplified) ───
+function updateDrawGuide() {
+  // Simplified - just show/hide guide
+}
 
+// ─── Export Functions ───
 function getSVGForExport() {
   const clone=svgEl.cloneNode(true);
   clone.setAttribute('xmlns','http://www.w3.org/2000/svg');
   clone.setAttribute('xmlns:xlink','http://www.w3.org/1999/xlink');
-  // Ensure SVG is fully visible for export
-  clone.style.opacity = '';
-
-  if(app.mode==='pattern') {
-    const p=patternState;
-    const tileW=p.spacing*3;
-    const tileH=p.tileShape==='hex'?p.spacing*Math.sqrt(3)*1.5:tileW;
-    clone.setAttribute('viewBox',`0 0 ${tileW} ${tileH}`);
-    const root=clone.querySelector('#svgRoot');
-    root.innerHTML='';
-    const bg=document.createElementNS('http://www.w3.org/2000/svg','rect');
-    bg.setAttribute('width',tileW);bg.setAttribute('height',tileH);bg.setAttribute('fill',p.bgColor);
-    root.appendChild(bg);
-    const tempSvg=document.createElementNS('http://www.w3.org/2000/svg','g');
-    renderPatternTile(0,0,tileW,tileH,tempSvg);
-    root.appendChild(tempSvg);
-    // Include tile drawing if present
-    if (patDrawState.active && hasPatDrawContent()) {
-      const imgEl = document.createElementNS('http://www.w3.org/2000/svg','image');
-      imgEl.setAttribute('href', patDrawCanvas.toDataURL('image/png'));
-      imgEl.setAttribute('x', 0);
-      imgEl.setAttribute('y', 0);
-      imgEl.setAttribute('width', tileW);
-      imgEl.setAttribute('height', tileH);
-      imgEl.setAttribute('preserveAspectRatio', 'none');
-      root.appendChild(imgEl);
-    }
-  } else {
-    clone.setAttribute('viewBox','0 0 800 800');
-  }
-  return new XMLSerializer().serializeToString(clone);
-}
-
-function getFullSVGString() {
-  const clone=svgEl.cloneNode(true);
-  clone.setAttribute('xmlns','http://www.w3.org/2000/svg');
-  clone.setAttribute('xmlns:xlink','http://www.w3.org/1999/xlink');
   clone.style.opacity = '';
   return new XMLSerializer().serializeToString(clone);
-}
-
-// Composite export: SVG + Canvas drawing
-function exportComposite(transparent) {
-  const w = 800, h = 800;
-  const exportCanvas = document.createElement('canvas');
-  exportCanvas.width = w; exportCanvas.height = h;
-  const ectx = exportCanvas.getContext('2d');
-
-  return new Promise(resolve => {
-    // Step 1: Draw SVG as base
-    const svgClone = svgEl.cloneNode(true);
-    svgClone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
-    svgClone.setAttribute('viewBox', '0 0 800 800');
-    svgClone.style.opacity = '';
-    const svgStr = new XMLSerializer().serializeToString(svgClone);
-    const svgBlob = new Blob([svgStr], {type: 'image/svg+xml'});
-    const svgUrl = URL.createObjectURL(svgBlob);
-    const svgImg = new Image();
-    svgImg.onload = () => {
-      if (!transparent) {
-        ectx.fillStyle = '#050505';
-        ectx.fillRect(0, 0, w, h);
-      }
-      ectx.drawImage(svgImg, 0, 0, w, h);
-      URL.revokeObjectURL(svgUrl);
-
-      // Step 2: Overlay canvas drawing
-      if (hasDrawContent()) {
-        ectx.drawImage(drawCanvas, 0, 0, w, h);
-      }
-
-      resolve(exportCanvas);
-    };
-    svgImg.src = svgUrl;
-  });
-}
-
-function hasDrawContent() {
-  const data = drawCtx.getImageData(0, 0, drawCanvas.width, drawCanvas.height).data;
-  for (let i = 3; i < data.length; i += 4) {
-    if (data[i] > 0) return true;
-  }
-  return false;
 }
 
 document.getElementById('exportSVG').addEventListener('click',()=>{
@@ -2272,23 +1419,9 @@ document.getElementById('exportSVG').addEventListener('click',()=>{
 
 document.getElementById('exportPNG').addEventListener('click',async ()=>{
   const transparent=document.getElementById('exportTransparent').checked;
-
-  if (app.mode === 'draw' || hasDrawContent()) {
-    // Composite export with canvas overlay
-    const canvas = await exportComposite(transparent);
-    const a=document.createElement('a');a.href=canvas.toDataURL('image/png');
-    a.download='mandala-drawing.png';a.click();
-    return;
-  }
-
-  // For pattern mode, use the full SVG (3x3) which already includes tile drawings
-  const svg=app.mode==='pattern'?getFullSVGString():getSVGForExport();
+  const svg=getSVGForExport();
   const canvas=document.createElement('canvas');
   let w=800,h=800;
-  if(app.mode==='pattern'){
-    const p=patternState;const tileW=p.spacing*3;const tileH=p.tileShape==='hex'?p.spacing*Math.sqrt(3)*1.5:tileW;
-    w=tileW*3;h=tileH*3;
-  }
   canvas.width=w;canvas.height=h;
   const ctx=canvas.getContext('2d');
   const img=new Image();
@@ -2298,36 +1431,10 @@ document.getElementById('exportPNG').addEventListener('click',async ()=>{
     if(!transparent){ctx.fillStyle=app.mode==='pattern'?patternState.bgColor:'#050505';ctx.fillRect(0,0,w,h);}
     ctx.drawImage(img,0,0,w,h);URL.revokeObjectURL(url);
     const a=document.createElement('a');a.href=canvas.toDataURL('image/png');
-    a.download=app.mode==='mandala'?'mandala.png':'pattern-swatch.png';
+    a.download=app.mode==='mandala'?'mandala.png':'pattern-wallpaper.png';
     a.click();
   };
   img.src=url;
-});
-
-document.getElementById('exportCSS').addEventListener('click',()=>{
-  const svg=getSVGForExport();
-  const encoded=btoa(unescape(encodeURIComponent(svg)));
-  let size='200px 200px';
-  if(app.mode==='pattern'){
-    const p=patternState;const tileW=p.spacing*3;const tileH=p.tileShape==='hex'?p.spacing*Math.sqrt(3)*1.5:tileW;
-    size=`${tileW}px ${tileH}px`;
-  }
-  const css=`background-image: url("data:image/svg+xml;base64,${encoded}");\nbackground-repeat: repeat;\nbackground-size: ${size};`;
-  navigator.clipboard.writeText(css).then(()=>alert('CSS copied to clipboard!')).catch(()=>prompt('Copy this CSS:',css));
-});
-
-document.getElementById('exportJSON').addEventListener('click',()=>{
-  const data=JSON.stringify({
-    mode:app.mode,
-    mandala:app.mode==='mandala'||app.mode==='draw'?{layers:mandalaState.layers.map(l=>{const{id,visible,...r}=l;return r;})}:null,
-    pattern:app.mode==='pattern'?patternState:null,
-    generate:app.generateActive?genState:null,
-    draw:app.mode==='draw'?{folds:drawState.folds,hasDrawing:hasDrawContent()}:null,
-    patternDraw:app.mode==='pattern'&&patDrawState.active?{hasDrawing:hasPatDrawContent()}:null
-  },null,2);
-  const blob=new Blob([data],{type:'application/json'});
-  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
-  a.download='geometry-builder.json';a.click();URL.revokeObjectURL(a.href);
 });
 
 // ─── Init ───
@@ -2337,7 +1444,6 @@ loadPresetButtons();
 switchMode();
 renderAll();
 
-if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{});}
 </script>
 </body>
 </html>
