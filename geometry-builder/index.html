@@ -6,7 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#0a0a0a">
-<title>Mandala Studio v1.6</title>
+<title>Mandala Studio v1.7</title>
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-192.png">
 <style>
@@ -21,8 +21,8 @@ input[type=color]::-webkit-color-swatch-wrapper{padding:0}
 input[type=color]::-webkit-color-swatch{border:none;border-radius:4px}
 select{background:var(--surface2);color:var(--text);border:1px solid var(--border);border-radius:var(--radius);padding:6px 10px;font-size:13px;outline:none;width:100%}
 .app{display:flex;height:100vh;height:100dvh}
-.canvas-area{flex:1;display:flex;align-items:center;justify-content:center;background:var(--bg);position:relative;min-width:0}
-.canvas-wrap{position:relative;aspect-ratio:1;max-width:100%;max-height:100%;background:#050505;border:1px solid var(--border);border-radius:4px;overflow:hidden}
+.canvas-area{flex:1;display:flex;align-items:center;justify-content:center;background:var(--bg);position:relative;min-width:0;padding:8px}
+.canvas-wrap{position:relative;width:100%;height:100%;max-width:100%;max-height:100%;background:#050505;border:1px solid var(--border);border-radius:4px;overflow:hidden}
 #mainCanvas{display:block;width:100%;height:100%}
 #drawCanvas{position:absolute;top:0;left:0;width:100%;height:100%;cursor:crosshair;touch-action:none;display:none}
 .mode-label{position:absolute;top:10px;left:10px;background:rgba(10,10,10,.85);color:var(--gold);font-size:11px;padding:4px 10px;border-radius:12px;letter-spacing:1px;text-transform:uppercase;pointer-events:none;z-index:5}
@@ -117,11 +117,11 @@ select{background:var(--surface2);color:var(--text);border:1px solid var(--borde
 .sym-chip.active{background:var(--gold);color:#0a0a0a;border-color:var(--gold);font-weight:700}
 
 /* Wallpaper group grid */
-.wpg-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:12px}
-.wpg-btn{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 2px;border-radius:var(--radius);background:var(--surface2);border:2px solid transparent;font-size:9px;color:var(--text2);transition:all .15s;cursor:pointer;min-height:52px;justify-content:center}
+.wpg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:12px}
+.wpg-btn{display:flex;flex-direction:column;align-items:center;gap:3px;padding:4px 2px;border-radius:var(--radius);background:var(--surface2);border:2px solid transparent;font-size:9px;color:var(--text2);transition:all .15s;cursor:pointer;min-height:78px;justify-content:center}
 .wpg-btn:hover{border-color:var(--border);color:var(--text)}
 .wpg-btn.active{border-color:var(--gold);color:var(--gold);background:#1a1708}
-.wpg-btn svg{width:26px;height:26px;flex-shrink:0}
+.wpg-btn svg{width:60px;height:60px;flex-shrink:0;border-radius:4px}
 .wpg-btn .wpg-label{font-weight:600;letter-spacing:.3px;line-height:1}
 
 /* Undo/redo bar */
@@ -130,7 +130,7 @@ select{background:var(--surface2);color:var(--text);border:1px solid var(--borde
 
 @media(max-width:768px){
   .app{flex-direction:column}
-  .canvas-area{flex:none;height:45vh;height:45dvh}
+  .canvas-area{flex:none;height:50vh;height:50dvh;padding:4px}
   .panel{width:100%;border-left:none;border-top:1px solid var(--border);flex:1}
   .tab{font-size:10px;padding:10px 4px}
   .mode-switcher button{font-size:13px;padding:10px 6px}
@@ -309,6 +309,10 @@ select{background:var(--surface2);color:var(--text);border:1px solid var(--borde
             <div class="ctrl-row"><label>BG Color</label><input type="color" id="patBgColor" value="#050505"></div>
           </div>
           <div class="section" style="border-top:1px solid var(--border);padding-top:12px">
+            <div class="section-title">Wallpaper Group</div>
+            <div class="wpg-grid" id="wpgGrid"></div>
+          </div>
+          <div class="section" style="border-top:1px solid var(--border);padding-top:12px">
             <div class="section-title">✏️ Draw on Tile</div>
             <div class="toggle-row"><div class="toggle" id="patDrawToggle"></div><span style="font-size:12px;color:var(--text2)">Enable tile drawing</span></div>
             <div id="patDrawControls" style="display:none">
@@ -329,10 +333,6 @@ select{background:var(--surface2);color:var(--text);border:1px solid var(--borde
               </div>
               <div style="margin-top:10px">
                 <div class="toggle-row"><div class="toggle" id="patDrawGuideToggle"></div><span style="font-size:12px;color:var(--text2)">Show pattern guide</span></div>
-              </div>
-              <div class="section" style="margin-top:8px">
-                <div class="section-title">Symmetry Group</div>
-                <div class="wpg-grid" id="wpgGrid"></div>
               </div>
               <div class="section" style="margin-top:8px">
                 <div class="section-title">History</div>
@@ -735,126 +735,86 @@ const WALLPAPER_GROUPS = {
     }}
 };
 
-// SVG preview icons for each group
+// Generate visual symmetry preview thumbnails using actual wallpaper group transforms
+// Shows a motif (small L-shape) with all symmetry copies tiled in a 2x2 grid
 function wpgSVGIcon(group) {
-  const s = 26; // viewBox size
-  const c = s/2;
-  const svgNS = 'http://www.w3.org/2000/svg';
-  let paths = '';
-  const col = 'currentColor';
-  const bg = 'rgba(128,128,128,0.15)';
+  const s = 60;
+  const bg = '#111';
+  const gold = '#C9A84C';
+  const goldDim = '#8B7333';
 
-  switch(group) {
-    case 'p1':
-      paths = `<rect x="2" y="2" width="${s-4}" height="${s-4}" fill="${bg}" rx="2"/>
-        <line x1="6" y1="8" x2="20" y2="8" stroke="${col}" stroke-width="1" opacity="0.4"/>
-        <line x1="6" y1="14" x2="20" y2="14" stroke="${col}" stroke-width="1" opacity="0.4"/>
-        <line x1="6" y1="20" x2="20" y2="20" stroke="${col}" stroke-width="1" opacity="0.4"/>`;
-      break;
-    case 'p2':
-      paths = `<rect x="2" y="2" width="${s-4}" height="${s-4}" fill="${bg}" rx="2"/>
-        <circle cx="${c}" cy="${c}" r="2" fill="${col}"/>
-        <path d="M8 8 L18 8 M8 18 L18 18" stroke="${col}" stroke-width="1" opacity="0.5"/>
-        <path d="M13 5 L13 21" stroke="${col}" stroke-width="0.7" stroke-dasharray="2 2" opacity="0.3"/>`;
-      break;
-    case 'pm':
-      paths = `<rect x="2" y="2" width="${s-4}" height="${s-4}" fill="${bg}" rx="2"/>
-        <line x1="${c}" y1="3" x2="${c}" y2="23" stroke="${col}" stroke-width="1.2" stroke-dasharray="2 1"/>
-        <path d="M7 8 L10 12 L7 16" stroke="${col}" stroke-width="1" fill="none" opacity="0.6"/>
-        <path d="M19 8 L16 12 L19 16" stroke="${col}" stroke-width="1" fill="none" opacity="0.6"/>`;
-      break;
-    case 'pg':
-      paths = `<rect x="2" y="2" width="${s-4}" height="${s-4}" fill="${bg}" rx="2"/>
-        <line x1="${c}" y1="3" x2="${c}" y2="23" stroke="${col}" stroke-width="1" stroke-dasharray="3 2" opacity="0.5"/>
-        <path d="M7 7 L10 10" stroke="${col}" stroke-width="1.2"/>
-        <path d="M19 16 L16 19" stroke="${col}" stroke-width="1.2"/>`;
-      break;
-    case 'cm':
-      paths = `<rect x="2" y="2" width="${s-4}" height="${s-4}" fill="${bg}" rx="2"/>
-        <line x1="${c}" y1="3" x2="${c}" y2="23" stroke="${col}" stroke-width="1" stroke-dasharray="2 1"/>
-        <line x1="3" y1="${c}" x2="23" y2="${c}" stroke="${col}" stroke-width="0.7" stroke-dasharray="3 2" opacity="0.4"/>
-        <path d="M7 8 L10 11 L7 14" stroke="${col}" stroke-width="1" fill="none" opacity="0.6"/>
-        <path d="M19 14 L16 17 L19 20" stroke="${col}" stroke-width="1" fill="none" opacity="0.6"/>`;
-      break;
-    case 'pmm':
-      paths = `<rect x="2" y="2" width="${s-4}" height="${s-4}" fill="${bg}" rx="2"/>
-        <line x1="${c}" y1="3" x2="${c}" y2="23" stroke="${col}" stroke-width="1.2" stroke-dasharray="2 1"/>
-        <line x1="3" y1="${c}" x2="23" y2="${c}" stroke="${col}" stroke-width="1.2" stroke-dasharray="2 1"/>`;
-      break;
-    case 'pmg':
-      paths = `<rect x="2" y="2" width="${s-4}" height="${s-4}" fill="${bg}" rx="2"/>
-        <line x1="3" y1="${c}" x2="23" y2="${c}" stroke="${col}" stroke-width="1" stroke-dasharray="2 1"/>
-        <circle cx="${c}" cy="${c}" r="2" fill="${col}"/>
-        <line x1="${c}" y1="3" x2="${c}" y2="23" stroke="${col}" stroke-width="0.7" stroke-dasharray="3 2" opacity="0.4"/>`;
-      break;
-    case 'pgg':
-      paths = `<rect x="2" y="2" width="${s-4}" height="${s-4}" fill="${bg}" rx="2"/>
-        <line x1="3" y1="${c}" x2="23" y2="${c}" stroke="${col}" stroke-width="0.7" stroke-dasharray="3 2" opacity="0.4"/>
-        <line x1="${c}" y1="3" x2="${c}" y2="23" stroke="${col}" stroke-width="0.7" stroke-dasharray="3 2" opacity="0.4"/>
-        <circle cx="8" cy="8" r="1.5" fill="${col}" opacity="0.6"/>
-        <circle cx="18" cy="18" r="1.5" fill="${col}" opacity="0.6"/>`;
-      break;
-    case 'cmm':
-      paths = `<rect x="2" y="2" width="${s-4}" height="${s-4}" fill="${bg}" rx="2"/>
-        <line x1="${c}" y1="3" x2="${c}" y2="23" stroke="${col}" stroke-width="1" stroke-dasharray="2 1"/>
-        <line x1="3" y1="${c}" x2="23" y2="${c}" stroke="${col}" stroke-width="1" stroke-dasharray="2 1"/>
-        <line x1="3" y1="3" x2="23" y2="23" stroke="${col}" stroke-width="0.7" opacity="0.3"/>
-        <line x1="23" y1="3" x2="3" y2="23" stroke="${col}" stroke-width="0.7" opacity="0.3"/>`;
-      break;
-    case 'p4':
-      paths = `<rect x="2" y="2" width="${s-4}" height="${s-4}" fill="${bg}" rx="2"/>
-        <circle cx="${c}" cy="${c}" r="2.5" fill="${col}"/>
-        <path d="M13 5 L13 8 M21 13 L18 13 M13 21 L13 18 M5 13 L8 13" stroke="${col}" stroke-width="1.2"/>`;
-      break;
-    case 'p4m':
-      paths = `<rect x="2" y="2" width="${s-4}" height="${s-4}" fill="${bg}" rx="2"/>
-        <line x1="${c}" y1="3" x2="${c}" y2="23" stroke="${col}" stroke-width="1" stroke-dasharray="2 1"/>
-        <line x1="3" y1="${c}" x2="23" y2="${c}" stroke="${col}" stroke-width="1" stroke-dasharray="2 1"/>
-        <line x1="3" y1="3" x2="23" y2="23" stroke="${col}" stroke-width="0.8" stroke-dasharray="2 1"/>
-        <line x1="23" y1="3" x2="3" y2="23" stroke="${col}" stroke-width="0.8" stroke-dasharray="2 1"/>
-        <circle cx="${c}" cy="${c}" r="2" fill="${col}"/>`;
-      break;
-    case 'p4g':
-      paths = `<rect x="2" y="2" width="${s-4}" height="${s-4}" fill="${bg}" rx="2"/>
-        <circle cx="${c}" cy="${c}" r="2" fill="${col}"/>
-        <line x1="3" y1="3" x2="23" y2="23" stroke="${col}" stroke-width="0.7" stroke-dasharray="3 2" opacity="0.4"/>
-        <line x1="23" y1="3" x2="3" y2="23" stroke="${col}" stroke-width="0.7" stroke-dasharray="3 2" opacity="0.4"/>
-        <path d="M13 5 L13 8 M21 13 L18 13 M13 21 L13 18 M5 13 L8 13" stroke="${col}" stroke-width="1"/>`;
-      break;
-    case 'p3':
-      paths = `<rect x="2" y="2" width="${s-4}" height="${s-4}" fill="${bg}" rx="2"/>
-        <polygon points="13,5 20,18 6,18" fill="none" stroke="${col}" stroke-width="1"/>
-        <circle cx="${c}" cy="14" r="1.5" fill="${col}"/>`;
-      break;
-    case 'p3m1':
-      paths = `<rect x="2" y="2" width="${s-4}" height="${s-4}" fill="${bg}" rx="2"/>
-        <polygon points="13,5 20,18 6,18" fill="none" stroke="${col}" stroke-width="1"/>
-        <line x1="${c}" y1="5" x2="${c}" y2="18" stroke="${col}" stroke-width="0.8" stroke-dasharray="2 1"/>
-        <line x1="6" y1="18" x2="16.5" y2="11.5" stroke="${col}" stroke-width="0.7" stroke-dasharray="2 1" opacity="0.5"/>
-        <line x1="20" y1="18" x2="9.5" y2="11.5" stroke="${col}" stroke-width="0.7" stroke-dasharray="2 1" opacity="0.5"/>`;
-      break;
-    case 'p31m':
-      paths = `<rect x="2" y="2" width="${s-4}" height="${s-4}" fill="${bg}" rx="2"/>
-        <polygon points="13,5 20,18 6,18" fill="none" stroke="${col}" stroke-width="1"/>
-        <polygon points="13,21 6,8 20,8" fill="none" stroke="${col}" stroke-width="0.7" opacity="0.4"/>
-        <line x1="6" y1="18" x2="20" y2="8" stroke="${col}" stroke-width="0.7" stroke-dasharray="2 1" opacity="0.4"/>`;
-      break;
-    case 'p6':
-      paths = `<rect x="2" y="2" width="${s-4}" height="${s-4}" fill="${bg}" rx="2"/>
-        <polygon points="13,4 21,8 21,18 13,22 5,18 5,8" fill="none" stroke="${col}" stroke-width="1"/>
-        <circle cx="${c}" cy="${c}" r="2" fill="${col}"/>`;
-      break;
-    case 'p6m':
-      paths = `<rect x="2" y="2" width="${s-4}" height="${s-4}" fill="${bg}" rx="2"/>
-        <polygon points="13,4 21,8 21,18 13,22 5,18 5,8" fill="none" stroke="${col}" stroke-width="1"/>
-        <line x1="${c}" y1="4" x2="${c}" y2="22" stroke="${col}" stroke-width="0.8" stroke-dasharray="2 1"/>
-        <line x1="5" y1="${c}" x2="21" y2="${c}" stroke="${col}" stroke-width="0.8" stroke-dasharray="2 1"/>
-        <line x1="5" y1="8" x2="21" y2="18" stroke="${col}" stroke-width="0.7" stroke-dasharray="2 1" opacity="0.5"/>
-        <line x1="21" y1="8" x2="5" y2="18" stroke="${col}" stroke-width="0.7" stroke-dasharray="2 1" opacity="0.5"/>
-        <circle cx="${c}" cy="${c}" r="1.5" fill="${col}"/>`;
-      break;
+  // Get transforms for this group
+  const grp = WALLPAPER_GROUPS[group];
+  if (!grp) return `<svg viewBox="0 0 ${s} ${s}" xmlns="http://www.w3.org/2000/svg"><rect width="${s}" height="${s}" fill="${bg}"/></svg>`;
+
+  const transforms = grp.transforms();
+
+  // Place a seed point and a small motif line at an asymmetric position
+  const seedX = 0.3, seedY = 0.25;
+  // Second point for the L-motif
+  const seed2X = 0.35, seed2Y = 0.35;
+
+  // Generate all symmetry copies within one tile
+  const seen = new Set();
+  const dots = [];
+  const lines = [];
+
+  [{ x: seedX, y: seedY }].forEach(seed => {
+    transforms.forEach(fn => {
+      const p = fn(seed.x, seed.y);
+      const px = ((p.x % 1) + 1) % 1;
+      const py = ((p.y % 1) + 1) % 1;
+      const key = Math.round(px * 100) + ',' + Math.round(py * 100);
+      if (!seen.has(key)) {
+        seen.add(key);
+        dots.push({ x: px, y: py });
+      }
+    });
+  });
+
+  // Also transform the line endpoints to show orientation
+  transforms.forEach(fn => {
+    const p1 = fn(seedX, seedY);
+    const p2 = fn(seed2X, seed2Y);
+    lines.push({
+      x1: ((p1.x % 1) + 1) % 1,
+      y1: ((p1.y % 1) + 1) % 1,
+      x2: ((p2.x % 1) + 1) % 1,
+      y2: ((p2.y % 1) + 1) % 1
+    });
+  });
+
+  // Render a 2x2 tile grid to show the repeating pattern
+  let content = `<rect width="${s}" height="${s}" fill="${bg}" rx="4"/>`;
+  // Subtle tile grid lines
+  content += `<line x1="${s/2}" y1="0" x2="${s/2}" y2="${s}" stroke="#222" stroke-width="0.5"/>`;
+  content += `<line x1="0" y1="${s/2}" x2="${s}" y2="${s/2}" stroke="#222" stroke-width="0.5"/>`;
+
+  const tileSize = s / 2;
+  for (let tx = 0; tx < 2; tx++) {
+    for (let ty = 0; ty < 2; ty++) {
+      const ox = tx * tileSize;
+      const oy = ty * tileSize;
+
+      // Draw motif lines
+      lines.forEach(l => {
+        const x1 = ox + l.x1 * tileSize;
+        const y1 = oy + l.y1 * tileSize;
+        const x2 = ox + l.x2 * tileSize;
+        const y2 = oy + l.y2 * tileSize;
+        content += `<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="${goldDim}" stroke-width="1" opacity="0.6"/>`;
+      });
+
+      // Draw dots
+      dots.forEach(d => {
+        const cx = ox + d.x * tileSize;
+        const cy = oy + d.y * tileSize;
+        content += `<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="2" fill="${gold}"/>`;
+      });
+    }
   }
-  return `<svg viewBox="0 0 ${s} ${s}" fill="none" xmlns="http://www.w3.org/2000/svg">${paths}</svg>`;
+
+  return `<svg viewBox="0 0 ${s} ${s}" xmlns="http://www.w3.org/2000/svg">${content}</svg>`;
 }
 
 // Build wallpaper group grid
