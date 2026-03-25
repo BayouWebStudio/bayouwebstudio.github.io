@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking — Tabs Vacilio | Schedule Your Tattoo</title>
+  <meta name="description" content="Book a tattoo session with Tabs Vacilio in Houston, TX. Custom anime pieces, flash deals, and consultations available.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav scrolled">
+    <div class="container">
+      <a href="index.html" class="nav-logo">TABS</a>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="tattoos.html">Tattoos</a></li>
+        <li><a href="booking.html" class="active">Booking</a></li>
+        <li><a href="testimonials.html">Testimonials</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="container">
+      <span class="section-label">Let's Work</span>
+      <h1>Book a Session</h1>
+      <p>Custom pieces &amp; flash deals — fill out the form to get started</p>
+    </div>
+  </div>
+
+  <!-- Booking Content -->
+  <section class="section">
+    <div class="container">
+      <div class="booking-grid">
+
+        <!-- Form -->
+        <div class="fade-up">
+          <form action="https://formspree.io/f/placeholder" method="POST">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" placeholder="Your full name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="your@email.com" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input type="tel" id="phone" name="phone" placeholder="(555) 000-0000">
+            </div>
+            <div class="form-group">
+              <label for="instagram">Instagram Handle</label>
+              <input type="text" id="instagram" name="instagram" placeholder="@yourhandle">
+            </div>
+            <div class="form-group">
+              <label for="type">Session Type</label>
+              <select id="type" name="type" required>
+                <option value="" disabled selected>Select one</option>
+                <option value="custom">Custom Piece</option>
+                <option value="flash">Flash Design</option>
+                <option value="coverup">Cover-Up</option>
+                <option value="consultation">Consultation Only</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="placement">Placement &amp; Size</label>
+              <input type="text" id="placement" name="placement" placeholder="e.g. Inner forearm, ~6 inches">
+            </div>
+            <div class="form-group">
+              <label for="description">Tell Me About Your Idea</label>
+              <textarea id="description" name="description" placeholder="Describe the piece you want — reference images, characters, style notes, vibes. The more detail the better." required></textarea>
+            </div>
+            <button type="submit" class="btn btn--solid" style="width: 100%;">Submit Request</button>
+          </form>
+        </div>
+
+        <!-- Sidebar Info -->
+        <div class="fade-up">
+          <div class="flash-card">
+            <span class="section-label">Flash Deals</span>
+            <h3>Regular Flash Drops</h3>
+            <div class="divider"></div>
+            <p class="price">Starting at $150</p>
+            <p class="price-note">Follow <a href="https://instagram.com/tabs___" target="_blank" rel="noopener">@tabs___</a> for drop announcements. First come, first served.</p>
+          </div>
+
+          <div class="flash-card">
+            <span class="section-label">Custom Work</span>
+            <h3>Full Custom Pieces</h3>
+            <div class="divider"></div>
+            <p class="price">Priced by Project</p>
+            <p class="price-note">Rates based on size, detail, and placement. Deposit required to lock in your date.</p>
+          </div>
+
+          <div class="flash-card">
+            <span class="section-label">Info</span>
+            <h3>What to Know</h3>
+            <div class="divider"></div>
+            <p style="color: var(--muted); font-size: 0.9rem; line-height: 1.8;">
+              ✦ Based in Houston, TX<br>
+              ✦ Non-refundable deposit to book<br>
+              ✦ Reference images encouraged<br>
+              ✦ 18+ only, valid ID required<br>
+              ✦ DM <a href="https://instagram.com/tabs___" target="_blank" rel="noopener">@tabs___</a> for questions
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-logo">TABS</div>
+        <ul class="footer-links">
+          <li><a href="https://instagram.com/tabs___" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="booking.html">Book</a></li>
+          <li><a href="tattoos.html">Gallery</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <p>Powered by <a href="https://eternowebstudio.com" target="_blank" rel="noopener">Eterno Web Studio</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
