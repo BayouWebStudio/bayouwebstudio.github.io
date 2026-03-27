@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diana Wesche | Astróloga y Artista · CDMX</title>
+<meta name="description" content="Diana Wesche — artista visual y astróloga en Ciudad de México. Cartas astrales, lectura de runas, seminarios de transiciones. Arte · Astrología · Alma.">
+<meta property="og:title" content="Diana Wesche | Arte · Astrología · Alma">
+<meta property="og:description" content="Diana Wesche — artista visual y astróloga en Ciudad de México. Cartas astrales, lectura de runas, y seminarios de transformación.">
+<meta property="og:image" content="https://eternowebstudio.com/dianawesche/img/diana.jpg">
+<meta property="og:url" content="https://eternowebstudio.com/dianawesche/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0d0d2b;
+    --navy-deep: #08081a;
+    --charcoal: #141432;
+    --gold: #C9A84C;
+    --gold-dim: rgba(201,168,76,0.15);
+    --violet: #7B2FBE;
+    --violet-dim: rgba(123,47,190,0.15);
+    --cream: #f5f0e8;
+    --dim: #9a95a8;
+    --border: rgba(201,168,76,0.08);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--navy);
+    color: var(--cream);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 { font-family: 'Cormorant Garamond', serif; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 48px;
+    background: linear-gradient(to bottom, rgba(13,13,43,0.97), transparent);
+  }
+
+  .nav-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--cream);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--dim);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--cream); }
+
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--cream);
+    font-size: 1.4rem;
+    cursor: pointer;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 700px;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+  }
+
+  .hero-photo {
+    position: absolute;
+    inset: 0;
+    background: url('img/diana.jpg') center 20% / cover no-repeat;
+    filter: brightness(0.5) contrast(1.05);
+  }
+
+  .hero-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      transparent 30%,
+      rgba(13,13,43,0.4) 55%,
+      var(--navy) 100%
+    );
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 72px 80px;
+    max-width: 900px;
+  }
+
+  .hero-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+    color: var(--cream);
+  }
+
+  .hero-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    margin-bottom: 16px;
+  }
+
+  .hero-desc {
+    font-size: 1rem;
+    color: rgba(245,240,232,0.6);
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    max-width: 440px;
+    line-height: 1.7;
+  }
+
+  /* ── SECTIONS ── */
+  section {
+    padding: 120px 72px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 48px;
+    display: block;
+  }
+
+  /* ── ABOUT ── */
+  .about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    border-top: 1px solid var(--border);
+  }
+
+  .about-text h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 28px;
+    color: var(--cream);
+  }
+
+  .about-text p {
+    font-size: 0.95rem;
+    color: var(--dim);
+    line-height: 1.85;
+    margin-bottom: 20px;
+    font-weight: 300;
+  }
+
+  .about-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .stat {
+    border-left: 1px solid var(--gold);
+    padding-left: 24px;
+  }
+
+  .stat-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem;
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+
+  /* ── PAINTINGS (OBRA) ── */
+  .paintings-section {
+    border-top: 1px solid var(--border);
+  }
+
+  .paintings-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 48px;
+  }
+
+  .paintings-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 300;
+    color: var(--cream);
+  }
+
+  .paintings-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+  }
+
+  .painting-item {
+    position: relative;
+    overflow: hidden;
+    background: var(--charcoal);
+  }
+
+  .painting-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.85);
+    transition: filter 0.6s ease, transform 0.6s ease;
+    aspect-ratio: 1/1;
+  }
+
+  .painting-item:hover img {
+    filter: brightness(1);
+    transform: scale(1.03);
+  }
+
+  /* ── SERVICES ── */
+  .services-section {
+    border-top: 1px solid var(--border);
+  }
+
+  .services-header {
+    margin-bottom: 56px;
+  }
+
+  .services-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 300;
+    color: var(--cream);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .service-card {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: rgba(20,20,50,0.6);
+    transition: border-color 0.4s, transform 0.3s;
+  }
+
+  .service-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-4px);
+  }
+
+  .service-card-img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    filter: brightness(0.65);
+    transition: filter 0.4s;
+  }
+
+  .service-card:hover .service-card-img {
+    filter: brightness(0.8);
+  }
+
+  .service-card-body {
+    padding: 28px;
+  }
+
+  .service-card-emoji {
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .service-card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+
+  .service-card-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  .service-card-desc {
+    font-size: 0.88rem;
+    color: var(--dim);
+    line-height: 1.75;
+    margin-bottom: 20px;
+    font-weight: 300;
+  }
+
+  .service-card-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  .service-card-price span {
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: var(--dim);
+  }
+
+  /* ── CONTACT ── */
+  .contact-section {
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+
+  .contact-section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 300;
+    color: var(--cream);
+    margin-bottom: 16px;
+  }
+
+  .contact-section .contact-sub {
+    font-size: 0.95rem;
+    color: var(--dim);
+    font-weight: 300;
+    margin-bottom: 48px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+  }
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .contact-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--dim);
+    transition: color 0.3s;
+  }
+
+  .contact-link:hover { color: var(--cream); }
+
+  .contact-link-icon {
+    width: 48px;
+    height: 48px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: border-color 0.3s, background 0.3s;
+  }
+
+  .contact-link:hover .contact-link-icon {
+    border-color: var(--gold);
+    background: var(--gold-dim);
+  }
+
+  .contact-link-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .contact-link-value {
+    font-size: 0.85rem;
+    color: var(--cream);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 60px 72px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .footer-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+  }
+
+  .footer-links a {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--dim);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--cream); }
+
+  .footer-copy {
+    font-size: 0.7rem;
+    color: rgba(154,149,168,0.5);
+  }
+
+  /* ── CTA BUTTON ── */
+  .btn-gold {
+    display: inline-block;
+    padding: 14px 32px;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  .btn-gold:hover {
+    background: var(--gold);
+    color: var(--navy);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 18px 20px; }
+    .nav-toggle { display: block !important; }
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 64px; left: 0; right: 0;
+      background: rgba(13,13,43,0.98);
+      padding: 20px;
+      gap: 20px;
+      border-bottom: 1px solid var(--border);
+      z-index: 99;
+    }
+    .nav-links.open { display: flex !important; }
+    section { padding: 80px 24px; }
+    .hero-content { padding: 0 24px 60px; }
+    .about { grid-template-columns: 1fr; gap: 48px; }
+    .paintings-grid { grid-template-columns: 1fr 1fr; }
+    .services-grid { grid-template-columns: 1fr; }
+    .service-card { max-width: 500px; margin: 0 auto; }
+    footer { flex-direction: column; gap: 24px; text-align: center; padding: 40px 24px; }
+    .footer-links { justify-content: center; }
+    .contact-links { flex-direction: column; align-items: center; gap: 28px; }
+  }
+
+  @media (max-width: 600px) {
+    .paintings-grid { grid-template-columns: 1fr 1fr; }
+    .hero-name { font-size: clamp(2.8rem, 10vw, 4.5rem); }
+  }
+
+  /* ── FADE IN ── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ── FLOWER OF LIFE BACKGROUND ── */
+  .flower-bg {
+    position: relative;
+  }
+  .flower-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22120%22%20height%3D%2269.28%22%20viewBox%3D%220%200%20120%2069.28%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23C9A84C%22%2F%3E%3Cstop%20offset%3D%2260%25%22%20stop-color%3D%22%23A8893D%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%237B2FBE%22%2F%3E%3C%2FlinearGradient%3E%3Cfilter%20id%3D%22s%22%3E%3CfeGaussianBlur%20stdDeviation%3D%221.2%22%20result%3D%22b%22%2F%3E%3CfeMerge%3E%3CfeMergeNode%20in%3D%22b%22%2F%3E%3CfeMergeNode%20in%3D%22SourceGraphic%22%2F%3E%3C%2FfeMerge%3E%3C%2Ffilter%3E%3C%2Fdefs%3E%3Cg%20filter%3D%22url%28%23s%29%22%3E%3Ccircle%20cx%3D%22-20.0%22%20cy%3D%22-34.64%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%2220.0%22%20cy%3D%22-34.64%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%2260.0%22%20cy%3D%22-34.64%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%22100.0%22%20cy%3D%22-34.64%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%22140.0%22%20cy%3D%22-34.64%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%22-40.0%22%20cy%3D%220.0%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%220.0%22%20cy%3D%220.0%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%2240.0%22%20cy%3D%220.0%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%2280.0%22%20cy%3D%220.0%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%22120.0%22%20cy%3D%220.0%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%22160.0%22%20cy%3D%220.0%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%22-20.0%22%20cy%3D%2234.64%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%2220.0%22%20cy%3D%2234.64%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%2260.0%22%20cy%3D%2234.64%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%22100.0%22%20cy%3D%2234.64%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%22140.0%22%20cy%3D%2234.64%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%22-40.0%22%20cy%3D%2269.28%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%220.0%22%20cy%3D%2269.28%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%2240.0%22%20cy%3D%2269.28%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%2280.0%22%20cy%3D%2269.28%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%22120.0%22%20cy%3D%2269.28%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%22160.0%22%20cy%3D%2269.28%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%22-20.0%22%20cy%3D%22103.92%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%2220.0%22%20cy%3D%22103.92%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%2260.0%22%20cy%3D%22103.92%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%22100.0%22%20cy%3D%22103.92%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3Ccircle%20cx%3D%22140.0%22%20cy%3D%22103.92%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22url%28%23g%29%22%20stroke-width%3D%220.5%22%20opacity%3D%220.25%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+    background-repeat: repeat;
+    background-size: 240px auto;
+    opacity: 0.6;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .flower-bg > * {
+    position: relative;
+    z-index: 1;
+  }
+</style>
+<link rel="canonical" href="https://eternowebstudio.com/dianawesche/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Diana Wesche","alternateName":"Diana Leticia Wesche","jobTitle":["Astróloga","Artista Visual"],"url":"https://eternowebstudio.com/dianawesche/","image":"https://eternowebstudio.com/dianawesche/img/diana.jpg","description":"Artista visual y astróloga en Ciudad de México. Cartas astrales, lectura de runas, y seminarios de transformación.","address":{"@type":"PostalAddress","addressLocality":"Ciudad de México","addressCountry":"MX"},"sameAs":["https://www.facebook.com/profile.php?id=100063750019763"]}</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-name">Diana Wesche</a>
+  <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+  <ul class="nav-links">
+    <li><a href="#sobre-mi">Sobre Mí</a></li>
+    <li><a href="#obra">Obra</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-photo"></div>
+  <div class="hero-gradient"></div>
+  <div class="hero-content">
+    <span class="hero-label">Ciudad de México · Artista & Astróloga</span>
+    <h1 class="hero-name">Diana<br>Wesche</h1>
+    <p class="hero-tagline">Arte · Astrología · Alma</p>
+    <p class="hero-desc">Pinto lo que el alma susurra. Leo lo que las estrellas escriben. Cada trazo y cada carta es un puente entre lo visible y lo infinito.</p>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="flower-bg">
+<section id="sobre-mi" class="about fade-up">
+  <div class="about-text">
+    <span class="section-label">Sobre Mí</span>
+    <h2>Donde el arte se encuentra con el cosmos.</h2>
+    <p>Soy Diana Leticia Wesche — artista visual y astróloga. Desde mi estudio en la Ciudad de México, creo pinturas que nacen de la intuición y la emoción: paisajes del alma, colores que vibran con la energía de quien los mira.</p>
+    <p>Paralelamente, la astrología me abrió un camino de autoconocimiento que hoy comparto con quienes buscan entender su mapa estelar. Una carta astral es un retrato del cielo en el momento exacto de tu nacimiento — tu huella cósmica, irrepetible.</p>
+    <p>Mi trabajo vive en la intersección del arte y lo sagrado. Cada pincelada tiene intención. Cada lectura tiene propósito.</p>
+  </div>
+  <div class="about-stats">
+    <div class="stat">
+      <div class="stat-number">∞</div>
+      <div class="stat-label">Colores del Alma</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">✦</div>
+      <div class="stat-label">Cartas Astrales Interpretadas</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">CDMX</div>
+      <div class="stat-label">Ciudad de México</div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- PAINTINGS / OBRA -->
+<section id="obra" class="paintings-section fade-up">
+  <div class="paintings-header">
+    <div>
+      <span class="section-label">Galería</span>
+      <h2>Obra</h2>
+    </div>
+  </div>
+  <div class="paintings-grid">
+    <div class="painting-item"><img src="img/paintings/IMG_0192.JPG" alt="Pintura de Diana Wesche" loading="lazy"></div>
+    <div class="painting-item"><img src="img/paintings/IMG_2863.JPG" alt="Pintura de Diana Wesche" loading="lazy"></div>
+    <div class="painting-item"><img src="img/paintings/IMG_5371.JPG" alt="Pintura de Diana Wesche" loading="lazy"></div>
+    <div class="painting-item"><img src="img/paintings/IMG_5372.JPG" alt="Pintura de Diana Wesche" loading="lazy"></div>
+    <div class="painting-item"><img src="img/paintings/IMG_5373.JPG" alt="Pintura de Diana Wesche" loading="lazy"></div>
+    <div class="painting-item"><img src="img/paintings/IMG_5374.JPG" alt="Pintura de Diana Wesche" loading="lazy"></div>
+    <div class="painting-item"><img src="img/paintings/IMG_5375.JPG" alt="Pintura de Diana Wesche" loading="lazy"></div>
+    <div class="painting-item"><img src="img/paintings/IMG_5379.JPG" alt="Pintura de Diana Wesche" loading="lazy"></div>
+    <div class="painting-item"><img src="img/paintings/IMG_5380.JPG" alt="Pintura de Diana Wesche" loading="lazy"></div>
+    <div class="painting-item"><img src="img/paintings/IMG_5381.JPG" alt="Pintura de Diana Wesche" loading="lazy"></div>
+    <div class="painting-item"><img src="img/paintings/IMG_5382.JPG" alt="Pintura de Diana Wesche" loading="lazy"></div>
+    <div class="painting-item"><img src="img/paintings/IMG_5383.JPG" alt="Pintura de Diana Wesche" loading="lazy"></div>
+    <div class="painting-item"><img src="img/paintings/IMG_5385.JPG" alt="Pintura de Diana Wesche" loading="lazy"></div>
+    <div class="painting-item"><img src="img/paintings/IMG_5387.JPG" alt="Pintura de Diana Wesche" loading="lazy"></div>
+    <div class="painting-item"><img src="img/paintings/IMG_5395.JPG" alt="Pintura de Diana Wesche" loading="lazy"></div>
+    <div class="painting-item"><img src="img/paintings/IMG_5396.JPG" alt="Pintura de Diana Wesche" loading="lazy"></div>
+    <div class="painting-item"><img src="img/paintings/IMG_5397.JPG" alt="Pintura de Diana Wesche" loading="lazy"></div>
+    <div class="painting-item"><img src="img/paintings/IMG_5398.JPG" alt="Pintura de Diana Wesche" loading="lazy"></div>
+    <div class="painting-item"><img src="img/paintings/IMG_5399.JPG" alt="Pintura de Diana Wesche" loading="lazy"></div>
+    <div class="painting-item"><img src="img/paintings/IMG_5400.JPG" alt="Pintura de Diana Wesche" loading="lazy"></div>
+    <div class="painting-item"><img src="img/paintings/IMG_5401.JPG" alt="Pintura de Diana Wesche" loading="lazy"></div>
+    <div class="painting-item"><img src="img/paintings/IMG_5597.PNG" alt="Pintura de Diana Wesche" loading="lazy"></div>
+    <div class="painting-item"><img src="img/paintings/IMG_5601.PNG" alt="Pintura de Diana Wesche" loading="lazy"></div>
+    <div class="painting-item"><img src="img/paintings/IMG_5603.PNG" alt="Pintura de Diana Wesche" loading="lazy"></div>
+    <div class="painting-item"><img src="img/paintings/IMG_5604.PNG" alt="Pintura de Diana Wesche" loading="lazy"></div>
+    <div class="painting-item"><img src="img/paintings/IMG_5608.PNG" alt="Pintura de Diana Wesche" loading="lazy"></div>
+    <div class="painting-item"><img src="img/paintings/IMG_7740.jpg" alt="Pintura de Diana Wesche" loading="lazy"></div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<div class="flower-bg">
+<section id="servicios" class="services-section fade-up">
+  <div class="services-header">
+    <span class="section-label">Servicios</span>
+    <h2>Sesiones & Seminarios</h2>
+  </div>
+  <div class="services-grid">
+    <!-- Carta Astral -->
+    <div class="service-card">
+      <img src="img/carta-astral.png" alt="Carta Astral" class="service-card-img">
+      <div class="service-card-body">
+        <span class="service-card-emoji">🌟</span>
+        <h3 class="service-card-title">Carta Astral</h3>
+        <p class="service-card-subtitle">"Tu Huella del Alma"</p>
+        <p class="service-card-desc">Una lectura profunda de tu carta natal — el mapa del cielo en el momento exacto de tu nacimiento. Descubre tus fortalezas, desafíos, y el propósito que las estrellas escribieron para ti.</p>
+        <div class="service-card-price">$888 <span>MXN</span></div>
+      </div>
+    </div>
+    <!-- Carta Astral + Runas -->
+    <div class="service-card">
+      <img src="img/runas.png" alt="Carta Astral + Runas" class="service-card-img">
+      <div class="service-card-body">
+        <span class="service-card-emoji">🌙</span>
+        <h3 class="service-card-title">Carta Astral + Runas</h3>
+        <p class="service-card-subtitle">"Estrellas y Piedras Sagradas"</p>
+        <p class="service-card-desc">Tu carta astral complementada con una lectura de runas ancestrales. Una sesión que combina la sabiduría del cosmos con la guía de los símbolos nórdicos más antiguos.</p>
+        <div class="service-card-price">$1,200 <span>MXN</span></div>
+      </div>
+    </div>
+    <!-- Seminario -->
+    <div class="service-card">
+      <img src="img/seminario.png" alt="Seminario de Transiciones" class="service-card-img">
+      <div class="service-card-body">
+        <span class="service-card-emoji">🌸</span>
+        <h3 class="service-card-title">Seminario de Transiciones</h3>
+        <p class="service-card-subtitle">"Renacer en Comunidad"</p>
+        <p class="service-card-desc">Un espacio sagrado para mujeres en momentos de cambio. Trabajamos con astrología, arte, meditación y círculos de palabra para navegar las transiciones de la vida con gracia y fuerza.</p>
+        <div class="service-card-price">$2,500 <span>MXN</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- CONTACT -->
+<section id="contacto" class="contact-section fade-up">
+  <span class="section-label">Contacto</span>
+  <h2>Hablemos</h2>
+  <p class="contact-sub">¿Quieres una lectura astral, conocer mi obra, o participar en un seminario? Escríbeme. Cada conversación comienza con una intención.</p>
+  <div class="contact-links">
+    <a href="mailto:dianaweschecards@gmail.com" class="contact-link">
+      <div class="contact-link-icon">✉</div>
+      <span class="contact-link-label">Email</span>
+      <span class="contact-link-value">dianaweschecards@gmail.com</span>
+    </a>
+    <a href="tel:+525531191985" class="contact-link">
+      <div class="contact-link-icon">☎</div>
+      <span class="contact-link-label">Teléfono</span>
+      <span class="contact-link-value">+52 55 3119 1985</span>
+    </a>
+    <a href="https://www.facebook.com/profile.php?id=100063750019763" target="_blank" rel="noopener" class="contact-link">
+      <div class="contact-link-icon">f</div>
+      <span class="contact-link-label">Facebook</span>
+      <span class="contact-link-value">Diana Wesche</span>
+    </a>
+  </div>
+  <div style="margin-top:48px;">
+    <a href="mailto:dianaweschecards@gmail.com" class="btn-gold">Agendar Sesión →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-name">Diana Wesche</span>
+  <ul class="footer-links">
+    <li><a href="#sobre-mi">Sobre Mí</a></li>
+    <li><a href="#obra">Obra</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <span class="footer-copy">© 2026 Diana Wesche · Arte · Astrología · Alma</span>
+</footer>
+
+<script>
+// Fade-in on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }});
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// Smooth scroll for nav links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+    document.querySelector('.nav-links')?.classList.remove('open');
+  });
+});
+</script>
+</body>
+</html>
