@@ -204,6 +204,14 @@
     font-weight: 300;
   }
 
+  .about-video {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 8px;
+    margin-top: 2rem;
+    display: block;
+  }
+
   .about-stats {
     display: flex;
     flex-direction: column;
@@ -229,6 +237,97 @@
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--dim);
+  }
+
+  /* ── SERVICIOS ── */
+  .servicios-section {
+    border-top: 1px solid var(--border);
+  }
+
+  .servicios-header {
+    margin-bottom: 56px;
+  }
+
+  .servicios-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 300;
+    color: var(--cream);
+  }
+
+  .servicios-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .servicio-card {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: rgba(20,20,50,0.6);
+    padding: 40px 32px;
+    transition: border-color 0.4s, transform 0.3s;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .servicio-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-4px);
+  }
+
+  .servicio-card-emoji {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .servicio-card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 10px;
+    line-height: 1.2;
+  }
+
+  .servicio-card-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+
+  .servicio-card-desc {
+    font-size: 0.88rem;
+    color: var(--dim);
+    line-height: 1.75;
+    margin-bottom: 28px;
+    font-weight: 300;
+    flex: 1;
+  }
+
+  .servicio-card-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    color: var(--gold);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+    margin-top: auto;
+  }
+
+  .servicio-card-price span {
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: var(--dim);
+    font-family: 'Inter', sans-serif;
+    display: block;
+    margin-top: 2px;
   }
 
   /* ── PAINTINGS (OBRA) ── */
@@ -275,100 +374,6 @@
   .painting-item:hover img {
     filter: brightness(1);
     transform: scale(1.03);
-  }
-
-  /* ── SERVICES ── */
-  .services-section {
-    border-top: 1px solid var(--border);
-  }
-
-  .services-header {
-    margin-bottom: 56px;
-  }
-
-  .services-header h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 300;
-    color: var(--cream);
-  }
-
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-  }
-
-  .service-card {
-    position: relative;
-    overflow: hidden;
-    border: 1px solid var(--border);
-    background: rgba(20,20,50,0.6);
-    transition: border-color 0.4s, transform 0.3s;
-  }
-
-  .service-card:hover {
-    border-color: var(--gold);
-    transform: translateY(-4px);
-  }
-
-  .service-card-img {
-    width: 100%;
-    aspect-ratio: 4/3;
-    object-fit: cover;
-    filter: brightness(0.65);
-    transition: filter 0.4s;
-  }
-
-  .service-card:hover .service-card-img {
-    filter: brightness(0.8);
-  }
-
-  .service-card-body {
-    padding: 28px;
-  }
-
-  .service-card-emoji {
-    font-size: 1.8rem;
-    margin-bottom: 12px;
-    display: block;
-  }
-
-  .service-card-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.5rem;
-    font-weight: 400;
-    color: var(--cream);
-    margin-bottom: 8px;
-  }
-
-  .service-card-subtitle {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1rem;
-    font-style: italic;
-    color: var(--gold);
-    margin-bottom: 16px;
-  }
-
-  .service-card-desc {
-    font-size: 0.88rem;
-    color: var(--dim);
-    line-height: 1.75;
-    margin-bottom: 20px;
-    font-weight: 300;
-  }
-
-  .service-card-price {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.6rem;
-    color: var(--gold);
-    font-weight: 600;
-  }
-
-  .service-card-price span {
-    font-size: 0.85rem;
-    font-weight: 300;
-    color: var(--dim);
   }
 
   /* ── CONTACT ── */
@@ -523,8 +528,8 @@
     .hero-content { padding: 0 24px 60px; }
     .about { grid-template-columns: 1fr; gap: 48px; }
     .paintings-grid { grid-template-columns: 1fr 1fr; }
-    .services-grid { grid-template-columns: 1fr; }
-    .service-card { max-width: 500px; margin: 0 auto; }
+    .servicios-grid { grid-template-columns: 1fr; }
+    .servicio-card { max-width: 500px; margin: 0 auto; }
     footer { flex-direction: column; gap: 24px; text-align: center; padding: 40px 24px; }
     .footer-links { justify-content: center; }
     .contact-links { flex-direction: column; align-items: center; gap: 28px; }
@@ -578,8 +583,8 @@
   <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
   <ul class="nav-links">
     <li><a href="#sobre-mi">Sobre Mí</a></li>
-    <li><a href="#servicios">Obra</a></li>
-    <li><a href="#obra">Servicios</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#obra">Obra</a></li>
     <li><a href="#contacto">Contacto</a></li>
   </ul>
 </nav>
@@ -605,6 +610,9 @@
     <p>Soy Diana Leticia Wesche — artista visual y astróloga. Desde mi estudio en la Ciudad de México, creo pinturas que nacen de la intuición y la emoción: paisajes del alma, colores que vibran con la energía de quien los mira.</p>
     <p>Paralelamente, la astrología me abrió un camino de autoconocimiento que hoy comparto con quienes buscan entender su mapa estelar. Una carta astral es un retrato del cielo en el momento exacto de tu nacimiento — tu huella cósmica, irrepetible.</p>
     <p>Mi trabajo vive en la intersección del arte y lo sagrado. Cada pincelada tiene intención. Cada lectura tiene propósito.</p>
+    <video autoplay muted loop playsinline class="about-video">
+      <source src="video/diana.mp4" type="video/mp4">
+    </video>
   </div>
   <div class="about-stats">
     <div class="stat">
@@ -619,6 +627,52 @@
       <div class="stat-number">CDMX</div>
       <div class="stat-label">Ciudad de México</div>
     </div>
+  </div>
+</section>
+</div>
+
+<!-- SERVICIOS -->
+<div class="flower-bg">
+<section id="servicios" class="servicios-section fade-up">
+  <div class="servicios-header">
+    <span class="section-label">Lecturas & Talleres</span>
+    <h2>Servicios</h2>
+  </div>
+  <div class="servicios-grid">
+
+    <div class="servicio-card">
+      <span class="servicio-card-emoji">🌟</span>
+      <h3 class="servicio-card-title">Carta Astral</h3>
+      <p class="servicio-card-subtitle">Tu Huella del Alma</p>
+      <p class="servicio-card-desc">El mapa del alma escrito en las estrellas al nacer. Una lectura profunda e íntima de tu carta natal — tus dones, tus desafíos, y el propósito que el cosmos inscribió para ti en el momento exacto de tu llegada.</p>
+      <div class="servicio-card-price">
+        $888 MXN
+        <span>Lectura individual · 60 min</span>
+      </div>
+    </div>
+
+    <div class="servicio-card">
+      <span class="servicio-card-emoji">🌙</span>
+      <h3 class="servicio-card-title">Carta Astral + Runas</h3>
+      <p class="servicio-card-subtitle">Lectura Completa</p>
+      <p class="servicio-card-desc">La profundidad de tu carta natal combinada con una tirada de runas. Las estrellas revelan el mapa; las runas señalan el camino. Una experiencia de autoconocimiento completa y transformadora.</p>
+      <div class="servicio-card-price">
+        $1,200 MXN
+        <span>Carta astral + tirada de runas · 90 min</span>
+      </div>
+    </div>
+
+    <div class="servicio-card">
+      <span class="servicio-card-emoji">🌸</span>
+      <h3 class="servicio-card-title">Seminario de Transiciones</h3>
+      <p class="servicio-card-subtitle">Serie de Charlas</p>
+      <p class="servicio-card-desc">Una serie de charlas íntimas sobre los grandes pasajes de la vida. Cambios, duelos, renacimientos — aprendemos a navegar las transiciones con sabiduría, presencia y gracia.</p>
+      <div class="servicio-card-price">
+        $2,500 MXN
+        <span>Serie de charlas · Grupo reducido</span>
+      </div>
+    </div>
+
   </div>
 </section>
 </div>
@@ -662,14 +716,27 @@
   </div>
 </section>
 
-<!-- SERVICES -->
-<div class="flower-bg">
-oter>
+<!-- CONTACT -->
+<section id="contacto" class="contact-section fade-up">
+  <span class="section-label">Conectemos</span>
+  <h2>¿Lista para explorar tu mapa estelar?</h2>
+  <p class="contact-sub">Escríbeme para agendar tu lectura o conocer más sobre los seminarios. Cada encuentro es un espacio sagrado de escucha y autoconocimiento.</p>
+  <div class="contact-links">
+    <a href="https://www.facebook.com/profile.php?id=100063750019763" target="_blank" class="contact-link">
+      <span class="contact-link-icon">f</span>
+      <span class="contact-link-label">Facebook</span>
+      <span class="contact-link-value">Diana Wesche</span>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
   <span class="footer-name">Diana Wesche</span>
   <ul class="footer-links">
     <li><a href="#sobre-mi">Sobre Mí</a></li>
-    <li><a href="#servicios">Obra</a></li>
-    <li><a href="#obra">Servicios</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#obra">Obra</a></li>
     <li><a href="#contacto">Contacto</a></li>
   </ul>
   <span class="footer-copy">© 2026 Diana Wesche · Arte · Astrología · Alma</span>
