@@ -821,6 +821,76 @@ fbq('track', 'PageView');
   </div>
 </section>
 
+<!-- Nuestros Clientes -->
+<section id="clientes" style="padding:100px 0 80px;">
+  <div class="container">
+    <h2 class="section-title reveal">Sites We've Built</h2>
+    <p style="text-align:center;color:var(--text-dim);max-width:560px;margin:-40px auto 50px;font-size:1.05rem;">Real artists. Real sites. Custom-built from their Instagram.</p>
+    <div class="clientes-grid reveal">
+      <a href="https://tattoosbypaketh.com" target="_blank" class="cliente-card">
+        <div class="cliente-cat">Tattoo Artist</div>
+        <h3>Israel Paketh</h3>
+        <span class="cliente-domain">tattoosbypaketh.com</span>
+        <p class="cliente-desc">Fine line & micro-realism specialist</p>
+        <span class="cliente-link">Ver sitio →</span>
+      </a>
+      <a href="https://frankendots.com" target="_blank" class="cliente-card">
+        <div class="cliente-cat">Tattoo Artist</div>
+        <h3>Frank Vortex</h3>
+        <span class="cliente-domain">frankendots.com</span>
+        <p class="cliente-desc">Dotwork & geometric tattoos</p>
+        <span class="cliente-link">Ver sitio →</span>
+      </a>
+      <a href="https://infernalgarden.com" target="_blank" class="cliente-card">
+        <div class="cliente-cat">Tattoo Artist</div>
+        <h3>Danny Diablo</h3>
+        <span class="cliente-domain">infernalgarden.com</span>
+        <p class="cliente-desc">Dark illustrative & blackwork</p>
+        <span class="cliente-link">Ver sitio →</span>
+      </a>
+      <a href="https://tatsuink.com" target="_blank" class="cliente-card">
+        <div class="cliente-cat">Tattoo Artist</div>
+        <h3>Rene Vasquez</h3>
+        <span class="cliente-domain">tatsuink.com</span>
+        <p class="cliente-desc">Japanese-inspired & color realism</p>
+        <span class="cliente-link">Ver sitio →</span>
+      </a>
+      <a href="https://inkversetattoo.com" target="_blank" class="cliente-card">
+        <div class="cliente-cat">Tattoo Artist</div>
+        <h3>Yadi Yang</h3>
+        <span class="cliente-domain">inkversetattoo.com</span>
+        <p class="cliente-desc">Versatile styles & custom designs</p>
+        <span class="cliente-link">Ver sitio →</span>
+      </a>
+      <a href="https://rubencharre.com" target="_blank" class="cliente-card">
+        <div class="cliente-cat">Tattoo Artist</div>
+        <h3>Rubén Charre</h3>
+        <span class="cliente-domain">rubencharre.com</span>
+        <p class="cliente-desc">Black & grey realism</p>
+        <span class="cliente-link">Ver sitio →</span>
+      </a>
+    </div>
+    <div style="text-align:center;margin-top:40px;" class="reveal">
+      <a href="/clients.html" class="btn btn-mint" style="padding:14px 36px;">Ver todos los clientes →</a>
+    </div>
+  </div>
+</section>
+<style>
+.clientes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.cliente-card{background:var(--card);border:1px solid #222;border-radius:14px;padding:28px 24px;text-decoration:none;display:flex;flex-direction:column;transition:all .3s ease;position:relative;overflow:hidden}
+.cliente-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--mint),var(--mint-bright));opacity:0;transition:opacity .3s}
+.cliente-card:hover{border-color:var(--mint);transform:translateY(-4px);background:var(--card-hover)}
+.cliente-card:hover::before{opacity:1}
+.cliente-cat{font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--mint);margin-bottom:10px}
+.cliente-card h3{color:#fff;font-size:1.15rem;font-family:'Inter',sans-serif;font-weight:700;margin-bottom:4px}
+.cliente-domain{color:var(--mint);font-size:0.82rem;font-family:monospace;margin-bottom:8px}
+.cliente-desc{color:var(--text-dim);font-size:0.88rem;line-height:1.4;flex:1;margin-bottom:12px}
+.cliente-link{color:var(--mint);font-weight:600;font-size:0.9rem;transition:gap .2s;display:inline-flex;align-items:center;gap:4px}
+.cliente-card:hover .cliente-link{gap:8px}
+@media(max-width:900px){.clientes-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.clientes-grid{grid-template-columns:1fr}}
+</style>
+
 <!-- Footer -->
 <footer>
   <div class="tagline">Get found. Get booked. Get Minted. 🌿</div>
