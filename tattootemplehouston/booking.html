@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Now &#x2014; Tattoo Temple Houston</title>
+  <meta name="description" content="Book a tattoo appointment at Tattoo Temple Houston. Choose your artist and share your vision.">
+  <link rel="canonical" href="https://houstontattootemple.com/booking.html">
+  <meta property="og:title" content="Book a Tattoo &#x2014; Tattoo Temple Houston">
+  <meta property="og:url" content="https://houstontattootemple.com/booking.html">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    
+    :root {
+      --black: #0a0a0a;
+      --charcoal: #141414;
+      --gold: #C9A84C;
+      --white: #f5f5f0;
+      --dim: #888;
+      --border: rgba(255,255,255,0.07);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 48px;
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.3rem; font-weight: 400;
+      letter-spacing: 0.1em; color: var(--white);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 32px; list-style: none; align-items: center; }
+    .nav-links a {
+      color: var(--dim); text-decoration: none;
+      font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--white); }
+    .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 1px; background: var(--white); margin: 5px 0; transition: all 0.3s; }
+    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(4px,4px); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(4px,-4px); }
+    .mobile-menu {
+      display: none; position: fixed; top: 65px; left: 0; right: 0; z-index: 99;
+      background: var(--charcoal); padding: 24px 48px;
+      border-bottom: 1px solid var(--border);
+    }
+    .mobile-menu.open { display: block; }
+    .mobile-menu a {
+      display: block; color: var(--white); text-decoration: none;
+      font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 12px 0; border-bottom: 1px solid var(--border);
+    }
+    .book-float {
+      position: fixed; bottom: 32px; right: 32px; z-index: 200;
+      background: var(--gold); color: #000;
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+      text-decoration: none; padding: 14px 22px; border-radius: 2px;
+      box-shadow: 0 4px 24px rgba(201,168,76,0.35);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .book-float:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(201,168,76,0.5); }
+    .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    footer {
+      background: var(--charcoal); padding: 48px 72px;
+      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 24px;
+    }
+    .footer-logo { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.1rem; color: var(--dim); }
+    .footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+    .footer-links a { color: var(--dim); text-decoration: none; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--white); }
+    .footer-copy { color: var(--dim); font-size: 0.72rem; }
+    .section-label { font-size: 0.68rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 400; line-height: 1.1; margin-bottom: 24px; }
+    .btn-gold { display: inline-block; background: var(--gold); color: #000; text-decoration: none; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; padding: 16px 40px; transition: opacity 0.2s; }
+    .btn-gold:hover { opacity: 0.88; }
+    .btn-outline { display: inline-block; border: 1px solid var(--border); color: var(--white); text-decoration: none; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; padding: 14px 36px; transition: border-color 0.2s, color 0.2s; }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+    @media (max-width: 900px) {
+      nav { padding: 18px 24px; }
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+      footer { padding: 40px 24px; flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 600px) { footer { padding: 32px 20px; } }
+  
+    .page-hero { padding: 140px 72px 64px; background: var(--charcoal); border-bottom: 1px solid var(--border); }
+    h1 { font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(3rem, 6vw, 5rem); font-weight: 300; line-height: 1; }
+    .booking-body { padding: 96px 72px; max-width: 1100px; margin: 0 auto; }
+    .booking-layout { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; }
+    .booking-info h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.8rem; font-weight: 300; margin-bottom: 24px; }
+    .booking-info p { color: var(--dim); line-height: 1.8; margin-bottom: 16px; font-size: 0.92rem; }
+    .artist-picker { margin-bottom: 32px; }
+    .artist-picker-label { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: block; }
+    .artist-radio-group { display: flex; flex-direction: column; gap: 12px; }
+    .artist-radio-item { display: flex; align-items: center; gap: 16px; cursor: pointer; padding: 12px; border: 1px solid var(--border); transition: border-color 0.2s; }
+    .artist-radio-item:hover, .artist-radio-item.selected { border-color: var(--gold); }
+    .artist-radio-item input { display: none; }
+    .artist-radio-photo { width: 56px; height: 56px; object-fit: cover; flex-shrink: 0; }
+    .artist-radio-info { flex: 1; }
+    .artist-radio-name { font-size: 0.9rem; font-weight: 400; margin-bottom: 2px; }
+    .artist-radio-style { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); }
+    .artist-radio-check { width: 16px; height: 16px; border: 1px solid var(--border); border-radius: 50%; flex-shrink: 0; position: relative; }
+    .artist-radio-item.selected .artist-radio-check::after { content: ""; position: absolute; inset: 3px; border-radius: 50%; background: var(--gold); }
+    .form-group { margin-bottom: 24px; }
+    .form-group label { display: block; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim); margin-bottom: 8px; }
+    .form-group input, .form-group textarea, .form-group select { width: 100%; background: var(--charcoal); border: 1px solid var(--border); color: var(--white); font-family: 'Inter', sans-serif; font-size: 0.92rem; font-weight: 300; padding: 14px 16px; outline: none; transition: border-color 0.2s; }
+    .form-group input:focus, .form-group textarea:focus { border-color: var(--gold); }
+    .form-group textarea { resize: vertical; min-height: 140px; }
+    .btn-submit { width: 100%; background: var(--gold); color: #000; border: none; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; padding: 18px; font-weight: 500; transition: opacity 0.2s; margin-top: 8px; }
+    .btn-submit:hover { opacity: 0.88; }
+    @media (max-width: 900px) { .page-hero { padding: 120px 24px 48px; } .booking-body { padding: 60px 24px; } .booking-layout { grid-template-columns: 1fr; gap: 48px; } }
+  </style>
+</head>
+<body>
+  
+  <nav>
+    <a href="./index.html" class="nav-logo">Tattoo Temple Houston</a>
+    <ul class="nav-links">
+      <li><a href="./index.html">Home</a></li>
+      <li><a href="./artists/index.html">Our Artists</a></li>
+      <li><a href="./gallery.html">Gallery</a></li>
+      <li><a href="./reviews.html">Reviews</a></li>
+      <li><a href="./booking.html">Book Now</a></li>
+    </ul>
+    <button class="hamburger" aria-label="Menu" onclick="this.classList.toggle('open');document.querySelector('.mobile-menu').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="mobile-menu">
+    <a href="./index.html">Home</a>
+    <a href="./artists/index.html">Our Artists</a>
+    <a href="./gallery.html">Gallery</a>
+    <a href="./reviews.html">Reviews</a>
+    <a href="./booking.html">Book Now</a>
+  </div>
+  <a href="./booking.html" class="book-float">Book Now</a>
+
+  <section class="page-hero">
+    <p class="section-label fade-up">Let's Work Together</p>
+    <h1 class="fade-up">Book a Session</h1>
+  </section>
+
+  <div class="booking-body">
+    <div class="booking-layout">
+      <div class="booking-info">
+        <h2>Choose Your Artist</h2>
+        <p>Each of our artists brings a unique perspective and specialization. Browse their work and pick the one who resonates with your vision.</p>
+        <div class="artist-picker">
+          <span class="artist-picker-label">Select an Artist</span>
+          <div class="artist-radio-group" id="artistPicker">
+            
+            <label class="artist-radio-item selected" onclick="selectArtist(this, 'Raul Wesche')">
+              <input type="radio" name="artist" value="Raul Wesche" checked>
+              <img src="../img/weschetattoo_1.jpg" alt="Raul Wesche" class="artist-radio-photo">
+              <div class="artist-radio-info">
+                <div class="artist-radio-name">Raul Wesche</div>
+                <div class="artist-radio-style">geometric</div>
+              </div>
+              <div class="artist-radio-check"></div>
+            </label>
+
+            <label class="artist-radio-item" onclick="selectArtist(this, 'Juju &#x1f638; (Julia Claire)')">
+              <input type="radio" name="artist" value="Juju &#x1f638; (Julia Claire)" >
+              <img src="../img/jujubrilliart_1.jpg" alt="Juju &#x1f638; (Julia Claire)" class="artist-radio-photo">
+              <div class="artist-radio-info">
+                <div class="artist-radio-name">Juju &#x1f638; (Julia Claire)</div>
+                <div class="artist-radio-style">piercing</div>
+              </div>
+              <div class="artist-radio-check"></div>
+            </label>
+
+            <label class="artist-radio-item" onclick="selectArtist(this, '&#x1d4dc;&#x1d4ea;&#x1d4ed;&#x1d4ee;&#x1d4f5;&#x1d4f2;&#x1d4f7;&#x1d4ee; &#x1d4d1;.')">
+              <input type="radio" name="artist" value="&#x1d4dc;&#x1d4ea;&#x1d4ed;&#x1d4ee;&#x1d4f5;&#x1d4f2;&#x1d4f7;&#x1d4ee; &#x1d4d1;." >
+              <img src="../img/sailordoomtattoos_1.jpg" alt="&#x1d4dc;&#x1d4ea;&#x1d4ed;&#x1d4ee;&#x1d4f5;&#x1d4f2;&#x1d4f7;&#x1d4ee; &#x1d4d1;." class="artist-radio-photo">
+              <div class="artist-radio-info">
+                <div class="artist-radio-name">&#x1d4dc;&#x1d4ea;&#x1d4ed;&#x1d4ee;&#x1d4f5;&#x1d4f2;&#x1d4f7;&#x1d4ee; &#x1d4d1;.</div>
+                <div class="artist-radio-style">new school</div>
+              </div>
+              <div class="artist-radio-check"></div>
+            </label>
+
+            <label class="artist-radio-item" onclick="selectArtist(this, 'Chloe Kristensen')">
+              <input type="radio" name="artist" value="Chloe Kristensen" >
+              <img src="../img/krisxmoon_1.jpg" alt="Chloe Kristensen" class="artist-radio-photo">
+              <div class="artist-radio-info">
+                <div class="artist-radio-name">Chloe Kristensen</div>
+                <div class="artist-radio-style">blackwork</div>
+              </div>
+              <div class="artist-radio-check"></div>
+            </label>
+            <label class="artist-radio-item" onclick="selectArtist(this, 'No preference')">
+              <input type="radio" name="artist" value="No preference">
+              <div style="width:56px;height:56px;background:var(--charcoal);display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;">?</div>
+              <div class="artist-radio-info">
+                <div class="artist-radio-name">No Preference</div>
+                <div class="artist-radio-style">Let us match you</div>
+              </div>
+              <div class="artist-radio-check"></div>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h2 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:2rem;font-weight:300;margin-bottom:32px;">Booking Inquiry</h2>
+        <form action="#" method="POST">
+          <input type="hidden" name="_subject" value="Tattoo Booking Inquiry &#x2014; Tattoo Temple Houston">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="artist" id="selectedArtist" value="Raul Wesche">
+          <div class="form-group">
+            <label>Name *</label>
+            <input type="text" name="name" required placeholder="Your full name">
+          </div>
+          <div class="form-group">
+            <label>Email *</label>
+            <input type="email" name="email" required placeholder="your@email.com">
+          </div>
+          <div class="form-group">
+            <label>Phone (optional)</label>
+            <input type="tel" name="phone" placeholder="Your phone number">
+          </div>
+          <div class="form-group">
+            <label>Placement *</label>
+            <input type="text" name="placement" required placeholder="Arm, back, leg, ribs...">
+          </div>
+          <div class="form-group">
+            <label>Your Vision *</label>
+            <textarea name="vision" rows="5" required placeholder="Describe your tattoo idea in detail..."></textarea>
+          </div>
+          <div class="form-group">
+            <label>Reference Links (optional)</label>
+            <input type="text" name="references" placeholder="Links to reference images">
+          </div>
+          <button type="submit" class="btn-submit">Send Booking Request</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">Tattoo Temple Houston</div>
+    <div class="footer-links">
+      <a href="./index.html">Home</a>
+      <a href="./artists/index.html">Artists</a>
+      <a href="./gallery.html">Gallery</a>
+      <a href="./reviews.html">Reviews</a>
+      <a href="./booking.html">Book Now</a>
+    </div>
+    <div class="footer-copy">&#xa9; 2026 Tattoo Temple Houston</div>
+  </footer>
+  <script>
+    function selectArtist(el, name) {
+      document.querySelectorAll('.artist-radio-item').forEach(i => i.classList.remove('selected'));
+      el.classList.add('selected');
+      document.getElementById('selectedArtist').value = name;
+      el.querySelector('input').checked = true;
+    }
+  </script>
+  
+  <script>
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+    });
+  </script>
+</body>
+</html>

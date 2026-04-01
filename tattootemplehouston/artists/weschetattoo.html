@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Raul Wesche &#x2014; Tattoo Temple Houston</title>
+  <meta name="description" content="I'm Raul Wesche, a geometric tattoo artist based in Houston.">
+  <link rel="canonical" href="https://houstontattootemple.com/artists/weschetattoo.html">
+  <meta property="og:title" content="Raul Wesche &#x2014; Tattoo Temple Houston">
+  <meta property="og:description" content="I'm Raul Wesche, a geometric tattoo artist based in Houston.">
+  <meta property="og:image" content="https://houstontattootemple.com/img/weschetattoo_1.jpg">
+  <meta property="og:url" content="https://houstontattootemple.com/artists/weschetattoo.html">
+  <meta property="og:type" content="profile">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    
+    :root {
+      --black: #0a0a0a;
+      --charcoal: #141414;
+      --gold: #C9A84C;
+      --white: #f5f5f0;
+      --dim: #888;
+      --border: rgba(255,255,255,0.07);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 48px;
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.3rem; font-weight: 400;
+      letter-spacing: 0.1em; color: var(--white);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 32px; list-style: none; align-items: center; }
+    .nav-links a {
+      color: var(--dim); text-decoration: none;
+      font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--white); }
+    .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 1px; background: var(--white); margin: 5px 0; transition: all 0.3s; }
+    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(4px,4px); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(4px,-4px); }
+    .mobile-menu {
+      display: none; position: fixed; top: 65px; left: 0; right: 0; z-index: 99;
+      background: var(--charcoal); padding: 24px 48px;
+      border-bottom: 1px solid var(--border);
+    }
+    .mobile-menu.open { display: block; }
+    .mobile-menu a {
+      display: block; color: var(--white); text-decoration: none;
+      font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 12px 0; border-bottom: 1px solid var(--border);
+    }
+    .book-float {
+      position: fixed; bottom: 32px; right: 32px; z-index: 200;
+      background: var(--gold); color: #000;
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+      text-decoration: none; padding: 14px 22px; border-radius: 2px;
+      box-shadow: 0 4px 24px rgba(201,168,76,0.35);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .book-float:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(201,168,76,0.5); }
+    .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    footer {
+      background: var(--charcoal); padding: 48px 72px;
+      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 24px;
+    }
+    .footer-logo { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.1rem; color: var(--dim); }
+    .footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+    .footer-links a { color: var(--dim); text-decoration: none; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--white); }
+    .footer-copy { color: var(--dim); font-size: 0.72rem; }
+    .section-label { font-size: 0.68rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 400; line-height: 1.1; margin-bottom: 24px; }
+    .btn-gold { display: inline-block; background: var(--gold); color: #000; text-decoration: none; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; padding: 16px 40px; transition: opacity 0.2s; }
+    .btn-gold:hover { opacity: 0.88; }
+    .btn-outline { display: inline-block; border: 1px solid var(--border); color: var(--white); text-decoration: none; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; padding: 14px 36px; transition: border-color 0.2s, color 0.2s; }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+    @media (max-width: 900px) {
+      nav { padding: 18px 24px; }
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+      footer { padding: 40px 24px; flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 600px) { footer { padding: 32px 20px; } }
+  
+    .hero {
+      min-height: 80vh; display: flex; align-items: flex-end;
+      padding: 0 72px 80px; position: relative; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('../img/weschetattoo_1.jpg');
+      background-size: cover; background-position: center top;
+      filter: brightness(0.38); transform: scale(1.02);
+    }
+    .hero-gradient { position: absolute; inset: 0; background: linear-gradient(to top, rgba(5,5,5,0.98) 0%, rgba(5,5,5,0.1) 60%, transparent 100%); }
+    .hero-content { position: relative; z-index: 2; max-width: 700px; }
+    .hero-eyebrow { font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: #C9A84C; margin-bottom: 12px; }
+    h1 { font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 300; line-height: 1; margin-bottom: 20px; }
+    .hero-handle { font-size: 0.82rem; color: var(--dim); letter-spacing: 0.08em; margin-bottom: 32px; }
+    .hero-handle a { color: var(--dim); text-decoration: none; transition: color 0.2s; }
+    .hero-handle a:hover { color: #C9A84C; }
+    /* BIO */
+    .bio-section { padding: 96px 72px; max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1.2fr 1fr; gap: 80px; align-items: start; }
+    .bio-text p { color: var(--dim); line-height: 1.9; margin-bottom: 24px; font-size: 0.97rem; }
+    .bio-stats { position: sticky; top: 100px; }
+    .stat-card { border: 1px solid var(--border); padding: 28px; margin-bottom: 16px; text-align: center; }
+    .stat-big { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 2.4rem; font-weight: 300; color: #C9A84C; }
+    .stat-small { font-size: 0.72rem; color: var(--dim); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 8px; }
+    .style-tag { display: inline-block; border: 1px solid #C9A84C44; color: #C9A84C; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 8px 16px; margin: 4px; }
+    /* GALLERY */
+    .gallery-section { padding: 72px 48px; }
+    .masonry-grid { columns: 4; column-gap: 3px; max-width: 1400px; margin: 0 auto; }
+    .masonry-item { break-inside: avoid; margin-bottom: 3px; overflow: hidden; }
+    .masonry-item img { width: 100%; display: block; filter: brightness(0.85); transition: filter 0.3s; }
+    .masonry-item:hover img { filter: brightness(1); }
+    /* BOOKING CTA */
+    .booking-cta { padding: 80px 72px; background: var(--charcoal); text-align: center; }
+    .booking-cta h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 2.4rem; font-weight: 300; margin-bottom: 16px; }
+    .booking-cta p { color: var(--dim); max-width: 440px; margin: 0 auto 32px; }
+    @media (max-width: 900px) {
+      .hero { padding: 0 24px 60px; }
+      .bio-section { padding: 60px 24px; grid-template-columns: 1fr; gap: 40px; }
+      .bio-stats { position: static; }
+      .gallery-section { padding: 48px 16px; }
+      .masonry-grid { columns: 2; }
+      .booking-cta { padding: 60px 24px; }
+    }
+    @media (max-width: 480px) { .masonry-grid { columns: 1; } }
+  </style>
+</head>
+<body>
+  
+  <nav>
+    <a href="../index.html" class="nav-logo">Tattoo Temple Houston</a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../artists/index.html">Our Artists</a></li>
+      <li><a href="../gallery.html">Gallery</a></li>
+      <li><a href="../reviews.html">Reviews</a></li>
+      <li><a href="../booking.html">Book Now</a></li>
+    </ul>
+    <button class="hamburger" aria-label="Menu" onclick="this.classList.toggle('open');document.querySelector('.mobile-menu').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="mobile-menu">
+    <a href="../index.html">Home</a>
+    <a href="../artists/index.html">Our Artists</a>
+    <a href="../gallery.html">Gallery</a>
+    <a href="../reviews.html">Reviews</a>
+    <a href="../booking.html">Book Now</a>
+  </div>
+  <a href="../booking.html" class="book-float">Book Now</a>
+
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-gradient"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow fade-up">geometric &#xb7; Tattoo Artist</p>
+      <h1 class="fade-up">Raul Wesche</h1>
+      <p class="hero-handle fade-up"><a href="https://www.instagram.com/weschetattoo" target="_blank" rel="noopener">@weschetattoo</a></p>
+      <a href="../booking.html" class="btn-gold fade-up">Book with Raul</a>
+    </div>
+  </section>
+
+  <div class="bio-section">
+    <div class="bio-text">
+      <p class="fade-up">I'm Raul Wesche, a geometric tattoo artist based in Houston.</p>
+      <div style="margin-top:32px;" class="fade-up">
+        <span class="style-tag">geometric</span>
+        
+        <span class="style-tag">Custom Work</span>
+      </div>
+    </div>
+    <div class="bio-stats">
+      
+      <div class="stat-card fade-up">
+        <div class="stat-big">geometric</div>
+        <div class="stat-small">Primary Style</div>
+      </div>
+      <div class="stat-card fade-up">
+        <a href="../booking.html" style="display:block;text-align:center;text-decoration:none;">
+          <div class="stat-big" style="font-size:1rem;">&#x1f4c5;</div>
+          <div class="stat-small" style="color:#C9A84C;margin-top:8px;">Book Now</div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <section class="gallery-section">
+    <div style="max-width:1400px;margin:0 auto 32px 48px;">
+      <p class="section-label fade-up">Portfolio</p>
+      <h2 class="fade-up" style="font-family:'Cormorant Garamond',Georgia,serif;">Work by Raul</h2>
+    </div>
+    <div class="masonry-grid">
+      
+      <div class="masonry-item fade-up">
+        <img src="../img/weschetattoo_1.jpg" alt="Raul Wesche tattoo" loading="lazy">
+      </div>
+
+      <div class="masonry-item fade-up">
+        <img src="../img/weschetattoo_2.jpg" alt="Raul Wesche tattoo" loading="lazy">
+      </div>
+
+      <div class="masonry-item fade-up">
+        <img src="../img/weschetattoo_3.jpg" alt="Raul Wesche tattoo" loading="lazy">
+      </div>
+
+      <div class="masonry-item fade-up">
+        <img src="../img/weschetattoo_4.jpg" alt="Raul Wesche tattoo" loading="lazy">
+      </div>
+
+      <div class="masonry-item fade-up">
+        <img src="../img/weschetattoo_5.jpg" alt="Raul Wesche tattoo" loading="lazy">
+      </div>
+
+      <div class="masonry-item fade-up">
+        <img src="../img/weschetattoo_6.jpg" alt="Raul Wesche tattoo" loading="lazy">
+      </div>
+
+      <div class="masonry-item fade-up">
+        <img src="../img/weschetattoo_7.jpg" alt="Raul Wesche tattoo" loading="lazy">
+      </div>
+
+      <div class="masonry-item fade-up">
+        <img src="../img/weschetattoo_8.jpg" alt="Raul Wesche tattoo" loading="lazy">
+      </div>
+
+      <div class="masonry-item fade-up">
+        <img src="../img/weschetattoo_9.jpg" alt="Raul Wesche tattoo" loading="lazy">
+      </div>
+
+      <div class="masonry-item fade-up">
+        <img src="../img/weschetattoo_10.jpg" alt="Raul Wesche tattoo" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <section class="booking-cta">
+    <p class="section-label fade-up">Book a Session</p>
+    <h2 class="fade-up">Ready to Work with Raul?</h2>
+    <p class="fade-up">Fill out the booking form and we'll be in touch to schedule your consultation.</p>
+    <a href="../booking.html" class="btn-gold fade-up">Start Your Booking</a>
+  </section>
+
+  <footer>
+    <div class="footer-logo">Tattoo Temple Houston</div>
+    <div class="footer-links">
+      <a href="../index.html">Home</a>
+      <a href="../artists/index.html">Artists</a>
+      <a href="../gallery.html">Gallery</a>
+      <a href="../reviews.html">Reviews</a>
+      <a href="../booking.html">Book Now</a>
+    </div>
+    <div class="footer-copy">&#xa9; 2026 Tattoo Temple Houston</div>
+  </footer>
+  
+  <script>
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+    });
+  </script>
+</body>
+</html>
