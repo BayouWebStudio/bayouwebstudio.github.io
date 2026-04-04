@@ -505,30 +505,59 @@
       border: 1px solid var(--border);
     }
     .site-card {
-      padding: 40px 36px;
+      padding: 0;
       border-right: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
       text-decoration: none;
       display: flex;
       flex-direction: column;
-      transition: background 0.25s;
+      transition: transform 0.25s ease, background 0.25s;
       position: relative;
       overflow: hidden;
+      background: rgba(10,8,5,0.6);
     }
     .site-card:nth-child(3n) { border-right: none; }
-    .site-card:nth-child(n+4) { border-bottom: none; }
+    .site-card:last-child, .site-card:nth-last-child(-n+3) { border-bottom: none; }
+    .site-card-img {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      position: relative;
+      background: linear-gradient(135deg, #1a150f 0%, #0d0a07 50%, #151010 100%);
+    }
+    .site-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease, opacity 0.3s ease;
+      display: block;
+    }
+    .site-card:hover .site-card-img img { transform: scale(1.04); }
+    .site-card-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 60%, rgba(10,8,5,0.9));
+      pointer-events: none;
+    }
+    .site-card-body {
+      padding: 20px 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      position: relative;
+    }
     .site-card::after {
       content: '→';
       position: absolute;
-      bottom: 36px; right: 32px;
+      top: 16px; right: 20px;
       color: var(--gold);
-      font-size: 1.1rem;
-      opacity: 0;
-      transform: translateX(-8px);
-      transition: all 0.25s ease;
+      font-size: 1rem;
+      opacity: 0.6;
+      transition: opacity 0.25s ease, transform 0.25s ease;
     }
-    .site-card:hover { background: rgba(201,160,48,0.04); }
-    .site-card:hover::after { opacity: 1; transform: translateX(0); }
+    .site-card:hover::after { opacity: 1; transform: translateX(3px); }
+    .site-card:hover { background: rgba(201,160,48,0.06); transform: translateY(-2px); }
     .site-idx {
       font-family: 'Space Mono', monospace;
       font-size: 0.58rem;
@@ -828,40 +857,139 @@
     </div>
     <div class="portfolio-grid">
       <a href="https://tattoosbypaketh.com" target="_blank" class="site-card reveal">
-        <p class="site-idx">001</p>
-        <h3 class="site-card-name">Paketh</h3>
-        <p class="site-card-domain">tattoosbypaketh.com</p>
-        <p class="site-card-type">Tattoo Artist</p>
+        <div class="site-card-img"><img src="img/portfolio-paketh.png" alt="Paketh website" loading="lazy" onerror="this.style.display='none'"></div>
+        <div class="site-card-body">
+          <p class="site-idx">001</p>
+          <h3 class="site-card-name">Paketh</h3>
+          <p class="site-card-domain">tattoosbypaketh.com</p>
+          <p class="site-card-type">Tattoo Artist</p>
+        </div>
       </a>
       <a href="https://frankendots.com" target="_blank" class="site-card reveal reveal-delay-1">
-        <p class="site-idx">002</p>
-        <h3 class="site-card-name">Frankendots</h3>
-        <p class="site-card-domain">frankendots.com</p>
-        <p class="site-card-type">Tattoo Artist</p>
+        <div class="site-card-img"><img src="img/portfolio-frankendots.png" alt="Frankendots website" loading="lazy" onerror="this.style.display='none'"></div>
+        <div class="site-card-body">
+          <p class="site-idx">002</p>
+          <h3 class="site-card-name">Frankendots</h3>
+          <p class="site-card-domain">frankendots.com</p>
+          <p class="site-card-type">Tattoo Artist</p>
+        </div>
       </a>
       <a href="https://infernalgarden.com" target="_blank" class="site-card reveal reveal-delay-2">
-        <p class="site-idx">003</p>
-        <h3 class="site-card-name">Infernal Garden</h3>
-        <p class="site-card-domain">infernalgarden.com</p>
-        <p class="site-card-type">Tattoo Studio</p>
+        <div class="site-card-img"><img src="img/portfolio-dannydiablx.webp" alt="Infernal Garden website" loading="lazy" onerror="this.style.display='none'"></div>
+        <div class="site-card-body">
+          <p class="site-idx">003</p>
+          <h3 class="site-card-name">Infernal Garden</h3>
+          <p class="site-card-domain">infernalgarden.com</p>
+          <p class="site-card-type">Tattoo Studio</p>
+        </div>
       </a>
       <a href="https://tatsuink.com" target="_blank" class="site-card reveal">
-        <p class="site-idx">004</p>
-        <h3 class="site-card-name">Tatsu Ink</h3>
-        <p class="site-card-domain">tatsuink.com</p>
-        <p class="site-card-type">Tattoo Studio</p>
+        <div class="site-card-img"><img src="img/portfolio-tatsutattoos.webp" alt="Tatsu Ink website" loading="lazy" onerror="this.style.display='none'"></div>
+        <div class="site-card-body">
+          <p class="site-idx">004</p>
+          <h3 class="site-card-name">Tatsu Ink</h3>
+          <p class="site-card-domain">tatsuink.com</p>
+          <p class="site-card-type">Tattoo Studio</p>
+        </div>
       </a>
       <a href="https://inkversetattoo.com" target="_blank" class="site-card reveal reveal-delay-1">
-        <p class="site-idx">005</p>
-        <h3 class="site-card-name">Inkverse Tattoo</h3>
-        <p class="site-card-domain">inkversetattoo.com</p>
-        <p class="site-card-type">Tattoo Studio</p>
+        <div class="site-card-img"><img src="img/portfolio-inkversetattooabi.webp" alt="Inkverse Tattoo website" loading="lazy" onerror="this.style.display='none'"></div>
+        <div class="site-card-body">
+          <p class="site-idx">005</p>
+          <h3 class="site-card-name">Inkverse Tattoo</h3>
+          <p class="site-card-domain">inkversetattoo.com</p>
+          <p class="site-card-type">Tattoo Studio</p>
+        </div>
       </a>
       <a href="https://rubencharre.com" target="_blank" class="site-card reveal reveal-delay-2">
-        <p class="site-idx">006</p>
-        <h3 class="site-card-name">Ruben Charre</h3>
-        <p class="site-card-domain">rubencharre.com</p>
-        <p class="site-card-type">Creative</p>
+        <div class="site-card-img"><img src="img/portfolio-rubencharre.webp" alt="Ruben Charre website" loading="lazy" onerror="this.style.display='none'"></div>
+        <div class="site-card-body">
+          <p class="site-idx">006</p>
+          <h3 class="site-card-name">Ruben Charre</h3>
+          <p class="site-card-domain">rubencharre.com</p>
+          <p class="site-card-type">Creative</p>
+        </div>
+      </a>
+      <a href="https://venusbalam.com" target="_blank" class="site-card reveal">
+        <div class="site-card-img"><img src="img/portfolio-venusbalam.webp" alt="Venus Bala website" loading="lazy" onerror="this.style.display='none'"></div>
+        <div class="site-card-body">
+          <p class="site-idx">007</p>
+          <h3 class="site-card-name">Venus Bala</h3>
+          <p class="site-card-domain">venusbalam.com</p>
+          <p class="site-card-type">Tattoo Artist</p>
+        </div>
+      </a>
+      <a href="https://tabstattoo.com" target="_blank" class="site-card reveal reveal-delay-1">
+        <div class="site-card-img"><img src="img/portfolio-tabs.webp" alt="Tabs Vacilio website" loading="lazy" onerror="this.style.display='none'"></div>
+        <div class="site-card-body">
+          <p class="site-idx">008</p>
+          <h3 class="site-card-name">Tabs Vacilio</h3>
+          <p class="site-card-domain">tabstattoo.com</p>
+          <p class="site-card-type">Tattoo Artist</p>
+        </div>
+      </a>
+      <a href="https://yesytattoo.com" target="_blank" class="site-card reveal reveal-delay-2">
+        <div class="site-card-img"><img src="img/portfolio-yesytattoo.webp" alt="Yesy Gonzalez website" loading="lazy" onerror="this.style.display='none'"></div>
+        <div class="site-card-body">
+          <p class="site-idx">009</p>
+          <h3 class="site-card-name">Yesy Gonzalez</h3>
+          <p class="site-card-domain">yesytattoo.com</p>
+          <p class="site-card-type">Tattoo Artist</p>
+        </div>
+      </a>
+      <a href="https://prettyboytatt.com" target="_blank" class="site-card reveal">
+        <div class="site-card-img"><img src="img/portfolio-prettyboytatt.webp" alt="Blessed Tattoo HTX website" loading="lazy" onerror="this.style.display='none'"></div>
+        <div class="site-card-body">
+          <p class="site-idx">010</p>
+          <h3 class="site-card-name">Blessed Tattoo HTX</h3>
+          <p class="site-card-domain">prettyboytatt.com</p>
+          <p class="site-card-type">Tattoo Studio</p>
+        </div>
+      </a>
+      <a href="https://goldensoultattoo.com" target="_blank" class="site-card reveal reveal-delay-1">
+        <div class="site-card-img"><img src="img/portfolio-goldensoultattoo.webp" alt="Golden Soul Tattoo website" loading="lazy" onerror="this.style.display='none'"></div>
+        <div class="site-card-body">
+          <p class="site-idx">011</p>
+          <h3 class="site-card-name">Golden Soul Tattoo</h3>
+          <p class="site-card-domain">goldensoultattoo.com</p>
+          <p class="site-card-type">Tattoo Studio</p>
+        </div>
+      </a>
+      <a href="https://ericharetattoo.com" target="_blank" class="site-card reveal reveal-delay-2">
+        <div class="site-card-img"><img src="img/portfolio-ericharetattoo.webp" alt="Eric Hare website" loading="lazy" onerror="this.style.display='none'"></div>
+        <div class="site-card-body">
+          <p class="site-idx">012</p>
+          <h3 class="site-card-name">Eric Hare</h3>
+          <p class="site-card-domain">ericharetattoo.com</p>
+          <p class="site-card-type">Tattoo Artist</p>
+        </div>
+      </a>
+      <a href="https://scalpdynamics.com.au" target="_blank" class="site-card reveal">
+        <div class="site-card-img"><img src="img/portfolio-scalpdynamics.webp" alt="Scalp Dynamics website" loading="lazy" onerror="this.style.display='none'"></div>
+        <div class="site-card-body">
+          <p class="site-idx">013</p>
+          <h3 class="site-card-name">Scalp Dynamics</h3>
+          <p class="site-card-domain">scalpdynamics.com.au</p>
+          <p class="site-card-type">Scalp Studio</p>
+        </div>
+      </a>
+      <a href="https://guccierrezz.com" target="_blank" class="site-card reveal reveal-delay-1">
+        <div class="site-card-img"><img src="img/portfolio-guccierrezz.webp" alt="Gucci Errezz website" loading="lazy" onerror="this.style.display='none'"></div>
+        <div class="site-card-body">
+          <p class="site-idx">014</p>
+          <h3 class="site-card-name">Gucci Errezz</h3>
+          <p class="site-card-domain">guccierrezz.com</p>
+          <p class="site-card-type">Creative</p>
+        </div>
+      </a>
+      <a href="https://wesche.com" target="_blank" class="site-card reveal reveal-delay-2">
+        <div class="site-card-img"><img src="img/preview-weschetattoo.jpg" alt="Wesche website" loading="lazy" onerror="this.style.display='none'"></div>
+        <div class="site-card-body">
+          <p class="site-idx">015</p>
+          <h3 class="site-card-name">Wesche</h3>
+          <p class="site-card-domain">wesche.com</p>
+          <p class="site-card-type">Personal</p>
+        </div>
       </a>
     </div>
   </section>
