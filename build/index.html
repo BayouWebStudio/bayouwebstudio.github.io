@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Building Your Site — Eterno Web Studio</title>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <link rel="icon" href="/favicon.ico">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17989903265"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-17989903265');
+  </script>
+  <!-- Event snippet for Sign-up conversion -->
+  <script>
+    gtag('event', 'conversion', {
+      'send_to': 'AW-17989903265/f6Q5CNqw84gcEKHHoIJD',
+      'value': 1.0,
+      'currency': 'USD'
+    });
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #C9A84C;
+      --gold-dim: #a8873d;
+      --dark: #0a1a12;
+      --card: #0d2018;
+      --card2: #112818;
+      --white: #ffffff;
+      --gray: #4a7a5e;
+      --gray-light: #2a4a38;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--dark);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 24px 16px;
+    }
+
+    /* ── Logo ── */
+    .logo {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--gold);
+      letter-spacing: -0.5px;
+      text-decoration: none;
+      z-index: 10;
+    }
+
+    /* ── Main card ── */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--gray-light);
+      border-radius: 24px;
+      padding: 40px 28px;
+      max-width: 480px;
+      width: 100%;
+      text-align: center;
+      margin-top: 48px;
+    }
+
+    /* ── Mint character ── */
+    .mint-char {
+      font-size: 64px;
+      line-height: 1;
+      margin-bottom: 20px;
+      display: inline-block;
+      animation: think 2s ease-in-out infinite;
+      transform-origin: center bottom;
+    }
+
+    @keyframes think {
+      0%, 100% { transform: rotate(-5deg) scale(1); }
+      25% { transform: rotate(5deg) scale(1.05); }
+      50% { transform: rotate(-3deg) scale(0.97); }
+      75% { transform: rotate(6deg) scale(1.03); }
+    }
+
+    .mint-char.celebrating {
+      animation: celebrate 0.6s ease-in-out infinite alternate;
+    }
+
+    @keyframes celebrate {
+      0% { transform: rotate(-8deg) scale(1) translateY(0); }
+      100% { transform: rotate(8deg) scale(1.15) translateY(-8px); }
+    }
+
+    /* ── Headline ── */
+    h1 {
+      font-size: 26px;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
+
+    h1 span.handle {
+      color: var(--gold);
+    }
+
+    .subtext {
+      font-size: 15px;
+      color: #8ab89a;
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+
+    /* ── URL pill ── */
+    .url-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--card2);
+      border: 1px solid var(--gray-light);
+      border-radius: 100px;
+      padding: 8px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gray);
+      margin-bottom: 28px;
+      transition: all 0.4s ease;
+    }
+
+    .url-pill.live {
+      color: var(--gold);
+      border-color: var(--gold);
+      background: rgba(0,200,130,0.08);
+    }
+
+    .url-pill .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gray);
+      animation: pulse-dot 1.5s ease-in-out infinite;
+      flex-shrink: 0;
+      transition: background 0.4s ease;
+    }
+
+    .url-pill.live .dot {
+      background: var(--gold);
+      animation: none;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 0.4; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.3); }
+    }
+
+    /* ── Progress bar ── */
+    .progress-wrap {
+      background: var(--card2);
+      border-radius: 100px;
+      height: 6px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      width: 100%;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold-dim), var(--gold));
+      border-radius: 100px;
+      width: 0%;
+      transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ── Step indicator ── */
+    .step-text {
+      font-size: 14px;
+      color: #8ab89a;
+      min-height: 22px;
+      transition: opacity 0.3s ease;
+    }
+
+    /* ── Phase 3 content ── */
+    .phase-ready {
+      display: none;
+    }
+
+    .phase-ready h1 {
+      color: var(--white);
+    }
+
+    .btn-primary {
+      display: block;
+      width: 100%;
+      background: var(--gold);
+      color: var(--dark);
+      font-size: 17px;
+      font-weight: 800;
+      padding: 16px 24px;
+      border-radius: 14px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      margin-bottom: 16px;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      letter-spacing: -0.2px;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(0,200,130,0.35);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+
+    /* ── CTA box ── */
+    .cta-box {
+      background: var(--card2);
+      border: 1px solid var(--gray-light);
+      border-radius: 16px;
+      padding: 20px;
+      margin-top: 4px;
+      text-align: left;
+    }
+
+    .cta-box p {
+      font-size: 14px;
+      color: #8ab89a;
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+
+    .btn-secondary {
+      display: block;
+      width: 100%;
+      background: transparent;
+      color: var(--gold);
+      font-size: 15px;
+      font-weight: 700;
+      padding: 13px 20px;
+      border-radius: 10px;
+      border: 1.5px solid var(--gold);
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.15s ease;
+      letter-spacing: -0.2px;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(0,200,130,0.08);
+    }
+
+    .forever-text {
+      font-size: 12px;
+      color: var(--gray);
+      margin-top: 16px;
+      line-height: 1.5;
+    }
+
+    .forever-text strong {
+      color: #8ab89a;
+    }
+
+    /* ── Dots loader ── */
+    /* Feature slideshow */
+    .feat-slide {
+      display: none;
+      text-align: center;
+      padding: 22px 24px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(0,200,130,0.12);
+      border-radius: 16px;
+      animation: fadeSlide 0.5s ease;
+    }
+    .feat-slide.active { display: block; }
+    .feat-icon { font-size: 36px; margin-bottom: 10px; }
+    .feat-phone { max-width: 150px; height: auto; display: block; margin: 0 auto 12px; border-radius: 24px; }
+    .feat-title { font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+    .feat-desc { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.5; }
+    .sdot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.2); display: inline-block; transition: background 0.3s; }
+    .sdot.active { background: #C9A84C; }
+    @keyframes fadeSlide { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+    .dots {
+      display: inline-flex;
+      gap: 5px;
+      margin-top: 8px;
+    }
+
+    .dot-loader {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      animation: dot-bounce 1.2s ease-in-out infinite;
+    }
+
+    .dot-loader:nth-child(1) { animation-delay: 0s; }
+    .dot-loader:nth-child(2) { animation-delay: 0.2s; }
+    .dot-loader:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes dot-bounce {
+      0%, 100% { transform: translateY(0); opacity: 0.4; }
+      50% { transform: translateY(-6px); opacity: 1; }
+    }
+
+    /* ── Fade transitions ── */
+    .fade-out {
+      animation: fadeOut 0.5s ease forwards;
+    }
+
+    .fade-in {
+      animation: fadeIn 0.6s ease forwards;
+    }
+
+    @keyframes fadeOut {
+      to { opacity: 0; transform: translateY(-8px); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1446410187106776');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" src="https://www.facebook.com/tr?id=1446410187106776&ev=PageView&noscript=1"/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+<body>
+
+  <a href="/" class="logo">Eterno Web Studio</a>
+
+  <!-- ── Email modal (required before build starts) ── -->
+  <div id="emailModal" style="
+    position:fixed; inset:0; z-index:999;
+    background:rgba(0,0,0,0.75); backdrop-filter:blur(6px);
+    display:flex; align-items:center; justify-content:center; padding:24px;
+  ">
+    <div style="
+      background:#0d2018; border:1px solid #2a4a38; border-radius:24px;
+      padding:40px 28px; max-width:420px; width:100%; text-align:center;
+    ">
+      <div style="font-size:48px;margin-bottom:16px;">📬</div>
+      <h2 style="font-size:22px;font-weight:800;color:#fff;margin-bottom:10px;letter-spacing:-0.5px;">
+        Where should we send your site?
+      </h2>
+      <p style="font-size:15px;color:#8ab89a;margin-bottom:24px;line-height:1.6;">
+        We'll email you the link the moment it's live — usually 2–5 minutes.
+      </p>
+      <input id="modalEmailInput" type="email" placeholder="your@email.com" style="
+        width:100%; padding:16px 20px; border-radius:50px;
+        background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.15);
+        color:#fff; font-size:16px; outline:none; font-family:inherit;
+        margin-bottom:14px; box-sizing:border-box; text-align:center;
+      " />
+      <button onclick="startWithEmail()" style="
+        width:100%; padding:16px; border-radius:50px;
+        background:#C9A84C; color:#0a1a12;
+        font-size:16px; font-weight:800; border:none; cursor:pointer;
+      ">Build My Site →</button>
+      <p style="margin-top:14px;font-size:13px;color:rgba(255,255,255,0.35);">
+        No spam. Just your site link.
+      </p>
+    </div>
+  </div>
+
+  <div class="card" id="mainCard">
+
+    <!-- Phase 1 & 2: Building -->
+    <div id="phaseBuilding">
+      <div class="mint-char" id="mintChar">◆</div>
+
+      <h1 id="headline">Eterno is building your site...</h1>
+
+      <p class="subtext" id="subtext">
+        Scanning <span class="handle" id="handleDisplay">@yourhandle</span>'s Instagram and building your custom site.
+        This takes about 2–5 minutes.
+      </p>
+
+      <div class="url-pill" id="urlPill">
+        <span class="dot" id="pillDot"></span>
+        <span id="urlText">eternowebstudio.com/...</span>
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+
+      <div class="step-text" id="stepText">Initializing...</div>
+
+      <div class="dots">
+        <div class="dot-loader"></div>
+        <div class="dot-loader"></div>
+        <div class="dot-loader"></div>
+      </div>
+
+      <!-- Feature slideshow — plays while building -->
+      <div id="featureSlideshow" style="margin-top:40px;min-height:130px;position:relative;">
+        <div class="feat-slide active" data-index="0">
+          <img src="/assets/ads/slides/slide-gallery.png" class="feat-phone" alt="Gallery">
+          <div class="feat-title">Your gallery, auto-organized</div>
+          <div class="feat-desc">Best photos pulled from your Instagram and arranged automatically</div>
+        </div>
+        <div class="feat-slide" data-index="1">
+          <img src="/assets/ads/slides/slide-booking.png" class="feat-phone" alt="Booking">
+          <div class="feat-title">Booking form, ready to go</div>
+          <div class="feat-desc">Clients can request appointments directly from your site</div>
+        </div>
+        <div class="feat-slide" data-index="2">
+          <img src="/assets/ads/slides/slide-seo.png" class="feat-phone" alt="SEO">
+          <div class="feat-title">Shows up on Google</div>
+          <div class="feat-desc">Built-in SEO so new clients can find you when they search</div>
+        </div>
+        <div class="feat-slide" data-index="3">
+          <img src="/assets/ads/slides/slide-edit.png" class="feat-phone" alt="Edit">
+          <div class="feat-title">Edit anything from your phone</div>
+          <div class="feat-desc">Change colors, text, photos, and more — no code needed</div>
+        </div>
+        <div class="feat-slide" data-index="4">
+          <img src="/assets/ads/slides/slide-themes.png" class="feat-phone" alt="Themes">
+          <div class="feat-title">7 styles to choose from</div>
+          <div class="feat-desc">Dark, fine line, anime, traditional, bold — pick your vibe</div>
+        </div>
+        <div class="feat-slide" data-index="5">
+          <img src="/assets/ads/slides/slide-domain.png" class="feat-phone" alt="Domain">
+          <div class="feat-title">Get your own .com</div>
+          <div class="feat-desc">Add a custom domain in one click. We handle everything.</div>
+        </div>
+        <!-- Dot indicators -->
+        <div style="display:flex;justify-content:center;gap:6px;margin-top:18px;" id="slideDots">
+          <span class="sdot active"></span><span class="sdot"></span><span class="sdot"></span>
+          <span class="sdot"></span><span class="sdot"></span><span class="sdot"></span>
+        </div>
+      </div>
+
+      <!-- Email capture — shows after 15s -->
+      <div id="emailCapture" style="display:none; margin-top:40px; opacity:0; transition:opacity 0.6s ease;">
+        <p style="font-size:15px; color:rgba(255,255,255,0.45); margin-bottom:14px;">
+          Don't want to wait? We'll email it to you. 📬
+        </p>
+        <div id="emailForm" style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
+          <input id="emailInput" type="email" placeholder="your@email.com"
+            style="flex:1; min-width:220px; max-width:320px; padding:14px 18px; border-radius:50px;
+                   background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.15);
+                   color:#fff; font-size:15px; outline:none; font-family:inherit;" />
+          <button onclick="submitEmail()"
+            style="padding:14px 28px; border-radius:50px; background:#C9A84C; color:#0a1a12;
+                   font-size:15px; font-weight:800; border:none; cursor:pointer; white-space:nowrap;">
+            Email Me →
+          </button>
+        </div>
+        <div id="emailSuccess" style="display:none; color:#C9A84C; font-size:15px; font-weight:600; margin-top:12px;">
+          ✅ Got it! We'll email you at <span id="emailConfirm"></span> when it's ready.
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 3: Ready -->
+    <div id="phaseReady" class="phase-ready">
+      <div class="mint-char celebrating" id="mintCharReady">◆</div>
+
+      <h1>Your site is live! 🎉</h1>
+
+      <p class="subtext" id="subtextReady">
+        <strong style="color:var(--gold)">eternowebstudio.com/<span id="slugReady"></span></strong> is live and looking fresh.
+      </p>
+
+      <a id="seeMysite" href="#" target="_blank" rel="noopener" class="btn-primary">
+        See My Site →
+      </a>
+
+      <div class="cta-box">
+        <p>Want to edit it, add your .com domain, and get found on Google?</p>
+        <a id="claimLink" href="#" class="btn-secondary">Claim My Site — It's Free →</a>
+      </div>
+
+      <p class="forever-text">Your site lives at <strong>eternowebstudio.com/<span id="foreverSlug"></span></strong> and it's yours forever.</p>
+    </div>
+
+  </div>
+
+  <script>
+    const CONVEX = 'https://curious-lemming-262.convex.site';
+
+    // ── Parse params ──
+    const params = new URLSearchParams(location.search);
+    const rawHandle = (params.get('ig') || '').replace(/^@/, '').trim();
+    const handle = rawHandle || 'yourhandle';
+    const slug = handle.toLowerCase().replace(/[^a-z0-9]/g, '');
+    let siteUrl = `https://eternowebstudio.com/${slug}/`;
+    const preloadedBuildId = params.get('buildId') || null;
+
+    // ── Populate UI ──
+    document.getElementById('handleDisplay').textContent = '@' + handle;
+    document.getElementById('urlText').textContent = `eternowebstudio.com/${slug}`;
+    document.getElementById('slugReady').textContent = slug;
+    document.getElementById('foreverSlug').textContent = slug;
+    document.getElementById('seeMysite').href = siteUrl;
+    document.getElementById('claimLink').href = `/dashboard/?claim=${encodeURIComponent(slug)}`;
+
+    // ── Real stage labels + progress ──
+    const stageProgress = {
+      started:     5,
+      scraping:    15,
+      classifying: 35,
+      uploading:   55,
+      building:    72,
+      deploying:   88,
+      complete:    100,
+    };
+    const stageLabels = {
+      started:     '📸 Importing your Instagram photos...',
+      scraping:    '📸 Scanning your Instagram...',
+      classifying: '🎨 Selecting your best photos...',
+      uploading:   '⚡ Uploading your gallery...',
+      building:    '✍️ Building your site...',
+      deploying:   '🚀 Going live...',
+      complete:    '✅ Your site is live!',
+    };
+
+    const progressEl = document.getElementById('progressBar');
+    const stepEl = document.getElementById('stepText');
+
+    function setProgress(pct) {
+      if (pct > parseFloat(progressEl.style.width || '0')) {
+        progressEl.style.width = pct + '%';
+      }
+    }
+    function setStepLabel(status) {
+      const label = stageLabels[status];
+      if (label && stepEl.textContent !== label) {
+        stepEl.style.opacity = '0';
+        setTimeout(() => { stepEl.textContent = label; stepEl.style.opacity = '1'; }, 300);
+      }
+      // When complete — inject a direct button right here, no div-swap needed
+      if (status === 'complete') {
+        setTimeout(() => {
+          const existing = document.getElementById('inline-live-btn');
+          if (existing) return;
+          const finalUrl = siteUrl || ('https://eternowebstudio.com/' + slug + '/');
+          const btnWrap = document.createElement('div');
+          btnWrap.id = 'inline-live-btn';
+          btnWrap.style.cssText = 'margin-top:24px;text-align:center;';
+          btnWrap.innerHTML =
+            '<a href="' + finalUrl + '" target="_blank" rel="noopener" ' +
+            'style="display:inline-block;background:#C9A84C;color:#0a1a12;font-weight:800;' +
+            'font-size:17px;padding:16px 32px;border-radius:50px;text-decoration:none;' +
+            'box-shadow:0 4px 20px rgba(0,200,130,0.35);">See My Site →</a>' +
+            '<br><p style="margin-top:12px;color:rgba(255,255,255,0.45);font-size:13px;">Please allow 5 minutes for your site to show up.</p>';
+          stepEl.parentNode.insertBefore(btnWrap, stepEl.nextSibling);
+        }, 400);
+      }
+    }
+    setProgress(5);
+    setStepLabel('started');
+
+    // ── Kick off build, then poll status ──
+    let buildId = null;
+    let pollInterval = null;
+    let isLive = false;
+
+    async function startBuild(email) {
+      if (!handle || handle === 'yourhandle') return;
+      try {
+        // Use public waitlist/join endpoint (no auth required)
+        const res = await fetch(`${CONVEX}/api/waitlist/join`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ igHandle: handle, email: email || undefined, source: 'build-page' }),
+        });
+        if (res.ok) {
+          const data = await res.json();
+          buildId = data.buildId || null;
+          if (buildId) {
+            // Got a buildId — poll Convex status
+            pollInterval = setInterval(pollStatus, 3000);
+            pollStatus();
+          } else if (data.status === 'existing') {
+            // Site already built — go live immediately
+            goLive();
+          } else {
+            // Queued but no buildId — fall back to GitHub polling
+            pollInterval = setInterval(pollGitHub, 8000);
+            setTimeout(pollGitHub, 5000);
+          }
+        } else {
+          showBuildError('We had trouble finding that Instagram account. Make sure it\'s public and try again.');
+        }
+      } catch (e) {
+        showBuildError('Connection error. Please refresh and try again.');
+      }
+    }
+
+    function showBuildError(msg) {
+      clearInterval(pollInterval);
+      clearInterval(stepInterval);
+      const stepEl2 = document.getElementById('stepText');
+      if (stepEl2) { stepEl2.textContent = '❌ ' + (msg || 'Something went wrong. Try a different handle.'); stepEl2.style.color = '#ff6b6b'; }
+      const progressEl2 = document.getElementById('progressBar');
+      if (progressEl2) progressEl2.style.background = '#ff6b6b';
+    }
+
+    async function pollStatus() {
+      if (isLive || !buildId) return;
+      try {
+        const res = await fetch(`${CONVEX}/api/build/status?id=${buildId}`);
+        if (!res.ok) return;
+        const data = await res.json();
+        const pct = stageProgress[data.status] || 5;
+        setProgress(pct);
+        setStepLabel(data.status);
+        if (data.siteUrl) {
+          siteUrl = data.siteUrl;
+          document.getElementById('seeMysite').href = siteUrl;
+        }
+        if (data.status === 'complete') {
+          clearInterval(pollInterval);
+          // Belt-and-suspenders: update href before calling goLive
+          const finalUrl = data.siteUrl || siteUrl;
+          document.getElementById('seeMysite').href = finalUrl;
+          document.getElementById('claimLink').href = `/dashboard/?claim=${encodeURIComponent(slug)}`;
+          const slugReady = document.getElementById('slugReady');
+          const foreverSlug = document.getElementById('foreverSlug');
+          if (slugReady) slugReady.textContent = slug;
+          if (foreverSlug) foreverSlug.textContent = slug;
+          goLive();
+        } else if (data.status === 'error') {
+          showBuildError(data.error || 'Build failed — the account may be private or have no photos. Try a different handle.');
+        }
+      } catch (e) { /* keep polling */ }
+    }
+
+    async function pollGitHub() {
+      if (isLive) return;
+      try {
+        const res = await fetch(siteUrl, { method: 'GET', cache: 'no-store' });
+        if (res.ok) goLive();
+      } catch (e) { /* keep polling */ }
+    }
+
+    // If buildId passed in URL (from /start), still show email modal to capture email
+    // but start polling in background immediately so progress tracks while they type
+    if (preloadedBuildId) {
+      buildId = preloadedBuildId;
+      pollInterval = setInterval(pollStatus, 3000);
+      pollStatus();
+      // modal stays visible — startWithEmail() will save email to build then continue
+    }
+
+    // Build starts only after email modal is submitted (startWithEmail → startBuild)
+
+    // ── Go Live ──
+    function goLive() {
+      if (isLive) return;
+      isLive = true;
+      clearInterval(pollInterval);
+      clearInterval(stepInterval);
+      setProgress(100);
+
+      const pill = document.getElementById('urlPill');
+      if (pill) pill.classList.add('live');
+
+      // Show ready screen immediately — no nested timeouts that can silently fail
+      const building = document.getElementById('phaseBuilding');
+      const ready = document.getElementById('phaseReady');
+      if (building) building.style.display = 'none';
+      if (ready) {
+        ready.style.display = 'block';
+        ready.style.opacity = '1';
+      }
+      try { launchConfetti(); } catch(e) {}
+    }
+
+    // ── Confetti ──
+    function launchConfetti() {
+      const colors = ['#C9A84C', '#ffffff', '#00a06a', '#80ffc7', '#003d1f'];
+      confetti({ particleCount: 120, spread: 80, origin: { y: 0.5 }, colors, startVelocity: 35, gravity: 0.9, ticks: 200 });
+      setTimeout(() => {
+        confetti({ particleCount: 60, spread: 50, origin: { y: 0.4, x: 0.2 }, colors, startVelocity: 25, angle: 60 });
+        confetti({ particleCount: 60, spread: 50, origin: { y: 0.4, x: 0.8 }, colors, startVelocity: 25, angle: 120 });
+      }, 300);
+    }
+
+    // ── Modal email submit → start build ──
+    let capturedEmail = '';
+
+    async function startWithEmail() {
+      const emailInput = document.getElementById('modalEmailInput');
+      const email = emailInput.value.trim();
+      if (!email || !email.includes('@')) {
+        emailInput.style.borderColor = '#ff6b6b';
+        return;
+      }
+      capturedEmail = email;
+      // Hide modal
+      document.getElementById('emailModal').style.display = 'none';
+      // If build already started (preloaded), just save email to existing build
+      if (buildId) {
+        fetch(`${CONVEX}/api/build/email`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ buildId, email, slug }),
+        }).catch(() => {});
+        return; // polling already running
+      }
+      // Otherwise start fresh build
+      startBuild(email);
+    }
+
+    // Allow pressing Enter in email input
+    document.getElementById('modalEmailInput').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') startWithEmail();
+    });
+
+    // ── Feature slideshow ──
+    (function() {
+      var slides = document.querySelectorAll('.feat-slide');
+      var dots = document.querySelectorAll('.sdot');
+      var cur = 0;
+      function showSlide(n) {
+        slides[cur].classList.remove('active');
+        dots[cur].classList.remove('active');
+        cur = n % slides.length;
+        slides[cur].classList.add('active');
+        dots[cur].classList.add('active');
+      }
+      setInterval(function() { showSlide(cur + 1); }, 7000);
+    })();
+
+    // ── Dev shortcut: ?test=live ──
+    if (params.get('test') === 'live') setTimeout(goLive, 1500);
+  </script>
+</body>
+</html>
+<!-- Thu Mar  5 11:13:47 CST 2026 -->

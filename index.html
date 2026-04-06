@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eterno Web Studio — Premium Websites for Tattoo Artists</title>
+<meta name="description" content="Premium websites for tattoo artists and studios. Edit live, manage bookings, sell products — all from one dashboard.">
+<link rel="canonical" href="https://eternowebstudio.com">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://eternowebstudio.com">
+<meta property="og:title" content="Eterno Web Studio — Premium Websites for Tattoo Artists">
+<meta property="og:description" content="Premium websites for tattoo artists and studios. Edit live, manage bookings, sell products — all from one dashboard.">
+<meta property="og:site_name" content="Eterno Web Studio">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Eterno Web Studio — Premium Websites for Tattoo Artists">
+<meta name="twitter:description" content="Premium websites for tattoo artists and studios. Edit live, manage bookings, sell products — all from one dashboard.">
+
+<!-- JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "name": "Eterno Web Studio",
+      "url": "https://eternowebstudio.com",
+      "email": "support@eternowebstudio.com",
+      "sameAs": ["https://instagram.com/eternowebstudio"],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Houston",
+        "addressRegion": "TX",
+        "addressCountry": "US"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "name": "Eterno Web Studio",
+      "url": "https://eternowebstudio.com"
+    }
+  ]
+}
+</script>
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ── Reset & Variables ── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --ink: #0a0a0a;
+  --surface: #111;
+  --card: #1a1a1a;
+  --gold: #C9A84C;
+  --gold-dim: #9A7B3A;
+  --text: #e0d5c0;
+  --text-dim: #8a8070;
+  --border: #2a2a2a;
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans: 'Inter', system-ui, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--ink);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── Animations ── */
+.fade-in {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Navigation ── */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 16px 0;
+  transition: background 0.35s ease, box-shadow 0.35s ease, padding 0.35s ease;
+}
+.nav.scrolled {
+  background: var(--ink);
+  box-shadow: 0 1px 0 var(--border);
+  padding: 10px 0;
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text);
+}
+.nav-logo-icon {
+  width: 36px;
+  height: 36px;
+  background: var(--gold);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--ink);
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-dim);
+  transition: color 0.25s ease;
+}
+.nav-links a:hover { color: var(--gold); }
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Language Toggle */
+.lang-toggle {
+  display: flex;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.lang-toggle button {
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.lang-toggle button.active {
+  background: var(--gold);
+  color: var(--ink);
+}
+
+.btn-cta {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 22px;
+  background: var(--gold);
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 0.88rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.2s ease;
+  font-family: var(--sans);
+}
+.btn-cta:hover { background: var(--gold-dim); transform: translateY(-1px); }
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 22px;
+  background: transparent;
+  color: var(--gold);
+  font-weight: 600;
+  font-size: 0.88rem;
+  border-radius: 8px;
+  border: 1.5px solid var(--gold);
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease;
+  font-family: var(--sans);
+}
+.btn-outline:hover { background: rgba(201,168,76,0.1); transform: translateY(-1px); }
+
+/* Mobile menu */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+.nav-hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--ink);
+  z-index: 999;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: var(--text);
+}
+.mobile-menu-close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: 2rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+/* ── Hero ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  padding: 120px 24px 80px;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 40%, rgba(201,168,76,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 60% at 20% 80%, rgba(201,168,76,0.03) 0%, transparent 60%),
+    var(--ink);
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, transparent, var(--ink));
+  pointer-events: none;
+}
+.hero-content { max-width: 780px; position: relative; z-index: 1; }
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 24px;
+  color: #fff;
+}
+.hero h1 .accent { color: var(--gold); }
+.hero p {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: var(--text-dim);
+  max-width: 600px;
+  margin: 0 auto 40px;
+  line-height: 1.7;
+}
+.hero-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.hero-buttons .btn-cta { padding: 14px 32px; font-size: 1rem; }
+.hero-buttons .btn-outline { padding: 14px 32px; font-size: 1rem; }
+
+/* ── Section Layout ── */
+.section {
+  padding: 100px 0;
+}
+.section-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+.section-header h2 {
+  font-family: var(--serif);
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 16px;
+}
+.section-header p {
+  color: var(--text-dim);
+  font-size: 1.05rem;
+  max-width: 540px;
+  margin: 0 auto;
+}
+.section-label {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+
+/* ── Features ── */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.feature-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 36px 28px;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+.feature-card:hover {
+  border-color: var(--gold-dim);
+  transform: translateY(-4px);
+}
+.feature-icon {
+  font-size: 2rem;
+  margin-bottom: 16px;
+  display: block;
+}
+.feature-card h3 {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 10px;
+}
+.feature-card p {
+  font-size: 0.92rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+/* ── How It Works ── */
+.steps-wrapper {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.steps-line {
+  position: absolute;
+  top: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 2px;
+  background: var(--border);
+  z-index: 0;
+}
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  position: relative;
+  z-index: 1;
+}
+.step {
+  text-align: center;
+}
+.step-number {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--card);
+  border: 2px solid var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--gold);
+  margin: 0 auto 20px;
+}
+.step h3 {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 8px;
+}
+.step p {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+/* ── Pricing ── */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+.pricing-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 40px 32px;
+  text-align: center;
+  transition: transform 0.3s ease;
+  position: relative;
+}
+.pricing-card:hover { transform: translateY(-4px); }
+.pricing-card.highlighted {
+  border-color: var(--gold);
+  box-shadow: 0 0 40px rgba(201,168,76,0.08);
+  transform: scale(1.03);
+}
+.pricing-card.highlighted:hover { transform: scale(1.03) translateY(-4px); }
+.pricing-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--gold);
+  color: var(--ink);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 16px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.pricing-card h3 {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 8px;
+}
+.pricing-price {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+}
+.pricing-price span {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--text-dim);
+}
+.pricing-features {
+  list-style: none;
+  margin: 28px 0;
+  text-align: left;
+}
+.pricing-features li {
+  padding: 8px 0;
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.pricing-features li::before {
+  content: '';
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(201,168,76,0.15);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C9A84C' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5L20 7'/%3E%3C/svg%3E");
+  background-size: 12px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.pricing-card .btn-cta { width: 100%; justify-content: center; padding: 14px; }
+.pricing-card .btn-outline { width: 100%; justify-content: center; padding: 14px; }
+
+/* ── Portfolio ── */
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.portfolio-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+.portfolio-card:hover {
+  border-color: var(--gold-dim);
+  transform: translateY(-4px);
+}
+.portfolio-thumb {
+  height: 200px;
+  position: relative;
+}
+.portfolio-card:nth-child(1) .portfolio-thumb {
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+}
+.portfolio-card:nth-child(2) .portfolio-thumb {
+  background: linear-gradient(135deg, #2d1b2e, #1a1a2e);
+}
+.portfolio-card:nth-child(3) .portfolio-thumb {
+  background: linear-gradient(135deg, #1b2e1b, #1a2e2e);
+}
+.portfolio-card:nth-child(4) .portfolio-thumb {
+  background: linear-gradient(135deg, #2e2b1b, #2e1b1b);
+}
+.portfolio-card:nth-child(5) .portfolio-thumb {
+  background: linear-gradient(135deg, #1b1b2e, #2e1b2e);
+}
+.portfolio-card:nth-child(6) .portfolio-thumb {
+  background: linear-gradient(135deg, #2e2e1b, #1b2e1b);
+}
+.portfolio-thumb::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 40%, rgba(201,168,76,0.12) 0%, transparent 60%);
+}
+.portfolio-info {
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.portfolio-info h3 {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #fff;
+}
+.portfolio-link {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--gold);
+  transition: color 0.25s ease;
+  white-space: nowrap;
+}
+.portfolio-link:hover { color: var(--gold-dim); }
+
+/* ── Footer ── */
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 60px 0 40px;
+  background: var(--ink);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 48px;
+}
+.footer-brand {
+  max-width: 280px;
+}
+.footer-brand .nav-logo { margin-bottom: 12px; }
+.footer-brand p {
+  font-size: 0.88rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+.footer-col h4 {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 16px;
+}
+.footer-col a {
+  display: block;
+  font-size: 0.88rem;
+  color: var(--text-dim);
+  padding: 4px 0;
+  transition: color 0.25s ease;
+}
+.footer-col a:hover { color: var(--gold); }
+.footer-bottom {
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.footer-bottom p {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .features-grid { grid-template-columns: repeat(2, 1fr); }
+  .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+  .pricing-card.highlighted { grid-column: span 2; max-width: 400px; margin: 0 auto; }
+  .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-right .btn-cta { display: none; }
+  .nav-hamburger { display: flex; }
+
+  .hero { padding: 100px 24px 60px; }
+  .hero h1 { font-size: clamp(2rem, 8vw, 2.8rem); }
+
+  .features-grid { grid-template-columns: 1fr; }
+
+  .steps-line { display: none; }
+  .steps-grid { grid-template-columns: 1fr; gap: 40px; }
+
+  .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+  .pricing-card.highlighted { grid-column: span 1; max-width: none; }
+
+  .portfolio-grid { grid-template-columns: 1fr; }
+
+  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── Navigation ── -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-icon">E</div>
+      <span>Eterno</span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#features" data-en="Features" data-es="Funciones">Features</a></li>
+      <li><a href="#pricing" data-en="Pricing" data-es="Precios">Pricing</a></li>
+      <li><a href="#portfolio" data-en="Portfolio" data-es="Portafolio">Portfolio</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <div class="lang-toggle" id="langToggle">
+        <button data-lang="en" class="active">EN</button>
+        <button data-lang="es">ES</button>
+      </div>
+      <a href="https://dashboard.eternowebstudio.com" class="btn-cta" data-en="Get Started" data-es="Comenzar">Get Started</a>
+      <button class="nav-hamburger" id="navHamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">&times;</button>
+  <a href="#features" class="mobile-link" data-en="Features" data-es="Funciones">Features</a>
+  <a href="#pricing" class="mobile-link" data-en="Pricing" data-es="Precios">Pricing</a>
+  <a href="#portfolio" class="mobile-link" data-en="Portfolio" data-es="Portafolio">Portfolio</a>
+  <div class="lang-toggle" id="langToggleMobile">
+    <button data-lang="en" class="active">EN</button>
+    <button data-lang="es">ES</button>
+  </div>
+  <a href="https://dashboard.eternowebstudio.com" class="btn-cta" data-en="Get Started" data-es="Comenzar">Get Started</a>
+</div>
+
+<!-- ── Hero ── -->
+<section class="hero">
+  <div class="hero-content fade-in">
+    <h1>
+      <span data-en="Websites Made for" data-es="Sitios Web Hechos para">Websites Made for</span><br>
+      <span class="accent" data-en="Artists" data-es="Artistas">Artists</span>
+    </h1>
+    <p data-en="Premium websites for tattoo artists and studios. Edit live, manage bookings, sell products &mdash; all from one dashboard." data-es="Sitios web premium para tatuadores y estudios. Edita en vivo, gestiona reservas, vende productos &mdash; todo desde un panel.">Premium websites for tattoo artists and studios. Edit live, manage bookings, sell products &mdash; all from one dashboard.</p>
+    <div class="hero-buttons">
+      <a href="https://dashboard.eternowebstudio.com" class="btn-cta" data-en="Get Started Free" data-es="Comienza Gratis">Get Started Free</a>
+      <a href="#features" class="btn-outline" data-en="See Features" data-es="Ver Funciones">See Features</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Features ── -->
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="section-label" data-en="Features" data-es="Funciones">Features</span>
+      <h2 data-en="Everything You Need" data-es="Todo lo que Necesitas">Everything You Need</h2>
+      <p data-en="Tools built specifically for tattoo artists and creative studios." data-es="Herramientas creadas especialmente para tatuadores y estudios creativos.">Tools built specifically for tattoo artists and creative studios.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card fade-in">
+        <span class="feature-icon">&#127912;</span>
+        <h3 data-en="Visual Editor" data-es="Editor Visual">Visual Editor</h3>
+        <p data-en="Click any text or image to edit your site live. No code needed." data-es="Haz clic en cualquier texto o imagen para editar tu sitio en vivo.">Click any text or image to edit your site live. No code needed.</p>
+      </div>
+      <div class="feature-card fade-in">
+        <span class="feature-icon">&#127917;</span>
+        <h3 data-en="Themes &amp; Fonts" data-es="Temas y Fuentes">Themes &amp; Fonts</h3>
+        <p data-en="Customize colors, fonts, and styles with real-time preview." data-es="Personaliza colores, fuentes y estilos con vista previa en tiempo real.">Customize colors, fonts, and styles with real-time preview.</p>
+      </div>
+      <div class="feature-card fade-in">
+        <span class="feature-icon">&#128722;</span>
+        <h3 data-en="Online Store" data-es="Tienda Online">Online Store</h3>
+        <p data-en="Sell products with Stripe-powered checkout, cart, and inventory tracking." data-es="Vende productos con checkout de Stripe, carrito y seguimiento de inventario.">Sell products with Stripe-powered checkout, cart, and inventory tracking.</p>
+      </div>
+      <div class="feature-card fade-in">
+        <span class="feature-icon">&#128197;</span>
+        <h3 data-en="Booking System" data-es="Sistema de Reservas">Booking System</h3>
+        <p data-en="Manage appointments with a calendar, deposits, and email notifications." data-es="Gestiona citas con calendario, dep&#243;sitos y notificaciones por email.">Manage appointments with a calendar, deposits, and email notifications.</p>
+      </div>
+      <div class="feature-card fade-in">
+        <span class="feature-icon">&#11088;</span>
+        <h3 data-en="Testimonials" data-es="Testimonios">Testimonials</h3>
+        <p data-en="Collect and approve client reviews that display on your site." data-es="Recopila y aprueba rese&#241;as de clientes que se muestran en tu sitio.">Collect and approve client reviews that display on your site.</p>
+      </div>
+      <div class="feature-card fade-in">
+        <span class="feature-icon">&#129302;</span>
+        <h3 data-en="AI Agent" data-es="Agente IA">AI Agent</h3>
+        <p data-en="AI-powered phone agent that answers calls and captures leads 24/7." data-es="Agente telef&#243;nico con IA que contesta llamadas y captura leads 24/7.">AI-powered phone agent that answers calls and captures leads 24/7.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── How It Works ── -->
+<section class="section" id="how-it-works" style="background: var(--surface);">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="section-label" data-en="How It Works" data-es="C&#243;mo Funciona">How It Works</span>
+      <h2 data-en="Up and Running in Minutes" data-es="Listo en Minutos">Up and Running in Minutes</h2>
+    </div>
+    <div class="steps-wrapper fade-in">
+      <div class="steps-line"></div>
+      <div class="steps-grid">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3 data-en="Sign Up" data-es="Reg&#237;strate">Sign Up</h3>
+          <p data-en="Create your free account in seconds." data-es="Crea tu cuenta gratis en segundos.">Create your free account in seconds.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3 data-en="Connect Your Site" data-es="Conecta tu Sitio">Connect Your Site</h3>
+          <p data-en="Link your Instagram or existing website." data-es="Vincula tu Instagram o sitio web existente.">Link your Instagram or existing website.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3 data-en="Start Editing" data-es="Empieza a Editar">Start Editing</h3>
+          <p data-en="Customize everything from your dashboard." data-es="Personaliza todo desde tu panel de control.">Customize everything from your dashboard.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Pricing ── -->
+<section class="section" id="pricing">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="section-label" data-en="Pricing" data-es="Precios">Pricing</span>
+      <h2 data-en="Simple, Transparent Pricing" data-es="Precios Simples y Transparentes">Simple, Transparent Pricing</h2>
+      <p data-en="Start free. Upgrade when you're ready." data-es="Comienza gratis. Mejora cuando est&#233;s listo.">Start free. Upgrade when you're ready.</p>
+    </div>
+    <div class="pricing-grid">
+      <!-- Free -->
+      <div class="pricing-card fade-in">
+        <h3>Free</h3>
+        <div class="pricing-price">$0<span>/mo</span></div>
+        <ul class="pricing-features">
+          <li data-en="2 edits per month" data-es="2 ediciones por mes">2 edits per month</li>
+          <li data-en="Basic editor" data-es="Editor b&#225;sico">Basic editor</li>
+          <li data-en="Analytics" data-es="Anal&#237;ticas">Analytics</li>
+        </ul>
+        <a href="https://dashboard.eternowebstudio.com" class="btn-outline" data-en="Start Free" data-es="Comienza Gratis">Start Free</a>
+      </div>
+      <!-- Starter -->
+      <div class="pricing-card fade-in" style="border-color: var(--gold-dim);">
+        <h3>Starter</h3>
+        <div class="pricing-price">$9<span>/mo</span></div>
+        <ul class="pricing-features">
+          <li data-en="Unlimited edits" data-es="Ediciones ilimitadas">Unlimited edits</li>
+          <li data-en="Custom domain support" data-es="Soporte de dominio personalizado">Custom domain support</li>
+          <li data-en="Booking system" data-es="Sistema de reservas">Booking system</li>
+          <li data-en="Testimonials" data-es="Testimonios">Testimonials</li>
+        </ul>
+        <a href="https://dashboard.eternowebstudio.com" class="btn-cta" data-en="Get Starter" data-es="Obtener Starter">Get Starter</a>
+      </div>
+      <!-- Pro -->
+      <div class="pricing-card highlighted fade-in">
+        <div class="pricing-badge" data-en="Most Popular" data-es="M&#225;s Popular">Most Popular</div>
+        <h3>Pro</h3>
+        <div class="pricing-price">$29<span>/mo</span></div>
+        <ul class="pricing-features">
+          <li data-en="Everything in Starter" data-es="Todo en Starter">Everything in Starter</li>
+          <li data-en="Online store" data-es="Tienda online">Online store</li>
+          <li data-en="AI phone agent" data-es="Agente telef&#243;nico IA">AI phone agent</li>
+          <li data-en="Priority support" data-es="Soporte prioritario">Priority support</li>
+          <li data-en="Theme customization" data-es="Personalizaci&#243;n de temas">Theme customization</li>
+        </ul>
+        <a href="https://dashboard.eternowebstudio.com" class="btn-cta" data-en="Go Pro" data-es="Ser Pro">Go Pro</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Portfolio ── -->
+<section class="section" id="portfolio" style="background: var(--surface);">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="section-label" data-en="Portfolio" data-es="Portafolio">Portfolio</span>
+      <h2 data-en="Built with Eterno" data-es="Hecho con Eterno">Built with Eterno</h2>
+    </div>
+    <div class="portfolio-grid">
+      <a href="https://tattoosbypaketh.com" target="_blank" rel="noopener" class="portfolio-card fade-in">
+        <div class="portfolio-thumb"></div>
+        <div class="portfolio-info">
+          <h3>Tattoos by Paketh</h3>
+          <span class="portfolio-link" data-en="View Site &rarr;" data-es="Ver Sitio &rarr;">View Site &rarr;</span>
+        </div>
+      </a>
+      <a href="https://goldensoultattoo.com" target="_blank" rel="noopener" class="portfolio-card fade-in">
+        <div class="portfolio-thumb"></div>
+        <div class="portfolio-info">
+          <h3>Golden Soul Tattoo</h3>
+          <span class="portfolio-link" data-en="View Site &rarr;" data-es="Ver Sitio &rarr;">View Site &rarr;</span>
+        </div>
+      </a>
+      <a href="https://frankendots.com" target="_blank" rel="noopener" class="portfolio-card fade-in">
+        <div class="portfolio-thumb"></div>
+        <div class="portfolio-info">
+          <h3>Frankendots</h3>
+          <span class="portfolio-link" data-en="View Site &rarr;" data-es="Ver Sitio &rarr;">View Site &rarr;</span>
+        </div>
+      </a>
+      <a href="https://rubencharre.com" target="_blank" rel="noopener" class="portfolio-card fade-in">
+        <div class="portfolio-thumb"></div>
+        <div class="portfolio-info">
+          <h3>Rub&#233;n Charre</h3>
+          <span class="portfolio-link" data-en="View Site &rarr;" data-es="Ver Sitio &rarr;">View Site &rarr;</span>
+        </div>
+      </a>
+      <a href="https://tatsuink.com" target="_blank" rel="noopener" class="portfolio-card fade-in">
+        <div class="portfolio-thumb"></div>
+        <div class="portfolio-info">
+          <h3>Tatsu Ink</h3>
+          <span class="portfolio-link" data-en="View Site &rarr;" data-es="Ver Sitio &rarr;">View Site &rarr;</span>
+        </div>
+      </a>
+      <a href="https://houstontattootemple.com" target="_blank" rel="noopener" class="portfolio-card fade-in">
+        <div class="portfolio-thumb"></div>
+        <div class="portfolio-info">
+          <h3>Houston Tattoo Temple</h3>
+          <span class="portfolio-link" data-en="View Site &rarr;" data-es="Ver Sitio &rarr;">View Site &rarr;</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo">
+          <div class="nav-logo-icon">E</div>
+          <span>Eterno</span>
+        </div>
+        <p data-en="Premium websites for artists" data-es="Sitios web premium para artistas">Premium websites for artists</p>
+      </div>
+      <div class="footer-col">
+        <h4 data-en="Product" data-es="Producto">Product</h4>
+        <a href="https://dashboard.eternowebstudio.com" data-en="Dashboard" data-es="Panel">Dashboard</a>
+        <a href="#features" data-en="Features" data-es="Funciones">Features</a>
+        <a href="#pricing" data-en="Pricing" data-es="Precios">Pricing</a>
+      </div>
+      <div class="footer-col">
+        <h4 data-en="Contact" data-es="Contacto">Contact</h4>
+        <a href="mailto:support@eternowebstudio.com">support@eternowebstudio.com</a>
+      </div>
+      <div class="footer-col">
+        <h4 data-en="Social" data-es="Redes">Social</h4>
+        <a href="https://instagram.com/eternowebstudio" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Eterno Web Studio</p>
+      <p data-en="Made with &#9824; in Houston, TX" data-es="Hecho con &#9824; en Houston, TX">Made with &#9824; in Houston, TX</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function() {
+  'use strict';
+
+  /* ── Language Toggle ── */
+  const STORAGE_KEY = 'eterno_lang';
+
+  function detectLang() {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored === 'en' || stored === 'es') return stored;
+    const browser = (navigator.language || navigator.userLanguage || '').slice(0, 2).toLowerCase();
+    return browser === 'es' ? 'es' : 'en';
+  }
+
+  let currentLang = detectLang();
+
+  function applyLang(lang) {
+    currentLang = lang;
+    localStorage.setItem(STORAGE_KEY, lang);
+    document.documentElement.lang = lang;
+
+    document.querySelectorAll('[data-en][data-es]').forEach(function(el) {
+      var text = el.getAttribute('data-' + lang);
+      if (text !== null) el.innerHTML = text;
+    });
+
+    document.querySelectorAll('.lang-toggle button').forEach(function(btn) {
+      btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+    });
+  }
+
+  document.querySelectorAll('.lang-toggle').forEach(function(toggle) {
+    toggle.addEventListener('click', function(e) {
+      var btn = e.target.closest('button[data-lang]');
+      if (!btn) return;
+      applyLang(btn.getAttribute('data-lang'));
+    });
+  });
+
+  applyLang(currentLang);
+
+  /* ── Nav Scroll Effect ── */
+  var nav = document.getElementById('nav');
+  var scrollThreshold = 60;
+
+  function onScroll() {
+    if (window.scrollY > scrollThreshold) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* ── Mobile Menu ── */
+  var hamburger = document.getElementById('navHamburger');
+  var mobileMenu = document.getElementById('mobileMenu');
+  var mobileClose = document.getElementById('mobileMenuClose');
+
+  hamburger.addEventListener('click', function() {
+    mobileMenu.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+
+  function closeMobile() {
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  mobileClose.addEventListener('click', closeMobile);
+
+  mobileMenu.querySelectorAll('a[href^="#"]').forEach(function(link) {
+    link.addEventListener('click', closeMobile);
+  });
+
+  /* ── Fade-in on Scroll ── */
+  var fadeEls = document.querySelectorAll('.fade-in');
+
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    fadeEls.forEach(function(el) { observer.observe(el); });
+  } else {
+    fadeEls.forEach(function(el) { el.classList.add('visible'); });
+  }
+
+  /* ── Smooth Scroll for Anchor Links ── */
+  document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+    anchor.addEventListener('click', function(e) {
+      var href = this.getAttribute('href');
+      if (href === '#') return;
+      var target = document.querySelector(href);
+      if (target) {
+        e.preventDefault();
+        var offset = nav.offsetHeight + 8;
+        var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      }
+    });
+  });
+
+})();
+</script>
+
+</body>
+</html>
