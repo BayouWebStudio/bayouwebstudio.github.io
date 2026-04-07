@@ -5,16 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Eterno Web Studio</title>
   <script>
-    // Handle /claim/slug → /dashboard/?claim=slug
     var path = window.location.pathname;
     var m = path.match(/^\/claim\/([^\/]+)\/?$/);
     if (m) {
-      window.location.replace('https://getminted.ai/dashboard/?claim=' + m[1]);
-    } else {
-      // Generic 404 — just send home
-      window.location.replace('https://getminted.ai');
+      window.location.replace('https://dashboard.eternowebstudio.com/?claim=' + m[1]);
     }
+    // Otherwise: do nothing, show 404 page
   </script>
 </head>
-<body></body>
+<body>
+  <h1>Page not found</h1>
+  <p>The page you requested does not exist.</p>
+</body>
 </html>
