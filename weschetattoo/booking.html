@@ -268,21 +268,18 @@
       <div class="form-panel">
         <h2 class="fade-up" data-en="Send an Inquiry" data-es="Enviar una Consulta">Send an Inquiry</h2>
         <form id="booking-form" class="fade-up" onsubmit="submitBooking(event)">
-
-          <label for="bname">Your Name</label>
-          <input type="text" id="bname" name="bname" placeholder="Full name" required>
-          <label for="bemail">Email</label>
-          <input type="email" id="bemail" name="bemail" placeholder="your@email.com" required>
-          <label for="bmessage">Message</label>
-          <textarea id="bmessage" name="bmessage" rows="5" placeholder="Tell us about your idea..." required></textarea>
-          <label for="field_1775397395284">New Field</label>
-          <input type="text" id="field_1775397395284" name="field_1775397395284" placeholder="">
-<div style="margin-bottom:16px;">
-              <label style="font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--dim,#999);display:block;margin-bottom:6px;">Reference Photos <span style="font-weight:300;font-size:0.7rem;">(optional, up to 5)</span></label>
-              <label class="ref-upload-label" for="ref-photos">+ Add Photos</label>
-              <input type="file" id="ref-photos" accept="image/*" multiple style="display:none;" onchange="handleRefPhotos(this)">
-              <div id="ref-previews" class="ref-previews"></div>
-            </div>
+          <div class="form-group">
+            <label for="bname">Your Name</label>
+            <input type="text" id="bname" name="bname" placeholder="Full name" required>
+          </div>
+          <div class="form-group">
+            <label for="bemail">Email</label>
+            <input type="email" id="bemail" name="bemail" placeholder="your@email.com" required>
+          </div>
+          <div class="form-group">
+            <label for="bmessage">Message</label>
+            <textarea id="bmessage" name="bmessage" rows="5" placeholder="Tell us about your idea..." required></textarea>
+          </div>
 <div class="datetime-section">
             <p class="datetime-label">Preferred Date (optional)</p>
             <input type="hidden" name="requestedDate" id="reqDate">
