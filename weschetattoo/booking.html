@@ -341,58 +341,62 @@
           function submitBooking(e) {
           e.preventDefault();
           var form = document.getElementById('booking-form');
-          var btn = form.querySelector('button[type="submit"]');
-          var name = document.getElementById('bname').value.trim();
-          var email = document.getElementById('bemail').value.trim();
-          var message = document.getElementById('bmessage').value.trim();
+          if (!form) return;
+          var btn = form.querySelector('button[type="submit"]') || form.querySelector('.btn-gold');
+          // Find fields by ID or by name attribute
+          function getVal(ids) {
+            for (var i = 0; i < ids.length; i++) {
+              var el = document.getElementById(ids[i]) || form.querySelector('[name="'+ids[i]+'"]');
+              if (el) return (el.value || '').trim();
+            }
+            return '';
+          }
+          var name = getVal(['bname','b-name','name']);
+          var email = getVal(['bemail','b-email','email']);
+          var message = getVal(['bmessage','b-message','b-vision','vision','message']);
           if (!name || !email || !message) { alert('Please fill in all required fields.'); return; }
-          var origText = btn.textContent;
-          btn.disabled = true; btn.textContent = 'Sending...';
+          var origText = btn ? btn.textContent : 'Send';
+          if (btn) { btn.disabled = true; btn.textContent = 'Sending...'; }
           var payload = {
             slug: 'weschetattoo',
             name: name,
             email: email,
             message: message
           };
-          // Include date/time if selected
+          var phone = getVal(['bphone','b-phone','phone']);
+          if (phone) payload.phone = phone;
+          var service = getVal(['bplacement','b-placement','placement','service']);
+          if (service) payload.service = service;
           var rd = document.getElementById('reqDate');
           var rt = document.getElementById('reqTime');
-          if (rd && rd.value && rt && rt.value) {
-            payload.requestedDate = rd.value;
-            payload.requestedTime = rt.value;
-          }
-          // Include reference photos
-          if (window.__refPhotos && window.__refPhotos.length > 0) {
-            payload.referencePhotos = window.__refPhotos;
-          }
+          if (rd && rd.value && rt && rt.value) { payload.requestedDate = rd.value; payload.requestedTime = rt.value; }
+          if (window.__refPhotos && window.__refPhotos.length > 0) payload.referencePhotos = window.__refPhotos;
           fetch('https://curious-lemming-262.convex.site/api/booking/submit', {
             method: 'POST',
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify(payload)
           })
-          .then(function(r){ return r.json(); })
-          .then(function(data){
+          .then(function(r) { return r.json(); })
+          .then(function(data) {
             if (data.ok) {
               form.reset();
-              // Reset calendar and slots
-              var ai = document.getElementById('availInfo'); if(ai) ai.style.display='none';
-              var sp = document.getElementById('slotPicker'); if(sp) sp.style.display='none';
+              var ai=document.getElementById('availInfo');if(ai)ai.style.display='none';
+              var sp=document.getElementById('slotPicker');if(sp)sp.style.display='none';
               document.querySelectorAll('.slot-btn').forEach(function(b){b.classList.remove('slot-active')});
-              if(window.__refPhotos) window.__refPhotos.length=0;
-              var rp = document.getElementById('refPreviews'); if(rp) rp.innerHTML='';
-              var ul = document.querySelector('.ref-upload-label'); if(ul) ul.style.display='';
-              var rd2 = document.getElementById('reqDate'); if(rd2) rd2.value='';
-              var rt2 = document.getElementById('reqTime'); if(rt2) rt2.value='';
-              btn.style.background = '#22c55e'; btn.textContent = 'Sent!';
-              setTimeout(function(){ btn.style.background = ''; btn.textContent = origText; btn.disabled = false; }, 3000);
+              if(window.__refPhotos)window.__refPhotos.length=0;
+              var rp=document.getElementById('refPreviews');if(rp)rp.innerHTML='';
+              var ul=document.querySelector('.ref-upload-label');if(ul)ul.style.display='';
+              if(rd)rd.value='';if(rt)rt.value='';
+              if(btn){btn.style.background='#22c55e';btn.textContent='Sent!';}
+              setTimeout(function(){if(btn){btn.style.background='';btn.textContent=origText;btn.disabled=false;}},3000);
             } else {
               alert(data.error || 'Something went wrong. Please try again.');
-              btn.disabled = false; btn.textContent = origText;
+              if(btn){btn.disabled=false;btn.textContent=origText;}
             }
           })
-          .catch(function(){
+          .catch(function() {
             alert('Something went wrong. Please try again.');
-            btn.disabled = false; btn.textContent = origText;
+            if(btn){btn.disabled=false;btn.textContent=origText;}
           });
         }
         </script>
