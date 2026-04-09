@@ -304,6 +304,7 @@
           </div>
 
                     <button type="submit" class="btn-gold">Send Booking Request</button>
+          <div id="formMsg" style="display:none;margin-top:16px;padding:16px;text-align:center;font-size:0.88rem;border-radius:4px;"></div>
         </form>
         <script>
         var refPhotos = [];
@@ -339,42 +340,59 @@
           }
           function submitBooking(e) {
           e.preventDefault();
-          var btn = document.getElementById('b-submit');
-          var msg = document.getElementById('b-msg');
-          var refs = document.getElementById('b-references').value.trim();
-          var vision = document.getElementById('b-vision').value.trim();
-          var fullMessage = vision + (refs ? ('\n\nReferences: ' + refs) : '');
-          btn.disabled = true; btn.textContent = 'Sending...'; msg.style.display = 'none';
+          var form = document.getElementById('booking-form');
+          var btn = form.querySelector('button[type="submit"]');
+          var name = document.getElementById('bname').value.trim();
+          var email = document.getElementById('bemail').value.trim();
+          var message = document.getElementById('bmessage').value.trim();
+          if (!name || !email || !message) { alert('Please fill in all required fields.'); return; }
+          var origText = btn.textContent;
+          btn.disabled = true; btn.textContent = 'Sending...';
+          var payload = {
+            slug: 'weschetattoo',
+            name: name,
+            email: email,
+            message: message
+          };
+          // Include date/time if selected
+          var rd = document.getElementById('reqDate');
+          var rt = document.getElementById('reqTime');
+          if (rd && rd.value && rt && rt.value) {
+            payload.requestedDate = rd.value;
+            payload.requestedTime = rt.value;
+          }
+          // Include reference photos
+          if (window.__refPhotos && window.__refPhotos.length > 0) {
+            payload.referencePhotos = window.__refPhotos;
+          }
           fetch('https://curious-lemming-262.convex.site/api/booking/submit', {
             method: 'POST',
             headers: {'Content-Type':'application/json'},
-            body: JSON.stringify({
-              slug: 'weschetattoo',
-              name: document.getElementById('b-name').value.trim(),
-              email: document.getElementById('b-email').value.trim(),
-              phone: document.getElementById('b-phone').value.trim() || undefined,
-              service: document.getElementById('b-placement').value.trim(),
-              message: fullMessage
-            , referencePhotos: refPhotos.length > 0 ? refPhotos : undefined})
+            body: JSON.stringify(payload)
           })
           .then(function(r){ return r.json(); })
           .then(function(data){
             if (data.ok) {
-              document.getElementById('booking-form').reset();
-              msg.style.color = '#7ecfa4';
-              msg.textContent = 'Your inquiry was sent! We\'ll be in touch soon.';
+              form.reset();
+              // Reset calendar and slots
+              var ai = document.getElementById('availInfo'); if(ai) ai.style.display='none';
+              var sp = document.getElementById('slotPicker'); if(sp) sp.style.display='none';
+              document.querySelectorAll('.slot-btn').forEach(function(b){b.classList.remove('slot-active')});
+              if(window.__refPhotos) window.__refPhotos.length=0;
+              var rp = document.getElementById('refPreviews'); if(rp) rp.innerHTML='';
+              var ul = document.querySelector('.ref-upload-label'); if(ul) ul.style.display='';
+              var rd2 = document.getElementById('reqDate'); if(rd2) rd2.value='';
+              var rt2 = document.getElementById('reqTime'); if(rt2) rt2.value='';
+              btn.style.background = '#22c55e'; btn.textContent = 'Sent!';
+              setTimeout(function(){ btn.style.background = ''; btn.textContent = origText; btn.disabled = false; }, 3000);
             } else {
-              msg.style.color = '#f87171';
-              msg.textContent = data.error || 'Something went wrong. Please try again.';
+              alert(data.error || 'Something went wrong. Please try again.');
+              btn.disabled = false; btn.textContent = origText;
             }
-            msg.style.display = 'block';
-            btn.disabled = false; btn.textContent = 'Send Inquiry';
           })
           .catch(function(){
-            msg.style.color = '#f87171';
-            msg.textContent = 'Something went wrong. Please try again.';
-            msg.style.display = 'block';
-            btn.disabled = false; btn.textContent = 'Send Inquiry';
+            alert('Something went wrong. Please try again.');
+            btn.disabled = false; btn.textContent = origText;
           });
         }
         </script>
